@@ -36,9 +36,13 @@ class Package
     #[ORM\Column(length: 120, unique: true)]
     protected string $name;
 
-    /** Its name in an address: lower case, without the "@" of an npm scope - "glitchr/stickyjs". */
+    /**
+     * Its name in an address: lower case, without the "@" of an npm scope -
+     * "glitchr/stickyjs". Not called a slug: it holds a slash, and the back
+     * office would take a slug for the record's address.
+     */
     #[ORM\Column(length: 120, unique: true)]
-    protected string $slug;
+    protected string $handle;
 
     #[ORM\Column(length: 12)]
     protected string $registry = self::PACKAGIST;
@@ -119,14 +123,14 @@ class Package
     public function __construct(string $name, Tier $tier, ?string $family = null)
     {
         $this->name = $name;
-        $this->slug = self::slugOf($name);
+        $this->handle = self::handleOf($name);
         $this->registry = str_starts_with($name, '@') ? self::NPM : self::PACKAGIST;
         $this->tier = $tier;
         $this->family = $family;
         $this->syncedAt = new \DateTimeImmutable();
     }
 
-    public static function slugOf(string $name): string
+    public static function handleOf(string $name): string
     {
         return strtolower(trim(ltrim(trim($name), '@'), '/'));
     }
@@ -146,21 +150,21 @@ class Package
         return $this->name;
     }
 
-    public function getSlug(): string
+    public function getHandle(): string
     {
-        return $this->slug;
+        return $this->handle;
     }
 
     /** "glitchr" */
     public function getVendor(): string
     {
-        return explode('/', $this->slug, 2)[0];
+        return explode('/', $this->handle, 2)[0];
     }
 
     /** "omnitrade", "stripe": what follows the vendor. */
     public function getShortName(): string
     {
-        return explode('/', $this->slug, 2)[1] ?? $this->slug;
+        return explode('/', $this->handle, 2)[1] ?? $this->handle;
     }
 
     public function getRegistry(): string

@@ -73,7 +73,8 @@ class RepositoryScanner
     {
         $json = self::json($dir.'/composer.json') ?: self::json($dir.'/package.json');
         $name = \is_string($json['name'] ?? null) ? $json['name'] : null;
-        if (null === $name || null === $floor = Tier::of($name)) {
+        // A "project" is a development workspace (omnitrade/workspace: every package of the family from its folder), not a package.
+        if (null === $name || 'project' === ($json['type'] ?? null) || null === $floor = Tier::of($name)) {
             return null;
         }
         [$tier, $family] = $floor;

@@ -46,7 +46,7 @@ class PackageCrudController extends AbstractCrudController
 
     public function configureCrud(Crud $crud): Crud
     {
-        return parent::configureCrud($crud)->setDefaultSort(['slug' => 'ASC']);
+        return parent::configureCrud($crud)->setDefaultSort(['handle' => 'ASC']);
     }
 
     public function configureActions(Actions $actions): Actions

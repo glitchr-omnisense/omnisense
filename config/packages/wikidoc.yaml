@@ -6,12 +6,14 @@ wikidoc:
     public:
         enabled: true
         path: docs
-    # Every family, provider, bundle and library: <workspace>/<repository>.
+    # Every family, provider, bundle and library: <workspace>/<repository>,
+    # under the folder the catalogue reads too (app.catalogue.repos_dir: the
+    # mounted repositories, tests/Fixtures/repos in the tests).
     discover:
-        - '%env(OMNI_REPOS)%/*/*'
-        - '%env(OMNI_REPOS)%/transparentjs'
-        - '%env(OMNI_REPOS)%/stickyjs'
-        - '%env(OMNI_REPOS)%/graphjs'
+        - '%app.catalogue.repos_dir%/*/*'
+        - '%app.catalogue.repos_dir%/transparentjs'
+        - '%app.catalogue.repos_dir%/stickyjs'
+        - '%app.catalogue.repos_dir%/graphjs'
     # The list of repositories, and the search's local records, kept a minute.
     cache_ttl: 60
     search:
@@ -21,12 +23,10 @@ wikidoc:
 
 when@test:
     wikidoc:
-        # The tests read tests/Fixtures/repos: every package there is a manual
-        # at the one version "current"; glitchr/omnibus is given two versions,
-        # the second one as wikidoc:sync would have copied it.
-        discover:
-            - '%kernel.project_dir%/tests/Fixtures/repos/*/*'
-            - '%kernel.project_dir%/tests/Fixtures/repos/stickyjs'
+        # The tests read tests/Fixtures/repos (app.catalogue.repos_dir): every
+        # package there is a manual at the one version "current";
+        # glitchr/omnibus is given two versions, the second one as
+        # wikidoc:sync would have copied it.
         manuals:
             glitchr/omnibus:
                 path: '%kernel.project_dir%/tests/Fixtures/repos/omnibus/core'

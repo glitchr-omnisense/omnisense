@@ -1,0 +1,1 @@
+{"name": "omnibus/offline", "description": "A carrier without an API: rates from a table.", "license": "LGPL-3.0-or-later", "require": {"glitchr/omnibus": "^2.0@dev"}}

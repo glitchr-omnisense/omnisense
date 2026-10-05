@@ -15,28 +15,28 @@ class PackageRepository extends ServiceEntityRepository
         parent::__construct($registry, Package::class);
     }
 
-    public function findOneBySlug(string $slug): ?Package
+    public function findOneByHandle(string $handle): ?Package
     {
-        return $this->findOneBy(['slug' => Package::slugOf($slug), 'missing' => false]);
+        return $this->findOneBy(['handle' => Package::handleOf($handle), 'missing' => false]);
     }
 
     /** @return list<Package> every package there is, by name */
     public function findCatalogue(): array
     {
-        return $this->findBy(['missing' => false], ['slug' => 'ASC']);
+        return $this->findBy(['missing' => false], ['handle' => 'ASC']);
     }
 
     /** @return list<Package> */
     public function findByTier(Tier $tier): array
     {
-        return $this->findBy(['tier' => $tier, 'missing' => false], ['slug' => 'ASC']);
+        return $this->findBy(['tier' => $tier, 'missing' => false], ['handle' => 'ASC']);
     }
 
     /** @return list<Package> a family's own package first, then its providers (or the foundation, then its components) */
     public function findFamily(string $family): array
     {
-        $packages = $this->findBy(['family' => $family, 'missing' => false], ['slug' => 'ASC']);
-        usort($packages, static fn (Package $a, Package $b): int => [$a->getTier()->order(), $a->getSlug()] <=> [$b->getTier()->order(), $b->getSlug()]);
+        $packages = $this->findBy(['family' => $family, 'missing' => false], ['handle' => 'ASC']);
+        usort($packages, static fn (Package $a, Package $b): int => [$a->getTier()->order(), $a->getHandle()] <=> [$b->getTier()->order(), $b->getHandle()]);
 
         return $packages;
     }
@@ -49,7 +49,7 @@ class PackageRepository extends ServiceEntityRepository
     public function findFamilies(): array
     {
         $families = [];
-        foreach ($this->findBy(['tier' => [Tier::Foundation, Tier::Family], 'missing' => false], ['slug' => 'ASC']) as $package) {
+        foreach ($this->findBy(['tier' => [Tier::Foundation, Tier::Family], 'missing' => false], ['handle' => 'ASC']) as $package) {
             $families[(string) $package->getFamily()] = $package;
         }
         uksort($families, static fn (string $a, string $b): int => ['omnibase' !== $a, $a] <=> ['omnibase' !== $b, $b]);

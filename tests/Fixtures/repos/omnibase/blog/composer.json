@@ -1,0 +1,1 @@
+{"name": "omnibase/blog", "type": "symfony-bundle", "description": "Posts, comments, a feed.", "license": "LGPL-3.0-or-later", "require": {"php": "^8.2", "glitchr/omnibase": "3.0.*-dev"}, "support": {"source": "https://github.com/glitchr-studio/omnibase-blog"}}

@@ -243,10 +243,10 @@ demos:
 
 sites:
   glitchr: "Le site du studio : applications, support au temps passé, logiciels et licences."
-  chapaland-v2: "Communauté, forum, wiki et mondes de jeu en temps réel."
+  chapaland_v2: "Communauté, forum, wiki et mondes de jeu en temps réel."
   latoucheoriginale: "Boutique en ligne de créations, paiement et expédition."
   nakaya: "Épicerie japonaise aux Halles du Scilt, à Schiltigheim."
-  nakaya-traiteur: "Le restaurant de Nakaya : la salle et ses réservations, la carte, la commande à table par QR code, le passe."
+  nakaya_traiteur: "Le restaurant de Nakaya : la salle et ses réservations, la carte, la commande à table par QR code, le passe."
   meyers: "Sa vitrine à Strasbourg, et l’accès de ses associés, locataires, artisans et de sa gestion."
   apfelschule: "La salle de classe ouverte d’une maîtresse : séquences, cartes, ressources, chroniques, FAQ et boutique."
   anaelletourret: "Harpiste : concerts, discographie avec extraits, vidéos, presse et lettre d’information."

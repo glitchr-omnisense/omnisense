@@ -29,7 +29,7 @@ class FollowRepository extends ServiceEntityRepository
             ->join('f.package', 'p')
             ->where('f.user = :user')
             ->setParameter('user', $user)
-            ->orderBy('p.slug', 'ASC')
+            ->orderBy('p.handle', 'ASC')
             ->getQuery()
             ->getResult();
     }

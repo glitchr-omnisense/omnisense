@@ -122,7 +122,7 @@
                 {% if sites %}
                 <ul class="om-sites">
                     {% for site in sites %}
-                    <li><a href="{{ site.url }}" rel="noopener">{{ site.name }}</a>{% if site.fictional %} <em>{{ '@messages.demos.fictional'|trans }}</em>{% endif %}<span>{{ ('@messages.sites.' ~ site.slug)|trans }}</span></li>
+                    <li><a href="{{ site.url }}" rel="noopener">{{ site.name }}</a>{% if site.fictional %} <em>{{ '@messages.demos.fictional'|trans }}</em>{% endif %}<span>{{ ('@messages.sites.' ~ site.slug|replace({'-': '_'}))|trans }}</span></li>
                     {% endfor %}
                 </ul>
                 {% else %}
