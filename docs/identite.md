@@ -26,7 +26,7 @@ celui d'un plan d'architecte, pas d'une page de produit.
   (`.om-cote`) numérotent les sections et nomment les champs.
 
 Ce qui n'y est pas : pas de dégradé, pas de rangée de cartes à icône, pas de
-coins arrondis (2 px), pas d'ombre portée.
+coins arrondis (2 px).
 
 La signature Glitch Art du pied de page est le partiel du socle
 (`@Base/partials/_credits.html.twig`), noire le jour, blanche la nuit,
