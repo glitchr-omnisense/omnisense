@@ -1,0 +1,249 @@
+# Omniscient — base stack (every environment).
+#
+# Same orchestration as Chapaland: one PHP image (deployments/docker/web)
+# runs web, worker, cron and the one-shot composer/assets jobs; data services
+# stay on the internal network; only the proxy publishes ports. On top:
+# Typesense (the manuals' search, service "search"); the site answers without it.
+#
+#   docker-compose.override.yml        dev additions (assets watcher, mailer, bind mounts)
+#   docker-compose.setup.yml           one-shot composer + assets (make build)
+#   docker-compose.override.setup.yml  dev variant of the above
+#   docker-compose.admin.yml           phpMyAdmin / Redis consoles (make admin)
+#
+# The Makefile chooses the files - use `make up`, not `docker compose up`.
+
+networks:
+  extranet:
+    name: ${APP_NAME:-${COMPOSE_PROJECT_NAME}}-extranet
+    driver: bridge
+  intranet:
+    name: ${APP_NAME:-${COMPOSE_PROJECT_NAME}}-intranet
+    driver: bridge
+    internal: true
+
+volumes:
+  public:
+    name: ${APP_NAME:-${COMPOSE_PROJECT_NAME}}-public
+  vendor:
+    name: ${APP_NAME:-${COMPOSE_PROJECT_NAME}}-vendor
+  storage:
+    name: ${APP_NAME:-${COMPOSE_PROJECT_NAME}}-storage
+  queue:
+    name: ${APP_NAME:-${COMPOSE_PROJECT_NAME}}-queue
+  cache:
+    name: ${APP_NAME:-${COMPOSE_PROJECT_NAME}}-cache
+  database:
+    name: ${APP_NAME:-${COMPOSE_PROJECT_NAME}}-database
+  mailer:
+    name: ${APP_NAME:-${COMPOSE_PROJECT_NAME}}-mailer
+  search:
+    name: ${APP_NAME:-${COMPOSE_PROJECT_NAME}}-search
+
+services:
+
+  # ── Cache (Redis) ────────────────────────────────────────────────
+
+  cache:
+    container_name: ${APP_NAME:-${COMPOSE_PROJECT_NAME}}-cache
+    image: redis:alpine
+    restart: unless-stopped
+    networks:
+      - intranet
+    volumes:
+      - cache:/data
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli -h 127.0.0.1 -p 6379 ping | grep PONG"]
+      interval: 10s
+      timeout: 3s
+      retries: 20
+      start_period: 10s
+
+  # ── Queue (Redis, Messenger transport) ───────────────────────────
+
+  queue:
+    container_name: ${APP_NAME:-${COMPOSE_PROJECT_NAME}}-queue
+    image: redis:alpine
+    restart: unless-stopped
+    networks:
+      - intranet
+    volumes:
+      - queue:/data
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli -h 127.0.0.1 -p 6379 ping | grep PONG"]
+      interval: 10s
+      timeout: 3s
+      retries: 20
+      start_period: 10s
+
+  # ── Database (MySQL) ─────────────────────────────────────────────
+
+  database:
+    container_name: ${APP_NAME:-${COMPOSE_PROJECT_NAME}}-database
+    image: mysql:8
+    restart: unless-stopped
+    env_file:
+      - .env
+      - path: .env.local
+        required: false
+    networks:
+      - intranet
+    volumes:
+      - database:/var/lib/mysql
+      - ./deployments/docker/database/conf.d:/etc/mysql/conf.d:ro
+      - ./initdb.sql:/docker-entrypoint-initdb.d/initdb.sql:ro
+    # -h 127.0.0.1, not localhost: "localhost" means the unix socket, which
+    # answers while the entrypoint's temporary init server is still running
+    # and nothing listens on TCP yet (see Chapaland's docker-compose.yml).
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+      start_period: 120s
+
+  # ── Search (Typesense, glitchr/typesense-bundle) ─────────────────
+  # The manuals' index (omnibase/docs: `bin/console wikidoc:index`). Not a
+  # dependency of web: stopped, the search falls back on the pages' own index.
+
+  search:
+    container_name: ${APP_NAME:-${COMPOSE_PROJECT_NAME}}-search
+    image: typesense/typesense:30.0.rca41
+    restart: unless-stopped
+    environment:
+      TYPESENSE_DATA_DIR: /data
+      TYPESENSE_API_KEY: ${TYPESENSE_SECRET:-omniscient-search-key}
+    networks:
+      - intranet
+    volumes:
+      - search:/data
+    healthcheck:
+      test: ["CMD-SHELL", "bash -c 'echo > /dev/tcp/127.0.0.1/8108'"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+
+  # ── Web (PHP-FPM + Nginx) ────────────────────────────────────────
+
+  web:
+    build:
+      context: .
+      dockerfile: ./deployments/docker/web/Dockerfile
+      args:
+        INSTALL_XDEBUG: "1"
+    restart: unless-stopped
+    depends_on:
+      database:
+        condition: service_healthy
+      cache:
+        condition: service_healthy
+      queue:
+        condition: service_healthy
+    env_file:
+      - .env
+      - path: .env.local
+        required: false
+    networks:
+      - intranet
+      - extranet
+    volumes:
+      - .:/srv/app:ro
+      - /srv/app/var/cache
+      - /srv/app/var/log
+      - ./config:/srv/app/config:rw
+      - public:/srv/app/public:rw
+      - vendor:/srv/app/vendor:rw
+      - storage:/srv/app/var/storage:rw
+      - ./deployments/docker/web/php.ini:/usr/local/etc/php/php.ini
+      - ./deployments/docker/web/php-fpm.conf:/usr/local/etc/php-fpm.conf
+      - ./deployments/docker/web/nginx.conf:/etc/nginx/nginx.conf
+      - ./deployments/docker/web/conf.d:/etc/nginx/conf.d
+    entrypoint: /srv/app/deployments/docker/web/entrypoint.sh
+    healthcheck:
+      test: ["CMD", "php", "-r", "echo 'ok';"]
+      interval: 10s
+      timeout: 5s
+      retries: 100
+
+  # ── Worker (Messenger consumer: mails, notifications) ────────────
+
+  worker:
+    build:
+      context: .
+      dockerfile: ./deployments/docker/web/Dockerfile
+    restart: unless-stopped
+    entrypoint: ["/srv/app/deployments/docker/web/entrypoint.worker.sh"]
+    depends_on:
+      web:
+        condition: service_started
+    env_file:
+      - .env
+      - path: .env.local
+        required: false
+    networks:
+      - intranet
+      - extranet
+    volumes:
+      - .:/srv/app:ro
+      - /srv/app/var/cache
+      - /srv/app/var/log
+      - public:/srv/app/public:rw
+      - vendor:/srv/app/vendor:rw
+      - storage:/srv/app/var/storage:rw
+      - ./deployments/docker/web/php.ini:/usr/local/etc/php/php.ini
+
+  # ── Cron (deployments/docker/cron/crontab) ───────────────────────
+
+  cron:
+    build:
+      context: .
+      dockerfile: ./deployments/docker/web/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      web:
+        condition: service_started
+    env_file:
+      - .env
+      - path: .env.local
+        required: false
+    networks:
+      - intranet
+      - extranet
+    entrypoint: ["/srv/app/deployments/docker/cron/entrypoint.sh"]
+    volumes:
+      - .:/srv/app:ro
+      - /srv/app/var/cache
+      - /srv/app/var/log
+      - public:/srv/app/public:rw
+      - vendor:/srv/app/vendor:rw
+      - storage:/srv/app/var/storage:rw
+      - ./deployments/docker/web/php.ini:/usr/local/etc/php/php.ini
+
+  # ── Proxy (Nginx, TLS termination) ───────────────────────────────
+
+  proxy:
+    container_name: ${APP_NAME:-${COMPOSE_PROJECT_NAME}}-proxy
+    image: nginx:alpine
+    restart: unless-stopped
+    env_file:
+      - .env
+      - path: .env.local
+        required: false
+    depends_on:
+      web:
+        condition: service_started
+    # Pin APP_HTTP / APP_HTTPS in .env.local: left empty, Docker hands out a
+    # new random port every time the proxy is recreated.
+    ports:
+      - "${APP_HTTP:-0}:80"
+      - "${APP_HTTPS:-0}:443"
+      - "${APP_HTTPS:-0}:443/udp"
+    networks:
+      - intranet
+      - extranet
+    volumes:
+      - ./deployments/docker/proxy/conf.d/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./.htpasswd:/etc/nginx/.htpasswd:ro
+      - ./deployments/docker/proxy/ssl:/etc/nginx/ssl
+      - ./deployments/docker/proxy/docker-entrypoint.d/01-generate-cert.sh:/docker-entrypoint.d/01-generate-cert.sh
+

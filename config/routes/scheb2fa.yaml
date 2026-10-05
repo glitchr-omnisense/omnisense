@@ -1,0 +1,21 @@
+# The two-factor challenge page and its check endpoint.
+#
+# security.yaml's firewall names these two routes (auth_form_path /
+# check_path), so leaving them undefined does not merely disable 2FA - it
+# breaks the account that switches it on: every request after such a sign-in
+# died with "No valid route found for `2fa_login`", including the settings
+# page that would have switched it back off. They were commented out here,
+# while /settings offers "Activer" for both e-mail codes and TOTP.
+2fa_login:
+    path: /login/2fa
+    defaults:
+        # The controller service the bundle provides; it renders the template
+        # named in scheb_two_factor.yaml (security/login_2fa.html.twig).
+        # service_id::method - the single-colon notation was dropped.
+        _controller: "scheb_two_factor.form_controller::form"
+
+# No controller and no defaults on purpose: the firewall's two-factor
+# listener intercepts this path before routing, exactly like form_login's
+# check path.
+2fa_login_check:
+    path: /login/2fa/check

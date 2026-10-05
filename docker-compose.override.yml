@@ -1,0 +1,257 @@
+# Development overrides — never used in production.
+# Loaded by the Makefile when APP_DEBUG=1.
+
+# With many sites up at once Docker's default address pools run out: this
+# site's two networks take subnets of their own, numbered after its HTTP port
+# (8124: 124 and 125). NETWORK_*_SUBNET in .env.local moves them.
+networks:
+  extranet:
+    ipam:
+      config:
+        - subnet: ${NETWORK_EXTRANET_SUBNET:-10.110.124.0/24}
+  intranet:
+    ipam:
+      config:
+        - subnet: ${NETWORK_INTRANET_SUBNET:-10.110.125.0/24}
+
+services:
+
+  # ── Assets watcher (Encore --watch, starts with `make up`) ───────
+
+  assets:
+    container_name: ${APP_NAME:-${COMPOSE_PROJECT_NAME}}-assets
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: ./deployments/docker/web/Dockerfile
+    env_file:
+      - .env
+      - path: .env.local
+        required: false
+    volumes:
+      - .:/srv/app:ro
+      - ./var:/srv/app/var:rw
+      - public:/srv/app/public:rw
+      # Encore's output on a host bind (grepable from the host); uploads and
+      # media stay on the named volume above.
+      - ./public/assets:/srv/app/public/assets:rw
+      - ./vendor:/srv/app/vendor:ro
+      # The packages built beside this site (omnibase/blog, consent, docs):
+      # composer path repositories, ../ from /srv/app, read only.
+      - ../omnibase:/srv/omnibase:ro
+      - ./yarn.lock:/srv/app/yarn.lock:rw
+      - ./package.json:/srv/app/package.json:rw
+      - ./node_modules:/srv/app/node_modules:rw
+      - ./composer.lock:/srv/app/composer.lock:rw
+      - ./symfony.lock:/srv/app/symfony.lock:rw
+    entrypoint: /srv/app/deployments/docker/assets/entrypoint.sh
+    command: ["--watch"]
+    networks:
+      - intranet
+      - extranet
+
+  # ── Web: dev overrides ───────────────────────────────────────────
+
+  web:
+    environment:
+      # OPcache on, re-checking files every 2s: off, every request recompiles
+      # the whole tree over the macOS -> Docker file share (Chapaland measured
+      # 3-4s a page against 0.35s).
+      PHP_OPCACHE: "1"
+      PHP_OPCACHE_VALIDATE_TIMESTAMPS: 1
+      PHP_OPCACHE_REVALIDATE_FREQ: 2
+    volumes:
+      - .:/srv/app:ro
+      - ./var:/srv/app/var:rw
+      - ./vendor:/srv/app/vendor:rw
+      # The packages built beside this site (omnibase/blog, consent, docs):
+      # composer path repositories, ../ from /srv/app, read only.
+      - ../omnibase:/srv/omnibase:ro
+      # The repositories the catalogue and the manuals are read from
+      # (app:packages:sync, wikidoc): every family and library, read only.
+      - ../omnibase:/srv/repos/omnibase:ro
+      - ../omnibus:/srv/repos/omnibus:ro
+      - ../omnitrade:/srv/repos/omnitrade:ro
+      - ../omnistate:/srv/repos/omnistate:ro
+      - ../omnibank:/srv/repos/omnibank:ro
+      - ../omnisong:/srv/repos/omnisong:ro
+      - ../omnipost:/srv/repos/omnipost:ro
+      - ../omnifood:/srv/repos/omnifood:ro
+      - ../omnischolar:/srv/repos/omnischolar:ro
+      - ../omnilex:/srv/repos/omnilex:ro
+      - ../omnimeet:/srv/repos/omnimeet:ro
+      - ../transparent:/srv/repos/transparentjs:ro
+      - ../stickyjs:/srv/repos/stickyjs:ro
+      - ../graphjs:/srv/repos/graphjs:ro
+      # "Used by": the composer.json of each site, and nothing else of it.
+      - ../chapaland-v2/composer.json:/srv/sites/chapaland-v2/composer.json:ro
+      - ../latoucheoriginale/composer.json:/srv/sites/latoucheoriginale/composer.json:ro
+      - ../nakaya/composer.json:/srv/sites/nakaya/composer.json:ro
+      - ../glitchr/composer.json:/srv/sites/glitchr/composer.json:ro
+      - ../meyers/composer.json:/srv/sites/meyers/composer.json:ro
+      - ../apfelschule/composer.json:/srv/sites/apfelschule/composer.json:ro
+      - ../anaelletourret/composer.json:/srv/sites/anaelletourret/composer.json:ro
+      - ../brieucvourch/composer.json:/srv/sites/brieucvourch/composer.json:ro
+      - ../nakatani/composer.json:/srv/sites/nakatani/composer.json:ro
+      - ../monica/composer.json:/srv/sites/monica/composer.json:ro
+      - ../wineseller/composer.json:/srv/sites/wineseller/composer.json:ro
+      - ../wedding/composer.json:/srv/sites/wedding/composer.json:ro
+      - ../maisondesante/composer.json:/srv/sites/maisondesante/composer.json:ro
+      - ../nakaya-traiteur/composer.json:/srv/sites/nakaya-traiteur/composer.json:ro
+      - ../notaire/composer.json:/srv/sites/notaire/composer.json:ro
+      - ../avocat/composer.json:/srv/sites/avocat/composer.json:ro
+      - ../juriste/composer.json:/srv/sites/juriste/composer.json:ro
+      - ../youtube/composer.json:/srv/sites/youtube/composer.json:ro
+      - ../panoboutique/composer.json:/srv/sites/panoboutique/composer.json:ro
+      # make doctrine-migration writes here.
+      - ./migrations:/srv/app/migrations:rw
+      # The named public volume over the host bind: uploads and media live
+      # there. An override's volume list REPLACES the base one, hence repeated.
+      - public:/srv/app/public:rw
+      - ./public/assets:/srv/app/public/assets:ro
+      - ./deployments/docker/web/php.ini:/usr/local/etc/php/php.ini
+      - ./deployments/docker/web/php-fpm.conf:/usr/local/etc/php-fpm.conf
+      - ./deployments/docker/web/nginx.conf:/etc/nginx/nginx.conf
+      - ./deployments/docker/web/conf.d.dev/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./node_modules:/srv/app/node_modules:rw
+      - ${HOME}/.ssh:/root/.ssh:ro
+    entrypoint: >
+      sh -c "./deployments/docker/web/entrypoint.sh || { printf '\033[31m[!] Web startup failed — vendor not installed? Run: make build\033[0m\n' >&2; tail -f /dev/null; }"
+    healthcheck:
+      disable: true
+    depends_on:
+      assets:
+        condition: service_started
+      database:
+        condition: service_healthy
+
+  # ── Proxy: dev overrides ─────────────────────────────────────────
+
+  proxy:
+    volumes:
+      - ./.htpasswd:/etc/nginx/.htpasswd:ro
+      - ./deployments/docker/proxy/ssl:/etc/nginx/ssl
+      - ./deployments/docker/proxy/docker-entrypoint.d/01-generate-cert.sh:/docker-entrypoint.d/01-generate-cert.sh
+      - ./deployments/docker/proxy/conf.d.dev/default.conf:/etc/nginx/conf.d/default.conf:ro
+
+  # ── Worker / cron: opt-in in dev (COMPOSE_PROFILES) ──────────────
+
+  worker:
+    profiles: [worker]
+    environment:
+      PHP_OPCACHE: "0"
+    volumes:
+      - .:/srv/app:ro
+      - ./var:/srv/app/var:rw
+      - ./vendor:/srv/app/vendor:rw
+      # The packages built beside this site (omnibase/blog, consent, docs):
+      # composer path repositories, ../ from /srv/app, read only.
+      - ../omnibase:/srv/omnibase:ro
+      # The repositories the catalogue and the manuals are read from
+      # (app:packages:sync, wikidoc): every family and library, read only.
+      - ../omnibase:/srv/repos/omnibase:ro
+      - ../omnibus:/srv/repos/omnibus:ro
+      - ../omnitrade:/srv/repos/omnitrade:ro
+      - ../omnistate:/srv/repos/omnistate:ro
+      - ../omnibank:/srv/repos/omnibank:ro
+      - ../omnisong:/srv/repos/omnisong:ro
+      - ../omnipost:/srv/repos/omnipost:ro
+      - ../omnifood:/srv/repos/omnifood:ro
+      - ../omnischolar:/srv/repos/omnischolar:ro
+      - ../omnilex:/srv/repos/omnilex:ro
+      - ../omnimeet:/srv/repos/omnimeet:ro
+      - ../transparent:/srv/repos/transparentjs:ro
+      - ../stickyjs:/srv/repos/stickyjs:ro
+      - ../graphjs:/srv/repos/graphjs:ro
+      # "Used by": the composer.json of each site, and nothing else of it.
+      - ../chapaland-v2/composer.json:/srv/sites/chapaland-v2/composer.json:ro
+      - ../latoucheoriginale/composer.json:/srv/sites/latoucheoriginale/composer.json:ro
+      - ../nakaya/composer.json:/srv/sites/nakaya/composer.json:ro
+      - ../glitchr/composer.json:/srv/sites/glitchr/composer.json:ro
+      - ../meyers/composer.json:/srv/sites/meyers/composer.json:ro
+      - ../apfelschule/composer.json:/srv/sites/apfelschule/composer.json:ro
+      - ../anaelletourret/composer.json:/srv/sites/anaelletourret/composer.json:ro
+      - ../brieucvourch/composer.json:/srv/sites/brieucvourch/composer.json:ro
+      - ../nakatani/composer.json:/srv/sites/nakatani/composer.json:ro
+      - ../monica/composer.json:/srv/sites/monica/composer.json:ro
+      - ../wineseller/composer.json:/srv/sites/wineseller/composer.json:ro
+      - ../wedding/composer.json:/srv/sites/wedding/composer.json:ro
+      - ../maisondesante/composer.json:/srv/sites/maisondesante/composer.json:ro
+      - ../nakaya-traiteur/composer.json:/srv/sites/nakaya-traiteur/composer.json:ro
+      - ../notaire/composer.json:/srv/sites/notaire/composer.json:ro
+      - ../avocat/composer.json:/srv/sites/avocat/composer.json:ro
+      - ../juriste/composer.json:/srv/sites/juriste/composer.json:ro
+      - ../youtube/composer.json:/srv/sites/youtube/composer.json:ro
+      - ../panoboutique/composer.json:/srv/sites/panoboutique/composer.json:ro
+      - public:/srv/app/public:rw
+      - ./public/assets:/srv/app/public/assets:ro
+      - storage:/srv/app/var/storage:rw
+      - ./deployments/docker/web/php.ini:/usr/local/etc/php/php.ini
+
+  cron:
+    profiles: [cron]
+    environment:
+      PHP_OPCACHE: "0"
+    volumes:
+      - .:/srv/app:ro
+      - ./var:/srv/app/var:rw
+      - ./vendor:/srv/app/vendor:rw
+      # The packages built beside this site (omnibase/blog, consent, docs):
+      # composer path repositories, ../ from /srv/app, read only.
+      - ../omnibase:/srv/omnibase:ro
+      # The repositories the catalogue and the manuals are read from
+      # (app:packages:sync, wikidoc): every family and library, read only.
+      - ../omnibase:/srv/repos/omnibase:ro
+      - ../omnibus:/srv/repos/omnibus:ro
+      - ../omnitrade:/srv/repos/omnitrade:ro
+      - ../omnistate:/srv/repos/omnistate:ro
+      - ../omnibank:/srv/repos/omnibank:ro
+      - ../omnisong:/srv/repos/omnisong:ro
+      - ../omnipost:/srv/repos/omnipost:ro
+      - ../omnifood:/srv/repos/omnifood:ro
+      - ../omnischolar:/srv/repos/omnischolar:ro
+      - ../omnilex:/srv/repos/omnilex:ro
+      - ../omnimeet:/srv/repos/omnimeet:ro
+      - ../transparent:/srv/repos/transparentjs:ro
+      - ../stickyjs:/srv/repos/stickyjs:ro
+      - ../graphjs:/srv/repos/graphjs:ro
+      # "Used by": the composer.json of each site, and nothing else of it.
+      - ../chapaland-v2/composer.json:/srv/sites/chapaland-v2/composer.json:ro
+      - ../latoucheoriginale/composer.json:/srv/sites/latoucheoriginale/composer.json:ro
+      - ../nakaya/composer.json:/srv/sites/nakaya/composer.json:ro
+      - ../glitchr/composer.json:/srv/sites/glitchr/composer.json:ro
+      - ../meyers/composer.json:/srv/sites/meyers/composer.json:ro
+      - ../apfelschule/composer.json:/srv/sites/apfelschule/composer.json:ro
+      - ../anaelletourret/composer.json:/srv/sites/anaelletourret/composer.json:ro
+      - ../brieucvourch/composer.json:/srv/sites/brieucvourch/composer.json:ro
+      - ../nakatani/composer.json:/srv/sites/nakatani/composer.json:ro
+      - ../monica/composer.json:/srv/sites/monica/composer.json:ro
+      - ../wineseller/composer.json:/srv/sites/wineseller/composer.json:ro
+      - ../wedding/composer.json:/srv/sites/wedding/composer.json:ro
+      - ../maisondesante/composer.json:/srv/sites/maisondesante/composer.json:ro
+      - ../nakaya-traiteur/composer.json:/srv/sites/nakaya-traiteur/composer.json:ro
+      - ../notaire/composer.json:/srv/sites/notaire/composer.json:ro
+      - ../avocat/composer.json:/srv/sites/avocat/composer.json:ro
+      - ../juriste/composer.json:/srv/sites/juriste/composer.json:ro
+      - ../youtube/composer.json:/srv/sites/youtube/composer.json:ro
+      - ../panoboutique/composer.json:/srv/sites/panoboutique/composer.json:ro
+      - public:/srv/app/public:rw
+      - ./public/assets:/srv/app/public/assets:ro
+      - storage:/srv/app/var/storage:rw
+      - ./deployments/docker/web/php.ini:/usr/local/etc/php/php.ini
+
+  # ── Mailer (MailDev) — dev only, https://<host>/admin/_/mailer/ ──
+
+  mailer:
+    profiles: [mailer]
+    container_name: ${APP_NAME:-${COMPOSE_PROJECT_NAME}}-mailer
+    user: root
+    restart: unless-stopped
+    image: maildev/maildev
+    volumes:
+      - mailer:/mnt/maildev:rw
+    environment:
+      - MAILDEV_MAIL_DIRECTORY=/mnt/maildev
+    command: bin/maildev --web 1080 --smtp 1025 --hide-extensions STARTTLS
+    networks:
+      - intranet

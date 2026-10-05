@@ -1,0 +1,38 @@
+# omnibase/docs: the manuals. One per package, read in the docs/ folder and
+# the README of its repository (mounted read only under OMNI_REPOS), a
+# version per branch: the branch checked out is read in place, the others
+# are copied under var/wikidoc by `bin/console wikidoc:sync`.
+wikidoc:
+    public:
+        enabled: true
+        path: docs
+    # Every family, provider, bundle and library: <workspace>/<repository>.
+    discover:
+        - '%env(OMNI_REPOS)%/*/*'
+        - '%env(OMNI_REPOS)%/transparentjs'
+        - '%env(OMNI_REPOS)%/stickyjs'
+        - '%env(OMNI_REPOS)%/graphjs'
+    # The list of repositories, and the search's local records, kept a minute.
+    cache_ttl: 60
+    search:
+        typesense:
+            enabled: true
+            prefix: omniscient
+
+when@test:
+    wikidoc:
+        # The tests read tests/Fixtures/repos: every package there is a manual
+        # at the one version "current"; glitchr/omnibus is given two versions,
+        # the second one as wikidoc:sync would have copied it.
+        discover:
+            - '%kernel.project_dir%/tests/Fixtures/repos/*/*'
+            - '%kernel.project_dir%/tests/Fixtures/repos/stickyjs'
+        manuals:
+            glitchr/omnibus:
+                path: '%kernel.project_dir%/tests/Fixtures/repos/omnibus/core'
+                repository: 'https://github.com/glitchr-studio/omnibus'
+                versions:
+                    '2.x': { path: '%kernel.project_dir%/tests/Fixtures/repos/omnibus/core' }
+                    '1.x': { path: '%kernel.project_dir%/tests/Fixtures/wikidoc/glitchr--omnibus/1.x' }
+        export_dir: '%kernel.project_dir%/var/wikidoc-test'
+        cache_ttl: 0

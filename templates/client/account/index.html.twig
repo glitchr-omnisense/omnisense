@@ -1,0 +1,55 @@
+{# "My account": the packages followed, the latest announcements, the settings, the back office for those who run the site. #}
+{% extends 'layout1.html.twig' %}
+
+{% block title %}{{ '@messages.account.title'|trans }}{% endblock %}
+
+{% block content %}
+<div class="om-wrap om-page">
+    <header class="om-head is-page">
+        <p class="om-cote">{{ '@messages.account.eyebrow'|trans }}</p>
+        <h1>{{ '@messages.account.title'|trans }}</h1>
+        <p class="om-lead">{{ '@messages.account.lead'|trans({name: app.user}) }}</p>
+        <p class="om-actions">
+            <a class="om-button is-line" href="{{ path('user_settings') }}">{{ '@messages.account.settings'|trans }}</a>
+            {% if is_granted('ROLE_STAFF') %}<a class="om-button is-line" href="{{ path('admin') }}">{{ '@messages.nav.admin'|trans }}</a>{% endif %}
+        </p>
+    </header>
+
+    <section class="om-tier" id="follows">
+        <header><h2>{{ '@messages.account.follows'|trans }} <small>{{ follows|length }}</small></h2><p>{{ '@messages.account.follows_lead'|trans }}</p></header>
+        {% if follows %}
+        <ul class="om-follows">
+            {% for follow in follows %}
+            {% set package = follow.package %}
+            <li>
+                <a class="om-row-name" href="{{ path('app_package', {vendor: package.vendor, name: package.shortName}) }}">{{ package.name }}</a>
+                <p class="om-row-facts">
+                    {% include 'partials/_states.html.twig' with {package: package} %}
+                    {% if follow.hasNewVersion %}<span class="om-fact is-new">{{ '@messages.account.new_version'|trans({before: follow.sinceVersion, now: package.publishedVersion}) }}</span>{% endif %}
+                    <span class="om-fact">{{ '@messages.account.since'|trans({date: follow.createdAt|format_date('medium')}) }}</span>
+                </p>
+                <form method="post" action="{{ path('app_package_follow', {vendor: package.vendor, name: package.shortName}) }}">
+                    <input type="hidden" name="_token" value="{{ csrf_token('follow-' ~ package.id) }}">
+                    <input type="hidden" name="back" value="account">
+                    <button type="submit" class="om-footer-link">{{ '@messages.account.unfollow'|trans }}</button>
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="om-none">{{ '@messages.account.no_follow'|trans({url: path('app_packages')})|raw }}</p>
+        {% endif %}
+    </section>
+
+    <section class="om-tier">
+        <header><h2>{{ '@messages.home.news'|trans }}</h2></header>
+        {% if posts %}
+        <ul class="om-sites">
+            {% for post in posts %}<li><a href="{{ path('blog_post', {slug: post.slug}) }}">{{ post.title }}</a><span>{{ post.publishedAt|format_date('medium') }}</span></li>{% endfor %}
+        </ul>
+        {% else %}
+        <p class="om-none">{{ '@messages.home.no_news'|trans }}</p>
+        {% endif %}
+    </section>
+</div>
+{% endblock %}

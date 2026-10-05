@@ -1,0 +1,78 @@
+{#
+ # The catalogue: every package found in a repository, floor by floor - the
+ # foundation, its components, the families each with its providers, the
+ # libraries. Then, apart, the names that are only announced.
+ #}
+{% extends 'layout1.html.twig' %}
+
+{% block title %}{{ '@messages.catalogue.title'|trans }}{% endblock %}
+{% block description %}{{ '@messages.catalogue.description'|trans({count: counts.packages}) }}{% endblock %}
+
+{% block content %}
+<div class="om-wrap om-page">
+    <header class="om-head is-page">
+        <p class="om-cote">{{ '@messages.catalogue.eyebrow'|trans }}</p>
+        <h1>{{ '@messages.catalogue.title'|trans }}</h1>
+        <p class="om-lead">{{ '@messages.catalogue.lead'|trans({count: counts.packages}) }}</p>
+        <p class="om-source">{{ synced ? '@messages.catalogue.synced'|trans({date: synced|format_datetime('long', 'short'), published: counts.published, unpublished: counts.unpublished, unknown: counts.unknown}) : '@messages.catalogue.never_synced'|trans }}</p>
+        <nav class="om-anchors" aria-label="{{ '@messages.catalogue.floors'|trans }}">
+            {% for tier, list in {foundation: foundation, component: components, family: families, provider: providers, library: libraries} %}{% if list|length %}<a href="#{{ tier }}"><span class="om-cote">{{ tier == 'library' ? '+' : loop.index }}</span> {{ ('@messages.floors.' ~ tier ~ '.name')|trans }}</a>{% endif %}{% endfor %}
+        </nav>
+    </header>
+
+    {% if counts.packages == 0 %}
+        <p class="om-none">{{ '@messages.catalogue.empty'|trans }}</p>
+    {% endif %}
+
+    {% if foundation|length %}
+    <section class="om-tier" id="foundation">
+        <header><p class="om-cote">1</p><h2>{{ '@messages.floors.foundation.name'|trans }}</h2><p>{{ '@messages.floors.foundation.text'|trans }}</p></header>
+        <ul class="om-rows">{% for package in foundation %}{% include 'partials/_package_row.html.twig' %}{% endfor %}</ul>
+    </section>
+    {% endif %}
+
+    {% if components|length %}
+    <section class="om-tier" id="component">
+        <header><p class="om-cote">2</p><h2>{{ '@messages.floors.component.name'|trans }} <small>{{ components|length }}</small></h2><p>{{ '@messages.floors.component.text'|trans }}</p></header>
+        <ul class="om-rows">{% for package in components %}{% include 'partials/_package_row.html.twig' with {short: true} %}{% endfor %}</ul>
+    </section>
+    {% endif %}
+
+    {% if families|length %}
+    <section class="om-tier" id="family">
+        <header><p class="om-cote">3 · 4</p><h2>{{ '@messages.floors.family.name'|trans }} <small>{{ families|length }}</small> {{ '@messages.catalogue.and_providers'|trans }}</h2><p>{{ '@messages.floors.family.text'|trans }} {{ '@messages.floors.provider.text'|trans }}</p></header>
+        <div id="provider" class="om-anchor"></div>
+        {% for name, own in families %}
+        <article class="om-family" id="{{ name }}">
+            <header>
+                <h3><a href="{{ path('app_family', {family: name}) }}">Omni<b>{{ family_suffix(name) }}</b></a></h3>
+                <p>{{ ('@messages.families.' ~ name ~ '.phrase')|trans }}</p>
+            </header>
+            <ul class="om-rows">
+                {% include 'partials/_package_row.html.twig' with {package: own} %}
+                {% for package in providers[name]|default([]) %}{% include 'partials/_package_row.html.twig' with {short: true} %}{% endfor %}
+            </ul>
+        </article>
+        {% endfor %}
+    </section>
+    {% endif %}
+
+    {% if libraries|length %}
+    <section class="om-tier" id="library">
+        <header><p class="om-cote">+</p><h2>{{ '@messages.floors.library.name'|trans }} <small>{{ libraries|length }}</small></h2><p>{{ '@messages.floors.library.text'|trans }}</p></header>
+        <ul class="om-rows">{% for package in libraries %}{% include 'partials/_package_row.html.twig' %}{% endfor %}</ul>
+    </section>
+    {% endif %}
+
+    {% if announced|length %}
+    <section class="om-tier is-announced" id="announced">
+        <header><h2>{{ '@messages.catalogue.announced_title'|trans }}</h2><p>{{ '@messages.catalogue.announced_lead'|trans }}</p></header>
+        <ul class="om-announced">
+            {% for name, state in announced %}
+            <li><span class="om-announced-name">Omni<b>{{ family_suffix(name) }}</b></span> <span>{{ ('@messages.families.' ~ name ~ '.phrase')|trans }}</span> <em>{{ ('@messages.catalogue.' ~ state)|trans }}</em></li>
+            {% endfor %}
+        </ul>
+    </section>
+    {% endif %}
+</div>
+{% endblock %}

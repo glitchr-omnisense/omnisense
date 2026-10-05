@@ -1,0 +1,58 @@
+# Admin services — opt-in only, never auto-loaded
+# Usage: docker compose -f docker-compose.yml -f docker-compose.admin.yml up -d
+# In dev: docker compose -f docker-compose.yml -f docker-compose.override.yml -f docker-compose.admin.yml up -d
+#
+# Production: always access via SSH tunnel
+#   ssh -L 8443:localhost:8443 user@prod-server
+#   then: https://localhost:8443
+
+services:
+
+  # ── Database admin (phpMyAdmin) ──────────────────────────────────
+
+  database-admin:
+    container_name: ${APP_NAME:-${COMPOSE_PROJECT_NAME}}-database-admin
+    restart: unless-stopped
+    image: phpmyadmin:latest
+    environment:
+      PMA_HOST: ${APP_NAME:-${COMPOSE_PROJECT_NAME}}-database
+      UPLOAD_LIMIT: "32M"
+      MEMORY_LIMIT: "512M"
+      MAX_EXECUTION_TIME: 32
+      PMA_ABSOLUTE_URI: "https://localhost/admin/_/database/"
+    depends_on:
+      - database
+    volumes:
+      - ./deployments/docker/database/admin/config.user.inc.php:/etc/phpmyadmin/config.user.inc.php
+      - ./deployments/docker/database/admin/config.secret.inc.php:/etc/phpmyadmin/config.secret.inc.php
+    networks:
+      - intranet
+
+
+  # ── Queue admin (Redis UI) ────────────────────────────
+
+  queue-admin:
+    container_name: ${APP_NAME:-${COMPOSE_PROJECT_NAME}}-queue-admin
+    restart: unless-stopped
+    image: rediscommander/redis-commander:latest
+    environment:
+      REDIS_HOSTS: "queue:${APP_NAME:-${COMPOSE_PROJECT_NAME}}-queue:6379"
+      URL_PREFIX: /admin/_/queue
+    depends_on:
+      - queue
+    networks:
+      - intranet
+
+  # ── Cache admin (Redis UI) ───────────────────────────────────────
+
+  cache-admin:
+    container_name: ${APP_NAME:-${COMPOSE_PROJECT_NAME}}-cache-admin
+    restart: unless-stopped
+    image: rediscommander/redis-commander:latest
+    environment:
+      REDIS_HOSTS: "cache:${APP_NAME:-${COMPOSE_PROJECT_NAME}}-cache:6379"
+      URL_PREFIX: /admin/_/cache
+    depends_on:
+      - cache
+    networks:
+      - intranet

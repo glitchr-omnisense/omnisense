@@ -1,0 +1,82 @@
+{#
+ # The document shell - omnibase plumbing as on the other sites: the theme
+ # classes on <html>, app.site.meta() for title/OG, transparent.js' offline
+ # strings, deploy_version() cache busting, and the base/form/app Encore tags.
+ #}
+{% set html_class = (app.theme.mode.class ?? "") ~ " " ~ (app.theme.width.class ?? "") %}
+
+{%- set html_attributes = (html_attributes ?? {})|merge({
+    'class': 'transparent loading ' ~ (html_attributes.class ?? '') ~ " " ~ html_class,
+    'data-offline-title'  : '@messages.offline.title'|trans,
+    'data-offline-message': '@messages.offline.message'|trans,
+    'data-offline-retry'  : '@messages.offline.retry'|trans,
+}) -%}
+
+<!DOCTYPE html>
+<html {{ html_attributes(html_attributes) }} lang="{{ app.request.getLocale()|lang }}">
+
+    {# The tab's title: the page's own, then the site's name after a bar - "glitchr/omnitrade | Omniscient". #}
+    {% set _page_title = block('title') is defined ? block('title')|trim : '' %}
+    {% set meta = app.site.meta({
+        'title'      : [(_page_title ?: null), site.name, (_page_title ? null : "@messages.site.slogan"|trans)] | join_if_exists(" | "),
+        'description': block('description') ?? ("@messages.site.description"|trans),
+        "keywords"   : (block('keywords') ?? ("@messages.site.keywords"|trans)) ,
+        "type"       : block('type') ?? "website",
+        "author"     : site.publisher,
+        "locale"     : app.request.getLocale()
+    }) %}
+
+    <head>
+    {% block head %}
+        <meta charset="UTF-8">
+        <title>{{ meta.title|raw }}</title>
+        <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+
+        {% block meta %}
+        <meta name="color-scheme" content="light dark">
+        <meta name="theme-color" content="#f3f5f6" media="(prefers-color-scheme: light)">
+        <meta name="theme-color" content="#0c1117" media="(prefers-color-scheme: dark)">
+        <meta name="description" content="{{ meta.description }}">
+        <meta name="keywords"    content="{{ meta.keywords }}">
+        <meta name="author"      content="{{ meta.author }}">
+        <meta property="og:title"       content="{{ meta.title }}">
+        <meta property="og:description" content="{{ meta.description }}">
+        <meta property="og:type"        content="{{ meta.type }}">
+        <meta property="og:locale"      content="{{ meta.locale }}">
+        <meta property="og:url"         content="{{ app.request.uri }}">
+        {% endblock %}
+
+        {% block icon %}
+        <link rel="icon" type="image/svg+xml" href="{{ asset('assets/ico/favicon.svg') }}">
+        {% endblock %}
+
+        {{ encore_entry_link_tags('base') }}
+        {{ encore_entry_link_tags('form') }}
+        {{ encore_entry_link_tags('app') }}
+
+        {% block stylesheets_layout %}{% endblock %}
+        {% block stylesheets %}{% endblock %}
+    {% endblock %}
+
+    <script>window.APP_DEPLOY_VERSION = "{{ deploy_version() }}";</script>
+    </head>
+
+    <body>
+    {% block body %}
+        {{ html_entry_noscript_tags() }}
+
+        <div id="page" data-layout="{% block layout_name %}base{% endblock %}">
+        {% block page %}
+            {% block layout %}{% endblock %}
+        {% endblock %}
+        </div>
+
+        {{ encore_entry_script_tags('base') }}
+        {{ encore_entry_script_tags('form') }}
+        {{ encore_entry_script_tags('app') }}
+
+        {% block javascripts_layout %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+    {% endblock %}
+    </body>
+</html>

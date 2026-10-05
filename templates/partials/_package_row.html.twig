@@ -1,0 +1,17 @@
+{#
+ # A package as a row of the catalogue: its name, what it is, where it
+ # stands - its registry, whether its README says it was tried for real,
+ # its manual. package: App\Entity\Package; short: print the name without
+ # its vendor (inside a family's list).
+ #}
+{% set manual = manual_of(package) %}
+<li class="om-row">
+    <a class="om-row-name" href="{{ path('app_package', {vendor: package.vendor, name: package.shortName}) }}">
+        {%- if short|default(false) %}<span>{{ package.vendor }}/</span>{{ package.shortName }}{% else %}{{ package.name }}{% endif -%}
+    </a>
+    <p class="om-row-text">{{ package.description ?? '@messages.catalogue.no_description'|trans }}</p>
+    <p class="om-row-facts">
+        {% include 'partials/_states.html.twig' with {package: package} %}
+        {% if manual %}<a class="om-fact is-link" href="{{ path('wikidoc_manual', {path: manual.urlPath()}) }}">{{ '@messages.catalogue.manual'|trans }}</a>{% endif %}
+    </p>
+</li>

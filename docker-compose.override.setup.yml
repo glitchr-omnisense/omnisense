@@ -1,0 +1,21 @@
+# Dev overrides for one-shot setup services — loaded by DOCKER_SETUP when APP_DEBUG=1
+# Replaces the named vendor volume with a host bind-mount so edits to ./vendor are
+# immediately visible inside containers without rebuilding or patching volumes.
+
+services:
+
+  composer:
+    volumes:
+      - ./vendor:/srv/app/vendor:rw
+      # The packages built beside this site (omnibase/blog, consent, docs):
+      # composer path repositories, ../ from /srv/app, read only.
+      - ../omnibase:/srv/omnibase:ro
+
+  assets:
+    command: []
+    volumes:
+      - ./vendor:/srv/app/vendor:rw
+      # The packages built beside this site (omnibase/blog, consent, docs):
+      # composer path repositories, ../ from /srv/app, read only.
+      - ../omnibase:/srv/omnibase:ro
+      - ./node_modules:/srv/app/node_modules:rw

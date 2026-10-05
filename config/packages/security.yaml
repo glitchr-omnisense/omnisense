@@ -1,0 +1,113 @@
+security:
+    password_hashers:
+        Base\Entity\User:
+            algorithm: auto
+
+    role_hierarchy:
+        # A member follows packages. The admin writes the announcements and
+        # runs the catalogue; staff sees the dashboard; editors are Glitch Art.
+        ROLE_STAFF      : [ROLE_USER]
+        ROLE_ADMIN      : [ROLE_STAFF]
+        ROLE_SUPERADMIN : [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_EDITOR     : [ROLE_SUPERADMIN]
+
+    providers:
+        users: { entity: { class: App\Entity\User } }
+        hwi: { id: Base\Security\UserProvider }
+
+    firewalls:
+        dev:
+            pattern: ^/(_wdt)/
+            security: false
+
+        ux:
+            pattern: ^/(images|webp|autocomplete|autovalidate)/.*(?<!_debug)$
+            security: false
+
+        assets:
+            pattern: ^/(media|storage|css|images|js|assets).*(?<!_debug)$
+            security: false
+
+        rescue:
+            provider: users
+            context: common
+            pattern: ^/(rescue|admin|_profiler)
+            user_checker: Base\Security\UserChecker
+            remember_me:
+                secret:   '%kernel.secret%'
+                lifetime: 604800
+                signature_properties: ['password', 'email']
+            custom_authenticator:
+                - Base\Security\RescueFormAuthenticator
+            entry_point: Base\Security\RescueFormAuthenticator
+            logout:
+                path: security_logoutRequest
+                target: security_logout
+            switch_user: { role: ROLE_ALLOWED_TO_SWITCH, parameter: _switch_user }
+
+        main:
+            context: common
+            provider: users
+            lazy: true
+            pattern: ^/
+            user_checker: Base\Security\UserChecker
+            remember_me:
+                secret:   '%kernel.secret%'
+                lifetime: 604800
+                signature_properties: ['password', 'email']
+            custom_authenticator:
+                - Base\Security\RescueFormAuthenticator
+                - Base\Security\LoginFormAuthenticator
+            entry_point: Base\Security\LoginFormAuthenticator
+            access_token:
+                token_handler: Base\Security\AccessTokenHandler
+            form_login:
+                use_referer: true
+            two_factor:
+                auth_form_path: 2fa_login
+                check_path: 2fa_login_check
+            oauth:
+                resource_owners:
+                    google: "/login/google/callback"
+                default_target_path: /account
+                login_path:        /login
+                failure_path:      /login
+                use_forward:       false
+                oauth_user_provider:
+                    service: Base\Security\UserProvider
+            webauthn:
+                user_provider: users
+                authentication:
+                    routes:
+                        options_path: /login/passkey/options
+                        result_path:  /login/passkey
+                registration:
+                    routes:
+                        options_path: /settings/passkeys/register/options
+                        result_path:  /settings/passkeys/register
+            logout:
+                path: security_logoutRequest
+                target: security_logout
+            switch_user: { role: ROLE_ALLOWED_TO_SWITCH, parameter: _switch_user }
+
+    access_control:
+        - { path: ^/rescue,     roles: PUBLIC_ACCESS }
+        - { path: ^/_profiler,  roles: PUBLIC_ACCESS }
+        - { path: ^/_wdt,       roles: PUBLIC_ACCESS }
+        # The API keys (Akismet, the GitHub token) are the creators' (ROLE_SUPERADMIN).
+        - { path: '^/admin/api-key(/|$)', roles: ROLE_SUPERADMIN }
+        - { path: ^/admin$,     roles: [ROLE_ADMIN, ROLE_STAFF] }
+        - { path: ^/admin,      roles: ROLE_ADMIN }
+        - { path: ^/settings,   roles: ROLE_USER }
+        - { path: ^/profile,    roles: ROLE_USER }
+        - { path: ^/(account|compte), roles: ROLE_USER }
+        - { path: ^/login/2fa,  roles: IS_AUTHENTICATED_2FA_IN_PROGRESS }
+
+when@test:
+    security:
+        password_hashers:
+            Base\Entity\User:
+                algorithm: auto
+                cost: 4
+                time_cost: 3
+                memory_cost: 10

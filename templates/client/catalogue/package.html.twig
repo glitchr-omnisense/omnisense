@@ -1,0 +1,135 @@
+{#
+ # A package: what its repository says of it (description, licence, branch,
+ # what it requires), where it stands (its registry, whether its README says
+ # it was tried for real - with the README's own sentence), who uses it, and
+ # its manual: the versions, the contents.
+ #}
+{% extends 'layout1.html.twig' %}
+
+{% macro nodes(pages, manual, version) %}
+    {% import _self as self %}
+    <ul>
+        {% for node in pages %}
+        <li>{% if node.isSection %}<span>{{ node.title }}</span>{% else %}<a href="{{ path('wikidoc_manual', {path: manual.urlPath(version.name, node.path)}) }}">{{ node.title }}</a>{% endif %}{% if node.children %}{{ self.nodes(node.children, manual, version) }}{% endif %}</li>
+        {% endfor %}
+    </ul>
+{% endmacro %}
+
+{% block title %}{{ package.name }}{% endblock %}
+{% block description %}{{ package.description ?? package.name }}{% endblock %}
+
+{% block content %}
+{% set registry = package.npm ? 'npm' : 'Packagist' %}
+<div class="om-wrap om-page">
+    <header class="om-head is-page">
+        <p class="om-cote">
+            <a href="{{ path('app_packages') }}">{{ '@messages.catalogue.title'|trans }}</a>
+            {% if own %} / <a href="{{ path('app_family', {family: package.family}) }}">Omni{{ family_suffix(package.family) }}</a>{% endif %}
+            / {{ ('@messages.floors.' ~ package.tier.value ~ '.one')|trans }}
+        </p>
+        <h1 class="om-package-title"><span>{{ package.npm ? '@' }}{{ package.vendor }}/</span>{{ package.shortName }}</h1>
+        {% if package.description %}<p class="om-lead">{{ package.description }}</p>{% endif %}
+
+        <div class="om-install">
+            <code data-copy-source>{{ package.installCommand }}</code>
+            {% if package.published is same as(false) %}<p class="om-install-note">{{ '@messages.package.not_published'|trans({registry: registry}) }}</p>{% endif %}
+        </div>
+
+        <div class="om-actions">
+            {% if manual %}<a class="om-button" href="{{ path('wikidoc_manual', {path: manual.urlPath()}) }}">{{ '@messages.package.read_manual'|trans }}</a>{% endif %}
+            {% if package.repositoryUrl %}<a class="om-button is-line" href="{{ package.repositoryUrl }}" rel="noopener">{{ '@messages.package.repository'|trans }}</a>{% endif %}
+            {% if app.user %}
+            <form method="post" action="{{ path('app_package_follow', {vendor: package.vendor, name: package.shortName}) }}" class="om-follow">
+                <input type="hidden" name="_token" value="{{ csrf_token('follow-' ~ package.id) }}">
+                <button type="submit" class="om-button is-line{{ following ? ' is-on' }}" aria-pressed="{{ following ? 'true' : 'false' }}"><i class="fa-{{ following ? 'solid' : 'regular' }} fa-bell" aria-hidden="true"></i> {{ (following ? '@messages.package.following' : '@messages.package.follow')|trans }}</button>
+            </form>
+            {% else %}
+            <a class="om-button is-line" href="{{ path('security_login') }}"><i class="fa-regular fa-bell" aria-hidden="true"></i> {{ '@messages.package.follow'|trans }}</a>
+            {% endif %}
+        </div>
+    </header>
+
+    <div class="om-package-grid">
+        <section class="om-sheet" aria-labelledby="om-sheet-title">
+            <h2 id="om-sheet-title" class="om-cote">{{ '@messages.package.sheet'|trans }}</h2>
+            <dl>
+                <div><dt>{{ '@messages.package.floor'|trans }}</dt><dd>{{ ('@messages.floors.' ~ package.tier.value ~ '.one')|trans }}{% if own and own != package %} · <a href="{{ path('app_family', {family: package.family}) }}">Omni{{ family_suffix(package.family) }}</a>{% endif %}</dd></div>
+                <div><dt>{{ '@messages.package.license'|trans }}</dt><dd>{{ package.license ?? '—' }}</dd></div>
+                <div><dt>{{ '@messages.package.branch'|trans }}</dt><dd>{% if package.branch %}<code>{{ package.branch }}</code>{% else %}—{% endif %}</dd></div>
+                <div><dt>{{ '@messages.package.repository'|trans }}</dt><dd>{% if package.repositoryUrl %}<a href="{{ package.repositoryUrl }}" rel="noopener">{{ package.repositoryUrl|replace({'https://': ''}) }}</a>{% else %}—{% endif %}</dd></div>
+                <div>
+                    <dt>{{ registry }}</dt>
+                    <dd>
+                        {% if package.published is same as(true) %}
+                            <a href="{{ package.registryUrl }}" rel="noopener">{{ '@messages.package.published'|trans }}</a>{% if package.publishedVersion %} · <code>{{ package.publishedVersion }}</code>{% endif %}{% if package.downloads is not null %} · {{ '@messages.package.downloads'|trans({count: package.downloads}) }}{% endif %}
+                        {% elseif package.published is same as(false) %}
+                            {{ '@messages.state.absent'|trans({registry: registry}) }}
+                        {% else %}
+                            {{ '@messages.state.unknown'|trans({registry: registry}) }}
+                        {% endif %}
+                        {% if package.registryCheckedAt %}<small>{{ '@messages.state.asked_on'|trans({date: package.registryCheckedAt|format_date('medium')}) }}</small>{% endif %}
+                    </dd>
+                </div>
+                <div>
+                    <dt>{{ '@messages.package.verified'|trans }}</dt>
+                    <dd>
+                        <span class="om-fact is-{{ package.verification.value }}">{{ ('@messages.state.' ~ package.verification.value)|trans }}</span>
+                        {% if package.verificationNote %}<blockquote class="om-quote"><p>{{ package.verificationNote }}</p><footer>{{ '@messages.package.from_readme'|trans }}</footer></blockquote>{% endif %}
+                    </dd>
+                </div>
+                {% if package.keywords %}<div><dt>{{ '@messages.package.keywords'|trans }}</dt><dd class="om-keywords">{% for keyword in package.keywords %}<span>{{ keyword }}</span>{% endfor %}</dd></div>{% endif %}
+                <div><dt>{{ '@messages.package.followers'|trans }}</dt><dd>{{ followers }}</dd></div>
+            </dl>
+            <p class="om-source">{{ '@messages.package.read_on'|trans({date: package.syncedAt|format_datetime('medium', 'short')}) }}</p>
+        </section>
+
+        <div class="om-package-main">
+            <section class="om-tier" id="manual">
+                <header><h2>{{ '@messages.package.manual'|trans }}</h2></header>
+                {% if manual %}
+                <p class="om-manual-versions">
+                    {{ '@messages.package.versions'|trans({count: manual.versions|length}) }}
+                    {% for v in manual.versions %}<a href="{{ path('wikidoc_manual', {path: manual.urlPath(v.name)}) }}"{% if version and v.name == version.name %} aria-current="true"{% endif %}>{{ v.name }}</a>{% endfor %}
+                    <span>{{ '@messages.package.pages'|trans({count: pages}) }}</span>
+                </p>
+                {% import _self as self %}
+                <nav class="om-contents" aria-label="{{ '@messages.package.contents'|trans }}">
+                    {% if home %}<ul><li><a href="{{ path('wikidoc_manual', {path: manual.urlPath(version.name)}) }}">{{ '@wikidoc.manual.home'|trans }}</a></li></ul>{% endif %}
+                    {{ self.nodes(tree, manual, version) }}
+                </nav>
+                {% if package.docPages == 0 %}<p class="om-note">{{ '@messages.package.readme_only'|trans }}</p>{% endif %}
+                {% else %}
+                <p class="om-none">{{ '@messages.package.no_manual'|trans }}</p>
+                {% endif %}
+            </section>
+
+            {% if requires or required_by %}
+            <section class="om-tier">
+                <header><h2>{{ '@messages.package.links'|trans }}</h2></header>
+                {% if requires %}
+                <h3 class="om-cote">{{ '@messages.package.requires'|trans }}</h3>
+                <ul class="om-rows">{% for other in requires %}{% include 'partials/_package_row.html.twig' with {package: other} %}{% endfor %}</ul>
+                {% endif %}
+                {% if required_by %}
+                <h3 class="om-cote">{{ '@messages.package.required_by'|trans({count: required_by|length}) }}</h3>
+                <p class="om-names">{% for other in required_by %}<a href="{{ path('app_package', {vendor: other.vendor, name: other.shortName}) }}">{{ other.name }}</a>{% endfor %}</p>
+                {% endif %}
+            </section>
+            {% endif %}
+
+            <section class="om-tier">
+                <header><h2>{{ '@messages.package.sites'|trans }} <small>{{ sites|length }}</small></h2></header>
+                {% if sites %}
+                <ul class="om-sites">
+                    {% for site in sites %}
+                    <li><a href="{{ site.url }}" rel="noopener">{{ site.name }}</a>{% if site.fictional %} <em>{{ '@messages.demos.fictional'|trans }}</em>{% endif %}<span>{{ ('@messages.sites.' ~ site.slug)|trans }}</span></li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p class="om-none">{{ '@messages.package.no_site'|trans }}</p>
+                {% endif %}
+            </section>
+        </div>
+    </div>
+</div>
+{% endblock %}

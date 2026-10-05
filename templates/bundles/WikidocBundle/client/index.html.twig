@@ -1,0 +1,52 @@
+{#
+ # Every manual, grouped as the catalogue groups its packages (omnibase/docs'
+ # own page lists them by name): omnibase and its components, each family
+ # with its providers, the libraries. A manual with a docs/ folder says how
+ # many pages it holds; one made of a README alone says so.
+ #}
+{% extends 'layout1.html.twig' %}
+
+{% block title %}{{ '@wikidoc.manuals.title'|trans }}{% endblock %}
+{% block description %}{{ '@messages.docs.description'|trans({count: manuals|length}) }}{% endblock %}
+
+{% block stylesheets %}{{ parent() }}<link rel="stylesheet" href="{{ asset('bundles/wikidoc/css/manual.css') }}">{% endblock %}
+
+{% block content %}
+<div class="om-wrap om-page om-docs-index">
+    <header class="om-head is-page manual-index-head">
+        <p class="om-cote">{{ '@messages.docs.eyebrow'|trans }}</p>
+        <h1>{{ '@wikidoc.manuals.title'|trans }}</h1>
+        <p class="om-lead">{{ '@messages.docs.lead'|trans({count: manuals|length}) }}</p>
+        <div class="manual-index om-docs-search">{% include '@Wikidoc/client/_search.html.twig' with {suffix: '-index'} %}</div>
+        <p class="om-source" data-engine="{{ engine }}">{{ ('@messages.docs.engine_' ~ engine)|trans }}</p>
+    </header>
+
+    {% if manuals is empty %}
+        <p class="om-none">{{ '@wikidoc.manuals.empty'|trans }}</p>
+    {% endif %}
+
+    {% for group in manual_groups(manuals) %}
+    <section class="om-tier" id="{{ group.family ?? group.kind }}">
+        <header>
+            {% if group.family %}
+                <h2><a href="{{ path('app_family', {family: group.family}) }}">Omni<b>{{ family_suffix(group.family) }}</b></a> <small>{{ group.manuals|length }}</small></h2>
+                <p>{{ ('@messages.families.' ~ group.family ~ '.phrase')|trans }}</p>
+            {% else %}
+                <h2>{{ ('@messages.docs.group_' ~ group.kind)|trans }} <small>{{ group.manuals|length }}</small></h2>
+            {% endif %}
+        </header>
+        <ul class="om-manuals">
+            {% for entry in group.manuals %}
+            {% set manual = entry.manual %}
+            <li>
+                <a class="om-row-name" href="{{ path('wikidoc_manual', {path: manual.urlPath()}) }}">{{ manual.label }}</a>
+                <span class="om-manual-versions">{% for v in manual.versions %}<a href="{{ path('wikidoc_manual', {path: manual.urlPath(v.name)}) }}">{{ v.name }}</a>{% endfor %}</span>
+                <span class="om-manual-size">{% if entry.package and entry.package.docPages %}{{ '@wikidoc.manuals.count'|trans({count: entry.package.docPages}) }}{% else %}{{ '@messages.docs.readme_only'|trans }}{% endif %}</span>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+    {% endfor %}
+</div>
+<script src="{{ asset('bundles/wikidoc/js/manual.js') }}" defer></script>
+{% endblock %}

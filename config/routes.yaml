@@ -1,0 +1,31 @@
+app_controller:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
+
+base_controller:
+    resource: "@BaseBundle/Controller"
+    type: attribute
+    prefix: /
+
+# The announcements: /blog (blog.path).
+blog_controller:
+    resource: "@BlogBundle/src/Controller/Client"
+    type: attribute
+    prefix: /
+
+# The manuals, one per package and a version per branch: /docs, /docs/<package>/<version>/<page>,
+# /docs/_search (omnibase/docs, wikidoc.public). The back office's own manual
+# (@WikidocBundle/src/Controller, also at /docs) is not imported.
+wikidoc_manuals:
+    resource: "@WikidocBundle/src/Site/Controller"
+    type: attribute
+    prefix: /
+
+# Tracks routes_paths.yaml (per-language paths for LocalizedRoute) so the
+# route cache invalidates when it changes. Not under config/routes/: the
+# Kernel auto-imports every yaml there as a routing file of its own.
+app_route_paths_resource:
+    resource: "routes_paths.yaml"
+    type: base_route_paths

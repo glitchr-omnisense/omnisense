@@ -1,0 +1,3 @@
+# omnibase/consent's words, where this site says less: it keeps your
+# session, your language and your theme (as its privacy page says).
+text: "The site keeps only what makes it work: your session, your language, your theme. No ads, no tracking.{privacy, select, none {} other { <a href=\"{privacy}\">Privacy</a>.}}"

@@ -1,0 +1,51 @@
+{# A family: the question it asks, its own package, the providers that answer, the sites that use it. #}
+{% extends 'layout1.html.twig' %}
+
+{% block title %}Omni{{ suffix }}{% endblock %}
+{% block description %}{{ ('@messages.families.' ~ family ~ '.phrase')|trans }}{% endblock %}
+
+{% block content %}
+<div class="om-wrap om-page">
+    <header class="om-head is-page">
+        <p class="om-cote"><a href="{{ path('app_packages') }}">{{ '@messages.catalogue.title'|trans }}</a> / {{ (family == 'omnibase' ? '@messages.floors.foundation.name' : '@messages.floors.family.name')|trans }}</p>
+        <h1 class="om-family-title">Omni<b>{{ suffix }}</b></h1>
+        <p class="om-lead">{{ ('@messages.families.' ~ family ~ '.phrase')|trans }}</p>
+        <p class="om-family-text">{{ ('@messages.families.' ~ family ~ '.text')|trans }}</p>
+        <p class="om-actions">
+            {% if manual %}<a class="om-button" href="{{ path('wikidoc_manual', {path: manual.urlPath()}) }}">{{ '@messages.family.manual'|trans }}</a>{% endif %}
+            <a class="om-button is-line" href="{{ path('app_package', {vendor: own.vendor, name: own.shortName}) }}">{{ own.name }}</a>
+            {% if own.repositoryUrl %}<a class="om-button is-line" href="{{ own.repositoryUrl }}" rel="noopener">GitHub</a>{% endif %}
+        </p>
+    </header>
+
+    <section class="om-tier">
+        <header><h2>{{ (family == 'omnibase' ? '@messages.family.own_foundation' : '@messages.family.own')|trans }}</h2></header>
+        <ul class="om-rows">{% include 'partials/_package_row.html.twig' with {package: own} %}</ul>
+    </section>
+
+    <section class="om-tier">
+        <header>
+            <h2>{{ (family == 'omnibase' ? '@messages.floors.component.name' : '@messages.floors.provider.name')|trans }} <small>{{ members|length }}</small></h2>
+            <p>{{ (family == 'omnibase' ? '@messages.floors.component.text' : '@messages.family.providers_lead')|trans }}</p>
+        </header>
+        {% if members %}
+        <ul class="om-rows">{% for package in members %}{% include 'partials/_package_row.html.twig' with {short: true} %}{% endfor %}</ul>
+        {% else %}
+        <p class="om-none">{{ '@messages.family.no_provider'|trans }}</p>
+        {% endif %}
+    </section>
+
+    <section class="om-tier">
+        <header><h2>{{ '@messages.family.sites'|trans }} <small>{{ sites|length }}</small></h2><p>{{ '@messages.family.sites_lead'|trans }}</p></header>
+        {% if sites %}
+        <ul class="om-sites">
+            {% for site in sites %}
+            <li><a href="{{ site.url }}" rel="noopener">{{ site.name }}</a>{% if site.fictional %} <em>{{ '@messages.demos.fictional'|trans }}</em>{% endif %}<span>{{ ('@messages.sites.' ~ site.slug)|trans }}</span></li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="om-none">{{ '@messages.family.no_site'|trans }}</p>
+        {% endif %}
+    </section>
+</div>
+{% endblock %}

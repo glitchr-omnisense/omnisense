@@ -1,0 +1,7 @@
+# The cookie answer (omnibase/consent): the circle in the footer, the panel
+# floating with a 10 s countdown until the visitor answers. USER = omnibase's
+# own cookies (theme, language, time zone): the only ones this site writes.
+consent:
+    groups: [USER]
+    countdown: 10
+    privacy_route: app_privacy

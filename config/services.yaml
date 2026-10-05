@@ -1,0 +1,87 @@
+parameters:
+    # Who the site is (App\Site\Identity, the Twig global `site`).
+    app.site.name: "Omniscient"
+    app.site.publisher: "Glitch Art"
+    app.site.host: ""
+    # The GitHub organisation the packages live under: the "edit this page"
+    # links, the repository links, the Sponsors page.
+    app.site.github: "glitchr-studio"
+
+    # The catalogue (app:packages:sync, App\Catalogue\*): where the packages'
+    # repositories and the sites' composer.json are mounted, read only.
+    app.catalogue.repos_dir: '%env(OMNI_REPOS)%'
+    app.catalogue.sites_dir: '%env(OMNI_SITES)%'
+    env(OMNI_REPOS): '/srv/repos'
+    env(OMNI_SITES): '/srv/sites'
+    env(GITHUB_SPONSORS_TOKEN): ''
+    env(GITHUB_SPONSORS_LOGIN): 'glitchr-studio'
+    env(TYPESENSE_SCHEME): 'http'
+    env(TYPESENSE_HOST): 'search'
+    env(TYPESENSE_PORT): '8108'
+    env(TYPESENSE_SECRET): 'omniscient-search-key'
+    env(BACKUP_USERNAME): ''
+    env(BACKUP_PASSWORD): ''
+    env(AKISMET_KEY): ''
+    env(CRISP_WEBSITE_ID): ''
+    env(DISCORD_TOKEN): ''
+    env(DISCORD_WEBHOOK): ''
+    env(DOCTRINE_DATABASE_PORT): '3306'
+    env(GOOGLE_ANALYTICS_VIEWID): ''
+    env(GOOGLE_MAPS_CLIENT_KEY): ''
+    env(GOOGLE_MAPS_SECRET): ''
+    env(GOOGLE_MAPS_SERVER_KEY): ''
+    env(GOOGLE_RECAPTCHA_SITE_KEY): ''
+    env(GOOGLE_RECAPTCHA_SECRET): ''
+    env(GOOGLE_RECAPTCHA_V2_SECRET): ''
+    env(GOOGLE_RECAPTCHA_V2_SITE_KEY): ''
+    env(GOOGLE_RECAPTCHA_V3_SECRET): ''
+    env(GOOGLE_RECAPTCHA_V3_SITE_KEY): ''
+    env(MAILER_TECHNICAL): 'noreply@omniscient.local'
+    env(MAILER_CONTACT): 'contact@omniscient.local'
+    env(HTTP_REDUCTION): '0'
+    env(HTTP_MACHINE): '[]'
+    env(HTTP_DOMAIN): '[]'
+    env(HTTP_SUBDOMAIN): '[]'
+    env(HTTP_PORT): '[]'
+    env(HTTP_BASEDIR): '[]'
+    google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+            - '../src/DataFixtures/'
+
+    # Required by webauthn.yaml's repositories (see Chapaland's services.yaml:
+    # the alias is resolved before Doctrine would make them autowireable).
+    Base\Repository\User\PasskeyRepository: ~
+    Base\Security\WebauthnUserEntityRepository: ~
+
+# Fixtures only exist where doctrine/fixtures-bundle (require-dev) does.
+when@dev:
+    services:
+        App\DataFixtures\:
+            resource: '../src/DataFixtures/'
+            autowire: true
+            autoconfigure: true
+
+when@test:
+    parameters:
+        # The tests read their own repositories and sites (a real environment
+        # variable - the containers' OMNI_REPOS - would win over .env.test).
+        app.catalogue.repos_dir: '%kernel.project_dir%/tests/Fixtures/repos'
+        app.catalogue.sites_dir: '%kernel.project_dir%/tests/Fixtures/sites'
+    services:
+        # The outside world, answered here: no test calls it for real.
+        App\Tests\Mock\NoNetwork: ~
+        App\DataFixtures\:
+            resource: '../src/DataFixtures/'
+            autowire: true
+            autoconfigure: true

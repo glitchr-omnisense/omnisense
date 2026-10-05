@@ -1,0 +1,14 @@
+framework:
+    mailer:
+        # Production: MAILER_DSN comes from the secrets vault (config/secrets/prod).
+        dsn: "%env(MAILER_DSN)%"
+
+# In dev every message is rewritten to the technical mailbox and lands in
+# MailDev (https://<host>/admin/_/mailer/): an order confirmation can never
+# reach a real customer from a development machine.
+when@dev:
+    framework:
+        mailer:
+            envelope:
+                sender: '%env(MAILER_TECHNICAL)%'
+                recipients: ['%env(MAILER_TECHNICAL)%']

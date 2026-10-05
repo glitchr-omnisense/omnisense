@@ -1,0 +1,140 @@
+{#
+ # The home page, section by section (StickyStops: each section is a stop):
+ # Omni and its turning suffix, one sentence per family; the four floors of
+ # the system; the families, one question each; where to read on.
+ # Every name and every number comes from the catalogue (app:packages:sync):
+ # a family is shown because its repository was found.
+ #}
+{% extends 'layout1.html.twig' %}
+
+{% block description %}{{ '@messages.site.description'|trans }}{% endblock %}
+
+{% block content %}
+{% set first = families|first %}
+<section class="om-hero sticky-stop" id="omni" data-controller="suffix" data-suffix-interval-value="2800">
+    <div class="om-wrap om-hero-inner">
+        <h1 class="visually-hidden">{{ '@messages.home.title'|trans }}</h1>
+        <p class="om-kicker"><span>{{ '@messages.home.kicker'|trans }}</span> <span class="om-cote">{{ '@messages.home.kicker_count'|trans({packages: counts.packages, families: families|length}) }}</span></p>
+
+        {% if first %}
+        <p class="om-omni" aria-hidden="true"><span class="om-omni-fixed">Omni</span><span class="om-omni-slot" data-suffix-target="slot"><span class="is-in">{{ first.suffix }}</span></span></p>
+        <p class="om-omni-phrase" data-suffix-target="phrase">{{ ('@messages.families.' ~ first.name ~ '.phrase')|trans }}</p>
+
+        <ol class="om-omni-index" aria-label="{{ '@messages.home.families_label'|trans }}">
+            {% for family in families %}
+            <li>
+                <a href="{{ path('app_family', {family: family.name}) }}" data-suffix-target="item" data-action="mouseenter->suffix#pick focus->suffix#pick" data-suffix="{{ family.suffix }}" data-phrase="{{ ('@messages.families.' ~ family.name ~ '.phrase')|trans }}"{% if loop.first %} aria-current="true"{% endif %}>
+                    <span class="om-cote">{{ '%02d'|format(loop.index) }}</span><span class="om-omni-name">Omni<b>{{ family.suffix }}</b></span>
+                    <span class="visually-hidden">: {{ ('@messages.families.' ~ family.name ~ '.phrase')|trans }}</span>
+                </a>
+            </li>
+            {% endfor %}
+        </ol>
+        {% else %}
+        <p class="om-omni" aria-hidden="true"><span class="om-omni-fixed">Omni</span></p>
+        <p class="om-omni-phrase">{{ '@messages.home.empty'|trans }}</p>
+        {% endif %}
+
+        <p class="om-actions">
+            <a class="om-button" href="{{ path('app_packages') }}">{{ '@messages.home.to_catalogue'|trans }}</a>
+            <a class="om-button is-line" href="{{ path('wikidoc_index') }}">{{ '@messages.home.to_docs'|trans }}</a>
+        </p>
+    </div>
+</section>
+
+<section class="om-section om-floors sticky-stop" id="floors">
+    <div class="om-wrap">
+        <header class="om-head">
+            <p class="om-cote">A — {{ '@messages.floors.eyebrow'|trans }}</p>
+            <h2>{{ '@messages.floors.title'|trans }}</h2>
+            <p class="om-lead">{{ '@messages.floors.lead'|trans }}</p>
+        </header>
+
+        {# The section drawing: two stacks. On the left what a site is made of; on the right what it asks of the outside. #}
+        <div class="om-section-drawing">
+            {% for stack in [['component', 'foundation'], ['provider', 'family']] %}
+            <div class="om-stack is-{{ loop.first ? 'house' : 'outside' }}">
+                <p class="om-stack-title">{{ ('@messages.floors.stack_' ~ (loop.first ? 'house' : 'outside'))|trans }}</p>
+                {% for tier in stack %}
+                {% set packages = floors[tier] %}
+                <a class="om-floor is-{{ tier }}" href="{{ path('app_packages') }}#{{ tier }}">
+                    <span class="om-floor-level">{{ {'foundation': '1', 'component': '2', 'family': '3', 'provider': '4'}[tier] }}</span>
+                    <span class="om-floor-body">
+                        <span class="om-floor-name">{{ ('@messages.floors.' ~ tier ~ '.name')|trans }}</span>
+                        <code class="om-floor-pattern">{{ ('@messages.floors.' ~ tier ~ '.pattern')|trans }}</code>
+                        <span class="om-floor-text">{{ ('@messages.floors.' ~ tier ~ '.text')|trans }}</span>
+                        <span class="om-floor-examples">
+                            {%- for package in packages|slice(0, 3) %}<code>{{ package.name }}</code>{% endfor -%}
+                            {%- if packages|length > 3 %}<span>+ {{ packages|length - 3 }}</span>{% endif -%}
+                        </span>
+                    </span>
+                    <span class="om-floor-count"><b>{{ packages|length }}</b> {{ '@messages.floors.packages'|trans({count: packages|length}) }}</span>
+                </a>
+                {% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+        <p class="om-floors-note">{{ '@messages.floors.note'|trans }}{% if floors.library|length %} {{ '@messages.floors.libraries'|trans({count: floors.library|length, url: path('app_packages') ~ '#library'})|raw }}{% endif %}</p>
+    </div>
+</section>
+
+<section class="om-section om-families sticky-stop" id="families">
+    <div class="om-wrap">
+        <header class="om-head">
+            <p class="om-cote">B — {{ '@messages.home.families_eyebrow'|trans }}</p>
+            <h2>{{ '@messages.home.families_title'|trans }}</h2>
+            <p class="om-lead">{{ '@messages.home.families_lead'|trans }}</p>
+        </header>
+        <ul class="om-family-list">
+            {% for family in families %}
+            <li>
+                <a href="{{ path('app_family', {family: family.name}) }}">
+                    <span class="om-family-name">Omni<b>{{ family.suffix }}</b></span>
+                    <span class="om-family-question">{{ ('@messages.families.' ~ family.name ~ '.phrase')|trans }}</span>
+                    <span class="om-family-count">{{ family.name == 'omnibase' ? '@messages.home.components'|trans({count: family.members}) : '@messages.home.providers'|trans({count: family.members}) }}</span>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
+
+<section class="om-section om-read sticky-stop" id="read">
+    <div class="om-wrap om-read-grid">
+        <div>
+            <header class="om-head">
+                <p class="om-cote">C — {{ '@messages.home.read_eyebrow'|trans }}</p>
+                <h2>{{ '@messages.home.read_title'|trans }}</h2>
+                <p class="om-lead">{{ '@messages.home.read_lead'|trans }}</p>
+            </header>
+            <form class="om-search" role="search" action="{{ path('wikidoc_search') }}" method="get">
+                <label for="om-home-q">{{ '@messages.home.search_label'|trans }}</label>
+                <div><input id="om-home-q" type="search" name="q" placeholder="webhook, MockHttpClient, make build…" autocomplete="off" spellcheck="false"><button type="submit" class="om-button">{{ '@messages.home.search_submit'|trans }}</button></div>
+            </form>
+            <dl class="om-figures">
+                <div><dt>{{ '@messages.home.figure_packages'|trans }}</dt><dd>{{ counts.packages }}</dd></div>
+                <div><dt>{{ '@messages.home.figure_manuals'|trans }}</dt><dd>{{ counts.manuals }}</dd></div>
+                <div><dt>{{ '@messages.home.figure_sites'|trans }}</dt><dd>{{ sites }}</dd></div>
+            </dl>
+            <p class="om-actions"><a class="om-button is-line" href="{{ path('app_demos') }}">{{ '@messages.home.to_demos'|trans }}</a> <a class="om-button is-line" href="{{ path('app_support') }}">{{ '@messages.home.to_support'|trans }}</a></p>
+        </div>
+        <div class="om-news">
+            <h3 class="om-cote">{{ '@messages.home.news'|trans }}</h3>
+            {% if posts %}
+            <ol>
+                {% for post in posts %}
+                <li>
+                    <time datetime="{{ post.publishedAt|date('Y-m-d') }}">{{ post.publishedAt|format_date('medium') }}</time>
+                    <a href="{{ path('blog_post', {slug: post.slug}) }}">{{ post.title }}</a>
+                    {% if post.headline %}<p>{{ post.headline }}</p>{% endif %}
+                </li>
+                {% endfor %}
+            </ol>
+            <p><a class="om-more" href="{{ path('blog_index') }}">{{ '@messages.home.all_news'|trans }}</a></p>
+            {% else %}
+            <p class="om-none">{{ '@messages.home.no_news'|trans }}</p>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

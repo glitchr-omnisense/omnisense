@@ -1,0 +1,16 @@
+framework:
+    router:
+        utf8: true
+        # Absolute links built without a request (the newsletter's mails, the
+        # reels' public address handed to Instagram, from the worker).
+        default_uri: '%env(DEFAULT_URI)%'
+
+when@dev:
+    framework:
+        router:
+            strict_requirements: null
+
+when@test:
+    framework:
+        router:
+            strict_requirements: null

@@ -1,0 +1,121 @@
+{% apply inky_to_html|inline_css_email %}
+<html>
+<head>
+    {%- set subject = subject ?? block('subject') -%}
+    <title>{{ subject|trim }}</title>
+    
+    <style>
+    {% block style %}
+            {{ source("@Base/notifier/main.css") }}
+            {{ encore_entry_css_source('email-layout1') }}
+    {% endblock %}
+    </style>
+</head>
+<body>
+
+    <spacer size="32"></spacer>
+    <wrapper class="body">
+    <container>
+        <wrapper class="secondary">
+            <row>
+                <columns large="2" class="header logo">
+                    <a href="{{ app.site.domain }}">
+                        <img src="{{ embed(app.site.logo.email|default("assets/images/brand/monogram.png")) }}" />
+                    </a>
+                </columns>
+                
+                {% block excerpt %}
+                <columns large="10" class="excerpt">
+                    {% if excerpt is defined and excerpt is not empty %}
+                    <p>{{ excerpt|raw  }}</p>
+                    {% endif %}
+                </columns>
+                {% endblock %}
+
+            </row>
+            </wrapper>
+    </container>
+
+    {%- set importance = importance ?? null -%}
+    <container class="body_{{ ("medium" == importance ? "alert" : ("high" == importance ? "warning" : "default")) }}">
+        <row>
+            <columns large="12" small="12" class="main">
+                {% if subject is not defined or subject is empty %}
+                    {% set subject = block('subject') %}
+                {% endif %}
+                
+                {% if subject is not empty %}
+                <div class="lead">{{ subject }}<hr></div>
+                {% endif %}
+                
+                {% block content %}
+                <p>
+                    {% if markdown is defined and markdown %}
+                        {{ include('@Base/notifier/content_markdown.html.twig') }}
+                    {% else %}
+                        {{ (raw ? content|raw : content) }}
+                    {% endif %}
+                </p>
+                {% endblock %}
+        
+                {% block action %}
+                <p class="action">
+                    {% if action_url is not defined or action_url is empty %}
+                        {% if block('action_url') is defined %}
+                            {% set action_url = block('action_url') %} 
+                        {% endif %}
+                    {% endif %}
+                    
+                    {% if action_url is defined and action_url is not empty %}
+
+                        {% if action_text is not defined or action_text is empty %}
+                            {% if block('action_text') is defined %}
+                                {% set action_text = block('action_text') %}
+                            {% else %}
+                                {% set action_text = '@emails.action_text'|trans %}
+                            {% endif %}
+                        {% endif %}
+
+                        {% if action_url is defined and action_url is not empty %}
+                            <button class="{{ action_class ?? "normal" }}" href="{{ action_url|url }}">{{ action_text }}</button>
+                        {% endif %}
+                    {% endif %}
+                </p>
+                {% endblock %}
+
+                {% block exception %}
+                    {% if exception is defined and exception is not empty %}
+                        <p><em>Exception stack trace attached.</em></p>
+                    {% endif %}
+                {% endblock %}
+            </columns>
+        </row>
+
+        <wrapper class="secondary footer">
+            {% block footer %}
+                {% if footer_text is defined and footer_text is not null %}
+                <spacer size="16"></spacer>
+                <row>
+                    <columns small="12" large="6">
+                        {% block footer_content %}
+                            <p><small>{{app.email.age}} {{ app.email.title | title }} 
+
+                            {% set _block = block('footer_text') %}
+                            
+                            {% if (footer_text is not null and footer_text is not empty) or _block is not empty %}
+                            -
+                            {% endif %}
+
+                            {% block footer_text %}{{ footer_text|raw }}{% endblock %}</small></p>
+                        {% endblock %}
+                    </columns>
+                </row>
+                {% endif %}
+            {% endblock %}
+        </wrapper>
+    </container>
+    </container>
+</wrapper>
+</body>
+</html>
+{% endapply %}

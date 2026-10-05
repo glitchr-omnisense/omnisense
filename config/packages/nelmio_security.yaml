@@ -1,0 +1,150 @@
+when@dev:
+    nelmio_security:
+        csp:
+            hosts: []
+            content_types: []
+            enforce:
+                level1_fallback: false
+                browser_adaptive:
+                    enabled: false
+                script-src:
+                    - 'self'
+                    - 'unsafe-inline'
+                    - 'unsafe-eval'
+                    - 'http:'
+                    - 'https:'
+                connect-src:
+                    - 'self'
+                    - 'blob:'
+                    - 'data:'
+                    - 'http:'
+                    - 'https:'
+                    - 'wss:'
+                manifest-src:
+                    - 'self'
+                    - 'blob:'
+                    - 'data:'
+                    - 'http:'
+                    - 'https:'
+                style-src:
+                    - 'self'
+                    - 'unsafe-inline'
+                    - 'http:'
+                    - 'https:'
+                font-src:
+                    - 'self'
+                    - 'data:'
+                    - 'http:'
+                    - 'https:'
+                media-src:
+                    - 'self'
+                    - 'data:'
+                    - 'http:'
+                    - 'https:'
+                img-src:
+                    - 'self'
+                    - 'data:'
+                    - 'http:'
+                    - 'https:'
+                    - 'blob:'
+                child-src:
+                    - 'self'
+                    - 'http:'
+                    - 'https:'
+                    - 'blob:'
+                frame-src:
+                    - 'self'
+                    - 'http:'
+                    - 'https:'
+                # Glitch Art's site in dev: its Forge shows this site's demo in a frame.
+                frame-ancestors:
+                    - 'self'
+                    - 'https://localhost:8453'
+
+                block-all-mixed-content: true # defaults to false, blocks HTTP content over HTTPS transport
+                upgrade-insecure-requests: false # defaults to false, upgrades HTTP requests to HTTPS transport
+
+nelmio_security:
+    # Framing: by this site itself and by Glitch Art's (glitchr.io: its Forge shows this
+    # site's demo in a frame) - the CSP's frame-ancestors below, in place of an
+    # X-Frame-Options: SAMEORIGIN that would refuse every other site.
+
+    # disables content type sniffing for script resources
+    content_type:
+        nosniff: true
+
+    # forces Microsoft's XSS-Protection with
+    # its block mode
+    # xss_protection:
+    #     enabled: true
+    #     mode_block: true
+
+    # Send a full URL in the `Referer` header when performing a same-origin request,
+    # only send the origin of the document to secure destination (HTTPS->HTTPS),
+    # and send no header to a less secure destination (HTTPS->HTTP).
+    # If `strict-origin-when-cross-origin` is not supported, use `no-referrer` policy,
+    # no referrer information is sent along with requests.
+    referrer_policy:
+        enabled: true
+        # One policy, not a list: a browser that reads only the first of a list
+        # (no-referrer) sends no Referer, and omnibase's language switch, which
+        # returns to the page you were on through it, falls back to the home page.
+        policies:
+            - 'strict-origin-when-cross-origin'
+
+    # prevents inline scripts, unsafe eval, external scripts/images/styles/frames, etc
+    csp:
+        hosts: []
+        content_types: []
+        enforce:
+            level1_fallback: false
+            browser_adaptive:
+                enabled: false
+            default-src:
+                - 'none'
+            script-src:
+                - 'self'
+                - 'unsafe-inline'
+                - 'unsafe-eval'
+                - 'https:'
+            connect-src:
+                - 'self'
+                - 'blob:'
+                - 'data:'
+                - 'https:'
+                - 'wss:'
+            manifest-src:
+                - 'self'
+                - 'blob:'
+                - 'data:'
+                - 'https:'
+            style-src:
+                - 'self'
+                - 'unsafe-inline'
+                - 'https:'
+            font-src:
+                - 'self'
+                - 'data:'
+                - 'https:'
+            media-src:
+                - 'self'
+                - 'data:'
+                - 'https:'
+            img-src:
+                - 'self'
+                - 'data:'
+                - 'https:'
+                - 'blob:'
+            child-src:
+                - 'self'
+                - 'https:'
+            frame-src:
+                - 'self'
+                - 'https:'
+            frame-ancestors:
+                - 'self'
+                - 'https://glitchr.io'
+                - 'https://www.glitchr.io'
+
+            block-all-mixed-content: true # defaults to false, blocks HTTP content over HTTPS transport
+            upgrade-insecure-requests: true # defaults to false, upgrades HTTP requests to HTTPS transport

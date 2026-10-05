@@ -1,0 +1,117 @@
+###> symfony/framework-bundle ###
+**/.DS_Store
+
+.nv
+.nvm
+.npm
+.config
+.local
+.wget-hsts
+*.bak
+*.bak-*
+
+.env.local
+.env.local.php
+.env.*.local
+config/secrets/prod*/prod*.decrypt.private.php
+public/bundles/
+
+phpinfo.php
+initdb.sql
+
+var/cache
+var/run
+var/log
+var/modules
+var/sessions
+var/storage
+# Written by deploy-publish into the PRODUCTION checkout as its rollback
+# point. Untracked and unignored, it made `git status` in that checkout
+# non-empty, which is exactly what deploy-preflight refuses to deploy over -
+# so the first deploy silently armed a block against every deploy after it.
+var/deploy-previous-ref
+
+vendor/
+###< symfony/framework-bundle ###
+
+.*sh_history
+###> symfony/phpunit-bridge ###
+.phpunit
+.phpunit.result.cache
+phpunit.xml
+
+###< symfony/phpunit-bridge ###
+*.log
+
+public/uploads
+data/uploads
+public/storage
+data/storage
+public/images
+data/media
+public/media
+
+###> liip/imagine-bundle ###
+public/media/cache/
+###< liip/imagine-bundle ###
+.well-known
+
+public/ads.txt
+public/robots.txt
+public/security.txt
+
+package-lock.json
+
+###> symfony/webpack-encore-bundle ###
+node_modules/
+npm-debug.log
+yarn-error.log
+public/assets
+###< symfony/webpack-encore-bundle ###
+
+###> friendsofphp/php-cs-fixer ###
+.php-cs-fixer.php
+.php-cs-fixer.cache
+###< friendsofphp/php-cs-fixer ###
+
+.idea
+
+public/google
+**/.DS_Store
+public/.htaccess
+public/.htpasswd
+# Beta hosts' basic auth (make htpasswd): per deployment, never committed.
+/.htpasswd
+# Written by `git config --global` inside the containers (HOME=/srv/app).
+/.gitconfig
+
+bin/console.bak
+var/maildev
+.npmrc
+config/reference.php
+
+# Local artefacts that must never be committed (a stray `git add -A`
+# would otherwise sweep in a DB tarball and the whole coverage report).
+var/backups
+var/coverage
+var/wikidoc-export
+*.mov
+var/phpunit
+
+
+# Everything under var/ is runtime output (cache, logs, sessions, debug dumps);
+# nothing in it is tracked. The per-directory lines above predate this one.
+/var/
+
+# Heavy design sources stay out of git (kept in data/ on the designer's machine).
+/data/
+deployments/docker/proxy/ssl/*
+!deployments/docker/proxy/ssl/.gitkeep
+
+###> phpunit/phpunit ###
+/phpunit.xml
+/.phpunit.cache/
+###< phpunit/phpunit ###
+
+# glitchr/canva's default token file (the app keeps its token in the settings instead).
+/var/canva/
