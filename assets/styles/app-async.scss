@@ -1,2 +1,59 @@
-// First paint (written with the identity).
-body { margin: 0; }
+// First paint: the type, the palette (light and dark), what the bundles'
+// stylesheets read. The chrome and the pages are in layout1.scss.
+@use "tokens" as *;
+
+@import "@fontsource-variable/archivo/wdth.css";
+@import "@fontsource-variable/recursive/mono.css";
+
+@mixin light {
+    --om-paper: #{$om-paper}; --om-sheet: #{$om-sheet}; --om-ink: #{$om-ink}; --om-soft: #{$om-soft}; --om-line: #{$om-line}; --om-blue: #{$om-blue};
+    --om-ok: #{$om-ok}; --om-warn: #{$om-warn}; --om-no: #{$om-no};
+    --om-grid: rgba(15, 20, 25, .05); --om-wash: rgba(29, 63, 216, .07); --om-mark: rgba(29, 63, 216, .16);
+    --manual-hl-keyword: #9c1f6e; --manual-hl-type: #0a6a8f; --manual-hl-property: #1d3fd8; --manual-hl-value: #17734a; --manual-hl-number: #955800; --manual-hl-comment: #6c7783; --manual-hl-variable: #8a3b12;
+    color-scheme: light;
+}
+@mixin dark {
+    --om-paper: #{$om-paper-dark}; --om-sheet: #{$om-sheet-dark}; --om-ink: #{$om-ink-dark}; --om-soft: #{$om-soft-dark}; --om-line: #{$om-line-dark}; --om-blue: #{$om-blue-dark};
+    --om-ok: #{$om-ok-dark}; --om-warn: #{$om-warn-dark}; --om-no: #{$om-no-dark};
+    --om-grid: rgba(232, 237, 242, .045); --om-wash: rgba(147, 173, 255, .1); --om-mark: rgba(147, 173, 255, .28);
+    --manual-hl-keyword: #f08bc8; --manual-hl-type: #7fd1ee; --manual-hl-property: #93adff; --manual-hl-value: #62cf9a; --manual-hl-number: #e6b15e; --manual-hl-comment: #7f8b98; --manual-hl-variable: #f0a37c;
+    color-scheme: dark;
+}
+
+:root {
+    @include light;
+
+    // What the bundles' stylesheets read: no colour of their own.
+    // omnibase/docs (the manuals):
+    --manual-ink: var(--om-ink); --manual-soft: var(--om-soft); --manual-line: var(--om-line); --manual-bg: var(--om-paper); --manual-surface: var(--om-sheet);
+    --manual-accent: var(--om-blue); --manual-on-accent: var(--om-paper); --manual-mark: var(--om-mark); --manual-radius: 2px; --manual-top: calc(#{$om-header} + 1.25rem);
+    --manual-font: #{$om-text}; --manual-font-display: #{$om-display}; --manual-font-mono: #{$om-mono};
+    --manual-code-bg: var(--om-sheet); --manual-note: var(--om-blue); --manual-tip: var(--om-ok); --manual-warning: var(--om-warn); --manual-caution: var(--om-no);
+    // omnibase/blog (the announcements):
+    --blog-accent: var(--om-blue); --blog-ink: var(--om-ink); --blog-soft: var(--om-soft); --blog-line: var(--om-line); --blog-surface: var(--om-sheet); --blog-measure: #{$om-measure}; --blog-measure-post: 46rem;
+    // omnibase/consent (the cookie answer):
+    --consent-ink: var(--om-ink); --consent-soft: var(--om-soft); --consent-bg: var(--om-sheet); --consent-line: var(--om-line);
+    --consent-accent: var(--om-ink); --consent-on-accent: var(--om-paper); --consent-danger: var(--om-no); --consent-hover: var(--om-wash);
+    --consent-radius: 2px; --consent-font: #{$om-text}; --consent-shadow: 4px 4px 0 var(--om-line);
+}
+html.theme-mode-dark { @include dark; }
+@media (prefers-color-scheme: dark) { html:not(.theme-mode-light) { @include dark; } }
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 100%; -webkit-text-size-adjust: 100%; scroll-padding-top: calc(#{$om-header} + 1rem); }
+body { margin: 0; min-height: 100vh; font: 400 1rem/1.6 $om-text; font-variation-settings: "MONO" 0; color: var(--om-ink); background: var(--om-paper); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+h1, h2, h3 { margin: 0 0 .5em; @include display; line-height: 1.08; text-wrap: balance; }
+h1 { font-size: clamp(2.1rem, 5vw, 3.6rem); }
+h2 { font-size: clamp(1.45rem, 2.8vw, 2.1rem); }
+h3 { font-size: 1.15rem; letter-spacing: -.01em; }
+p { margin: 0 0 1em; }
+img { max-width: 100%; height: auto; }
+a { color: inherit; text-decoration: underline; text-decoration-color: var(--om-line); text-decoration-thickness: 1px; text-underline-offset: .2em; }
+a:hover { color: var(--om-blue); text-decoration-color: currentColor; }
+code, kbd, pre, samp { font-family: $om-mono; font-variation-settings: "MONO" 1; }
+mark { padding: 0 .1em; background: var(--om-mark); color: inherit; }
+:focus-visible { outline: 2px solid var(--om-blue); outline-offset: 2px; }
+::selection { background: $om-blue; color: #fff; }
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+#nprogress .bar { background: var(--om-blue) !important; height: 2px !important; }
+#nprogress .peg { box-shadow: none !important; }

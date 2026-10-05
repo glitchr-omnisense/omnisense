@@ -1,0 +1,50 @@
+// Omniscient's sheet: a plan. Drafting film and black ink, one colour only -
+// the blue of a blueprint - for what one acts on and for the suffix that
+// turns after "Omni"; three small signals for a package's state (there,
+// in part, not there). At night the film is the blue-black of a cyanotype
+// and the ink its white line.
+//
+// Archivo, drawn wide (its width axis at 125 %), for the mark and the
+// titles: letters with the stance of lettering on a title block. Recursive
+// for everything that is read, and the same face with its MONO axis at 1
+// for code, package names and the dimension labels ("cotes") - one family,
+// so that a package's name reads the same in a sentence and in a listing.
+$om-display: "Archivo Variable", "Archivo", "Arial Narrow", Arial, sans-serif;
+$om-text: "Recursive Variable", "Recursive", ui-sans-serif, system-ui, "Helvetica Neue", Arial, sans-serif;
+$om-mono: "Recursive Variable", "Recursive", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+$om-paper: #f3f5f6;
+$om-sheet: #ffffff;
+$om-ink:   #0f1419;
+$om-soft:  #55606c;
+$om-line:  #cbd2d9;
+$om-blue:  #1d3fd8;
+$om-ok:    #17734a;
+$om-warn:  #955800;
+$om-no:    #a8261d;
+
+$om-paper-dark: #0b1016;
+$om-sheet-dark: #121a23;
+$om-ink-dark:   #e8edf2;
+$om-soft-dark:  #96a3b0;
+$om-line-dark:  #2a3541;
+$om-blue-dark:  #93adff;
+$om-ok-dark:    #62cf9a;
+$om-warn-dark:  #e6b15e;
+$om-no-dark:    #ff9087;
+
+$om-measure: 82rem;
+$om-gutter: clamp(1rem, 3.5vw, 2.5rem);
+$om-header: 3.75rem;
+
+@mixin wide   { @media (min-width: 64rem) { @content; } }
+@mixin narrow { @media (max-width: 63.99rem) { @content; } }
+@mixin small  { @media (max-width: 40rem) { @content; } }
+@mixin motion { @media (prefers-reduced-motion: no-preference) { @content; } }
+
+// Text set in the MONO cut of Recursive.
+@mixin mono($size: .8rem, $weight: 500) { font-family: $om-mono; font-variation-settings: "MONO" 1; font-size: $size; font-weight: $weight; letter-spacing: 0; }
+// A dimension label, as on a plan: small capitals in the mono cut.
+@mixin cote { @include mono(.7rem, 600); line-height: 1.4; text-transform: uppercase; letter-spacing: .09em; color: var(--om-soft); }
+// A title drawn wide.
+@mixin display($weight: 800) { font-family: $om-display; font-stretch: 125%; font-weight: $weight; letter-spacing: -.02em; }

@@ -23,6 +23,10 @@ import '@glitchr/stickyjs';
 import '@glitchr/transparentjs';
 import Base from '../vendor/glitchr/omnibase/assets/boot.js';
 
+// The manuals' palette, copy buttons and current heading (omnibase/docs): its
+// pages load it too, and loading it twice does nothing.
+import '../vendor/omnibase/docs/public/js/manual.js';
+
 window.addEventListener('transparent:load', function () {
     var header = document.querySelector('.om-header');
     if (header) header.dispatchEvent(new CustomEvent('menu:close'));
