@@ -21,9 +21,9 @@ final class Sponsors
     public const OPEN = 'open';
 
     /**
-     * @param list<array{name: string, description: ?string, monthly: int, oneTime: bool}>                     $tiers
-     * @param list<array{login: string, name: ?string, avatar: ?string, url: ?string, tier: ?string}>          $sponsors the public ones
-     * @param array{title: ?string, description: ?string, percent: int, target: ?int, kind: ?string}|null      $goal
+     * @param list<array{name: string, description: ?string, monthly: int, oneTime: bool}>                $tiers
+     * @param list<array{login: string, name: ?string, avatar: ?string, url: ?string, tier: ?string}>     $sponsors the public ones
+     * @param array{title: ?string, description: ?string, percent: int, target: ?int, kind: ?string}|null $goal
      */
     public function __construct(
         public readonly string $state,
