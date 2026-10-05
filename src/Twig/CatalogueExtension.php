@@ -26,8 +26,8 @@ class CatalogueExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('manual_of', fn (Package $package): ?Manual => $this->manuals->get($package->getSlug())),
-            new TwigFunction('package_of', fn (Manual|string $manual): ?Package => $this->packages->findOneBySlug($manual instanceof Manual ? $manual->getKey() : $manual)),
+            new TwigFunction('manual_of', fn (Package $package): ?Manual => $this->manuals->get($package->getHandle())),
+            new TwigFunction('package_of', fn (Manual|string $manual): ?Package => $this->packages->findOneByHandle($manual instanceof Manual ? $manual->getKey() : $manual)),
             new TwigFunction('family_suffix', Families::suffix(...)),
             new TwigFunction('site_of', Sites::get(...)),
             new TwigFunction('manual_groups', $this->groups(...)),
@@ -47,7 +47,7 @@ class CatalogueExtension extends AbstractExtension
     {
         $packages = [];
         foreach ($this->packages->findCatalogue() as $package) {
-            $packages[$package->getSlug()] = $package;
+            $packages[$package->getHandle()] = $package;
         }
 
         $groups = [];

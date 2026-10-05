@@ -24,7 +24,6 @@
 {% endblock %}
 
 {% block content %}
-{% for type, messages in app.flashes %}{% for message in messages %}<div class="alert alert-{{ type == 'success' ? 'success' : 'warning' }}">{{ message }}</div>{% endfor %}{% endfor %}
 <div class="card">
     <table class="table app-manuals">
         <thead><tr><th>Manuel</th><th>Versions (pages)</th><th>Dépôt</th><th>Au catalogue</th><th></th></tr></thead>

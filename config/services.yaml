@@ -81,6 +81,9 @@ when@test:
     services:
         # The outside world, answered here: no test calls it for real.
         App\Tests\Mock\NoNetwork: ~
+        # Typesense too: omnibase/docs talks to this instead of the "search" container.
+        App\Tests\Mock\FakeTypesense: ~
+        Base\Wikidoc\Search\TypesenseClientInterface: '@App\Tests\Mock\FakeTypesense'
         App\DataFixtures\:
             resource: '../src/DataFixtures/'
             autowire: true

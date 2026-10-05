@@ -80,23 +80,23 @@ class CatalogueController extends AbstractController
             'own' => $own,
             'members' => array_values(array_filter($members, static fn (Package $p): bool => $p !== $own)),
             'sites' => $sites,
-            'manual' => $this->manuals->get($own->getSlug()),
+            'manual' => $this->manuals->get($own->getHandle()),
         ]);
     }
 
     #[Route('/packages/{vendor}/{name}', name: 'app_package', requirements: ['vendor' => '[a-z0-9][a-z0-9_.-]*', 'name' => '[a-z0-9][a-z0-9_.-]*'], methods: ['GET'])]
     public function package(string $vendor, string $name, FollowRepository $follows): Response
     {
-        $package = $this->packages->findOneBySlug($vendor.'/'.$name);
+        $package = $this->packages->findOneByHandle($vendor.'/'.$name);
         if (null === $package) {
             throw $this->createNotFoundException(sprintf('No package "%s/%s".', $vendor, $name));
         }
 
-        $manual = $this->manuals->get($package->getSlug());
+        $manual = $this->manuals->get($package->getHandle());
         $version = $manual?->getDefaultVersion();
         $pages = null !== $manual && null !== $version ? $this->manuals->pages($manual, $version) : null;
 
-        $requires = array_values(array_filter(array_map(fn (string $required): ?Package => $this->packages->findOneBySlug($required), $package->getRequires())));
+        $requires = array_values(array_filter(array_map(fn (string $required): ?Package => $this->packages->findOneByHandle($required), $package->getRequires())));
         $requiredBy = array_values(array_filter($this->packages->findCatalogue(), static fn (Package $other): bool => \in_array($package->getName(), $other->getRequires(), true)));
         $user = $this->getUser();
 
@@ -121,7 +121,7 @@ class CatalogueController extends AbstractController
     #[IsGranted('ROLE_USER')]
     public function follow(string $vendor, string $name, Request $request, FollowRepository $follows, EntityManagerInterface $em): Response
     {
-        $package = $this->packages->findOneBySlug($vendor.'/'.$name);
+        $package = $this->packages->findOneByHandle($vendor.'/'.$name);
         if (null === $package) {
             throw $this->createNotFoundException();
         }

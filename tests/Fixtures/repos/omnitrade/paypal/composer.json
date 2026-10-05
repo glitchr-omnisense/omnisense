@@ -1,0 +1,1 @@
+{"name": "omnitrade/paypal", "type": "library", "description": "PayPal for Omnitrade: orders, captures, refunds.", "license": "LGPL-3.0-or-later", "require": {"glitchr/omnitrade": "^1.0@dev"}}

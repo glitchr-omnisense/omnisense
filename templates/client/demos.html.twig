@@ -24,7 +24,7 @@
             {% for site in sites %}
             <li>
                 <h3><a href="{{ site.url }}" rel="noopener">{{ site.name }}</a>{% if site.fictional %} <em class="om-fictional">{{ '@messages.demos.fictional'|trans }}</em>{% endif %}</h3>
-                <p>{{ ('@messages.sites.' ~ site.slug)|trans }}</p>
+                <p>{{ ('@messages.sites.' ~ site.slug|replace({'-': '_'}))|trans }}</p>
                 <p class="om-demo-address"><a href="{{ site.url }}" rel="noopener">{{ site.url|replace({'https://': ''}) }}</a></p>
                 {% if site.packages %}
                 <p class="om-names">{% for package in site.packages %}<a href="{{ path('app_package', {vendor: package.vendor, name: package.shortName}) }}">{{ package.name }}</a>{% endfor %}</p>

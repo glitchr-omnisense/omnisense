@@ -39,7 +39,7 @@ class ManualsController extends AbstractController
         $pages = 0;
         $versions = 0;
         foreach ($this->manuals->all() as $manual) {
-            $row = ['manual' => $manual, 'package' => $packages->findOneBySlug($manual->getKey()), 'versions' => []];
+            $row = ['manual' => $manual, 'package' => $packages->findOneByHandle($manual->getKey()), 'versions' => []];
             foreach ($manual->versions as $version) {
                 $count = \count($this->manuals->pages($manual, $version)->getAllPages());
                 $row['versions'][] = ['version' => $version, 'pages' => $count];

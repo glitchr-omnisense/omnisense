@@ -1,0 +1,1 @@
+{"name": "glitchr/omnitrade", "type": "library", "description": "One contract for payment providers.", "license": "LGPL-3.0-or-later", "keywords": ["payment", "gateway"], "require": {"php": ">=8.2", "symfony/http-client-contracts": "^3.0"}, "support": {"source": "https://github.com/glitchr-studio/omnitrade"}}
