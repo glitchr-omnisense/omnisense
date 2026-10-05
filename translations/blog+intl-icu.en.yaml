@@ -1,0 +1,17 @@
+# omnibase/blog's words, where this site says them differently: here they
+# are announcements (a release, a new family, a package that changes).
+index:
+  title: "News"
+  eyebrow: "Release by release"
+  lead: "A release, a new family, a package that changes hands: what moves in the ecosystem."
+  description: "The news of the Omni ecosystem: releases, new families, changes."
+  empty: "No news yet."
+  month_title: "News of {month}"
+  topic_title: "News · {topic}"
+
+post:
+  by: "Glitch Art's pen"
+  neighbours: "Neighbouring news"
+
+comment:
+  author: "Glitch Art"

@@ -1,0 +1,4 @@
+# Per-language route paths for Base\Attributes\Attribute\Route. This site
+# keeps one address per page whatever the language (a documentation address
+# is pasted in an issue or a commit message: two spellings would be one too
+# many), so nothing is declared here.

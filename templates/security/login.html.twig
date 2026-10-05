@@ -1,0 +1,84 @@
+{# omnibase's sign-in, with the way to an account for who has none: anyone signs up, to follow packages. #}
+{% extends 'layout1.html.twig' %}
+
+{% block title %}{{'@forms.login.title'|trans}}{% endblock %}
+
+{% block content %}
+<article class="login wrapper om-login">
+<div class="card">
+    <div class="card-header">
+        <h1 class="text-center">{{'@forms.login.title'|trans}}</h1>
+    </div>
+    <div class="card-body" >
+        {{ form_start(form) }}
+
+        <input type="hidden" name="_target_path" value="{{ app.referrer }}"/>
+
+        <div class="col d-flex justify-content-center">
+        <div class="input-group form-group mb-2">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fa-fw fa-solid fa-user"></i></span>
+            </div>
+            {{ form_widget(form.identifier, {attr:{placeholder:'@forms.login.identifier'|trans}}) }}
+        </div>
+        </div>
+
+        <div class="col d-flex justify-content-center">
+        <div class="input-group form-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fa-fw fa-solid fa-key"></i></span>
+            </div>
+            {{ form_widget(form.password, {attr: {placeholder:'@forms.login.password'|trans}}) }}
+        </div>
+        </div>
+
+        {% if error %}
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+
+        <div class="col d-flex justify-content-center">
+            <div class=" form-group form-check form-switch form-switch-lg">
+                {{ form_widget(form._remember_me) }}
+                {{ form_label(form._remember_me, '@forms.login.rememberMe'|trans) }}
+            </div>
+        </div>
+        <hr>
+
+        <div class="col d-flex justify-content-center">
+            {{ form_rest(form) }}
+        </div>
+
+        <div class="col d-flex justify-content-center login-btn">
+            <button class="btn btn-lg btn-primary" type="submit">{{ '@forms.login.submit'|trans }}</button>
+        </div>
+        {{ form_end(form) }}
+
+        <hr>
+        <div class="text-center text-muted small mb-2">{{'@forms.login.orContinueWith'|trans}}</div>
+
+        <div class="col d-flex justify-content-center">
+            {% if oauth_available('google') %}
+            <a class="btn btn-outline-secondary m-1" href="{{ path('oauth_google') }}">
+                <i class="fa-fw fa-brands fa-google"></i> {{'@forms.login.withGoogle'|trans}}
+            </a>
+            {% endif %}
+            <button type="button" class="btn btn-outline-secondary m-1" data-passkey-login="{{ app.referrer ?: '/' }}">
+                <i class="fa-fw fa-solid fa-passport"></i> {{'@forms.login.withPasskey'|trans}}
+            </button>
+        </div>
+    </div>
+
+    <div class="card-footer">
+        <div class="text-center">
+            <a href="{{ path('security_register') }}">{{ '@messages.account.register'|trans }}</a> ·
+            <a href="{{ path("security_resetPassword") }}">{{'@forms.login.forgotPassword'|trans}}</a>
+        </div>
+    </div>
+</div>
+</article>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('webauthn') }}
+{% endblock %}

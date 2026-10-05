@@ -1,0 +1,18 @@
+{# The language, light / dark, and the account: at the right of the title block. #}
+<div class="om-tools">
+    {% set current = app.request.locale|lang %}
+    {% for other in ['fr', 'en']|filter(l => l != current) %}
+    <a class="om-tool" href="{{ path('_switch_locale', {_locale: other}) }}" hreflang="{{ other }}" aria-label="{{ '@messages.nav.languages'|trans }}: {{ other|upper }}">{{ other|upper }}</a>
+    {% endfor %}
+    <button type="button" class="om-tool" data-controller="theme" data-action="theme#toggle" aria-label="{{ '@messages.nav.theme'|trans }}" title="{{ '@messages.nav.theme'|trans }}">
+        <i class="fa-solid fa-moon om-when-light" aria-hidden="true"></i>
+        <i class="fa-solid fa-sun om-when-dark" aria-hidden="true"></i>
+    </button>
+    {% if app.user %}
+        {% if is_granted('ROLE_STAFF') %}<a class="om-tool" href="{{ path('admin') }}" title="{{ '@messages.nav.admin'|trans }}" aria-label="{{ '@messages.nav.admin'|trans }}"><i class="fa-solid fa-sliders" aria-hidden="true"></i></a>{% endif %}
+        <a class="om-tool is-account" href="{{ path('app_account') }}" title="{{ '@messages.nav.account'|trans }}"><i class="fa-solid fa-user" aria-hidden="true"></i><span>{{ app.user }}</span></a>
+        <a class="om-tool" href="{{ path('security_logoutRequest') }}" title="{{ '@messages.nav.logout'|trans }}" aria-label="{{ '@messages.nav.logout'|trans }}"><i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i></a>
+    {% else %}
+        <a class="om-tool is-account" href="{{ path('security_login') }}" title="{{ '@messages.nav.access'|trans }}"><i class="fa-solid fa-key" aria-hidden="true"></i><span>{{ '@messages.nav.access'|trans }}</span></a>
+    {% endif %}
+</div>

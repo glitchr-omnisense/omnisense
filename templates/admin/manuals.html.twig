@@ -1,0 +1,57 @@
+{# The manuals as omnibase/docs reads them now, and the two buttons that do what wikidoc:sync and wikidoc:index do. #}
+{% extends '@Admin/layout.html.twig' %}
+
+{% block page_title %}Manuels{% endblock %}
+
+{% block content_header %}
+<div class="admin-header">
+    <span class="admin-header-icon"><i class="fa-solid fa-book"></i></span>
+    <div class="admin-header-titles">
+        <h1 class="admin-header-record">Manuels</h1>
+        <div class="admin-header-subtitle">{{ rows|length }} manuel(s), {{ versions }} version(s), {{ pages }} page(s) · recherche : {{ engine == 'typesense' ? 'Typesense' : 'index des pages (Typesense ' ~ (typesense ? 'ne répond pas' : 'non branché') ~ ')' }}</div>
+    </div>
+    <div class="global-actions">
+        <form method="post" action="{{ path('admin_manuals_sync') }}">
+            <input type="hidden" name="_token" value="{{ csrf_token('admin-manuals-sync') }}">
+            <button type="submit" class="btn"{{ git ? '' : ' disabled title="git n\'est pas installé ici"' }}><i class="fa-solid fa-code-branch"></i> Copier les autres branches</button>
+        </form>
+        <form method="post" action="{{ path('admin_manuals_index') }}">
+            <input type="hidden" name="_token" value="{{ csrf_token('admin-manuals-index') }}">
+            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i> Remplir l'index de recherche</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+{% for type, messages in app.flashes %}{% for message in messages %}<div class="alert alert-{{ type == 'success' ? 'success' : 'warning' }}">{{ message }}</div>{% endfor %}{% endfor %}
+<div class="card">
+    <table class="table app-manuals">
+        <thead><tr><th>Manuel</th><th>Versions (pages)</th><th>Dépôt</th><th>Au catalogue</th><th></th></tr></thead>
+        <tbody>
+            {% for row in rows %}
+            <tr>
+                <td><strong>{{ row.manual.name }}</strong></td>
+                <td>
+                    {% for v in row.versions %}
+                    <span class="app-version{{ v.version.live ? ' is-live' }}" title="{{ v.version.live ? 'Lue dans le dépôt' : 'Copie de la branche ' ~ v.version.branch }}">{{ v.version.name }} ({{ v.pages }})</span>
+                    {% endfor %}
+                </td>
+                <td>{% if row.manual.repository %}<a href="{{ row.manual.repository }}" target="_blank" rel="noopener">{{ row.manual.repository|replace({'https://github.com/': ''}) }}</a>{% else %}—{% endif %}</td>
+                <td>{% if row.package %}<a href="{{ path('admin_crud_packages_detail', {entityId: row.package.id}) }}">oui</a>{% else %}non{% endif %}</td>
+                <td><a href="{{ path('wikidoc_manual', {path: row.manual.urlPath()}) }}" target="_top">Lire</a></td>
+            </tr>
+            {% else %}
+            <tr><td colspan="5">Aucun manuel : les dépôts sont-ils montés (OMNI_REPOS) ?</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<style>
+    .app-manuals { width: 100%; border-collapse: collapse; }
+    .app-manuals th, .app-manuals td { padding: .55rem .9rem; text-align: left; border-bottom: 1px solid var(--admin-border); vertical-align: top; }
+    .app-manuals th { font-size: .74rem; text-transform: uppercase; letter-spacing: .05em; color: var(--admin-muted); }
+    .app-version { display: inline-block; margin: 0 .3rem .2rem 0; padding: 0 .45rem; border: 1px solid var(--admin-border); border-radius: 4px; font-size: .82rem; }
+    .app-version.is-live { border-color: var(--admin-accent); color: var(--admin-accent); }
+</style>
+{% endblock %}

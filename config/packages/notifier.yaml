@@ -1,0 +1,16 @@
+framework:
+    notifier:
+        channel_policy:
+            urgent:  ['email']
+            high:    ['email']
+            medium:  ['email']
+            low:     ['email']
+            default: ["email+", "browser+"]
+            email:   ['email+']
+            notify:  ['inapp']
+            info:    ['browser+']
+            warning: ['browser+']
+            success: ['browser+']
+            danger:  ['browser+']
+        admin_recipients:
+            - { email: '%env(MAILER_CONTACT)%' }

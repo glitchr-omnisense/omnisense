@@ -1,0 +1,82 @@
+{% extends "base.html.twig" %}
+
+{#
+ # The page as a sheet of a plan: the title block at the top - the mark, the
+ # sections of the site, the tools -, #content, which transparent.js swaps
+ # on a navigation, and the cartouche at the bottom: the plan of the site,
+ # where the packages live, the legal pages, and Glitch Art's signature.
+ #}
+
+{% block layout_name %}omniscient{% endblock %}
+
+{% block stylesheets_layout %}
+    {{ encore_entry_link_tags('layout1') }}
+{% endblock %}
+
+{% set route = app.request.attributes.get('_route')|default('') %}
+
+{% block layout %}
+<a class="om-skip" href="#content">{{ '@messages.nav.skip'|trans }}</a>
+
+<header class="om-header" data-controller="menu" data-action="menu:close->menu#close">
+    <div class="om-wrap om-header-inner">
+        <a class="om-mark" href="{{ path('app_index') }}" aria-label="{{ site.name }}"><b>Omni</b><i>scient</i></a>
+        <nav class="om-nav" id="om-nav" aria-label="{{ '@messages.nav.label'|trans }}">
+            <ul>
+                <li><a href="{{ path('app_packages') }}" {{ route in ['app_packages', 'app_package', 'app_family'] ? 'aria-current="page"' }}>{{ '@messages.nav.packages'|trans }}</a></li>
+                <li><a href="{{ path('wikidoc_index') }}" {{ route starts with 'wikidoc_' ? 'aria-current="page"' }}>{{ '@messages.nav.docs'|trans }}</a></li>
+                <li><a href="{{ path('app_demos') }}" {{ route == 'app_demos' ? 'aria-current="page"' }}>{{ '@messages.nav.demos'|trans }}</a></li>
+                <li><a href="{{ path('blog_index') }}" {{ route starts with 'blog_' ? 'aria-current="page"' }}>{{ '@messages.nav.blog'|trans }}</a></li>
+                <li><a href="{{ path('app_support') }}" {{ route == 'app_support' ? 'aria-current="page"' }}>{{ '@messages.nav.support'|trans }}</a></li>
+            </ul>
+        </nav>
+        <button type="button" class="om-menu-button" data-menu-target="button" data-action="menu#toggle" aria-controls="om-nav" aria-expanded="false">{{ '@messages.nav.menu'|trans }}</button>
+        {% include 'partials/_tools.html.twig' %}
+    </div>
+</header>
+
+<main id="content" tabindex="-1">
+    {% block content %}{% endblock %}
+</main>
+
+<footer class="om-footer">
+    <div class="om-wrap">
+        <div class="om-footer-grid">
+            <div class="om-footer-id">
+                <p class="om-mark is-small"><b>Omni</b><i>scient</i></p>
+                <p>{{ '@messages.footer.what'|trans }}</p>
+            </div>
+            <nav aria-label="{{ '@messages.footer.plan'|trans }}">
+                <h2>{{ '@messages.footer.plan'|trans }}</h2>
+                <ul>
+                    <li><a href="{{ path('app_packages') }}">{{ '@messages.nav.packages'|trans }}</a></li>
+                    <li><a href="{{ path('wikidoc_index') }}">{{ '@messages.nav.docs'|trans }}</a></li>
+                    <li><a href="{{ path('app_demos') }}">{{ '@messages.nav.demos'|trans }}</a></li>
+                    <li><a href="{{ path('blog_index') }}">{{ '@messages.nav.blog'|trans }}</a></li>
+                    <li><a href="{{ path('app_support') }}">{{ '@messages.nav.support'|trans }}</a></li>
+                </ul>
+            </nav>
+            <div>
+                <h2>{{ '@messages.footer.sources'|trans }}</h2>
+                <ul>
+                    <li><a href="{{ site.githubUrl }}" rel="noopener">GitHub · {{ site.github }}</a></li>
+                    <li><a href="https://packagist.org/packages/glitchr/" rel="noopener">Packagist · glitchr</a></li>
+                    <li><a href="{{ path('blog_feed') }}" data-transparent-ignore>{{ '@messages.footer.feed'|trans }}</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="om-footer-head"><h2>{{ '@messages.footer.site'|trans }}</h2>{% include '@Consent/_cookie.html.twig' with {place: 'footer'} %}</div>
+                <ul>
+                    <li><a href="{{ path('app_legal') }}">{{ '@messages.footer.legal'|trans }}</a></li>
+                    <li><a href="{{ path('app_privacy') }}">{{ '@messages.footer.privacy'|trans }}</a></li>
+                    <li><button type="button" class="om-footer-link" data-consent-open aria-controls="ga-cookie-footer">{{ '@messages.footer.cookies'|trans }}</button></li>
+                </ul>
+            </div>
+        </div>
+        <div class="om-footer-credits">
+            {#- Glitch Art's signature, omnibase's own, on the right: black, white at night (layout1.scss). -#}
+            {% include '@Base/partials/_credits.html.twig' with {color: 'black', site_name: site.name} %}
+        </div>
+    </div>
+</footer>
+{% endblock %}

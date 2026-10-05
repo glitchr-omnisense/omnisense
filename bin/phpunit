@@ -1,0 +1,25 @@
+#!/usr/bin/env php
+<?php
+
+if (!file_exists(dirname(__DIR__).'/vendor/symfony/phpunit-bridge/bin/simple-phpunit.php')) {
+    echo "Unable to find the `simple-phpunit.php` script in `vendor/symfony/phpunit-bridge/bin/`.\n";
+    exit(1);
+}
+
+if (false === getenv('SYMFONY_PHPUNIT_DIR')) {
+    // In the prod-style container topology /srv/app is a READ-ONLY bind and
+    // only var/cache, var/log, var/storage, vendor and public are writable
+    // volumes — var/ itself is not. PHPUnit's self-install must therefore
+    // live under var/cache (wiped = harmless, simple-phpunit reinstalls).
+    putenv('SYMFONY_PHPUNIT_DIR='.dirname(__DIR__).'/var/cache/phpunit');
+}
+
+// Fresh environments (the deploy gate's throwaway clone) don't have the dir
+// yet: simple-phpunit chdir()s into it and would otherwise fall back to
+// installing PHPUnit into the read-only app root.
+$phpunitDir = getenv('SYMFONY_PHPUNIT_DIR');
+if ($phpunitDir && !is_dir($phpunitDir)) {
+    @mkdir($phpunitDir, 0777, true);
+}
+
+require dirname(__DIR__).'/vendor/symfony/phpunit-bridge/bin/simple-phpunit.php';

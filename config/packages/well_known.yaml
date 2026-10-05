@@ -1,0 +1,43 @@
+
+when@dev:
+  well_known:
+    resources:
+      robots_txt:
+        - {user-agent: ["*"], disallow: ["/"]}
+        
+well_known:
+  enable: True
+  location_uri: /.well-known
+
+  basedir_warning: true
+  override_existing: true
+
+  # Fetch gnupg pgp-key.txt generation
+  # gnupg: 
+  #   directory: /var/www/.gnupg
+  #   uid: "Meyers & Associée"
+
+  resources:
+    ads_txt: 
+      - ["google.com", "pub-0000000000000000", "DIRECT", "f08c47fec0942fa0"]
+
+    robots_txt:
+      - {user-agent: ["*"], disallow: ["/storage", "/bundles","/assets"], sitemap: ["/sitemap.xml"]}
+      - {user-agent: ["*"], allow: ["/"]}
+
+    change_password: /reset-password
+
+    security_txt:
+      canonical: /.well-known/security.txt
+      encryption: /.well-known/pgp-key.txt
+      expires: "+1y"
+      contacts: 
+        - "mailto:support@glitchr.io"
+
+      acknowledgements: /security-acknowledgements
+      policy: /security-policy
+      hiring: /security-hiring
+      preferred_languages:
+        - en
+        - fr
+  

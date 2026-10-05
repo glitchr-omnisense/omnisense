@@ -1,0 +1,71 @@
+doctrine:
+    dbal:
+        default_connection: default
+        connections:
+            default:
+                host:     '%env(resolve:DOCTRINE_DATABASE_HOST)%'
+                port:     '%env(DOCTRINE_DATABASE_PORT)%'
+                user:     '%env(DOCTRINE_DATABASE_USER)%'
+                password: '%env(DOCTRINE_DATABASE_PASSWORD)%'
+                dbname:   '%env(DOCTRINE_DATABASE)%'
+
+                driver: 'pdo_mysql'
+                charset: utf8mb4
+                server_version: '9.0.0' # " ^(?:5\.5\.5-)?(mariadb-)?<major_version>.<minor_version>.<patch_version> "
+
+                sslmode: "DISABLED"
+                profiling_collect_backtrace: '%kernel.debug%'
+                default_table_options:
+                    charset: utf8mb4
+                    collate: utf8mb4_unicode_ci # Emoji
+
+    orm:
+        second_level_cache:
+            enabled: true
+            region_cache_driver:
+                type: pool
+                pool: cache.adapter
+
+        quote_strategy: doctrine.orm.quote_strategy.default
+        naming_strategy: Base\Database\Mapping\NamingStrategy
+        class_metadata_factory_name: Base\Database\Mapping\ClassMetadataFactory
+
+        auto_mapping: true
+
+
+        metadata_cache_driver:
+            type: pool
+            pool: doctrine.system_cache_pool
+        query_cache_driver:
+            type: pool
+            pool: doctrine.system_cache_pool
+        result_cache_driver:
+            type: pool
+            pool: doctrine.result_cache_pool
+
+        mappings:
+            App:
+                is_bundle: false
+                type: attribute
+                dir: '%kernel.project_dir%/src/Entity'
+                prefix: 'App\Entity'
+                alias: App
+
+when@prod:
+
+    framework:
+        cache:
+            pools:
+                doctrine.result_cache_pool:
+                    adapter: cache.app
+                doctrine.system_cache_pool:
+                    adapter: cache.system
+
+# Tests never touch the development data: <database>_test, created once with
+#     make database-test   (see the Makefile)
+when@test:
+    doctrine:
+        dbal:
+            connections:
+                default:
+                    dbname_suffix: '_test%env(default::TEST_TOKEN)%'

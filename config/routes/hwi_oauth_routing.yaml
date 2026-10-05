@@ -1,0 +1,78 @@
+# hwi_oauth_redirect:
+#     resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+#     prefix:   /connect
+
+# hwi_oauth_connect:
+#     resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
+#     prefix:   /connect
+
+# hwi_oauth_login:
+#     resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+#     prefix:   /login
+
+# OAuth routes
+oauth_facebook:
+    path: /connect/facebook
+oauth_google:
+    path: /connect/google
+    controller: HWI\Bundle\OAuthBundle\Controller\RedirectToServiceController::redirectToServiceAction
+    defaults:
+        service: google
+oauth_instagram:
+    path: /connect/instagram
+oauth_paypal:
+    path: /connect/paypal
+oauth_spotify:
+    path: /connect/spotify
+oauth_twitter:
+    path: /connect/twitter
+oauth_twitch:
+    path: /connect/twitch
+
+# OAuth check/callback routes - one per security.yaml's oauth.resource_owners
+# path (must match those exactly). These never actually execute their own
+# controller: Security\Http\Authenticator\OAuthAuthenticator::supports()
+# matches the request by raw path string (HttpUtils::checkRequestPath()),
+# intercepting and short-circuiting the kernel.request event before any
+# controller resolution happens - but Symfony's RouterListener (which runs
+# BEFORE the security firewall listener in the kernel.request event chain)
+# still 404s the request outright if no route matches the path at all, so
+# a real route registration is required regardless of whether the
+# controller it points to is ever reached. Confirmed live: without these,
+# every provider's OAuth login threw a flat "No route found" 404 the
+# instant the provider redirected back - not a credentials/config issue.
+oauth_facebook_check:
+    path: /connect/facebook-check
+    controller: HWI\Bundle\OAuthBundle\Controller\Connect\ConnectController::connectServiceAction
+    defaults:
+        service: facebook
+oauth_google_check:
+    path: /login/google/callback
+    controller: HWI\Bundle\OAuthBundle\Controller\Connect\ConnectController::connectServiceAction
+    defaults:
+        service: google
+oauth_instagram_check:
+    path: /connect/instagram-check
+    controller: HWI\Bundle\OAuthBundle\Controller\Connect\ConnectController::connectServiceAction
+    defaults:
+        service: instagram
+oauth_paypal_check:
+    path: /connect/paypal-check
+    controller: HWI\Bundle\OAuthBundle\Controller\Connect\ConnectController::connectServiceAction
+    defaults:
+        service: paypal
+oauth_spotify_check:
+    path: /connect/spotify-check
+    controller: HWI\Bundle\OAuthBundle\Controller\Connect\ConnectController::connectServiceAction
+    defaults:
+        service: spotify
+oauth_twitter_check:
+    path: /connect/twitter-check
+    controller: HWI\Bundle\OAuthBundle\Controller\Connect\ConnectController::connectServiceAction
+    defaults:
+        service: twitter
+oauth_twitch_check:
+    path: /connect/twitch-check
+    controller: HWI\Bundle\OAuthBundle\Controller\Connect\ConnectController::connectServiceAction
+    defaults:
+        service: twitch

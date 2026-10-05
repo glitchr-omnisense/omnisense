@@ -1,0 +1,26 @@
+# Installed inside the `cron` docker service (see docker-compose.yml) via
+# `crontab /srv/app/crontab` — commands run IN the container, so they call
+# bin/console directly (no `make`: those targets are host-side docker-exec
+# wrappers). Job output lands in /srv/app/var/log/cron.<job>.log
+#
+# Cron resets PATH to /usr/bin:/bin — php lives in /usr/local/bin
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+# ┌───────────── minute (0 - 59)
+# │ ┌───────────── hour (0 - 23)
+# │ │ ┌───────────── day of the month (1 - 31)
+# │ │ │ ┌───────────── month (1 - 12)
+# │ │ │ │ ┌───────────── day of the week (0 - 6) (Sunday to Saturday)
+# │ │ │ │ │
+# * * * * * command to execute
+
+*   *  * * *  date -u +\%FT\%TZ > /srv/app/var/log/cron.heartbeat
+0   0  * * *  php /srv/app/bin/console uploader:entities -v --delete-orphans >> /srv/app/var/log/cron.orphans-cleanup.log 2>&1
+*/5 *  * * *  php /srv/app/bin/console thread:publishable --publish >> /srv/app/var/log/cron.publishable.log 2>&1
+# The catalogue, each night: every package's composer.json or package.json
+# read again from its repository, its presence on Packagist or npm asked once
+# (cached, the last answer kept when the registry is unreachable); then the
+# manuals' search index (omnibase/docs), which only matters when Typesense runs.
+30  3  * * *  php /srv/app/bin/console app:packages:sync >> /srv/app/var/log/cron.packages-sync.log 2>&1
+45  3  * * *  php /srv/app/bin/console wikidoc:index >> /srv/app/var/log/cron.wikidoc-index.log 2>&1

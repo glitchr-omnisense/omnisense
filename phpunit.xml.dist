@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+         backupGlobals="false"
+         colors="true"
+         bootstrap="tests/bootstrap.php"
+         cacheDirectory="var/phpunit">
+    <php>
+        <ini name="display_errors" value="1"/>
+        <ini name="error_reporting" value="-1"/>
+        <server name="APP_ENV" value="test" force="true"/>
+        <env name="APP_ENV" value="test" force="true"/>
+        <env name="APP_DEBUG" value="1" force="true"/>
+        <server name="SHELL_VERBOSITY" value="-1"/>
+        <server name="KERNEL_CLASS" value="App\Kernel"/>
+        <!-- base-bundle's UserTracker reads the client IP from the $_SERVER
+             global at sign-in (UserInfoTrait::getIp/getAgent), not from the
+             Request, and refuses a null. -->
+        <server name="REMOTE_ADDR" value="127.0.0.1"/>
+        <server name="HTTP_USER_AGENT" value="PHPUnit"/>
+    </php>
+
+    <testsuites>
+        <testsuite name="app">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <source>
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+    </source>
+</phpunit>

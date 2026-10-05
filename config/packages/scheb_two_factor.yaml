@@ -1,0 +1,18 @@
+scheb_two_factor:
+    totp:
+        enabled: true                   # If TOTP authentication should be enabled, default false
+        leeway: 0
+        template: security/login_2fa.html.twig   # Template used to render the authentication form
+
+    email:
+        enabled: true
+        digits: 6
+        template: security/login_2fa.html.twig
+
+    backup_codes:
+        enabled: true
+
+    trusted_device:
+        enabled: true
+        lifetime: 2592000                # 30 days
+        cookie_name: trusted_device

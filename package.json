@@ -1,0 +1,47 @@
+{
+  "name": "omniscient",
+  "version": "1.0.0",
+  "description": "Omniscient, enseignant et consultant — site de démonstration",
+  "private": true,
+  "license": "UNLICENSED",
+  "author": "Glitch Art <support@glitchr.io>",
+  "scripts": {
+    "dev-server": "encore dev-server",
+    "dev": "encore dev",
+    "watch": "encore dev --watch",
+    "prod": "encore production --progress"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17",
+    "@babel/preset-env": "^7.16",
+    "@symfony/stimulus-bundle": "file:vendor/symfony/stimulus-bundle/assets",
+    "@symfony/webpack-encore": "^5.3",
+    "core-js": "^3.23",
+    "postcss": "^8.0",
+    "postcss-loader": "^8.2.0",
+    "regenerator-runtime": "^0.14.1",
+    "sass": "^1.97.3",
+    "sass-loader": "^16.0.6",
+    "webpack": "^5.74",
+    "webpack-cli": "^6.0.1",
+    "webpack-notifier": "^1.15",
+    "webpackbar": "^7.0.0"
+  },
+  "dependencies": {
+    "@fontsource-variable/archivo": "^5.2",
+    "@fontsource-variable/recursive": "^5.2",
+    "@fortawesome/fontawesome-free": "^6.7",
+    "@glitchr/cookie": "^1.0",
+    "@glitchr/media-query-plugin": "^1.0",
+    "@glitchr/stickyjs": "^1.2.2",
+    "@glitchr/transparentjs": "git+https://github.com/glitchr-studio/transparentjs.git#ca3d565ee39740e27ae16e322d28ff73544bc591",
+    "@hotwired/stimulus": "^3.0",
+    "@popperjs/core": "^2.11.8",
+    "@symfony/stimulus-bridge": "^4.0.1",
+    "bootstrap": "^5.3.8",
+    "file-loader": "^6.0",
+    "jquery": "^3.7",
+    "nprogress": "^0.2.0",
+    "sweetalert2": "^11.14"
+  }
+}

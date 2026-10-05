@@ -1,0 +1,8 @@
+twig:
+    default_path: '%kernel.project_dir%/templates'
+    file_name_pattern: '*.twig'
+
+    globals:
+        # Who the site is (the header, the footer, the legal notice), from
+        # config/services.yaml (App\Site\Identity).
+        site: '@App\Site\Identity'

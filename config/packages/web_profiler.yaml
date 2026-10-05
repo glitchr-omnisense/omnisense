@@ -1,0 +1,20 @@
+when@dev:
+    web_profiler:
+        toolbar: true
+        intercept_redirects: false
+
+    framework:
+        profiler:
+            only_exceptions: false
+
+# Tests keep one kernel across requests (disableReboot): a profile per
+# request, each carrying every log line before it, ran the suite out of
+# memory. None reads them; a test that needs one calls enableProfiler().
+when@test:
+    web_profiler:
+        toolbar: false
+        intercept_redirects: false
+
+    framework:
+        profiler:
+            collect: false

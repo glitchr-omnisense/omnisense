@@ -1,0 +1,179 @@
+base:
+  autoclear: true
+  spam:
+    akismet: "%env(AKISMET_KEY)%"
+
+  uploader:
+    storage: "local.uploads"
+
+    warmup: true
+    formats:
+      - {width: 250, height: 250}
+      - {width: 500, height: 500}
+      - {width: 1000, height: 1000}
+      - {width: 2000, height: 2000}
+
+  images:
+    debug: false
+    disable_profiler: true
+    warmup: true
+    enable_webp: true
+
+    fallback: true
+
+    max_resolution: Base\Imagine\Filter\Basic\Definition\UltraHighDefinitionFilter
+    max_quality: 0.8
+    autorotate: true
+    timeout: 240
+
+  obfuscator:
+    # Reverse-mapping cache for short image URLs must survive deploys/cache:clear
+    # (var/cache is wiped on every deploy — var/storage is not, same as uploads).
+    cache_dir: '%kernel.project_dir%/var/storage/obfuscator/%kernel.environment%'
+
+  site:
+    index: "app_index"
+    maintenance:
+      redirect_on_deny: security_maintenance
+      lockpath: '%kernel.project_dir%/public/maintenance.lock'
+
+  access_restriction:
+    redirect_on_deny: security_rescue
+    firewalls:
+      - 'main'
+
+    route_exceptions:
+      - "/^(?:locale_|ux_|user_|security_)/"
+
+  database:
+    use_custom: true
+  
+  parameter_bag:
+    use_hot_bag: true
+    use_setting_bag: true
+
+  router:
+    use_custom: true
+    ip_access: false
+
+    use_fallbacks: '%env(bool:HTTP_REDUCTION)%'
+    host_fallbacks:
+      - { machine: '%env(json:HTTP_MACHINE)%', subdomain: '%env(json:HTTP_SUBDOMAIN)%', domain: '%env(json:HTTP_DOMAIN)%', port: "%env(json:HTTP_PORT)%", base_dir: '%env(HTTP_BASEDIR)%' }
+
+  notifier:
+    technical_loopback: '%env(bool:MAILER_LOOPBACK)%'
+    technical_recipient: 
+      email: '%env(MAILER_TECHNICAL)%'
+    admin_role: "ROLE_EDITOR"
+    test_recipients:
+      - '@(?:local|localhost|localhost\.local)$'
+      - '@example.org$'
+
+    options:
+      - { channel: "email",    markAsRead: false }
+      - { channel: "email+",   markAsRead: false }
+      - { channel: "browser+", markAsRead: true }
+      - { channel: "inapp",    markAsRead: false }
+      - { channel: "push",     markAsRead: false }
+
+  twig:
+    use_custom: true
+    use_form2: true
+    use_bootstrap: true
+
+    default_path: '%kernel.project_dir%/vendor/glitchr/omnibase/templates'
+    form_themes:
+        - '@Base/form/form_div_layout.html.twig'
+
+    themes:
+      widths:
+        auto:
+          icon: 'fa-solid fa-fw fa-arrows-left-right'
+          class: 'theme-width-auto'
+        narrow:
+          icon: 'fa-solid fa-fw fa-text-width'
+          class: 'theme-width-narrow'
+        wide:
+          icon: 'fa-solid fa-fw fa-arrows-left-right-to-line'
+          class: 'theme-width-wide'
+        full:
+          icon: 'fa-solid fa-fw fa-arrows-to-circle'
+          class: 'theme-width-full'
+
+      modes: 
+        auto:
+          icon: 'fa-solid fa-fw fa-circle-half-stroke'
+          prefers: 'light dark'
+        dark:
+          icon: 'fa-solid fa-fw fa-moon'
+          prefers: 'dark'
+        light:
+          icon: 'fa-solid fa-fw fa-sun'
+          prefers: 'light'
+        # contrast:
+        #   icon: 'fa-solid fa-fw fa-eye-slash'
+        #   prefers: 'light dark'
+
+      filters:
+        grayscale:
+          icon: 'fa-solid fa-fw fa-brain'
+        sepia:
+          icon: 'fa-solid fa-fw fa-droplet'
+        invert:
+          icon: 'fa-solid fa-fw fa-palette'
+
+      audiences:
+        child:
+          icon: 'fa-solid fa-fw fa-child'
+          age: 13
+        teen:
+          icon: 'fa-solid fa-fw fa-user'
+          age: 18
+
+
+    editor:
+      storage: "local.wysiwyg"
+
+    script_attributes:
+        defer: true
+    link_attributes:
+        defer: true
+
+    breakpoints:
+        - {'name': 'mobile'          , 'media': 'all and (max-width: 470px)'}
+        - {'name': 'mobile.landscape', 'media': 'all and (max-width: 470px) and (orientation: landscape)'}
+        - {'name': 'tablet'          , 'media': 'all and (min-width: 471px) and (max-width: 1024px)'}
+        - {'name': 'tablet.landscape', 'media': 'all and (min-width: 471px) and (max-width: 1024px) and (orientation: landscape)'}
+        - {'name': 'laptop'          , 'media': 'all and (min-width: 1025px) and (max-width: 1280px)'}
+        - {'name': 'desktop'         , 'media': 'all and (min-width: 1281px)'}
+
+    paths:
+        - { path: '%kernel.project_dir%/templates/layout' }
+        - { path: '%kernel.project_dir%/templates/layout', namespace: "Layout" }
+
+  attributes:
+    use_custom: True
+    paths:
+        - '%kernel.project_dir%/src/Annotation'
+
+  extension:
+
+    max_revisions: 5
+    empty_trash: "+7 days"
+    logging_default_expiry: "+30 days"
+
+  user:
+    login_with_token: false
+    token_default_throttling: 180
+    # connections:
+    #   max_records:32
+    #   expiry:"+1 year"
+
+    register:
+      # Anyone signs up on their own, to follow packages (App\Entity\Follow).
+      autoapprove: True
+      notify_admins: True
+
+    identifier: "firstname"
+    notifications:
+      expiry: "+30 days"

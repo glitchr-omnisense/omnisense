@@ -1,0 +1,63 @@
+# One-shot setup services — never started by plain `docker compose up`
+# Loaded explicitly by the Makefile via DOCKER_SETUP
+# Usage: docker compose -f docker-compose.yml -f docker-compose.setup.yml run --rm composer
+#        docker compose -f docker-compose.yml -f docker-compose.setup.yml run --rm assets
+
+services:
+
+  # ── Composer (one-shot) ──────────────────────────────────────────
+
+  composer:
+    container_name: ${APP_NAME:-${COMPOSE_PROJECT_NAME}}-composer
+    restart: "no"
+    build:
+      context: .
+      dockerfile: ./deployments/docker/web/Dockerfile
+    env_file:
+      - .env
+      - path: .env.local
+        required: false
+    volumes:
+      - /srv/app/var/cache
+      - .:/srv/app:rw
+      - .:/mnt/app:ro
+      - public:/srv/app/public:rw
+      - vendor:/srv/app/vendor:rw
+      - storage:/srv/app/var/storage:rw
+      - ./deployments/docker/web/php.ini:/usr/local/etc/php/php.ini
+    networks:
+      - intranet
+      - extranet
+    entrypoint: /srv/app/deployments/docker/composer/entrypoint.sh
+
+  # ── Assets (one-shot build) ──────────────────────────────────────
+
+  assets:
+    restart: "no"
+    depends_on:
+      composer:
+        condition: service_completed_successfully
+    build:
+      context: .
+      dockerfile: ./deployments/docker/web/Dockerfile
+    env_file:
+      - .env
+      - path: .env.local
+        required: false
+    volumes:
+      - .:/srv/app:ro
+      - .:/mnt/app:ro
+      - /srv/app/var/cache
+      - /srv/app/var/log
+      - /srv/app/node_modules
+      - public:/srv/app/public:rw
+      - vendor:/srv/app/vendor:rw
+      - storage:/srv/app/var/storage:rw
+      - ./composer.lock:/srv/app/composer.lock:rw
+      - ./symfony.lock:/srv/app/symfony.lock:rw
+      - ./yarn.lock:/srv/app/yarn.lock:rw
+      - ./deployments/docker/web/php.ini:/usr/local/etc/php/php.ini
+    networks:
+      - intranet
+      - extranet
+    entrypoint: /srv/app/deployments/docker/assets/entrypoint.sh

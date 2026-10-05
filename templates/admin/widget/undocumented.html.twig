@@ -1,0 +1,18 @@
+{# The packages without a docs/ folder (App\Admin\Widget\UndocumentedWidgetType). #}
+<div class="analytics-card card app-undocumented">
+    <div class="analytics-card-header">
+        <h2 class="analytics-card-title">{{ widget.label|trans({}, 'admin') }}</h2>
+    </div>
+    <div class="app-widget-body">
+        <p class="app-widget-note"><strong>{{ readme_only|length + nothing|length }}</strong> paquet(s) sur {{ total }} n'ont pas de dossier <code>docs/</code>{% if nothing %}, dont {{ nothing|length }} sans README{% endif %}.</p>
+        {% if readme_only or nothing %}
+        <ul class="app-widget-list">
+            {% for package in nothing %}<li><a href="{{ path('admin_crud_packages_detail', {entityId: package.id}) }}">{{ package.name }}</a> <em>(rien)</em></li>{% endfor %}
+            {% for package in readme_only|slice(0, 30) %}<li><a href="{{ path('admin_crud_packages_detail', {entityId: package.id}) }}">{{ package.name }}</a></li>{% endfor %}
+        </ul>
+        {% if readme_only|length > 30 %}<p class="app-widget-note">… et {{ readme_only|length - 30 }} autre(s).</p>{% endif %}
+        {% else %}
+        <p class="app-widget-note">Chaque paquet a sa documentation.</p>
+        {% endif %}
+    </div>
+</div>

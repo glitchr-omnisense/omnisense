@@ -1,0 +1,7 @@
+# omnibase/blog: the announcements (a release, a new family, a package that
+# changes hands), at /blog. No comments: a release note is not a forum.
+blog:
+    path: blog
+    posts_per_page: 12
+    comments:
+        enabled: false

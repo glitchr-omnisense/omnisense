@@ -1,0 +1,12 @@
+{# A package's two states, each read somewhere and saying where: its registry, its README. #}
+{% set registry = package.npm ? 'npm' : 'Packagist' %}
+{% if package.published is same as(true) %}
+    <a class="om-fact is-yes" href="{{ package.registryUrl }}" rel="noopener" title="{{ package.registryCheckedAt ? '@messages.state.asked_on'|trans({date: package.registryCheckedAt|format_date('medium')}) }}">{{ registry }}{% if package.publishedVersion %} · {{ package.publishedVersion }}{% endif %}</a>
+{% elseif package.published is same as(false) %}
+    <span class="om-fact is-no" title="{{ package.registryCheckedAt ? '@messages.state.asked_on'|trans({date: package.registryCheckedAt|format_date('medium')}) }}">{{ '@messages.state.absent'|trans({registry: registry}) }}</span>
+{% else %}
+    <span class="om-fact is-unknown">{{ '@messages.state.unknown'|trans({registry: registry}) }}</span>
+{% endif %}
+{% if package.verification.value != 'unstated' %}
+    <span class="om-fact is-{{ package.verification.value }}" title="{{ package.verificationNote }}">{{ ('@messages.state.' ~ package.verification.value)|trans }}</span>
+{% endif %}
