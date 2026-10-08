@@ -121,8 +121,11 @@ html.theme-mode-dark .om-when-dark { display: inline; } html.theme-mode-dark .om
     > div { display: flex; }
     input { flex: 1; min-width: 0; min-height: 2.9rem; padding: 0 .9rem; border: 1.5px solid var(--om-ink); border-right: 0; border-radius: 2px 0 0 2px; background: var(--om-sheet); color: var(--om-ink); @include mono(.9rem, 500); &:focus { outline: 0; box-shadow: inset 0 0 0 2px var(--om-blue); } &::placeholder { color: var(--om-soft); opacity: .8; } }
     .om-button { min-height: 2.9rem; border-radius: 0 2px 2px 0; } }
-.om-figures { display: flex; flex-wrap: wrap; gap: 1rem 3rem; margin: 2rem 0 0;
-    div { display: flex; flex-direction: column-reverse; } dt { @include cote; } dd { margin: 0; @include display(800); font-size: clamp(2.2rem, 4.5vw, 3.4rem); line-height: 1; } }
+// The figures as a plan's dimensions: each one measured by its cote above it -
+// a thin line between two ticks - rather than set as a dashboard's numbers.
+.om-figures { display: flex; flex-wrap: wrap; gap: 1.5rem 3rem; margin: 2rem 0 0;
+    div { position: relative; display: flex; flex-direction: column-reverse; padding-top: .95rem; }
+    div::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: .6rem; border-inline: 1px solid var(--om-soft); background: linear-gradient(var(--om-soft), var(--om-soft)) center / 100% 1px no-repeat; } dt { @include cote; } dd { margin: 0; @include display(800); font-size: clamp(2.2rem, 4.5vw, 3.4rem); line-height: 1; } }
 .om-news { h3 { margin-bottom: .75rem; }
     ol { margin: 0; padding: 0; list-style: none; border-top: 1.5px solid var(--om-ink); }
     li { padding: .9rem 0; border-bottom: 1px solid var(--om-line); }
