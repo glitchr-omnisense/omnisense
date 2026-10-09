@@ -3329,16 +3329,16 @@
         },
         {
             "name": "enshrined/svg-sanitize",
-            "version": "0.22.0",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/darylldoyle/svg-sanitizer.git",
-                "reference": "0afa95ea74be155a7bcd6c6fb60c276c39984500"
+                "reference": "f3300fcd1bbf67d205b52217c75d0f7d6a8c47ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/darylldoyle/svg-sanitizer/zipball/0afa95ea74be155a7bcd6c6fb60c276c39984500",
-                "reference": "0afa95ea74be155a7bcd6c6fb60c276c39984500",
+                "url": "https://api.github.com/repos/darylldoyle/svg-sanitizer/zipball/f3300fcd1bbf67d205b52217c75d0f7d6a8c47ff",
+                "reference": "f3300fcd1bbf67d205b52217c75d0f7d6a8c47ff",
                 "shasum": ""
             },
             "require": {
@@ -3368,9 +3368,9 @@
             "description": "An SVG sanitizer for PHP",
             "support": {
                 "issues": "https://github.com/darylldoyle/svg-sanitizer/issues",
-                "source": "https://github.com/darylldoyle/svg-sanitizer/tree/0.22.0"
+                "source": "https://github.com/darylldoyle/svg-sanitizer/tree/1.0.0"
             },
-            "time": "2025-08-12T10:13:48+00:00"
+            "time": "2026-09-01T09:35:47+00:00"
         },
         {
             "name": "firebase/php-jwt",
@@ -3766,7 +3766,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-studio/omnibase.git",
-                "reference": "07c0ff9c8830813e31a3cd5fbbda200de0eef297"
+                "reference": "46b34c1408fd8b266e74b986df3d65c6769c66d7"
             },
             "require": {
                 "api-platform/doctrine-orm": "^4.0",
@@ -3776,7 +3776,7 @@
                 "doctrine/orm": "^2.15|^3.0",
                 "embed/embed": "^4.4",
                 "endroid/qr-code": "^6.0",
-                "enshrined/svg-sanitize": "^0.22",
+                "enshrined/svg-sanitize": "^1.0",
                 "ext-exif": "*",
                 "ext-igbinary": "*",
                 "ext-imagick": "*",
@@ -3816,6 +3816,7 @@
                 "symfony/process": "^6.0|^7.0|^8.0",
                 "symfony/security-bundle": "^6.0|^7.0|^8.0",
                 "symfony/serializer": "^6.0|^7.0|^8.0",
+                "symfony/translation": "^6.0|^7.0|^8.0",
                 "symfony/twig-bundle": "^6.0|^7.0|^8.0",
                 "symfony/uid": "^6.0|^7.0|^8.0",
                 "symfony/ux-twig-component": "^2.0|^3.0",
@@ -3900,7 +3901,7 @@
                 "helper",
                 "symfony"
             ],
-            "time": "2026-10-08T17:58:09+00:00"
+            "time": "2026-10-09T10:04:53+00:00"
         },
         {
             "name": "glitchr/typesense-bundle",
@@ -6517,7 +6518,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-studio/omnibase-admin.git",
-                "reference": "b6e6557f8de796760ed10ab23020a0b4c426eeeb"
+                "reference": "46edeac5f7ab0a3b8117136704831a8cee2f6eeb"
             },
             "require": {
                 "glitchr/omnibase": "3.0.*-dev",
@@ -6563,7 +6564,7 @@
                 "dashboard",
                 "symfony"
             ],
-            "time": "2026-10-08T17:58:09+00:00"
+            "time": "2026-10-09T07:30:28+00:00"
         },
         {
             "name": "omnibase/blog",
