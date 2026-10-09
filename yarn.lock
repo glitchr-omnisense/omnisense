@@ -838,9 +838,9 @@
   resolved "https://registry.yarnpkg.com/@glitchr/stickyjs/-/stickyjs-1.2.2.tgz#74d869c7778772824731bc95c5720d375e3dcdae"
   integrity sha512-dkH/O8WWzkW9VHLZdZgzDt/6jVOQZJk/qfXi4VEC5eF2oDBXJ6YjcG8AgrMPibfOBEvtZmpcYrSY0e79qJ0BCg==
 
-"@glitchr/transparentjs@git+https://github.com/glitchr-studio/transparentjs.git#ca3d565ee39740e27ae16e322d28ff73544bc591":
-  version "3.0.25"
-  resolved "git+https://github.com/glitchr-studio/transparentjs.git#ca3d565ee39740e27ae16e322d28ff73544bc591"
+"@glitchr/transparentjs@git+https://github.com/glitchr-studio/transparentjs.git#3103c6f0f8115c9d6135c35f76a5bf93ba7b839b":
+  version "3.0.30"
+  resolved "git+https://github.com/glitchr-studio/transparentjs.git#3103c6f0f8115c9d6135c35f76a5bf93ba7b839b"
 
 "@hotwired/stimulus-webpack-helpers@^1.0.1":
   version "1.0.1"

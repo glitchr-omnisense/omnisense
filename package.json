@@ -34,7 +34,7 @@
     "@glitchr/cookie": "^1.0",
     "@glitchr/media-query-plugin": "^1.0",
     "@glitchr/stickyjs": "^1.2.2",
-    "@glitchr/transparentjs": "git+https://github.com/glitchr-studio/transparentjs.git#ca3d565ee39740e27ae16e322d28ff73544bc591",
+    "@glitchr/transparentjs": "git+https://github.com/glitchr-studio/transparentjs.git#3103c6f0f8115c9d6135c35f76a5bf93ba7b839b",
     "@hotwired/stimulus": "^3.0",
     "@popperjs/core": "^2.11.8",
     "@symfony/stimulus-bridge": "^4.0.1",
