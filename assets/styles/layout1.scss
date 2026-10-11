@@ -62,7 +62,7 @@ html.theme-mode-dark .om-when-dark { display: inline; } html.theme-mode-dark .om
     background-image: linear-gradient(var(--om-grid) 1px, transparent 1px), linear-gradient(90deg, var(--om-grid) 1px, transparent 1px), linear-gradient(var(--om-grid) 1px, transparent 1px), linear-gradient(90deg, var(--om-grid) 1px, transparent 1px);
     background-size: 2rem 2rem, 2rem 2rem, 10rem 10rem, 10rem 10rem; background-position: -1px -1px; }
 .om-hero-inner { display: grid; gap: 1.25rem 3rem; grid-template-columns: minmax(0, 1fr); @include wide { grid-template-columns: minmax(0, 1fr) 15.5rem; grid-template-areas: "kicker index" "omni index" "phrase index" "actions index"; align-items: start; } }
-.om-kicker { display: flex; flex-wrap: wrap; gap: .4rem 1.25rem; align-items: baseline; margin: 0; font-size: 1.05rem; font-weight: 600; @include wide { grid-area: kicker; } }
+.om-kicker { display: flex; flex-wrap: wrap; gap: .4rem 1.25rem; align-items: baseline; margin: 0; font-size: 1.05rem; font-weight: 600; @include wide { grid-area: kicker; } .om-cote { white-space: normal; } }
 .om-omni { margin: 0; display: flex; flex-wrap: wrap; align-items: baseline; @include display(800); font-size: clamp(4rem, 21vw, 8rem); line-height: 1; letter-spacing: -.035em; @include wide { grid-area: omni; flex-wrap: nowrap; font-size: clamp(5rem, 9.4vw, 8.75rem); } }
 .om-omni-fixed { color: var(--om-ink); }
 // The slot: a blank on a form, a rule under it, the suffix written in blue.

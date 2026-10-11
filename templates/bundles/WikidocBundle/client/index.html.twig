@@ -19,7 +19,7 @@
 {% set site_pages = manual_pages('glitchr/omniscient') %}
 <div class="om-wrap om-page om-docs-index">
     <header class="om-head is-page manual-index-head">
-        <p class="om-cote">{{ '@messages.docs.eyebrow'|trans }}</p>
+        <p class="om-cote">{{ '@messages.docs.count'|trans({manuals: manuals|length, groups: manual_groups(manuals)|length}) }}</p>
         <h1>{{ '@wikidoc.manuals.title'|trans }}</h1>
         <p class="om-lead">{{ '@messages.docs.lead'|trans({count: manuals|length}) }}</p>
         <div class="manual-index om-docs-search">{% include '@Wikidoc/client/_search.html.twig' with {suffix: '-index'} %}</div>

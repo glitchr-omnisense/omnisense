@@ -66,7 +66,7 @@ class CatalogueExtension extends AbstractExtension
         }
 
         $pages = [];
-        foreach ($this->manuals->pages($found, $version)->getAllPages() as $page) {
+        foreach ($this->manuals->pages($found, $version)->getSequence() as $page) {
             if (!$page->isSection()) {
                 $pages[] = ['title' => $page->title, 'path' => $found->urlPath($version->name, $page->path)];
             }
