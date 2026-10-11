@@ -34,7 +34,7 @@
     "@fortawesome/fontawesome-free": "^6.7",
     "@glitchr/cookie": "^1.0",
     "@glitchr/media-query-plugin": "^1.0",
-    "@glitchr/stickyjs": "^1.2.2",
+    "@glitchr/stickyjs": "git+https://github.com/glitchr-studio/stickyjs.git#2451fc670f74615aa7d0fc1abbca895492fab52e",
     "@glitchr/transparentjs": "git+https://github.com/glitchr-studio/transparentjs.git#3103c6f0f8115c9d6135c35f76a5bf93ba7b839b",
     "@hotwired/stimulus": "^3.0",
     "@popperjs/core": "^2.11.8",
