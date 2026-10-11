@@ -71,4 +71,7 @@ répond à la place de Packagist, npm et GitHub) et parlent à une doublure de
 Typesense (`tests/Mock/FakeTypesense.php`), qu'un test « éteint » pour
 vérifier le repli sur l'index des pages.
 
-Captures : `var/shots/` (bureau et téléphone, clair et sombre).
+Captures : `var/shots/` (bureau et téléphone, clair et sombre) ; celles de
+la refonte du 2026-10-11 dans `var/shots/refonte/` (`shoot.sh` : Chrome
+sans tête en français ; le « téléphone » y fait 500 px, la plus petite
+fenêtre que Chrome sans tête accepte sur macOS).
