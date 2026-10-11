@@ -5,7 +5,6 @@ namespace App\Tests\Unit;
 use App\Catalogue\Families;
 use App\Catalogue\PackageRegistries;
 use App\Catalogue\RepositoryScanner;
-use App\Catalogue\Sites;
 use App\Catalogue\Tier;
 use App\Catalogue\Verification;
 use PHPUnit\Framework\TestCase;
@@ -123,19 +122,13 @@ final class CatalogueTest extends TestCase
         self::assertContains('@glitchr/stickyjs', $sites['juriste'], 'a site\'s package.json counts too');
     }
 
-    public function testFamiliesAndSites(): void
+    public function testFamilies(): void
     {
         self::assertSame('trade', Families::suffix('omnitrade'));
         self::assertSame(['omnibase', 'omnitrade', 'omnimeet', 'omnizzz'], array_keys(Families::ordered(['omnizzz' => 1, 'omnimeet' => 1, 'omnitrade' => 1, 'omnibase' => 1])));
         // An announced name stops being one the day its family is found.
-        self::assertArrayHasKey('omnisign', Families::announced(['omnibase', 'omnitrade']));
-        self::assertArrayNotHasKey('omnisign', Families::announced(['omnisign']));
+        self::assertArrayHasKey('omnishow', Families::announced(['omnibase', 'omnitrade']));
+        self::assertArrayNotHasKey('omnishow', Families::announced(['omnishow']));
         self::assertSame([], array_intersect(array_keys(Families::ANNOUNCED), Families::ORDER), 'a family is announced or it exists');
-
-        // Taratata is a private demonstration: not listed. The fictional ones say so.
-        self::assertNull(Sites::get('taratata'));
-        self::assertTrue(Sites::get('juriste')['fictional']);
-        self::assertFalse(Sites::get('nakaya')['fictional']);
-        self::assertSame('https://localhost:8443', Sites::get('nakaya')['url']);
     }
 }

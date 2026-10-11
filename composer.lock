@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b2c7ad4aa83f5ad2dfcb47047acb427d",
+    "content-hash": "b50142b0cd7afbd58a1a1af17b68ac50",
     "packages": [
         {
             "name": "api-platform/doctrine-common",
@@ -3589,6 +3589,58 @@
             "time": "2026-03-09T19:31:40+00:00"
         },
         {
+            "name": "git/git-bundle",
+            "version": "1.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/glitchr-studio/git-bundle.git",
+                "reference": "126186c9bdda0c7fe240b33c12e253a43b0b54e1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/glitchr-studio/git-bundle/zipball/126186c9bdda0c7fe240b33c12e253a43b0b54e1",
+                "reference": "126186c9bdda0c7fe240b33c12e253a43b0b54e1",
+                "shasum": ""
+            },
+            "require": {
+                "ext-git2": "*",
+                "php": "^8.1",
+                "symfony/config": "^6.0|^7.0|^8.0",
+                "symfony/dependency-injection": "^6.0|^7.0|^8.0",
+                "symfony/framework-bundle": "^6.0|^7.0|^8.0",
+                "symfony/http-kernel": "^6.0|^7.0|^8.0",
+                "symfony/routing": "^6.0|^7.0|^8.0",
+                "symfony/twig-bundle": "^6.0|^7.0|^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^10.5"
+            },
+            "default-branch": true,
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Git\\": "./src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Marco Meyer",
+                    "email": "marco.meyer@glitchr.io"
+                }
+            ],
+            "description": "GitHub-like git repository viewer for Symfony, powered by libgit2 via the php-git2 extension",
+            "homepage": "https://www.glitchr.io",
+            "support": {
+                "issues": "https://github.com/glitchr-studio/git-bundle/issues",
+                "source": "https://github.com/glitchr-studio/git-bundle/tree/1.0"
+            },
+            "time": "2026-09-26T09:38:15+00:00"
+        },
+        {
             "name": "glitchr/backup-manager",
             "version": "4.0.x-dev",
             "source": {
@@ -6572,7 +6624,7 @@
             "dist": {
                 "type": "path",
                 "url": "../omnibase/blog",
-                "reference": "da8d94a7130c28b3634ed42d80a87d778648e64d"
+                "reference": "e3e275f03420c689805cfdf34b6fd2580205e893"
             },
             "require": {
                 "doctrine/orm": "^2.15|^3.0",
@@ -20319,6 +20371,7 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "git/git-bundle": 20,
         "glitchr/backup-manager": 20,
         "glitchr/base-plugin": 20,
         "glitchr/doctrine-dc2type": 20,
@@ -20334,9 +20387,9 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
+        "php": ">=8.2",
         "ext-ctype": "*",
-        "ext-iconv": "*",
-        "php": ">=8.2"
+        "ext-iconv": "*"
     },
     "platform-dev": {},
     "platform-overrides": {

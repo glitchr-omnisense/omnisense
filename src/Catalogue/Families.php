@@ -16,7 +16,7 @@ namespace App\Catalogue;
 final class Families
 {
     /** Omni + base, bus, trade...: the order the suffix turns in. */
-    public const ORDER = ['omnibase', 'omnibus', 'omnitrade', 'omnistate', 'omnibank', 'omnisong', 'omnipost', 'omnifood', 'omnischolar', 'omnilex', 'omnimeet'];
+    public const ORDER = ['omnibase', 'omnibus', 'omnitrade', 'omnistate', 'omnibank', 'omnisong', 'omnipost', 'omnifood', 'omnischolar', 'omnilex', 'omnimeet', 'omnishield', 'omnisign', 'omnibill', 'omnireview'];
 
     /**
      * Announced, not written: `planned` has a first site waiting for it,
@@ -26,9 +26,6 @@ final class Families
      */
     public const ANNOUNCED = [
         'omnishow' => 'planned',
-        'omnisign' => 'planned',
-        'omnibill' => 'planned',
-        'omnireview' => 'planned',
         'omniticket' => 'reserved',
         'omnireach' => 'reserved',
         'omnifilm' => 'reserved',

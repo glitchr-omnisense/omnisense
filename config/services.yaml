@@ -84,6 +84,10 @@ when@test:
         # Typesense too: omnibase/docs talks to this instead of the "search" container.
         App\Tests\Mock\FakeTypesense: ~
         Base\Wikidoc\Search\TypesenseClientInterface: '@App\Tests\Mock\FakeTypesense'
+        # The fixtures' repositories are files without a .git: their tags and
+        # branches are given here, as libgit2 would read them.
+        App\Tests\Mock\FakeVersions: { autowire: true }
+        App\Catalogue\Versions: '@App\Tests\Mock\FakeVersions'
         App\DataFixtures\:
             resource: '../src/DataFixtures/'
             autowire: true

@@ -1,0 +1,45 @@
+{#
+ # Which frameworks the packages run in: what is true today (the families run
+ # in plain PHP, proved by each family's BareTest; omnibase and its components
+ # are Symfony bundles) and what will be (omnibase made agnostic, its framework
+ # parts in bridges; plan 0, rule 13) - no date promised.
+ # letter: the section's mark on the home page ("C"); none on the install page.
+ #}
+<header class="om-head">
+    <p class="om-cote">{% if letter is defined %}{{ letter }} — {% endif %}{{ '@messages.compat.eyebrow'|trans }}</p>
+    <h2>{{ '@messages.compat.title'|trans }}</h2>
+    <p class="om-lead">{{ '@messages.compat.lead'|trans }}</p>
+</header>
+<div class="om-compat">
+    <div class="om-compat-col is-now">
+        <h3><span class="om-fact is-verified">{{ '@messages.compat.now'|trans }}</span> {{ '@messages.compat.families_title'|trans }}</h3>
+        <p>{{ '@messages.compat.families_text'|trans|raw }}</p>
+        <pre class="om-code"><code>use Omnitrade\PayPal\PayPalGatewayFactory;
+use Omnitrade\Registry;
+use Symfony\Component\HttpClient\HttpClient;
+
+// No container, no kernel: the registry is built by hand.
+$registry = new Registry([new PayPalGatewayFactory(HttpClient::create())], [
+    'paypal' =&gt; ['factory' =&gt; 'paypal', 'options' =&gt; ['client_id' =&gt; $id, 'secret' =&gt; $secret]],
+]);
+$gateway = $registry-&gt;get('paypal');</code></pre>
+        <p class="om-note">{{ '@messages.compat.families_proof'|trans|raw }}</p>
+    </div>
+    <div class="om-compat-col is-now">
+        <h3><span class="om-fact is-partial">{{ '@messages.compat.now'|trans }}</span> {{ '@messages.compat.omnibase_title'|trans }}</h3>
+        <p>{{ '@messages.compat.omnibase_text'|trans|raw }}</p>
+    </div>
+    <div class="om-compat-col is-later">
+        <h3><span class="om-fact is-unstated">{{ '@messages.compat.later'|trans }}</span> {{ '@messages.compat.agnostic_title'|trans }}</h3>
+        <p>{{ '@messages.compat.agnostic_text'|trans|raw }}</p>
+        <ul class="om-compat-bridges">
+            <li><code>omnibridge/symfony</code><span>{{ '@messages.compat.bridge_symfony'|trans }}</span></li>
+            <li><code>omnibridge/doctrine</code><span>{{ '@messages.compat.bridge_doctrine'|trans }}</span></li>
+            <li><code>omnibridge/twig</code><span>{{ '@messages.compat.bridge_twig'|trans }}</span></li>
+            <li><code>omnibridge/composer</code><span>{{ '@messages.compat.bridge_composer'|trans }}</span></li>
+            <li><code>omnibridge/laravel</code><span>{{ '@messages.compat.bridge_laravel'|trans }}</span></li>
+        </ul>
+        {% set compat_page = doc_path('glitchr/omniscient', 'compatibilite') %}
+        {% if compat_page %}<p class="om-note">{{ '@messages.compat.read_more'|trans({url: path('wikidoc_manual', {path: compat_page})})|raw }}</p>{% endif %}
+    </div>
+</div>

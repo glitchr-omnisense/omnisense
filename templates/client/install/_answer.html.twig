@@ -1,0 +1,39 @@
+{# The selector's answer: the commands, the composer.json block, and what each line stands on. #}
+{% if plan.refused %}
+<p class="om-install-note">{{ '@messages.install.refused'|trans({names: plan.refused|join(', '), framework: ('@messages.install.framework_' ~ plan.framework)|trans}) }}</p>
+{% endif %}
+{% if plan.isEmpty %}
+<p class="om-none">{{ '@messages.install.empty'|trans }}</p>
+{% else %}
+<div class="om-answer-grid">
+    <div>
+        <h2 class="om-cote">{{ '@messages.install.commands'|trans }}</h2>
+        <pre class="om-code" data-copy-source><code>{% for command in plan.commands %}{{ command }}{{ not loop.last ? "\n" }}{% endfor %}</code></pre>
+    </div>
+    <div>
+        <h2 class="om-cote">composer.json</h2>
+        <pre class="om-code" data-copy-source><code>{{ plan.composerJson }}</code></pre>
+    </div>
+</div>
+<ul class="om-answer-notes">
+    {% if plan.dev %}<li>{{ '@messages.install.note_dev'|trans }}</li>{% endif %}
+    {% if plan.repositories %}<li>{{ '@messages.install.note_vcs'|trans({count: plan.repositories|length}) }}</li>{% endif %}
+    {% if plan.plugins %}<li>{{ '@messages.install.note_plugin'|trans }}</li>{% endif %}
+    {% if plan.framework == 'symfony' and plan.hasFamilies %}<li>{{ '@messages.install.note_symfony'|trans }}</li>{% endif %}
+    {% if plan.framework != 'symfony' %}<li>{{ ('@messages.install.note_' ~ plan.framework)|trans }}</li>{% endif %}
+</ul>
+<table class="om-answer-table">
+    <caption class="om-cote">{{ '@messages.install.why'|trans }}</caption>
+    <thead><tr><th scope="col">{{ '@messages.install.package'|trans }}</th><th scope="col">{{ '@messages.install.constraint'|trans }}</th><th scope="col">{{ '@messages.install.source'|trans }}</th></tr></thead>
+    <tbody>
+        {% for name, constraint in plan.require %}
+        {% set package = plan.packages[name] %}
+        <tr>
+            <td><a href="{{ path('app_package', {vendor: package.vendor, name: package.shortName}) }}#versions">{{ name }}</a></td>
+            <td><code>{{ constraint }}</code></td>
+            <td>{{ (constraint starts with '^' ? '@messages.install.from_release' : '@messages.install.from_branch')|trans }} · {{ (package.published is same as(true) ? '@messages.install.on_packagist' : (package.published is same as(false) ? '@messages.install.on_github' : '@messages.install.on_github_unknown'))|trans }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}

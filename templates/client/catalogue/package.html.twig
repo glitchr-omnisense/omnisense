@@ -1,8 +1,8 @@
 {#
  # A package: what its repository says of it (description, licence, branch,
  # what it requires), where it stands (its registry, whether its README says
- # it was tried for real - with the README's own sentence), who uses it, and
- # its manual: the versions, the contents.
+ # it was tried for real - with the README's own sentence), its versions read
+ # in its repository (git/git-bundle), and its manual: the versions, the contents.
  #}
 {% extends 'layout1.html.twig' %}
 
@@ -117,17 +117,36 @@
             </section>
             {% endif %}
 
-            <section class="om-tier">
-                <header><h2>{{ '@messages.package.sites'|trans }} <small>{{ sites|length }}</small></h2></header>
-                {% if sites %}
-                <ul class="om-sites">
-                    {% for site in sites %}
-                    <li><a href="{{ site.url }}" rel="noopener">{{ site.name }}</a>{% if site.fictional %} <em>{{ '@messages.demos.fictional'|trans }}</em>{% endif %}<span>{{ ('@messages.sites.' ~ site.slug|replace({'-': '_'}))|trans }}</span></li>
+            <section class="om-tier" id="versions">
+                <header><h2>{{ '@messages.versions.title'|trans }}</h2><p>{{ '@messages.versions.lead'|trans }}</p></header>
+                {% if versions.read %}
+                <dl class="om-constraints">
+                    <div><dt>{{ '@messages.versions.constraint_stable'|trans }}</dt><dd><code>{{ versions.constraint('stable') ?? '—' }}</code></dd></div>
+                    <div><dt>{{ '@messages.versions.constraint_dev'|trans }}</dt><dd><code>{{ versions.constraint('dev') ?? '—' }}</code></dd></div>
+                </dl>
+                <h3 class="om-cote">{{ '@messages.versions.tags'|trans }}</h3>
+                {% if versions.tags %}
+                <ul class="om-tags">{% for tag in versions.tags %}<li><code>{{ tag.name }}</code>{% if tag.date %} <time datetime="{{ tag.date|date('Y-m-d') }}">{{ tag.date|format_date('medium') }}</time>{% endif %}</li>{% endfor %}</ul>
+                {% else %}
+                <p class="om-none">{{ '@messages.versions.no_tag'|trans }}</p>
+                {% endif %}
+                <h3 class="om-cote">{{ '@messages.versions.branches'|trans }}</h3>
+                <ul class="om-branches">
+                    {% for branch in versions.branches %}
+                    <li>
+                        <p class="om-branch-head"><code>{{ branch.name }}</code> <code class="om-branch-version">{{ branch.version }}</code>{% if branch.default %} <span class="om-fact is-verified">{{ '@messages.versions.branch_default'|trans }}</span>{% endif %}</p>
+                        <ol class="om-commits">
+                            {% for commit in branch.commits %}
+                            <li><code>{{ commit.sha }}</code> <time datetime="{{ commit.date|date('c') }}">{{ commit.date|format_date('short') }}</time> <span title="{{ commit.subject }}">{{ commit.subject|length > 120 ? commit.subject|slice(0, 120) ~ '…' : commit.subject }}</span></li>
+                            {% endfor %}
+                        </ol>
+                    </li>
                     {% endfor %}
                 </ul>
                 {% else %}
-                <p class="om-none">{{ '@messages.package.no_site'|trans }}</p>
+                <p class="om-none">{{ '@messages.versions.unread'|trans }}{% if package.publishedVersion %} <code>{{ package.publishedVersion }}</code>{% endif %}</p>
                 {% endif %}
+                {% if not package.npm %}<p><a class="om-more" href="{{ path('app_install', {framework: package.tier.value in ['foundation', 'component'] ? 'symfony' : 'bare', 'p': [package.name]}) }}">{{ '@messages.versions.install'|trans }}</a></p>{% endif %}
             </section>
         </div>
     </div>

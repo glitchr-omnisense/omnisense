@@ -19,9 +19,9 @@
     .blog-prose { font-size: 1.06rem; line-height: 1.7; h2 { margin-top: 2.2rem; font-size: 1.45rem; } code { padding: .05em .3em; border: 1px solid var(--om-line); background: var(--om-sheet); font-size: .9em; } a { color: var(--om-blue); } }
     .blog-neighbours a { border: 1.5px solid var(--om-ink); border-radius: 0; }
 
-    // ── The manuals: the page's title in the site's wide letters ──
-    .manual-prose h1, .manual-index-head h1 { font-stretch: 125%; }
-    .manual-prose h2, .manual-prose h3 { font-stretch: 112%; letter-spacing: -.01em; }
+    // ── The manuals: the titles in the site's display face ──
+    .manual-prose h1, .manual-index-head h1 { @include display(800); }
+    .manual-prose h2, .manual-prose h3 { letter-spacing: -.01em; font-variation-settings: "opsz" 24; }
     .manual-name { @include mono(1rem, 700); }
     .manual-tree a[aria-current] { font-weight: 700; }
     .manual-search input[type="search"] { @include mono(.86rem, 500); }

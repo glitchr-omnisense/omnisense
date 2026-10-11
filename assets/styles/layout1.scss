@@ -84,7 +84,7 @@ html.theme-mode-dark .om-when-dark { display: inline; } html.theme-mode-dark .om
         &:hover, &[aria-current] { border-color: var(--om-blue); color: var(--om-ink); .om-omni-name b { color: var(--om-blue); } }
         &[aria-current] { background: var(--om-wash); } }
     .om-cote { min-width: 1.4rem; @include small { display: none; } } }
-.om-omni-name { font-family: $om-display; font-stretch: 112%; font-weight: 700; font-size: 1rem; letter-spacing: -.01em; b { font-weight: 300; } }
+.om-omni-name { font-family: $om-display; font-weight: 700; font-size: 1rem; letter-spacing: -.01em; b { font-weight: 300; } }
 
 // ── Home: the floors ───────────────────────────────────────────────────
 .om-section-drawing { display: grid; gap: 2.5rem; @include wide { grid-template-columns: 1fr 1fr; gap: 0; } }
@@ -168,7 +168,7 @@ a.om-fact:hover { border-color: var(--om-blue); color: var(--om-blue); }
 .om-announced { margin: 0; padding: 0; list-style: none;
     li { display: grid; gap: .1rem 1.5rem; align-items: baseline; padding: .45rem 0; border-top: 1px dotted var(--om-line); color: var(--om-soft); @include wide { grid-template-columns: 13rem minmax(0, 1fr) auto; } }
     em { @include cote; font-style: normal; } }
-.om-announced-name { font-family: $om-display; font-stretch: 112%; font-weight: 700; color: var(--om-soft); b { font-weight: 300; } }
+.om-announced-name { font-family: $om-display; font-weight: 700; color: var(--om-soft); b { font-weight: 300; } }
 
 // ── A family, a package ────────────────────────────────────────────────
 .om-family-title, .om-package-title { font-size: clamp(2.4rem, 7vw, 5rem); letter-spacing: -.03em; b { font-weight: 300; color: var(--om-blue); } }
@@ -195,26 +195,88 @@ a.om-fact:hover { border-color: var(--om-blue); color: var(--om-blue); }
     ul ul { margin: .25rem 0 0 1rem; padding-left: .9rem; border-left: 1px solid var(--om-line); li { padding: .15rem 0; } }
     a { font-weight: 600; text-decoration: none; } span { @include cote; } }
 .om-names { display: flex; flex-wrap: wrap; gap: .3rem; margin: .5rem 0 0; a { padding: .05rem .5rem; border: 1px solid var(--om-line); border-radius: 2px; @include mono(.74rem, 500); text-decoration: none; &:hover { border-color: var(--om-blue); } } }
-.om-sites { margin: 0; padding: 0; list-style: none; border-top: 1.5px solid var(--om-ink);
+.om-plain-list { margin: 0; padding: 0; list-style: none; border-top: 1.5px solid var(--om-ink);
     li { display: grid; gap: .1rem 1.5rem; align-items: baseline; padding: .6rem .25rem; border-bottom: 1px solid var(--om-line); @include wide { grid-template-columns: 17rem minmax(0, 1fr); } }
-    a { font-weight: 650; text-decoration: none; } span { font-size: .93rem; color: var(--om-soft); }
-    em { margin-left: .4rem; } }
-.om-sites em, .om-fictional { padding: 0 .4rem; border: 1px solid var(--om-warn); border-radius: 2px; @include mono(.66rem, 600); font-style: normal; text-transform: uppercase; letter-spacing: .06em; color: var(--om-warn); vertical-align: .15em; }
+    a { font-weight: 650; text-decoration: none; } span { font-size: .93rem; color: var(--om-soft); } }
 
-// ── The manuals' index ─────────────────────────────────────────────────
+// ── A package's versions (read in its repository through git/git-bundle) ──
+.om-constraints { display: flex; flex-wrap: wrap; gap: .75rem 2.5rem; margin: 0 0 1rem;
+    > div { display: flex; flex-direction: column-reverse; gap: .2rem; } dt { @include cote; } dd { margin: 0; code { @include mono(1.05rem, 700); color: var(--om-blue); } } }
+.om-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin: 0 0 .5rem; padding: 0; list-style: none;
+    li { display: inline-flex; align-items: baseline; gap: .5rem; padding: .15rem .6rem; border: 1px solid var(--om-ink); border-radius: 2px; background: var(--om-sheet); }
+    code { @include mono(.86rem, 700); } time { @include mono(.7rem, 400); color: var(--om-soft); } }
+.om-branches { margin: 0; padding: 0; list-style: none; border-top: 1.5px solid var(--om-ink);
+    > li { padding: .75rem 0 .9rem; border-bottom: 1px solid var(--om-line); } }
+.om-branch-head { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .8rem; margin: 0 0 .4rem; > code:first-child { @include mono(1rem, 700); } }
+.om-branch-version { @include mono(.8rem, 500); color: var(--om-blue); &::before { content: "→ "; color: var(--om-soft); } }
+.om-commits { margin: 0; padding: 0 0 0 .75rem; list-style: none; border-left: 1px solid var(--om-line);
+    li { display: grid; grid-template-columns: 5.5rem 5.5rem minmax(0, 1fr); gap: 0 .8rem; align-items: baseline; padding: .18rem 0; font-size: .9rem; @include small { grid-template-columns: 5rem minmax(0, 1fr); time { display: none; } } }
+    code { @include mono(.76rem, 500); color: var(--om-soft); } time { @include mono(.72rem, 400); color: var(--om-soft); } span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } }
+
+// ── Code blocks, with a copy button when the script is there ───────────
+.om-code { position: relative; margin: 0 0 1rem; padding: .9rem 1rem; border: 1.5px solid var(--om-ink); background: var(--om-sheet); overflow: auto; tab-size: 4;
+    code { @include mono(.86rem, 500); line-height: 1.55; white-space: pre; } }
+.om-copy { position: absolute; top: .4rem; right: .4rem; padding: .2rem .55rem; border: 1px solid var(--om-line); border-radius: 2px; background: var(--om-paper); color: var(--om-soft); @include mono(.66rem, 600); text-transform: uppercase; letter-spacing: .06em; cursor: pointer;
+    &:hover { border-color: var(--om-blue); color: var(--om-blue); } }
+
+// ── The install selector (as pytorch.org's): rows of choices, the answer under them ──
+.om-selector { margin-top: clamp(1.5rem, 4vw, 2.5rem); border: 1.5px solid var(--om-ink); background: var(--om-sheet); }
+.om-selector-row { display: grid; border-bottom: 1px solid var(--om-line); @include wide { grid-template-columns: 11rem minmax(0, 1fr); }
+    &.is-off { color: var(--om-soft); .om-selector-choices { background-image: repeating-linear-gradient(45deg, transparent 0 7px, var(--om-grid) 7px 8px); } } }
+.om-selector-label { display: flex; flex-direction: column; justify-content: center; gap: .15rem; margin: 0; padding: .8rem 1rem; @include cote; color: var(--om-ink); border-bottom: 1px solid var(--om-line); @include wide { border-bottom: 0; border-right: 1px solid var(--om-line); }
+    small { @include mono(.62rem, 400); text-transform: none; letter-spacing: 0; color: var(--om-soft); } }
+.om-selector-choices { display: flex; flex-wrap: wrap; align-items: stretch; gap: 0; &.is-grouped { flex-direction: column; } }
+.om-selector-group { display: flex; flex-wrap: wrap; align-items: stretch; border-bottom: 1px dotted var(--om-line); &:last-child { border-bottom: 0; }
+    > .om-cote { display: flex; align-items: center; min-width: 8rem; padding: .5rem 1rem; color: var(--om-blue); @include small { flex-basis: 100%; padding-bottom: 0; } } }
+// A choice: a cell of the row. Chosen, it is filled with the blue of the plan.
+.om-pick { position: relative; display: flex; flex: 1 1 auto; min-width: 7rem; border-right: 1px solid var(--om-line); &:last-child { border-right: 0; }
+    input { position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none; }
+    span { display: flex; flex: 1; flex-direction: column; justify-content: center; gap: .1rem; padding: .7rem 1rem; font-weight: 600; font-size: .95rem; line-height: 1.3; cursor: pointer; b { font-weight: 300; color: var(--om-blue); } }
+    small { @include mono(.66rem, 400); color: var(--om-soft); }
+    span:hover { background: var(--om-wash); }
+    input:checked + span { background: var(--om-blue); color: var(--om-paper); b, small { color: var(--om-paper); } }
+    input:focus-visible + span { outline: 2px solid var(--om-blue); outline-offset: -3px; }
+    &.is-off span, input:disabled + span { cursor: not-allowed; color: var(--om-soft); background: none; } }
+.om-selector-send { margin: 0; padding: .75rem 1rem; border-bottom: 1px solid var(--om-line); }
+.om-selector-answer { padding: 1.25rem 1rem 1rem; border-top: 1.5px solid var(--om-ink); margin-top: -1px; &[aria-busy] { opacity: .6; } h2.om-cote { margin-bottom: .5rem; color: var(--om-blue); } }
+.om-selector[aria-busy] .om-selector-answer { opacity: .6; }
+.om-answer-grid { display: grid; gap: 1rem 2rem; @include wide { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+.om-answer-notes { margin: 0 0 1.25rem; padding-left: 1.1rem; font-size: .93rem; color: var(--om-soft); li { margin: .2rem 0; } }
+.om-answer-table { width: 100%; border-collapse: collapse; font-size: .92rem;
+    caption { text-align: left; margin-bottom: .5rem; color: var(--om-blue); }
+    th, td { padding: .45rem .5rem .45rem 0; text-align: left; vertical-align: top; border-bottom: 1px solid var(--om-line); }
+    th { @include cote; } td code { @include mono(.86rem, 700); } td:last-child { color: var(--om-soft); } a { text-decoration: none; font-weight: 600; } }
+
+// ── Compatibility: today / planned, three columns of the sheet ─────────
+.om-compat { display: grid; gap: 2rem; @include wide { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, 1fr); gap: 0; }
+    .om-compat-col { @include wide { padding: 0 2rem; border-left: 1px solid var(--om-line); &:first-child { padding-left: 0; border-left: 0; } &:last-child { padding-right: 0; } } }
+    h3 { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .75rem; margin-bottom: .75rem; font-size: 1.2rem; }
+    .is-later { h3, p { color: var(--om-soft); } h3 { color: var(--om-ink); } }
+    .om-code { margin-top: 1rem; } code { font-size: .92em; } }
+.om-compat-bridges { margin: .75rem 0 0; padding: 0; list-style: none; border-top: 1.5px dashed var(--om-soft);
+    li { display: grid; gap: 0 1rem; padding: .45rem 0; border-bottom: 1px dotted var(--om-line); @include wide { grid-template-columns: 11rem minmax(0, 1fr); } }
+    code { @include mono(.84rem, 700); } span { font-size: .92rem; color: var(--om-soft); } }
+
+// ── The documentation's entry page: the way in, the reference, contributing ──
 .om-docs-search { max-width: 36rem; margin: 1.25rem 0 .5rem; padding: 0; .manual-search { margin: 0; } .manual-search input[type="search"] { min-height: 2.9rem; border: 1.5px solid var(--om-ink); } }
+.om-docs-ways { margin: 0; padding: 0; list-style: none; border-top: 1.5px solid var(--om-ink); display: grid; @include wide { grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); }
+    li { border-bottom: 1px solid var(--om-line); @include wide { border-right: 1px solid var(--om-line); &:last-child { border-right: 0; } } }
+    li.is-tool a { background-image: repeating-linear-gradient(45deg, transparent 0 7px, var(--om-grid) 7px 8px); }
+    a { display: grid; grid-template-columns: 2rem minmax(0, 1fr); gap: .15rem .6rem; height: 100%; padding: 1rem .9rem 1.1rem .6rem; text-decoration: none; &:hover { background-color: var(--om-wash); color: var(--om-ink); .om-docs-way-title { color: var(--om-blue); } }
+        .om-cote { padding-top: .35rem; } }
+    .om-docs-way-title { @include display(800); font-size: 1.35rem; line-height: 1.1; }
+    .om-docs-way-text { grid-column: 2; font-size: .92rem; line-height: 1.45; color: var(--om-soft); } }
+.om-docs-group { margin-top: 1.75rem; }
+.om-docs-contribute-text { max-width: 46rem; font-size: 1.05rem; }
+// The pencil: at the head of a manual's page, against the title.
+#content .manual-pencil { float: right; display: inline-flex; align-items: center; gap: .45rem; margin: .35rem 0 .5rem 1.25rem; padding: .4rem .7rem; border: 1.5px solid var(--om-ink); border-radius: 2px; background: var(--om-sheet); color: var(--om-ink); @include mono(.7rem, 600); text-transform: uppercase; letter-spacing: .07em; text-decoration: none; line-height: 1;
+    i { font-size: .8rem; }
+    &:hover { background: var(--om-blue); border-color: var(--om-blue); color: var(--om-paper); }
+    @include small { span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); } padding: .55rem; } }
 .om-manuals { margin: 0; padding: 0; list-style: none; border-top: 1.5px solid var(--om-ink); display: grid; @include wide { grid-template-columns: 1fr 1fr; column-gap: 3rem; }
     li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .1rem 1rem; align-items: baseline; padding: .55rem .25rem; border-bottom: 1px solid var(--om-line); }
     .om-manual-versions { margin: 0; }
     .om-manual-size { grid-column: 1 / -1; @include mono(.7rem, 400); color: var(--om-soft); } }
-
-// ── Demos ──────────────────────────────────────────────────────────────
-.om-demos { margin: 0; padding: 0; list-style: none; border-top: 1.5px solid var(--om-ink);
-    > li { display: grid; gap: .25rem 2rem; padding: 1.1rem .25rem; border-bottom: 1px solid var(--om-line); @include wide { grid-template-columns: 19rem minmax(0, 1fr); > * { grid-column: 2; } > h3 { grid-column: 1; grid-row: 1 / span 4; } } }
-    h3 { margin: 0; font-size: 1.35rem; a { text-decoration: none; } }
-    p { margin: 0; }
-    .om-demo-address a { @include mono(.8rem, 600); color: var(--om-blue); } }
-.om-tier.is-demo > header h2 { color: var(--om-warn); }
 
 // ── Support ────────────────────────────────────────────────────────────
 .om-nodata { max-width: 46rem; padding: 1.25rem 1.4rem; border: 1.5px dashed var(--om-ink); background: var(--om-sheet); p { margin: 0 0 .5rem; } p:last-child { margin: 0; } }
@@ -231,7 +293,7 @@ a.om-fact:hover { border-color: var(--om-blue); color: var(--om-blue); }
 
 // ── The cartouche ──────────────────────────────────────────────────────
 .om-footer { margin-top: 0; padding: 2.5rem 0 1.5rem; border-top: 1.5px solid var(--om-ink); font-size: .95rem; line-height: 1.5;
-    h2 { margin: 0 0 .6rem; @include cote; font-stretch: 100%; }
+    h2 { margin: 0 0 .6rem; @include cote; }
     ul { margin: 0; padding: 0; list-style: none; } li { margin-bottom: .25rem; }
     a { text-decoration: none; } p { margin: .6rem 0 0; max-width: 20rem; color: var(--om-soft); } }
 .om-footer-grid { display: grid; gap: 2rem 2.5rem; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); }

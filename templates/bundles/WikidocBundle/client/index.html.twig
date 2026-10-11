@@ -1,8 +1,12 @@
 {#
- # Every manual, grouped as the catalogue groups its packages (omnibase/docs'
- # own page lists them by name): omnibase and its components, each family
- # with its providers, the libraries. A manual with a docs/ folder says how
- # many pages it holds; one made of a README alone says so.
+ # The documentation's entry page, which orients (as docs.conda-forge.org and
+ # symfony.com/doc do): the search first; then a way in by need - start, pick
+ # a framework, read the conventions, contribute - which are the site's own
+ # pages (its docs/ folder, rendered by the same engine as every manual);
+ # then the reference, a manual per package, grouped as the catalogue groups
+ # its packages (omnibase and its components, each family with its
+ # providers, the libraries); the catalogue itself is reached from here.
+ # omnibase/docs' own page lists the manuals by name: this one replaces it.
  #}
 {% extends 'layout1.html.twig' %}
 
@@ -12,6 +16,7 @@
 {% block stylesheets %}{{ parent() }}<link rel="stylesheet" href="{{ asset('bundles/wikidoc/css/manual.css') }}">{% endblock %}
 
 {% block content %}
+{% set site_pages = manual_pages('glitchr/omniscient') %}
 <div class="om-wrap om-page om-docs-index">
     <header class="om-head is-page manual-index-head">
         <p class="om-cote">{{ '@messages.docs.eyebrow'|trans }}</p>
@@ -21,32 +26,69 @@
         <p class="om-source" data-engine="{{ engine }}">{{ ('@messages.docs.engine_' ~ engine)|trans }}</p>
     </header>
 
-    {% if manuals is empty %}
-        <p class="om-none">{{ '@wikidoc.manuals.empty'|trans }}</p>
-    {% endif %}
-
-    {% for group in manual_groups(manuals) %}
-    <section class="om-tier" id="{{ group.family ?? group.kind }}">
+    {# 1. The way in, by need. #}
+    <section class="om-tier om-docs-start" id="start">
         <header>
-            {% if group.family %}
-                <h2><a href="{{ path('app_family', {family: group.family}) }}">Omni<b>{{ family_suffix(group.family) }}</b></a> <small>{{ group.manuals|length }}</small></h2>
-                <p>{{ ('@messages.families.' ~ group.family ~ '.phrase')|trans }}</p>
-            {% else %}
-                <h2>{{ ('@messages.docs.group_' ~ group.kind)|trans }} <small>{{ group.manuals|length }}</small></h2>
-            {% endif %}
+            <p class="om-cote">1 — {{ '@messages.docs.start_eyebrow'|trans }}</p>
+            <h2>{{ '@messages.docs.start_title'|trans }}</h2>
+            <p>{{ '@messages.docs.start_lead'|trans }}</p>
         </header>
-        <ul class="om-manuals">
-            {% for entry in group.manuals %}
-            {% set manual = entry.manual %}
-            <li>
-                <a class="om-row-name" href="{{ path('wikidoc_manual', {path: manual.urlPath()}) }}">{{ manual.label }}</a>
-                <span class="om-manual-versions">{% for v in manual.versions %}<a href="{{ path('wikidoc_manual', {path: manual.urlPath(v.name)}) }}">{{ v.name }}</a>{% endfor %}</span>
-                <span class="om-manual-size">{% if entry.package and entry.package.docPages %}{{ '@wikidoc.manuals.count'|trans({count: entry.package.docPages}) }}{% else %}{{ '@messages.docs.readme_only'|trans }}{% endif %}</span>
-            </li>
+        <ol class="om-docs-ways">
+            {% for page in site_pages %}
+            <li><a href="{{ path('wikidoc_manual', {path: page.path}) }}"><span class="om-cote">{{ '%02d'|format(loop.index) }}</span><span class="om-docs-way-title">{{ page.title }}</span><span class="om-docs-way-text">{{ ('@messages.docs.way_' ~ page.path|split('/')|last|replace({'-': '_'}))|trans }}</span></a></li>
             {% endfor %}
-        </ul>
+            <li class="is-tool"><a href="{{ path('app_install') }}"><span class="om-cote">{{ '%02d'|format(site_pages|length + 1) }}</span><span class="om-docs-way-title">{{ '@messages.install.title'|trans }}</span><span class="om-docs-way-text">{{ '@messages.docs.way_install'|trans }}</span></a></li>
+        </ol>
     </section>
-    {% endfor %}
+
+    {# 2. The reference: a manual per package. #}
+    <section class="om-tier om-docs-reference" id="reference">
+        <header>
+            <p class="om-cote">2 — {{ '@messages.docs.reference_eyebrow'|trans }}</p>
+            <h2>{{ '@messages.docs.reference_title'|trans }}</h2>
+            <p>{{ '@messages.docs.reference_lead'|trans({url: path('app_packages')})|raw }}</p>
+        </header>
+        {% if manuals is empty %}
+            <p class="om-none">{{ '@wikidoc.manuals.empty'|trans }}</p>
+        {% endif %}
+        {% set groups = manual_groups(manuals) %}
+        <nav class="om-anchors" aria-label="{{ '@messages.docs.reference_title'|trans }}">
+            {% for group in groups %}<a href="#{{ group.family ?? group.kind }}">{% if group.family %}Omni<b>{{ family_suffix(group.family) }}</b>{% else %}{{ ('@messages.docs.group_' ~ group.kind)|trans }}{% endif %}<span class="om-cote">{{ group.manuals|length }}</span></a>{% endfor %}
+        </nav>
+        {% for group in groups %}
+        <section class="om-family om-docs-group" id="{{ group.family ?? group.kind }}">
+            <header>
+                {% if group.family %}
+                    <h3><a href="{{ path('app_family', {family: group.family}) }}">Omni<b>{{ family_suffix(group.family) }}</b></a></h3>
+                    <p>{{ ('@messages.families.' ~ group.family ~ '.phrase')|trans }}</p>
+                {% else %}
+                    <h3>{{ ('@messages.docs.group_' ~ group.kind)|trans }}</h3>
+                {% endif %}
+            </header>
+            <ul class="om-manuals">
+                {% for entry in group.manuals %}
+                {% set manual = entry.manual %}
+                <li>
+                    <a class="om-row-name" href="{{ path('wikidoc_manual', {path: manual.urlPath()}) }}">{{ manual.label }}</a>
+                    <span class="om-manual-versions">{% for v in manual.versions %}<a href="{{ path('wikidoc_manual', {path: manual.urlPath(v.name)}) }}">{{ v.name }}</a>{% endfor %}</span>
+                    <span class="om-manual-size">{% if entry.package and entry.package.docPages %}{{ '@wikidoc.manuals.count'|trans({count: entry.package.docPages}) }}{% else %}{{ '@messages.docs.readme_only'|trans }}{% endif %}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+        {% endfor %}
+    </section>
+
+    {# 3. Contributing: the pencil, in three lines. #}
+    <section class="om-tier om-docs-contribute" id="contribute">
+        <header>
+            <p class="om-cote">3 — {{ '@messages.docs.contribute_eyebrow'|trans }}</p>
+            <h2>{{ '@messages.docs.contribute_title'|trans }}</h2>
+        </header>
+        <p class="om-docs-contribute-text">{{ '@messages.docs.contribute_text'|trans }}</p>
+        {% set contribute = doc_path('glitchr/omniscient', 'contribuer') %}
+        <p class="om-actions">{% if contribute %}<a class="om-button is-line" href="{{ path('wikidoc_manual', {path: contribute}) }}">{{ '@messages.docs.contribute_more'|trans }}</a>{% endif %} <a class="om-button is-line" href="{{ site.githubUrl }}" rel="noopener">GitHub · {{ site.github }}</a></p>
+    </section>
 </div>
 <script src="{{ asset('bundles/wikidoc/js/manual.js') }}" defer></script>
 {% endblock %}

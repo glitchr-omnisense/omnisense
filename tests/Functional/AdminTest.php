@@ -25,7 +25,8 @@ class AdminTest extends SiteTestCase
             self::assertStringContainsString($label, $menu);
         }
         // The two tiles: the state of the catalogue, the packages without a docs/ folder.
-        self::assertMatchesRegularExpression('/8\s*paquets\s*7\s*manuels/', $dashboard->filter('.app-catalogue')->text());
+        // Eight manuals: seven packages with something to read (omnibus/offline has nothing), and the site's own pages.
+        self::assertMatchesRegularExpression('/8\s*paquets\s*8\s*manuels/', $dashboard->filter('.app-catalogue')->text());
         self::assertStringContainsString('omnibus/offline', $dashboard->filter('.app-undocumented')->text());
 
         $screens = array_values(array_unique(array_map(fn ($href) => strtok($href, '?'), array_filter(
@@ -79,15 +80,16 @@ class AdminTest extends SiteTestCase
         self::assertResponseIsSuccessful();
         self::assertResponseHeaderSame('X-Transparent-Nest', 'overlay');
         $text = preg_replace('/\s+/', ' ', $page->filter('body')->text());
-        self::assertStringContainsString('7 manuel(s), 8 version(s)', $text);
+        self::assertStringContainsString('8 manuel(s), 9 version(s)', $text);
+        self::assertStringContainsString('glitchr/omniscient', $text, 'the site\'s own pages, a manual too');
         self::assertStringContainsString('2.x (3)', $text, 'glitchr/omnibus: its README and two pages');
         self::assertStringContainsString('1.x (2)', $text);
 
         // "Remplir l'index de recherche": what wikidoc:index does.
         $this->client->submit($page->filter('form[action="/admin/manuals/index"]')->form());
         self::assertResponseRedirects('/admin/manuals');
-        self::assertCount(8, FakeTypesense::$collections);
-        self::assertStringContainsString('dans 8 collection(s)', $this->client->followRedirect()->filter('body')->text());
+        self::assertCount(9, FakeTypesense::$collections);
+        self::assertStringContainsString('dans 9 collection(s)', $this->client->followRedirect()->filter('body')->text());
 
         // With the engine stopped the screen says so, and nothing breaks.
         FakeTypesense::$up = false;

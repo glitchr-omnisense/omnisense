@@ -44,7 +44,7 @@
     <section class="om-tier">
         <header><h2>{{ '@messages.home.news'|trans }}</h2></header>
         {% if posts %}
-        <ul class="om-sites">
+        <ul class="om-plain-list">
             {% for post in posts %}<li><a href="{{ path('blog_post', {slug: post.slug}) }}">{{ post.title }}</a><span>{{ post.publishedAt|format_date('medium') }}</span></li>{% endfor %}
         </ul>
         {% else %}

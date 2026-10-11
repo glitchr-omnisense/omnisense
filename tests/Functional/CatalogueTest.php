@@ -12,7 +12,7 @@ use Symfony\Component\Console\Tester\CommandTester;
 /**
  * The catalogue: read from the repositories, floor by floor; a page per
  * family - never for a name that is only announced; a page per package with
- * its sheet and its manual; a member follows a package; the command asks
+ * its sheet, its versions and its manual; a member follows a package; the command asks
  * the registries, and keeps what they said when they stop answering.
  */
 class CatalogueTest extends SiteTestCase
@@ -44,15 +44,15 @@ class CatalogueTest extends SiteTestCase
         self::assertCount(0, $announced->filter('a'), 'nothing to open: there is no package');
     }
 
-    public function testAFamilyItsProvidersAndTheSitesThatUseIt(): void
+    public function testAFamilyAndItsProviders(): void
     {
         $page = $this->client->request('GET', '/families/omnitrade');
 
         self::assertSame('Omnitrade', $page->filter('h1')->text());
         self::assertStringContainsString('Encaisser et vendre', $page->filter('.om-lead')->text());
         self::assertSame(['glitchr/omnitrade', 'omnitrade/paypal', 'omnitrade/stripe'], $page->filter('.om-row-name')->each(fn ($a) => $a->text()));
-        self::assertSame(['Nakaya Gourmet'], $page->filter('.om-sites a')->each(fn ($a) => $a->text()));
         self::assertSame('/docs/glitchr/omnitrade/current', $page->filter('.om-actions a')->first()->attr('href'));
+        self::assertCount(2, $page->filter('.om-tier'), 'the family, its providers - and nothing of the sites that use it');
     }
 
     public function testAFamilyInReserveIsNotAFamily(): void
@@ -82,9 +82,18 @@ class CatalogueTest extends SiteTestCase
         self::assertSame('/docs/glitchr/omnitrade/current', $page->filter('.om-actions a')->first()->attr('href'));
         self::assertStringContainsString('3 pages', $page->filter('#manual')->text(), 'the README and the two pages of docs/');
 
-        // Who requires it, and which sites.
+        // Who requires it.
         self::assertSame(['omnitrade/paypal', 'omnitrade/stripe'], $page->filter('.om-tier .om-names a')->each(fn ($a) => $a->text()));
-        self::assertSame(['Nakaya Gourmet'], $page->filter('.om-sites a')->each(fn ($a) => $a->text()));
+
+        // Its versions, read in its repository: the constraints each channel takes, the releases, the branches and their last commits.
+        $versions = $page->filter('#versions');
+        self::assertSame(['^1.4', '1.x-dev'], $versions->filter('.om-constraints code')->each(fn ($c) => $c->text()));
+        self::assertSame(['v2.0.0-beta.1', 'v1.4.2', 'v1.4.1', 'v1.3.0'], $versions->filter('.om-tags code')->each(fn ($c) => $c->text()), 'newest first');
+        self::assertSame(['1.x', '2.x'], $versions->filter('.om-branch-head > code:first-child')->each(fn ($c) => $c->text()), 'the branch developed on first');
+        self::assertSame(['1.x-dev', '2.x-dev'], $versions->filter('.om-branch-version')->each(fn ($c) => $c->text()));
+        self::assertStringContainsString('branche suivie', $versions->filter('.om-branches > li')->first()->text());
+        self::assertCount(3, $versions->filter('.om-branches > li')->first()->filter('.om-commits li'));
+        self::assertSame('/install?framework=bare&p%5B0%5D=glitchr/omnitrade', $versions->filter('a.om-more')->attr('href'));
 
         // A provider: the sentence its README says, quoted as such.
         $page = $this->client->request('GET', '/packages/omnitrade/paypal');
@@ -96,9 +105,12 @@ class CatalogueTest extends SiteTestCase
         // An npm library, under its name without the "@"; a package with nothing to read says so.
         $page = $this->client->request('GET', '/packages/glitchr/stickyjs');
         self::assertSame('npm install @glitchr/stickyjs', $page->filter('.om-install code')->text());
-        self::assertSame(['Côme Aubertel'], $page->filter('.om-sites a')->each(fn ($a) => $a->text()));
+        self::assertCount(0, $page->filter('#versions a.om-more'), 'an npm library is not installed by Composer');
         $page = $this->client->request('GET', '/packages/omnibus/offline');
         self::assertStringContainsString('ni dossier docs/ ni README', $page->filter('#manual')->text());
+        // A package whose repository could not be read says so, and nothing is made up.
+        self::assertStringContainsString('n’a pas pu être lu', $page->filter('#versions')->text());
+        self::assertCount(0, $page->filter('#versions .om-tags, #versions .om-branches'));
     }
 
     public function testAMemberFollowsAPackage(): void

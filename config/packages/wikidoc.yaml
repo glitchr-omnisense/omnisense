@@ -14,6 +14,16 @@ wikidoc:
         - '%app.catalogue.repos_dir%/transparentjs'
         - '%app.catalogue.repos_dir%/stickyjs'
         - '%app.catalogue.repos_dir%/graphjs'
+    # The site's own pages, across the packages (getting started, the
+    # frameworks, contributing, conventions): its docs/ folder, read by the
+    # same engine. The site's repository is private (plan 0, rule 11): no
+    # repository is given, so these pages carry no "propose a change" pencil.
+    manuals:
+        glitchr/omniscient:
+            path: '%kernel.project_dir%'
+            label: 'Omniscient'
+            description: 'Démarrer, choisir son cadre, contribuer : les pages qui valent pour tous les paquets.'
+            readme: false
     # The list of repositories, and the search's local records, kept a minute.
     cache_ttl: 60
     search:

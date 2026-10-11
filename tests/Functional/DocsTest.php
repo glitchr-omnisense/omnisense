@@ -16,6 +16,12 @@ use Symfony\Component\Console\Tester\CommandTester;
  */
 class DocsTest extends SiteTestCase
 {
+    /** The site's own pages are a manual too, at the version of the branch checked out (main; "current" without a .git). */
+    private static function siteVersion(): string
+    {
+        return str_replace('.', '-', (string) (\Base\Wikidoc\Manual\Git::branch(\dirname(__DIR__, 2)) ?? 'current'));
+    }
+
     public function testEveryManualGroupedAsTheCatalogue(): void
     {
         $page = $this->client->request('GET', '/docs');
@@ -115,7 +121,7 @@ class DocsTest extends SiteTestCase
         $collections = array_keys(FakeTypesense::$collections);
         sort($collections);
         self::assertSame([
-            'omniscient_glitchr-omnibase_current', 'omniscient_glitchr-omnibus_1-x', 'omniscient_glitchr-omnibus_2-x', 'omniscient_glitchr-omnitrade_current',
+            'omniscient_glitchr-omnibase_current', 'omniscient_glitchr-omnibus_1-x', 'omniscient_glitchr-omnibus_2-x', 'omniscient_glitchr-omniscient_'.self::siteVersion(), 'omniscient_glitchr-omnitrade_current',
             'omniscient_glitchr-stickyjs_current', 'omniscient_omnibase-blog_current', 'omniscient_omnitrade-paypal_current', 'omniscient_omnitrade-stripe_current',
         ], $collections);
         self::assertSame(['Signature'], array_values(array_filter(array_column(FakeTypesense::$collections['omniscient_glitchr-omnitrade_current'], 'section'), fn ($s) => 'Signature' === $s)));
