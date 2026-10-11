@@ -838,10 +838,9 @@
     webpack "^5.21.2"
     webpack-sources "^2.2.0"
 
-"@glitchr/stickyjs@^1.2.2":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@glitchr/stickyjs/-/stickyjs-1.2.2.tgz#74d869c7778772824731bc95c5720d375e3dcdae"
-  integrity sha512-dkH/O8WWzkW9VHLZdZgzDt/6jVOQZJk/qfXi4VEC5eF2oDBXJ6YjcG8AgrMPibfOBEvtZmpcYrSY0e79qJ0BCg==
+"@glitchr/stickyjs@git+https://github.com/glitchr-studio/stickyjs.git#2451fc670f74615aa7d0fc1abbca895492fab52e":
+  version "1.7.0"
+  resolved "git+https://github.com/glitchr-studio/stickyjs.git#2451fc670f74615aa7d0fc1abbca895492fab52e"
 
 "@glitchr/transparentjs@git+https://github.com/glitchr-studio/transparentjs.git#3103c6f0f8115c9d6135c35f76a5bf93ba7b839b":
   version "3.0.30"

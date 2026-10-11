@@ -3818,7 +3818,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-studio/omnibase.git",
-                "reference": "46b34c1408fd8b266e74b986df3d65c6769c66d7"
+                "reference": "a3c2ad0fc8872b8352ea2b062752cbdf498631c0"
             },
             "require": {
                 "api-platform/doctrine-orm": "^4.0",
@@ -3886,11 +3886,11 @@
             "require-dev": {
                 "doctrine/doctrine-fixtures-bundle": "^3.4",
                 "doctrine/doctrine-migrations-bundle": "^3.0",
-                "glitchr/omniguard": "1.x-dev",
+                "glitchr/omnishield": "1.x-dev",
                 "glitchr/omnisign": "1.x-dev",
-                "omniguard/akismet": "1.x-dev",
-                "omniguard/altcha": "1.x-dev",
-                "omniguard/disposable": "1.x-dev",
+                "omnishield/akismet": "1.x-dev",
+                "omnishield/altcha": "1.x-dev",
+                "omnishield/disposable": "1.x-dev",
                 "omnisign/docuseal": "1.x-dev",
                 "phpstan/phpstan": "^1.12",
                 "phpunit/phpunit": "^10.5",
@@ -3906,11 +3906,11 @@
             "suggest": {
                 "doctrine/doctrine-fixtures-bundle": "demo:reset reloads the fixtures (the demo environment)",
                 "dompdf/dompdf": "Base\\Response\\PdfResponse: an HTML page answered as a PDF (^3.0)",
-                "glitchr/omniguard": "Base\\Service\\FormGuard's captcha, address lists and content classifier (the option `guard` of a form, Akismet behind SpamChecker): register Omniguard\\Bridge\\Symfony\\OmniguardBundle; not on Packagist yet - a vcs repository, https://github.com/glitchr-studio/omniguard",
+                "glitchr/omnishield": "Base\\Service\\FormGuard's captcha, address lists and content classifier (the option `guard` of a form, Akismet behind SpamChecker): register Omnishield\\Bridge\\Symfony\\OmnishieldBundle; not on Packagist yet - a vcs repository, https://github.com/glitchr-studio/omnishield",
                 "glitchr/omnisign": "Base\\Service\\Signatures: documents signed for any entity (Base\\Entity\\Signature\\Envelope, mapped only with it), the signed file and its evidence kept in the private storage; register Omnisign\\Bridge\\Symfony\\OmnisignBundle; not on Packagist yet - a vcs repository, https://github.com/glitchr-studio/omnisign",
-                "omniguard/akismet": "Akismet behind Base\\Service\\SpamChecker (base.guard.classifier)",
-                "omniguard/altcha": "ALTCHA, the default captcha of FormGuard: a proof of work served and checked by the site, no third party, no cookie, no consent",
-                "omniguard/disposable": "Disposable e-mail domains refused at sign-up (base.guard.reputation)",
+                "omnishield/akismet": "Akismet behind Base\\Service\\SpamChecker (base.guard.classifier)",
+                "omnishield/altcha": "ALTCHA, the default captcha of FormGuard: a proof of work served and checked by the site, no third party, no cookie, no consent",
+                "omnishield/disposable": "Disposable e-mail domains refused at sign-up (base.guard.reputation)",
                 "omnisign/docuseal": "A DocuSeal instance of one's own: nothing leaves for a third party (omnisign/yousign, omnisign/docusign for the providers)",
                 "symfony/lock": "demo:reset runs under a lock (the demo environment)"
             },
@@ -3953,7 +3953,7 @@
                 "helper",
                 "symfony"
             ],
-            "time": "2026-10-09T10:04:53+00:00"
+            "time": "2026-10-10T12:30:52+00:00"
         },
         {
             "name": "glitchr/typesense-bundle",
