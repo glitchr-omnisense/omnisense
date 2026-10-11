@@ -53,7 +53,7 @@
         {% endif %}
         {% set groups = manual_groups(manuals) %}
         <nav class="om-anchors" aria-label="{{ '@messages.docs.reference_title'|trans }}">
-            {% for group in groups %}<a href="#{{ group.family ?? group.kind }}">{% if group.family %}Omni<b>{{ family_suffix(group.family) }}</b>{% else %}{{ ('@messages.docs.group_' ~ group.kind)|trans }}{% endif %}<span class="om-cote">{{ group.manuals|length }}</span></a>{% endfor %}
+            {% for group in groups %}<a href="#{{ group.family ?? group.kind }}"><span>{% if group.family %}Omni<b>{{ family_suffix(group.family) }}</b>{% else %}{{ ('@messages.docs.group_' ~ group.kind)|trans }}{% endif %}</span><span class="om-cote">{{ group.manuals|length }}</span></a>{% endfor %}
         </nav>
         {% for group in groups %}
         <section class="om-family om-docs-group" id="{{ group.family ?? group.kind }}">
