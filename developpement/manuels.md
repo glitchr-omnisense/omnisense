@@ -26,8 +26,15 @@ wikidoc:
   Typesense par manuel et par version (`omniscient_<paquet>_<version>`).
   Quand le conteneur `search` est arrêté, ou qu'un manuel n'a pas encore sa
   collection, l'index des pages répond à la place et la page le dit.
-- **Corriger une page** : le lien « Modifier cette page » mène au fichier
-  sur GitHub. Il n'y a pas d'éditeur ici.
+- **Corriger une page** : le crayon « Proposer une modification », à côté
+  du titre (`templates/bundles/WikidocBundle/client/page.html.twig`), ouvre
+  l'éditeur de GitHub sur le fichier, à la branche lue (`rendered.editUrl`,
+  `PageRenderer::forgeUrl`). Un manuel sans dépôt public — celui du site —
+  n'en a pas. Il n'y a pas d'éditeur ici.
+- **La page d'entrée** (`templates/bundles/WikidocBundle/client/index.html.twig`)
+  oriente comme docs.conda-forge.org et symfony.com/doc : la recherche,
+  puis Démarrer (les pages du `docs/` du site), la référence (un manuel par
+  paquet, groupés comme le catalogue), Contribuer.
 
 L'écran Administration › Manuels montre chaque manuel, ses versions et
 leur nombre de pages, le moteur qui répond, et deux boutons qui font ce que

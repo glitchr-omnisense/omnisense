@@ -1,0 +1,90 @@
+{#
+ # The install selector (as on pytorch.org): rows of choices that combine,
+ # the answer under them. A GET form: without JavaScript "Composer" sends the
+ # page again; with it, install_controller.js asks for the answer alone at
+ # each change (?fragment=1) and keeps the address in step.
+ #}
+{% extends 'layout1.html.twig' %}
+
+{% block title %}{{ '@messages.install.title'|trans }}{% endblock %}
+{% block description %}{{ '@messages.install.description'|trans }}{% endblock %}
+
+{% macro choice(type, name, value, label, checked, disabled = false, note = null) %}
+    <label class="om-pick{{ disabled ? ' is-off' }}">
+        <input type="{{ type }}" name="{{ name }}" value="{{ value }}"{{ checked ? ' checked' }}{{ disabled ? ' disabled' }} data-action="change->install#update">
+        <span>{{ label|raw }}{% if note %}<small>{{ note }}</small>{% endif %}</span>
+    </label>
+{% endmacro %}
+
+{% block content %}
+{% import _self as ui %}
+{% set symfony = plan.framework == 'symfony' %}
+<div class="om-wrap om-page">
+    <header class="om-head is-page">
+        <p class="om-cote"><a href="{{ path('wikidoc_index') }}">{{ '@messages.nav.docs'|trans }}</a> / {{ '@messages.install.eyebrow'|trans }}</p>
+        <h1>{{ '@messages.install.title'|trans }}</h1>
+        <p class="om-lead">{{ '@messages.install.lead'|trans }}</p>
+    </header>
+
+    <form class="om-selector" method="get" action="{{ path('app_install') }}" data-controller="install" data-install-url-value="{{ path('app_install') }}">
+        <div class="om-selector-row">
+            <p class="om-selector-label" id="om-row-framework">{{ '@messages.install.framework'|trans }}</p>
+            <div class="om-selector-choices" role="radiogroup" aria-labelledby="om-row-framework">
+                {{ ui.choice('radio', 'framework', 'bare', '@messages.install.bare'|trans, plan.framework == 'bare') }}
+                {{ ui.choice('radio', 'framework', 'symfony', 'Symfony', symfony) }}
+                {{ ui.choice('radio', 'framework', 'laravel', 'Laravel', plan.framework == 'laravel', false, '@messages.install.laravel_note'|trans) }}
+            </div>
+        </div>
+
+        <div class="om-selector-row">
+            <p class="om-selector-label" id="om-row-channel">{{ '@messages.install.channel'|trans }}</p>
+            <div class="om-selector-choices" role="radiogroup" aria-labelledby="om-row-channel">
+                {{ ui.choice('radio', 'channel', 'stable', '@messages.install.stable'|trans, plan.channel == 'stable', false, '@messages.install.stable_note'|trans) }}
+                {{ ui.choice('radio', 'channel', 'dev', '@messages.install.dev'|trans, plan.channel == 'dev', false, '@messages.install.dev_note'|trans) }}
+            </div>
+        </div>
+
+        <div class="om-selector-row">
+            <p class="om-selector-label" id="om-row-families">{{ '@messages.install.families'|trans }}</p>
+            <div class="om-selector-choices" role="group" aria-labelledby="om-row-families">
+                {% for name, family in families %}
+                {{ ui.choice('checkbox', 'p[]', family.name, 'Omni<b>' ~ family_suffix(name) ~ '</b>', family.name in chosen) }}
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="om-selector-row">
+            <p class="om-selector-label" id="om-row-providers">{{ '@messages.install.providers'|trans }}</p>
+            <div class="om-selector-choices is-grouped" role="group" aria-labelledby="om-row-providers">
+                {% for name, members in providers %}
+                <div class="om-selector-group" data-install-target="group" data-family="glitchr/{{ name }}">
+                    <span class="om-cote">Omni{{ family_suffix(name) }}</span>
+                    {% for provider in members %}
+                    {{ ui.choice('checkbox', 'p[]', provider.name, provider.shortName, provider.name in chosen) }}
+                    {% endfor %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="om-selector-row{{ symfony ? '' : ' is-off' }}" data-install-target="symfony">
+            <p class="om-selector-label" id="om-row-components">{{ '@messages.install.components'|trans }}<small>{{ '@messages.install.components_note'|trans }}</small></p>
+            <div class="om-selector-choices" role="group" aria-labelledby="om-row-components">
+                {% for package in foundation|merge(components) %}
+                {{ ui.choice('checkbox', 'p[]', package.name, package.name == 'glitchr/omnibase' ? 'omnibase' : package.shortName, package.name in chosen, not symfony) }}
+                {% endfor %}
+            </div>
+        </div>
+
+        <p class="om-selector-send" data-install-target="send"><button type="submit" class="om-button">{{ '@messages.install.submit'|trans }}</button></p>
+
+        <div class="om-selector-answer" data-install-target="answer" aria-live="polite">
+            {% include 'client/install/_answer.html.twig' %}
+        </div>
+    </form>
+
+    <section class="om-tier" id="compatibility">
+        {% include 'partials/_compatibility.html.twig' %}
+    </section>
+</div>
+{% endblock %}

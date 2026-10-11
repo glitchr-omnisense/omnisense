@@ -1,9 +1,11 @@
 {#
  # The home page, section by section (StickyStops: each section is a stop):
  # Omni and its turning suffix, one sentence per family; the four floors of
- # the system; the families, one question each; where to read on.
- # Every name and every number comes from the catalogue (app:packages:sync):
- # a family is shown because its repository was found.
+ # the system; the families, one question each; which frameworks it runs in;
+ # where to read on. Every name and every number comes from the catalogue
+ # (app:packages:sync): a family is shown because its repository was found.
+ # The way on is the documentation (Marco, 2026-10-10): nothing here counts
+ # or names the sites built on the packages.
  #}
 {% extends 'layout1.html.twig' %}
 
@@ -17,13 +19,13 @@
         <p class="om-kicker"><span>{{ '@messages.home.kicker'|trans }}</span> <span class="om-cote">{{ '@messages.home.kicker_count'|trans({packages: counts.packages, families: families|length}) }}</span></p>
 
         {% if first %}
-        <p class="om-omni" aria-hidden="true"><span class="om-omni-fixed">Omni</span><span class="om-omni-slot" data-suffix-target="slot"><span class="is-in">{{ first.suffix }}</span></span></p>
+        <p class="om-omni" aria-hidden="true"><span class="om-omni-fixed">Omni</span><a class="om-omni-slot" href="{{ path('wikidoc_index') }}" tabindex="-1" data-suffix-target="slot"><span class="is-in">{{ first.suffix }}</span></a></p>
         <p class="om-omni-phrase" data-suffix-target="phrase">{{ ('@messages.families.' ~ first.name ~ '.phrase')|trans }}</p>
 
         <ol class="om-omni-index" aria-label="{{ '@messages.home.families_label'|trans }}">
             {% for family in families %}
             <li>
-                <a href="{{ path('app_family', {family: family.name}) }}" data-suffix-target="item" data-action="mouseenter->suffix#pick focus->suffix#pick" data-suffix="{{ family.suffix }}" data-phrase="{{ ('@messages.families.' ~ family.name ~ '.phrase')|trans }}"{% if loop.first %} aria-current="true"{% endif %}>
+                <a href="{{ path('wikidoc_manual', {path: 'glitchr/' ~ family.name}) }}" data-suffix-target="item" data-action="mouseenter->suffix#pick focus->suffix#pick" data-suffix="{{ family.suffix }}" data-phrase="{{ ('@messages.families.' ~ family.name ~ '.phrase')|trans }}"{% if loop.first %} aria-current="true"{% endif %}>
                     <span class="om-cote">{{ '%02d'|format(loop.index) }}</span><span class="om-omni-name">Omni<b>{{ family.suffix }}</b></span>
                     <span class="visually-hidden">: {{ ('@messages.families.' ~ family.name ~ '.phrase')|trans }}</span>
                 </a>
@@ -36,8 +38,8 @@
         {% endif %}
 
         <p class="om-actions">
-            <a class="om-button" href="{{ path('app_packages') }}">{{ '@messages.home.to_catalogue'|trans }}</a>
-            <a class="om-button is-line" href="{{ path('wikidoc_index') }}">{{ '@messages.home.to_docs'|trans }}</a>
+            <a class="om-button" href="{{ path('wikidoc_index') }}">{{ '@messages.start.to_docs'|trans }}</a>
+            <a class="om-button is-line" href="{{ path('app_install') }}">{{ '@messages.start.to_install'|trans }}</a>
         </p>
     </div>
 </section>
@@ -99,11 +101,17 @@
     </div>
 </section>
 
+<section class="om-section om-compat-section sticky-stop" id="compatibility">
+    <div class="om-wrap">
+        {% include 'partials/_compatibility.html.twig' with {letter: 'C'} %}
+    </div>
+</section>
+
 <section class="om-section om-read sticky-stop" id="read">
     <div class="om-wrap om-read-grid">
         <div>
             <header class="om-head">
-                <p class="om-cote">C — {{ '@messages.home.read_eyebrow'|trans }}</p>
+                <p class="om-cote">D — {{ '@messages.home.read_eyebrow'|trans }}</p>
                 <h2>{{ '@messages.home.read_title'|trans }}</h2>
                 <p class="om-lead">{{ '@messages.home.read_lead'|trans }}</p>
             </header>
@@ -114,9 +122,9 @@
             <dl class="om-figures">
                 <div><dt>{{ '@messages.home.figure_packages'|trans }}</dt><dd>{{ counts.packages }}</dd></div>
                 <div><dt>{{ '@messages.home.figure_manuals'|trans }}</dt><dd>{{ counts.manuals }}</dd></div>
-                <div><dt>{{ '@messages.home.figure_sites'|trans }}</dt><dd>{{ sites }}</dd></div>
+                <div><dt>{{ '@messages.home.figure_families'|trans }}</dt><dd>{{ families|length }}</dd></div>
             </dl>
-            <p class="om-actions"><a class="om-button is-line" href="{{ path('app_demos') }}">{{ '@messages.home.to_demos'|trans }}</a> <a class="om-button is-line" href="{{ path('app_support') }}">{{ '@messages.home.to_support'|trans }}</a></p>
+            <p class="om-actions"><a class="om-button" href="{{ path('wikidoc_index') }}">{{ '@messages.start.to_docs'|trans }}</a> <a class="om-button is-line" href="{{ path('app_support') }}">{{ '@messages.home.to_support'|trans }}</a></p>
         </div>
         <div class="om-news">
             <h3 class="om-cote">{{ '@messages.home.news'|trans }}</h3>

@@ -3,8 +3,8 @@
 namespace App\Controller;
 
 use App\Catalogue\Families;
-use App\Catalogue\Sites;
 use App\Catalogue\Tier;
+use App\Catalogue\Versions;
 use App\Entity\Follow;
 use App\Entity\Package;
 use App\Entity\User;
@@ -21,7 +21,9 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 /**
  * The catalogue: every package `app:packages:sync` found, by floor; a page
  * per family (its own package, its providers); a page per package, with
- * what its repository says of it and the contents of its manual.
+ * what its repository says of it - its versions too, read through
+ * git/git-bundle - and the contents of its manual. Which sites use a
+ * package is not shown (Marco, 2026-10-10).
  */
 class CatalogueController extends AbstractController
 {
@@ -64,28 +66,17 @@ class CatalogueController extends AbstractController
             throw $this->createNotFoundException(sprintf('No family "%s".', $family));
         }
 
-        $sites = [];
-        foreach ($members as $member) {
-            foreach ($member->getUsedBy() as $site) {
-                if (null !== Sites::get($site)) {
-                    $sites[$site] = Sites::get($site);
-                }
-            }
-        }
-        ksort($sites);
-
         return $this->render('client/catalogue/family.html.twig', [
             'family' => $family,
             'suffix' => Families::suffix($family),
             'own' => $own,
             'members' => array_values(array_filter($members, static fn (Package $p): bool => $p !== $own)),
-            'sites' => $sites,
             'manual' => $this->manuals->get($own->getHandle()),
         ]);
     }
 
     #[Route('/packages/{vendor}/{name}', name: 'app_package', requirements: ['vendor' => '[a-z0-9][a-z0-9_.-]*', 'name' => '[a-z0-9][a-z0-9_.-]*'], methods: ['GET'])]
-    public function package(string $vendor, string $name, FollowRepository $follows): Response
+    public function package(string $vendor, string $name, FollowRepository $follows, Versions $versions): Response
     {
         $package = $this->packages->findOneByHandle($vendor.'/'.$name);
         if (null === $package) {
@@ -110,7 +101,7 @@ class CatalogueController extends AbstractController
             'pages' => null !== $pages ? \count($pages->getAllPages()) : 0,
             'requires' => $requires,
             'required_by' => $requiredBy,
-            'sites' => array_values(array_filter(array_map(static fn (string $site): ?array => Sites::get($site), $package->getUsedBy()))),
+            'versions' => $versions->of($package),
             'following' => $user instanceof User && null !== $follows->findOneFor($user, $package),
             'followers' => $follows->countFor($package),
         ]);

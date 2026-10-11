@@ -4,14 +4,19 @@
 // in part, not there). At night the film is the blue-black of a cyanotype
 // and the ink its white line.
 //
-// Archivo, drawn wide (its width axis at 125 %), for the mark and the
-// titles: letters with the stance of lettering on a title block. Recursive
-// for everything that is read, and the same face with its MONO axis at 1
-// for code, package names and the dimension labels ("cotes") - one family,
-// so that a package's name reads the same in a sentence and in a listing.
-$om-display: "Archivo Variable", "Archivo", "Arial Narrow", Arial, sans-serif;
-$om-text: "Recursive Variable", "Recursive", ui-sans-serif, system-ui, "Helvetica Neue", Arial, sans-serif;
-$om-mono: "Recursive Variable", "Recursive", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+// Three faces, served by the site (fontsource packages, SIL Open Font
+// License 1.1), chosen for long technical pages:
+//  - Bricolage Grotesque (Atelier Triay) for the mark and the titles: a
+//    grotesque with a hand of its own - its optical-size axis tightens the
+//    large sizes, as lettering on a title block;
+//  - IBM Plex Sans for what is read: open, even, made for screens and for
+//    text that goes on; its italic for the quotes;
+//  - IBM Plex Mono, cut from the same drawing, for code, package names and
+//    the dimension labels ("cotes"): a name reads the same in a sentence
+//    and in a listing.
+$om-display: "Bricolage Grotesque Variable", "Bricolage Grotesque", "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+$om-text: "IBM Plex Sans", ui-sans-serif, system-ui, "Helvetica Neue", Arial, sans-serif;
+$om-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
 
 $om-paper: #f3f5f6;
 $om-sheet: #ffffff;
@@ -42,9 +47,9 @@ $om-header: 3.75rem;
 @mixin small  { @media (max-width: 40rem) { @content; } }
 @mixin motion { @media (prefers-reduced-motion: no-preference) { @content; } }
 
-// Text set in the MONO cut of Recursive.
-@mixin mono($size: .8rem, $weight: 500) { font-family: $om-mono; font-variation-settings: "MONO" 1; font-size: $size; font-weight: $weight; letter-spacing: 0; }
+// Text set in the mono cut.
+@mixin mono($size: .8rem, $weight: 500) { font-family: $om-mono; font-size: $size; font-weight: $weight; letter-spacing: 0; }
 // A dimension label, as on a plan: small capitals in the mono cut.
 @mixin cote { @include mono(.7rem, 600); line-height: 1.4; text-transform: uppercase; letter-spacing: .09em; color: var(--om-soft); }
-// A title drawn wide.
-@mixin display($weight: 800) { font-family: $om-display; font-stretch: 125%; font-weight: $weight; letter-spacing: -.02em; }
+// A title, in the display face at its large optical size.
+@mixin display($weight: 800) { font-family: $om-display; font-weight: $weight; font-variation-settings: "opsz" 96; letter-spacing: -.02em; }

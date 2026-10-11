@@ -1,4 +1,4 @@
-{# A family: the question it asks, its own package, the providers that answer, the sites that use it. #}
+{# A family: the question it asks, its own package, the providers that answer. #}
 {% extends 'layout1.html.twig' %}
 
 {% block title %}Omni{{ suffix }}{% endblock %}
@@ -35,17 +35,5 @@
         {% endif %}
     </section>
 
-    <section class="om-tier">
-        <header><h2>{{ '@messages.family.sites'|trans }} <small>{{ sites|length }}</small></h2><p>{{ '@messages.family.sites_lead'|trans }}</p></header>
-        {% if sites %}
-        <ul class="om-sites">
-            {% for site in sites %}
-            <li><a href="{{ site.url }}" rel="noopener">{{ site.name }}</a>{% if site.fictional %} <em>{{ '@messages.demos.fictional'|trans }}</em>{% endif %}<span>{{ ('@messages.sites.' ~ site.slug|replace({'-': '_'}))|trans }}</span></li>
-            {% endfor %}
-        </ul>
-        {% else %}
-        <p class="om-none">{{ '@messages.family.no_site'|trans }}</p>
-        {% endif %}
-    </section>
 </div>
 {% endblock %}

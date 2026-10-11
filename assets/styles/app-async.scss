@@ -2,8 +2,17 @@
 // stylesheets read. The chrome and the pages are in layout1.scss.
 @use "tokens" as *;
 
-@import "@fontsource-variable/archivo/wdth.css";
-@import "@fontsource-variable/recursive/mono.css";
+// The faces (see _tokens.scss): Bricolage Grotesque with its three axes,
+// IBM Plex Sans in four weights and one italic, IBM Plex Mono in three.
+@import "@fontsource-variable/bricolage-grotesque/standard.css";
+@import "@fontsource/ibm-plex-sans/400.css";
+@import "@fontsource/ibm-plex-sans/400-italic.css";
+@import "@fontsource/ibm-plex-sans/500.css";
+@import "@fontsource/ibm-plex-sans/600.css";
+@import "@fontsource/ibm-plex-sans/700.css";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+@import "@fontsource/ibm-plex-mono/600.css";
 
 @mixin light {
     --om-paper: #{$om-paper}; --om-sheet: #{$om-sheet}; --om-ink: #{$om-ink}; --om-soft: #{$om-soft}; --om-line: #{$om-line}; --om-blue: #{$om-blue};
@@ -41,16 +50,16 @@ html.theme-mode-dark { @include dark; }
 
 *, *::before, *::after { box-sizing: border-box; }
 html { font-size: 100%; -webkit-text-size-adjust: 100%; scroll-padding-top: calc(#{$om-header} + 1rem); }
-body { margin: 0; min-height: 100vh; font: 400 1rem/1.6 $om-text; font-variation-settings: "MONO" 0; color: var(--om-ink); background: var(--om-paper); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+body { margin: 0; min-height: 100vh; font: 400 1rem/1.65 $om-text; color: var(--om-ink); background: var(--om-paper); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
 h1, h2, h3 { margin: 0 0 .5em; @include display; line-height: 1.08; text-wrap: balance; }
 h1 { font-size: clamp(2.1rem, 5vw, 3.6rem); }
 h2 { font-size: clamp(1.45rem, 2.8vw, 2.1rem); }
-h3 { font-size: 1.15rem; letter-spacing: -.01em; }
+h3 { font-size: 1.15rem; letter-spacing: -.01em; font-variation-settings: "opsz" 24; }
 p { margin: 0 0 1em; }
 img { max-width: 100%; height: auto; }
 a { color: inherit; text-decoration: underline; text-decoration-color: var(--om-line); text-decoration-thickness: 1px; text-underline-offset: .2em; }
 a:hover { color: var(--om-blue); text-decoration-color: currentColor; }
-code, kbd, pre, samp { font-family: $om-mono; font-variation-settings: "MONO" 1; }
+code, kbd, pre, samp { font-family: $om-mono; }
 mark { padding: 0 .1em; background: var(--om-mark); color: inherit; }
 :focus-visible { outline: 2px solid var(--om-blue); outline-offset: 2px; }
 ::selection { background: $om-blue; color: #fff; }

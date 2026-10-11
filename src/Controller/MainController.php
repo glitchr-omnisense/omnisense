@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Catalogue\Families;
-use App\Catalogue\Sites;
 use App\Catalogue\Tier;
 use App\Repository\PackageRepository;
 use App\Sponsor\GitHubSponsors;
@@ -14,8 +13,9 @@ use Symfony\Component\Routing\Attribute\Route;
 
 /**
  * The site's own pages: the home page (Omni and its turning suffix, the
- * floors of the system), the sites built on it, how to support it, the
- * legal pages. The catalogue is CatalogueController's, the manuals
+ * floors of the system, the way to the documentation), how to support it,
+ * the legal pages. The sites built on the packages are not listed here:
+ * /demos, which listed them, sends to the documentation. The catalogue is CatalogueController's, the manuals
  * omnibase/docs', the announcements omnibase/blog's.
  */
 class MainController extends AbstractController
@@ -45,27 +45,15 @@ class MainController extends AbstractController
             'families' => $families,
             'floors' => $floors,
             'counts' => $packages->counts(),
-            'sites' => \count(Sites::all()),
             'posts' => $posts->findLatest(3),
         ]);
     }
 
+    /** The page that listed the sites is gone (Marco, 2026-10-10): the documentation is what is shown. */
     #[Route('/demos', name: 'app_demos')]
-    public function demos(PackageRepository $packages): Response
+    public function demos(): Response
     {
-        $sites = [];
-        foreach (Sites::all() as $slug => $site) {
-            $site['packages'] = $packages->findUsedBy($slug);
-            $sites[$site['kind']][] = $site;
-        }
-
-        return $this->render('client/demos.html.twig', [
-            'groups' => array_filter([
-                Sites::CLIENT => $sites[Sites::CLIENT] ?? [],
-                Sites::PRODUCT => $sites[Sites::PRODUCT] ?? [],
-                Sites::DEMO => $sites[Sites::DEMO] ?? [],
-            ]),
-        ]);
+        return $this->redirectToRoute('wikidoc_index', [], Response::HTTP_MOVED_PERMANENTLY);
     }
 
     #[Route('/support', name: 'app_support')]

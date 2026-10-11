@@ -33,4 +33,7 @@ return [
     Typesense\Bundle\TypesenseBundle::class => ['all' => true],
     // The cookie answer: the circle in the footer, its panel (omnibase/consent).
     Base\Consent\ConsentBundle::class => ['all' => true],
+    // Each package's repository read through libgit2: its tags, its branches, their
+    // last commits (git/git-bundle ships no Flex recipe).
+    Git\GitBundle::class => ['all' => true],
 ];

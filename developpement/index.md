@@ -12,8 +12,8 @@ Ports de développement : **8124** (HTTP) et **8633** (HTTPS) —
 |---|---|---|
 | Accueil | `/` | les familles trouvées dans les dépôts ; leurs phrases sont des textes du site |
 | Catalogue | `/packages`, `/families/{famille}`, `/packages/{vendeur}/{nom}` | `App\Entity\Package`, écrit par `app:packages:sync` |
-| Documentation | `/docs`, `/docs/{paquet}/{version}/{page}`, `/docs/_search` | le `docs/` et le README de chaque dépôt (omnibase/docs) |
-| Démos | `/demos` | `App\Catalogue\Sites` et le `composer.json` de chaque site |
+| Documentation | `/docs`, `/docs/{paquet}/{version}/{page}`, `/docs/_search` | le `docs/` et le README de chaque dépôt (omnibase/docs) ; le `docs/` du site lui-même pour les pages transverses (manuel `glitchr/omniscient`) |
+| Installer | `/install` | `App\Catalogue\Installer` : les versions lues par git/git-bundle (`App\Catalogue\Versions`), le `composer.json` de chaque paquet |
 | Annonces | `/blog` | omnibase/blog |
 | Compte | `/account`, `/login`, `/register` | `App\Entity\Follow` |
 | Soutenir | `/support` | `App\Sponsor\GitHubSponsors` |
@@ -21,6 +21,13 @@ Ports de développement : **8124** (HTTP) et **8633** (HTTPS) —
 
 Voir : [le catalogue](catalogue.md), [les manuels](manuels.md),
 [l'identité](identite.md), [ce qui reste à fournir](a-fournir.md).
+
+Ce dossier `developpement/` est la documentation de développement du site ;
+le dossier `docs/` est sa documentation publique (Démarrer, Compatibilité,
+Conventions, Contribuer), rendue par omnibase/docs comme le manuel de
+n'importe quel paquet. `/demos`, qui listait les sites construits sur les
+paquets, redirige vers `/docs` : le site ne nomme ni ne compte les sites
+(Marco, 2026-10-10).
 
 ## Démarrer
 
@@ -38,7 +45,9 @@ docker exec omniscient-web-1 php bin/console wikidoc:index         # l'index Typ
 
 Les dépôts des paquets sont montés en lecture seule sous `/srv/repos`
 (`docker-compose.override.yml`), et de chaque site seul son `composer.json`
-sous `/srv/sites` : rien n'y est écrit. Les copies des autres branches vont
+sous `/srv/sites` : rien n'y est écrit. `git/git-bundle` lit ces dépôts par
+libgit2 (extension `git2`, compilée dans l'image : `deployments/docker/web/
+Dockerfile`), sans url : rien n'est cloné ni rapatrié. Les copies des autres branches vont
 dans `var/wikidoc/`.
 
 Comptes des fixtures (développement et tests) : `glitchr` (super-admin),

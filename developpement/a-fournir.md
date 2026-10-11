@@ -6,7 +6,7 @@
 | Un compte GitHub Sponsors pour `glitchr-studio` et un jeton de lecture | sans jeton la page Soutenir dit « Pas de données » et n'affiche rien | `GITHUB_SPONSORS_TOKEN` (`.env.local` ou le coffre) |
 | La publication des paquets absents de Packagist | leur fiche dit « Absent de Packagist » et prévient que `composer require` ne les trouvera pas | Packagist ; puis `app:packages:sync --fresh` |
 | Les `docs/` des paquets qui n'en ont pas | leur manuel est leur README seul (tuile « Paquets sans documentation » du tableau de bord) | le dépôt de chaque paquet |
-| Les adresses publiques des sites | la page Démos pointe les adresses de développement | `App\Catalogue\Sites` |
+| Un dépôt public pour le site, ou pour son seul `docs/` | les pages transverses (Démarrer, Compatibilité, Conventions, Contribuer) n'ont pas de crayon « Proposer une modification » : leur source n'est pas publique | `config/packages/wikidoc.yaml`, `manuals.glitchr/omniscient.repository` |
 
 ## Ce qui n'est pas fait
 

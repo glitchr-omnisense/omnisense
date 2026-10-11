@@ -10,10 +10,14 @@ celui d'un plan d'architecte, pas d'une page de produit.
   la nuit), pour ce sur quoi on agit et pour le suffixe qui tourne après
   « Omni ». Trois signaux discrets pour l'état d'un paquet (publié, en
   partie, absent).
-- **Deux caractères** : Archivo, dessiné large (axe de largeur à 125 %),
-  pour la marque et les titres ; Recursive pour ce qui se lit, et le même
-  caractère en chasse fixe (axe `MONO`) pour le code, les noms de paquets et
-  les cotes.
+- **Trois caractères**, servis par le site (paquets fontsource, SIL Open
+  Font License 1.1) : Bricolage Grotesque (Atelier Triay) pour la marque et
+  les titres, son axe de taille optique serré aux grands corps comme un
+  lettrage de cartouche ; IBM Plex Sans pour ce qui se lit, fait pour les
+  longues pages d'écran, son italique pour les citations ; IBM Plex Mono,
+  taillé sur le même dessin, pour le code, les noms de paquets et les cotes.
+  (Jusqu'au 2026-10-11 : Archivo large et Recursive, jugés peu lisibles sur
+  une documentation.)
 - **La marque** : « Omni » en gras, le suffixe en maigre et en bleu —
   `Omni|scient` dans l'en-tête, `Omni|base`, `Omni|trade`… ailleurs. À
   l'accueil le suffixe est écrit sur un blanc souligné, comme une case à

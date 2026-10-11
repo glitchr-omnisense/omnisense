@@ -80,13 +80,17 @@ services:
       - ../omnischolar:/srv/repos/omnischolar:ro
       - ../omnilex:/srv/repos/omnilex:ro
       - ../omnimeet:/srv/repos/omnimeet:ro
+      - ../omnishield:/srv/repos/omnishield:ro
+      - ../omnisign:/srv/repos/omnisign:ro
+      - ../omnibill:/srv/repos/omnibill:ro
+      - ../omnireview:/srv/repos/omnireview:ro
       - ../transparent:/srv/repos/transparentjs:ro
       - ../stickyjs:/srv/repos/stickyjs:ro
       - ../graphjs:/srv/repos/graphjs:ro
       # "Used by": the composer.json of each site, and nothing else of it.
       - ../chapaland-v2/composer.json:/srv/sites/chapaland-v2/composer.json:ro
       - ../latoucheoriginale/composer.json:/srv/sites/latoucheoriginale/composer.json:ro
-      - ../nakaya/composer.json:/srv/sites/nakaya/composer.json:ro
+      - ../nakaya-gourmet/composer.json:/srv/sites/nakaya-gourmet/composer.json:ro
       - ../glitchr/composer.json:/srv/sites/glitchr/composer.json:ro
       - ../meyers/composer.json:/srv/sites/meyers/composer.json:ro
       - ../apfelschule/composer.json:/srv/sites/apfelschule/composer.json:ro
@@ -97,7 +101,7 @@ services:
       - ../wineseller/composer.json:/srv/sites/wineseller/composer.json:ro
       - ../wedding/composer.json:/srv/sites/wedding/composer.json:ro
       - ../maisondesante/composer.json:/srv/sites/maisondesante/composer.json:ro
-      - ../nakaya-traiteur/composer.json:/srv/sites/nakaya-traiteur/composer.json:ro
+      - ../nakaya-restaurant/composer.json:/srv/sites/nakaya-restaurant/composer.json:ro
       - ../notaire/composer.json:/srv/sites/notaire/composer.json:ro
       - ../avocat/composer.json:/srv/sites/avocat/composer.json:ro
       - ../juriste/composer.json:/srv/sites/juriste/composer.json:ro
@@ -160,13 +164,17 @@ services:
       - ../omnischolar:/srv/repos/omnischolar:ro
       - ../omnilex:/srv/repos/omnilex:ro
       - ../omnimeet:/srv/repos/omnimeet:ro
+      - ../omnishield:/srv/repos/omnishield:ro
+      - ../omnisign:/srv/repos/omnisign:ro
+      - ../omnibill:/srv/repos/omnibill:ro
+      - ../omnireview:/srv/repos/omnireview:ro
       - ../transparent:/srv/repos/transparentjs:ro
       - ../stickyjs:/srv/repos/stickyjs:ro
       - ../graphjs:/srv/repos/graphjs:ro
       # "Used by": the composer.json of each site, and nothing else of it.
       - ../chapaland-v2/composer.json:/srv/sites/chapaland-v2/composer.json:ro
       - ../latoucheoriginale/composer.json:/srv/sites/latoucheoriginale/composer.json:ro
-      - ../nakaya/composer.json:/srv/sites/nakaya/composer.json:ro
+      - ../nakaya-gourmet/composer.json:/srv/sites/nakaya-gourmet/composer.json:ro
       - ../glitchr/composer.json:/srv/sites/glitchr/composer.json:ro
       - ../meyers/composer.json:/srv/sites/meyers/composer.json:ro
       - ../apfelschule/composer.json:/srv/sites/apfelschule/composer.json:ro
@@ -177,7 +185,7 @@ services:
       - ../wineseller/composer.json:/srv/sites/wineseller/composer.json:ro
       - ../wedding/composer.json:/srv/sites/wedding/composer.json:ro
       - ../maisondesante/composer.json:/srv/sites/maisondesante/composer.json:ro
-      - ../nakaya-traiteur/composer.json:/srv/sites/nakaya-traiteur/composer.json:ro
+      - ../nakaya-restaurant/composer.json:/srv/sites/nakaya-restaurant/composer.json:ro
       - ../notaire/composer.json:/srv/sites/notaire/composer.json:ro
       - ../avocat/composer.json:/srv/sites/avocat/composer.json:ro
       - ../juriste/composer.json:/srv/sites/juriste/composer.json:ro
@@ -212,13 +220,17 @@ services:
       - ../omnischolar:/srv/repos/omnischolar:ro
       - ../omnilex:/srv/repos/omnilex:ro
       - ../omnimeet:/srv/repos/omnimeet:ro
+      - ../omnishield:/srv/repos/omnishield:ro
+      - ../omnisign:/srv/repos/omnisign:ro
+      - ../omnibill:/srv/repos/omnibill:ro
+      - ../omnireview:/srv/repos/omnireview:ro
       - ../transparent:/srv/repos/transparentjs:ro
       - ../stickyjs:/srv/repos/stickyjs:ro
       - ../graphjs:/srv/repos/graphjs:ro
       # "Used by": the composer.json of each site, and nothing else of it.
       - ../chapaland-v2/composer.json:/srv/sites/chapaland-v2/composer.json:ro
       - ../latoucheoriginale/composer.json:/srv/sites/latoucheoriginale/composer.json:ro
-      - ../nakaya/composer.json:/srv/sites/nakaya/composer.json:ro
+      - ../nakaya-gourmet/composer.json:/srv/sites/nakaya-gourmet/composer.json:ro
       - ../glitchr/composer.json:/srv/sites/glitchr/composer.json:ro
       - ../meyers/composer.json:/srv/sites/meyers/composer.json:ro
       - ../apfelschule/composer.json:/srv/sites/apfelschule/composer.json:ro
@@ -229,7 +241,7 @@ services:
       - ../wineseller/composer.json:/srv/sites/wineseller/composer.json:ro
       - ../wedding/composer.json:/srv/sites/wedding/composer.json:ro
       - ../maisondesante/composer.json:/srv/sites/maisondesante/composer.json:ro
-      - ../nakaya-traiteur/composer.json:/srv/sites/nakaya-traiteur/composer.json:ro
+      - ../nakaya-restaurant/composer.json:/srv/sites/nakaya-restaurant/composer.json:ro
       - ../notaire/composer.json:/srv/sites/notaire/composer.json:ro
       - ../avocat/composer.json:/srv/sites/avocat/composer.json:ro
       - ../juriste/composer.json:/srv/sites/juriste/composer.json:ro

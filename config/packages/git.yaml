@@ -1,0 +1,8 @@
+# git/git-bundle: libgit2 reads each package's repository - its tags, its
+# branches, their last commits - for the versions a package page shows and the
+# install selector's constraints. The repositories are the catalogue's
+# (App\Catalogue\PackageRepositories), given without a url: nothing is cloned
+# or fetched, the mounts stay read only. The bundle's viewer routes are not
+# imported: no page of it is public.
+git:
+    access_role: ROLE_SUPERADMIN

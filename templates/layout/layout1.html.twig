@@ -23,9 +23,9 @@
         <a class="om-mark" href="{{ path('app_index') }}" aria-label="{{ site.name }}"><b>Omni</b><i>scient</i></a>
         <nav class="om-nav" id="om-nav" aria-label="{{ '@messages.nav.label'|trans }}">
             <ul>
-                <li><a href="{{ path('app_packages') }}" {{ route in ['app_packages', 'app_package', 'app_family'] ? 'aria-current="page"' }}>{{ '@messages.nav.packages'|trans }}</a></li>
-                <li><a href="{{ path('wikidoc_index') }}" {{ route starts with 'wikidoc_' ? 'aria-current="page"' }}>{{ '@messages.nav.docs'|trans }}</a></li>
-                <li><a href="{{ path('app_demos') }}" {{ route == 'app_demos' ? 'aria-current="page"' }}>{{ '@messages.nav.demos'|trans }}</a></li>
+                {# The documentation first; the catalogue is reached from it, not from here. #}
+                <li><a href="{{ path('wikidoc_index') }}" {{ route starts with 'wikidoc_' or route in ['app_packages', 'app_package', 'app_family'] ? 'aria-current="page"' }}>{{ '@messages.nav.docs'|trans }}</a></li>
+                <li><a href="{{ path('app_install') }}" {{ route == 'app_install' ? 'aria-current="page"' }}>{{ '@messages.nav.install'|trans }}</a></li>
                 <li><a href="{{ path('blog_index') }}" {{ route starts with 'blog_' ? 'aria-current="page"' }}>{{ '@messages.nav.blog'|trans }}</a></li>
                 <li><a href="{{ path('app_support') }}" {{ route == 'app_support' ? 'aria-current="page"' }}>{{ '@messages.nav.support'|trans }}</a></li>
             </ul>
@@ -49,9 +49,9 @@
             <nav aria-label="{{ '@messages.footer.plan'|trans }}">
                 <h2>{{ '@messages.footer.plan'|trans }}</h2>
                 <ul>
-                    <li><a href="{{ path('app_packages') }}">{{ '@messages.nav.packages'|trans }}</a></li>
                     <li><a href="{{ path('wikidoc_index') }}">{{ '@messages.nav.docs'|trans }}</a></li>
-                    <li><a href="{{ path('app_demos') }}">{{ '@messages.nav.demos'|trans }}</a></li>
+                    <li><a href="{{ path('app_install') }}">{{ '@messages.nav.install'|trans }}</a></li>
+                    <li><a href="{{ path('app_packages') }}">{{ '@messages.nav.packages'|trans }}</a></li>
                     <li><a href="{{ path('blog_index') }}">{{ '@messages.nav.blog'|trans }}</a></li>
                     <li><a href="{{ path('app_support') }}">{{ '@messages.nav.support'|trans }}</a></li>
                 </ul>

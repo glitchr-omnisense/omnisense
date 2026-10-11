@@ -131,6 +131,21 @@ RUN pecl install imagick \
 RUN pecl install amqp \
     && docker-php-ext-enable amqp
 
+# php-git2 (libgit2 bindings, RogerGee/php-git2) - git/git-bundle reads each
+# package's repository through it, in-process: its tags, its branches, their
+# last commits (the versions a package page shows and the install selector's
+# constraints). The same block as glitchr's image.
+RUN apt-get update && apt-get install -y --no-install-recommends libgit2-dev \
+    && rm -rf /var/lib/apt/lists/* \
+    && git clone --depth 1 https://github.com/RogerGee/php-git2.git /usr/src/php-git2 \
+    && cd /usr/src/php-git2 \
+    && phpize \
+    && ./configure --with-libgit2=/usr \
+    && make -j"$(nproc)" \
+    && make install \
+    && docker-php-ext-enable git2 \
+    && rm -rf /usr/src/php-git2
+
 # APCu + igbinary
 RUN pecl install apcu igbinary \
     && docker-php-ext-enable apcu igbinary
