@@ -38,6 +38,29 @@ class DocsTest extends SiteTestCase
         self::assertCount(1, $page->filter('form[data-manual-search]'));
     }
 
+    public function testTheEntryPageOrientsThenListsTheReference(): void
+    {
+        $page = $this->client->request('GET', '/docs');
+
+        // The way in: the site's own pages, in their reading order, then the selector.
+        self::assertSame(['Démarrer', 'Compatibilité', 'Conventions', 'Contribuer', 'Composer son installation'], $page->filter('.om-docs-ways .om-docs-way-title')->each(fn ($t) => $t->text()));
+        self::assertSame('/docs/glitchr/omniscient/'.str_replace('-', '.', self::siteVersion()).'/demarrer', $page->filter('.om-docs-ways a')->first()->attr('href'));
+        self::assertSame('/install', $page->filter('.om-docs-ways a')->last()->attr('href'));
+        // The reference, grouped as the catalogue; the site's pages are not a package.
+        self::assertSame(['omnibase', 'omnibus', 'omnitrade', 'library'], $page->filter('.om-docs-group')->each(fn ($g) => $g->attr('id')));
+        self::assertStringNotContainsString('glitchr/omniscient', $page->filter('#reference')->text());
+        self::assertStringContainsString('Proposer une modification', $page->filter('#contribute')->text());
+
+        // The site's own page has no pencil: its repository is not public. A package's page has one, at the branch read.
+        $page = $this->client->request('GET', '/docs/glitchr/omniscient/'.str_replace('-', '.', self::siteVersion()).'/contribuer');
+        self::assertResponseIsSuccessful();
+        self::assertCount(0, $page->filter('.manual-pencil'));
+        self::assertStringContainsString('ne portent pas de crayon', $page->filter('.manual-prose')->text());
+        $page = $this->client->request('GET', '/docs/glitchr/omnibus/1.x/installation');
+        self::assertSame('https://github.com/glitchr-studio/omnibus/edit/1.x/docs/installation.md', $page->filter('.manual-pencil')->attr('href'));
+        self::assertSame('Proposer une modification', trim($page->filter('.manual-pencil')->text()));
+    }
+
     public function testAPageOfAManual(): void
     {
         $page = $this->client->request('GET', '/docs/glitchr/omnitrade/current/installation');

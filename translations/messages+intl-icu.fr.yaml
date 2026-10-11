@@ -216,6 +216,7 @@ package:
 
 docs:
   eyebrow: "Documentation"
+  count: "{manuals} manuels · {groups} familles et groupes"
   description: "La documentation de l’écosystème Omni : {count} manuels, un par paquet, lus dans les dépôts."
   lead: "{count, plural, one {# manuel} other {# manuels}}, un par paquet. La source est le Markdown du dossier docs/ de chaque dépôt : un crayon sur chaque page pour proposer une modification."
   engine_typesense: "Recherche : Typesense."

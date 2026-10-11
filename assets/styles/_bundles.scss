@@ -20,7 +20,10 @@
     .blog-neighbours a { border: 1.5px solid var(--om-ink); border-radius: 0; }
 
     // ── The manuals: the titles in the site's display face ──
-    .manual-prose h1, .manual-index-head h1 { @include display(800); }
+    .manual-prose h1 { @include display(800); }
+    // The documentation's entry page: the site's own head, the search field without the bundle's frame.
+    .manual-index-head h1 { @include display(800); font-size: clamp(2.1rem, 5vw, 3.6rem); letter-spacing: -.02em; margin: 0 0 .35em; }
+    .om-docs-search.manual-index { padding: 0; margin: 1.25rem 0 .5rem; max-width: 36rem; }
     .manual-prose h2, .manual-prose h3 { letter-spacing: -.01em; font-variation-settings: "opsz" 24; }
     .manual-name { @include mono(1rem, 700); }
     .manual-tree a[aria-current] { font-weight: 700; }

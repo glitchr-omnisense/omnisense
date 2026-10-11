@@ -12,7 +12,7 @@
 {% macro choice(type, name, value, label, checked, disabled = false, note = null) %}
     <label class="om-pick{{ disabled ? ' is-off' }}">
         <input type="{{ type }}" name="{{ name }}" value="{{ value }}"{{ checked ? ' checked' }}{{ disabled ? ' disabled' }} data-action="change->install#update">
-        <span>{{ label|raw }}{% if note %}<small>{{ note }}</small>{% endif %}</span>
+        <span><span class="om-pick-label">{{ label|raw }}</span>{% if note %}<small>{{ note }}</small>{% endif %}</span>
     </label>
 {% endmacro %}
 
