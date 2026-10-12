@@ -24,6 +24,14 @@ class SiteTest extends SiteTestCase
         self::assertSame([], NoNetwork::$requests, 'a page asks nothing of Packagist, npm or GitHub: the command does');
     }
 
+    /** Without `keys` the arrow is the browser's 40px nudge, which creeps through a section taller than the screen. */
+    public function testTheArrowKeysGoFromSectionToSection(): void
+    {
+        $source = file_get_contents(\dirname(__DIR__, 2).'/assets/app-defer.js');
+
+        self::assertMatchesRegularExpression('/stops:\s*\{[^}]*keys:\s*true/', $source);
+    }
+
     /** On its own client: omnibase's sign-in and sign-up forms do not survive each other in one session. */
     public function testAnyoneMaySignUp(): void
     {

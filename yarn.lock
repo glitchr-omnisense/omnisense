@@ -828,9 +828,9 @@
   resolved "https://registry.yarnpkg.com/@glitchr/cookie/-/cookie-1.0.53.tgz#594c38f3127c00b1ab79d7124b6c52019be8a293"
   integrity sha512-GY85cJyFuJGeEONbEQ3mPWvVr71Q78eZBzmZnsdApZ6Ds/BAlq16KeKq0xtKskAIfG+f7jpNKfgGBn5WVA/tYg==
 
-"@glitchr/flowjs@git+https://github.com/glitchr-studio/flowjs.git#07eaaa2e1c5ed49049b29505daca3ea8247d3850":
-  version "1.0.0"
-  resolved "git+https://github.com/glitchr-studio/flowjs.git#07eaaa2e1c5ed49049b29505daca3ea8247d3850"
+"@glitchr/flowjs@git+https://github.com/glitchr-studio/flowjs.git#b763778edbb0dcb86b3dbbfc4c237070b548edeb":
+  version "1.0.1"
+  resolved "git+https://github.com/glitchr-studio/flowjs.git#b763778edbb0dcb86b3dbbfc4c237070b548edeb"
 
 "@glitchr/media-query-plugin@^1.0":
   version "1.5.13"

@@ -35,8 +35,11 @@ window.addEventListener('transparent:load', function () {
 
 Base.boot({
     nest: ['/admin*'],
-    // The home page's sections are magnetic (StickyStops, [data-sticky-stop]).
-    stops: true,
+    // The home page's sections are magnetic (StickyStops, .sticky-stop). The arrow
+    // keys go from section to section, as the page keys read a tall one: without
+    // `keys` the arrow is the browser's 40px nudge, and the sections taller than
+    // the screen are crept through line by line.
+    stops: { keys: true },
     // Feeds and files load whole.
     exceptions: ['/blog/feed.xml', '/uploads/*'],
     current: '.om-nav a',
