@@ -24,7 +24,7 @@ class CatalogueTest extends SiteTestCase
         self::assertSame(['glitchr/omnibase'], $page->filter('#foundation .om-row-name')->each(fn ($a) => $a->text()));
         self::assertSame(['omnibase/blog'], $page->filter('#component .om-row-name')->each(fn ($a) => $a->text()));
         self::assertSame(['glitchr/omnitrade', 'omnitrade/paypal', 'omnitrade/stripe'], $page->filter('#omnitrade .om-row-name')->each(fn ($a) => $a->text()));
-        self::assertSame(['@glitchr/stickyjs'], $page->filter('#library .om-row-name')->each(fn ($a) => $a->text()));
+        self::assertSame(['@glitchr/flowjs'], $page->filter('#library .om-row-name')->each(fn ($a) => $a->text()));
         self::assertStringNotContainsString('workspace', $page->filter('#content')->text());
 
         // What each README says of itself, and nothing where it says nothing.
@@ -103,8 +103,8 @@ class CatalogueTest extends SiteTestCase
         self::assertStringContainsString('son manuel est son README', $page->filter('#manual')->text());
 
         // An npm library, under its name without the "@"; a package with nothing to read says so.
-        $page = $this->client->request('GET', '/packages/glitchr/stickyjs');
-        self::assertSame('npm install @glitchr/stickyjs', $page->filter('.om-install code')->text());
+        $page = $this->client->request('GET', '/packages/glitchr/flowjs');
+        self::assertSame('npm install @glitchr/flowjs', $page->filter('.om-install code')->text());
         self::assertCount(0, $page->filter('#versions a.om-more'), 'an npm library is not installed by Composer');
         $page = $this->client->request('GET', '/packages/omnibus/offline');
         self::assertStringContainsString('ni dossier docs/ ni README', $page->filter('#manual')->text());
@@ -152,12 +152,12 @@ class CatalogueTest extends SiteTestCase
         $command = new CommandTester((new Application(static::$kernel))->find('app:packages:sync'));
         $package = fn (string $name): Package => $this->em->getRepository(Package::class)->findOneBy(['name' => $name]);
 
-        // Packagist knows omnitrade, not its PayPal provider; npm knows stickyjs; the rest gets no answer.
+        // Packagist knows omnitrade, not its PayPal provider; npm knows flowjs; the rest gets no answer.
         NoNetwork::$answers = [
             'https://packagist.org/packages/glitchr/omnitrade.json' => [['package' => ['versions' => ['1.x-dev' => []], 'downloads' => ['total' => 13]]]],
             'https://packagist.org/packages/omnitrade/paypal.json' => [['status' => 'error'], 404],
-            'https://registry.npmjs.org/@glitchr%2Fstickyjs' => [['dist-tags' => ['latest' => '1.2.2']]],
-            'https://api.npmjs.org/downloads/point/last-month/@glitchr/stickyjs' => [['downloads' => 750]],
+            'https://registry.npmjs.org/@glitchr%2Fflowjs' => [['dist-tags' => ['latest' => '1.0.0']]],
+            'https://api.npmjs.org/downloads/point/last-month/@glitchr/flowjs' => [['downloads' => 750]],
         ];
         self::assertSame(0, $command->execute(['--fresh' => true]));
         self::assertStringContainsString('3 answered, 5 unreachable', $command->getDisplay());
@@ -167,7 +167,7 @@ class CatalogueTest extends SiteTestCase
         self::assertTrue($package('glitchr/omnitrade')->isPublished());
         self::assertSame(['1.x-dev', 13], [$package('glitchr/omnitrade')->getPublishedVersion(), $package('glitchr/omnitrade')->getDownloads()]);
         self::assertFalse($package('omnitrade/paypal')->isPublished());
-        self::assertSame('1.2.2', $package('@glitchr/stickyjs')->getPublishedVersion());
+        self::assertSame('1.0.0', $package('@glitchr/flowjs')->getPublishedVersion());
         self::assertNull($package('glitchr/omnibus')->isPublished(), 'no answer: unknown, not absent');
 
         // The pages say the three states apart.

@@ -11,8 +11,7 @@ wikidoc:
     # mounted repositories, tests/Fixtures/repos in the tests).
     discover:
         - '%app.catalogue.repos_dir%/*/*'
-        - '%app.catalogue.repos_dir%/transparentjs'
-        - '%app.catalogue.repos_dir%/stickyjs'
+        - '%app.catalogue.repos_dir%/flowjs'
         - '%app.catalogue.repos_dir%/graphjs'
     # The site's own pages, across the packages (getting started, the
     # frameworks, contributing, conventions): its docs/ folder, read by the

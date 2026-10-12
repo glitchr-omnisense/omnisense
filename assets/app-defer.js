@@ -1,7 +1,7 @@
 /*
  * After first paint: the glitchr plugins, started by glitchr/omnibase's
- * Base.boot() (vendor/glitchr/omnibase/assets/boot.js) - stickyjs, then
- * transparentjs (links swap #content in place, the back office opens as a
+ * Base.boot() (vendor/glitchr/omnibase/assets/boot.js) - flowjs' sticky and
+ * stops, then its navigation (links swap #content in place, the back office opens as a
  * website-in-website over the site) - and the site's own effects.
  */
 Object.assign(window, { jQuery: jQuery, $: jQuery });
@@ -19,8 +19,9 @@ window.Swal = Swal;
 
 import './styles/app-defer.scss';
 
-import '@glitchr/stickyjs';
-import '@glitchr/transparentjs';
+import '@glitchr/flowjs/sticky';
+import '@glitchr/flowjs/stops';
+import '@glitchr/flowjs/navigation';
 import Base from '../vendor/glitchr/omnibase/assets/boot.js';
 
 // The manuals' palette, copy buttons and current heading (omnibase/docs): its

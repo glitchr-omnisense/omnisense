@@ -21,7 +21,7 @@ final class CatalogueTest extends TestCase
         self::assertSame([Tier::Component, 'omnibase'], Tier::of('omnibase/marketplace'));
         self::assertSame([Tier::Family, 'omnitrade'], Tier::of('glitchr/omnitrade'));
         self::assertSame([Tier::Provider, 'omnitrade'], Tier::of('omnitrade/stripe'));
-        self::assertSame([Tier::Library, null], Tier::of('@glitchr/stickyjs'));
+        self::assertSame([Tier::Library, null], Tier::of('@glitchr/flowjs'));
         // Not the ecosystem's: another vendor, another scope, a helper of the studio.
         self::assertNull(Tier::of('symfony/http-client'));
         self::assertNull(Tier::of('@hotwired/stimulus'));
@@ -64,8 +64,8 @@ final class CatalogueTest extends TestCase
             return match (true) {
                 str_ends_with($url, '/packages/glitchr/omnitrade.json') => new MockResponse(json_encode(['package' => ['versions' => ['dev-feature' => [], '1.x-dev' => [], '2.x-dev' => []], 'downloads' => ['total' => 13]]])),
                 str_ends_with($url, '/packages/omnitrade/web.json') => new MockResponse('{"status":"error"}', ['http_code' => 404]),
-                str_contains($url, 'registry.npmjs.org/@glitchr%2Fstickyjs') => new MockResponse(json_encode(['dist-tags' => ['latest' => '1.2.2']])),
-                str_contains($url, 'api.npmjs.org/downloads/point/last-month/@glitchr/stickyjs') => new MockResponse(json_encode(['downloads' => 750])),
+                str_contains($url, 'registry.npmjs.org/@glitchr%2Fflowjs') => new MockResponse(json_encode(['dist-tags' => ['latest' => '1.0.0']])),
+                str_contains($url, 'api.npmjs.org/downloads/point/last-month/@glitchr/flowjs') => new MockResponse(json_encode(['downloads' => 750])),
                 default => new MockResponse('', ['http_code' => 503]),
             };
         });
@@ -74,8 +74,8 @@ final class CatalogueTest extends TestCase
         $state = $registries->state('glitchr/omnitrade');
         self::assertSame([true, '2.x-dev', 13], [$state->published, $state->version, $state->downloads]);
         self::assertFalse($registries->state('omnitrade/web')->published);
-        $state = $registries->state('@glitchr/stickyjs');
-        self::assertSame([true, '1.2.2', 750], [$state->published, $state->version, $state->downloads]);
+        $state = $registries->state('@glitchr/flowjs');
+        self::assertSame([true, '1.0.0', 750], [$state->published, $state->version, $state->downloads]);
 
         // Kept: asked once.
         $before = \count($calls);
@@ -105,7 +105,7 @@ final class CatalogueTest extends TestCase
         $packages = $scanner->scan();
 
         // A workspace ("project") and another vendor's package are not the catalogue's.
-        self::assertSame(['@glitchr/stickyjs', 'glitchr/omnibase', 'glitchr/omnibus', 'glitchr/omnitrade', 'omnibase/blog', 'omnibus/offline', 'omnitrade/paypal', 'omnitrade/stripe'], array_keys($packages));
+        self::assertSame(['@glitchr/flowjs', 'glitchr/omnibase', 'glitchr/omnibus', 'glitchr/omnitrade', 'omnibase/blog', 'omnibus/offline', 'omnitrade/paypal', 'omnitrade/stripe'], array_keys($packages));
 
         $trade = $packages['glitchr/omnitrade'];
         self::assertSame([Tier::Family, 'omnitrade', 'omnitrade/core', 'LGPL-3.0-or-later', 2], [$trade->tier, $trade->family, $trade->path, $trade->license, $trade->docPages]);
@@ -114,12 +114,12 @@ final class CatalogueTest extends TestCase
         self::assertContains('glitchr/omnitrade', $packages['omnitrade/stripe']->requires);
         self::assertSame(0, $packages['omnibus/offline']->docPages);
         self::assertNull($packages['omnibus/offline']->readme);
-        self::assertSame('https://github.com/glitchr-studio/stickyjs', $packages['@glitchr/stickyjs']->repositoryUrl);
+        self::assertSame('https://github.com/glitchr-studio/flowjs', $packages['@glitchr/flowjs']->repositoryUrl);
 
         $sites = $scanner->sites();
         self::assertSame(['juriste', 'nakaya', 'taratata'], array_keys($sites));
         self::assertContains('omnitrade/stripe', $sites['nakaya']);
-        self::assertContains('@glitchr/stickyjs', $sites['juriste'], 'a site\'s package.json counts too');
+        self::assertContains('@glitchr/flowjs', $sites['juriste'], 'a site\'s package.json counts too');
     }
 
     public function testFamilies(): void

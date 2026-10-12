@@ -17,7 +17,7 @@ class SiteTest extends SiteTestCase
 {
     public function testEveryPublicPageAnswersWithoutCallingAnyone(): void
     {
-        foreach (['/', '/packages', '/families/omnitrade', '/families/omnibase', '/packages/glitchr/omnitrade', '/packages/glitchr/stickyjs', '/docs', '/docs/glitchr/omnitrade/current/installation', '/docs/glitchr/omnibus/2.x', '/docs/_search?q=webhook', '/install', '/support', '/blog', '/blog/les-manuels-se-lisent-dans-les-depots', '/blog/feed.xml', '/legal', '/privacy', '/login'] as $path) {
+        foreach (['/', '/packages', '/families/omnitrade', '/families/omnibase', '/packages/glitchr/omnitrade', '/packages/glitchr/flowjs', '/docs', '/docs/glitchr/omnitrade/current/installation', '/docs/glitchr/omnibus/2.x', '/docs/_search?q=webhook', '/install', '/support', '/blog', '/blog/les-manuels-se-lisent-dans-les-depots', '/blog/feed.xml', '/legal', '/privacy', '/login'] as $path) {
             $this->client->request('GET', $path);
             self::assertResponseIsSuccessful($path);
         }
@@ -79,7 +79,7 @@ class SiteTest extends SiteTestCase
 
     public function testNoPublicPageCountsOrNamesTheSitesBuiltOnThePackages(): void
     {
-        foreach (['/', '/packages', '/families/omnitrade', '/packages/glitchr/omnitrade', '/packages/glitchr/stickyjs', '/docs', '/install'] as $path) {
+        foreach (['/', '/packages', '/families/omnitrade', '/packages/glitchr/omnitrade', '/packages/glitchr/flowjs', '/docs', '/install'] as $path) {
             $text = $this->client->request('GET', $path)->filter('#content')->text();
             self::assertDoesNotMatchRegularExpression('/sites? (construits?|qui s’en servent)|utilisé par|Nakaya|Côme Aubertel|Démos/u', $text, $path);
             self::assertCount(0, $this->client->getCrawler()->filter('.om-sites, .om-demos, a[href="/demos"]'), $path);

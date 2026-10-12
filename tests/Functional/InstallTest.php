@@ -86,7 +86,7 @@ class InstallTest extends SiteTestCase
         self::assertResponseIsSuccessful();
         self::assertStringContainsString('Choisissez au moins un paquet', $page->filter('.om-selector-answer')->text());
         // An npm library is not a Composer package.
-        $page = $this->client->request('GET', '/install?p[]=@glitchr/stickyjs');
+        $page = $this->client->request('GET', '/install?p[]=@glitchr/flowjs');
         self::assertStringContainsString('Choisissez au moins un paquet', $page->filter('.om-selector-answer')->text());
     }
 
