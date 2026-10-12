@@ -84,8 +84,7 @@ services:
       - ../omnisign:/srv/repos/omnisign:ro
       - ../omnibill:/srv/repos/omnibill:ro
       - ../omnireview:/srv/repos/omnireview:ro
-      - ../transparent:/srv/repos/transparentjs:ro
-      - ../stickyjs:/srv/repos/stickyjs:ro
+      - ../flowjs:/srv/repos/flowjs:ro
       - ../graphjs:/srv/repos/graphjs:ro
       # "Used by": the composer.json of each site, and nothing else of it.
       - ../chapaland-v2/composer.json:/srv/sites/chapaland-v2/composer.json:ro
@@ -168,8 +167,7 @@ services:
       - ../omnisign:/srv/repos/omnisign:ro
       - ../omnibill:/srv/repos/omnibill:ro
       - ../omnireview:/srv/repos/omnireview:ro
-      - ../transparent:/srv/repos/transparentjs:ro
-      - ../stickyjs:/srv/repos/stickyjs:ro
+      - ../flowjs:/srv/repos/flowjs:ro
       - ../graphjs:/srv/repos/graphjs:ro
       # "Used by": the composer.json of each site, and nothing else of it.
       - ../chapaland-v2/composer.json:/srv/sites/chapaland-v2/composer.json:ro
@@ -224,8 +222,7 @@ services:
       - ../omnisign:/srv/repos/omnisign:ro
       - ../omnibill:/srv/repos/omnibill:ro
       - ../omnireview:/srv/repos/omnireview:ro
-      - ../transparent:/srv/repos/transparentjs:ro
-      - ../stickyjs:/srv/repos/stickyjs:ro
+      - ../flowjs:/srv/repos/flowjs:ro
       - ../graphjs:/srv/repos/graphjs:ro
       # "Used by": the composer.json of each site, and nothing else of it.
       - ../chapaland-v2/composer.json:/srv/sites/chapaland-v2/composer.json:ro

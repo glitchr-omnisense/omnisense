@@ -10,7 +10,7 @@ wikidoc:
     public: { enabled: true, path: docs }
     discover:
         - '%app.catalogue.repos_dir%/*/*'      # chaque famille, fournisseur et bundle
-        - '%app.catalogue.repos_dir%/stickyjs' # et les bibliothèques
+        - '%app.catalogue.repos_dir%/flowjs'     # et les bibliothèques
     cache_ttl: 60
     search:
         typesense: { enabled: true, prefix: omniscient }

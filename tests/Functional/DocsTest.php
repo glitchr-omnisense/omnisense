@@ -31,7 +31,7 @@ class DocsTest extends SiteTestCase
         self::assertSame(['glitchr/omnibase', 'omnibase/blog'], $page->filter('#omnibase .om-row-name')->each(fn ($a) => $a->text()));
         self::assertSame(['glitchr/omnibus'], $page->filter('#omnibus .om-row-name')->each(fn ($a) => $a->text()));
         self::assertSame(['glitchr/omnitrade', 'omnitrade/paypal', 'omnitrade/stripe'], $page->filter('#omnitrade .om-row-name')->each(fn ($a) => $a->text()));
-        self::assertSame(['@glitchr/stickyjs'], $page->filter('#library .om-row-name')->each(fn ($a) => $a->text()));
+        self::assertSame(['@glitchr/flowjs'], $page->filter('#library .om-row-name')->each(fn ($a) => $a->text()));
         // A manual's versions, newest first; one made of a README alone says so.
         self::assertSame(['2.x', '1.x'], $page->filter('#omnibus .om-manual-versions a')->each(fn ($a) => $a->text()));
         self::assertStringContainsString('README seul', $page->filter('#omnitrade li')->eq(1)->text());
@@ -144,8 +144,8 @@ class DocsTest extends SiteTestCase
         $collections = array_keys(FakeTypesense::$collections);
         sort($collections);
         self::assertSame([
-            'omniscient_glitchr-omnibase_current', 'omniscient_glitchr-omnibus_1-x', 'omniscient_glitchr-omnibus_2-x', 'omniscient_glitchr-omniscient_'.self::siteVersion(), 'omniscient_glitchr-omnitrade_current',
-            'omniscient_glitchr-stickyjs_current', 'omniscient_omnibase-blog_current', 'omniscient_omnitrade-paypal_current', 'omniscient_omnitrade-stripe_current',
+            'omniscient_glitchr-flowjs_current', 'omniscient_glitchr-omnibase_current', 'omniscient_glitchr-omnibus_1-x', 'omniscient_glitchr-omnibus_2-x', 'omniscient_glitchr-omniscient_'.self::siteVersion(), 'omniscient_glitchr-omnitrade_current',
+            'omniscient_omnibase-blog_current', 'omniscient_omnitrade-paypal_current', 'omniscient_omnitrade-stripe_current',
         ], $collections);
         self::assertSame(['Signature'], array_values(array_filter(array_column(FakeTypesense::$collections['omniscient_glitchr-omnitrade_current'], 'section'), fn ($s) => 'Signature' === $s)));
 

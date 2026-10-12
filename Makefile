@@ -492,7 +492,7 @@ endif
 # DEPENDENCIES
 # ═══════════════════════════════════════════════════════════════
 
-## Yarn in the assets container (usage: make yarn ARGS="upgrade @glitchr/stickyjs")
+## Yarn in the assets container (usage: make yarn ARGS="upgrade @glitchr/flowjs")
 yarn:
 	@$(DOCKER_ASSETS) yarn $(ARGS)
 

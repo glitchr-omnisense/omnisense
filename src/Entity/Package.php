@@ -32,13 +32,13 @@ class Package
     #[ORM\Column(type: 'integer')]
     protected $id;
 
-    /** The package's name as its registry spells it: "glitchr/omnitrade", "@glitchr/stickyjs". */
+    /** The package's name as its registry spells it: "glitchr/omnitrade", "@glitchr/flowjs". */
     #[ORM\Column(length: 120, unique: true)]
     protected string $name;
 
     /**
      * Its name in an address: lower case, without the "@" of an npm scope -
-     * "glitchr/stickyjs". Not called a slug: it holds a slash, and the back
+     * "glitchr/flowjs". Not called a slug: it holds a slash, and the back
      * office would take a slug for the record's address.
      */
     #[ORM\Column(length: 120, unique: true)]

@@ -828,6 +828,10 @@
   resolved "https://registry.yarnpkg.com/@glitchr/cookie/-/cookie-1.0.53.tgz#594c38f3127c00b1ab79d7124b6c52019be8a293"
   integrity sha512-GY85cJyFuJGeEONbEQ3mPWvVr71Q78eZBzmZnsdApZ6Ds/BAlq16KeKq0xtKskAIfG+f7jpNKfgGBn5WVA/tYg==
 
+"@glitchr/flowjs@git+https://github.com/glitchr-studio/flowjs.git#07eaaa2e1c5ed49049b29505daca3ea8247d3850":
+  version "1.0.0"
+  resolved "git+https://github.com/glitchr-studio/flowjs.git#07eaaa2e1c5ed49049b29505daca3ea8247d3850"
+
 "@glitchr/media-query-plugin@^1.0":
   version "1.5.13"
   resolved "https://registry.yarnpkg.com/@glitchr/media-query-plugin/-/media-query-plugin-1.5.13.tgz#f491c8681a42ab44c0d2d7fb1c8bbc2a0756a22e"
@@ -837,14 +841,6 @@
     postcss "^7.0.32"
     webpack "^5.21.2"
     webpack-sources "^2.2.0"
-
-"@glitchr/stickyjs@git+https://github.com/glitchr-studio/stickyjs.git#2451fc670f74615aa7d0fc1abbca895492fab52e":
-  version "1.7.0"
-  resolved "git+https://github.com/glitchr-studio/stickyjs.git#2451fc670f74615aa7d0fc1abbca895492fab52e"
-
-"@glitchr/transparentjs@git+https://github.com/glitchr-studio/transparentjs.git#3103c6f0f8115c9d6135c35f76a5bf93ba7b839b":
-  version "3.0.30"
-  resolved "git+https://github.com/glitchr-studio/transparentjs.git#3103c6f0f8115c9d6135c35f76a5bf93ba7b839b"
 
 "@hotwired/stimulus-webpack-helpers@^1.0.1":
   version "1.0.1"
