@@ -3818,7 +3818,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-studio/omnibase.git",
-                "reference": "821b88c061ff76941eade20eaca645b9884361a4"
+                "reference": "9a6a38875526231d6abd79abde3009f58dca3d94"
             },
             "require": {
                 "api-platform/doctrine-orm": "^4.0",
@@ -3953,7 +3953,7 @@
                 "helper",
                 "symfony"
             ],
-            "time": "2026-10-11T23:59:38+00:00"
+            "time": "2026-10-12T23:55:20+00:00"
         },
         {
             "name": "glitchr/typesense-bundle",
@@ -6570,7 +6570,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-studio/omnibase-admin.git",
-                "reference": "8624e72e9bbcfae72c22c279284e0c49376cfb52"
+                "reference": "7d34adfe158454860a41523f9449ecbf38126c55"
             },
             "require": {
                 "glitchr/omnibase": "3.0.*-dev",
@@ -6616,7 +6616,7 @@
                 "dashboard",
                 "symfony"
             ],
-            "time": "2026-10-12T00:04:52+00:00"
+            "time": "2026-10-12T23:55:27+00:00"
         },
         {
             "name": "omnibase/blog",

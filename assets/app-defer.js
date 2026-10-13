@@ -1,7 +1,7 @@
 /*
  * After first paint: the glitchr plugins, started by glitchr/omnibase's
- * Base.boot() (vendor/glitchr/omnibase/assets/boot.js) - flowjs' sticky and
- * stops, then its navigation (links swap #content in place, the back office opens as a
+ * Base.boot() (vendor/glitchr/omnibase/assets/boot.js) - flowjs' stops, then its
+ * navigation (links swap #content in place, the back office opens as a
  * website-in-website over the site) - and the site's own effects.
  */
 Object.assign(window, { jQuery: jQuery, $: jQuery });
@@ -19,7 +19,6 @@ window.Swal = Swal;
 
 import './styles/app-defer.scss';
 
-import '@glitchr/flowjs/sticky';
 import '@glitchr/flowjs/stops';
 import '@glitchr/flowjs/navigation';
 import Base from '../vendor/glitchr/omnibase/assets/boot.js';
@@ -34,6 +33,8 @@ window.addEventListener('transparent:load', function () {
 });
 
 Base.boot({
+    // No Sticky effect on this site: only the stops and the navigation are imported.
+    sticky: false,
     nest: ['/admin*'],
     // The home page's sections are magnetic (StickyStops, .sticky-stop). The arrow
     // keys go from section to section, as the page keys read a tall one: without
