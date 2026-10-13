@@ -34,7 +34,7 @@
     "@fortawesome/fontawesome-free": "^6.7",
     "@glitchr/cookie": "^1.0",
     "@glitchr/media-query-plugin": "^1.0",
-    "@glitchr/flowjs": "git+https://github.com/glitchr-studio/flowjs.git#b763778edbb0dcb86b3dbbfc4c237070b548edeb",
+    "@glitchr/flowjs": "^1.0.1",
     "@hotwired/stimulus": "^3.0",
     "@popperjs/core": "^2.11.8",
     "@symfony/stimulus-bridge": "^4.0.1",
