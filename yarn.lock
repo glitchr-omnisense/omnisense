@@ -829,9 +829,9 @@
   integrity sha512-GY85cJyFuJGeEONbEQ3mPWvVr71Q78eZBzmZnsdApZ6Ds/BAlq16KeKq0xtKskAIfG+f7jpNKfgGBn5WVA/tYg==
 
 "@glitchr/flowjs@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.npmjs.org/@glitchr/flowjs/-/flowjs-1.0.1.tgz#beea298ed5686467f2fd286cfefeae2ab336d7c2"
-  integrity sha512-LYh1PxX7yPeMxrFkq3BYHgtzJqJFtF6gfqelIz+10a9sEb6ZDl3CqecjgMFRPmJTFfPWMZKC4z76Mmbh39yQ4w==
+  version "1.0.2"
+  resolved "https://registry.npmjs.org/@glitchr/flowjs/-/flowjs-1.0.2.tgz#1271e175d61a22c50286e709219c3b0cb197d1ca"
+  integrity sha512-Slh3XyjvvLhZD9qv8cYLvyGI4n2BJULDSvKKqQZW3eDKS5LE1NcHQD7Z23rcthiKGGiU4U++6kMMf3C6scJV5Q==
 
 "@glitchr/media-query-plugin@^1.0":
   version "1.5.13"

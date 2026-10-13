@@ -49,7 +49,7 @@ html.theme-mode-dark .om-when-dark { display: inline; } html.theme-mode-dark .om
 
 // ── Sections and heads ─────────────────────────────────────────────────
 #content { display: block; min-height: 60vh; &:focus { outline: 0; } }
-.om-section { padding-block: clamp(3.5rem, 8vw, 6rem); border-top: 1.5px solid var(--om-ink); scroll-margin-top: $om-header; }
+.om-section { padding-block: clamp(3.5rem, 8vw, 6rem); border-top: 1.5px solid var(--om-ink); }
 .om-head { margin-bottom: clamp(1.75rem, 4vw, 2.75rem);
     .om-cote { margin-bottom: .9rem; }
     h2 { font-size: clamp(1.9rem, 4.4vw, 3.3rem); }
@@ -58,7 +58,7 @@ html.theme-mode-dark .om-when-dark { display: inline; } html.theme-mode-dark .om
 
 // ── Home: Omni and its suffix ──────────────────────────────────────────
 // The drafting grid under the mark: fine lines every 2 rem, a heavier one every 10.
-.om-hero { position: relative; display: flex; align-items: center; min-height: calc(100vh - #{$om-header}); min-height: calc(100svh - #{$om-header}); padding-block: clamp(2.5rem, 6vw, 4.5rem); scroll-margin-top: $om-header; overflow: hidden;
+.om-hero { position: relative; display: flex; align-items: center; min-height: calc(100vh - #{$om-header}); min-height: calc(100svh - #{$om-header}); padding-block: clamp(2.5rem, 6vw, 4.5rem); overflow: hidden;
     background-image: linear-gradient(var(--om-grid) 1px, transparent 1px), linear-gradient(90deg, var(--om-grid) 1px, transparent 1px), linear-gradient(var(--om-grid) 1px, transparent 1px), linear-gradient(90deg, var(--om-grid) 1px, transparent 1px);
     background-size: 2rem 2rem, 2rem 2rem, 10rem 10rem, 10rem 10rem; background-position: -1px -1px; }
 .om-hero-inner { display: grid; gap: 1.25rem 3rem; grid-template-columns: minmax(0, 1fr); @include wide { grid-template-columns: minmax(0, 1fr) 15.5rem; grid-template-areas: "kicker index" "omni index" "phrase index" "actions index"; align-items: start; } }
