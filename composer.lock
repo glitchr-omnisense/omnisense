@@ -3818,7 +3818,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-studio/omnibase.git",
-                "reference": "16852a2671b315c32722caf80d8adbebd98f1aa5"
+                "reference": "747cfc8a6b168ecfcd9623530bc489e6eecd9876"
             },
             "require": {
                 "api-platform/doctrine-orm": "^4.0",
@@ -3953,7 +3953,7 @@
                 "helper",
                 "symfony"
             ],
-            "time": "2026-10-14T05:03:00+00:00"
+            "time": "2026-10-14T12:28:51+00:00"
         },
         {
             "name": "glitchr/typesense-bundle",
@@ -4079,12 +4079,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-studio/well-known.git",
-                "reference": "7b2014b3faf4d25e5195808eeb85ed5bee29a493"
+                "reference": "944cc966f9c73d063455556d842a8aaa59a6eeb5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-studio/well-known/zipball/7b2014b3faf4d25e5195808eeb85ed5bee29a493",
-                "reference": "7b2014b3faf4d25e5195808eeb85ed5bee29a493",
+                "url": "https://api.github.com/repos/glitchr-studio/well-known/zipball/944cc966f9c73d063455556d842a8aaa59a6eeb5",
+                "reference": "944cc966f9c73d063455556d842a8aaa59a6eeb5",
                 "shasum": ""
             },
             "require": {
@@ -4128,7 +4128,7 @@
                 "issues": "https://github.com/glitchr-studio/well-known/issues",
                 "source": "https://github.com/glitchr-studio/well-known/tree/1.0"
             },
-            "time": "2026-09-15T08:56:58+00:00"
+            "time": "2026-10-14T11:11:29+00:00"
         },
         {
             "name": "google/apiclient",
