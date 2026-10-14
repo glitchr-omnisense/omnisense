@@ -3818,7 +3818,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-studio/omnibase.git",
-                "reference": "442f51fb1076bc06a5430111000fa90fbc72251e"
+                "reference": "16852a2671b315c32722caf80d8adbebd98f1aa5"
             },
             "require": {
                 "api-platform/doctrine-orm": "^4.0",
@@ -3953,7 +3953,7 @@
                 "helper",
                 "symfony"
             ],
-            "time": "2026-10-13T11:11:45+00:00"
+            "time": "2026-10-14T05:03:00+00:00"
         },
         {
             "name": "glitchr/typesense-bundle",
@@ -6570,7 +6570,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-studio/omnibase-admin.git",
-                "reference": "cb6f13e39bcf8cc6c414ed65fd558451cdfbbe2b"
+                "reference": "49f3d4dec6da52784ba64859288d02422f96269a"
             },
             "require": {
                 "glitchr/omnibase": "3.0.*-dev",
@@ -6616,7 +6616,7 @@
                 "dashboard",
                 "symfony"
             ],
-            "time": "2026-10-13T11:11:28+00:00"
+            "time": "2026-10-14T01:53:51+00:00"
         },
         {
             "name": "omnibase/blog",
@@ -6679,7 +6679,7 @@
             "dist": {
                 "type": "path",
                 "url": "../omnibase/consent",
-                "reference": "b17f04c498d31899a3196bbd97bf188ff85eedbe"
+                "reference": "ec5e7d9e16b26934e493f0d8256b2b798a0eb549"
             },
             "require": {
                 "glitchr/omnibase": "3.0.*-dev",
@@ -6710,7 +6710,7 @@
                     "email": "marco.meyer@glitchr.io"
                 }
             ],
-            "description": "The cookie answer of every omnibase site, in one place: a small circle, a panel, an implicit acceptance counted down, and the visitor's choice kept by @glitchr/cookie.",
+            "description": "The cookie answer of every omnibase site, in one place: a small circle, a panel, the features the visitor answers for and what each keeps, a countdown, on @glitchr/flowjs/cookie.",
             "transport-options": {
                 "symlink": true,
                 "relative": true

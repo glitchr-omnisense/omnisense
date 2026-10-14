@@ -823,15 +823,10 @@
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free/-/fontawesome-free-6.7.2.tgz#8249de9b7e22fcb3ceb5e66090c30a1d5492b81a"
   integrity sha512-JUOtgFW6k9u4Y+xeIaEiLr3+cjoUPiAuLXoyKOJSia6Duzb7pq+A76P9ZdPDoAoxHdHzq6gE9/jKBGXlZT8FbA==
 
-"@glitchr/cookie@^1.0":
-  version "1.0.53"
-  resolved "https://registry.yarnpkg.com/@glitchr/cookie/-/cookie-1.0.53.tgz#594c38f3127c00b1ab79d7124b6c52019be8a293"
-  integrity sha512-GY85cJyFuJGeEONbEQ3mPWvVr71Q78eZBzmZnsdApZ6Ds/BAlq16KeKq0xtKskAIfG+f7jpNKfgGBn5WVA/tYg==
-
-"@glitchr/flowjs@^1.0.1":
-  version "1.0.3"
-  resolved "https://registry.npmjs.org/@glitchr/flowjs/-/flowjs-1.0.3.tgz#5b360cea6437fd42af8122b6ae7ef8888519b1f6"
-  integrity sha512-vOhHyAWvLVbRQLbJS9IB286q1AN28J/VLteWXllFeB2qM3+OlUx+BZiDL6A+XyzpqjKW7TfEhs9OMvtLJyGqSw==
+"@glitchr/flowjs@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.npmjs.org/@glitchr/flowjs/-/flowjs-1.2.1.tgz#35a168f0cc47d83c2da09dae31ddd73756d071a4"
+  integrity sha512-Plaqnqq+FwFZjaA35AjdkbfRIjj8mZ7szwWBidTTqyJH6TN+Sq7C1bOT2DVLnK8lhv/OJZRKWJ/3O1YO6Q1riQ==
 
 "@glitchr/media-query-plugin@^1.0":
   version "1.5.13"
