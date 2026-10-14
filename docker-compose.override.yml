@@ -78,6 +78,7 @@ services:
       - ../omnipost:/srv/repos/omnipost:ro
       - ../omnifood:/srv/repos/omnifood:ro
       - ../omnischolar:/srv/repos/omnischolar:ro
+      - ../omnilab:/srv/repos/omnilab:ro
       - ../omnilex:/srv/repos/omnilex:ro
       - ../omnimeet:/srv/repos/omnimeet:ro
       - ../omnishield:/srv/repos/omnishield:ro
@@ -161,6 +162,7 @@ services:
       - ../omnipost:/srv/repos/omnipost:ro
       - ../omnifood:/srv/repos/omnifood:ro
       - ../omnischolar:/srv/repos/omnischolar:ro
+      - ../omnilab:/srv/repos/omnilab:ro
       - ../omnilex:/srv/repos/omnilex:ro
       - ../omnimeet:/srv/repos/omnimeet:ro
       - ../omnishield:/srv/repos/omnishield:ro
@@ -216,6 +218,7 @@ services:
       - ../omnipost:/srv/repos/omnipost:ro
       - ../omnifood:/srv/repos/omnifood:ro
       - ../omnischolar:/srv/repos/omnischolar:ro
+      - ../omnilab:/srv/repos/omnilab:ro
       - ../omnilex:/srv/repos/omnilex:ro
       - ../omnimeet:/srv/repos/omnimeet:ro
       - ../omnishield:/srv/repos/omnishield:ro
