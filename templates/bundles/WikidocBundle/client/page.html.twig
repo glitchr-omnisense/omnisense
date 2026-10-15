@@ -5,7 +5,8 @@
  # being read (rendered.editUrl: PageRenderer::forgeUrl, "edit" at
  # version.branch). GitHub offers the fork and the pull request itself to
  # whoever has no write access. A manual without a public repository (the
- # site's own pages) has no pencil. The rest is the bundle's: the sidebar
+ # site's own pages, whose repository is a private GitLab) has no pencil:
+ # only a public forge (GitHub) lets a reader propose a change. The rest is the bundle's: the sidebar
  # (manual, version, search, contents), the breadcrumb, the prose, "on this
  # page", previous / next; manual.css gives the look, manual.js the palette.
  #}
@@ -63,7 +64,8 @@
         {% endif %}
 
         <div class="manual-prose" data-text-copy="{{ '@wikidoc.manual.copy'|trans }}" data-text-copied="{{ '@wikidoc.manual.copied'|trans }}">
-            {% if rendered.editUrl %}
+            {% set editable = rendered.editUrl and rendered.editUrl starts with 'https://github.com/' %}
+            {% if editable %}
             {#- The pencil: beside the title (floated against it), labelled for everyone; the branch read is in the address. -#}
             <a class="manual-pencil" href="{{ rendered.editUrl }}" rel="noopener" title="{{ '@messages.docs.pencil_title'|trans({file: rendered.source, branch: version.branch}) }}">
                 <i class="fa-solid fa-pen" aria-hidden="true"></i><span>{{ '@messages.docs.pencil'|trans }}</span>
@@ -74,7 +76,7 @@
         </div>
 
         <footer class="manual-foot">
-            {% if rendered.editUrl %}
+            {% if editable %}
             <p class="manual-edit">
                 <a href="{{ rendered.editUrl }}" rel="noopener">{{ '@wikidoc.manual.edit'|trans }}</a>
                 <span class="manual-source">{{ '@wikidoc.manual.source'|trans }} : <a href="{{ rendered.sourceUrl }}" rel="noopener"><code>{{ rendered.source }}</code></a></span>
