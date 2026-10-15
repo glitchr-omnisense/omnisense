@@ -125,7 +125,7 @@ families:
     text: "Un seul contrat pour les publications : profils d’auteur, travaux, livres et leurs éditions, citations, lus dans plusieurs bases, fusionnés et dédoublonnés, exportés en BibTeX, RIS ou CSL-JSON."
   omnilab:
     phrase: "Lire ce que la science sait d’une chose, ou mesure en un lieu."
-    text: "Un seul contrat pour les API scientifiques publiques, quel que soit le domaine : une entité (un composé, un gène, une espèce, un astre, un séisme) avec ses propriétés, leurs unités et ses identifiants dans d’autres bases, suivis d’une base à l’autre ; une série (une variable mesurée en un lieu sur une période : météo, climat, air) ; un produit catalogué (une scène satellite, au sens de STAC) — PubChem, ChEBI, Wikidata, Open-Meteo, le Copernicus Data Space."
+    text: "Un seul contrat pour les API scientifiques publiques, quel que soit le domaine : une entité (un composé, un gène, une espèce, un astre, un séisme) avec ses propriétés, leurs unités et ses identifiants dans d’autres bases, suivis d’une base à l’autre ; une série (une variable mesurée en un lieu sur une période : météo, climat, air) ; un produit catalogué (une scène satellite, au sens de STAC) — PubChem, ChEBI, ChEMBL, Wikidata, UniProt, NCBI Gene et Taxonomy, GBIF, Open-Meteo, le Copernicus Data Space."
   omnilex:
     phrase: "Lire les sources du droit."
     text: "Un seul contrat pour les sources du droit : textes, codes et jurisprudence, cherchés avec des filtres, lus dans leur version en vigueur à une date ; identifiants normalisés et validés (ECLI, NOR, CELEX)."
