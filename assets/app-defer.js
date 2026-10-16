@@ -40,7 +40,9 @@ Base.boot({
     // keys go from section to section, as the page keys read a tall one: without
     // `keys` the arrow is the browser's 40px nudge, and the sections taller than
     // the screen are crept through line by line.
-    stops: { keys: true },
+    // Going back up is free (flowjs 1.3, `up: false`): a scroll heading up rests where the reader
+    // left it; a scroll heading down still settles on its section.
+    stops: { keys: true, up: false },
     // Feeds and files load whole.
     exceptions: ['/blog/feed.xml', '/uploads/*'],
     current: '.om-nav a',
