@@ -76,6 +76,9 @@
     "git/git-bundle": {
         "version": "dev-1.0-forge"
     },
+    "glitchr/symfony-profiler-pack": {
+        "version": "1.x-dev"
+    },
     "glitchr/typesense-bundle": {
         "version": "2.0.x-dev"
     },
