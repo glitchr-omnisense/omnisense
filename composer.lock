@@ -3818,7 +3818,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-studio/omnibase.git",
-                "reference": "d694aba17e725d99423402b9a4cc354a07473fd0"
+                "reference": "0f54cc6ba39228231de73f1a5d78b37808d9ea0d"
             },
             "require": {
                 "api-platform/doctrine-orm": "^4.0",
@@ -3953,7 +3953,7 @@
                 "helper",
                 "symfony"
             ],
-            "time": "2026-10-16T07:18:25+00:00"
+            "time": "2026-10-16T14:42:28+00:00"
         },
         {
             "name": "glitchr/typesense-bundle",
@@ -17246,12 +17246,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-studio/symfony-profiler-pack.git",
-                "reference": "bb29223b28af2e0a7a1565a5dc4eb5452715dd42"
+                "reference": "12378422d670b657b9fb24f8092ea352035c70ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-studio/symfony-profiler-pack/zipball/bb29223b28af2e0a7a1565a5dc4eb5452715dd42",
-                "reference": "bb29223b28af2e0a7a1565a5dc4eb5452715dd42",
+                "url": "https://api.github.com/repos/glitchr-studio/symfony-profiler-pack/zipball/12378422d670b657b9fb24f8092ea352035c70ed",
+                "reference": "12378422d670b657b9fb24f8092ea352035c70ed",
                 "shasum": ""
             },
             "require": {
@@ -17297,7 +17297,7 @@
                 "toolbar",
                 "web debug toolbar"
             ],
-            "time": "2026-10-16T04:42:37+00:00"
+            "time": "2026-10-16T15:18:17+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
