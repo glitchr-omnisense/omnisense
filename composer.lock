@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b50142b0cd7afbd58a1a1af17b68ac50",
+    "content-hash": "dc4af9a53404880f0149d1d62b3ff498",
     "packages": [
         {
             "name": "api-platform/doctrine-common",
@@ -17240,6 +17240,65 @@
             "time": "2026-09-22T09:54:55+00:00"
         },
         {
+            "name": "glitchr/symfony-profiler-pack",
+            "version": "1.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/glitchr-studio/symfony-profiler-pack.git",
+                "reference": "bb29223b28af2e0a7a1565a5dc4eb5452715dd42"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/glitchr-studio/symfony-profiler-pack/zipball/bb29223b28af2e0a7a1565a5dc4eb5452715dd42",
+                "reference": "bb29223b28af2e0a7a1565a5dc4eb5452715dd42",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2",
+                "symfony/framework-bundle": "^7.4|^8.0",
+                "symfony/twig-bundle": "^7.4|^8.0",
+                "symfony/web-profiler-bundle": "^7.4|^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11.5|^12.0",
+                "symfony/browser-kit": "^7.4|^8.0",
+                "symfony/css-selector": "^7.4|^8.0",
+                "symfony/translation": "^7.4|^8.0"
+            },
+            "default-branch": true,
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Glitchr\\ProfilerPack\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Glitchr\\ProfilerPack\\Tests\\": "tests/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marco Meyer",
+                    "email": "marco.meyer@glitchr.io"
+                }
+            ],
+            "description": "A floating web debug toolbar for Symfony's profiler (drag it, resize it, fold it), a locale panel and wider profiler pages. A bundle with code, not a Composer pack.",
+            "homepage": "https://github.com/glitchr-studio/symfony-profiler-pack",
+            "keywords": [
+                "debug",
+                "dev",
+                "profiler",
+                "symfony",
+                "toolbar",
+                "web debug toolbar"
+            ],
+            "time": "2026-10-16T04:42:37+00:00"
+        },
+        {
             "name": "justinrainbow/json-schema",
             "version": "6.13.1",
             "source": {
@@ -20376,6 +20435,7 @@
         "glitchr/base-plugin": 20,
         "glitchr/doctrine-dc2type": 20,
         "glitchr/omnibase": 20,
+        "glitchr/symfony-profiler-pack": 20,
         "glitchr/typesense-bundle": 20,
         "glitchr/ux-google": 20,
         "glitchr/well-known": 20,
