@@ -16,7 +16,7 @@
         <p class="om-lead">{{ '@messages.catalogue.lead'|trans({count: counts.packages}) }}</p>
         <p class="om-source">{{ synced ? '@messages.catalogue.synced'|trans({date: synced|format_datetime('long', 'short'), published: counts.published, unpublished: counts.unpublished, unknown: counts.unknown}) : '@messages.catalogue.never_synced'|trans }}</p>
         <nav class="om-anchors" aria-label="{{ '@messages.catalogue.floors'|trans }}">
-            {% for tier, list in {foundation: foundation, component: components, family: families, provider: providers, library: libraries} %}{% if list|length %}<a href="#{{ tier }}"><span class="om-cote">{{ tier == 'library' ? '+' : loop.index }}</span> {{ ('@messages.floors.' ~ tier ~ '.name')|trans }}</a>{% endif %}{% endfor %}
+            {% for tier, list in {foundation: foundation, component: components, family: families, provider: providers, bridge: bridges, library: libraries} %}{% if list|length %}<a href="#{{ tier }}"><span class="om-cote">{{ tier == 'library' ? '+' : loop.index }}</span> {{ ('@messages.floors.' ~ tier ~ '.name')|trans }}</a>{% endif %}{% endfor %}
         </nav>
     </header>
 
@@ -54,6 +54,13 @@
             </ul>
         </article>
         {% endfor %}
+    </section>
+    {% endif %}
+
+    {% if bridges|length %}
+    <section class="om-tier" id="bridge">
+        <header><p class="om-cote">5</p><h2>{{ '@messages.floors.bridge.name'|trans }} <small>{{ bridges|length }}</small></h2><p>{{ '@messages.floors.bridge.text'|trans }}</p></header>
+        <ul class="om-rows">{% for package in bridges %}{% include 'partials/_package_row.html.twig' with {short: true} %}{% endfor %}</ul>
     </section>
     {% endif %}
 

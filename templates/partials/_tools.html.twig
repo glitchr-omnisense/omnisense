@@ -13,6 +13,6 @@
         <a class="om-tool is-account" href="{{ path('app_account') }}" title="{{ '@messages.nav.account'|trans }}"><i class="fa-solid fa-user" aria-hidden="true"></i><span>{{ app.user }}</span></a>
         <a class="om-tool" href="{{ path('security_logoutRequest') }}" title="{{ '@messages.nav.logout'|trans }}" aria-label="{{ '@messages.nav.logout'|trans }}"><i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i></a>
     {% else %}
-        <a class="om-tool is-account" href="{{ path('security_login') }}" title="{{ '@messages.nav.access'|trans }}"><i class="fa-solid fa-key" aria-hidden="true"></i><span>{{ '@messages.nav.access'|trans }}</span></a>
+        <a class="om-tool is-account is-signin" href="{{ path('security_login') }}"><span>{{ '@messages.nav.access'|trans }}</span></a>
     {% endif %}
 </div>

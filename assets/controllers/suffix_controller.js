@@ -3,8 +3,9 @@ import { Controller } from '@hotwired/stimulus';
 /*
  * The home page's mark: "Omni" stays, the suffix after it turns - base,
  * bus, trade... - and the sentence under it says what that family asks.
- * The list beside it holds every family: pointing at one, or giving it the
- * focus, shows it and stops the turning until the pointer leaves.
+ * The tags beside it, under the search, hold every family: pointing at one,
+ * or giving it the focus, shows it and stops the turning until the pointer
+ * leaves.
  *
  * Without movement (prefers-reduced-motion) nothing turns by itself: the
  * first family is shown, the list still answers.

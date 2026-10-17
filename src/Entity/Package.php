@@ -414,9 +414,10 @@ class Package
     {
         return match ($this->tier) {
             Tier::Foundation => 'Socle',
-            Tier::Component => 'Métier',
+            Tier::Component => 'Extension',
             Tier::Family => 'Famille',
             Tier::Provider => 'Fournisseur',
+            Tier::Bridge => 'Pont',
             Tier::Library => 'Bibliothèque',
         };
     }

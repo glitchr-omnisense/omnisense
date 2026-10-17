@@ -46,30 +46,48 @@ class SiteTest extends SiteTestCase
         self::assertSame('fr', $page->filter('html')->attr('lang'));
         self::assertSame('Omni', $page->filter('.om-omni-fixed')->text());
         // The fixtures' repositories hold omnibase, omnibus and omnitrade: three suffixes, in the home page's order.
-        self::assertSame(['base', 'bus', 'trade'], $page->filter('.om-omni-index [data-suffix-target="item"]')->each(fn ($a) => $a->attr('data-suffix')));
+        self::assertSame(['base', 'bus', 'trade'], $page->filter('.om-omni-tags [data-suffix-target="item"]')->each(fn ($a) => $a->attr('data-suffix')));
         self::assertSame('base', $page->filter('.om-omni-slot')->text());
         self::assertSame('Le socle des sites, et un composant par métier.', $page->filter('.om-omni-phrase')->text());
         self::assertSame('Encaisser et vendre, quel que soit le prestataire.', $page->filter('[data-suffix="trade"]')->attr('data-phrase'));
         self::assertCount(1, $page->filter('[data-controller="suffix"]'));
         // Nothing announced turns: omnishow, omnidns... are names, not families.
         self::assertStringNotContainsString('Omnishow', $page->filter('#content')->text());
-        self::assertStringNotContainsString('dns', $page->filter('.om-omni-index')->text());
+        self::assertStringNotContainsString('dns', $page->filter('.om-omni-tags')->text());
 
-        // The way on is the documentation: the suffix, each family of the index, the first button.
+        // The search through every manual comes first, beside the mark.
+        self::assertSame('/docs/_search', $page->filter('.om-hero form[role="search"]')->attr('action'));
+        self::assertCount(1, $page->filter('#content form[role="search"]'));
+
+        // The way on is the documentation: the suffix, each family's tag, the first button.
         self::assertSame('/docs', $page->filter('.om-omni-slot')->attr('href'));
         self::assertSame('/docs/glitchr/omnitrade', $page->filter('[data-suffix="trade"]')->attr('href'));
         self::assertSame('/docs', $page->filter('.om-hero .om-actions a')->first()->attr('href'));
         self::assertSame('/install', $page->filter('.om-hero .om-actions a')->eq(1)->attr('href'));
         self::assertSame(['/docs', '/install', '/blog', '/support'], $page->filter('.om-nav a')->each(fn ($a) => $a->attr('href')), 'the catalogue is reached from the documentation, not from the menu');
 
-        // The floors, counted in the catalogue; each section is a stop.
-        self::assertSame(['2', '1', '4', '3'], $page->filter('.om-floor-level')->each(fn ($n) => $n->text()));
+        // omnibase and the families side by side, counted in the catalogue; each section is a stop.
+        self::assertSame(['1', '2', '3', '4'], $page->filter('.om-floor-level')->each(fn ($n) => $n->text()));
+        self::assertSame(['Socle', 'Extensions', 'Familles', 'Fournisseurs'], $page->filter('.om-floor-name')->each(fn ($n) => $n->text()));
+        // A family's example and the provider's beside it share their domain; "omni" in grey, the domain in blue.
+        self::assertSame(['glitchr/omnibus', 'glitchr/omnitrade'], $page->filter('.om-floor.is-family .om-floor-examples code')->each(fn ($c) => $c->text()));
+        self::assertSame(['omnibus/offline', 'omnitrade/paypal'], $page->filter('.om-floor.is-provider .om-floor-examples code')->each(fn ($c) => $c->text()));
+        self::assertSame(['bus', 'trade'], $page->filter('.om-floor.is-provider .om-floor-examples .om-mark-domain')->each(fn ($b) => $b->text()));
+        self::assertSame('omni', $page->filter('.om-floor.is-family .om-floor-pattern .om-mark-omni')->text());
+        // What turns: the families with providers, in the home page's order, each with all of its own.
+        self::assertSame([['family' => 'glitchr/omnibus', 'providers' => ['omnibus/offline']], ['family' => 'glitchr/omnitrade', 'providers' => ['omnitrade/paypal', 'omnitrade/stripe']]], json_decode($page->filter('[data-controller="examples"]')->attr('data-examples-pairs-value'), true));
         self::assertStringContainsString('1 paquet', $page->filter('.om-floor.is-foundation .om-floor-count')->text());
         self::assertStringContainsString('2 paquets', $page->filter('.om-floor.is-family .om-floor-count')->text());
         self::assertStringContainsString('3 paquets', $page->filter('.om-floor.is-provider .om-floor-count')->text());
-        self::assertCount(5, $page->filter('#content > .sticky-stop'));
-        self::assertSame(['Omnibase', 'Omnibus', 'Omnitrade'], $page->filter('.om-family-name')->each(fn ($n) => $n->text()));
-        self::assertStringContainsString('2 fournisseurs', $page->filter('.om-family-list li')->eq(2)->text());
+        self::assertCount(6, $page->filter('#content > .sticky-stop'));
+
+        // omnibridge has its own section: the five targets, none in the fixtures' repositories.
+        self::assertSame(['omnibridge/symfony', 'omnibridge/doctrine', 'omnibridge/twig', 'omnibridge/composer', 'omnibridge/laravel'], $page->filter('#bridges .om-family-name')->each(fn ($n) => $n->text()));
+        self::assertSame(['Prévu'], array_values(array_unique($page->filter('#bridges .om-family-count')->each(fn ($n) => $n->text()))));
+
+        self::assertSame(['Omnibase', 'Omnibus', 'Omnitrade'], $page->filter('#families .om-family-name')->each(fn ($n) => $n->text()));
+        self::assertStringContainsString('2 fournisseurs', $page->filter('#families .om-family-list li')->eq(2)->text());
+        self::assertStringNotContainsString('question', $page->filter('#families h2')->text());
 
         // Which frameworks: what is true today, what is planned - and no date.
         $compat = $page->filter('#compatibility');
@@ -77,7 +95,8 @@ class SiteTest extends SiteTestCase
         self::assertSame(['Aujourd’hui', 'Aujourd’hui', 'Prévu'], $compat->filter('h3 .om-fact')->each(fn ($f) => $f->text()));
         self::assertStringContainsString('Tests/BareTest.php', $compat->text());
         self::assertStringContainsString('omnibase deviendra agnostique', $compat->text());
-        self::assertSame(['omnibridge/symfony', 'omnibridge/doctrine', 'omnibridge/twig', 'omnibridge/composer', 'omnibridge/laravel'], $compat->filter('.om-compat-bridges code')->each(fn ($c) => $c->text()));
+        self::assertCount(0, $compat->filter('.om-compat-bridges'), 'the bridges are listed once, in their own section');
+        self::assertSame('#bridges', $compat->filter('a[href="#bridges"]')->attr('href'));
         self::assertDoesNotMatchRegularExpression('/\b20\d\d\b/', $compat->text(), 'no date promised');
 
         // The latest announcements, and Glitch Art's signature (omnibase's partial, black).
@@ -105,7 +124,8 @@ class SiteTest extends SiteTestCase
 
         self::assertSame('en', $page->filter('html')->attr('lang'));
         self::assertSame('The foundation of the sites, and one component per trade.', $page->filter('.om-omni-phrase')->text());
-        self::assertStringContainsString('Four floors, two buildings', $page->filter('#floors h2')->text());
+        self::assertStringContainsString('omnibase and the families, side by side', $page->filter('#floors h2')->text());
+        self::assertStringContainsString('One bridge per framework', $page->filter('#bridges h2')->text());
         self::assertSame(['Documentation', 'Install', 'News', 'Support'], $page->filter('.om-nav a')->each(fn ($a) => $a->text()));
         self::assertStringContainsString('Compatible with any framework', $page->filter('#compatibility h2')->text());
 

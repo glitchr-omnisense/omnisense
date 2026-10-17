@@ -49,6 +49,7 @@ class CatalogueController extends AbstractController
             'components' => $this->packages->findByTier(Tier::Component),
             'families' => $families,
             'providers' => $providers,
+            'bridges' => $this->packages->findByTier(Tier::Bridge),
             'libraries' => $this->packages->findByTier(Tier::Library),
             'announced' => Families::announced(array_keys($this->packages->findFamilies())),
             'counts' => $this->packages->counts(),

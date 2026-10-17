@@ -5,10 +5,13 @@ namespace App\Catalogue;
 /**
  * The floor a package stands on (plan 0, rules 1 to 3):
  *
- *   foundation  glitchr/omnibase: what every site starts from
- *   component   omnibase/<trade>: a site's component, one per trade
- *   family      glitchr/omniXXX: one question asked of several services
- *   provider    omniXXX/<provider>: one service answering it
+ *   foundation  glitchr/omnibase: the core every site starts from
+ *   component   omnibase/<extension>: an extension of the core (a trade, or
+ *               a feature several sites share), written framework-agnostic
+ *   family      glitchr/omniXXX: one contract for one domain
+ *   provider    omniXXX/<service>: one service fulfilling it
+ *   bridge      omnibridge/<target>: the glue between omnibase and a
+ *               framework, a storage or a view layer (plan 0, rule 13)
  *   library     a JavaScript library of the house (@glitchr/...)
  */
 enum Tier: string
@@ -17,6 +20,7 @@ enum Tier: string
     case Component = 'component';
     case Family = 'family';
     case Provider = 'provider';
+    case Bridge = 'bridge';
     case Library = 'library';
 
     /**
@@ -43,10 +47,17 @@ enum Tier: string
                 return [self::Foundation, 'omnibase'];
             }
 
+            if ('omnibridge' === $package) {
+                return [self::Bridge, null];
+            }
+
             return 1 === preg_match('/^omni[a-z]+$/', $package) ? [self::Family, $package] : null;
         }
         if ('omnibase' === $vendor) {
             return [self::Component, 'omnibase'];
+        }
+        if ('omnibridge' === $vendor) {
+            return [self::Bridge, null];
         }
 
         return 1 === preg_match('/^omni[a-z]+$/', $vendor) ? [self::Provider, $vendor] : null;
@@ -59,7 +70,8 @@ enum Tier: string
             self::Component => 1,
             self::Family => 2,
             self::Provider => 3,
-            self::Library => 4,
+            self::Bridge => 4,
+            self::Library => 5,
         };
     }
 }
