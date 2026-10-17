@@ -413,8 +413,8 @@ class Package
     public function getTierLabel(): string
     {
         return match ($this->tier) {
-            Tier::Foundation => 'Socle',
-            Tier::Component => 'Extension',
+            Tier::Foundation => 'Cœur',
+            Tier::Component => 'Structure préparée',
             Tier::Family => 'Famille',
             Tier::Provider => 'Fournisseur',
             Tier::Bridge => 'Pont',

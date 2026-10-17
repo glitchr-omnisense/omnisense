@@ -36,7 +36,7 @@ chargée.
 
 ## Aujourd'hui : omnibase est fait pour Symfony
 
-`glitchr/omnibase` et ses composants `omnibase/*` sont des bundles Symfony :
+`glitchr/omnibase` et les structures préparées `omnibase/*` sont des bundles Symfony :
 leurs écrans, leur stockage et leurs gabarits s'appuient sur Symfony,
 Doctrine et Twig. Ils ne s'installent pas ailleurs pour l'instant, et le
 [sélecteur d'installation](/install) le dit quand on les choisit hors de
@@ -44,13 +44,13 @@ Symfony.
 
 ## Prévu : omnibase deviendra agnostique
 
-Le métier de chaque composant passera à la racine de son paquet (objets,
+Le métier de chaque structure passera à la racine de son paquet (objets,
 règles, contrats), ses parts de cadre dans des ponts du même paquet :
 contrôleurs et formulaires dans `Bridge/Symfony`, correspondances et dépôts
 dans `Bridge/Doctrine`, gabarits dans `Bridge/Twig` — leurs dépendances non
 requises, comme pour les familles. Les noms des paquets ne changent pas.
 
-Une colle générique, qui ne connaît aucun composant, les reliera à chaque
+Une colle générique, qui ne connaît aucune structure, les reliera à chaque
 cadre :
 
 | Paquet | Ce qu'il relie |
@@ -59,11 +59,12 @@ cadre :
 | `omnibridge/doctrine` | le stockage (Doctrine est autonome, ce n'est pas une part de Symfony) |
 | `omnibridge/twig` | le rendu (Twig est autonome aussi) |
 | `omnibridge/composer` | l'installation : aujourd'hui `glitchr/base-plugin` |
-| `omnibridge/laravel`, `omnibridge/react` | seulement à l'usage |
+| `omnibridge/react` | les pages en composants React, depuis n'importe quel cadre |
+| `omnibridge/laravel` | seulement à l'usage |
 
-Un écran se décrira une fois et un pont de vue le rendra : le composant
-remet un nom et ses données, `omnibridge/twig` les rend côté serveur, un
-autre pont pourrait les recevoir comme propriétés. Les formulaires sont le
+Un écran se décrira une fois et un pont de vue le rendra : la structure
+remet un nom et ses données, `omnibridge/twig` les rend côté serveur,
+`omnibridge/react` les reçoit comme propriétés d'un composant React. Les formulaires sont le
 cas difficile.
 
 Ce chantier vient après les sites en cours. Jusque-là, aucun paquet n'est

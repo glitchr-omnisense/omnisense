@@ -12,11 +12,12 @@ use App\Entity\Package;
 final class InstallPlan
 {
     /**
-     * @param array<string, Package>                         $packages     the packages chosen, by name
-     * @param array<string, string>                          $require      their constraints, by name
+     * @param array<string, Package>                          $packages     the packages chosen, by name
+     * @param array<string, string>                           $require      their constraints, by name
      * @param array<string, array{type: string, url: string}> $repositories the vcs repositories of what is not on Packagist, by package
-     * @param list<string>                                   $plugins      the Composer plugins to allow
-     * @param list<string>                                   $refused      chosen, but not for this framework (yet)
+     * @param list<string>                                    $plugins      the Composer plugins to allow
+     * @param list<string>                                    $refused      chosen, but not for this framework (yet)
+     * @param list<class-string|string>                       $bundles      the Symfony bundles to declare by hand (no Flex recipe)
      */
     public function __construct(
         public readonly string $framework,
@@ -27,6 +28,7 @@ final class InstallPlan
         public readonly bool $dev,
         public readonly array $plugins,
         public readonly array $refused,
+        public readonly array $bundles = [],
     ) {
     }
 
@@ -79,7 +81,13 @@ final class InstallPlan
         return $commands;
     }
 
-    /** The Symfony bundles to declare in config/bundles.php, when Flex has no recipe for them. */
+    /** The lines config/bundles.php needs, when Flex has no recipe for the bundles. */
+    public function bundlesPhp(): string
+    {
+        return implode("\n", array_map(static fn (string $bundle): string => sprintf("%s::class => ['all' => true],", $bundle), $this->bundles));
+    }
+
+    /** Whether a family is installed: its registry is built by hand (plain PHP) or its bundle declared (Symfony). */
     public function hasFamilies(): bool
     {
         return (bool) array_filter($this->packages, static fn (Package $p): bool => \in_array($p->getTier(), [Tier::Family, Tier::Provider], true));

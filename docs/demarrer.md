@@ -5,19 +5,25 @@ order: 1
 
 # Démarrer
 
-L'écosystème Omni est un ensemble de paquets PHP. Ils se lisent en quatre
-étages, et c'est tout le vocabulaire à connaître :
+L'écosystème Omni est un ensemble de paquets PHP. Il se lit en deux parts :
+le **socle**, que tout site peut prendre, et des **structures préparées**,
+facultatives.
 
-| Étage | Nom | Ce que c'est |
+| Part | Nom | Ce que c'est |
 |---|---|---|
-| Socle | `glitchr/omnibase` | ce dont tout site part : comptes, back-office, traductions, images, formulaires |
-| Composants | `omnibase/<métier>` | les pages et les écrans d'un métier (boutique, blog, agenda, cabinet…), posés sur le socle |
-| Familles | `glitchr/omni<question>` | une question posée à plusieurs services, un seul contrat pour la réponse |
-| Fournisseurs | `omni<question>/<service>` | un service qui répond à la question : un paquet par service |
+| Socle : le cœur | `glitchr/omnibase` | ce dont tout site part : comptes, back-office, traductions, images, formulaires |
+| Socle : les familles | `omniscient/omni<domaine>` | un contrat pour un domaine (colis, paiements, registres…), quel que soit le service derrière ; `glitchr/omni<domaine>` pour celles qui n'ont pas encore déménagé |
+| Socle : les fournisseurs | `omni<domaine>/<service>` | un service qui remplit le contrat de sa famille : un paquet par service, [à chercher](/packages) |
+| Socle : les ponts | `omnibridge/<cible>` | la colle entre le socle et un cadre, un stockage ou une couche de rendu |
+| Facultatif : les structures préparées | `omnibase/<métier>` | une structure toute prête pour un métier — entités, écrans, back-office, traductions, données de démonstration — déjà assemblée sur le socle |
 
-Une famille et ses fournisseurs **ne dépendent pas du socle** : ils
-s'installent dans n'importe quelle application PHP. Le socle et ses
-composants sont, aujourd'hui, des bundles Symfony (voir
+Les structures préparées sont **facultatives** : rien dans le cœur ni dans
+les familles n'en dépend. Un site en prend une pour aller vite, ou écrit la
+sienne sur le cœur et les familles.
+
+Une famille et ses fournisseurs **ne dépendent pas du cœur** : ils
+s'installent dans n'importe quelle application PHP. Le cœur et les
+structures préparées sont, aujourd'hui, des bundles Symfony (voir
 [Compatibilité](compatibilite.md)).
 
 ## Installer une famille
@@ -39,17 +45,19 @@ $registry = new Registry([new StripeGatewayFactory(HttpClient::create())], [
 $gateway = $registry->get('stripe');
 ```
 
-Dans Symfony, le pont est dans le paquet du cœur (`Bridge/Symfony`) :
+Dans Symfony, le pont est dans le paquet de la famille (`Bridge/Symfony`) :
 déclarez son bundle dans `config/bundles.php` et ses passerelles sous la clé
 de la famille (`omnitrade:`). Le manuel de chaque famille s'ouvre sur
 l'usage en PHP nu, puis sur Symfony.
 
 > [!TIP]
-> Le [sélecteur d'installation](/install) compose la commande et le bloc
-> `composer.json` pour le cadre, le canal et les paquets choisis, avec les
-> contraintes de version qu'il faut (voir [Conventions](conventions.md)).
+> Le [sélecteur d'installation](/install) compose les commandes, le bloc
+> `composer.json` et, sous Symfony, la ligne de `config/bundles.php` pour le
+> cadre, le canal et ce qu'il vous faut (le cœur, une famille et ses
+> fournisseurs, un pont, une structure préparée), avec les contraintes de
+> version qu'il faut (voir [Conventions](conventions.md)).
 
-## Installer le socle
+## Installer le cœur
 
 `glitchr/omnibase` s'installe avec son greffon Composer, qui doit être
 autorisé :
@@ -59,13 +67,14 @@ composer config allow-plugins.glitchr/base-plugin true
 composer require glitchr/omnibase:3.x-dev
 ```
 
-Puis un composant par métier : `omnibase/blog`, `omnibase/marketplace`,
-`omnibase/agenda`… Chacun a son manuel.
+Puis, si elle fait gagner du temps, une structure préparée :
+`omnibase/blog`, `omnibase/marketplace`, `omnibase/agenda`… Chacune a son
+manuel ; aucune n'est requise.
 
 ## Lire la suite
 
 - [La documentation de chaque paquet](/docs) : un manuel par paquet, lu
   dans le dossier `docs/` de son dépôt, une version par branche.
-- [Le catalogue](/packages) : où en est chaque paquet (publié, vérifié en
-  réel, ses versions).
+- [La recherche des paquets](/packages) : chaque paquet, par nom, famille
+  ou sorte, et où il en est (publié, vérifié en réel, sa dernière version).
 - [Contribuer](contribuer.md) : corriger une page depuis GitHub.

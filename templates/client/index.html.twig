@@ -1,10 +1,13 @@
 {#
  # The home page, section by section (StickyStops: each section is a stop):
  # Omni and its turning suffix, the search through every manual and one tag
- # per family; omnibase and the families side by side; omnibridge, the glue
- # to a framework; the families, a contract each; which frameworks it runs
- # in; where to read on. Every name and every number comes from the catalogue
- # (app:packages:sync): a family is shown because its repository was found.
+ # per family; the foundation - the core, the families, the bridges; the
+ # families, a contract each, their providers counted and left to the search;
+ # omnibridge, the glue to a framework; apart and optional, the prepared
+ # structures; which frameworks it runs in; where to read on. No provider is
+ # named here, and the prepared structures never stand among the families.
+ # Every name and every number comes from the catalogue (app:packages:sync):
+ # a family is shown because its repository was found.
  # The way on is the documentation (Marco, 2026-10-10): nothing here counts
  # or names the sites built on the packages.
  #}
@@ -17,7 +20,7 @@
 <section class="om-hero sticky-stop" id="omni" data-controller="suffix" data-suffix-interval-value="2800">
     <div class="om-wrap om-hero-inner">
         <h1 class="visually-hidden">{{ '@messages.home.title'|trans }}</h1>
-        <p class="om-kicker"><span>{{ '@messages.home.kicker'|trans }}</span> <span class="om-cote">{{ '@messages.home.kicker_count'|trans({packages: counts.packages, families: families|length}) }}</span></p>
+        <p class="om-kicker"><span>{{ '@messages.home.kicker'|trans }}</span> <span class="om-cote">{{ '@messages.home.kicker_count'|trans({packages: counts.packages, families: floors.family|length}) }}</span></p>
 
         {% if first %}
         <p class="om-omni" aria-hidden="true"><span class="om-omni-fixed">Omni</span><a class="om-omni-slot" href="{{ path('wikidoc_index') }}" tabindex="-1" data-suffix-target="slot"><span class="is-in">{{ first.suffix }}</span></a></p>
@@ -36,7 +39,7 @@
             {% if families %}
             <ul class="om-omni-tags" aria-label="{{ '@messages.home.tags_label'|trans }}">
                 {% for family in families %}
-                <li><a href="{{ path('wikidoc_manual', {path: 'glitchr/' ~ family.name}) }}" data-suffix-target="item" data-action="mouseenter->suffix#pick focus->suffix#pick" data-suffix="{{ family.suffix }}" data-phrase="{{ ('@messages.families.' ~ family.name ~ '.phrase')|trans }}"{% if loop.first %} aria-current="true"{% endif %}>omni<b>{{ family.suffix }}</b><span class="visually-hidden">: {{ ('@messages.families.' ~ family.name ~ '.phrase')|trans }}</span></a></li>
+                <li><a href="{{ path('wikidoc_manual', {path: family.package.name}) }}" data-suffix-target="item" data-action="mouseenter->suffix#pick focus->suffix#pick" data-suffix="{{ family.suffix }}" data-phrase="{{ ('@messages.families.' ~ family.name ~ '.phrase')|trans }}"{% if loop.first %} aria-current="true"{% endif %}>omni<b>{{ family.suffix }}</b><span class="visually-hidden">: {{ ('@messages.families.' ~ family.name ~ '.phrase')|trans }}</span></a></li>
                 {% endfor %}
             </ul>
             {% endif %}
@@ -57,39 +60,55 @@
             <p class="om-lead">{{ '@messages.floors.lead'|trans }}</p>
         </header>
 
-        {# The section drawing: two stacks, read from the top. On the left omnibase, its core (1) then its
-         # extensions (2); on the right a family (3) then its providers (4). The examples turn one at a
-         # time (examples_controller.js); a family and the providers beside it are always of one domain. #}
-        {% set shown = {
-            foundation: floors.foundation|map(p => p.name)|slice(0, 3),
-            component: extensions|slice(0, 3),
-            family: pairs|slice(0, 3)|map(p => p.family),
-            provider: pairs|slice(0, 3)|map(p => p.providers|first),
-        } %}
-        <div class="om-section-drawing" data-controller="examples" data-examples-extensions-value="{{ extensions|json_encode }}" data-examples-pairs-value="{{ pairs|json_encode }}">
-            {% for stack in [['foundation', 'component'], ['family', 'provider']] %}
-            <div class="om-stack is-{{ loop.first ? 'house' : 'outside' }}">
-                <p class="om-stack-title">{{ ('@messages.floors.stack_' ~ (loop.first ? 'house' : 'outside'))|trans }}</p>
-                {% for tier in stack %}
-                {% set packages = floors[tier] %}
-                <a class="om-floor is-{{ tier }}" href="{{ path('app_packages') }}#{{ tier }}">
-                    <span class="om-floor-level">{{ {'foundation': '1', 'component': '2', 'family': '3', 'provider': '4'}[tier] }}</span>
-                    <span class="om-floor-body">
-                        <span class="om-floor-name">{{ ('@messages.floors.' ~ tier ~ '.name')|trans }}</span>
-                        <code class="om-floor-pattern">{{ ('@messages.floors.' ~ tier ~ '.pattern')|trans|omni_mark }}</code>
-                        <span class="om-floor-text">{{ ('@messages.floors.' ~ tier ~ '.text')|trans }}</span>
-                        <span class="om-floor-examples">
-                            {%- for name in shown[tier] %}<code data-examples-target="{{ tier }}">{{ name|omni_mark }}</code>{% endfor -%}
-                            {%- if packages|length > shown[tier]|length %}<span>+ {{ packages|length - shown[tier]|length }}</span>{% endif -%}
-                        </span>
-                    </span>
-                    <span class="om-floor-count"><b>{{ packages|length }}</b> {{ '@messages.floors.packages'|trans({count: packages|length}) }}</span>
-                </a>
-                {% endfor %}
-            </div>
+        {# The foundation's section drawing, read from the left: the core (1), the families (2), the bridges (3).
+         # The families' examples turn one at a time (examples_controller.js); providers are only counted. #}
+        {% set providers_count = floors.provider|length %}
+        <div class="om-section-drawing is-foundation" data-controller="examples" data-examples-families-value="{{ turning|json_encode }}">
+            {% set shown = turning|slice(0, 2) %}
+            {% for tier, level in {foundation: '1', family: '2', bridge: '3'} %}
+            {% set packages = floors[tier] %}
+            {# The core is named by its pattern (its name as the catalogue has it): no example beside it. #}
+            {% set examples = tier == 'family' ? shown : (tier == 'bridge' ? packages|map(p => p.name)|slice(0, 4) : []) %}
+            <a class="om-floor is-{{ tier }}" href="{{ (path('app_packages') ~ '?' ~ {kind: tier == 'foundation' ? 'core' : tier}|url_encode) }}">
+                <span class="om-floor-level">{{ level }}</span>
+                <span class="om-floor-body">
+                    <span class="om-floor-name">{{ ('@messages.floors.' ~ tier ~ '.name')|trans }}</span>
+                    <code class="om-floor-pattern">{{ (tier == 'foundation' and packages|length ? packages|first.name : ('@messages.floors.' ~ tier ~ '.pattern')|trans)|omni_mark }}</code>
+                    <span class="om-floor-text">{{ ('@messages.floors.' ~ tier ~ '.text')|trans }}</span>
+                    {% if examples %}<span class="om-floor-examples">
+                        {%- for name in examples %}<code{% if tier == 'family' %} data-examples-target="family"{% endif %}>{{ name|omni_mark }}</code>{% endfor -%}
+                        {%- if packages|length > examples|length %}<span>+ {{ packages|length - examples|length }}</span>{% endif -%}
+                    </span>{% endif %}
+                </span>
+                <span class="om-floor-count"><b>{{ packages|length }}</b> {{ '@messages.floors.packages'|trans({count: packages|length}) }}{% if tier == 'family' %} · {{ '@messages.floors.providers_count'|trans({count: providers_count}) }}{% endif %}</span>
+            </a>
             {% endfor %}
         </div>
-        <p class="om-floors-note">{{ '@messages.floors.note'|trans }}{% if floors.library|length %} {{ '@messages.floors.libraries'|trans({count: floors.library|length, url: path('app_packages') ~ '#library'})|raw }}{% endif %}</p>
+        <p class="om-floors-note">{{ '@messages.floors.note'|trans }}{% if floors.library|length %} {{ '@messages.floors.libraries'|trans({count: floors.library|length, url: (path('app_packages') ~ '?' ~ {kind: 'library'}|url_encode)})|raw }}{% endif %}</p>
+    </div>
+</section>
+
+<section class="om-section om-families sticky-stop" id="families">
+    <div class="om-wrap">
+        <header class="om-head">
+            <p class="om-cote">B — {{ '@messages.home.families_eyebrow'|trans }}</p>
+            <h2>{{ '@messages.home.families_title'|trans }}</h2>
+            <p class="om-lead">{{ '@messages.home.families_lead'|trans }}</p>
+        </header>
+        <ul class="om-family-list is-rows">
+            {% for family in families|filter(f => f.name != 'omnibase') %}
+            <li>
+                <a class="om-family-name" href="{{ path('app_family', {family: family.name}) }}">Omni<b>{{ family.suffix }}</b></a>
+                <span class="om-family-question">{{ ('@messages.families.' ~ family.name ~ '.phrase')|trans }}</span>
+                <a class="om-family-count" href="{{ (path('app_packages') ~ '?' ~ {family: family.name, kind: 'provider'}|url_encode) }}">{{ '@messages.home.providers'|trans({count: family.members}) }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% if announced %}
+        <p class="om-announced-line" id="announced">{{ '@messages.home.announced'|trans }}
+            {% for name, state in announced %}<span class="om-announced-name" title="{{ ('@messages.families.' ~ name ~ '.phrase')|trans }}">Omni<b>{{ family_suffix(name) }}</b></span> <em>({{ ('@messages.catalogue.' ~ state)|trans }})</em>{{ not loop.last ? ', ' }}{% endfor %}
+        </p>
+        {% endif %}
     </div>
 </section>
 
@@ -99,15 +118,15 @@
 <section class="om-section om-bridges sticky-stop" id="bridges">
     <div class="om-wrap">
         <header class="om-head">
-            <p class="om-cote">B — {{ '@messages.home.bridges_eyebrow'|trans }}</p>
+            <p class="om-cote">C — {{ '@messages.home.bridges_eyebrow'|trans }}</p>
             <h2>{{ '@messages.home.bridges_title'|trans }}</h2>
             <p class="om-lead">{{ '@messages.home.bridges_lead'|trans }}</p>
         </header>
         <ul class="om-family-list om-bridge-list">
-            {% for target in ['symfony', 'doctrine', 'twig', 'composer', 'laravel'] %}
+            {% for target in ['symfony', 'doctrine', 'twig', 'react', 'composer', 'laravel'] %}
             {% set package = found_bridges['omnibridge/' ~ target]|default(null) %}
             <li>
-                <a href="{{ package ? path('app_package', {vendor: package.vendor, name: package.shortName}) : path('app_packages') ~ '#bridge' }}">
+                <a href="{{ package ? path('app_package', {vendor: package.vendor, name: package.shortName}) : (path('app_packages') ~ '?' ~ {kind: 'bridge'}|url_encode) }}">
                     <span class="om-family-name">omnibridge/<b>{{ target }}</b></span>
                     <span class="om-family-question">{{ ('@messages.home.bridge_' ~ target)|trans }}</span>
                     <span class="om-family-count">{{ (package ? '@messages.home.bridge_found' : '@messages.home.bridge_planned')|trans }}</span>
@@ -118,30 +137,36 @@
     </div>
 </section>
 
-<section class="om-section om-families sticky-stop" id="families">
+{# Apart, and optional: the prepared structures. Nothing in the core or the families depends on them. #}
+<section class="om-section om-structures sticky-stop" id="structures">
     <div class="om-wrap">
         <header class="om-head">
-            <p class="om-cote">C — {{ '@messages.home.families_eyebrow'|trans }}</p>
-            <h2>{{ '@messages.home.families_title'|trans }}</h2>
-            <p class="om-lead">{{ '@messages.home.families_lead'|trans }}</p>
+            <p class="om-cote">D — <span class="om-optional">{{ '@messages.structures.optional'|trans }}</span> {{ '@messages.structures.eyebrow'|trans }}</p>
+            <h2>{{ '@messages.structures.title'|trans }}</h2>
+            <p class="om-lead">{{ '@messages.floors.component.text'|trans }}</p>
         </header>
-        <ul class="om-family-list">
-            {% for family in families %}
-            <li>
-                <a href="{{ path('app_family', {family: family.name}) }}">
-                    <span class="om-family-name">Omni<b>{{ family.suffix }}</b></span>
-                    <span class="om-family-question">{{ ('@messages.families.' ~ family.name ~ '.phrase')|trans }}</span>
-                    <span class="om-family-count">{{ family.name == 'omnibase' ? '@messages.home.components'|trans({count: family.members}) : '@messages.home.providers'|trans({count: family.members}) }}</span>
-                </a>
-            </li>
-            {% endfor %}
-        </ul>
+        {% set shown = structures|slice(0, 3) %}
+        <div class="om-section-drawing is-optional" data-controller="examples" data-examples-structures-value="{{ structures|json_encode }}">
+            <a class="om-floor is-component" href="{{ (path('app_packages') ~ '?' ~ {kind: 'structure'}|url_encode) }}">
+                <span class="om-floor-level" aria-hidden="true">+</span>
+                <span class="om-floor-body">
+                    <span class="om-floor-name">{{ '@messages.floors.component.name'|trans }}</span>
+                    <code class="om-floor-pattern">{{ '@messages.floors.component.pattern'|trans|omni_mark }}</code>
+                    <span class="om-floor-examples">
+                        {%- for name in shown %}<code data-examples-target="component">{{ name|omni_mark }}</code>{% endfor -%}
+                        {%- if structures|length > shown|length %}<span>+ {{ structures|length - shown|length }}</span>{% endif -%}
+                    </span>
+                </span>
+                <span class="om-floor-count"><b>{{ structures|length }}</b> {{ '@messages.structures.count'|trans({count: structures|length}) }}</span>
+            </a>
+            <p class="om-structures-note">{{ '@messages.structures.note'|trans }}</p>
+        </div>
     </div>
 </section>
 
 <section class="om-section om-compat-section sticky-stop" id="compatibility">
     <div class="om-wrap">
-        {% include 'partials/_compatibility.html.twig' with {letter: 'D', bridges: '#bridges'} %}
+        {% include 'partials/_compatibility.html.twig' with {letter: 'E', bridges: '#bridges'} %}
     </div>
 </section>
 
@@ -149,14 +174,14 @@
     <div class="om-wrap om-read-grid">
         <div>
             <header class="om-head">
-                <p class="om-cote">E — {{ '@messages.home.read_eyebrow'|trans }}</p>
+                <p class="om-cote">F — {{ '@messages.home.read_eyebrow'|trans }}</p>
                 <h2>{{ '@messages.home.read_title'|trans }}</h2>
                 <p class="om-lead">{{ '@messages.home.read_lead'|trans }}</p>
             </header>
             <dl class="om-figures">
                 <div><dt>{{ '@messages.home.figure_packages'|trans }}</dt><dd>{{ counts.packages }}</dd></div>
                 <div><dt>{{ '@messages.home.figure_manuals'|trans }}</dt><dd>{{ counts.manuals }}</dd></div>
-                <div><dt>{{ '@messages.home.figure_families'|trans }}</dt><dd>{{ families|length }}</dd></div>
+                <div><dt>{{ '@messages.home.figure_families'|trans }}</dt><dd>{{ floors.family|length }}</dd></div>
             </dl>
             <p class="om-actions"><a class="om-button" href="{{ path('wikidoc_index') }}">{{ '@messages.start.to_docs'|trans }}</a> <a class="om-button is-line" href="{{ path('app_support') }}">{{ '@messages.home.to_support'|trans }}</a></p>
         </div>

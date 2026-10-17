@@ -1,0 +1,22 @@
+{#
+ # A package as a row of the search: its name, what it is, its family, its
+ # latest version, "not tested live" when its README says so, its links.
+ # The data-* attributes are what search_controller.js narrows the rows by
+ # (App\Catalogue\PackageSearch writes the same haystack it searches).
+ #}
+{% set manual = manual_of(package) %}
+<li class="om-hit" data-name="{{ package.name|lower }}" data-short="{{ package.shortName|lower }}" data-text="{{ search_haystack(package) }}" data-family="{{ package.family }}" data-kind="{{ package.tier.kind }}" data-order="{{ order }}"{{ hidden ? ' hidden' }}>
+    <div class="om-hit-head">
+        <a class="om-hit-name" href="{{ path('app_package', {vendor: package.vendor, name: package.shortName}) }}">{{ package.name|omni_mark }}</a>
+        <span class="om-kind is-{{ package.tier.kind }}">{{ ('@messages.kind.' ~ package.tier.kind ~ '_one')|trans }}</span>
+        {% if package.family and package.tier.kind not in ['core', 'family'] %}<a class="om-hit-family" href="{{ (path('app_packages') ~ '?' ~ {family: package.family}|url_encode) }}">{{ package.family }}</a>{% endif %}
+        {% if package.publishedVersion %}<code class="om-hit-version" title="{{ '@messages.search.version_title'|trans({registry: package.npm ? 'npm' : 'Packagist'}) }}">{{ package.publishedVersion }}</code>{% endif %}
+        {% if package.verification.value == 'unverified' %}<span class="om-fact is-unverified" title="{{ package.verificationNote }}">{{ '@messages.search.untested'|trans }}</span>{% elseif package.verification.value == 'partial' %}<span class="om-fact is-partial" title="{{ package.verificationNote }}">{{ '@messages.search.partly_tested'|trans }}</span>{% endif %}
+    </div>
+    <p class="om-hit-text">{{ package.description ?? '@messages.catalogue.no_description'|trans }}</p>
+    <p class="om-hit-links">
+        {% if package.published is same as(true) %}<a href="{{ package.registryUrl }}" rel="noopener">{{ package.npm ? 'npm' : 'Packagist' }}</a>{% endif %}
+        {% if package.repositoryUrl %}<a href="{{ package.repositoryUrl }}" rel="noopener">GitHub</a>{% endif %}
+        {% if manual %}<a href="{{ path('wikidoc_manual', {path: manual.urlPath()}) }}">{{ '@messages.search.docs'|trans }}</a>{% endif %}
+    </p>
+</li>

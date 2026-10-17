@@ -11,15 +11,19 @@ licence, et ce que leur README dit de leur vérification.
 ## Les noms
 
 Un paquet se nomme par son nom Composer, jamais par son dossier :
-`glitchr/omnistate`, pas « omnistate/core ». Les deux côtés se lisent de la
-même façon, « la famille / un de ses membres » : `omnitrade/stripe` est un
-fournisseur d'un service extérieur, `omnibase/marketplace` un composant de
-site fourni par le socle.
+`glitchr/omnistate`, pas « omnistate/core ». Le cœur et le paquet propre de
+chaque famille passent sous le vendeur `omniscient/` sur Packagist
+(`omniscient/omnilab` d'abord, les autres à leur tour) ; l'ancien nom
+`glitchr/…` reste déclaré en `replace`, si bien qu'un projet qui le requiert
+encore reçoit le nouveau paquet. Les autres noms se lisent « la famille / un
+de ses membres » : `omnitrade/stripe` est un fournisseur d'un service
+extérieur, `omnibase/marketplace` une structure préparée — une structure
+toute prête pour un métier, assemblée sur le socle, et facultative : rien
+dans le cœur ni dans les familles n'en dépend.
 
 Une famille n'existe que pour une question posée à **au moins deux services
 réels**, et qu'aucune bibliothèque existante ne couvre déjà. Un nom
-seulement annoncé est listé à part au bas du [catalogue](/packages), sans
-fiche.
+seulement annoncé est cité à part sur la page d'accueil, sans fiche.
 
 ## Les versions
 

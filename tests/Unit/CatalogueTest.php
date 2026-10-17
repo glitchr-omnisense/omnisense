@@ -24,6 +24,17 @@ final class CatalogueTest extends TestCase
         self::assertSame([Tier::Bridge, null], Tier::of('omnibridge/symfony'));
         self::assertSame([Tier::Bridge, null], Tier::of('glitchr/omnibridge'));
         self::assertSame([Tier::Library, null], Tier::of('@glitchr/flowjs'));
+        // The omniscient/ vendor holds the core and the families' own packages, as glitchr/ did and still does until each moves.
+        self::assertSame([Tier::Family, 'omnilab'], Tier::of('omniscient/omnilab'));
+        self::assertSame([Tier::Family, 'omnilab'], Tier::of('glitchr/omnilab'));
+        self::assertSame([Tier::Foundation, 'omnibase'], Tier::of('omniscient/omnibase'));
+        self::assertSame([Tier::Bridge, null], Tier::of('omniscient/omnibridge'));
+        self::assertSame([Tier::Provider, 'omnilab'], Tier::of('omnilab/pubchem'));
+        self::assertNull(Tier::of('omniscient/website'));
+        // What the search calls each floor.
+        self::assertSame(['core', 'structure', 'family', 'provider', 'bridge', 'library'], array_map(static fn (Tier $t): string => $t->kind(), Tier::cases()));
+        self::assertSame(Tier::Component, Tier::fromKind('structure'));
+        self::assertNull(Tier::fromKind('component'));
         // Not the ecosystem's: another vendor, another scope, a helper of the studio.
         self::assertNull(Tier::of('symfony/http-client'));
         self::assertNull(Tier::of('@hotwired/stimulus'));

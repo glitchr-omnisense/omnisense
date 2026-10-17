@@ -3,6 +3,8 @@
 namespace App\Twig;
 
 use App\Catalogue\Families;
+use App\Catalogue\InstallChoice;
+use App\Catalogue\PackageSearch;
 use App\Entity\Package;
 use App\Repository\PackageRepository;
 use Base\Wikidoc\Manual\Manual;
@@ -51,6 +53,8 @@ class CatalogueExtension extends AbstractExtension
             new TwigFunction('manual_of', fn (Package $package): ?Manual => $this->manuals->get($package->getHandle())),
             new TwigFunction('package_of', fn (Manual|string $manual): ?Package => $this->packages->findOneByHandle($manual instanceof Manual ? $manual->getKey() : $manual)),
             new TwigFunction('family_suffix', Families::suffix(...)),
+            new TwigFunction('search_haystack', PackageSearch::haystack(...)),
+            new TwigFunction('install_params', InstallChoice::paramsFor(...)),
             new TwigFunction('doc_path', $this->docPath(...)),
             new TwigFunction('manual_pages', $this->manualPages(...)),
             new TwigFunction('manual_groups', $this->groups(...)),
