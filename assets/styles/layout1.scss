@@ -108,7 +108,7 @@ html.theme-mode-dark .om-when-dark { display: inline; } html.theme-mode-dark .om
 .om-mark-omni { color: var(--om-soft); }
 .om-mark-domain { font-weight: inherit; color: var(--om-blue); }
 .om-floor-text { font-size: .96rem; line-height: 1.45; color: var(--om-soft); }
-.om-floor-examples { display: flex; flex-wrap: wrap; gap: .3rem .5rem; margin-top: .25rem; code { @include mono(.8rem, 500); padding: 0 .35rem; border: 1px solid var(--om-line); @include motion { transition: opacity .22s ease, transform .22s ease; &.is-out { opacity: 0; transform: translateY(-.25rem); } } } span { @include mono(.72rem, 500); color: var(--om-soft); } }
+.om-floor-examples { display: flex; flex-wrap: wrap; gap: .3rem .5rem; margin-top: .25rem; code { @include mono(.8rem, 500); white-space: nowrap; box-sizing: border-box; overflow: hidden; text-overflow: ellipsis; padding: 0 .35rem; border: 1px solid var(--om-line); @include motion { transition: opacity .22s ease, transform .22s ease; &.is-out { opacity: 0; transform: translateY(-.25rem); } } } span { @include mono(.72rem, 500); color: var(--om-soft); } }
 .om-floor-count { grid-column: 2; padding: 0 1.1rem .9rem 0; @include cote; b { @include display(800); font-size: 1.3rem; letter-spacing: -.02em; color: var(--om-ink); margin-right: .25rem; } }
 .om-floors-note { margin: 1.75rem 0 0; max-width: 46rem; font-size: 1.02rem; }
 

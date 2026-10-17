@@ -9,6 +9,12 @@ import { Controller } from '@hotwired/stimulus';
  *
  * Only while the drawing is on screen and the page is shown; without
  * movement (prefers-reduced-motion) nothing turns.
+ *
+ * A row's chips keep one width while the names turn: the longest name they
+ * may show, or less when the row cannot hold that many beside its "+ N" - a
+ * longer name is then cut (…, the whole of it in its title). Measured once
+ * the fonts are in and again when the row's width changes: the floors below
+ * never move while the names turn.
  */
 export default class extends Controller {
     static targets = ['component', 'family', 'provider'];
@@ -16,6 +22,11 @@ export default class extends Controller {
 
     connect() {
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+        this.reserve();
+        document.fonts?.ready.then(() => this.reserve());
+        this.resized = new ResizeObserver(() => this.reserve());
+        this.resized.observe(this.element);
 
         this.step = 0;
         this.slot = { component: 0, pair: 0 };
@@ -39,6 +50,7 @@ export default class extends Controller {
     disconnect() {
         this.stop();
         this.observer?.disconnect();
+        this.resized?.disconnect();
         if (this.visibility) document.removeEventListener('visibilitychange', this.visibility);
     }
 
@@ -80,6 +92,44 @@ export default class extends Controller {
         if (this.providerTargets[slot]) setTimeout(() => this.swap(this.providerTargets[slot], provider), 140);
     }
 
+    // A row's chips as wide as the widest name their kind may show, or the share of the row left beside its "+ N".
+    reserve() {
+        const kinds = {
+            component: this.extensionsValue,
+            family: this.pairsValue.map((pair) => pair.family),
+            provider: this.pairsValue.flatMap((pair) => pair.providers),
+        };
+        for (const [kind, names] of Object.entries(kinds)) {
+            const chips = this[`${kind}Targets`];
+            if (!chips.length || !names.length) continue;
+            const row = chips[0].parentNode;
+            const probe = chips[0].cloneNode(false);
+            probe.removeAttribute('data-examples-target');
+            probe.setAttribute('aria-hidden', 'true');
+            probe.style.cssText = 'position: absolute; visibility: hidden; width: auto';
+            row.appendChild(probe);
+            let widest = 0;
+            for (const name of names) {
+                probe.innerHTML = mark(name);
+                widest = Math.max(widest, probe.getBoundingClientRect().width);
+            }
+            // The narrowest a chip may be: "omni" and a few letters, read; below it the row wraps (still without moving).
+            probe.innerHTML = mark('omnixxxx/xxx');
+            const narrowest = probe.getBoundingClientRect().width;
+            probe.remove();
+
+            const style = getComputedStyle(row);
+            const gap = parseFloat(style.columnGap) || 0;
+            const others = [...row.children].filter((child) => !chips.includes(child)).reduce((sum, child) => sum + child.getBoundingClientRect().width + gap, 0);
+            const share = (row.clientWidth - others - gap * (chips.length - 1)) / chips.length;
+            const width = Math.floor(Math.max(narrowest, Math.min(widest, share)));
+            chips.forEach((chip) => {
+                chip.style.width = `${width}px`;
+                chip.title = chip.textContent;
+            });
+        }
+    }
+
     // The next name not on screen, going round the list.
     pick(length, shown, cursor) {
         let next = this[cursor] % length;
@@ -93,6 +143,7 @@ export default class extends Controller {
         chip.classList.add('is-out');
         setTimeout(() => {
             chip.innerHTML = mark(name);
+            chip.title = name;
             chip.classList.remove('is-out');
         }, 220);
     }
