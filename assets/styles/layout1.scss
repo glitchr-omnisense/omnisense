@@ -8,11 +8,11 @@
 .om-skip { position: absolute; left: -999rem; top: .5rem; z-index: 3000; padding: .5rem .9rem; background: var(--om-ink); color: var(--om-paper); &:focus { left: .5rem; color: var(--om-paper); } }
 .om-cote { margin: 0; @include cote; a { color: inherit; } }
 .om-lead { max-width: 44rem; font-size: clamp(1.1rem, 1.6vw, 1.3rem); line-height: 1.5; color: var(--om-soft); }
-.om-source { @include mono(.72rem, 400); color: var(--om-soft); }
+.om-source { @include fine(.875rem, 400); color: var(--om-soft); }
 .om-none, .om-note { color: var(--om-soft); font-size: .95rem; }
 .om-more { font-weight: 650; }
 
-.om-button { display: inline-flex; align-items: center; gap: .5rem; min-height: 2.75rem; padding: 0 1.15rem; border: 1.5px solid var(--om-ink); border-radius: 2px; background: var(--om-ink); color: var(--om-paper); font: 650 .86rem/1 $om-text; letter-spacing: .01em; text-decoration: none; cursor: pointer;
+.om-button { display: inline-flex; align-items: center; gap: .5rem; min-height: 2.75rem; padding: 0 1.15rem; border: 1.5px solid var(--om-ink); border-radius: 2px; background: var(--om-ink); color: var(--om-paper); font: 600 .95rem/1 $om-text; text-decoration: none; cursor: pointer;
     &:hover { background: var(--om-blue); border-color: var(--om-blue); color: var(--om-paper); }
     &.is-line { background: transparent; color: var(--om-ink); &:hover { background: var(--om-ink); border-color: var(--om-ink); color: var(--om-paper); } }
     &.is-on { border-color: var(--om-blue); color: var(--om-blue); } }
@@ -27,14 +27,15 @@
     &.is-small { font-size: 1.15rem; } }
 .om-nav { margin-right: auto;
     ul { display: flex; gap: .25rem; margin: 0; padding: 0; list-style: none; }
-    a { display: block; padding: .45rem .7rem; font-size: .93rem; font-weight: 500; text-decoration: none; border-bottom: 2px solid transparent;
+    a { display: block; padding: .45rem .7rem; font-size: 1rem; font-weight: 500; text-decoration: none; border-bottom: 2px solid transparent;
         &:hover { color: var(--om-blue); }
         &[aria-current] { border-bottom-color: var(--om-blue); font-weight: 700; } } }
 .om-menu-button { display: none; margin-left: auto; padding: .35rem .8rem; border: 1.5px solid var(--om-ink); border-radius: 2px; background: none; color: var(--om-ink); font: 650 .82rem/1.4 $om-text; cursor: pointer; }
 .om-tools { display: flex; align-items: center; gap: .15rem; }
-.om-tool { display: inline-flex; align-items: center; gap: .4rem; min-width: 2.25rem; min-height: 2.25rem; padding: 0 .5rem; justify-content: center; border: 0; border-radius: 2px; background: none; color: var(--om-ink); @include mono(.74rem, 600); text-decoration: none; cursor: pointer;
+.om-tool { display: inline-flex; align-items: center; gap: .4rem; min-width: 2.25rem; min-height: 2.25rem; padding: 0 .5rem; justify-content: center; border: 0; border-radius: 2px; background: none; color: var(--om-ink); @include fine(.875rem, 600); text-decoration: none; cursor: pointer;
     &:hover { background: var(--om-wash); color: var(--om-blue); }
-    &.is-account { border: 1px solid var(--om-line); padding: 0 .7rem; span { max-width: 9rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } } }
+    &.is-signin { margin-left: .25rem; font-weight: 600; &:hover { background: none; text-decoration: underline; text-underline-offset: .25em; } }
+    &.is-account { font-size: 1rem; padding: 0 .7rem; span { max-width: 9rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } } }
 .om-when-dark { display: none; }
 html.theme-mode-dark .om-when-dark { display: inline; } html.theme-mode-dark .om-when-light { display: none; }
 @media (prefers-color-scheme: dark) { html:not(.theme-mode-light) .om-when-dark { display: inline; } html:not(.theme-mode-light) .om-when-light { display: none; } }
@@ -44,7 +45,7 @@ html.theme-mode-dark .om-when-dark { display: inline; } html.theme-mode-dark .om
     .om-nav { display: none; order: 5; flex-basis: 100%; margin: 0; padding: .25rem 0 .5rem; border-top: 1px solid var(--om-line);
         ul { flex-direction: column; gap: 0; } a { padding: .6rem .25rem; border-bottom: 0; border-left: 2px solid transparent; &[aria-current] { border-left-color: var(--om-blue); padding-left: .7rem; } } }
     .om-header.is-open .om-nav { display: block; }
-    .om-tool.is-account span { display: none; }
+    .om-tool.is-account:not(.is-signin) span { display: none; }
 }
 
 // ── Sections and heads ─────────────────────────────────────────────────
@@ -61,9 +62,9 @@ html.theme-mode-dark .om-when-dark { display: inline; } html.theme-mode-dark .om
 .om-hero { position: relative; display: flex; align-items: center; min-height: calc(100vh - #{$om-header}); min-height: calc(100svh - #{$om-header}); padding-block: clamp(2.5rem, 6vw, 4.5rem); overflow: hidden;
     background-image: linear-gradient(var(--om-grid) 1px, transparent 1px), linear-gradient(90deg, var(--om-grid) 1px, transparent 1px), linear-gradient(var(--om-grid) 1px, transparent 1px), linear-gradient(90deg, var(--om-grid) 1px, transparent 1px);
     background-size: 2rem 2rem, 2rem 2rem, 10rem 10rem, 10rem 10rem; background-position: -1px -1px; }
-.om-hero-inner { display: grid; gap: 1.25rem 3rem; grid-template-columns: minmax(0, 1fr); @include wide { grid-template-columns: minmax(0, 1fr) 15.5rem; grid-template-areas: "kicker index" "omni index" "phrase index" "actions index"; align-items: start; } }
+.om-hero-inner { display: grid; gap: 1.25rem 3.5rem; grid-template-columns: minmax(0, 1fr); @include wide { grid-template-columns: minmax(0, 1fr) minmax(18rem, 25rem); grid-template-areas: "kicker find" "omni find" "phrase find" "actions find"; align-items: start; } }
 .om-kicker { display: flex; flex-wrap: wrap; gap: .4rem 1.25rem; align-items: baseline; margin: 0; font-size: 1.05rem; font-weight: 600; @include wide { grid-area: kicker; } .om-cote { white-space: normal; } }
-.om-omni { margin: 0; display: flex; flex-wrap: wrap; align-items: baseline; @include display(800); font-size: clamp(4rem, 21vw, 8rem); line-height: 1; letter-spacing: -.035em; @include wide { grid-area: omni; flex-wrap: nowrap; font-size: clamp(5rem, 9.4vw, 8.75rem); } }
+.om-omni { margin: 0; display: flex; flex-wrap: wrap; align-items: baseline; @include display(800); font-size: clamp(4rem, 21vw, 8rem); line-height: 1; letter-spacing: -.02em; @include wide { grid-area: omni; flex-wrap: nowrap; font-size: clamp(5rem, 9.4vw, 8.75rem); } }
 .om-omni-fixed { color: var(--om-ink); }
 // The slot: a blank on a form, a rule under it, the suffix written in blue.
 .om-omni-slot { position: relative; display: block; min-width: 2.4ch; overflow: hidden; color: var(--om-blue); font-weight: 300; padding: 0 .04em .16em 0; border-bottom: .04em solid var(--om-ink);
@@ -79,12 +80,13 @@ html.theme-mode-dark .om-when-dark { display: inline; } html.theme-mode-dark .om
 }
 .om-omni-phrase { margin: 1.1rem 0 0; max-width: 36rem; min-height: 2.8em; font-size: clamp(1.2rem, 2.2vw, 1.6rem); line-height: 1.35; font-weight: 500; @include wide { grid-area: phrase; } }
 .om-hero .om-actions { @include wide { grid-area: actions; } }
-.om-omni-index { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: .3rem; @include wide { grid-area: index; display: block; padding: .5rem 0 .5rem 1.25rem; border-left: 1.5px solid var(--om-ink); background: var(--om-paper); }
-    a { display: flex; align-items: baseline; gap: .75rem; padding: .32rem .6rem; border: 1px solid var(--om-line); border-radius: 2px; background: var(--om-paper); text-decoration: none; @include wide { border: 0; border-left: 3px solid transparent; margin-left: calc(-1.25rem - 2px); padding: .3rem .5rem .3rem 1.1rem; }
-        &:hover, &[aria-current] { border-color: var(--om-blue); color: var(--om-ink); .om-omni-name b { color: var(--om-blue); } }
-        &[aria-current] { background: var(--om-wash); } }
-    .om-cote { min-width: 1.4rem; @include small { display: none; } } }
-.om-omni-name { font-family: $om-display; font-weight: 700; font-size: 1rem; letter-spacing: -.01em; b { font-weight: 300; } }
+// Beside the mark: the search through every manual, and under it one tag per family.
+.om-hero-find { @include wide { grid-area: find; align-self: center; padding: .25rem 0 .25rem 2rem; border-left: 1.5px solid var(--om-ink); }
+    .om-search { max-width: none; } }
+.om-omni-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin: 1.25rem 0 0; padding: 0; list-style: none;
+    a { display: inline-block; padding: .2rem .6rem; border: 1px solid var(--om-line); border-radius: 2px; background: var(--om-paper); font: 500 .95rem/1.4 $om-text; text-decoration: none;
+        b { font-weight: 600; color: var(--om-blue); }
+        &:hover, &[aria-current] { border-color: var(--om-blue); color: var(--om-ink); background: var(--om-wash); } } }
 
 // ── Home: the floors ───────────────────────────────────────────────────
 .om-section-drawing { display: grid; gap: 2.5rem; @include wide { grid-template-columns: 1fr 1fr; gap: 0; } }
@@ -101,9 +103,12 @@ html.theme-mode-dark .om-when-dark { display: inline; } html.theme-mode-dark .om
     .is-provider & { background-image: repeating-linear-gradient(45deg, transparent 0 6px, var(--om-line) 6px 7px), repeating-linear-gradient(-45deg, transparent 0 6px, var(--om-line) 6px 7px); } }
 .om-floor-body { display: grid; gap: .3rem; padding: 1.1rem 1.1rem .6rem 0; }
 .om-floor-name { @include display(800); font-size: clamp(1.4rem, 2.6vw, 1.9rem); line-height: 1; }
-.om-floor-pattern { @include mono(.8rem, 600); color: var(--om-blue); }
+.om-floor-pattern { @include mono(.85rem, 500); color: var(--om-ink); }
+// A name marked as the omni_mark filter does: "omni" in grey, the domain after it in blue.
+.om-mark-omni { color: var(--om-soft); }
+.om-mark-domain { font-weight: inherit; color: var(--om-blue); }
 .om-floor-text { font-size: .96rem; line-height: 1.45; color: var(--om-soft); }
-.om-floor-examples { display: flex; flex-wrap: wrap; gap: .3rem .5rem; margin-top: .25rem; code { @include mono(.72rem, 500); padding: 0 .35rem; border: 1px solid var(--om-line); } span { @include mono(.72rem, 500); color: var(--om-soft); } }
+.om-floor-examples { display: flex; flex-wrap: wrap; gap: .3rem .5rem; margin-top: .25rem; code { @include mono(.8rem, 500); padding: 0 .35rem; border: 1px solid var(--om-line); @include motion { transition: opacity .22s ease, transform .22s ease; &.is-out { opacity: 0; transform: translateY(-.25rem); } } } span { @include mono(.72rem, 500); color: var(--om-soft); } }
 .om-floor-count { grid-column: 2; padding: 0 1.1rem .9rem 0; @include cote; b { @include display(800); font-size: 1.3rem; letter-spacing: -.02em; color: var(--om-ink); margin-right: .25rem; } }
 .om-floors-note { margin: 1.75rem 0 0; max-width: 46rem; font-size: 1.02rem; }
 
@@ -114,12 +119,13 @@ html.theme-mode-dark .om-when-dark { display: inline; } html.theme-mode-dark .om
 .om-family-name { @include display(800); font-size: clamp(1.5rem, 3vw, 2.1rem); line-height: 1.05; b { font-weight: 300; color: var(--om-blue); } }
 .om-family-question { font-size: 1.08rem; }
 .om-family-count { @include cote; }
+.om-bridge-list { a { @include wide { grid-template-columns: 21rem minmax(0, 1fr) auto; } } .om-family-name { font-size: clamp(1.35rem, 2.4vw, 1.75rem); } }
 
 // ── Home: read on ──────────────────────────────────────────────────────
 .om-read-grid { display: grid; gap: 3rem; @include wide { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 5rem; } }
 .om-search { max-width: 36rem; label { display: block; margin-bottom: .4rem; @include cote; }
     > div { display: flex; }
-    input { flex: 1; min-width: 0; min-height: 2.9rem; padding: 0 .9rem; border: 1.5px solid var(--om-ink); border-right: 0; border-radius: 2px 0 0 2px; background: var(--om-sheet); color: var(--om-ink); @include mono(.9rem, 500); &:focus { outline: 0; box-shadow: inset 0 0 0 2px var(--om-blue); } &::placeholder { color: var(--om-soft); opacity: .8; } }
+    input { flex: 1; min-width: 0; min-height: 2.9rem; padding: 0 .9rem; border: 1.5px solid var(--om-ink); border-right: 0; border-radius: 2px 0 0 2px; background: var(--om-sheet); color: var(--om-ink); font: 400 1rem/1.4 $om-text; &:focus { outline: 0; box-shadow: inset 0 0 0 2px var(--om-blue); } &::placeholder { color: var(--om-soft); opacity: .8; } }
     .om-button { min-height: 2.9rem; border-radius: 0 2px 2px 0; } }
 // The figures as a plan's dimensions: each one measured by its cote above it -
 // a thin line between two ticks - rather than set as a dashboard's numbers.
@@ -129,7 +135,7 @@ html.theme-mode-dark .om-when-dark { display: inline; } html.theme-mode-dark .om
 .om-news { h3 { margin-bottom: .75rem; }
     ol { margin: 0; padding: 0; list-style: none; border-top: 1.5px solid var(--om-ink); }
     li { padding: .9rem 0; border-bottom: 1px solid var(--om-line); }
-    time { display: block; @include mono(.72rem, 500); color: var(--om-soft); }
+    time { display: block; @include fine(.85rem, 500); color: var(--om-soft); }
     a { font-size: 1.12rem; font-weight: 650; text-decoration: none; }
     p { margin: .2rem 0 0; font-size: .95rem; color: var(--om-soft); } }
 
@@ -139,7 +145,7 @@ html.theme-mode-dark .om-when-dark { display: inline; } html.theme-mode-dark .om
 .om-tier { padding-top: clamp(2rem, 4.5vw, 3rem); scroll-margin-top: $om-header;
     > header { display: grid; gap: .3rem 1.5rem; align-items: baseline; margin-bottom: 1rem; @include wide { grid-template-columns: auto minmax(0, 1fr); }
         .om-cote { grid-column: 1 / -1; color: var(--om-blue); }
-        h2 { margin: 0; font-size: clamp(1.45rem, 2.8vw, 2rem); small { @include mono(.8rem, 600); color: var(--om-soft); letter-spacing: 0; vertical-align: .35em; } a { text-decoration: none; } b { font-weight: 300; color: var(--om-blue); } }
+        h2 { margin: 0; font-size: clamp(1.45rem, 2.8vw, 2rem); small { @include fine(.85rem, 600); color: var(--om-soft); letter-spacing: 0; vertical-align: .35em; } a { text-decoration: none; } b { font-weight: 300; color: var(--om-blue); } }
         p { margin: 0; color: var(--om-soft); max-width: 46rem; } }
     h3.om-cote { margin: 1.5rem 0 .5rem; } }
 .om-anchor { scroll-margin-top: $om-header; }
@@ -154,7 +160,7 @@ html.theme-mode-dark .om-when-dark { display: inline; } html.theme-mode-dark .om
 .om-row-text { margin: 0; font-size: .93rem; line-height: 1.45; color: var(--om-soft); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .om-row-facts { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: .3rem; margin: .15rem 0 0; @include wide { grid-column: 2; } }
 // A fact about a package: a small label with the dot of its state.
-.om-fact { display: inline-flex; align-items: center; gap: .4rem; padding: .05rem .5rem; border: 1px solid var(--om-line); border-radius: 2px; @include mono(.7rem, 500); line-height: 1.6; color: var(--om-soft); text-decoration: none; white-space: nowrap;
+.om-fact { display: inline-flex; align-items: center; gap: .4rem; padding: .05rem .5rem; border: 1px solid var(--om-line); border-radius: 2px; @include fine(.875rem, 500); line-height: 1.6; color: var(--om-soft); text-decoration: none; white-space: nowrap;
     &::before { content: ""; width: .5rem; height: .5rem; border-radius: 50%; background: var(--om-line); flex: none; }
     &.is-yes::before, &.is-verified::before { background: var(--om-ok); }
     &.is-partial::before, &.is-new::before { background: var(--om-warn); }
@@ -204,19 +210,19 @@ a.om-fact:hover { border-color: var(--om-blue); color: var(--om-blue); }
     > div { display: flex; flex-direction: column-reverse; gap: .2rem; } dt { @include cote; } dd { margin: 0; code { @include mono(1.05rem, 700); color: var(--om-blue); } } }
 .om-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin: 0 0 .5rem; padding: 0; list-style: none;
     li { display: inline-flex; align-items: baseline; gap: .5rem; padding: .15rem .6rem; border: 1px solid var(--om-ink); border-radius: 2px; background: var(--om-sheet); }
-    code { @include mono(.86rem, 700); } time { @include mono(.7rem, 400); color: var(--om-soft); } }
+    code { @include mono(.86rem, 700); } time { @include fine(.85rem, 400); color: var(--om-soft); } }
 .om-branches { margin: 0; padding: 0; list-style: none; border-top: 1.5px solid var(--om-ink);
     > li { padding: .75rem 0 .9rem; border-bottom: 1px solid var(--om-line); } }
 .om-branch-head { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .8rem; margin: 0 0 .4rem; > code:first-child { @include mono(1rem, 700); } }
 .om-branch-version { @include mono(.8rem, 500); color: var(--om-blue); &::before { content: "→ "; color: var(--om-soft); } }
 .om-commits { margin: 0; padding: 0 0 0 .75rem; list-style: none; border-left: 1px solid var(--om-line);
     li { display: grid; grid-template-columns: 5.5rem 5.5rem minmax(0, 1fr); gap: 0 .8rem; align-items: baseline; padding: .18rem 0; font-size: .9rem; @include small { grid-template-columns: 5rem minmax(0, 1fr); time { display: none; } } }
-    code { @include mono(.76rem, 500); color: var(--om-soft); } time { @include mono(.72rem, 400); color: var(--om-soft); } span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } }
+    code { @include mono(.76rem, 500); color: var(--om-soft); } time { @include fine(.85rem, 400); color: var(--om-soft); } span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } }
 
 // ── Code blocks, with a copy button when the script is there ───────────
-.om-code { position: relative; margin: 0 0 1rem; padding: .9rem 1rem; border: 1.5px solid var(--om-ink); background: var(--om-sheet); overflow: auto; tab-size: 4;
+.om-code { position: relative; margin: 0 0 1rem; padding: .9rem 1rem; border: 1.5px solid var(--om-ink); border-radius: 0; background: var(--om-sheet); color: var(--om-ink); overflow: auto; tab-size: 4;
     code { @include mono(.86rem, 500); line-height: 1.55; white-space: pre; } }
-.om-copy { position: absolute; top: .4rem; right: .4rem; padding: .2rem .55rem; border: 1px solid var(--om-line); border-radius: 2px; background: var(--om-paper); color: var(--om-soft); @include mono(.66rem, 600); text-transform: uppercase; letter-spacing: .06em; cursor: pointer;
+.om-copy { position: absolute; top: .4rem; right: .4rem; padding: .2rem .55rem; border: 1px solid var(--om-line); border-radius: 2px; background: var(--om-paper); color: var(--om-soft); @include fine(.875rem, 600); cursor: pointer;
     &:hover { border-color: var(--om-blue); color: var(--om-blue); } }
 
 // ── The install selector (as pytorch.org's): rows of choices, the answer under them ──
@@ -224,7 +230,7 @@ a.om-fact:hover { border-color: var(--om-blue); color: var(--om-blue); }
 .om-selector-row { display: grid; border-bottom: 1px solid var(--om-line); @include wide { grid-template-columns: 11rem minmax(0, 1fr); }
     &.is-off { color: var(--om-soft); .om-selector-choices { background-image: repeating-linear-gradient(45deg, transparent 0 7px, var(--om-grid) 7px 8px); } } }
 .om-selector-label { display: flex; flex-direction: column; justify-content: center; gap: .15rem; margin: 0; padding: .8rem 1rem; @include cote; color: var(--om-ink); border-bottom: 1px solid var(--om-line); @include wide { border-bottom: 0; border-right: 1px solid var(--om-line); }
-    small { @include mono(.62rem, 400); text-transform: none; letter-spacing: 0; color: var(--om-soft); } }
+    small { @include fine(.85rem, 400); text-transform: none; letter-spacing: 0; color: var(--om-soft); } }
 .om-selector-choices { display: flex; flex-wrap: wrap; align-items: stretch; gap: 0; &.is-grouped { flex-direction: column; } }
 .om-selector-group { display: flex; flex-wrap: wrap; align-items: stretch; border-bottom: 1px dotted var(--om-line); &:last-child { border-bottom: 0; }
     > .om-cote { display: flex; align-items: center; min-width: 8rem; padding: .5rem 1rem; color: var(--om-blue); @include small { flex-basis: 100%; padding-bottom: 0; } } }
@@ -232,7 +238,7 @@ a.om-fact:hover { border-color: var(--om-blue); color: var(--om-blue); }
 .om-pick { position: relative; display: flex; flex: 1 1 auto; min-width: 7rem; border-right: 1px solid var(--om-line); &:last-child { border-right: 0; }
     input { position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none; }
     span { display: flex; flex: 1; flex-direction: column; justify-content: center; gap: .1rem; padding: .7rem 1rem; font-weight: 600; font-size: .95rem; line-height: 1.3; cursor: pointer; b { font-weight: 300; color: var(--om-blue); } }
-    small { @include mono(.66rem, 400); color: var(--om-soft); }
+    small { @include fine(.85rem, 400); color: var(--om-soft); }
     span:hover { background: var(--om-wash); }
     input:checked + span { background: var(--om-blue); color: var(--om-paper); b, small { color: var(--om-paper); } }
     input:focus-visible + span { outline: 2px solid var(--om-blue); outline-offset: -3px; }
@@ -269,14 +275,14 @@ a.om-fact:hover { border-color: var(--om-blue); color: var(--om-blue); }
 .om-docs-group { margin-top: 1.75rem; }
 .om-docs-contribute-text { max-width: 46rem; font-size: 1.05rem; }
 // The pencil: at the head of a manual's page, against the title.
-#content .manual-pencil { float: right; display: inline-flex; align-items: center; gap: .45rem; margin: .35rem 0 .5rem 1.25rem; padding: .4rem .7rem; border: 1.5px solid var(--om-ink); border-radius: 2px; background: var(--om-sheet); color: var(--om-ink); @include mono(.7rem, 600); text-transform: uppercase; letter-spacing: .07em; text-decoration: none; line-height: 1;
+#content .manual-pencil { float: right; display: inline-flex; align-items: center; gap: .45rem; margin: .35rem 0 .5rem 1.25rem; padding: .4rem .7rem; border: 1.5px solid var(--om-ink); border-radius: 2px; background: var(--om-sheet); color: var(--om-ink); @include fine(.9rem, 600); text-decoration: none; line-height: 1;
     i { font-size: .8rem; }
     &:hover { background: var(--om-blue); border-color: var(--om-blue); color: var(--om-paper); }
     @include small { span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); } padding: .55rem; } }
 .om-manuals { margin: 0; padding: 0; list-style: none; border-top: 1.5px solid var(--om-ink); display: grid; @include wide { grid-template-columns: 1fr 1fr; column-gap: 3rem; }
     li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .1rem 1rem; align-items: baseline; padding: .55rem .25rem; border-bottom: 1px solid var(--om-line); }
     .om-manual-versions { margin: 0; }
-    .om-manual-size { grid-column: 1 / -1; @include mono(.7rem, 400); color: var(--om-soft); } }
+    .om-manual-size { grid-column: 1 / -1; @include fine(.875rem, 400); color: var(--om-soft); } }
 
 // ── Support ────────────────────────────────────────────────────────────
 .om-nodata { max-width: 46rem; padding: 1.25rem 1.4rem; border: 1.5px dashed var(--om-ink); background: var(--om-sheet); p { margin: 0 0 .5rem; } p:last-child { margin: 0; } }

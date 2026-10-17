@@ -21,6 +21,8 @@ final class CatalogueTest extends TestCase
         self::assertSame([Tier::Component, 'omnibase'], Tier::of('omnibase/marketplace'));
         self::assertSame([Tier::Family, 'omnitrade'], Tier::of('glitchr/omnitrade'));
         self::assertSame([Tier::Provider, 'omnitrade'], Tier::of('omnitrade/stripe'));
+        self::assertSame([Tier::Bridge, null], Tier::of('omnibridge/symfony'));
+        self::assertSame([Tier::Bridge, null], Tier::of('glitchr/omnibridge'));
         self::assertSame([Tier::Library, null], Tier::of('@glitchr/flowjs'));
         // Not the ecosystem's: another vendor, another scope, a helper of the studio.
         self::assertNull(Tier::of('symfony/http-client'));

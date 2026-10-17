@@ -4,19 +4,17 @@
 // in part, not there). At night the film is the blue-black of a cyanotype
 // and the ink its white line.
 //
-// Three faces, served by the site (fontsource packages, SIL Open Font
-// License 1.1), chosen for long technical pages:
-//  - Bricolage Grotesque (Atelier Triay) for the mark and the titles: a
-//    grotesque with a hand of its own - its optical-size axis tightens the
-//    large sizes, as lettering on a title block;
-//  - IBM Plex Sans for what is read: open, even, made for screens and for
-//    text that goes on; its italic for the quotes;
-//  - IBM Plex Mono, cut from the same drawing, for code, package names and
-//    the dimension labels ("cotes"): a name reads the same in a sentence
-//    and in a listing.
-$om-display: "Bricolage Grotesque Variable", "Bricolage Grotesque", "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
-$om-text: "IBM Plex Sans", ui-sans-serif, system-ui, "Helvetica Neue", Arial, sans-serif;
-$om-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+// One family in three cuts, served by the site (fontsource packages, SIL
+// Open Font License 1.1), drawn for screens and long technical text (Erik
+// Spiekermann and Ralph du Carrois, for Mozilla):
+//  - Fira Sans Condensed for the mark and the titles: narrow and heavy, as
+//    the lettering of a title block;
+//  - Fira Sans for what is read; its italic for the quotes;
+//  - Fira Mono, cut from the same drawing, for code and package names: a
+//    name reads the same in a sentence and in a listing.
+$om-display: "Fira Sans Condensed", "Fira Sans", "Helvetica Neue", Arial, sans-serif;
+$om-text: "Fira Sans", ui-sans-serif, system-ui, "Helvetica Neue", Arial, sans-serif;
+$om-mono: "Fira Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
 
 $om-paper: #f3f5f6;
 $om-sheet: #ffffff;
@@ -47,9 +45,11 @@ $om-header: 3.75rem;
 @mixin small  { @media (max-width: 40rem) { @content; } }
 @mixin motion { @media (prefers-reduced-motion: no-preference) { @content; } }
 
-// Text set in the mono cut.
-@mixin mono($size: .8rem, $weight: 500) { font-family: $om-mono; font-size: $size; font-weight: $weight; letter-spacing: 0; }
-// A dimension label, as on a plan: small capitals in the mono cut.
-@mixin cote { @include mono(.7rem, 600); line-height: 1.4; text-transform: uppercase; letter-spacing: .09em; color: var(--om-soft); }
-// A title, in the display face at its large optical size.
-@mixin display($weight: 800) { font-family: $om-display; font-weight: $weight; font-variation-settings: "opsz" 96; letter-spacing: -.02em; }
+// Code and package names, in the mono cut - never smaller than .8rem.
+@mixin mono($size: .85rem, $weight: 500) { font-family: $om-mono; font-size: max($size, .8rem); font-weight: $weight; letter-spacing: 0; }
+// Small print that is not code (a date, a count, a state): the text face.
+@mixin fine($size: .875rem, $weight: 500) { font-family: $om-text; font-size: max($size, .8rem); font-weight: $weight; letter-spacing: 0; text-transform: none; }
+// A label in the margin, as on a plan: the text face, small and set apart by its weight.
+@mixin cote { font-family: $om-text; font-size: .85rem; font-weight: 600; line-height: 1.4; letter-spacing: 0; text-transform: none; color: var(--om-soft); }
+// A title, in the condensed cut.
+@mixin display($weight: 700) { font-family: $om-display; font-weight: $weight; letter-spacing: -.01em; }

@@ -1,8 +1,9 @@
 {#
  # The home page, section by section (StickyStops: each section is a stop):
- # Omni and its turning suffix, one sentence per family; the four floors of
- # the system; the families, one question each; which frameworks it runs in;
- # where to read on. Every name and every number comes from the catalogue
+ # Omni and its turning suffix, the search through every manual and one tag
+ # per family; omnibase and the families side by side; omnibridge, the glue
+ # to a framework; the families, a contract each; which frameworks it runs
+ # in; where to read on. Every name and every number comes from the catalogue
  # (app:packages:sync): a family is shown because its repository was found.
  # The way on is the documentation (Marco, 2026-10-10): nothing here counts
  # or names the sites built on the packages.
@@ -22,20 +23,24 @@
         <p class="om-omni" aria-hidden="true"><span class="om-omni-fixed">Omni</span><a class="om-omni-slot" href="{{ path('wikidoc_index') }}" tabindex="-1" data-suffix-target="slot"><span class="is-in">{{ first.suffix }}</span></a></p>
         <p class="om-omni-phrase" data-suffix-target="phrase">{{ ('@messages.families.' ~ first.name ~ '.phrase')|trans }}</p>
 
-        <ol class="om-omni-index" aria-label="{{ '@messages.home.families_label'|trans }}">
-            {% for family in families %}
-            <li>
-                <a href="{{ path('wikidoc_manual', {path: 'glitchr/' ~ family.name}) }}" data-suffix-target="item" data-action="mouseenter->suffix#pick focus->suffix#pick" data-suffix="{{ family.suffix }}" data-phrase="{{ ('@messages.families.' ~ family.name ~ '.phrase')|trans }}"{% if loop.first %} aria-current="true"{% endif %}>
-                    <span class="om-cote">{{ '%02d'|format(loop.index) }}</span><span class="om-omni-name">Omni<b>{{ family.suffix }}</b></span>
-                    <span class="visually-hidden">: {{ ('@messages.families.' ~ family.name ~ '.phrase')|trans }}</span>
-                </a>
-            </li>
-            {% endfor %}
-        </ol>
         {% else %}
         <p class="om-omni" aria-hidden="true"><span class="om-omni-fixed">Omni</span></p>
         <p class="om-omni-phrase">{{ '@messages.home.empty'|trans }}</p>
         {% endif %}
+
+        <div class="om-hero-find">
+            <form class="om-search" role="search" action="{{ path('wikidoc_search') }}" method="get">
+                <label for="om-home-q">{{ '@messages.home.search_label'|trans }}</label>
+                <div><input id="om-home-q" type="search" name="q" placeholder="{{ '@messages.home.search_placeholder'|trans }}" autocomplete="off" spellcheck="false"><button type="submit" class="om-button">{{ '@messages.home.search_submit'|trans }}</button></div>
+            </form>
+            {% if families %}
+            <ul class="om-omni-tags" aria-label="{{ '@messages.home.tags_label'|trans }}">
+                {% for family in families %}
+                <li><a href="{{ path('wikidoc_manual', {path: 'glitchr/' ~ family.name}) }}" data-suffix-target="item" data-action="mouseenter->suffix#pick focus->suffix#pick" data-suffix="{{ family.suffix }}" data-phrase="{{ ('@messages.families.' ~ family.name ~ '.phrase')|trans }}"{% if loop.first %} aria-current="true"{% endif %}>omni<b>{{ family.suffix }}</b><span class="visually-hidden">: {{ ('@messages.families.' ~ family.name ~ '.phrase')|trans }}</span></a></li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
 
         <p class="om-actions">
             <a class="om-button" href="{{ path('wikidoc_index') }}">{{ '@messages.start.to_docs'|trans }}</a>
@@ -52,9 +57,17 @@
             <p class="om-lead">{{ '@messages.floors.lead'|trans }}</p>
         </header>
 
-        {# The section drawing: two stacks. On the left what a site is made of; on the right what it asks of the outside. #}
-        <div class="om-section-drawing">
-            {% for stack in [['component', 'foundation'], ['provider', 'family']] %}
+        {# The section drawing: two stacks, read from the top. On the left omnibase, its core (1) then its
+         # extensions (2); on the right a family (3) then its providers (4). The examples turn one at a
+         # time (examples_controller.js); a family and the providers beside it are always of one domain. #}
+        {% set shown = {
+            foundation: floors.foundation|map(p => p.name)|slice(0, 3),
+            component: extensions|slice(0, 3),
+            family: pairs|slice(0, 3)|map(p => p.family),
+            provider: pairs|slice(0, 3)|map(p => p.providers|first),
+        } %}
+        <div class="om-section-drawing" data-controller="examples" data-examples-extensions-value="{{ extensions|json_encode }}" data-examples-pairs-value="{{ pairs|json_encode }}">
+            {% for stack in [['foundation', 'component'], ['family', 'provider']] %}
             <div class="om-stack is-{{ loop.first ? 'house' : 'outside' }}">
                 <p class="om-stack-title">{{ ('@messages.floors.stack_' ~ (loop.first ? 'house' : 'outside'))|trans }}</p>
                 {% for tier in stack %}
@@ -63,11 +76,11 @@
                     <span class="om-floor-level">{{ {'foundation': '1', 'component': '2', 'family': '3', 'provider': '4'}[tier] }}</span>
                     <span class="om-floor-body">
                         <span class="om-floor-name">{{ ('@messages.floors.' ~ tier ~ '.name')|trans }}</span>
-                        <code class="om-floor-pattern">{{ ('@messages.floors.' ~ tier ~ '.pattern')|trans }}</code>
+                        <code class="om-floor-pattern">{{ ('@messages.floors.' ~ tier ~ '.pattern')|trans|omni_mark }}</code>
                         <span class="om-floor-text">{{ ('@messages.floors.' ~ tier ~ '.text')|trans }}</span>
                         <span class="om-floor-examples">
-                            {%- for package in packages|slice(0, 3) %}<code>{{ package.name }}</code>{% endfor -%}
-                            {%- if packages|length > 3 %}<span>+ {{ packages|length - 3 }}</span>{% endif -%}
+                            {%- for name in shown[tier] %}<code data-examples-target="{{ tier }}">{{ name|omni_mark }}</code>{% endfor -%}
+                            {%- if packages|length > shown[tier]|length %}<span>+ {{ packages|length - shown[tier]|length }}</span>{% endif -%}
                         </span>
                     </span>
                     <span class="om-floor-count"><b>{{ packages|length }}</b> {{ '@messages.floors.packages'|trans({count: packages|length}) }}</span>
@@ -80,10 +93,35 @@
     </div>
 </section>
 
+{# omnibridge: the glue between omnibase and a framework. The targets are plan 0's (rule 13); a bridge found in a repository links to its card. #}
+{% set found_bridges = {} %}
+{% for package in floors.bridge %}{% set found_bridges = found_bridges|merge({(package.name): package}) %}{% endfor %}
+<section class="om-section om-bridges sticky-stop" id="bridges">
+    <div class="om-wrap">
+        <header class="om-head">
+            <p class="om-cote">B — {{ '@messages.home.bridges_eyebrow'|trans }}</p>
+            <h2>{{ '@messages.home.bridges_title'|trans }}</h2>
+            <p class="om-lead">{{ '@messages.home.bridges_lead'|trans }}</p>
+        </header>
+        <ul class="om-family-list om-bridge-list">
+            {% for target in ['symfony', 'doctrine', 'twig', 'composer', 'laravel'] %}
+            {% set package = found_bridges['omnibridge/' ~ target]|default(null) %}
+            <li>
+                <a href="{{ package ? path('app_package', {vendor: package.vendor, name: package.shortName}) : path('app_packages') ~ '#bridge' }}">
+                    <span class="om-family-name">omnibridge/<b>{{ target }}</b></span>
+                    <span class="om-family-question">{{ ('@messages.home.bridge_' ~ target)|trans }}</span>
+                    <span class="om-family-count">{{ (package ? '@messages.home.bridge_found' : '@messages.home.bridge_planned')|trans }}</span>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
+
 <section class="om-section om-families sticky-stop" id="families">
     <div class="om-wrap">
         <header class="om-head">
-            <p class="om-cote">B — {{ '@messages.home.families_eyebrow'|trans }}</p>
+            <p class="om-cote">C — {{ '@messages.home.families_eyebrow'|trans }}</p>
             <h2>{{ '@messages.home.families_title'|trans }}</h2>
             <p class="om-lead">{{ '@messages.home.families_lead'|trans }}</p>
         </header>
@@ -103,7 +141,7 @@
 
 <section class="om-section om-compat-section sticky-stop" id="compatibility">
     <div class="om-wrap">
-        {% include 'partials/_compatibility.html.twig' with {letter: 'C'} %}
+        {% include 'partials/_compatibility.html.twig' with {letter: 'D', bridges: '#bridges'} %}
     </div>
 </section>
 
@@ -111,14 +149,10 @@
     <div class="om-wrap om-read-grid">
         <div>
             <header class="om-head">
-                <p class="om-cote">D — {{ '@messages.home.read_eyebrow'|trans }}</p>
+                <p class="om-cote">E — {{ '@messages.home.read_eyebrow'|trans }}</p>
                 <h2>{{ '@messages.home.read_title'|trans }}</h2>
                 <p class="om-lead">{{ '@messages.home.read_lead'|trans }}</p>
             </header>
-            <form class="om-search" role="search" action="{{ path('wikidoc_search') }}" method="get">
-                <label for="om-home-q">{{ '@messages.home.search_label'|trans }}</label>
-                <div><input id="om-home-q" type="search" name="q" placeholder="webhook, MockHttpClient, make build…" autocomplete="off" spellcheck="false"><button type="submit" class="om-button">{{ '@messages.home.search_submit'|trans }}</button></div>
-            </form>
             <dl class="om-figures">
                 <div><dt>{{ '@messages.home.figure_packages'|trans }}</dt><dd>{{ counts.packages }}</dd></div>
                 <div><dt>{{ '@messages.home.figure_manuals'|trans }}</dt><dd>{{ counts.manuals }}</dd></div>

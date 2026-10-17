@@ -7,14 +7,14 @@
 #content {
     // ── The announcements ──
     .blog { font-family: $om-text; }
-    .blog-head { align-items: flex-start; padding-bottom: 1.5rem; margin-bottom: 2rem; border-bottom: 1.5px solid var(--om-ink); h1 { @include display(800); font-size: clamp(2.1rem, 5vw, 3.6rem); letter-spacing: -.02em; } }
+    .blog-head { align-items: flex-start; padding-bottom: 1.5rem; margin-bottom: 2rem; border-bottom: 1.5px solid var(--om-ink); h1 { @include display(800); font-size: clamp(2.1rem, 5vw, 3.6rem); } }
     .blog-eyebrow { @include cote; }
     .blog-lead { font-size: 1.15rem; }
-    .blog-feed { @include mono(.76rem, 600); }
+    .blog-feed { @include fine(.875rem, 600); }
     .blog-card { border: 1.5px solid var(--om-ink); border-radius: 0; background: var(--om-sheet); h2, h3 { @include display(800); letter-spacing: -.015em; } }
-    .blog-card-meta, .blog-byline { @include mono(.72rem, 500); color: var(--om-soft); }
-    .blog-topics a, .blog-pill { border-radius: 2px; @include mono(.74rem, 500); }
-    .blog-more { @include mono(.8rem, 700); }
+    .blog-card-meta, .blog-byline { @include fine(.875rem, 500); color: var(--om-soft); }
+    .blog-topics a, .blog-pill { border-radius: 2px; @include fine(.875rem, 500); }
+    .blog-more { @include fine(.875rem, 700); }
     .blog-post-head h1 { @include display(800); font-size: clamp(2rem, 5vw, 3.4rem); }
     .blog-prose { font-size: 1.06rem; line-height: 1.7; h2 { margin-top: 2.2rem; font-size: 1.45rem; } code { padding: .05em .3em; border: 1px solid var(--om-line); background: var(--om-sheet); font-size: .9em; } a { color: var(--om-blue); } }
     .blog-neighbours a { border: 1.5px solid var(--om-ink); border-radius: 0; }
@@ -24,17 +24,43 @@
     // The documentation's entry page: the site's own head, the search field without the bundle's frame.
     .manual-index-head h1 { @include display(800); font-size: clamp(2.1rem, 5vw, 3.6rem); letter-spacing: -.02em; margin: 0 0 .35em; }
     .om-docs-search.manual-index { padding: 0; margin: 1.25rem 0 .5rem; max-width: 36rem; }
-    .manual-prose h2, .manual-prose h3 { letter-spacing: -.01em; font-variation-settings: "opsz" 24; }
+    .manual-prose h2, .manual-prose h3 { letter-spacing: -.01em; }
     .manual-name { @include mono(1rem, 700); }
     .manual-tree a[aria-current] { font-weight: 700; }
     .manual-search input[type="search"] { @include mono(.86rem, 500); }
     .manual-index.manual-results { max-width: 62rem; }
 
-    // ── omnibase's sign-in, sign-up and settings (Bootstrap cards) ──
-    .login.wrapper, .register.wrapper { max-width: 30rem; margin: clamp(2rem, 6vw, 4rem) auto; padding-inline: $om-gutter; }
-    .login .card, .register .card, .settings .card { border: 1.5px solid var(--om-ink); border-radius: 0; background: var(--om-sheet); color: var(--om-ink); box-shadow: none; }
-    .login .card-header, .login .card-footer { background: none; border-color: var(--om-line); }
-    .login h1, .login h3 { margin: 0; font-size: 1.6rem; }
+    // ── omnibase's sign-in, sign-up and settings ──
+    // Their templates are written for Bootstrap, which the site does not
+    // load: the classes they use are drawn here, on the sheet.
+    .login.wrapper, .register.wrapper, .signin { max-width: 30rem; margin: clamp(2rem, 6vw, 4rem) auto; padding-inline: $om-gutter; }
+    .login .card, .register .card, .signin .card, .settings .card { border: 1.5px solid var(--om-ink); border-radius: 0; background: var(--om-sheet); color: var(--om-ink); box-shadow: none; }
+    .login, .register, .signin {
+        .card { width: 100%; }
+        .card-header { padding: 1.6rem 1.75rem 0; border: 0; background: none; }
+        .card-body { padding: 1.25rem 1.75rem 1.5rem; }
+        .card-footer { padding: 1rem 1.75rem; border-top: 1px solid var(--om-line); background: none; font-size: .95rem; }
+        h1, h3 { margin: 0; @include display(800); font-size: 2rem; text-align: left; }
+        .col { display: block; } .d-flex { display: flex; flex-wrap: wrap; } .justify-content-center, .justify-content-end { justify-content: flex-start; }
+        .text-center { text-align: left; } .text-muted { color: var(--om-soft); } .small { font-size: .9rem; }
+        .mb-2 { margin-bottom: .6rem; } .mb-3 { margin-bottom: 1rem; } .m-1 { margin: 0 .5rem .5rem 0; }
+        .input-group { display: flex; width: 100%; }
+        .input-group-prepend { display: flex; }
+        .input-group-text { display: grid; place-items: center; width: 2.9rem; border: 1.5px solid var(--om-ink); border-right: 0; background: var(--om-paper); color: var(--om-soft); }
+        .form-control { flex: 1; width: 100%; min-width: 0; min-height: 2.9rem; padding: 0 .9rem; border: 1.5px solid var(--om-ink); border-radius: 0; background: var(--om-sheet); color: var(--om-ink); font: 400 1rem/1.4 $om-text;
+            &:focus { outline: 0; box-shadow: inset 0 0 0 2px var(--om-blue); } &::placeholder { color: var(--om-soft); } }
+        // omnibase stacks a switch over its label, 2.5em wide (!important): a plain box beside its words.
+        .form-check { display: flex; flex-direction: row; align-items: center; gap: .6rem; margin: .4rem 0 0; padding: 0;
+            input { width: 1.1rem !important; height: 1.1rem; margin: 0; accent-color: var(--om-ink); } .label-wrapper { padding: 0; } label { font-size: .95rem; } }
+        hr { margin: 1.25rem 0; border: 0; border-top: 1px solid var(--om-line); }
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 2.75rem; padding: 0 1.15rem; border: 1.5px solid var(--om-ink); border-radius: 0; background: transparent; color: var(--om-ink); font: 600 .95rem/1 $om-text; text-decoration: none; cursor: pointer;
+            &:hover { background: var(--om-ink); color: var(--om-paper); } }
+        .btn-primary { background: var(--om-ink); color: var(--om-paper); &:hover { border-color: var(--om-blue); background: var(--om-blue); } }
+        .btn-lg, .btn-block { width: 100%; }
+        .login-btn { margin-top: .25rem; }
+        .alert-danger { margin: 0 0 .75rem; padding: .6rem .8rem; border-left: 3px solid var(--om-no); background: var(--om-paper); color: var(--om-no); font-size: .95rem; }
+        .invalid-feedback { color: var(--om-no); font-size: .9rem; }
+    }
     .btn-primary { border-radius: 2px; border-color: var(--om-ink); background: var(--om-ink); color: var(--om-paper); &:hover { border-color: var(--om-blue); background: var(--om-blue); } }
     .btn-outline-secondary { border-radius: 2px; }
     .form-control { border-radius: 2px; }

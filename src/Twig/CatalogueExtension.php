@@ -8,11 +8,13 @@ use App\Repository\PackageRepository;
 use Base\Wikidoc\Manual\Manual;
 use Base\Wikidoc\Manual\ManualRegistry;
 use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
 use Twig\TwigFunction;
 
 /**
  * What the templates ask of the catalogue: a package's manual, a manual's
- * package, a family's suffix, the manuals grouped as the catalogue.
+ * package, a family's suffix, the manuals grouped as the catalogue, a name
+ * marked as the home page shows it.
  */
 class CatalogueExtension extends AbstractExtension
 {
@@ -20,6 +22,27 @@ class CatalogueExtension extends AbstractExtension
         private readonly ManualRegistry $manuals,
         private readonly PackageRepository $packages,
     ) {
+    }
+
+    public function getFilters(): array
+    {
+        return [
+            new TwigFilter('omni_mark', self::mark(...), ['is_safe' => ['html']]),
+        ];
+    }
+
+    /**
+     * A package name or a floor's pattern with its parts told apart: "omni"
+     * in grey, the domain after it in blue - glitchr/omni<b>bank</b>,
+     * omni<b>bank</b>/powens, omni<b>&lt;domain&gt;</b>/&lt;service&gt;.
+     * assets/controllers/examples_controller.js marks the names it turns in
+     * the same way.
+     */
+    public static function mark(string $name): string
+    {
+        return implode('/', array_map(static fn (string $part): string => 1 === preg_match('/^omni(.+)$/', $part, $match)
+            ? '<span class="om-mark-omni">omni</span><b class="om-mark-domain">'.htmlspecialchars($match[1]).'</b>'
+            : htmlspecialchars($part), explode('/', $name)));
     }
 
     public function getFunctions(): array
