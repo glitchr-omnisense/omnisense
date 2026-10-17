@@ -823,10 +823,10 @@
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free/-/fontawesome-free-6.7.2.tgz#8249de9b7e22fcb3ceb5e66090c30a1d5492b81a"
   integrity sha512-JUOtgFW6k9u4Y+xeIaEiLr3+cjoUPiAuLXoyKOJSia6Duzb7pq+A76P9ZdPDoAoxHdHzq6gE9/jKBGXlZT8FbA==
 
-"@glitchr/flowjs@^1.3.1":
-  version "1.3.1"
-  resolved "https://registry.npmjs.org/@glitchr/flowjs/-/flowjs-1.3.1.tgz#2484b31790708d9f21baf5b738d84b740a91dee7"
-  integrity sha512-Z6PdhDfWXxP5FVIjvwwe/LpckbhvP5SWyv00H3OXrYPpogZOOpLZtpaN7BCVg0Ew2IxHWpOCvdtVaiUV2pe61w==
+"@glitchr/flowjs@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@glitchr/flowjs/-/flowjs-1.4.0.tgz#8b479431499e431340a312b6b0a658e46cebd20d"
+  integrity sha512-LUr5Oh5Zq0gsbZOri3xJGjaemyM+AcHkwcspR7xLH6m0n+yZ1ohGSTcOa+56JwMVnjr9XkSpB5qO+dH1eW3CNQ==
 
 "@glitchr/media-query-plugin@^1.0":
   version "1.5.13"
