@@ -37,11 +37,21 @@ class Installer
     ) {
     }
 
-    /** Whether a package can be installed in that framework today. */
+    /**
+     * Whether a package can be installed in that framework today: a family
+     * and its providers anywhere; a bridge anywhere but the framework it is
+     * named after (omnibridge/symfony is Symfony's); the core and the
+     * prepared structures in Symfony only, for now.
+     */
     public static function fits(Package $package, string $framework): bool
     {
         if ($package->isNpm()) {
             return false;
+        }
+        if (Tier::Bridge === $package->getTier()) {
+            $target = $package->getShortName();
+
+            return !\in_array($target, self::FRAMEWORKS, true) || $target === $framework;
         }
 
         return self::SYMFONY === $framework || \in_array($package->getTier(), [Tier::Family, Tier::Provider], true);
@@ -100,14 +110,41 @@ class Installer
         foreach ($closure as $name => $package) {
             $own = $require[$name] ?? null;
             $dev = $dev || PackageVersions::isDev($own) || [] !== array_filter($constraints[$name] ?? [], PackageVersions::isDev(...));
-            if (true !== $package->isPublished() && null !== $package->getRepositoryUrl()) {
+            // Not on Packagist, or there without a version yet (just submitted, not crawled): its repository is declared.
+            if ((true !== $package->isPublished() || null === $package->getPublishedVersion()) && null !== $package->getRepositoryUrl()) {
                 $repositories[$name] = ['type' => 'vcs', 'url' => $package->getRepositoryUrl()];
             }
         }
 
         $plugins = array_values(array_filter(self::PLUGINS, fn (string $plugin): bool => (bool) array_filter($closure, fn (Package $p): bool => \array_key_exists($plugin, $this->requireOf($p)))));
 
-        return new InstallPlan($framework, $channel, $chosen, $require, $repositories, $dev, $plugins, $refused);
+        // In Symfony, each family's bundle (in its package, Bridge/Symfony; no Flex recipe) is declared by hand.
+        $bundles = [];
+        if (self::SYMFONY === $framework) {
+            foreach ($closure as $package) {
+                if (Tier::Family === $package->getTier() && null !== $bundle = $this->bundleOf($package)) {
+                    $bundles[] = $bundle;
+                }
+            }
+        }
+
+        return new InstallPlan($framework, $channel, $chosen, $require, $repositories, $dev, $plugins, $refused, $bundles);
+    }
+
+    /** A family's Symfony bundle, read in its package: Bridge/Symfony/<Name>Bundle.php (or under src/), its namespace and class. */
+    private function bundleOf(Package $package): ?string
+    {
+        $dir = $this->repositories->directoryOf($package);
+        foreach (['/Bridge/Symfony', '/src/Bridge/Symfony'] as $folder) {
+            foreach (glob($dir.$folder.'/*Bundle.php') ?: [] as $file) {
+                $code = (string) file_get_contents($file);
+                if (1 === preg_match('/^namespace\s+([^;\s]+)\s*;/m', $code, $ns) && 1 === preg_match('/^(?:final\s+|abstract\s+)?class\s+(\w+Bundle)\b/m', $code, $class)) {
+                    return $ns[1].'\\'.$class[1];
+                }
+            }
+        }
+
+        return null;
     }
 
     /** @var array<string, array<string, string>> what each composer.json requires, read once per request */

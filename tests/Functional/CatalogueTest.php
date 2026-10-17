@@ -3,6 +3,7 @@
 namespace App\Tests\Functional;
 
 use App\Catalogue\Synchronizer;
+use App\Catalogue\Tier;
 use App\Entity\Follow;
 use App\Entity\Package;
 use App\Tests\Mock\NoNetwork;
@@ -10,38 +11,101 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 
 /**
- * The catalogue: read from the repositories, floor by floor; a page per
- * family - never for a name that is only announced; a page per package with
+ * The catalogue: read from the repositories, searched by name, family and
+ * kind; a renamed family's old address kept; a page per family - never for
+ * a name that is only announced; a page per package with
  * its sheet, its versions and its manual; a member follows a package; the command asks
  * the registries, and keeps what they said when they stop answering.
  */
 class CatalogueTest extends SiteTestCase
 {
-    public function testTheCatalogueFloorByFloor(): void
+    public function testTheSearchFindsEveryPackageByNameFamilyAndKind(): void
     {
+        $visible = fn ($page): array => $page->filter('.om-hit:not([hidden]) .om-hit-name')->each(fn ($a) => $a->text());
+
+        // Nothing typed: every package, in the order of the floors - the core, the families, the prepared structures, the providers, the libraries.
         $page = $this->client->request('GET', '/packages');
-
-        self::assertSame(['glitchr/omnibase'], $page->filter('#foundation .om-row-name')->each(fn ($a) => $a->text()));
-        self::assertSame(['omnibase/blog'], $page->filter('#component .om-row-name')->each(fn ($a) => $a->text()));
-        self::assertSame(['glitchr/omnitrade', 'omnitrade/paypal', 'omnitrade/stripe'], $page->filter('#omnitrade .om-row-name')->each(fn ($a) => $a->text()));
-        self::assertSame(['@glitchr/flowjs'], $page->filter('#library .om-row-name')->each(fn ($a) => $a->text()));
+        self::assertResponseIsSuccessful();
+        self::assertSame('Chercher un paquet', $page->filter('h1')->text());
+        self::assertSame(['glitchr/omnibase', 'glitchr/omnibus', 'glitchr/omnitrade', 'omnibase/blog', 'omnibus/offline', 'omnitrade/paypal', 'omnitrade/stripe', '@glitchr/flowjs'], $visible($page));
+        self::assertSame('8 paquets', trim($page->filter('.om-finder-count')->text()));
         self::assertStringNotContainsString('workspace', $page->filter('#content')->text());
+        // The filters: a family, a kind.
+        self::assertSame(['', 'omnibase', 'omnibus', 'omnitrade'], $page->filter('select[name="family"] option')->each(fn ($o) => $o->attr('value')));
+        self::assertSame(['', 'core', 'family', 'bridge', 'structure', 'provider', 'library'], $page->filter('input[name="kind"]')->each(fn ($i) => $i->attr('value')));
 
-        // What each README says of itself, and nothing where it says nothing.
-        $facts = fn (string $name) => $page->filter('.om-row')->reduce(fn ($row) => $row->filter('.om-row-name')->text() === $name)->filter('.om-fact')->each(fn ($f) => trim($f->text()));
-        self::assertContains('Vérifié en réel', $facts('omnitrade/stripe'));
-        self::assertContains('Non vérifié en réel', $facts('omnitrade/paypal'));
-        self::assertNotContains('Vérifié en réel', $facts('glitchr/omnitrade'));
-        self::assertNotContains('Non vérifié en réel', $facts('glitchr/omnitrade'), 'the table of its providers is not about itself');
-        // The fixtures did not ask the registries: the page says so rather than "absent".
-        self::assertContains('Packagist n’a pas été interrogé', $facts('glitchr/omnibus'));
+        // A provider found by its name: the exact short name first; the rows that do not answer are sent hidden, for the script.
+        $page = $this->client->request('GET', '/packages?q=Stripe');
+        self::assertSame(['omnitrade/stripe'], $visible($page));
+        self::assertCount(7, $page->filter('.om-hit[hidden]'));
+        self::assertSame('1 paquet', trim($page->filter('.om-finder-count')->text()));
+        // ...and by its family: the family's word, or the family filter.
+        $page = $this->client->request('GET', '/packages?q=omnitrade');
+        self::assertSame(['glitchr/omnitrade', 'omnitrade/paypal', 'omnitrade/stripe'], $visible($page));
+        $page = $this->client->request('GET', '/packages?family=omnitrade&kind=provider');
+        self::assertSame(['omnitrade/paypal', 'omnitrade/stripe'], $visible($page));
+        self::assertSame('omnitrade', $page->filter('select[name="family"] option[selected]')->attr('value'));
+        self::assertSame('provider', $page->filter('input[name="kind"]:checked')->attr('value'));
+        // Every word has to be found; accents do not count.
+        self::assertSame(['omnitrade/stripe'], $visible($this->client->request('GET', '/packages?q=stripe+r%C3%A9fund')));
+        self::assertSame([], $visible($page = $this->client->request('GET', '/packages?q=stripe+parcel')));
+        self::assertStringContainsString('Aucun paquet ne répond', $page->filter('.om-finder-count')->text());
+        // A prepared structure is a kind of its own.
+        self::assertSame(['omnibase/blog'], $visible($this->client->request('GET', '/packages?kind=structure')));
+        // An unknown filter is no filter.
+        self::assertCount(8, $this->client->request('GET', '/packages?family=omninope&kind=nope')->filter('.om-hit:not([hidden])'));
 
-        // The names that are only announced are apart, and said to be so.
-        $announced = $page->filter('#announced');
-        self::assertStringContainsString('Annoncées, pas encore écrites', $announced->text());
-        self::assertStringContainsString('Omnidns', $announced->text());
-        self::assertStringContainsString('nom réservé', $announced->text());
-        self::assertCount(0, $announced->filter('a'), 'nothing to open: there is no package');
+        // A row: its name, its kind, its family, what its README says when it says it was not tested live, its links.
+        $page = $this->client->request('GET', '/packages?q=paypal');
+        $row = $page->filter('.om-hit:not([hidden])');
+        self::assertSame('Fournisseur', $row->filter('.om-kind')->text());
+        self::assertSame('omnitrade', $row->filter('.om-hit-family')->text());
+        self::assertSame('Non testé en réel', $row->filter('.om-fact.is-unverified')->text());
+        self::assertSame('/packages/omnitrade/paypal', $row->filter('.om-hit-name')->attr('href'));
+        self::assertSame(['Manuel'], $row->filter('.om-hit-links a')->each(fn ($a) => $a->text()), 'the fixtures never asked Packagist, and paypal has no repository url');
+        $stripe = $this->client->request('GET', '/packages?q=stripe')->filter('.om-hit:not([hidden])');
+        self::assertCount(0, $stripe->filter('.om-fact.is-unverified'), 'its README says it was verified');
+        $trade = $this->client->request('GET', '/packages?q=omnitrade&kind=family')->filter('.om-hit:not([hidden])');
+        self::assertSame(['GitHub', 'Manuel'], $trade->filter('.om-hit-links a')->each(fn ($a) => $a->text()));
+        self::assertSame('https://github.com/glitchr-studio/omnitrade', $trade->filter('.om-hit-links a')->first()->attr('href'));
+
+        // The same search as data, for the install selector's provider pick.
+        $this->client->request('GET', '/packages.json?family=omnitrade&kind=provider&q=pa');
+        self::assertResponseIsSuccessful();
+        $json = json_decode((string) $this->client->getResponse()->getContent(), true);
+        self::assertSame(['omnitrade/paypal'], array_column($json, 'name'));
+        self::assertSame(['paypal', 'omnitrade', 'provider'], [$json[0]['short'], $json[0]['family'], $json[0]['kind']]);
+        self::assertSame([], NoNetwork::$requests);
+    }
+
+    /** omniscient/ takes over from glitchr/: the old address follows the package once only the new name is in the catalogue. */
+    public function testARenamedFamilyKeepsItsOldAddress(): void
+    {
+        $new = new Package('omniscient/omnibus', Tier::Family, 'omnibus');
+        $this->em->persist($new);
+        $this->em->flush();
+
+        // Both names in the catalogue: the old page is still the old package's.
+        $this->client->request('GET', '/packages/glitchr/omnibus');
+        self::assertResponseIsSuccessful();
+
+        $old = $this->em->getRepository(Package::class)->findOneBy(['name' => 'glitchr/omnibus']);
+        $old->setMissing(true);
+        $this->em->flush();
+        $this->client->request('GET', '/packages/glitchr/omnibus?from=here');
+        self::assertResponseRedirects('/packages/omniscient/omnibus?from=here', 301);
+        $this->client->request('GET', '/packages/omniscient/omnibus');
+        self::assertResponseIsSuccessful();
+        // A name never written stays a 404; a manual still under its old name is not moved.
+        $this->client->request('GET', '/packages/glitchr/omninope');
+        self::assertResponseStatusCodeSame(404);
+        $this->client->request('GET', '/docs/glitchr/omnitrade');
+        self::assertResponseRedirects('/docs/glitchr/omnitrade/current');
+
+        $repository = $this->em->getRepository(Package::class);
+        $repository->findOneBy(['name' => 'glitchr/omnibus'])->setMissing(false);
+        $this->em->remove($repository->findOneBy(['name' => 'omniscient/omnibus']));
+        $this->em->flush();
     }
 
     public function testAFamilyAndItsProviders(): void
@@ -93,7 +157,7 @@ class CatalogueTest extends SiteTestCase
         self::assertSame(['1.x-dev', '2.x-dev'], $versions->filter('.om-branch-version')->each(fn ($c) => $c->text()));
         self::assertStringContainsString('branche suivie', $versions->filter('.om-branches > li')->first()->text());
         self::assertCount(3, $versions->filter('.om-branches > li')->first()->filter('.om-commits li'));
-        self::assertSame('/install?framework=bare&p%5B0%5D=glitchr/omnitrade', $versions->filter('a.om-more')->attr('href'));
+        self::assertSame('/install?framework=bare&need=family&family=omnitrade&providers=', $versions->filter('a.om-more')->attr('href'));
 
         // A provider: the sentence its README says, quoted as such.
         $page = $this->client->request('GET', '/packages/omnitrade/paypal');
@@ -194,7 +258,7 @@ class CatalogueTest extends SiteTestCase
 
     public function testAPackageWhoseRepositoryIsGoneLeavesTheCatalogue(): void
     {
-        $ghost = new Package('omnitrade/ghost', \App\Catalogue\Tier::Provider, 'omnitrade');
+        $ghost = new Package('omnitrade/ghost', Tier::Provider, 'omnitrade');
         $this->em->persist($ghost);
         $this->em->flush();
         $this->client->request('GET', '/packages/omnitrade/ghost');

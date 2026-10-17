@@ -1,24 +1,26 @@
 import { Controller } from '@hotwired/stimulus';
 
 /*
- * The examples on the home page's floors turn, one at a time: an extension
- * on the left, then a family with one of its providers on the right, then
- * another extension... A family and the provider beside it always share
- * their domain (glitchr/omnibank and omnibank/powens change together), and
- * a family comes back with another of its providers.
+ * The examples on the home page's floors turn, one at a time: a family's
+ * own package on the foundation's floor (glitchr/omnibus, then
+ * omniscient/omnilab...), a prepared structure on the optional one
+ * (omnibase/blog, then omnibase/agenda...). Each drawing has its own
+ * controller and the kinds it holds; where both are, they take turns.
+ * Providers are never shown here: they are the search's.
  *
  * Only while the drawing is on screen and the page is shown; without
  * movement (prefers-reduced-motion) nothing turns.
  *
  * A row's chips keep one width while the names turn: the longest name they
  * may show, or less when the row cannot hold that many beside its "+ N" - a
- * longer name is then cut (…, the whole of it in its title). Measured once
+ * longer name is then cut (…, the whole of it in its title) - unless the row
+ * is so narrow that a chip a line, whole, reads better (a phone). Measured once
  * the fonts are in and again when the row's width changes: the floors below
  * never move while the names turn.
  */
 export default class extends Controller {
-    static targets = ['component', 'family', 'provider'];
-    static values = { extensions: Array, pairs: Array, interval: { type: Number, default: 2200 } };
+    static targets = ['component', 'family'];
+    static values = { families: Array, structures: Array, interval: { type: Number, default: 2200 } };
 
     connect() {
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -29,13 +31,14 @@ export default class extends Controller {
         this.resized.observe(this.element);
 
         this.step = 0;
-        this.slot = { component: 0, pair: 0 };
-        this.shownExtensions = this.componentTargets.map((_, i) => i);
-        this.shownPairs = this.familyTargets.map((_, i) => i);
-        this.nextExtension = this.shownExtensions.length;
-        this.nextPair = this.shownPairs.length;
-        this.turns = this.pairsValue.map(() => 0);
-        this.shownPairs.forEach((i) => (this.turns[i] = 1));
+        this.kinds = {
+            family: { names: this.familiesValue, slot: 0 },
+            component: { names: this.structuresValue, slot: 0 },
+        };
+        for (const [kind, state] of Object.entries(this.kinds)) {
+            state.shown = this[`${kind}Targets`].map((_, i) => i);
+            state.next = state.shown.length;
+        }
 
         this.visible = false;
         this.observer = new IntersectionObserver(([entry]) => {
@@ -64,41 +67,26 @@ export default class extends Controller {
         this.timer = null;
     }
 
+    // The kinds with more names than chips take turns.
     tick() {
-        const left = this.extensionsValue.length > this.componentTargets.length;
-        const right = this.pairsValue.length > this.familyTargets.length;
-        if (!left && !right) return this.stop();
+        const turning = Object.keys(this.kinds).filter((kind) => this.kinds[kind].names.length > this[`${kind}Targets`].length);
+        if (!turning.length) return this.stop();
 
-        const side = (this.step++ % 2 === 0 && left) || !right ? 'left' : 'right';
-        side === 'left' ? this.turnExtension() : this.turnPair();
+        this.turn(turning[this.step++ % turning.length]);
     }
 
-    turnExtension() {
-        const slot = this.slot.component++ % this.componentTargets.length;
-        const next = this.pick(this.extensionsValue.length, this.shownExtensions, 'nextExtension');
-        this.shownExtensions[slot] = next;
-        this.swap(this.componentTargets[slot], this.extensionsValue[next]);
-    }
-
-    turnPair() {
-        const slot = this.slot.pair++ % this.familyTargets.length;
-        const next = this.pick(this.pairsValue.length, this.shownPairs, 'nextPair');
-        const pair = this.pairsValue[next];
-        this.shownPairs[slot] = next;
-        const provider = pair.providers[this.turns[next]++ % pair.providers.length];
-
-        // The family first, its provider a beat after: one change, read as one.
-        this.swap(this.familyTargets[slot], pair.family);
-        if (this.providerTargets[slot]) setTimeout(() => this.swap(this.providerTargets[slot], provider), 140);
+    turn(kind) {
+        const state = this.kinds[kind];
+        const chips = this[`${kind}Targets`];
+        const slot = state.slot++ % chips.length;
+        const next = this.pick(state);
+        state.shown[slot] = next;
+        this.swap(chips[slot], state.names[next]);
     }
 
     // A row's chips as wide as the widest name their kind may show, or the share of the row left beside its "+ N".
     reserve() {
-        const kinds = {
-            component: this.extensionsValue,
-            family: this.pairsValue.map((pair) => pair.family),
-            provider: this.pairsValue.flatMap((pair) => pair.providers),
-        };
+        const kinds = { component: this.structuresValue, family: this.familiesValue };
         for (const [kind, names] of Object.entries(kinds)) {
             const chips = this[`${kind}Targets`];
             if (!chips.length || !names.length) continue;
@@ -122,7 +110,10 @@ export default class extends Controller {
             const gap = parseFloat(style.columnGap) || 0;
             const others = [...row.children].filter((child) => !chips.includes(child)).reduce((sum, child) => sum + child.getBoundingClientRect().width + gap, 0);
             const share = (row.clientWidth - others - gap * (chips.length - 1)) / chips.length;
-            const width = Math.floor(Math.max(narrowest, Math.min(widest, share)));
+            // Too narrow a share for the longest name (a phone): a chip a line, each as wide as the longest name, rather than
+            // names cut to "glitchr/omn…" - the row is as many lines whatever name it shows, so nothing below moves.
+            const whole = share < widest && widest <= row.clientWidth;
+            const width = Math.ceil(whole ? widest : Math.max(narrowest, Math.min(widest, share)));
             chips.forEach((chip) => {
                 chip.style.width = `${width}px`;
                 chip.title = chip.textContent;
@@ -131,10 +122,11 @@ export default class extends Controller {
     }
 
     // The next name not on screen, going round the list.
-    pick(length, shown, cursor) {
-        let next = this[cursor] % length;
-        while (shown.includes(next)) next = (next + 1) % length;
-        this[cursor] = next + 1;
+    pick(state) {
+        const length = state.names.length;
+        let next = state.next % length;
+        while (state.shown.includes(next)) next = (next + 1) % length;
+        state.next = next + 1;
 
         return next;
     }

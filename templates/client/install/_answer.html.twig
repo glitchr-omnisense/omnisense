@@ -1,4 +1,7 @@
-{# The selector's answer: the commands, the composer.json block, and what each line stands on. #}
+{# The selector's answer: the commands, the composer.json block, the bundles to declare in Symfony, and what each line stands on. #}
+{% if choice.unknown|default([]) %}
+<p class="om-install-note">{{ '@messages.install.unknown'|trans({names: choice.unknown|join(', '), family: choice.family, count: choice.unknown|length}) }} <a href="{{ (path('app_packages') ~ '?' ~ {family: choice.family, kind: 'provider'}|url_encode) }}">{{ '@messages.install.providers_browse'|trans }}</a></p>
+{% endif %}
 {% if plan.refused %}
 <p class="om-install-note">{{ '@messages.install.refused'|trans({names: plan.refused|join(', '), framework: ('@messages.install.framework_' ~ plan.framework)|trans}) }}</p>
 {% endif %}
@@ -14,6 +17,12 @@
         <h2 class="om-cote">composer.json</h2>
         <pre class="om-code" data-copy-source><code>{{ plan.composerJson }}</code></pre>
     </div>
+    {% if plan.bundles %}
+    <div class="om-answer-bundles">
+        <h2 class="om-cote">config/bundles.php</h2>
+        <pre class="om-code" data-copy-source><code>{{ plan.bundlesPhp }}</code></pre>
+    </div>
+    {% endif %}
 </div>
 <ul class="om-answer-notes">
     {% if plan.dev %}<li>{{ '@messages.install.note_dev'|trans }}</li>{% endif %}
@@ -31,7 +40,7 @@
         <tr>
             <td><a href="{{ path('app_package', {vendor: package.vendor, name: package.shortName}) }}#versions">{{ name }}</a></td>
             <td><code>{{ constraint }}</code></td>
-            <td>{{ (constraint starts with '^' ? '@messages.install.from_release' : '@messages.install.from_branch')|trans }} · {{ (package.published is same as(true) ? '@messages.install.on_packagist' : (package.published is same as(false) ? '@messages.install.on_github' : '@messages.install.on_github_unknown'))|trans }}</td>
+            <td>{{ (constraint starts with '^' ? '@messages.install.from_release' : '@messages.install.from_branch')|trans }} · {{ (package.published is same as(true) ? (package.publishedVersion ? '@messages.install.on_packagist' : '@messages.install.on_packagist_empty') : (package.published is same as(false) ? '@messages.install.on_github' : '@messages.install.on_github_unknown'))|trans }}</td>
         </tr>
         {% endfor %}
     </tbody>

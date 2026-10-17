@@ -29,6 +29,7 @@
         </p>
         <h1 class="om-package-title"><span>{{ package.npm ? '@' }}{{ package.vendor }}/</span>{{ package.shortName }}</h1>
         {% if package.description %}<p class="om-lead">{{ package.description }}</p>{% endif %}
+        {% if package.tier.value == 'component' %}<p class="om-optional-note"><span class="om-optional">{{ '@messages.structures.optional'|trans }}</span> {{ '@messages.structures.optional_note'|trans }}</p>{% endif %}
 
         <div class="om-install">
             <code data-copy-source>{{ package.installCommand }}</code>
@@ -146,7 +147,7 @@
                 {% else %}
                 <p class="om-none">{{ '@messages.versions.unread'|trans }}{% if package.publishedVersion %} <code>{{ package.publishedVersion }}</code>{% endif %}</p>
                 {% endif %}
-                {% if not package.npm %}<p><a class="om-more" href="{{ path('app_install', {framework: package.tier.value in ['foundation', 'component'] ? 'symfony' : 'bare', 'p': [package.name]}) }}">{{ '@messages.versions.install'|trans }}</a></p>{% endif %}
+                {% if not package.npm %}<p><a class="om-more" href="{{ path('app_install', {framework: package.tier.value in ['foundation', 'component'] ? 'symfony' : 'bare'}|merge(install_params(package))) }}">{{ '@messages.versions.install'|trans }}</a></p>{% endif %}
             </section>
         </div>
     </div>

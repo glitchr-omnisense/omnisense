@@ -13,7 +13,8 @@ use Symfony\Component\Routing\Attribute\Route;
 
 /**
  * The site's own pages: the home page (Omni and its turning suffix, the
- * floors of the system, the way to the documentation), how to support it,
+ * foundation - the core, the families, the bridges - and apart, optional,
+ * the prepared structures; the way to the documentation), how to support it,
  * the legal pages. The sites built on the packages are not listed here:
  * /demos, which listed them, sends to the documentation. The catalogue is CatalogueController's, the manuals
  * omnibase/docs', the announcements omnibase/blog's.
@@ -41,40 +42,21 @@ class MainController extends AbstractController
             $floors[$tier->value] = $packages->findByTier($tier);
         }
 
-        // The examples on the floors turn: a family is shown with providers
-        // of its own (glitchr/omnibank beside omnibank/powens), in the home
-        // page's order; the extensions turn on their own.
-        $providers = [];
-        foreach ($floors['provider'] as $provider) {
-            $providers[(string) $provider->getFamily()][] = $provider->getName();
-        }
-        $pairs = [];
-        foreach ($families as $name => $family) {
-            if (isset($providers[$name]) && Tier::Family === $family['package']->getTier()) {
-                $pairs[] = ['family' => $family['package']->getName(), 'providers' => $providers[$name]];
+        // The examples on the floors turn: the families' own packages on the foundation's floor (in the home
+        // page's order), the prepared structures on their own optional floor. No provider is named here.
+        $turning = [];
+        foreach ($families as $family) {
+            if (Tier::Family === $family['package']->getTier()) {
+                $turning[] = $family['package']->getName();
             }
-        }
-        // The first three shown name three different services (not omnibus/amazon beside omnitrade/amazon):
-        // each family's list starts at its first service not named already, the others follow round.
-        $named = [];
-        foreach (\array_slice(array_keys($pairs), 0, 3) as $i) {
-            $list = $pairs[$i]['providers'];
-            $first = 0;
-            foreach ($list as $at => $provider) {
-                if (!\in_array(substr($provider, strpos($provider, '/') + 1), $named, true)) {
-                    $first = $at;
-                    break;
-                }
-            }
-            $pairs[$i]['providers'] = [...\array_slice($list, $first), ...\array_slice($list, 0, $first)];
-            $named[] = substr($pairs[$i]['providers'][0], strpos($pairs[$i]['providers'][0], '/') + 1);
         }
 
         return $this->render('client/index.html.twig', [
             'families' => $families,
             'floors' => $floors,
-            'pairs' => $pairs,
-            'extensions' => array_map(static fn ($package): string => $package->getName(), $floors['component']),
+            'turning' => $turning,
+            'structures' => array_map(static fn ($package): string => $package->getName(), $floors['component']),
+            'announced' => Families::announced(array_keys($families)),
             'counts' => $packages->counts(),
             'posts' => $posts->findLatest(3),
         ]);

@@ -100,7 +100,8 @@ html.theme-mode-dark .om-when-dark { display: inline; } html.theme-mode-dark .om
     .is-foundation & { background-image: radial-gradient(var(--om-soft) 1px, transparent 1.4px); background-size: 7px 7px; }
     .is-component & { background-image: repeating-linear-gradient(45deg, transparent 0 5px, var(--om-line) 5px 6px); }
     .is-family & { background-image: repeating-linear-gradient(90deg, transparent 0 5px, var(--om-line) 5px 6px); }
-    .is-provider & { background-image: repeating-linear-gradient(45deg, transparent 0 6px, var(--om-line) 6px 7px), repeating-linear-gradient(-45deg, transparent 0 6px, var(--om-line) 6px 7px); } }
+    .is-provider & { background-image: repeating-linear-gradient(45deg, transparent 0 6px, var(--om-line) 6px 7px), repeating-linear-gradient(-45deg, transparent 0 6px, var(--om-line) 6px 7px); }
+    .is-bridge & { background-image: repeating-linear-gradient(0deg, transparent 0 5px, var(--om-line) 5px 6px); } }
 .om-floor-body { display: grid; gap: .3rem; padding: 1.1rem 1.1rem .6rem 0; }
 .om-floor-name { @include display(800); font-size: clamp(1.4rem, 2.6vw, 1.9rem); line-height: 1; }
 .om-floor-pattern { @include mono(.85rem, 500); color: var(--om-ink); }
@@ -111,6 +112,15 @@ html.theme-mode-dark .om-when-dark { display: inline; } html.theme-mode-dark .om
 .om-floor-examples { display: flex; flex-wrap: wrap; gap: .3rem .5rem; margin-top: .25rem; code { @include mono(.8rem, 500); white-space: nowrap; box-sizing: border-box; overflow: hidden; text-overflow: ellipsis; padding: 0 .35rem; border: 1px solid var(--om-line); @include motion { transition: opacity .22s ease, transform .22s ease; &.is-out { opacity: 0; transform: translateY(-.25rem); } } } span { @include mono(.72rem, 500); color: var(--om-soft); } }
 .om-floor-count { grid-column: 2; padding: 0 1.1rem .9rem 0; @include cote; b { @include display(800); font-size: 1.3rem; letter-spacing: -.02em; color: var(--om-ink); margin-right: .25rem; } }
 .om-floors-note { margin: 1.75rem 0 0; max-width: 46rem; font-size: 1.02rem; }
+// The foundation: the core, the families, the bridges, side by side on a wide screen.
+.om-section-drawing.is-foundation { gap: 0; @include wide { grid-template-columns: minmax(0, .85fr) minmax(0, 1.35fr) minmax(0, 1fr); .om-floor + .om-floor { border-top: 1.5px solid var(--om-ink); border-left: 0; } } }
+// Apart and optional: the prepared structures, drawn dashed - not a floor the others stand on.
+.om-section-drawing.is-optional { gap: 1rem 2.5rem; align-items: center; @include wide { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); }
+    .om-floor { border-style: dashed; }
+    .om-floor-level { border-right-style: dashed; font-weight: 400; } }
+.om-structures-note { margin: 0; max-width: 32rem; color: var(--om-soft); }
+.om-optional { display: inline-block; padding: 0 .45rem; border: 1px dashed currentColor; border-radius: 2px; color: var(--om-ink); font-weight: 650; }
+.om-optional-note { margin: .75rem 0 0; color: var(--om-soft); .om-optional { margin-right: .35rem; } }
 
 // ── Home: the families ─────────────────────────────────────────────────
 .om-family-list { margin: 0; padding: 0; list-style: none; border-top: 1.5px solid var(--om-ink);
@@ -120,6 +130,15 @@ html.theme-mode-dark .om-when-dark { display: inline; } html.theme-mode-dark .om
 .om-family-question { font-size: 1.08rem; }
 .om-family-count { @include cote; }
 .om-bridge-list { a { @include wide { grid-template-columns: 21rem minmax(0, 1fr) auto; } } .om-family-name { font-size: clamp(1.35rem, 2.4vw, 1.75rem); } }
+// A family per row: its name to its page, its question, its providers counted - to the search, never listed.
+.om-family-list.is-rows {
+    li { display: grid; gap: .15rem 2rem; align-items: baseline; padding: .95rem .25rem; border-bottom: 1px solid var(--om-line); @include wide { grid-template-columns: 17rem minmax(0, 1fr) auto; }
+        &:hover { background: var(--om-wash); } }
+    a { display: inline; padding: 0; border: 0; &:hover { background: none; } }
+    a.om-family-name { color: var(--om-ink); &:hover b { color: var(--om-ink); } }
+    a.om-family-count { color: var(--om-blue); text-decoration: underline; text-underline-offset: .2em; } }
+.om-announced-line { margin: 1.25rem 0 0; color: var(--om-soft); font-size: .95rem; em { font-style: normal; @include fine(.85rem, 500); } }
+
 
 // ── Home: read on ──────────────────────────────────────────────────────
 .om-read-grid { display: grid; gap: 3rem; @include wide { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 5rem; } }
@@ -225,6 +244,34 @@ a.om-fact:hover { border-color: var(--om-blue); color: var(--om-blue); }
 .om-copy { position: absolute; top: .4rem; right: .4rem; padding: .2rem .55rem; border: 1px solid var(--om-line); border-radius: 2px; background: var(--om-paper); color: var(--om-soft); @include fine(.875rem, 600); cursor: pointer;
     &:hover { border-color: var(--om-blue); color: var(--om-blue); } }
 
+// ── The package search (as conda-forge.org/packages): a box, two filters, compact rows ──
+.om-finder { margin-top: clamp(1.25rem, 3vw, 2rem); display: grid; gap: 1rem; padding: 1rem; border: 1.5px solid var(--om-ink); background: var(--om-sheet); }
+.om-finder-box { max-width: none; }
+.om-finder-filters { display: flex; flex-wrap: wrap; gap: .75rem 1.5rem; align-items: flex-end; }
+.om-finder-family { display: grid; gap: .3rem; }
+.om-finder select, .om-selector-field select { min-height: 2.4rem; max-width: 100%; padding: 0 .6rem; border: 1.5px solid var(--om-ink); border-radius: 2px; background: var(--om-sheet); color: var(--om-ink); font: 500 .95rem/1.2 $om-text; }
+.om-finder-kinds { display: flex; flex-wrap: wrap; gap: .35rem; margin: 0; padding: 0; border: 0; min-width: 0; legend { float: left; width: 100%; margin-bottom: .3rem; } }
+.om-chip { position: relative; display: inline-flex;
+    input { position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none; }
+    span { display: inline-flex; align-items: center; min-height: 2.4rem; padding: 0 .75rem; border: 1px solid var(--om-line); border-radius: 2px; font-weight: 600; font-size: .9rem; cursor: pointer; }
+    span:hover { border-color: var(--om-blue); }
+    input:checked + span { background: var(--om-blue); border-color: var(--om-blue); color: var(--om-paper); }
+    input:focus-visible + span { outline: 2px solid var(--om-blue); outline-offset: 2px; } }
+.om-finder-count { margin: 1.25rem 0 .5rem; @include cote; color: var(--om-ink); }
+.om-hits { margin: 0; padding: 0; list-style: none; border-top: 1.5px solid var(--om-ink); }
+.om-hit { display: grid; gap: .15rem 1.25rem; padding: .6rem .25rem; border-bottom: 1px solid var(--om-line); @include wide { grid-template-columns: minmax(0, 27rem) minmax(0, 1fr) auto; align-items: baseline; }
+    &[hidden] { display: none; } }
+.om-hit-head { display: flex; flex-wrap: wrap; gap: .2rem .5rem; align-items: baseline; min-width: 0; }
+.om-hit-name { @include mono(.95rem, 700); text-decoration: none; overflow-wrap: anywhere; color: var(--om-ink); &:hover { text-decoration: underline; } }
+.om-kind { @include fine(.8rem, 600); padding: 0 .4rem; border: 1px solid var(--om-line); border-radius: 2px; color: var(--om-soft); white-space: nowrap;
+    &.is-core, &.is-family { color: var(--om-ink); border-color: var(--om-ink); }
+    &.is-structure { border-style: dashed; } }
+.om-hit-family { @include fine(.8rem, 500); color: var(--om-soft); }
+.om-hit-version { @include mono(.8rem, 500); color: var(--om-soft); }
+.om-hit .om-fact { @include fine(.8rem, 500); line-height: 1.5; }
+.om-hit-text { margin: 0; min-width: 0; font-size: .92rem; color: var(--om-soft); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; @include narrow { white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; } }
+.om-hit-links { display: flex; gap: .75rem; margin: 0; @include fine(.85rem, 600); white-space: nowrap; a { text-decoration: none; &:hover { text-decoration: underline; } } }
+
 // ── The install selector (as pytorch.org's): rows of choices, the answer under them ──
 .om-selector { margin-top: clamp(1.5rem, 4vw, 2.5rem); border: 1.5px solid var(--om-ink); background: var(--om-sheet); }
 .om-selector-row { display: grid; border-bottom: 1px solid var(--om-line); @include wide { grid-template-columns: 11rem minmax(0, 1fr); }
@@ -237,16 +284,28 @@ a.om-fact:hover { border-color: var(--om-blue); color: var(--om-blue); }
 // A choice: a cell of the row. Chosen, it is filled with the blue of the plan.
 .om-pick { position: relative; display: flex; flex: 1 1 auto; min-width: 7rem; border-right: 1px solid var(--om-line); &:last-child { border-right: 0; }
     input { position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none; }
-    span { display: flex; flex: 1; flex-direction: column; justify-content: center; gap: .1rem; padding: .7rem 1rem; font-weight: 600; font-size: .95rem; line-height: 1.3; cursor: pointer; b { font-weight: 300; color: var(--om-blue); } }
+    > span { display: flex; flex: 1; flex-direction: column; justify-content: center; gap: .1rem; padding: .7rem 1rem; font-weight: 600; font-size: .95rem; line-height: 1.3; cursor: pointer; b { font-weight: 300; color: var(--om-blue); } }
+    .om-pick-label { display: block; overflow-wrap: anywhere; }
     small { @include fine(.85rem, 400); color: var(--om-soft); }
-    span:hover { background: var(--om-wash); }
+    > span:hover { background: var(--om-wash); }
     input:checked + span { background: var(--om-blue); color: var(--om-paper); b, small { color: var(--om-paper); } }
     input:focus-visible + span { outline: 2px solid var(--om-blue); outline-offset: -3px; }
     &.is-off span, input:disabled + span { cursor: not-allowed; color: var(--om-soft); background: none; } }
+.om-selector-row[hidden], .om-suggestions[hidden] { display: none; }
+.om-selector-row.is-optional { border-top: 1px dashed var(--om-ink); }
+.om-selector-choices.is-dense .om-pick { flex: 1 1 auto; min-width: 7.5rem; border-bottom: 1px solid var(--om-line); > span { padding-block: .55rem; } }
+.om-selector-field { display: grid; gap: .5rem; padding: .75rem 1rem; min-width: 0; select { width: 100%; } }
+.om-selector-hint { margin: 0; font-size: .9rem; color: var(--om-soft); }
+.om-provider-pick { position: relative; max-width: 32rem;
+    input { width: 100%; min-height: 2.6rem; padding: 0 .8rem; border: 1.5px solid var(--om-ink); border-radius: 2px; background: var(--om-sheet); color: var(--om-ink); @include mono(.95rem, 500); &:focus { outline: 0; box-shadow: inset 0 0 0 2px var(--om-blue); } } }
+.om-suggestions { position: absolute; z-index: 20; top: 100%; left: 0; right: 0; margin: 0; padding: 0; list-style: none; max-height: 18rem; overflow: auto; border: 1.5px solid var(--om-ink); border-top: 0; background: var(--om-sheet);
+    li { display: grid; gap: .1rem; padding: .45rem .8rem; border-bottom: 1px solid var(--om-line); cursor: pointer; &:hover, &[aria-selected="true"] { background: var(--om-wash); } }
+    b { @include mono(.9rem, 700); } span { font-size: .85rem; color: var(--om-soft); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } }
+.om-answer-bundles { @include wide { grid-column: 1 / -1; } }
 .om-selector-send { margin: 0; padding: .75rem 1rem; border-bottom: 1px solid var(--om-line); }
 .om-selector-answer { padding: 1.25rem 1rem 1rem; border-top: 1.5px solid var(--om-ink); margin-top: -1px; &[aria-busy] { opacity: .6; } h2.om-cote { margin-bottom: .5rem; color: var(--om-blue); } }
 .om-selector[aria-busy] .om-selector-answer { opacity: .6; }
-.om-answer-grid { display: grid; gap: 1rem 2rem; @include wide { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+.om-answer-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1rem 2rem; @include wide { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
 .om-answer-notes { margin: 0 0 1.25rem; padding-left: 1.1rem; font-size: .93rem; color: var(--om-soft); li { margin: .2rem 0; } }
 .om-answer-table { width: 100%; border-collapse: collapse; font-size: .92rem;
     caption { text-align: left; margin-bottom: .5rem; color: var(--om-blue); }
@@ -254,7 +313,7 @@ a.om-fact:hover { border-color: var(--om-blue); color: var(--om-blue); }
     th { @include cote; } td code { @include mono(.86rem, 700); } td:last-child { color: var(--om-soft); } a { text-decoration: none; font-weight: 600; } }
 
 // ── Compatibility: today / planned, three columns of the sheet ─────────
-.om-compat { display: grid; gap: 2rem; @include wide { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, 1fr); gap: 0; }
+.om-compat { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2rem; @include wide { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, 1fr); gap: 0; }
     .om-compat-col { @include wide { padding: 0 2rem; border-left: 1px solid var(--om-line); &:first-child { padding-left: 0; border-left: 0; } &:last-child { padding-right: 0; } } }
     h3 { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .75rem; margin-bottom: .75rem; font-size: 1.2rem; }
     .is-later { h3, p { color: var(--om-soft); } h3 { color: var(--om-ink); } }

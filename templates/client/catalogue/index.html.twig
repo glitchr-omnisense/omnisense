@@ -1,85 +1,63 @@
 {#
- # The catalogue: every package found in a repository, floor by floor - the
- # foundation, its components, the families each with its providers, the
- # libraries. Then, apart, the names that are only announced.
+ # The search (as conda-forge.org/packages): one box over every package,
+ # a family and a kind to narrow it, a compact row each - its name, what it
+ # is, its family, its latest version, "not tested live" when its README
+ # says so, and its links (Packagist or npm, GitHub, its manual). A plain GET
+ # form: without script the page is sent again; with it, search_controller.js
+ # narrows the rows as one types, from the haystack each row carries.
  #}
 {% extends 'layout1.html.twig' %}
 
-{% block title %}{{ '@messages.catalogue.title'|trans }}{% endblock %}
-{% block description %}{{ '@messages.catalogue.description'|trans({count: counts.packages}) }}{% endblock %}
+{% block title %}{{ '@messages.search.title'|trans }}{% endblock %}
+{% block description %}{{ '@messages.search.description'|trans({count: counts.packages}) }}{% endblock %}
 
 {% block content %}
 <div class="om-wrap om-page">
     <header class="om-head is-page">
-        <p class="om-cote">{{ '@messages.catalogue.eyebrow'|trans }}</p>
-        <h1>{{ '@messages.catalogue.title'|trans }}</h1>
-        <p class="om-lead">{{ '@messages.catalogue.lead'|trans({count: counts.packages}) }}</p>
+        <p class="om-cote">{{ '@messages.search.eyebrow'|trans }}</p>
+        <h1>{{ '@messages.search.title'|trans }}</h1>
+        <p class="om-lead">{{ '@messages.search.lead'|trans({count: counts.packages}) }}</p>
         <p class="om-source">{{ synced ? '@messages.catalogue.synced'|trans({date: synced|format_datetime('long', 'short'), published: counts.published, unpublished: counts.unpublished, unknown: counts.unknown}) : '@messages.catalogue.never_synced'|trans }}</p>
-        <nav class="om-anchors" aria-label="{{ '@messages.catalogue.floors'|trans }}">
-            {% for tier, list in {foundation: foundation, component: components, family: families, provider: providers, bridge: bridges, library: libraries} %}{% if list|length %}<a href="#{{ tier }}"><span class="om-cote">{{ tier == 'library' ? '+' : loop.index }}</span> {{ ('@messages.floors.' ~ tier ~ '.name')|trans }}</a>{% endif %}{% endfor %}
-        </nav>
     </header>
 
-    {% if counts.packages == 0 %}
-        <p class="om-none">{{ '@messages.catalogue.empty'|trans }}</p>
-    {% endif %}
+    <div data-controller="search" data-search-url-value="{{ path('app_packages') }}">
+    <form class="om-finder" role="search" method="get" action="{{ path('app_packages') }}">
+        <div class="om-search om-finder-box">
+            <label for="om-finder-q">{{ '@messages.search.label'|trans }}</label>
+            <div>
+                <input id="om-finder-q" type="search" name="q" value="{{ query.q }}" placeholder="{{ '@messages.search.placeholder'|trans }}" autocomplete="off" spellcheck="false" data-search-target="q" data-action="input->search#filter">
+                <button type="submit" class="om-button" data-search-target="send">{{ '@messages.search.submit'|trans }}</button>
+            </div>
+        </div>
+        <div class="om-finder-filters">
+            <label class="om-finder-family">
+                <span class="om-cote">{{ '@messages.search.family'|trans }}</span>
+                <select name="family" data-search-target="family" data-action="change->search#filter">
+                    <option value="">{{ '@messages.search.any_family'|trans }}</option>
+                    {% for name, own in families %}
+                    <option value="{{ name }}"{{ name == family ? ' selected' }}>{{ name }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+            <fieldset class="om-finder-kinds">
+                <legend class="om-cote">{{ '@messages.search.kind'|trans }}</legend>
+                <label class="om-chip"><input type="radio" name="kind" value=""{{ kind == '' ? ' checked' }} data-action="change->search#filter"><span>{{ '@messages.search.any_kind'|trans }}</span></label>
+                {% for k in kinds %}
+                <label class="om-chip"><input type="radio" name="kind" value="{{ k }}"{{ kind == k ? ' checked' }} data-action="change->search#filter"><span>{{ ('@messages.kind.' ~ k)|trans }}</span></label>
+                {% endfor %}
+            </fieldset>
+        </div>
+    </form>
 
-    {% if foundation|length %}
-    <section class="om-tier" id="foundation">
-        <header><p class="om-cote">1</p><h2>{{ '@messages.floors.foundation.name'|trans }}</h2><p>{{ '@messages.floors.foundation.text'|trans }}</p></header>
-        <ul class="om-rows">{% for package in foundation %}{% include 'partials/_package_row.html.twig' %}{% endfor %}</ul>
-    </section>
-    {% endif %}
+    <p class="om-finder-count" aria-live="polite" data-search-target="count" data-one="{{ '@messages.search.count'|trans({count: 1}) }}" data-many="{{ '@messages.search.count_many'|trans({count: '%n'}) }}" data-none="{{ '@messages.search.none'|trans }}">
+        {{ found|length ? '@messages.search.count'|trans({count: found|length}) : '@messages.search.none'|trans }}
+    </p>
 
-    {% if components|length %}
-    <section class="om-tier" id="component">
-        <header><p class="om-cote">2</p><h2>{{ '@messages.floors.component.name'|trans }} <small>{{ components|length }}</small></h2><p>{{ '@messages.floors.component.text'|trans }}</p></header>
-        <ul class="om-rows">{% for package in components %}{% include 'partials/_package_row.html.twig' with {short: true} %}{% endfor %}</ul>
-    </section>
-    {% endif %}
-
-    {% if families|length %}
-    <section class="om-tier" id="family">
-        <header><p class="om-cote">3 · 4</p><h2>{{ '@messages.floors.family.name'|trans }} <small>{{ families|length }}</small> {{ '@messages.catalogue.and_providers'|trans }}</h2><p>{{ '@messages.floors.family.text'|trans }} {{ '@messages.floors.provider.text'|trans }}</p></header>
-        <div id="provider" class="om-anchor"></div>
-        {% for name, own in families %}
-        <article class="om-family" id="{{ name }}">
-            <header>
-                <h3><a href="{{ path('app_family', {family: name}) }}">Omni<b>{{ family_suffix(name) }}</b></a></h3>
-                <p>{{ ('@messages.families.' ~ name ~ '.phrase')|trans }}</p>
-            </header>
-            <ul class="om-rows">
-                {% include 'partials/_package_row.html.twig' with {package: own} %}
-                {% for package in providers[name]|default([]) %}{% include 'partials/_package_row.html.twig' with {short: true} %}{% endfor %}
-            </ul>
-        </article>
+    <ol class="om-hits" data-search-target="list">
+        {% for package in rows %}
+        {% include 'partials/_package_hit.html.twig' with {hidden: found[package.name] is not defined, order: order[package.name]} %}
         {% endfor %}
-    </section>
-    {% endif %}
-
-    {% if bridges|length %}
-    <section class="om-tier" id="bridge">
-        <header><p class="om-cote">5</p><h2>{{ '@messages.floors.bridge.name'|trans }} <small>{{ bridges|length }}</small></h2><p>{{ '@messages.floors.bridge.text'|trans }}</p></header>
-        <ul class="om-rows">{% for package in bridges %}{% include 'partials/_package_row.html.twig' with {short: true} %}{% endfor %}</ul>
-    </section>
-    {% endif %}
-
-    {% if libraries|length %}
-    <section class="om-tier" id="library">
-        <header><p class="om-cote">+</p><h2>{{ '@messages.floors.library.name'|trans }} <small>{{ libraries|length }}</small></h2><p>{{ '@messages.floors.library.text'|trans }}</p></header>
-        <ul class="om-rows">{% for package in libraries %}{% include 'partials/_package_row.html.twig' %}{% endfor %}</ul>
-    </section>
-    {% endif %}
-
-    {% if announced|length %}
-    <section class="om-tier is-announced" id="announced">
-        <header><h2>{{ '@messages.catalogue.announced_title'|trans }}</h2><p>{{ '@messages.catalogue.announced_lead'|trans }}</p></header>
-        <ul class="om-announced">
-            {% for name, state in announced %}
-            <li><span class="om-announced-name">Omni<b>{{ family_suffix(name) }}</b></span> <span>{{ ('@messages.families.' ~ name ~ '.phrase')|trans }}</span> <em>{{ ('@messages.catalogue.' ~ state)|trans }}</em></li>
-            {% endfor %}
-        </ul>
-    </section>
-    {% endif %}
+    </ol>
+    </div>
 </div>
 {% endblock %}

@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Catalogue\Families;
+use App\Catalogue\PackageSearch;
 use App\Catalogue\Tier;
 use App\Catalogue\Versions;
+use App\Dto\PackageQuery;
 use App\Entity\Follow;
 use App\Entity\Package;
 use App\Entity\User;
@@ -13,13 +15,15 @@ use App\Repository\PackageRepository;
 use Base\Wikidoc\Manual\ManualRegistry;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Attribute\MapQueryString;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 /**
- * The catalogue: every package `app:packages:sync` found, by floor; a page
+ * The catalogue: the search over every package `app:packages:sync` found; a page
  * per family (its own package, its providers); a page per package, with
  * what its repository says of it - its versions too, read through
  * git/git-bundle - and the contents of its manual. Which sites use a
@@ -30,31 +34,52 @@ class CatalogueController extends AbstractController
     public function __construct(
         private readonly PackageRepository $packages,
         private readonly ManualRegistry $manuals,
+        private readonly PackageSearch $search,
     ) {
     }
 
-    #[Route('/packages', name: 'app_packages')]
-    public function index(): Response
+    /**
+     * The search (as conda-forge.org/packages): one box over every package,
+     * a family and a kind to narrow it, a compact row each. A plain GET form;
+     * search_controller.js narrows the same rows as one types.
+     */
+    #[Route('/packages', name: 'app_packages', methods: ['GET'])]
+    public function index(#[MapQueryString] PackageQuery $query = new PackageQuery()): Response
     {
+        $kind = null !== Tier::fromKind($query->kind) ? $query->kind : '';
         $families = Families::ordered($this->packages->findFamilies());
-        unset($families['omnibase']);
-
-        $providers = [];
-        foreach ($this->packages->findByTier(Tier::Provider) as $provider) {
-            $providers[(string) $provider->getFamily()][] = $provider;
-        }
+        $family = isset($families[$query->family]) ? $query->family : '';
+        $all = $this->search->all();
+        $found = $this->search->search($query->q, $family ?: null, $kind ?: null);
 
         return $this->render('client/catalogue/index.html.twig', [
-            'foundation' => $this->packages->findByTier(Tier::Foundation),
-            'components' => $this->packages->findByTier(Tier::Component),
+            'query' => $query,
+            'family' => $family,
+            'kind' => $kind,
+            // Every row is sent, the ones that do not answer hidden: the script narrows them again as one types.
+            'rows' => [...$found, ...array_values(array_filter($all, static fn (Package $p): bool => !\in_array($p, $found, true)))],
+            'order' => array_flip(array_map(static fn (Package $p): string => $p->getName(), $all)),
+            'found' => array_flip(array_map(static fn (Package $p): string => $p->getName(), $found)),
             'families' => $families,
-            'providers' => $providers,
-            'bridges' => $this->packages->findByTier(Tier::Bridge),
-            'libraries' => $this->packages->findByTier(Tier::Library),
-            'announced' => Families::announced(array_keys($this->packages->findFamilies())),
+            'kinds' => array_map(static fn (Tier $t): string => $t->kind(), PackageSearch::ORDER),
             'counts' => $this->packages->counts(),
             'synced' => $this->packages->lastSync(),
         ]);
+    }
+
+    /** The same search as data: what the install selector's provider pick asks as one types. */
+    #[Route('/packages.json', name: 'app_packages_json', methods: ['GET'])]
+    public function data(#[MapQueryString] PackageQuery $query = new PackageQuery()): JsonResponse
+    {
+        $found = \array_slice($this->search->search($query->q, $query->family ?: null, $query->kind ?: null), 0, 12);
+
+        return $this->json(array_map(static fn (Package $p): array => [
+            'name' => $p->getName(),
+            'short' => $p->getShortName(),
+            'family' => $p->getFamily(),
+            'kind' => $p->getTier()->kind(),
+            'description' => $p->getDescription(),
+        ], $found));
     }
 
     #[Route('/families/{family}', name: 'app_family', requirements: ['family' => 'omni[a-z]+'])]
