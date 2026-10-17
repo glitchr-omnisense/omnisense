@@ -144,4 +144,22 @@ class InstallTest extends SiteTestCase
         self::assertStringNotContainsString('<html', $html, 'the answer alone');
         self::assertStringContainsString('composer require omnitrade/stripe:^1.4', $html);
     }
+
+    /**
+     * The compatibility section closes the page as on the home: its long title over its lead (a tier's header set them
+     * side by side, the lead squeezed into a narrow column), its example's lines wrapping inside their box.
+     */
+    public function testTheCompatibilitySectionReadsAsOnTheHome(): void
+    {
+        $page = $this->client->request('GET', '/install');
+        self::assertResponseIsSuccessful();
+        $section = $page->filter('section#compatibility');
+        self::assertCount(1, $section);
+        self::assertStringContainsString('om-section', (string) $section->attr('class'));
+        self::assertStringNotContainsString('om-tier', (string) $section->attr('class'));
+        self::assertCount(1, $section->filter('.om-compat .om-code'));
+
+        $styles = (string) file_get_contents(\dirname(__DIR__, 2).'/assets/styles/layout1.scss');
+        self::assertMatchesRegularExpression('/\.om-compat \{.*\.om-code \{[^}]*code \{ white-space: pre-wrap; overflow-wrap: break-word;/s', $styles);
+    }
 }
