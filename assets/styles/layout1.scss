@@ -317,7 +317,8 @@ a.om-fact:hover { border-color: var(--om-blue); color: var(--om-blue); }
     .om-compat-col { @include wide { padding: 0 2rem; border-left: 1px solid var(--om-line); &:first-child { padding-left: 0; border-left: 0; } &:last-child { padding-right: 0; } } }
     h3 { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .75rem; margin-bottom: .75rem; font-size: 1.2rem; }
     .is-later { h3, p { color: var(--om-soft); } h3 { color: var(--om-ink); } }
-    .om-code { margin-top: 1rem; } code { font-size: .92em; } }
+    // A column a third of the sheet wide: the example's lines wrap rather than run out of their box.
+    .om-code { margin-top: 1rem; code { white-space: pre-wrap; overflow-wrap: break-word; font-size: clamp(.72rem, 2.9vw, .8rem); } } code { font-size: .92em; } }
 .om-compat-bridges { margin: .75rem 0 0; padding: 0; list-style: none; border-top: 1.5px dashed var(--om-soft);
     li { display: grid; gap: 0 1rem; padding: .45rem 0; border-bottom: 1px dotted var(--om-line); @include wide { grid-template-columns: 11rem minmax(0, 1fr); } }
     code { @include mono(.84rem, 700); } span { font-size: .92rem; color: var(--om-soft); } }
