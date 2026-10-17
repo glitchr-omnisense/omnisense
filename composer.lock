@@ -17246,12 +17246,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-studio/symfony-profiler-pack.git",
-                "reference": "dc84801d4d36da7f4ea97b6e8e2881867cdc02fa"
+                "reference": "bf3ace73404c61d072c9867ec2f2a32778abfd81"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-studio/symfony-profiler-pack/zipball/dc84801d4d36da7f4ea97b6e8e2881867cdc02fa",
-                "reference": "dc84801d4d36da7f4ea97b6e8e2881867cdc02fa",
+                "url": "https://api.github.com/repos/glitchr-studio/symfony-profiler-pack/zipball/bf3ace73404c61d072c9867ec2f2a32778abfd81",
+                "reference": "bf3ace73404c61d072c9867ec2f2a32778abfd81",
                 "shasum": ""
             },
             "require": {
@@ -17297,7 +17297,7 @@
                 "toolbar",
                 "web debug toolbar"
             ],
-            "time": "2026-10-17T04:12:56+00:00"
+            "time": "2026-10-17T04:49:14+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
