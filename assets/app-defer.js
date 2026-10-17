@@ -42,7 +42,9 @@ Base.boot({
     // the screen are crept through line by line.
     // Going back up is free (flowjs 1.3, `up: false`): a scroll heading up rests where the reader
     // left it; a scroll heading down still settles on its section.
-    stops: { keys: true, up: false },
+    // A section taller than the screen shows both its ends to the arrows (flowjs 1.4, `ends`):
+    // down, to its bottom first, then to the next section's top; up the same way back.
+    stops: { keys: true, up: false, ends: true },
     // Feeds and files load whole.
     exceptions: ['/blog/feed.xml', '/uploads/*'],
     current: '.om-nav a',

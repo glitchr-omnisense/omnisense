@@ -32,6 +32,34 @@ class SiteTest extends SiteTestCase
         self::assertMatchesRegularExpression('/stops:\s*\{[^}]*keys:\s*true/', $source);
     }
 
+    /** With `ends` (flowjs 1.4) an arrow rests at a tall section's bottom before the next section's top: its end was skipped. */
+    public function testTheArrowKeysShowATallSectionsBottom(): void
+    {
+        $source = file_get_contents(\dirname(__DIR__, 2).'/assets/app-defer.js');
+
+        self::assertMatchesRegularExpression('/stops:\s*\{[^}]*ends:\s*true/', $source);
+    }
+
+    /**
+     * The floors' examples turn without moving the page: a row's chips keep one width (the longest name, or
+     * their share of the row beside its "+ N"), a longer name cut rather than pushing the "+ N" down a line.
+     */
+    public function testTheTurningExamplesKeepTheirPlace(): void
+    {
+        $controller = file_get_contents(\dirname(__DIR__, 2).'/assets/controllers/examples_controller.js');
+        $styles = file_get_contents(\dirname(__DIR__, 2).'/assets/styles/layout1.scss');
+
+        self::assertStringContainsString('this.reserve();', $controller);
+        self::assertStringContainsString('document.fonts?.ready.then(() => this.reserve())', $controller, 'measured again once the fonts are in');
+        self::assertStringContainsString('new ResizeObserver(() => this.reserve())', $controller, 'and when the row\'s width changes');
+        self::assertStringContainsString('chip.style.width = `${width}px`', $controller);
+        self::assertMatchesRegularExpression('/\.om-floor-examples \{[^}]*code \{[^}]*white-space: nowrap;[^}]*overflow: hidden; text-overflow: ellipsis;/', $styles);
+
+        $this->client->request('GET', '/');
+        self::assertResponseIsSuccessful();
+        self::assertGreaterThan(0, $this->client->getCrawler()->filter('[data-controller~="examples"] [data-examples-target="provider"]')->count());
+    }
+
     /** On its own client: omnibase's sign-in and sign-up forms do not survive each other in one session. */
     public function testAnyoneMaySignUp(): void
     {
