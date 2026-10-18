@@ -15,12 +15,13 @@ use Symfony\Component\Routing\Attribute\Route;
 
 /**
  * Get started (as pytorch.org/get-started): rows of choices - the framework,
- * the channel, what is needed (the core, a family and its providers, a
+ * the channel, what is needed (the core, families and their providers, a
  * prepared structure, a bridge) - and under them the commands, the
- * composer.json block and, in Symfony, the bundles to declare. Providers are
- * not listed: they are typed by name, with suggestions from the search. A
- * plain GET form: without JavaScript the page is sent again; with it,
- * install_controller.js asks for the answer alone (?fragment=1) at each change.
+ * composer.json block and, in Symfony, the bundles to declare. The chosen
+ * families' providers are chips, family by family, counted. A plain GET form:
+ * without JavaScript the page is sent again; with it, install_controller.js
+ * shows another family's providers at once, narrows them as one types, and
+ * asks for the answer alone (?fragment=1) at each change.
  */
 class InstallController extends AbstractController
 {
@@ -36,8 +37,8 @@ class InstallController extends AbstractController
 
         $families = $chooser->families();
         $providers = [];
-        foreach ($families as $name => $own) {
-            $providers[$name] = \count($packages->findFamily($name)) - 1;
+        foreach (array_keys($families) as $name) {
+            $providers[$name] = $chooser->providersOf($name);
         }
 
         return $this->render('client/install/index.html.twig', [

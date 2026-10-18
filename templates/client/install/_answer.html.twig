@@ -1,6 +1,6 @@
 {# The selector's answer: the commands, the composer.json block, the bundles to declare in Symfony, and what each line stands on. #}
 {% if choice.unknown|default([]) %}
-<p class="om-install-note">{{ '@messages.install.unknown'|trans({names: choice.unknown|join(', '), family: choice.family, count: choice.unknown|length}) }} <a href="{{ (path('app_packages') ~ '?' ~ {family: choice.family, kind: 'provider'}|url_encode) }}">{{ '@messages.install.providers_browse'|trans }}</a></p>
+<p class="om-install-note">{{ '@messages.install.unknown'|trans({names: choice.unknown|join(', '), family: choice.familyList, count: choice.unknown|length}) }} <a href="{{ path('app_packages') ~ '?' ~ (choice.families|length == 1 ? {family: choice.families|first, kind: 'provider'} : {kind: 'provider'})|url_encode }}">{{ '@messages.install.providers_browse'|trans }}</a></p>
 {% endif %}
 {% if plan.refused %}
 <p class="om-install-note">{{ '@messages.install.refused'|trans({names: plan.refused|join(', '), framework: ('@messages.install.framework_' ~ plan.framework)|trans}) }}</p>
