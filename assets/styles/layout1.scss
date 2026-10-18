@@ -291,16 +291,37 @@ a.om-fact:hover { border-color: var(--om-blue); color: var(--om-blue); }
     input:checked + span { background: var(--om-blue); color: var(--om-paper); b, small { color: var(--om-paper); } }
     input:focus-visible + span { outline: 2px solid var(--om-blue); outline-offset: -3px; }
     &.is-off span, input:disabled + span { cursor: not-allowed; color: var(--om-soft); background: none; } }
-.om-selector-row[hidden], .om-suggestions[hidden] { display: none; }
+.om-selector-row[hidden] { display: none; }
 .om-selector-row.is-optional { border-top: 1px dashed var(--om-ink); }
 .om-selector-choices.is-dense .om-pick { flex: 1 1 auto; min-width: 7.5rem; border-bottom: 1px solid var(--om-line); > span { padding-block: .55rem; } }
 .om-selector-field { display: grid; gap: .5rem; padding: .75rem 1rem; min-width: 0; select { width: 100%; } }
 .om-selector-hint { margin: 0; font-size: .9rem; color: var(--om-soft); }
-.om-provider-pick { position: relative; max-width: 32rem;
-    input { width: 100%; min-height: 2.6rem; padding: 0 .8rem; border: 1.5px solid var(--om-ink); border-radius: 2px; background: var(--om-sheet); color: var(--om-ink); @include mono(.95rem, 500); &:focus { outline: 0; box-shadow: inset 0 0 0 2px var(--om-blue); } } }
-.om-suggestions { position: absolute; z-index: 20; top: 100%; left: 0; right: 0; margin: 0; padding: 0; list-style: none; max-height: 18rem; overflow: auto; border: 1.5px solid var(--om-ink); border-top: 0; background: var(--om-sheet);
-    li { display: grid; gap: .1rem; padding: .45rem .8rem; border-bottom: 1px solid var(--om-line); cursor: pointer; &:hover, &[aria-selected="true"] { background: var(--om-wash); } }
-    b { @include mono(.9rem, 700); } span { font-size: .85rem; color: var(--om-soft); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } }
+// Families are several: a pill holds a small box, ticked when chosen.
+.om-pick.is-multi .om-pick-label::before { content: ''; display: inline-block; width: .7em; height: .7em; margin-right: .45em; border: 1.5px solid currentColor; border-radius: 1px; vertical-align: -.02em; }
+.om-pick.is-multi input:checked + span .om-pick-label::before { background: currentColor; box-shadow: inset 0 0 0 2px var(--om-blue); }
+.om-pick .om-pick-count { display: inline; font-variant-numeric: tabular-nums; }
+// The chosen families' providers: counted, narrowed by a filter, chips family by family.
+.om-providers { gap: .65rem; }
+.om-provider-count { margin: 0; font-weight: 600; font-variant-numeric: tabular-nums; min-height: 1.4em; @include small { min-height: 2.8em; }
+    .om-num { display: inline-block; min-width: 1ch; color: var(--om-blue); font-weight: 700; } }
+@include motion { .om-num.is-ticking, .om-provider-tally.is-ticking { animation: om-tick .3s ease-out; } }
+@keyframes om-tick { from { opacity: .2; transform: translateY(.35em); } to { opacity: 1; transform: none; } }
+.om-provider-filter { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem .75rem; max-width: 34rem;
+    label { @include fine(.85rem, 600); color: var(--om-soft); white-space: nowrap; }
+    input { flex: 1 1 12rem; min-width: 0; min-height: 2.5rem; padding: 0 .8rem; border: 1.5px solid var(--om-ink); border-radius: 2px; background: var(--om-sheet); color: var(--om-ink); @include mono(.95rem, 500); &:focus { outline: 0; box-shadow: inset 0 0 0 2px var(--om-blue); } &::placeholder { color: var(--om-soft); opacity: 1; } } }
+.om-provider-groups, .om-provider-filter { &[hidden] { display: none; } }
+.om-provider-groups { display: grid; align-content: start; gap: .75rem; max-height: 22rem; overflow: auto; overscroll-behavior: contain; padding: .65rem .75rem; border: 1px solid var(--om-line); background: var(--om-paper); @include small { max-height: 55vh; padding: .55rem; } }
+.om-provider-group { display: block; min-width: 0; margin: 0; padding: 0; border: 0; &[hidden] { display: none; }
+    legend { display: flex; align-items: baseline; gap: .5rem; padding: 0 0 .3rem; font-weight: 600; font-size: .92rem; b { font-weight: 300; color: var(--om-blue); } } }
+.om-provider-tally { display: inline-block; @include mono(.8rem, 600); font-variant-numeric: tabular-nums; color: var(--om-soft); }
+.om-provider-chips { display: flex; flex-wrap: wrap; gap: .35rem; }
+.om-chip { position: relative; display: inline-flex; &[hidden] { display: none; }
+    input { position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none; }
+    span { display: block; padding: .28rem .6rem; border: 1px solid var(--om-line); border-radius: 2px; background: var(--om-sheet); @include mono(.85rem, 500); line-height: 1.35; cursor: pointer; overflow-wrap: anywhere; @media (pointer: coarse) { padding: .5rem .7rem; } }
+    span:hover { background: var(--om-wash); }
+    input:checked + span { background: var(--om-blue); border-color: var(--om-blue); color: var(--om-paper); }
+    input:focus-visible + span { outline: 2px solid var(--om-blue); outline-offset: 1px; } }
+.om-provider-none { margin: 0; font-size: .88rem; color: var(--om-soft); &[hidden] { display: none; } }
 .om-answer-bundles { @include wide { grid-column: 1 / -1; } }
 .om-selector-send { margin: 0; padding: .75rem 1rem; border-bottom: 1px solid var(--om-line); }
 .om-selector-answer { padding: 1.25rem 1rem 1rem; border-top: 1.5px solid var(--om-ink); margin-top: -1px; &[aria-busy] { opacity: .6; } h2.om-cote { margin-bottom: .5rem; color: var(--om-blue); } }

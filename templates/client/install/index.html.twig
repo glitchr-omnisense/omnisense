@@ -1,12 +1,15 @@
 {#
  # Get started (as pytorch.org/get-started): rows of choices that combine,
- # the answer under them. The foundation only - the core, a family, a bridge -
- # and, apart and optional, a prepared structure; a family's providers are
- # never listed: typed by name, suggested from the search as one types.
- # A GET form: without JavaScript "Composer" sends the page again (the rows
- # of another need open then); with it, install_controller.js opens the rows
- # of the need chosen, suggests providers, and asks for the answer alone at
- # each change (?fragment=1), keeping the address in step.
+ # the answer under them. The foundation only - the core, families, a bridge -
+ # and, apart and optional, a prepared structure. Families are several
+ # (checkboxes as pills); the chosen ones' providers are chips, family by
+ # family, each family counted, the whole counted ("38 providers in omnibus +
+ # omnilex", "12 of 38" once a filter narrows them).
+ # A GET form: without JavaScript "Composer" sends the page again (the chosen
+ # families' providers, checkboxes; the field takes names typed); with it,
+ # install_controller.js opens the rows of the need chosen, shows the chosen
+ # families' providers, narrows them as one types, and asks for the answer
+ # alone at each change (?fragment=1), keeping the address in step.
  #}
 {% extends 'layout1.html.twig' %}
 
@@ -30,7 +33,7 @@
         <p class="om-lead">{{ '@messages.install.lead'|trans }}</p>
     </header>
 
-    <form class="om-selector" method="get" action="{{ path('app_install') }}" data-controller="install" data-install-url-value="{{ path('app_install') }}" data-install-suggest-value="{{ path('app_packages_json') }}">
+    <form class="om-selector" method="get" action="{{ path('app_install') }}" data-controller="install" data-install-url-value="{{ path('app_install') }}">
         <div class="om-selector-row">
             <p class="om-selector-label" id="om-row-framework">{{ '@messages.install.framework'|trans }}</p>
             <div class="om-selector-choices" role="radiogroup" aria-labelledby="om-row-framework">
@@ -58,29 +61,62 @@
         </div>
 
         <div class="om-selector-row" data-install-target="need" data-need="family"{{ choice.need != 'family' ? ' hidden' }}>
-            <p class="om-selector-label" id="om-row-family">{{ '@messages.install.family'|trans }}</p>
-            <div class="om-selector-choices is-dense" role="radiogroup" aria-labelledby="om-row-family">
+            <p class="om-selector-label" id="om-row-family">{{ '@messages.install.family'|trans }}<small>{{ '@messages.install.family_note'|trans }}</small></p>
+            <div class="om-selector-choices is-dense" role="group" aria-labelledby="om-row-family">
                 {% for name, own in families %}
-                <label class="om-pick">
-                    <input type="radio" name="family" value="{{ name }}"{{ choice.family == name ? ' checked' }} data-action="change->install#family" data-count="{{ providers[name] }}" data-package="{{ own.name }}">
-                    <span><span class="om-pick-label">omni<b>{{ family_suffix(name) }}</b></span></span>
+                <label class="om-pick is-multi">
+                    <input type="checkbox" name="family[]" value="{{ name }}"{{ name in choice.families ? ' checked' }} data-action="change->install#family" data-install-target="family" data-package="{{ own.name }}">
+                    <span><span class="om-pick-label">omni<b>{{ family_suffix(name) }}</b> <small class="om-pick-count">{{ providers[name]|length }}</small></span></span>
                 </label>
                 {% endfor %}
             </div>
         </div>
 
-        {% set family_count = providers[choice.family]|default(0) %}
+        {# Every family's providers are here, the chosen families' shown: the script shows another family's at once. #}
+        {% set offered = 0 %}{% set placeholder = [] %}
+        {% for name in choice.families %}{% set offered = offered + providers[name]|length %}{% set placeholder = placeholder|merge(providers[name]|slice(0, 2)|map(p => p.shortName)) %}{% endfor %}
         <div class="om-selector-row" data-install-target="need" data-need="family"{{ choice.need != 'family' ? ' hidden' }}>
-            <p class="om-selector-label" id="om-row-providers"><label for="om-providers">{{ '@messages.install.providers'|trans }}</label><small>{{ '@messages.install.providers_note'|trans }}</small></p>
-            <div class="om-selector-field">
-                <div class="om-provider-pick">
-                    <input id="om-providers" type="text" name="providers" value="{{ choice.providers }}" placeholder="{{ '@messages.install.providers_placeholder'|trans }}" autocomplete="off" spellcheck="false" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="om-provider-list" data-install-target="providers" data-action="input->install#suggest focus->install#suggest keydown->install#navigate change->install#update">
-                    <ul id="om-provider-list" class="om-suggestions" role="listbox" hidden data-install-target="suggestions"></ul>
-                </div>
-                <p class="om-selector-hint" data-install-target="hint" data-template="{{ '@messages.install.providers_hint'|trans({count: '%n', family: '%f'}) }}">
-                    {{ '@messages.install.providers_hint'|trans({count: family_count, family: choice.family}) }}
-                    <a href="{{ (path('app_packages') ~ '?' ~ {family: choice.family, kind: 'provider'}|url_encode) }}" data-install-target="browse">{{ '@messages.install.providers_browse'|trans }}</a>
+            <p class="om-selector-label" id="om-row-providers">{{ '@messages.install.providers'|trans }}<small>{{ '@messages.install.providers_note'|trans }}</small></p>
+            <div class="om-selector-field om-providers">
+                <p class="om-provider-count" aria-live="polite" data-install-target="count"
+                   data-none="{{ '@messages.install.providers_no_family'|trans }}"
+                   data-one="{{ '@messages.install.providers_count'|trans({count: 1, families: '%f'}) }}"
+                   data-other="{{ '@messages.install.providers_count'|trans({count: 2, families: '%f'})|replace({'2': '%n'}) }}"
+                   data-of="{{ '@messages.install.providers_of'|trans({shown: '%s', count: '%n', families: '%f'}) }}"
+                   data-picked-one="{{ '@messages.install.providers_picked'|trans({count: 1}) }}"
+                   data-picked-other="{{ '@messages.install.providers_picked'|trans({count: 2})|replace({'2': '%n'}) }}">
+                    {%- if choice.families is empty -%}
+                    {{ '@messages.install.providers_no_family'|trans }}
+                    {%- else -%}
+                    {{ '@messages.install.providers_count'|trans({count: offered, families: choice.familyList}) }}{% if choice.picked %} · {{ '@messages.install.providers_picked'|trans({count: choice.picked|length}) }}{% endif %}
+                    {%- endif -%}
                 </p>
+                <div class="om-provider-filter">
+                    <label for="om-providers">{{ '@messages.install.providers_filter'|trans }}</label>
+                    <input id="om-providers" type="text" name="providers" value="{{ choice.providers }}" placeholder="{{ placeholder|slice(0, 3)|join(' ') }}" autocomplete="off" spellcheck="false" aria-controls="om-provider-groups" data-install-target="filter" data-action="input->install#filter keydown->install#filterKey">
+                </div>
+                <div class="om-provider-groups" id="om-provider-groups" data-install-target="groups">
+                    {% for name, list in providers %}
+                    {% set shown = name in choice.families %}
+                    <fieldset class="om-provider-group" data-family="{{ name }}" data-install-target="group"{{ not shown ? ' hidden' }}>
+                        <legend><span>omni<b>{{ family_suffix(name) }}</b></span> <span class="om-provider-tally" data-total="{{ list|length }}">{{ list|length }}</span></legend>
+                        {% if list %}
+                        <div class="om-provider-chips">
+                            {% for provider in list %}
+                            <label class="om-chip" title="{{ provider.description }}">
+                                <input type="checkbox" name="provider[]" value="{{ provider.name }}"{{ provider.name in choice.picked ? ' checked' }}{{ not shown ? ' disabled' }} data-short="{{ provider.shortName }}" data-action="change->install#pick">
+                                <span>{{ provider.shortName }}</span>
+                            </label>
+                            {% endfor %}
+                        </div>
+                        <p class="om-provider-none" hidden>{{ '@messages.install.providers_none_match'|trans }}</p>
+                        {% else %}
+                        <p class="om-provider-none">{{ '@messages.install.providers_none'|trans }}</p>
+                        {% endif %}
+                    </fieldset>
+                    {% endfor %}
+                </div>
+                <p class="om-selector-hint"><a href="{{ path('app_packages') ~ '?' ~ (choice.families|length == 1 ? {family: choice.families|first, kind: 'provider'} : {kind: 'provider'})|url_encode }}" data-install-target="browse">{{ '@messages.install.providers_browse'|trans }}</a></p>
             </div>
         </div>
 

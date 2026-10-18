@@ -3,13 +3,14 @@
 namespace App\Tests\Functional;
 
 use App\Tests\Mock\NoNetwork;
+use Symfony\Component\BrowserKit\Cookie;
 
 /**
  * The install selector (as pytorch.org/get-started): a GET form of rows - the
- * framework, the channel, what is needed (the core, a family and the providers
- * typed by name, a bridge, a prepared structure) - whose answer is the Composer
- * commands, the composer.json block and, in Symfony, the bundles to declare;
- * no provider is listed. Each package at its minor version when a release
+ * framework, the channel, what is needed (the core, families and the providers
+ * of the chosen ones, ticked as chips or typed by name, a bridge, a prepared
+ * structure) - whose answer is the Composer commands, the composer.json block
+ * and, in Symfony, the bundles to declare. Each package at its minor version when a release
  * exists (^1.4), else at its development branch (2.x-dev) - with the
  * stability, the vcs repositories and the plugin that go with them. Without
  * JavaScript the page is sent again; with it, the answer alone is asked
@@ -29,14 +30,18 @@ class InstallTest extends SiteTestCase
         // What is needed: the foundation (the core, a family, a bridge), and apart the optional prepared structure.
         self::assertSame(['core', 'family', 'bridge', 'structure'], $page->filter('input[name="need"]')->each(fn ($i) => $i->attr('value')));
         self::assertSame('family', $page->filter('input[name="need"]:checked')->attr('value'));
-        self::assertSame(['omnibus', 'omnitrade'], $page->filter('input[name="family"]')->each(fn ($i) => $i->attr('value')), 'the families, omnibase apart: it is the core');
-        self::assertSame('omnitrade', $page->filter('input[name="family"]:checked')->attr('value'));
-        // The providers are typed, never listed: the page names none but the one chosen.
-        self::assertSame('stripe', $page->filter('input[name="providers"]')->attr('value'));
+        self::assertSame(['omnibus', 'omnitrade'], $page->filter('input[name="family[]"]')->each(fn ($i) => $i->attr('value')), 'the families, omnibase apart: it is the core');
+        self::assertSame('checkbox', $page->filter('input[name="family[]"]')->attr('type'), 'several families can be chosen');
+        self::assertSame(['omnitrade'], $page->filter('input[name="family[]"]:checked')->each(fn ($i) => $i->attr('value')));
+        // The chosen family's providers are chips, the example's ticked; another family's are in the page, closed and not sent.
+        self::assertSame(['omnitrade/paypal', 'omnitrade/stripe'], $page->filter('.om-provider-group:not([hidden]) input[name="provider[]"]')->each(fn ($i) => $i->attr('value')));
+        self::assertSame(['omnitrade/stripe'], $page->filter('input[name="provider[]"]:checked')->each(fn ($i) => $i->attr('value')));
+        self::assertSame(['omnibus'], $page->filter('.om-provider-group[hidden]')->each(fn ($g) => $g->attr('data-family')));
+        self::assertNotNull($page->filter('.om-provider-group[hidden] input')->attr('disabled'));
+        self::assertSame('', $page->filter('input[name="providers"]')->attr('value'), 'the provider typed became its chip');
+        self::assertSame('paypal stripe', $page->filter('input[name="providers"]')->attr('placeholder'), 'the field shows the family\'s own providers');
+        self::assertSame('2 fournisseurs dans omnitrade · 1 choisi', trim($page->filter('.om-provider-count')->text()));
         self::assertCount(0, $page->filter('input[name="p[]"]'));
-        $html = $page->filter('#content')->html();
-        self::assertStringNotContainsString('omnitrade/paypal', $html);
-        self::assertStringNotContainsString('omnibus/offline', $html);
         self::assertSame('/packages?family=omnitrade&kind=provider', $page->filter('[data-install-target="browse"]')->attr('href'));
         // The rows of the other needs are there for the script, closed.
         self::assertSame(['bridge', 'structure'], $page->filter('.om-selector-row[hidden]')->each(fn ($r) => $r->attr('data-need')));
@@ -56,6 +61,11 @@ class InstallTest extends SiteTestCase
         $form = $page->filter('.om-selector')->form();
         $form['framework']->select('symfony');
         $form['channel']->select('dev');
+        foreach ($form['provider'] as $chip) {
+            if ('omnitrade/stripe' === $chip->availableOptionValues()[0]) {
+                $chip->untick();
+            }
+        }
         $form['providers'] = 'PayPal';
         $page = $this->client->submit($form);
         self::assertResponseIsSuccessful();
@@ -104,6 +114,75 @@ class InstallTest extends SiteTestCase
         $page = $this->client->request('GET', '/install?framework=bare&need=structure&structure=omnibase/blog');
         self::assertStringContainsString('omnibase/blog : pour PHP nu, pas encore', $page->filter('.om-install-note')->text());
         self::assertStringContainsString('facultative', $page->filter('.om-selector-row.is-optional')->text());
+    }
+
+    /**
+     * Several families: one `composer require` line with each family's own package and the providers ticked among
+     * theirs, every chosen family's providers shown and counted (Marco, 2026-10-18: "allow having multiple families
+     * and consequently show the available providers"); old single-family links keep working.
+     */
+    public function testSeveralFamiliesComposeOneCommand(): void
+    {
+        $page = $this->client->request('GET', '/install?framework=symfony&channel=stable&need=family&family[]=omnibus&family[]=omnitrade&provider[]=omnibus/offline&provider[]=omnitrade/stripe');
+        self::assertResponseIsSuccessful();
+        self::assertSame(['omnibus', 'omnitrade'], $page->filter('input[name="family[]"]:checked')->each(fn ($i) => $i->attr('value')));
+        $commands = $page->filter('.om-answer-grid pre')->first()->text();
+        self::assertSame(1, substr_count($commands, 'composer require'), 'one line for every package');
+        self::assertStringContainsString('composer require glitchr/omnibus:2.x-dev glitchr/omnitrade:^1.4 omnibus/offline:', $commands);
+        self::assertStringContainsString(' omnitrade/stripe:^1.4', $commands);
+        $json = json_decode($page->filter('.om-answer-grid pre')->eq(1)->text(), true);
+        self::assertSame(['glitchr/omnibus', 'glitchr/omnitrade', 'omnibus/offline', 'omnitrade/stripe'], array_keys($json['require']));
+        self::assertStringContainsString('OmnitradeBundle::class', $page->filter('.om-answer-bundles pre')->text(), 'the bundle of each family that has one');
+
+        // Both families' providers shown, each family counted, the whole counted and the ticked ones.
+        self::assertSame(['omnibus', 'omnitrade'], $page->filter('.om-provider-group:not([hidden])')->each(fn ($g) => $g->attr('data-family')));
+        self::assertSame(['1', '2'], $page->filter('.om-provider-group:not([hidden]) .om-provider-tally')->each(fn ($t) => $t->text()));
+        self::assertSame('3 fournisseurs dans omnibus + omnitrade · 2 choisis', trim($page->filter('.om-provider-count')->text()));
+        self::assertSame(['1', '2'], $page->filter('input[name="family[]"] ~ span .om-pick-count')->each(fn ($c) => $c->text()), 'each family\'s count on its pill');
+        self::assertSame('offline paypal stripe', $page->filter('input[name="providers"]')->attr('placeholder'));
+        self::assertSame('/packages?kind=provider', $page->filter('[data-install-target="browse"]')->attr('href'), 'two families: every provider in the search');
+
+        // A provider of a family not chosen is not installed; a name typed is looked for in every family chosen.
+        $require = fn (string $query): array => array_keys(json_decode($this->client->request('GET', '/install?'.$query)->filter('.om-answer-grid pre')->eq(1)->text(), true)['require']);
+        self::assertSame(['glitchr/omnibus'], $require('need=family&family[]=omnibus&provider[]=omnitrade/stripe'));
+        self::assertSame(['glitchr/omnibus', 'glitchr/omnitrade', 'omnibus/offline', 'omnitrade/paypal'], $require('need=family&family[]=omnitrade&family[]=omnibus&providers=paypal+offline'));
+
+        // An old link (one family, providers typed): the same answer, the providers ticked.
+        $page = $this->client->request('GET', '/install?need=family&family=omnibus&providers=offline');
+        self::assertSame(['omnibus'], $page->filter('input[name="family[]"]:checked')->each(fn ($i) => $i->attr('value')));
+        self::assertSame(['omnibus/offline'], $page->filter('input[name="provider[]"]:checked')->each(fn ($i) => $i->attr('value')));
+        self::assertSame('1 fournisseur dans omnibus · 1 choisi', trim($page->filter('.om-provider-count')->text()));
+        self::assertSame('offline', $page->filter('input[name="providers"]')->attr('placeholder'), 'never another family\'s providers');
+
+        // No family: said, nothing composed.
+        $page = $this->client->request('GET', '/install?need=family&family=');
+        self::assertCount(0, $page->filter('input[name="family[]"]:checked'));
+        self::assertStringContainsString('Choisissez au moins une famille', $page->filter('.om-provider-count')->text());
+        self::assertStringContainsString('Choisissez au moins un paquet', $page->filter('.om-selector-answer')->text());
+
+        // Without script: the form sent again with a second family ticked shows its providers, and ticked ones install.
+        $form = $this->client->request('GET', '/install?need=family&family=omnitrade&providers=')->filter('.om-selector')->form();
+        $form['family'][0]->tick();
+        $page = $this->client->submit($form);
+        self::assertSame(['omnibus', 'omnitrade'], $page->filter('.om-provider-group:not([hidden])')->each(fn ($g) => $g->attr('data-family')));
+        $form = $page->filter('.om-selector')->form();
+        $form['provider'][0]->tick();
+        $page = $this->client->submit($form);
+        self::assertSame(['glitchr/omnibus', 'glitchr/omnitrade', 'omnibus/offline'], array_keys(json_decode($page->filter('.om-answer-grid pre')->eq(1)->text(), true)['require']));
+    }
+
+    public function testTheProvidersAreCountedInEnglishToo(): void
+    {
+        $this->client->getCookieJar()->set(new Cookie('LANG', 'en'));
+        $page = $this->client->request('GET', '/install?need=family&family[]=omnibus&family[]=omnitrade&provider[]=omnibus/offline');
+        self::assertSame('en', $page->filter('html')->attr('lang'));
+        self::assertSame('3 providers in omnibus + omnitrade · 1 chosen', trim($page->filter('.om-provider-count')->text()));
+        self::assertSame('Filter by name', $page->filter('label[for="om-providers"]')->text());
+        // The script's templates for the count, in the same words.
+        $count = $page->filter('.om-provider-count');
+        self::assertSame('%n providers in %f', $count->attr('data-other'));
+        self::assertSame('1 provider in %f', $count->attr('data-one'));
+        self::assertSame('%s of %n in %f', $count->attr('data-of'));
     }
 
     public function testStableWhereNothingIsReleasedFallsBackToTheBranch(): void
