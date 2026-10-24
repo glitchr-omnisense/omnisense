@@ -6,12 +6,14 @@
  * router with the values of their parameters read from the content files -
  * rendered as a visitor by the site's own kernel, for a static host.
  *
- *     bin/omnibridge-static build             (the whole build: docs, assets, export, check)
- *     vendor/bin/omnibridge-static build static.php --out=public-static
+ *     bin/omnibridge-static build [--github-pages]   (the whole build: docs, assets, export, check)
+ *     vendor/bin/omnibridge-static build static.php --out=public-static [--target=github-pages]
  *
  * Environment:
- *   SITE_URL        the static site's public origin (canonical links, sitemap, feeds)
- *   RENDER_ORIGIN   the origin the kernel renders at (SITE_URL by default), rewritten to SITE_URL in every page
+ *   SITE_URL        the static site's public address (canonical links, sitemap, feeds): an origin, or the
+ *                   folder of one it is served under (https://glitchr-studio.github.io/omniscient/) - the
+ *                   pages are rendered at the root and omnibridge/static moves every internal address under it
+ *   RENDER_ORIGIN   the origin the kernel renders at (SITE_URL's origin by default), rewritten to it in every page
  *   APP_ENV         prod for a deployable build (dev shows the profiler's toolbar)
  *
  * Nothing here needs a database: the catalogue, the guides, the news and the
@@ -38,9 +40,11 @@ return static function (array $host): Site {
     }
 
     $static = rtrim(getenv('SITE_URL') ?: 'http://localhost:8135', '/');
-    // The pages are rendered at the static site's own origin (its absolute links, feeds and robots.txt
-    // are then right as written); another RENDER_ORIGIN is rewritten to it in every page.
-    $render = rtrim(getenv('RENDER_ORIGIN') ?: $static, '/');
+    // The pages are rendered at the root of the static site's own origin (its absolute links, feeds and
+    // robots.txt are then right as written); another RENDER_ORIGIN is rewritten to it in every page. Under
+    // a folder (GitHub Pages: /omniscient), the export moves the internal addresses into it.
+    $origin = (new Site($static))->origin();
+    $render = rtrim(getenv('RENDER_ORIGIN') ?: $origin, '/');
 
     if (isset($host[Cli::HOST_RENDERER], $host[Cli::HOST_ROUTES], $host[Cli::HOST_CONTAINER])) {
         // bin/console omnibridge:static:build: this kernel's renderer, routes and container.
@@ -109,6 +113,8 @@ return static function (array $host): Site {
         ->publicDir($root.'/public')
         // Encore's build (the site's entries and omnibase's, with the chunks their runtime loads).
         ->assets($root.'/public/assets/manifest.json')
+        // The search page's index, which assets/search.js fetches: followed, and moved with the base path.
+        ->resourceAttributes('data-site-search')
         ->notFound('/not-found')
         // What changes at every request, out of every page: the build is the same from one run to the next.
         ->normalise(static fn (string $html): string => $replace([
@@ -120,7 +126,7 @@ return static function (array $host): Site {
             '# <span class="ga-credits-time">\[[^\]]*\]</span>#',
         ], ['', '', ''], $html))
         // The credits name the host the page was rendered at, in capitals: the static site's.
-        ->normalise(static fn (string $html): string => str_replace(strtoupper((string) parse_url($render, \PHP_URL_HOST)), strtoupper((string) parse_url($static, \PHP_URL_HOST)), $html))
+        ->normalise(static fn (string $html): string => str_replace(strtoupper((string) parse_url($render, \PHP_URL_HOST)), strtoupper((string) parse_url($origin, \PHP_URL_HOST)), $html))
         // The render origin, as the router writes it, moved to the static site's.
-        ->normalise(static fn (string $html): string => str_replace([$render, str_replace('/', '\/', $render), rawurlencode($render)], [$static, str_replace('/', '\/', $static), rawurlencode($static)], $html));
+        ->normalise(static fn (string $html): string => $render === $origin ? $html : str_replace([$render, str_replace('/', '\/', $render), rawurlencode($render)], [$origin, str_replace('/', '\/', $origin), rawurlencode($origin)], $html));
 };

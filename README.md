@@ -33,14 +33,29 @@ bin/omnibridge-static build     # docs/ of each package at its ref, Encore, expo
 bin/omnibridge-static check dist
 ```
 
-`SITE_URL` is the public origin (canonical links, sitemap, feeds;
-`http://localhost:8135` by default). `--local=<folder>` reads the commits
-from working copies instead of GitHub; `--skip-assets` keeps the current
-Encore build; `--verify` renders every page twice. Two builds of the same
-commit give the same `dist/omnibridge-static.json`.
+`SITE_URL` is the public address (canonical links, sitemap, feeds;
+`http://localhost:8135` by default): an origin, or the folder of one the site
+is served under (`https://glitchr-studio.github.io/omniscient/`) - the pages
+are rendered at the root and omnibridge/static moves every internal address
+under the folder. `--github-pages` exports for GitHub Pages (`.nojekyll`, no
+`_redirects`, any address outside the folder an error). `--local=<folder>`
+reads the commits from working copies instead of GitHub; `--skip-assets`
+keeps the current Encore build; `--verify` renders every page twice. Two
+builds of the same commit give the same `dist/`.
 
 With the site's containers: `make static`, then `make static-serve`
-(http://localhost:8135, a plain nginx).
+(http://localhost:8135, an nginx that serves it as GitHub Pages does;
+`make static-serve STATIC_BASE_PATH=/omniscient` for a build under that
+folder).
+
+## Hosting
+
+GitHub Pages, deployed by the `website` workflow on every push to `main`
+(pull requests build the preview artifact only). Once, on GitHub:
+Settings → Pages → Source: "GitHub Actions". The address is the one Pages
+gives the repository (`https://glitchr-studio.github.io/omniscient/`); with a
+custom domain, set it in Settings → Pages and set the repository variable
+`SITE_URL` to it (`https://example.org/`): the site is then built at the root.
 
 ## Tests
 

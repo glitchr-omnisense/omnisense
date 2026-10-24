@@ -1,4 +1,4 @@
-{# The privacy page: no account, no cookie, nothing asked of other services by the pages. #}
+{# The privacy page: no account, no cookie, nothing asked of other services by the pages; what the host records. #}
 {% extends 'layout1.html.twig' %}
 
 {% block title %}{{ '@messages.privacy.title'|trans }}{% endblock %}
@@ -10,6 +10,10 @@
     <p>{{ '@messages.privacy.cookies_text'|trans }}</p>
     <h2>{{ '@messages.privacy.services'|trans }}</h2>
     <p>{{ '@messages.privacy.services_text'|trans }}</p>
+    {% if site.host %}
+    <h2>{{ '@messages.privacy.host'|trans }}</h2>
+    <p>{{ '@messages.privacy.host_text'|trans({host: site.host}) }}</p>
+    {% endif %}
     <h2>{{ '@messages.privacy.rights'|trans }}</h2>
     <p>{{ '@messages.privacy.rights_text'|trans({email: site.email}) }}</p>
 </div>

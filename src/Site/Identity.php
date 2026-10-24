@@ -22,13 +22,16 @@ class Identity
     ) {
     }
 
-    /** The static site's public origin, without a trailing slash (SITE_URL). */
+    /**
+     * The static site's public address, without a trailing slash (SITE_URL): its origin, or the folder of
+     * one it is served under ("https://glitchr-studio.github.io/omniscient").
+     */
     public function getUrl(): string
     {
         return rtrim($this->url, '/');
     }
 
-    /** An address of the site made absolute at its public origin: "/news" → "https://…/news". */
+    /** An address of the site made absolute at its public address: "/news" → "https://…/news". */
     public function absolute(string $path): string
     {
         return $this->getUrl().'/'.ltrim($path, '/');

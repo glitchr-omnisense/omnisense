@@ -1,4 +1,4 @@
-{# The legal notice: who publishes the site, where it is hosted (not yet: it is a local demonstration), where the packages live and under which licence. #}
+{# The legal notice: who publishes the site, where it is hosted (GitHub Pages: app.site.host), where the packages live and under which licence. #}
 {% extends 'layout1.html.twig' %}
 
 {% block title %}{{ '@messages.legal.title'|trans }}{% endblock %}
@@ -9,7 +9,7 @@
     <h2>{{ '@messages.legal.publisher'|trans }}</h2>
     <p>{{ '@messages.legal.publisher_text'|trans({publisher: site.publisher}) }} <a href="{{ site.makerUrl }}" rel="noopener">{{ site.makerUrl|replace({'https://': ''}) }}</a> · {{ site.email }}</p>
     <h2>{{ '@messages.legal.host'|trans }}</h2>
-    <p>{{ site.host ?? '@messages.legal.host_missing'|trans }}</p>
+    <p>{{ site.host ? '@messages.legal.host_text'|trans({host: site.host}) : '@messages.legal.host_missing'|trans }}</p>
     <h2>{{ '@messages.legal.packages'|trans }}</h2>
     <p>{{ '@messages.legal.packages_text'|trans }} <a href="{{ site.githubUrl }}" rel="noopener">github.com/{{ site.github }}</a></p>
     <h2>{{ '@messages.legal.sources'|trans }}</h2>

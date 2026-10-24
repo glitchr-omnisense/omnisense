@@ -3,16 +3,18 @@
 # its pinned commit, the front-end build, the export of every page by
 # omnibridge/static, and the check of the folder against its manifest.
 #
-#   bin/omnibridge-static build [--out=dist] [--local=<folder of working copies>] [--skip-assets] [--verify]
+#   bin/omnibridge-static build [--out=dist] [--local=<folder of working copies>] [--skip-assets] [--verify] [--github-pages]
 #   bin/omnibridge-static check [dist]
 #
 # Runs where PHP 8.4 (with the core's extensions) and Node are: the CI image,
 # or the site's container (make static). No database, no Redis, no network
 # but GitHub for the documentation (none with --local).
 #
-# Environment: SITE_URL, the public origin of the static site (canonical
-# links, sitemap, feeds) - http://localhost:8135 by default, a preview's own
-# address in CI.
+# Environment: SITE_URL, the public address of the static site (canonical
+# links, sitemap, feeds): an origin or a folder of one
+# (https://glitchr-studio.github.io/omniscient/) - http://localhost:8135 by
+# default. --github-pages exports for GitHub Pages (.nojekyll, CNAME for a
+# custom domain, no _redirects, every address checked to stay under the folder).
 set -eu
 cd "$(dirname "$0")/.."
 
@@ -23,12 +25,14 @@ out=dist
 local=
 assets=1
 verify=
+target=
 for argument in "$@"; do
     case "$argument" in
         --out=*) out=${argument#--out=} ;;
         --local=*) local=${argument#--local=} ;;
         --skip-assets) assets= ;;
         --verify) verify=--verify ;;
+        --github-pages) target=--target=github-pages ;;
         *) [ "$command" = check ] && out=$argument || { echo "Unknown option: $argument" >&2; exit 2; } ;;
     esac
 done
@@ -52,7 +56,7 @@ case "$command" in
         php bin/console assets:install public --no-interaction >/dev/null
         php bin/console cache:clear --no-warmup >/dev/null
         echo "== export (omnibridge/static) to $out"
-        php vendor/bin/omnibridge-static build static.php --out="$out" --strict $verify
+        php vendor/bin/omnibridge-static build static.php --out="$out" --strict $verify $target
         php vendor/bin/omnibridge-static check "$out"
         ;;
     check)

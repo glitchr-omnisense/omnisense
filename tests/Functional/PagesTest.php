@@ -138,6 +138,15 @@ final class PagesTest extends SiteTestCase
         self::assertStringNotContainsString('hreflang=', $html);
     }
 
+    public function testTheLegalNoticeAndThePrivacyPageNameTheHost(): void
+    {
+        self::assertStringContainsString('The site is a set of static files served by GitHub Pages, a service of GitHub, Inc.', $this->get('/legal'));
+        self::assertStringContainsString('servis par GitHub Pages, un service de GitHub, Inc.', $this->get('/fr/mentions-legales'));
+        self::assertStringNotContainsString('not online yet', $this->get('/legal'));
+        self::assertStringContainsString('IP address for the security of its service', $this->get('/privacy'));
+        self::assertStringContainsString('adresse IP de chaque visiteur', $this->get('/fr/confidentialite'));
+    }
+
     public function testNoPageOpensTheDatabase(): void
     {
         foreach (['/', '/fr', '/packages', '/families/omnitrade', '/packages/omnitrade/stripe', '/docs', '/docs/omnitrade/1.x/installation', '/guides/architecture', '/news/first', '/news/feed.atom', '/search.json'] as $path) {

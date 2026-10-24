@@ -2,12 +2,15 @@ parameters:
     # Who the site is (App\Site\Identity, the Twig global `site`).
     app.site.name: "Omniscient"
     app.site.publisher: "Glitch Art"
-    app.site.host: ""
+    # Who hosts the site (the legal notice, the privacy page): the static
+    # export is published on GitHub Pages (.github/workflows/website.yml).
+    app.site.host: "GitHub Pages"
     # The GitHub organisation the packages live under: the "edit this page"
     # links, the repository links, the Sponsors page.
     app.site.github: "glitchr-studio"
-    # The public origin of the static site (SITE_URL): the canonical and
-    # alternate links, the sitemap, the feeds, robots.txt.
+    # The public address of the static site (SITE_URL): its origin, or the
+    # folder of one it is served under (https://glitchr-studio.github.io/omniscient/)
+    # - the canonical and alternate links, the sitemap, the feeds, robots.txt.
     app.site.url: '%env(SITE_URL)%'
     env(SITE_URL): 'http://localhost:8135'
 

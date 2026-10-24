@@ -1,0 +1,18 @@
+# The static host of the smoke tests, serving the export as GitHub Pages does: the site under
+# ${BASE_PATH} (the export mounted at /srv/www${BASE_PATH}; empty at the root), a file at its path,
+# a folder redirected to its address with a slash and answered by its index.html, 404.html for the
+# rest. The nginx image fills ${BASE_PATH} in (/etc/nginx/templates):
+#
+#   docker run -d -p 8135:80 -e BASE_PATH=/omniscient -v "$PWD/dist:/srv/www/omniscient:ro" \
+#     -v "$PWD/tests/smoke/nginx.conf.template:/etc/nginx/templates/default.conf.template:ro" nginx:1.27-alpine
+server {
+    listen 80;
+    root /srv/www;
+    charset utf-8;
+    index index.html;
+    # The redirection of a folder to its address with a slash keeps the host and port asked for.
+    absolute_redirect off;
+    location / {
+    }
+    error_page 404 ${BASE_PATH}/404.html;
+}
