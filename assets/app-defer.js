@@ -42,9 +42,14 @@ Base.boot({
     // the screen are crept through line by line.
     // Going back up is free (flowjs 1.3, `up: false`): a scroll heading up rests where the reader
     // left it; a scroll heading down still settles on its section.
-    // A section taller than the screen shows both its ends to the arrows (flowjs 1.4, `ends`):
-    // down, to its bottom first, then to the next section's top; up the same way back.
-    stops: { keys: true, up: false, ends: true },
+    // A section taller than the screen is read a screen at a time by the arrows and the page
+    // keys (flowjs 1.5, `screens`): from its top a screen further, and so on to its bottom
+    // exactly, then to the next section's top; up the same way back. With `ends` (1.4) an
+    // arrow went from the families' top straight to their last screen, the rows between
+    // (most of a screen at 1440x900, more than two on a phone) never shown. A section at most
+    // a quarter of a screen taller than the screen has its top alone (flowjs 1.5.2): neither
+    // a key nor a scroll coming to rest stops a few pixels further, at its bottom.
+    stops: { keys: true, up: false, screens: true },
     // Feeds and files load whole.
     exceptions: ['/blog/feed.xml', '/uploads/*'],
     current: '.om-nav a',
