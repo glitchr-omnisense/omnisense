@@ -78,14 +78,17 @@ class MainController extends AbstractController
     }
 
     /** robots.txt, with the sitemap the static export writes beside it. */
-    #[Route('/robots.txt', name: 'app_robots', methods: ['GET'])]
+    #[Route('/robots.txt', name: 'app_robots', defaults: ['_locale' => 'en'], methods: ['GET'])]
     public function robots(Identity $site): Response
     {
         return new Response("User-agent: *\nAllow: /\n\nSitemap: ".$site->absolute('/sitemap.xml')."\n", 200, ['Content-Type' => 'text/plain; charset=UTF-8']);
     }
 
-    /** The page a static host serves for an unknown address (404.html in the export). */
-    #[Route('/not-found', name: 'app_not_found', methods: ['GET'])]
+    /**
+     * The page a static host serves for an unknown address (404.html in the export), in English: its
+     * route has no language of its own, and the build renders it after pages of both.
+     */
+    #[Route('/not-found', name: 'app_not_found', defaults: ['_locale' => 'en'], methods: ['GET'])]
     public function notFound(): Response
     {
         return $this->render('client/pages/not_found.html.twig', [], new Response('', Response::HTTP_NOT_FOUND));

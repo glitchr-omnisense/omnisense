@@ -68,7 +68,7 @@
             {% set packages = floors[tier] %}
             {# The core is named by its pattern (its name as the catalogue has it): no example beside it. #}
             {% set examples = tier == 'family' ? shown : (tier == 'bridge' ? packages|map(p => p.name)|slice(0, 4) : []) %}
-            <a class="om-floor is-{{ tier }}" href="{{ (path('app_packages') ~ '#' ~ {kind: tier == 'foundation' ? 'core' : tier}|url_encode) }}">
+            <a class="om-floor is-{{ tier }}" href="{{ (path('app_packages') ~ '#kind-' ~ (tier == 'foundation' ? 'core' : tier)) }}">
                 <span class="om-floor-level">{{ level }}</span>
                 <span class="om-floor-body">
                     <span class="om-floor-name">{{ ('@messages.floors.' ~ tier ~ '.name')|trans }}</span>
@@ -83,7 +83,7 @@
             </a>
             {% endfor %}
         </div>
-        <p class="om-floors-note">{{ '@messages.floors.note'|trans }}{% if floors.library|length %} {{ '@messages.floors.libraries'|trans({count: floors.library|length, url: (path('app_packages') ~ '#' ~ {kind: 'library'}|url_encode)})|raw }}{% endif %}</p>
+        <p class="om-floors-note">{{ '@messages.floors.note'|trans }}{% if floors.library|length %} {{ '@messages.floors.libraries'|trans({count: floors.library|length, url: (path('app_packages') ~ '#kind-library')})|raw }}{% endif %}</p>
     </div>
 </section>
 
@@ -99,7 +99,7 @@
             <li>
                 <a class="om-family-name" href="{{ path('app_family', {family: family.name}) }}">Omni<b>{{ family.suffix }}</b></a>
                 <span class="om-family-question">{{ family.phrase }}</span>
-                <a class="om-family-count" href="{{ (path('app_packages') ~ '#' ~ {family: family.name, kind: 'provider'}|url_encode) }}">{{ '@messages.home.providers'|trans({count: family.members}) }}</a>
+                <a class="om-family-count" href="{{ (path('app_packages') ~ '#family-' ~ family.name ~ '.kind-provider') }}">{{ '@messages.home.providers'|trans({count: family.members}) }}</a>
             </li>
             {% endfor %}
         </ul>
@@ -117,10 +117,10 @@
             <p class="om-lead">{{ '@messages.home.bridges_lead'|trans }}</p>
         </header>
         <ul class="om-family-list om-bridge-list">
-            {% for target in ['symfony', 'doctrine', 'twig', 'react', 'composer', 'laravel'] %}
+            {% for target in ['symfony', 'laravel', 'doctrine', 'twig', 'react', 'composer', 'static'] %}
             {% set package = found_bridges['omnibridge/' ~ target]|default(null) %}
             <li>
-                <a href="{{ package ? path('app_package', {vendor: package.vendor, name: package.shortName}) : (path('app_packages') ~ '#' ~ {kind: 'bridge'}|url_encode) }}">
+                <a href="{{ package ? path('app_package', {vendor: package.vendor, name: package.shortName}) : (path('app_packages') ~ '#kind-bridge') }}">
                     <span class="om-family-name">omnibridge/<b>{{ target }}</b></span>
                     <span class="om-family-question">{{ ('@messages.home.bridge_' ~ target)|trans }}</span>
                     <span class="om-family-count">{{ (package ? '@messages.home.bridge_found' : '@messages.home.bridge_planned')|trans }}</span>
@@ -141,7 +141,7 @@
         </header>
         {% set shown = structures|slice(0, 3) %}
         <div class="om-section-drawing is-optional" data-controller="examples" data-examples-structures-value="{{ structures|json_encode }}">
-            <a class="om-floor is-component" href="{{ (path('app_packages') ~ '#' ~ {kind: 'structure'}|url_encode) }}">
+            <a class="om-floor is-component" href="{{ (path('app_packages') ~ '#kind-structure') }}">
                 <span class="om-floor-level" aria-hidden="true">+</span>
                 <span class="om-floor-body">
                     <span class="om-floor-name">{{ '@messages.floors.component.name'|trans }}</span>

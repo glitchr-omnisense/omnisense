@@ -53,16 +53,17 @@ home:
   tags_label: The families, one tag each
   bridges_eyebrow: omnibridge
   bridges_title: One bridge per framework, not one per structure
-  bridges_lead: The core and its structures will know no framework. A bridge ties all of them at once to Symfony, to Doctrine, to Twig, to React - a generic glue that knows no structure. Another framework is one more bridge, not a rewrite of every structure.
+  bridges_lead: 'The core knows no framework: a bridge ties it to Symfony, to Laravel, to Doctrine, to Twig, to React - a generic glue that knows no structure. Another framework is one more bridge, not a rewrite of every structure.'
   bridge_found: In the catalogue
   bridge_planned: Planned
   bridge_symfony: Container, routing, forms, security.
   bridge_doctrine: 'Storage: Doctrine stands on its own.'
   bridge_twig: 'Rendering: Twig stands on its own.'
-  bridge_composer: Installation; today glitchr/base-plugin.
-  bridge_laravel: When someone uses it.
+  bridge_composer: 'Installation: the stubs and the core’s declared patches.'
+  bridge_laravel: The core’s contracts on Laravel’s container.
   bridge_react: Pages as React components, from any framework.
   announced: 'Announced, not written yet:'
+  bridge_static: A static export of any application’s public pages - this site.
 floors:
   eyebrow: The foundation
   title: The core, the families, the bridges
@@ -73,7 +74,7 @@ floors:
   foundation:
     name: Core
     one: Core
-    pattern: glitchr/omnibase
+    pattern: omniscient/omnibase
     text: 'The core every site starts from: accounts and security, back office, translations, images, forms.'
   component:
     name: Prepared structures
@@ -105,7 +106,7 @@ catalogue:
   eyebrow: Catalogue
   title: The packages
   description: 'The {count} packages of the Omni ecosystem: the core, the families and their providers, the bridges, the libraries, and the optional prepared structures.'
-  lead: '{count, plural, =0 {No package} one {# package} other {# packages}}, floor by floor. Nothing is typed here: each line is read in the package''s repository, and its state is asked of its registry.'
+  lead: '{count, plural, =0 {No package} one {# package} other {# packages}}, floor by floor, from the site''s catalogue: each line was read in the package''s repository.'
   floors: The floors
   and_providers: and their providers
   no_description: Its repository does not describe it.
@@ -186,11 +187,11 @@ legal:
   publisher: Publication
   publisher_text: This site is published by {publisher}.
   host: Hosting
-  host_missing: 'The site is not online: it is a local demonstration. The host will be named when it goes online.'
+  host_missing: The site is not online yet. The host will be named when it is.
   packages: The packages
   packages_text: The packages presented are published by the glitchr-studio organisation. Each one's licence is the one its repository declares, repeated on its sheet.
   sources: Where the information comes from
-  sources_text: A package's sheet is read in its repository (composer.json or package.json, README); its presence on Packagist or npm is asked of those registries, on the date shown; its documentation is the content of its docs/ folder. The third-party services named in the manuals belong to their owners.
+  sources_text: A package's page comes from the site's catalogue, read in its repository (composer.json or package.json, README); its documentation is its docs/ folder at the commit the site pins, shown on each page. The third-party services named in the manuals belong to their owners.
   fonts: Type
   fonts_text: 'The typefaces are served by the site, with no call to a third party: Bricolage Grotesque (Atelier Triay), IBM Plex Sans and IBM Plex Mono (IBM), all three under the SIL Open Font License 1.1.'
 privacy:
@@ -204,26 +205,25 @@ privacy:
   rights_text: 'The site keeps no personal data. For any question: {email}.'
 start:
   to_docs: Read the documentation
-  to_install: Compose your installation
-  docs_lead: Each package has its manual, read in its repository. Start with the family you need, or compose your installation.
+  docs_lead: Each package has its manual, read in its repository at a pinned commit. Start with the guides, or with the family you need.
 compat:
   eyebrow: Compatibility
-  title: 'Compatible with any framework: the families today, the core tomorrow'
-  lead: 'What is true today, and what will be. No date: the foundation''s work comes after the sites in progress.'
+  title: 'Any framework: the families in plain PHP, the core through its bridges'
+  lead: What is true today. No date is promised for the rest.
   now: Today
-  later: Planned
+  later: Next
   families_title: The families run in plain PHP
   families_text: 'The core of an <code>omni*</code> family requires neither Symfony, nor Doctrine, nor Twig: only standalone libraries. Its registry is built by hand, in a script, a Laravel or a Symfony application. The Symfony bridge is in the package, under <code>Bridge/Symfony</code>, and nothing of it is loaded elsewhere.'
   families_proof: 'The proof: each family has a framework-free test (<code>Tests/BareTest.php</code>) that builds its registry by hand and checks that no framework class is loaded.'
-  omnibase_title: omnibase is made for Symfony
-  omnibase_text: '<code>glitchr/omnibase</code> and the prepared structures <code>omnibase/*</code> are Symfony bundles today: their screens, storage and templates rely on Symfony, Doctrine and Twig.'
-  agnostic_title: omnibase will become agnostic
-  agnostic_text: 'Each structure''s trade will move to the root of its package (objects, rules, contracts), its framework parts into bridges of the same package (<code>Bridge/Symfony</code>, <code>Bridge/Doctrine</code>, <code>Bridge/Twig</code>). A generic glue, which knows no structure, will tie them to each framework:'
+  omnibase_title: omnibase 4 runs through its bridges
+  omnibase_text: '<code>omniscient/omnibase</code> 4.x requires only its framework-free foundation: Symfony comes through <code>omnibridge/symfony</code>, Laravel through <code>omnibridge/laravel</code>, the storage and the rendering through <code>omnibridge/doctrine</code> and <code>omnibridge/twig</code>.'
+  agnostic_title: The prepared structures follow
+  agnostic_text: 'The prepared structures <code>omnibase/*</code> are Symfony bundles on the core today; each moves its trade to the root of its package (objects, rules, contracts) as it is reworked, its framework parts into bridges. The generic glue, which knows no structure:'
   bridge_symfony: container, routing, forms, security
   bridge_doctrine: storage (Doctrine is standalone)
   bridge_twig: rendering (Twig is standalone)
-  bridge_composer: installation, today glitchr/base-plugin
-  bridge_laravel: when someone uses it
+  bridge_composer: 'installation: the stubs and the core’s declared patches'
+  bridge_laravel: the core’s contracts on Laravel’s container
   read_more: 'The detail, and what it asks of each package: <a href="{url}">the Compatibility page of the documentation</a>.'
   bridges_below: That glue is <a href="{url}">omnibridge</a>, described above.
 structures:
@@ -237,7 +237,7 @@ search:
   eyebrow: Packages
   title: Search the packages
   description: 'Search the {count} packages of the Omni ecosystem: by name, by family, by kind.'
-  lead: '{count, plural, =0 {No package} one {# package} other {# packages}}, each read in its repository and asked of its registry. A word is looked for in the name, the family, the description and the keywords.'
+  lead: '{count, plural, =0 {No package} one {# package} other {# packages}}, from the site''s catalogue, each read in its repository. A word is looked for in the name, the family, the description and the keywords.'
   label: Name, service or keyword
   placeholder: stripe, colissimo, pubchem, captcha…
   submit: Search
