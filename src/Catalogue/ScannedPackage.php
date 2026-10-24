@@ -21,9 +21,10 @@ final class ScannedPackage
         public readonly array $requires,
         public readonly string $path,
         public readonly ?string $branch,
-        public readonly ?string $repositoryUrl,
+        public readonly ?string $repository,
         public readonly ?string $readme,
         public readonly int $docPages,
+        public readonly ?string $head = null,
     ) {
     }
 }

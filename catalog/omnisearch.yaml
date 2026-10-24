@@ -1,0 +1,48 @@
+# The omnisearch entry of the Omniscient catalogue. Written by `bin/console
+# app:catalog:import` from the packages' repositories; the phrase and the
+# text are the site's own, edited here. Each package: its kind, what its
+# composer.json says, its GitHub repository and development branch, whether
+# its README says it was verified against the real service, whether it has
+# a docs/ folder (see config/documentation.yaml).
+family: omnisearch
+phrase:
+  en: 'Search, whatever the engine.'
+  fr: 'Chercher, quel que soit le moteur.'
+text:
+  en: 'Search the way Doctrine is for SQL: indexes declared on the classes by attributes, connections and drivers, queries, results and objects loaded back, the indexing rule; an in-memory engine, a Doctrine bridge and a Symfony bundle. Engines are packages of their own (omnisearch/typesense).'
+  fr: 'La recherche comme Doctrine l’est pour SQL : des index déclarés sur les classes par attributs, connexions et pilotes, requêtes, résultats et objets rechargés, la règle d’indexation ; un moteur en mémoire, un pont Doctrine et un bundle Symfony. Les moteurs sont des paquets à part (omnisearch/typesense).'
+packages:
+  omniscient/omnisearch:
+    kind: family
+    description: 'Omnisearch: search the way Doctrine is for SQL, whatever the engine - indexes declared on the classes by attributes (#[Index], #[Field]), connections and drivers, requests and responses (DBAL), a manager, finders, queries, results and objects loaded back, the indexing rule (ORM); an in-memory engine, a Doctrine bridge and a Symfony bundle. Engines are packages of their own (omnisearch/typesense).'
+    license: MIT
+    keywords:
+      - search
+      - full-text
+      - orm
+      - dbal
+      - doctrine
+      - attributes
+      - typesense
+      - omnisearch
+    repository: glitchr-studio/omnisearch
+    branch: 1.x
+    verification: partial
+    verification_note: "- Not verified: an engine other than Typesense and memory; Doctrine's MongoDB ODM (the store falls back on findBy(), never run); Laravel (no bridge yet: one is written when an application under Laravel indexes)."
+    docs: true
+  omnisearch/typesense:
+    kind: provider
+    description: "Omnisearch Typesense: omnisearch's driver for Typesense, over glitchr/typesense-bundle - the indexes declared by omnisearch's attributes become the bundle's collections (sub-collections of a discriminator included), objects its documents, omnisearch's requests its queries (infix, matched tokens, facets...), its responses omnisearch's; in a Symfony application the bundle hosts them."
+    license: MIT
+    keywords:
+      - search
+      - typesense
+      - omnisearch
+      - doctrine
+    repository: glitchr-studio/omnisearch-typesense
+    branch: 1.x
+    requires:
+      - omniscient/omnisearch
+    verification: partial
+    verification_note: '- Not verified: Typesense clusters of several nodes; multiSearch (not exposed by omnisearch).'
+    docs: true

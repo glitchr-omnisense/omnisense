@@ -1,0 +1,124 @@
+# The omnigame entry of the Omniscient catalogue. Written by `bin/console
+# app:catalog:import` from the packages' repositories; the phrase and the
+# text are the site's own, edited here. Each package: its kind, what its
+# composer.json says, its GitHub repository and development branch, whether
+# its README says it was verified against the real service, whether it has
+# a docs/ folder (see config/documentation.yaml).
+family: omnigame
+phrase:
+  en: 'Follow a game on the stores.'
+  fr: 'Suivre un jeu sur les boutiques.'
+packages:
+  omnigame/gog:
+    kind: provider
+    description: "Omnigame's GOG, under any PHP host, with no key: a product's record with its description and its price in the country asked, and the catalogue's search with prices, studios, genres and the store's rating."
+    license: MIT
+    keywords:
+      - gog
+      - store
+      - game
+      - games
+      - catalogue
+      - framework-agnostic
+      - omnigame
+    repository: glitchr-studio/omnigame-gog
+    branch: 1.x
+    requires:
+      - omniscient/omnigame
+    verification: verified
+    verification_note: '- Verified live (2026-10-24): a product with its US price, a search.'
+  omnigame/igdb:
+    kind: provider
+    description: "Omnigame's IGDB, under any PHP host: Twitch's games database through Apicalypse queries - search, a game's record by its IGDB, Steam or GOG number with its studios, platforms, cover and screenshots, score and identifiers on the stores; Twitch's application token got and renewed by itself."
+    license: MIT
+    keywords:
+      - igdb
+      - twitch
+      - game
+      - games
+      - database
+      - apicalypse
+      - framework-agnostic
+      - omnigame
+    repository: glitchr-studio/omnigame-igdb
+    branch: 1.x
+    requires:
+      - omniscient/omnigame
+    verification: partial
+    verification_note: '- Not verified live: no credentials.'
+  omnigame/itch:
+    kind: provider
+    description: "Omnigame's itch.io, under any PHP host: a game page's record from its public data.json with no key, and with a server-side API key whether a player owns one of your games (download keys) and the library of the key's own account."
+    license: MIT
+    keywords:
+      - itch
+      - itch.io
+      - indie
+      - game
+      - games
+      - download-keys
+      - framework-agnostic
+      - omnigame
+    repository: glitchr-studio/omnigame-itch
+    branch: 1.x
+    requires:
+      - omniscient/omnigame
+    verification: partial
+    verification_note: "- Verified live (2026-10-24): X-Moon's page. — - Not verified live: ownership and library (no key)."
+  omnigame/rawg:
+    kind: provider
+    description: "Omnigame's RAWG, under any PHP host: search and a game's record with its studios, platforms, scores and the stores that sell it - its Steam number, itch.io page and Epic slug read from their links - with an API key."
+    license: MIT
+    keywords:
+      - rawg
+      - game
+      - games
+      - database
+      - framework-agnostic
+      - omnigame
+    repository: glitchr-studio/omnigame-rawg
+    branch: 1.x
+    requires:
+      - omniscient/omnigame
+    verification: partial
+    verification_note: '- Not verified live: no key.'
+  omnigame/steam:
+    kind: provider
+    description: "Omnigame's Steam, under any PHP host: an app's store record and the store's search with no key (price in the country asked, texts in the language asked), a player's library and whether they own a game with a Steam Web API key."
+    license: MIT
+    keywords:
+      - steam
+      - valve
+      - store
+      - game
+      - games
+      - library
+      - framework-agnostic
+      - omnigame
+    repository: glitchr-studio/omnigame-steam
+    branch: 1.x
+    requires:
+      - omniscient/omnigame
+    verification: partial
+    verification_note: "- Verified live (no key, 2026-10-24): Portal 2's record in English with its US price, a search. — - Not verified live: the library and ownership (no Web API key was used)."
+  omniscient/omnigame:
+    kind: family
+    description: "Omnigame: a game's presence on the stores, read under any PHP host - its store record (texts, dates, studios, platforms, price, pictures, scores, identifiers on other stores), a search by title, a player's library and whether a player owns a game, behind contracts by capability. Read only: nothing is bought, granted or written. Providers are packages of their own (omnigame/steam, omnigame/gog, omnigame/itch, omnigame/igdb, omnigame/rawg); the Symfony and Laravel bridges live in omnibridge."
+    license: MIT
+    keywords:
+      - game
+      - games
+      - steam
+      - gog
+      - itch
+      - igdb
+      - rawg
+      - store
+      - library
+      - framework-agnostic
+      - omnigame
+    repository: glitchr-studio/omnigame
+    branch: 1.x
+    verification: partial
+    verification_note: "- Verified live (docker compose run --rm omnigame live, no key): Steam's store (Portal 2's record and price, a search), GOG's catalogue (a product, its price, a search), an itch.io page. — - Not verified live: Steam's library and ownership, itch.io's ownership and library, IGDB, RAWG - no key was used."
+    docs: true

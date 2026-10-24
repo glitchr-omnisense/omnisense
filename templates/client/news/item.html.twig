@@ -1,0 +1,19 @@
+{# A piece of news (news/<date>-<slug>.<locale>.md). #}
+{% extends 'layout1.html.twig' %}
+
+{% block title %}{{ item.title }}{% endblock %}
+{% block description %}{{ item.summary }}{% endblock %}
+{% block type %}article{% endblock %}
+
+{% block content %}
+<div class="om-wrap om-page om-text om-news-item">
+    <header class="om-head is-page">
+        <p class="om-cote"><a href="{{ path('app_news') }}">{{ '@messages.news.title'|trans }}</a> / <time datetime="{{ item.date|date('Y-m-d') }}">{{ item.date|format_date('long', locale: app.request.locale|lang) }}</time>{% if item.author %} · {{ item.author }}{% endif %}</p>
+        <h1>{{ item.title }}</h1>
+        <p class="om-lead">{{ item.summary }}</p>
+    </header>
+    <div class="manual-prose">{{ item.rendered.html|raw }}</div>
+    <p class="om-source"><a href="{{ site.githubUrl }}/omniscient/blob/main/{{ item.source }}" rel="noopener"><code>{{ item.source }}</code></a></p>
+    <p><a class="om-more" href="{{ path('app_news') }}">{{ '@messages.home.all_news'|trans }}</a></p>
+</div>
+{% endblock %}

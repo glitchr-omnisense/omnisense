@@ -1,0 +1,36 @@
+{# A guide of the site (docs/<locale>/<slug>.md), with the other guides beside it and "on this page". #}
+{% extends 'layout1.html.twig' %}
+
+{% block title %}{{ guide.title }}{% endblock %}
+{% block description %}{{ guide.description }}{% endblock %}
+
+{% block content %}
+<div class="manual" data-manual-page>
+    <aside class="manual-side" id="manual-side">
+        <div class="manual-id">
+            <a class="manual-all" href="{{ path('app_docs') }}">{{ '@messages.manual.all'|trans }}</a>
+            <span class="manual-name">{{ '@messages.docs.guides'|trans }}</span>
+        </div>
+        <nav class="manual-tree" aria-label="{{ '@messages.docs.guides'|trans }}">
+            <ul>{% for other in guides %}<li><a href="{{ path('app_guide', {slug: other.slug}) }}"{% if other.slug == guide.slug %} aria-current="page"{% endif %}>{{ other.title }}</a></li>{% endfor %}</ul>
+        </nav>
+    </aside>
+
+    <article class="manual-page">
+        <nav class="manual-crumbs" aria-label="{{ '@messages.manual.breadcrumb'|trans }}">
+            <ol>
+                <li><a href="{{ path('app_docs') }}">{{ '@messages.docs.title'|trans }}</a></li>
+                <li aria-current="page"><span>{{ guide.title }}</span></li>
+            </ol>
+            <button type="button" class="manual-menu-button" data-manual-menu aria-controls="manual-side" aria-expanded="false">{{ '@messages.manual.menu'|trans }}</button>
+        </nav>
+        <div class="manual-prose" data-text-copy="{{ '@messages.manual.copy'|trans }}" data-text-copied="{{ '@messages.manual.copied'|trans }}">
+            <a class="manual-pencil" href="{{ site.githubUrl }}/omniscient/edit/main/{{ guide.source }}" rel="noopener" title="{{ '@messages.docs.pencil_title'|trans({file: guide.source, branch: 'main'}) }}"><i class="fa-solid fa-pen" aria-hidden="true"></i><span>{{ '@messages.docs.pencil'|trans }}</span></a>
+            <h1>{{ guide.title }}</h1>
+            {{ guide.rendered.html|raw }}
+        </div>
+    </article>
+
+    {% include 'partials/_doc_toc.html.twig' with {headings: guide.rendered.headings} %}
+</div>
+{% endblock %}

@@ -1,4 +1,4 @@
-.PHONY: assets tests coverage
+.PHONY: assets tests coverage static static-serve static-stop
 .DEFAULT_GOAL := help
 
 assets:
@@ -827,6 +827,23 @@ ifeq ($(TARGET),coverage)
 else
 	@: # no-op when "coverage" is an argument of another target (make tests coverage)
 endif
+
+# ═══════════════════════════════════════════════════════════════
+# STATIC WEBSITE (omnibridge/static)
+# ═══════════════════════════════════════════════════════════════
+
+## Build the static website into dist/ (bin/omnibridge-static build, in the composer container; ARGS="--local=/srv/repos" reads the docs from the mounted working copies)
+static:
+	@$(DOCKER_COMPOSER) bin/omnibridge-static build $(ARGS)
+
+## Serve dist/ with a plain nginx on http://localhost:8135 (no PHP); make static-stop removes it
+static-serve:
+	@docker rm -f $(APP_NAME)-static >/dev/null 2>&1 || true
+	@docker run -d --name $(APP_NAME)-static -p 8135:80 -v "$(CURDIR)/dist:/srv/static:ro" -v "$(CURDIR)/tests/smoke/nginx.conf:/etc/nginx/conf.d/default.conf:ro" nginx:1.27-alpine >/dev/null
+	@printf "http://localhost:8135\n"
+
+static-stop:
+	@docker rm -f $(APP_NAME)-static >/dev/null 2>&1 || true
 
 # Catch-all to avoid "No rule to make target" 
 %:

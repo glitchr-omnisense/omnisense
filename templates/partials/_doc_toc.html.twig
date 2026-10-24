@@ -1,0 +1,14 @@
+{# "On this page": the second- and third-level headings of the prose. #}
+<aside class="manual-toc">
+    {% set shown = headings|filter(h => h.level >= 2 and h.level <= 3 and h.id) %}
+    {% if shown|length > 1 %}
+    <nav aria-label="{{ '@messages.manual.on_this_page'|trans }}">
+        <p class="manual-toc-title">{{ '@messages.manual.on_this_page'|trans }}</p>
+        <ul>
+            {% for heading in shown %}
+            <li class="is-h{{ heading.level }}"><a href="#{{ heading.id }}">{{ heading.text }}</a></li>
+            {% endfor %}
+        </ul>
+    </nav>
+    {% endif %}
+</aside>

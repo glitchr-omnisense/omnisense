@@ -2,9 +2,6 @@
 
 namespace App\Catalogue;
 
-use App\Entity\Package;
-use App\Repository\PackageRepository;
-
 use function Symfony\Component\String\u;
 
 /**
@@ -25,7 +22,7 @@ final class PackageSearch
     /** The order of the floors when nothing is typed (and between equal scores). */
     public const ORDER = [Tier::Foundation, Tier::Family, Tier::Bridge, Tier::Component, Tier::Provider, Tier::Library];
 
-    public function __construct(private readonly PackageRepository $packages)
+    public function __construct(private readonly Catalogue $packages)
     {
     }
 
@@ -35,7 +32,7 @@ final class PackageSearch
     public function all(): array
     {
         $rank = array_flip(array_map(static fn (Tier $t): string => $t->value, self::ORDER));
-        $all = $this->packages->findCatalogue();
+        $all = array_values($this->packages->all());
         usort($all, static fn (Package $a, Package $b): int => [$rank[$a->getTier()->value], $a->getName()] <=> [$rank[$b->getTier()->value], $b->getName()]);
 
         return $all;

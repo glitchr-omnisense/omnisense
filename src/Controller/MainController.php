@@ -2,91 +2,92 @@
 
 namespace App\Controller;
 
-use App\Catalogue\Families;
+use App\Catalogue\Catalogue;
 use App\Catalogue\Tier;
-use App\Repository\PackageRepository;
-use App\Sponsor\GitHubSponsors;
-use Base\Blog\Repository\PostRepository;
+use App\Content\Documentation;
+use App\Content\Guides;
+use App\Content\News;
+use App\Site\Identity;
+use App\Site\Locale;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 /**
  * The site's own pages: the home page (Omni and its turning suffix, the
  * foundation - the core, the families, the bridges - and apart, optional,
- * the prepared structures; the way to the documentation), how to support it,
- * the legal pages. The sites built on the packages are not listed here:
- * /demos, which listed them, sends to the documentation. The catalogue is CatalogueController's, the manuals
- * omnibase/docs', the announcements omnibase/blog's.
+ * the prepared structures), how to support the project, the legal pages
+ * and the page for unknown addresses. Every route is localized: English at
+ * the root, French under /fr.
  */
 class MainController extends AbstractController
 {
-    #[Route('/', name: 'app_index')]
-    public function index(PackageRepository $packages, PostRepository $posts): Response
+    #[Route(['en' => '/', 'fr' => '/fr'], name: 'app_index', methods: ['GET'])]
+    public function index(Request $request, Catalogue $catalogue, News $news, Guides $guides, Documentation $documentation): Response
     {
-        // The families that exist are the ones found in a repository; the
-        // order they turn in, and their sentence, are the site's.
+        $locale = Locale::of($request);
         $families = [];
-        foreach (Families::ordered($packages->findFamilies()) as $name => $package) {
-            $members = $packages->findFamily($name);
+        foreach ($catalogue->families() as $name => $family) {
+            $own = $family->getOwn();
+            if (null === $own || Tier::Family !== $own->getTier() && Tier::Foundation !== $own->getTier()) {
+                continue;
+            }
             $families[$name] = [
                 'name' => $name,
-                'suffix' => Families::suffix($name),
-                'package' => $package,
-                'members' => \count($members) - 1,
+                'suffix' => $family->getSuffix(),
+                'phrase' => $family->phrase($locale),
+                'package' => $own,
+                'members' => \count(array_filter($family->getMembers(), static fn ($p): bool => Tier::Provider === $p->getTier())),
             ];
         }
 
         $floors = [];
         foreach (Tier::cases() as $tier) {
-            $floors[$tier->value] = $packages->findByTier($tier);
-        }
-
-        // The examples on the floors turn: the families' own packages on the foundation's floor (in the home
-        // page's order), the prepared structures on their own optional floor. No provider is named here.
-        $turning = [];
-        foreach ($families as $family) {
-            if (Tier::Family === $family['package']->getTier()) {
-                $turning[] = $family['package']->getName();
-            }
+            $floors[$tier->value] = $catalogue->findByTier($tier);
         }
 
         return $this->render('client/index.html.twig', [
             'families' => $families,
             'floors' => $floors,
-            'turning' => $turning,
+            // The examples on the floors turn: the families' own packages, the prepared structures on their own floor.
+            'turning' => array_values(array_map(static fn (array $f): string => $f['package']->getName(), array_filter($families, static fn (array $f): bool => Tier::Family === $f['package']->getTier()))),
             'structures' => array_map(static fn ($package): string => $package->getName(), $floors['component']),
-            'announced' => Families::announced(array_keys($families)),
-            'counts' => $packages->counts(),
-            'posts' => $posts->findLatest(3),
+            'counts' => $catalogue->counts() + ['manuals' => \count($documentation->manuals())],
+            'posts' => \array_slice($news->all($locale), 0, 3),
+            'guides' => $guides->all($locale),
         ]);
     }
 
-    /** The page that listed the sites is gone (Marco, 2026-10-10): the documentation is what is shown. */
-    #[Route('/demos', name: 'app_demos')]
-    public function demos(): Response
+    #[Route(['en' => '/support', 'fr' => '/fr/soutenir'], name: 'app_support', methods: ['GET'])]
+    public function support(Catalogue $catalogue): Response
     {
-        return $this->redirectToRoute('wikidoc_index', [], Response::HTTP_MOVED_PERMANENTLY);
+        return $this->render('client/support.html.twig', ['counts' => $catalogue->counts()]);
     }
 
-    #[Route('/support', name: 'app_support')]
-    public function support(GitHubSponsors $github, PackageRepository $packages): Response
-    {
-        return $this->render('client/support.html.twig', [
-            'sponsors' => $github->fetch(),
-            'counts' => $packages->counts(),
-        ]);
-    }
-
-    #[Route('/legal', name: 'app_legal')]
+    #[Route(['en' => '/legal', 'fr' => '/fr/mentions-legales'], name: 'app_legal', methods: ['GET'])]
     public function legal(): Response
     {
         return $this->render('client/pages/legal.html.twig');
     }
 
-    #[Route('/privacy', name: 'app_privacy')]
+    #[Route(['en' => '/privacy', 'fr' => '/fr/confidentialite'], name: 'app_privacy', methods: ['GET'])]
     public function privacy(): Response
     {
         return $this->render('client/pages/privacy.html.twig');
+    }
+
+    /** robots.txt, with the sitemap the static export writes beside it. */
+    #[Route('/robots.txt', name: 'app_robots', methods: ['GET'])]
+    public function robots(Identity $site): Response
+    {
+        return new Response("User-agent: *\nAllow: /\n\nSitemap: ".$site->absolute('/sitemap.xml')."\n", 200, ['Content-Type' => 'text/plain; charset=UTF-8']);
+    }
+
+    /** The page a static host serves for an unknown address (404.html in the export). */
+    #[Route('/not-found', name: 'app_not_found', methods: ['GET'])]
+    public function notFound(): Response
+    {
+        return $this->render('client/pages/not_found.html.twig', [], new Response('', Response::HTTP_NOT_FOUND));
     }
 }

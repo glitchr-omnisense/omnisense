@@ -1,6 +1,7 @@
 // The chrome and the pages: a plan's sheet. Rules instead of boxes, labels
 // in the margin, one blue. See _tokens.scss for the palette and the type.
 @use "tokens" as *;
+@use "manual";
 @use "bundles";
 
 // ── The sheet ──────────────────────────────────────────────────────────
@@ -390,3 +391,18 @@ a.om-fact:hover { border-color: var(--om-blue); color: var(--om-blue); }
 // Glitch Art's signature: black, white at night - never a colour of the site.
 html.theme-mode-dark .om-footer-credits .ga-credits { --ga-credits-ink: #fff; }
 @media (prefers-color-scheme: dark) { html:not(.theme-mode-light) .om-footer-credits .ga-credits { --ga-credits-ink: #fff; } }
+
+// ── The news page, the site search, the headings' anchors (the static site's own pages) ──
+#content {
+    .om-news-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.5rem;
+        li { padding: 1.25rem 0; border-top: 1.5px solid var(--om-ink); }
+        time { @include cote; }
+        h2 { @include display(800); font-size: clamp(1.35rem, 3vw, 1.9rem); margin: .35rem 0 .5rem; a { color: inherit; text-decoration: none; } a:hover { text-decoration: underline; } }
+    }
+    .om-news-item .manual-prose { max-width: 46rem; }
+    .om-site-search .om-finder-box { margin-bottom: 1rem; }
+    .om-site-hits .om-hit-name { overflow-wrap: anywhere; }
+    .manual-prose .heading-anchor { margin-left: .35em; text-decoration: none; opacity: 0; &::after { content: "#"; color: var(--om-soft); } }
+    .manual-prose :is(h2, h3, h4):hover .heading-anchor, .manual-prose .heading-anchor:focus { opacity: 1; }
+    .manual-notice.is-eol { border-color: var(--om-no); }
+}

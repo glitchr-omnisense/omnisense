@@ -1,474 +1,304 @@
 site:
-  slogan: "The Omni packages and their documentation"
-  description: "Omniscient presents the Omni ecosystem - the foundation (the omnibase core, the families and their providers, the bridges) and optional ready-made structures - and publishes each package's documentation, read in its repository."
-  keywords: "omnibase, omnitrade, omnibus, Symfony, PHP, packages, documentation, Glitch Art"
-
+  slogan: The Omni packages and their documentation
+  description: Omniscient presents the Omni ecosystem - the foundation (the omnibase core, the families and their providers, the bridges) and optional ready-made structures - and publishes each package's documentation, read in its repository.
+  keywords: omnibase, omnitrade, omnibus, Symfony, PHP, packages, documentation, Glitch Art
 offline:
-  title: "You are offline"
-  message: "Check your connection and try again."
-  retry: "Retry"
-
+  title: You are offline
+  message: Check your connection and try again.
+  retry: Retry
 nav:
-  skip: "Skip to content"
-  label: "The site"
-  menu: "Menu"
-  packages: "Packages"
-  docs: "Documentation"
-  install: "Install"
-  blog: "News"
-  support: "Support"
-  languages: "Language"
-  theme: "Light or dark"
-  access: "Sign in"
-  account: "Account"
-  admin: "Back office"
-  logout: "Sign out"
-
+  skip: Skip to content
+  label: The site
+  menu: Menu
+  packages: Packages
+  docs: Documentation
+  blog: News
+  support: Support
+  languages: Language
+  theme: Light or dark
+  search: Search
 footer:
-  what: "The Omni ecosystem, package by package: what each does, where it stands, and its manual, read in its repository."
-  plan: "Plan"
-  sources: "The packages"
-  feed: "News · RSS feed"
-  site: "The site"
-  legal: "Legal notice"
-  privacy: "Privacy"
-  cookies: "Cookies"
-
+  what: 'The Omni ecosystem, package by package: what each does, where it stands, and its manual, read in its repository.'
+  plan: Plan
+  sources: The packages
+  feed: News · RSS feed
+  site: The site
+  legal: Legal notice
+  privacy: Privacy
 home:
-  title: "Omniscient: the Omni ecosystem and its documentation"
-  kicker: "One prefix, several families"
-  kicker_count: "{packages} packages · {families} families"
-  families_label: "The families"
-  empty: "The catalogue has not been read from the repositories yet."
-  to_catalogue: "The catalogue"
-  to_docs: "The documentation"
-  families_eyebrow: "The families"
-  families_title: "A contract per domain, a package per service"
-  families_lead: "A family writes down once what a domain asks of outside services - rates and labels for parcels, payments and refunds for trade - and each provider fulfils it for one service. Changing service is changing a line of configuration."
-  providers: "{count, plural, =0 {no provider} one {# provider} other {# providers}}"
-  read_eyebrow: "Read"
-  read_title: "Every package has its manual"
-  read_lead: "The manuals are the Markdown files of each repository, as they are written there: a version per branch, a link to the file to correct it."
-  search_label: "Search every manual"
-  search_submit: "Search"
-  figure_packages: "packages in the catalogue"
-  figure_manuals: "manuals published"
-  figure_families: "families"
-  to_support: "Support"
-  news: "News"
-  all_news: "All the news"
-  no_news: "No news yet."
-  search_placeholder: "webhook, MockHttpClient, make build…"
-  tags_label: "The families, one tag each"
-  bridges_eyebrow: "omnibridge"
-  bridges_title: "One bridge per framework, not one per structure"
-  bridges_lead: "The core and its structures will know no framework. A bridge ties all of them at once to Symfony, to Doctrine, to Twig, to React - a generic glue that knows no structure. Another framework is one more bridge, not a rewrite of every structure."
-  bridge_found: "In the catalogue"
-  bridge_planned: "Planned"
-  bridge_symfony: "Container, routing, forms, security."
-  bridge_doctrine: "Storage: Doctrine stands on its own."
-  bridge_twig: "Rendering: Twig stands on its own."
-  bridge_composer: "Installation; today glitchr/base-plugin."
-  bridge_laravel: "When someone uses it."
-  bridge_react: "Pages as React components, from any framework."
-  announced: "Announced, not written yet:"
-
+  title: 'Omniscient: the Omni ecosystem and its documentation'
+  kicker: One prefix, several families
+  kicker_count: '{packages} packages · {families} families'
+  families_label: The families
+  empty: The catalogue has not been read from the repositories yet.
+  to_catalogue: The catalogue
+  to_docs: The documentation
+  families_eyebrow: The families
+  families_title: A contract per domain, a package per service
+  families_lead: A family writes down once what a domain asks of outside services - rates and labels for parcels, payments and refunds for trade - and each provider fulfils it for one service. Changing service is changing a line of configuration.
+  providers: '{count, plural, =0 {no provider} one {# provider} other {# providers}}'
+  read_eyebrow: Read
+  read_title: Every package has its manual
+  read_lead: 'The manuals are the Markdown files of each repository, as they are written there: a version per branch, a link to the file to correct it.'
+  search_label: Search every manual
+  search_submit: Search
+  figure_packages: packages in the catalogue
+  figure_manuals: manuals published
+  figure_families: families
+  to_support: Support
+  news: News
+  all_news: All the news
+  no_news: No news yet.
+  search_placeholder: webhook, MockHttpClient, make build…
+  tags_label: The families, one tag each
+  bridges_eyebrow: omnibridge
+  bridges_title: One bridge per framework, not one per structure
+  bridges_lead: The core and its structures will know no framework. A bridge ties all of them at once to Symfony, to Doctrine, to Twig, to React - a generic glue that knows no structure. Another framework is one more bridge, not a rewrite of every structure.
+  bridge_found: In the catalogue
+  bridge_planned: Planned
+  bridge_symfony: Container, routing, forms, security.
+  bridge_doctrine: 'Storage: Doctrine stands on its own.'
+  bridge_twig: 'Rendering: Twig stands on its own.'
+  bridge_composer: Installation; today glitchr/base-plugin.
+  bridge_laravel: When someone uses it.
+  bridge_react: Pages as React components, from any framework.
+  announced: 'Announced, not written yet:'
 floors:
-  eyebrow: "The foundation"
-  title: "The core, the families, the bridges"
-  lead: "What any site may take: omnibase, the core of the sites; the families, one contract per domain, fulfilled service by service by their providers; the bridges, which tie it all to a framework. The providers are not listed here: they are searched for."
-  packages: "{count, plural, one {package} other {packages}}"
-  note: "A site takes the core, the families it calls on and the bridges of its framework. A prepared structure is added when it saves time: nothing in the core or the families depends on one."
-  libraries: "Plus <a href=\"{url}\">{count, plural, one {# JavaScript library} other {# JavaScript libraries}}</a>."
+  eyebrow: The foundation
+  title: The core, the families, the bridges
+  lead: 'What any site may take: omnibase, the core of the sites; the families, one contract per domain, fulfilled service by service by their providers; the bridges, which tie it all to a framework. The providers are not listed here: they are searched for.'
+  packages: '{count, plural, one {package} other {packages}}'
+  note: 'A site takes the core, the families it calls on and the bridges of its framework. A prepared structure is added when it saves time: nothing in the core or the families depends on one.'
+  libraries: Plus <a href="{url}">{count, plural, one {# JavaScript library} other {# JavaScript libraries}}</a>.
   foundation:
-    name: "Core"
-    one: "Core"
-    pattern: "glitchr/omnibase"
-    text: "The core every site starts from: accounts and security, back office, translations, images, forms."
+    name: Core
+    one: Core
+    pattern: glitchr/omnibase
+    text: 'The core every site starts from: accounts and security, back office, translations, images, forms.'
   component:
-    name: "Prepared structures"
-    one: "Prepared structure"
-    pattern: "omnibase/<trade>"
-    text: "A ready-made structure for one trade - entities, screens, back office, translations, demo data - already assembled on the core. Optional: take one to go fast, or write your own on the core and the families."
+    name: Prepared structures
+    one: Prepared structure
+    pattern: omnibase/<trade>
+    text: 'A ready-made structure for one trade - entities, screens, back office, translations, demo data - already assembled on the core. Optional: take one to go fast, or write your own on the core and the families.'
   family:
-    name: "Families"
-    one: "Family"
-    pattern: "omniscient/omni<domain>"
-    text: "The contract of one domain - parcels, payments, public registers, science data - in plain PHP, whoever the service behind it. Under omniscient/, or still glitchr/ for those not moved yet."
+    name: Families
+    one: Family
+    pattern: omniscient/omni<domain>
+    text: The contract of one domain - parcels, payments, public registers, science data - in plain PHP, whoever the service behind it. Under omniscient/, or still glitchr/ for those not moved yet.
   provider:
-    name: "Providers"
-    one: "Provider"
-    pattern: "omni<domain>/<service>"
-    text: "A service fulfilling its family's contract: one package per service, installed on its own."
+    name: Providers
+    one: Provider
+    pattern: omni<domain>/<service>
+    text: 'A service fulfilling its family''s contract: one package per service, installed on its own.'
   bridge:
-    name: "Bridges"
-    one: "Bridge"
-    pattern: "omnibridge/<target>"
-    text: "The glue between the core and a framework, a storage or a view layer. It knows no structure: one bridge serves them all."
+    name: Bridges
+    one: Bridge
+    pattern: omnibridge/<target>
+    text: 'The glue between the core and a framework, a storage or a view layer. It knows no structure: one bridge serves them all.'
   library:
-    name: "Libraries"
-    one: "Library"
-    pattern: "@glitchr/<name>"
-    text: "The house's JavaScript libraries, without dependency."
-  providers_count: "{count, plural, =0 {no provider} one {# provider to search} other {# providers to search}}"
-
-families:
-  omnibase:
-    phrase: "The core of the sites, and optional ready-made structures."
-    text: "glitchr/omnibase is made for Symfony: accounts and security, back office, translations, images, forms. The prepared structures omnibase/<trade> assemble a trade on it in advance; they are optional: nothing in the core or the families depends on them."
-  omnibus:
-    phrase: "Ship a parcel, whatever the carrier."
-    text: "One contract for parcel carriers: rates, labels, tracking, pickup points."
-  omnitrade:
-    phrase: "Take payments and sell, whatever the provider."
-    text: "One contract for payment providers and commerce platforms: purchase, authorize, capture, refund, webhooks, platform orders."
-  omnistate:
-    phrase: "Ask the public registers what they know."
-    text: "One contract for what states and registries know: companies, VAT numbers, domains and networks, and the registers its providers add."
-  omnibank:
-    phrase: "Read a bank account."
-    text: "One contract for bank access: accounts, balances, transactions, transfers, consents and webhooks, over statement files and bank APIs."
-  omnisong:
-    phrase: "Let a musician's catalogue be heard."
-    text: "One contract for listening to a catalogue: releases, tracks, previews, the links to every platform, and the embeds that play from them."
-  omnipost:
-    phrase: "Publish on the social networks."
-    text: "One contract for publishing - a reel, a picture, a carousel -, reading one's own feed, and knowing what each network imposes."
-  omnifood:
-    phrase: "Receive a restaurant's orders and reservations."
-    text: "One contract for the restaurant platforms: delivery orders, table reservations, menus, stores, webhooks."
-  omnischolar:
-    phrase: "Gather a researcher's publications."
-    text: "One contract for publications: author profiles, works, books and their editions, citations, read from several sources, merged and deduplicated, exported as BibTeX, RIS or CSL-JSON."
-  omnilab:
-    phrase: "Read what science knows of a thing, or measures at a place."
-    text: "One contract for the public science-data APIs, whatever the domain: an entity (a compound, a reaction, a crystal structure, a material, a physical constant, a gene, a protein and its domains, a protein structure, a biological pathway, a disease, a genetic variant, a species, a star, a galaxy, an exoplanet, an asteroid or a comet, an earthquake, a solar flare, a rocket launch) with its properties, their units and its identifiers in other bases, followed from one base to the next; a series (a variable measured at a place, or at a weather, river or tide station, over a time: weather, climate, air, rivers, tides; a planet's or a comet's path across that place's sky); the occurrences of a place and a period (the records and observations of a species, the earthquakes of a region, the launches of a month); a catalogued product (a satellite scene; a dataset or an astronomical catalogue's table, found by text; the file of a request, followed until it is ready; STAC-like). Its sources, by domain - chemistry: PubChem, ChEBI, ChEMBL, KEGG (for academic use), Rhea's biochemical reactions, the NCI/CADD Chemical Identifier Resolver (with OPSIN for systematic names); crystals and materials: the Crystallography Open Database, the Materials Project, OQMD; physics: CODATA's fundamental constants (NIST); genes, proteins and diseases: UniProt, NCBI Gene, HGNC, Ensembl (with the plants, fungi and invertebrates of Ensembl Genomes), RCSB PDB, InterPro and Pfam, the Gene Ontology (QuickGO), STRING's protein interactions, Reactome, Open Targets' targets, diseases and drugs, ClinVar, the GWAS Catalog; the living world: NCBI Taxonomy, the Catalogue of Life (on which GBIF builds its taxonomy), GBIF, ITIS, iNaturalist, eBird (birds; a key beyond its taxonomy), the IUCN Red List (with a token); the sea: OBIS and the World Register of Marine Species (WoRMS); fossils: the Paleobiology Database; the sky: SIMBAD, NED (galaxies and quasars), the CDS's VizieR catalogues, ESA's Gaia DR3 catalogue, the NASA Exoplanet Archive; the solar system: the JPL Small-Body Database, the Minor Planet Center, JPL Horizons' ephemerides; the Earth: the earthquake catalogues of the USGS and the EMSC, Open-Meteo, NOAA (NCEI's station records, the National Weather Service), the Deutscher Wetterdienst (through Bright Sky), the Copernicus Data Space, the Copernicus Climate and Atmosphere Data Stores (C3S, CAMS), NASA Earthdata, elevations (Open Topo Data); water: the USGS's rivers and wells, NOAA's tides and water levels (CO-OPS); air: OpenAQ's measurements (with a key); space weather: NOAA's Space Weather Prediction Center (the aurora, the Kp index, the solar wind), NASA's DONKI events (flares, coronal mass ejections, storms); spaceflight: the launches of Launch Library 2; and Wikidata across them all."
-  omnilex:
-    phrase: "Read the sources of law."
-    text: "One contract for the sources of law: texts, codes and case law, searched with filters, read in the version in force at a date; identifiers normalised and validated (ECLI, NOR, CELEX)."
-  omnimeet:
-    phrase: "Open a video room and let someone in."
-    text: "One contract for video meetings: open a room, let a participant in, close it, read its state - whether the call goes from browser to browser or through a conferencing service."
-  omnishield:
-    phrase: "Guard a form: captcha, spam, addresses known for abuse."
-    text: "One contract for guarding a form: is this token valid (ALTCHA, Turnstile, reCAPTCHA), is this text spam (Akismet), is this address known for abuse (StopForumSpam, disposable domains) - whoever answers; a form field and a constraint on the Symfony side."
-  omnishow:
-    phrase: "Play a video hosted elsewhere."
-  omnisign:
-    phrase: "Have a document signed."
-    text: "One contract for having documents signed: create an envelope (documents, signers, fields, a simple, advanced or qualified level), send it, follow it, remind, cancel, sign in the page, download the signed documents and their evidence - Yousign, DocuSign, DocuSeal."
-  omnibill:
-    phrase: "Send and receive an electronic invoice."
-    text: "One contract for electronic invoices: submit a conformant file (Factur-X, UBL, CII), follow its statuses, receive suppliers' invoices, declare a status, look a company up in the directory, transmit e-reporting - by e-mail, through an approved platform (XP Z12-013) or Chorus Pro."
-  omnireview:
-    phrase: "Read what customers say elsewhere."
-    text: "One contract for what customers say elsewhere: the rating, the reviews, the establishment's reply, the invitation to leave a review - Google, Tripadvisor, Trustpilot -, each platform with its terms of display; the origin, the date and the link always shown."
-  omniticket:
-    phrase: "Read the tickets sold elsewhere."
-  omnireach:
-    phrase: "Read what outside tools know of a site's audience."
-  omnifilm:
-    phrase: "Describe a work: film, series, episode."
-  omnigame:
-    phrase: "Follow a game on the stores."
-  omnidns:
-    phrase: "Manage a domain name where it is registered."
-
+    name: Libraries
+    one: Library
+    pattern: '@glitchr/<name>'
+    text: The house's JavaScript libraries, without dependency.
+  providers_count: '{count, plural, =0 {no provider} one {# provider to search} other {# providers to search}}'
 catalogue:
-  eyebrow: "Catalogue"
-  title: "The packages"
-  description: "The {count} packages of the Omni ecosystem: the core, the families and their providers, the bridges, the libraries, and the optional prepared structures."
-  lead: "{count, plural, =0 {No package} one {# package} other {# packages}}, floor by floor. Nothing is typed here: each line is read in the package's repository, and its state is asked of its registry."
-  synced: "Repositories read on {date}. Registries: {published} published, {unpublished} absent{unknown, plural, =0 {} one {, # without an answer} other {, # without an answer}}."
-  never_synced: "The repositories have not been read yet."
-  floors: "The floors"
-  empty: "The catalogue is empty: app:packages:sync has not read the repositories yet."
-  and_providers: "and their providers"
-  no_description: "Its repository does not describe it."
-  manual: "Manual"
-  announced_title: "Announced, not written yet"
-  announced_lead: "Names set down so that one question does not get two families. No code, no package to install: they are not part of the catalogue."
-  planned: "planned"
-  reserved: "name reserved"
-
+  eyebrow: Catalogue
+  title: The packages
+  description: 'The {count} packages of the Omni ecosystem: the core, the families and their providers, the bridges, the libraries, and the optional prepared structures.'
+  lead: '{count, plural, =0 {No package} one {# package} other {# packages}}, floor by floor. Nothing is typed here: each line is read in the package''s repository, and its state is asked of its registry.'
+  floors: The floors
+  and_providers: and their providers
+  no_description: Its repository does not describe it.
+  manual: Manual
+  curated: 'Curated in the site''s catalog/ files, read from each repository: {families} families, {providers} providers, {documented} packages with a manual.'
 state:
-  absent: "Not on {registry}"
-  unknown: "{registry} was not asked"
-  asked_on: "{date}"
-  verified: "Verified for real"
-  partial: "Verified in part"
-  unverified: "Not verified for real"
-  unstated: "Its README does not say"
-
+  verified: Verified for real
+  partial: Verified in part
+  unverified: Not verified for real
+  unstated: Its README does not say
 family:
-  manual: "Read its manual"
-  own: "The family"
-  own_foundation: "The foundation"
-  providers_lead: "One package per service, installed on its own. What each README says of its verification is repeated as it is."
-  no_provider: "No provider was found in the repositories."
-
+  manual: Read its manual
+  own: The family
+  own_foundation: The foundation
+  providers_lead: One package per service, installed on its own. What each README says of its verification is repeated as it is.
+  no_provider: No provider was found in the repositories.
 package:
-  not_published: "This package is not on {registry} yet: the command will not find it until it is submitted there."
-  read_manual: "Read the manual"
-  repository: "Repository"
-  follow: "Follow"
-  following: "Following"
-  sheet: "Sheet"
-  floor: "Floor"
-  license: "Licence"
-  branch: "Branch"
-  published: "published"
-  downloads: "{count, plural, =0 {no download} one {# download} other {# downloads}}"
-  verified: "Verified for real"
-  from_readme: "From its README"
-  keywords: "Keywords"
-  followers: "Followed by"
-  read_on: "Read in its repository on {date}."
-  manual: "Manual"
-  versions: "{count, plural, one {Version} other {Versions}}"
-  pages: "{count, plural, =0 {no page} one {# page} other {# pages}}"
-  contents: "The manual's contents"
-  readme_only: "This package has no docs/ folder: its manual is its README."
-  no_manual: "This package has neither a docs/ folder nor a README."
-  links: "Dependencies"
-  requires: "It requires"
-  required_by: "{count, plural, one {Required by # package} other {Required by # packages}}"
-
+  read_manual: Read the manual
+  repository: Repository
+  sheet: Sheet
+  floor: Floor
+  license: Licence
+  branch: Branch
+  verified: Verified for real
+  from_readme: From its README
+  keywords: Keywords
+  manual: Manual
+  versions: '{count, plural, one {Version} other {Versions}}'
+  no_manual: This package has neither a docs/ folder nor a README.
+  links: Dependencies
+  requires: It requires
+  required_by: '{count, plural, one {Required by # package} other {Required by # packages}}'
+  dev_branch: 'No package of the ecosystem has a stable release yet: the command asks for its development branch.'
+  readme: README
 docs:
-  eyebrow: "Documentation"
-  count: "{manuals} manuals · {groups} families and groups"
-  description: "The documentation of the Omni ecosystem: {count} manuals, one per package, read in the repositories."
-  lead: "{count, plural, one {# manual} other {# manuals}}, one per package. The source is the Markdown of each repository's docs/ folder: a pencil on every page to propose a change."
-  engine_typesense: "Search: Typesense."
-  engine_local: "Search: the pages' own index (the search engine is stopped)."
-  group_library: "JavaScript libraries"
-  group_other: "Others"
-  readme_only: "README only"
-  start_eyebrow: "Where to start"
-  start_title: "Getting started"
-  start_lead: "The pages that hold for every package: what they are, where they run, what they share, how to correct them."
-  way_demarrer: "The foundation and the optional prepared structures; installing a family or the core in three lines."
-  way_compatibilite: "What runs in plain PHP today, what is made for Symfony, what will become agnostic."
-  way_conventions: "Names, versions and Composer constraints, the MIT licence, \"verified for real\"."
-  way_contribuer: "The pencil, the fork, the pull request; writing a page."
-  way_install: "Framework, channel, what you need: the commands, the composer.json block, the bundles."
-  reference_eyebrow: "Reference"
-  reference_title: "One manual per package"
-  reference_lead: "The docs/ folder and the README of each repository, a version per branch. Where each package stands - published, verified, its versions - is read in <a href=\"{url}\">the package search</a>."
-  contribute_eyebrow: "Contribute"
-  contribute_title: "Correct a page"
-  contribute_text: "On every page, the pencil \"Propose a change\" opens GitHub's editor on the Markdown file, at the branch being read. Without write access, GitHub offers the fork and the pull request; the page is corrected here at the next reading of the repository."
-  contribute_more: "The path in detail"
-  pencil: "Propose a change"
-  pencil_title: "Open {file} in GitHub's editor, on the branch {branch}"
-
+  eyebrow: Documentation
+  count: '{manuals} manuals · {groups} families and groups'
+  description: 'The documentation of the Omni ecosystem: the guides that hold for every package, and {count} manuals, each read in its package''s own repository at a pinned commit.'
+  lead: The guides first; then {count, plural, one {# manual} other {# manuals}}, one per package, each read from its repository's docs/ folder at the commit the site pins - a pencil on every page to propose a change.
+  group_library: JavaScript libraries
+  group_other: Others
+  start_eyebrow: Where to start
+  start_title: Getting started
+  start_lead: 'The pages that hold for every package: what they are, where they run, what they share, how to correct them.'
+  reference_eyebrow: Reference
+  reference_title: One manual per package
+  reference_lead: Each package's docs/ folder, read at an immutable commit; each package has its own version series. Where each package stands is read in <a href="{url}">the package search</a>.
+  contribute_eyebrow: Contribute
+  contribute_title: Correct a page
+  contribute_text: On every page, the pencil "Propose a change" opens GitHub's editor on the Markdown file, at the branch the series follows. Without write access, GitHub offers the fork and the pull request; the page changes here once its commit is pinned again.
+  contribute_more: The path in detail
+  pencil: Propose a change
+  pencil_title: Open {file} in GitHub's editor, on the branch {branch}
+  title: Documentation
+  none: No manual is declared in config/documentation.yaml.
+  pages: '{count, plural, =0 {not fetched} one {# page} other {# pages}}'
+  guides: Guides
+  group_libraries: JavaScript libraries
+  group_omnibridge: Bridges
 support:
-  eyebrow: "Support"
-  title: "Support the packages"
-  description: "Supporting the Omni ecosystem: GitHub Sponsors, and the other ways to help."
-  lead: "The {packages} packages of the catalogue are free software; each one's licence is on its sheet. Maintaining them takes time: trying them against the real services, following their changes, writing their manuals."
-  sponsor: "Sponsor {login} on GitHub"
-  goal: "Current goal"
-  tiers: "Tiers"
-  monthly: "a month"
-  once: "once"
-  wall: "{count, plural, =0 {No sponsor yet} one {# sponsor} other {# sponsors}}"
-  private: "{count, plural, one {# sponsor prefers not to be named.} other {# sponsors prefer not to be named.}}"
-  no_sponsor: "The page is open; nobody has signed up yet."
-  asked_on: "According to GitHub, on {date}."
-  nodata: "No data."
-  state:
-    unconfigured: "This site has no GitHub token: it asked GitHub Sponsors nothing, and does not know whether {login}'s page is open there. So no tier, no goal and no sponsor can be shown."
-    unreachable: "GitHub Sponsors did not answer. No tier, no goal and no sponsor can be shown for now."
-    closed: "According to GitHub, {login} has no Sponsors page open. So there is no tier, no goal and no sponsor to show."
-  nothing_invented: "Nothing is shown in their place: no example, no supposed figure."
-  otherwise: "Without money"
-  otherwise_lead: "What helps as much."
+  eyebrow: Support
+  title: Support the packages
+  description: 'Supporting the Omni ecosystem: GitHub Sponsors, and the other ways to help.'
+  lead: 'The {packages} packages of the catalogue are free software; each one''s licence is on its sheet. Maintaining them takes time: trying them against the real services, following their changes, writing their manuals.'
+  sponsor: Sponsor {login} on GitHub
+  otherwise: Without money
+  otherwise_lead: What helps as much.
   way:
-    use: "Use them"
-    use_text: "A package tried in a real project teaches more than all its tests."
-    report: "Report"
-    report_text: "A service that changed, an answer misread, a case forgotten: each repository has its issues."
-    document: "Correct a manual"
-    document_text: "Every page has its \"Edit this page\" link, to the file in the repository."
-
-account:
-  eyebrow: "Account"
-  title: "My account"
-  lead: "Hello {name}."
-  settings: "Account settings"
-  register: "Create an account"
-  follows: "Packages followed"
-  follows_lead: "For each: what its registry serves today, and what changed since the day you followed it."
-  no_follow: "You follow no package. The \"Follow\" button is on the page of each package of the <a href=\"{url}\">catalogue</a>."
-  new_version: "New version: {before} → {now}"
-  since: "Followed since {date}"
-  unfollow: "Unfollow"
-
+    use: Use them
+    use_text: A package tried in a real project teaches more than all its tests.
+    report: Report
+    report_text: 'A service that changed, an answer misread, a case forgotten: each repository has its issues.'
+    document: Correct a manual
+    document_text: Every page has its "Edit this page" link, to the file in the repository.
+  sponsors_text: 'The organisation''s GitHub Sponsors page says what support pays for: trying the packages against the real services, following their changes, writing their manuals.'
 legal:
-  title: "Legal notice"
-  publisher: "Publication"
-  publisher_text: "This site is published by {publisher}."
-  host: "Hosting"
-  host_missing: "The site is not online: it is a local demonstration. The host will be named when it goes online."
-  packages: "The packages"
-  packages_text: "The packages presented are published by the glitchr-studio organisation. Each one's licence is the one its repository declares, repeated on its sheet."
-  sources: "Where the information comes from"
-  sources_text: "A package's sheet is read in its repository (composer.json or package.json, README); its presence on Packagist or npm is asked of those registries, on the date shown; its documentation is the content of its docs/ folder. The third-party services named in the manuals belong to their owners."
-  fonts: "Type"
-  fonts_text: "The typefaces are served by the site, with no call to a third party: Bricolage Grotesque (Atelier Triay), IBM Plex Sans and IBM Plex Mono (IBM), all three under the SIL Open Font License 1.1."
-
+  title: Legal notice
+  publisher: Publication
+  publisher_text: This site is published by {publisher}.
+  host: Hosting
+  host_missing: 'The site is not online: it is a local demonstration. The host will be named when it goes online.'
+  packages: The packages
+  packages_text: The packages presented are published by the glitchr-studio organisation. Each one's licence is the one its repository declares, repeated on its sheet.
+  sources: Where the information comes from
+  sources_text: A package's sheet is read in its repository (composer.json or package.json, README); its presence on Packagist or npm is asked of those registries, on the date shown; its documentation is the content of its docs/ folder. The third-party services named in the manuals belong to their owners.
+  fonts: Type
+  fonts_text: 'The typefaces are served by the site, with no call to a third party: Bricolage Grotesque (Atelier Triay), IBM Plex Sans and IBM Plex Mono (IBM), all three under the SIL Open Font License 1.1.'
 privacy:
-  title: "Privacy"
-  intro: "This site does no advertising tracking and sells no data."
-  accounts: "Accounts"
-  accounts_text: "An account is for following packages. It keeps the identifier and the address chosen, the password as a hash, and the list of packages followed. To access, correct or delete them: {email}."
-  cookies: "Cookies"
-  cookies_text: "Only the cookies the site needs (language, theme, session) are set; the circle at the foot of every page lets you refuse them."
-  services: "Services asked"
-  services_text: "The site asks Packagist and npm whether a package is published there, and GitHub Sponsors the state of the organisation's page when a token is configured. These requests leave from the server: they carry nothing of the visitors."
-  rights: "Your rights"
-  rights_text: "You may ask for access to your data, their correction or their erasure by writing to {email}, and lodge a complaint with your data protection authority."
-
+  title: Privacy
+  intro: 'This site is a set of static pages: no account, no form, no tracking, no cookie.'
+  cookies: Cookies and storage
+  cookies_text: No cookie is set. The choice between light and dark, if you make one, is kept in your own browser (local storage) and never leaves it.
+  services: Services asked
+  services_text: 'The pages load nothing from other services: the fonts and scripts are the site''s own. Links to GitHub, Packagist or npm take you there; nothing is asked of them while you read.'
+  rights: Your rights
+  rights_text: 'The site keeps no personal data. For any question: {email}.'
 start:
-  to_docs: "Read the documentation"
-  to_install: "Compose your installation"
-  docs_lead: "Each package has its manual, read in its repository. Start with the family you need, or compose your installation."
-
-install:
-  eyebrow: "Install"
-  title: "Compose your installation"
-  description: "Choose the framework, the channel and what you need - the core, families and their providers, a bridge, a prepared structure: the Composer commands, the composer.json block and, in Symfony, the bundles to declare."
-  lead: "One row per choice: the commands are composed below, each package at its minor version when a release exists, else at its development branch. The chosen families' providers are ticked."
-  framework: "Framework"
-  bare: "Plain PHP"
-  laravel_note: "no bridge yet: as in plain PHP"
-  framework_bare: "plain PHP"
-  framework_symfony: "Symfony"
-  framework_laravel: "Laravel"
-  channel: "Channel"
-  stable: "Stable"
-  stable_note: "latest release"
-  dev: "Development"
-  dev_note: "the current branch"
-  providers: "Providers"
-  submit: "Compose"
-  empty: "Choose at least one package."
-  refused: "{names}: not yet for {framework}. The omnibase core and the prepared structures are Symfony bundles today."
-  commands: "The commands"
-  why: "Where each constraint comes from"
-  package: "Package"
-  constraint: "Constraint"
-  source: "Source"
-  from_release: "latest tagged release, at the minor version"
-  from_branch: "development branch (no tagged release)"
-  on_packagist: "on Packagist"
-  on_github: "GitHub repository (not on Packagist yet)"
-  on_github_unknown: "GitHub repository (Packagist has not been asked yet: the repository is declared to be safe)"
-  note_dev: "One of the packages exists only as a development branch so far: minimum-stability dev, and prefer-stable so that everything else stays on stable releases."
-  note_vcs: "{count, plural, one {One package is not on Packagist yet: its repository is declared.} other {# packages are not on Packagist yet: their repositories are declared.}}"
-  note_plugin: "omnibase installs with its Composer plugin (glitchr/base-plugin): it has to be allowed."
-  note_symfony: "Each family's bundle is in its package (Bridge/Symfony), with no Flex recipe: the config/bundles.php line above, then its gateways under the family's key."
-  note_bare: "In plain PHP, the family's registry is built by hand: new Registry([$factories], $config). Nothing of a framework is loaded."
-  note_laravel: "No Laravel bridge yet: a family is used there as in plain PHP, its registry built in a service provider. omnibase does not run there yet."
-  need: "You need"
-  need_core: "The core"
-  need_core_note: "omnibase, Symfony today"
-  need_family: "Families"
-  need_family_note: "and their providers"
-  need_bridge: "A bridge"
-  need_bridge_note: "to a framework, a storage, a view"
-  need_structure: "A prepared structure"
-  need_structure_note: "optional"
-  family: "Families"
-  providers_note: "those of the chosen families"
-  providers_browse: "Browse them in the search"
-  bridge: "Bridge"
-  structure: "Structure"
-  structure_note: "optional, Symfony today"
-  structure_hint: "A ready-made structure for one trade, already assembled on the core. Optional: nothing in the core or the families depends on it."
-  unknown: "{count, plural, one {No provider of {family} is called {names}.} other {No provider of {family} goes by these names: {names}.}}"
-  on_packagist_empty: "on Packagist, no version read there yet: its repository is declared"
-  family_note: "one or several"
-  providers_count: "{count, plural, =0 {No provider} one {# provider} other {# providers}} in {families}"
-  providers_of: "{shown} of {count} in {families}"
-  providers_picked: "{count, plural, one {# chosen} other {# chosen}}"
-  providers_no_family: "Choose at least one family: its providers show here."
-  providers_filter: "Filter by name"
-  providers_none_match: "None matches the filter."
-  providers_none: "No provider yet."
-
+  to_docs: Read the documentation
+  to_install: Compose your installation
+  docs_lead: Each package has its manual, read in its repository. Start with the family you need, or compose your installation.
 compat:
-  eyebrow: "Compatibility"
-  title: "Compatible with any framework: the families today, the core tomorrow"
-  lead: "What is true today, and what will be. No date: the foundation's work comes after the sites in progress."
-  now: "Today"
-  later: "Planned"
-  families_title: "The families run in plain PHP"
-  families_text: "The core of an <code>omni*</code> family requires neither Symfony, nor Doctrine, nor Twig: only standalone libraries. Its registry is built by hand, in a script, a Laravel or a Symfony application. The Symfony bridge is in the package, under <code>Bridge/Symfony</code>, and nothing of it is loaded elsewhere."
-  families_proof: "The proof: each family has a framework-free test (<code>Tests/BareTest.php</code>) that builds its registry by hand and checks that no framework class is loaded."
-  omnibase_title: "omnibase is made for Symfony"
-  omnibase_text: "<code>glitchr/omnibase</code> and the prepared structures <code>omnibase/*</code> are Symfony bundles today: their screens, storage and templates rely on Symfony, Doctrine and Twig."
-  agnostic_title: "omnibase will become agnostic"
-  agnostic_text: "Each structure's trade will move to the root of its package (objects, rules, contracts), its framework parts into bridges of the same package (<code>Bridge/Symfony</code>, <code>Bridge/Doctrine</code>, <code>Bridge/Twig</code>). A generic glue, which knows no structure, will tie them to each framework:"
-  bridge_symfony: "container, routing, forms, security"
-  bridge_doctrine: "storage (Doctrine is standalone)"
-  bridge_twig: "rendering (Twig is standalone)"
-  bridge_composer: "installation, today glitchr/base-plugin"
-  bridge_laravel: "when someone uses it"
-  read_more: "The detail, and what it asks of each package: <a href=\"{url}\">the Compatibility page of the documentation</a>."
-  bridges_below: "That glue is <a href=\"{url}\">omnibridge</a>, described above."
-
-versions:
-  title: "Versions"
-  lead: "Read in its repository (tags, branches, last commits)."
-  tags: "Tagged releases"
-  no_tag: "No tagged release: the package is followed at its development branch."
-  branches: "Branches"
-  branch_default: "followed branch"
-  constraint_stable: "Stable"
-  constraint_dev: "Development"
-  unread: "This package's repository could not be read here."
-  install: "Compose an installation with this package"
-
+  eyebrow: Compatibility
+  title: 'Compatible with any framework: the families today, the core tomorrow'
+  lead: 'What is true today, and what will be. No date: the foundation''s work comes after the sites in progress.'
+  now: Today
+  later: Planned
+  families_title: The families run in plain PHP
+  families_text: 'The core of an <code>omni*</code> family requires neither Symfony, nor Doctrine, nor Twig: only standalone libraries. Its registry is built by hand, in a script, a Laravel or a Symfony application. The Symfony bridge is in the package, under <code>Bridge/Symfony</code>, and nothing of it is loaded elsewhere.'
+  families_proof: 'The proof: each family has a framework-free test (<code>Tests/BareTest.php</code>) that builds its registry by hand and checks that no framework class is loaded.'
+  omnibase_title: omnibase is made for Symfony
+  omnibase_text: '<code>glitchr/omnibase</code> and the prepared structures <code>omnibase/*</code> are Symfony bundles today: their screens, storage and templates rely on Symfony, Doctrine and Twig.'
+  agnostic_title: omnibase will become agnostic
+  agnostic_text: 'Each structure''s trade will move to the root of its package (objects, rules, contracts), its framework parts into bridges of the same package (<code>Bridge/Symfony</code>, <code>Bridge/Doctrine</code>, <code>Bridge/Twig</code>). A generic glue, which knows no structure, will tie them to each framework:'
+  bridge_symfony: container, routing, forms, security
+  bridge_doctrine: storage (Doctrine is standalone)
+  bridge_twig: rendering (Twig is standalone)
+  bridge_composer: installation, today glitchr/base-plugin
+  bridge_laravel: when someone uses it
+  read_more: 'The detail, and what it asks of each package: <a href="{url}">the Compatibility page of the documentation</a>.'
+  bridges_below: That glue is <a href="{url}">omnibridge</a>, described above.
 structures:
-  optional: "Optional"
-  eyebrow: "Prepared structures"
-  title: "A ready-made structure, when it saves time"
-  count: "{count, plural, one {structure} other {structures}}"
-  note: "Nothing in the core or the families depends on them. Symfony today, as the core is; all of them are in the package search."
-  optional_note: "A prepared structure, optional: nothing in the core or the families depends on it."
-
+  optional: Optional
+  eyebrow: Prepared structures
+  title: A ready-made structure, when it saves time
+  count: '{count, plural, one {structure} other {structures}}'
+  note: Nothing in the core or the families depends on them. Symfony today, as the core is; all of them are in the package search.
+  optional_note: 'A prepared structure, optional: nothing in the core or the families depends on it.'
 search:
-  eyebrow: "Packages"
-  title: "Search the packages"
-  description: "Search the {count} packages of the Omni ecosystem: by name, by family, by kind."
-  lead: "{count, plural, =0 {No package} one {# package} other {# packages}}, each read in its repository and asked of its registry. A word is looked for in the name, the family, the description and the keywords."
-  label: "Name, service or keyword"
-  placeholder: "stripe, colissimo, pubchem, captcha…"
-  submit: "Search"
-  family: "Family"
-  any_family: "All"
-  kind: "Kind"
-  any_kind: "All"
-  count: "{count, plural, =0 {No package} one {# package} other {# packages}}"
-  count_many: "{count} packages"
-  none: "No package answers: another word, or another family?"
-  version_title: "Latest version on {registry}"
-  untested: "Not tested live"
-  partly_tested: "Partly tested live"
-  docs: "Docs"
-
+  eyebrow: Packages
+  title: Search the packages
+  description: 'Search the {count} packages of the Omni ecosystem: by name, by family, by kind.'
+  lead: '{count, plural, =0 {No package} one {# package} other {# packages}}, each read in its repository and asked of its registry. A word is looked for in the name, the family, the description and the keywords.'
+  label: Name, service or keyword
+  placeholder: stripe, colissimo, pubchem, captcha…
+  submit: Search
+  family: Family
+  any_family: All
+  kind: Kind
+  any_kind: All
+  count: '{count, plural, =0 {No package} one {# package} other {# packages}}'
+  count_many: '{count} packages'
+  none: 'No package answers: another word, or another family?'
+  version_title: Its development branch, as Composer asks for it
+  untested: Not tested live
+  partly_tested: Partly tested live
+  docs: Docs
 kind:
-  core: "Core"
-  family: "Families"
-  provider: "Providers"
-  structure: "Prepared structures"
-  bridge: "Bridges"
-  library: "JS libraries"
-  core_one: "Core"
-  family_one: "Family"
-  provider_one: "Provider"
-  structure_one: "Prepared structure"
-  bridge_one: "Bridge"
-  library_one: "JS library"
+  core: Core
+  family: Families
+  provider: Providers
+  structure: Prepared structures
+  bridge: Bridges
+  library: JS libraries
+  core_one: Core
+  family_one: Family
+  provider_one: Provider
+  structure_one: Prepared structure
+  bridge_one: Bridge
+  library_one: JS library
+manual:
+  contents: The manual's contents
+  home: Home
+  all: All the documentation
+  version: Version
+  breadcrumb: Where you are
+  menu: Contents
+  copy: Copy
+  copied: Copied
+  on_this_page: On this page
+  not_default: You are reading the {version} series; the current one is {current}.
+  see_current: Read {current}
+  eol: The {version} series is no longer maintained.
+  read_at: Read at
+  branch: series of the branch {branch}
+  previous: Previous
+  next: Next
+  no_home: 'This manual has no home page: its pages are in the contents.'
+  not_fetched: This series has not been fetched (bin/console app:docs:fetch).
+news:
+  eyebrow: News
+  title: News
+  description: Announcements and release notes of the Omni ecosystem.
+  lead: 'Announcements and release notes, one Markdown file each in the site''s news/ folder: proposed by pull request, published at the merge, with their Atom and RSS feeds.'
+site_search:
+  eyebrow: Search
+  title: Search the site
+  description: Search the guides, the news, the packages and every manual of the Omni ecosystem.
+  lead: The guides, the news, every package and every page of the manuals' current series - answered in your browser, from an index written with the site.
+  kind_guide: Guide
+  kind_news: News
+  kind_doc: Manual
+  noscript: 'The search runs in your browser and needs JavaScript. Otherwise: <a href="{packages}">the package list</a>, <a href="{docs}">the documentation</a>.'
+not_found:
+  title: This page does not exist
+  lead: The address may have changed, or the page was never written. The documentation and the search start from here.
+  home: Home

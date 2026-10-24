@@ -1,0 +1,68 @@
+# The omnimeet entry of the Omniscient catalogue. Written by `bin/console
+# app:catalog:import` from the packages' repositories; the phrase and the
+# text are the site's own, edited here. Each package: its kind, what its
+# composer.json says, its GitHub repository and development branch, whether
+# its README says it was verified against the real service, whether it has
+# a docs/ folder (see config/documentation.yaml).
+family: omnimeet
+phrase:
+  en: 'Open a video room and let someone in.'
+  fr: 'Ouvrir une salle de visio et y faire entrer quelqu’un.'
+text:
+  en: 'One contract for video meetings: open a room, let a participant in, close it, read its state - whether the call goes from browser to browser or through a conferencing service.'
+  fr: 'Un seul contrat pour la visioconférence : ouvrir une salle, y faire entrer un participant, la fermer, lire son état — que l’appel passe de navigateur à navigateur ou par un service de conférence.'
+packages:
+  omnimeet/direct:
+    kind: provider
+    description: "Omnimeet Direct: a video meeting from browser to browser (WebRTC) - two people, encrypted end to end, no third party, nothing recorded. The handshake's rules on a store the application provides, temporary TURN credentials for one's own relay (coturn's use-auth-secret), and the JavaScript engine, with no dependency."
+    license: MIT
+    keywords:
+      - video
+      - webrtc
+      - peer-to-peer
+      - signaling
+      - turn
+      - coturn
+      - omnimeet
+    repository: glitchr-studio/omnimeet-direct
+    branch: 1.x
+    requires:
+      - omniscient/omnimeet
+    verification: unstated
+    docs: true
+  omnimeet/jitsi:
+    kind: provider
+    description: "Omnimeet Jitsi: a video meeting on a Jitsi Meet instance - one's own, a public one, or 8x8's Jitsi as a Service - embedded through the IFrame API and driven from the page, a JSON Web Token per participant (shared secret or key pair), several people, JaaS webhooks read and their signature checked."
+    license: MIT
+    keywords:
+      - video
+      - meeting
+      - conference
+      - jitsi
+      - jitsi-meet
+      - jaas
+      - jwt
+      - omnimeet
+    repository: glitchr-studio/omnimeet-jitsi
+    branch: 1.x
+    requires:
+      - omniscient/omnimeet
+    verification: partial
+    verification_note: 'Documentation: the three kinds of instance, the token, the frame, an instance that refuses to be framed (embed: false), the webhooks, and what was verified - a real meeting on a public open instance; tokens, JaaS and webhooks against the documentation only.'
+    docs: true
+  omniscient/omnimeet:
+    kind: family
+    description: "Omnimeet: one contract for video meetings - open a room, let a participant in (a JavaScript engine and its options, an embedded frame, or an address), close it, read its state, hear the provider's callbacks - whatever carries the call: the two browsers themselves (omnimeet/direct) or a conferencing service (omnimeet/jitsi); and its Symfony bundle."
+    license: MIT
+    keywords:
+      - video
+      - meeting
+      - conference
+      - webrtc
+      - teleconsultation
+      - jitsi
+      - omnimeet
+    repository: glitchr-studio/omnimeet
+    branch: 1.x
+    verification: unstated
+    docs: true

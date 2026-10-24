@@ -1,0 +1,15 @@
+packages:
+  omnitrade:
+    package: omniscient/omnitrade
+    repository: glitchr-studio/omnitrade
+    default: '1.x'
+    versions:
+      '1.x':
+        branch: 1.x
+        ref: 1111111111111111111111111111111111111111
+        path: docs/
+      '0.9':
+        branch: '0.9'
+        ref: 2222222222222222222222222222222222222222
+        path: docs/
+        eol: true

@@ -1,10 +1,11 @@
 {#
- # The search (as conda-forge.org/packages): one box over every package,
- # a family and a kind to narrow it, a compact row each - its name, what it
- # is, its family, its latest version, "not tested live" when its README
- # says so, and its links (Packagist or npm, GitHub, its manual). A plain GET
- # form: without script the page is sent again; with it, search_controller.js
- # narrows the rows as one types, from the haystack each row carries.
+ # The package search (as conda-forge.org/packages): one box over every
+ # package, a family and a kind to narrow it, a compact row each - its name,
+ # what it is, its family, its development branch, "not tested live" when
+ # its README says so, and its links (Packagist, GitHub, its manual). Every
+ # row is in the page: search_controller.js narrows them as one types and
+ # keeps the question in the address (?q=...&family=...), which it reads
+ # again when the page opens - the page itself is static.
  #}
 {% extends 'layout1.html.twig' %}
 
@@ -17,7 +18,7 @@
         <p class="om-cote">{{ '@messages.search.eyebrow'|trans }}</p>
         <h1>{{ '@messages.search.title'|trans }}</h1>
         <p class="om-lead">{{ '@messages.search.lead'|trans({count: counts.packages}) }}</p>
-        <p class="om-source">{{ synced ? '@messages.catalogue.synced'|trans({date: synced|format_datetime('long', 'short'), published: counts.published, unpublished: counts.unpublished, unknown: counts.unknown}) : '@messages.catalogue.never_synced'|trans }}</p>
+        <p class="om-source">{{ '@messages.catalogue.curated'|trans({families: counts.families, providers: counts.providers, documented: counts.documented}) }}</p>
     </header>
 
     <div data-controller="search" data-search-url-value="{{ path('app_packages') }}">
@@ -25,7 +26,7 @@
         <div class="om-search om-finder-box">
             <label for="om-finder-q">{{ '@messages.search.label'|trans }}</label>
             <div>
-                <input id="om-finder-q" type="search" name="q" value="{{ query.q }}" placeholder="{{ '@messages.search.placeholder'|trans }}" autocomplete="off" spellcheck="false" data-search-target="q" data-action="input->search#filter">
+                <input id="om-finder-q" type="search" name="q" placeholder="{{ '@messages.search.placeholder'|trans }}" autocomplete="off" spellcheck="false" data-search-target="q" data-action="input->search#filter">
                 <button type="submit" class="om-button" data-search-target="send">{{ '@messages.search.submit'|trans }}</button>
             </div>
         </div>
@@ -34,28 +35,28 @@
                 <span class="om-cote">{{ '@messages.search.family'|trans }}</span>
                 <select name="family" data-search-target="family" data-action="change->search#filter">
                     <option value="">{{ '@messages.search.any_family'|trans }}</option>
-                    {% for name, own in families %}
-                    <option value="{{ name }}"{{ name == family ? ' selected' }}>{{ name }}</option>
+                    {% for name, family in families %}
+                    <option value="{{ name }}">{{ name }}</option>
                     {% endfor %}
                 </select>
             </label>
             <fieldset class="om-finder-kinds">
                 <legend class="om-cote">{{ '@messages.search.kind'|trans }}</legend>
-                <label class="om-chip"><input type="radio" name="kind" value=""{{ kind == '' ? ' checked' }} data-action="change->search#filter"><span>{{ '@messages.search.any_kind'|trans }}</span></label>
+                <label class="om-chip"><input type="radio" name="kind" value="" checked data-action="change->search#filter"><span>{{ '@messages.search.any_kind'|trans }}</span></label>
                 {% for k in kinds %}
-                <label class="om-chip"><input type="radio" name="kind" value="{{ k }}"{{ kind == k ? ' checked' }} data-action="change->search#filter"><span>{{ ('@messages.kind.' ~ k)|trans }}</span></label>
+                <label class="om-chip"><input type="radio" name="kind" value="{{ k }}" data-action="change->search#filter"><span>{{ ('@messages.kind.' ~ k)|trans }}</span></label>
                 {% endfor %}
             </fieldset>
         </div>
     </form>
 
     <p class="om-finder-count" aria-live="polite" data-search-target="count" data-one="{{ '@messages.search.count'|trans({count: 1}) }}" data-many="{{ '@messages.search.count_many'|trans({count: '%n'}) }}" data-none="{{ '@messages.search.none'|trans }}">
-        {{ found|length ? '@messages.search.count'|trans({count: found|length}) : '@messages.search.none'|trans }}
+        {{ '@messages.search.count_many'|trans({count: rows|length}) }}
     </p>
 
     <ol class="om-hits" data-search-target="list">
         {% for package in rows %}
-        {% include 'partials/_package_hit.html.twig' with {hidden: found[package.name] is not defined, order: order[package.name]} %}
+        {% include 'partials/_package_hit.html.twig' with {order: loop.index0} %}
         {% endfor %}
     </ol>
     </div>

@@ -1,6 +1,6 @@
 /*
- * After first paint: the glitchr plugins, started by glitchr/omnibase's
- * Base.boot() (vendor/glitchr/omnibase/assets/boot.js) - flowjs' stops, then its
+ * After first paint: the glitchr plugins, started by omniscient/omnibase's
+ * Base.boot() (vendor/omniscient/omnibase/assets/boot.js) - flowjs' stops, then its
  * navigation (links swap #content in place, the back office opens as a
  * website-in-website over the site) - and the site's own effects.
  */
@@ -21,11 +21,12 @@ import './styles/app-defer.scss';
 
 import '@glitchr/flowjs/stops';
 import '@glitchr/flowjs/navigation';
-import Base from '../vendor/glitchr/omnibase/assets/boot.js';
+import Base from '../vendor/omniscient/omnibase/assets/boot.js';
 
-// The manuals' palette, copy buttons and current heading (omnibase/docs): its
-// pages load it too, and loading it twice does nothing.
-import '../vendor/omnibase/docs/public/js/manual.js';
+// The documentation pages' copy buttons, current heading and folded contents,
+// and the site's search over its prebuilt JSON index.
+import './docs.js';
+import './search.js';
 
 window.addEventListener('transparent:load', function () {
     var header = document.querySelector('.om-header');
@@ -35,7 +36,6 @@ window.addEventListener('transparent:load', function () {
 Base.boot({
     // No Sticky effect on this site: only the stops and the navigation are imported.
     sticky: false,
-    nest: ['/admin*'],
     // The home page's sections are magnetic (StickyStops, .sticky-stop). The arrow
     // keys go from section to section, as the page keys read a tall one: without
     // `keys` the arrow is the browser's 40px nudge, and the sections taller than

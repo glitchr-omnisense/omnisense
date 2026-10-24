@@ -3,7 +3,7 @@
  # in plain PHP, proved by each family's BareTest; omnibase and its components
  # are Symfony bundles) and what will be (omnibase made agnostic, its framework
  # parts in bridges; plan 0, rule 13) - no date promised.
- # letter: the section's mark on the home page ("D"); none on the install page.
+ # letter: the section's mark on the home page ("E").
  # bridges: where the bridges are described already (the home page's
  # #bridges): then they are not listed again here, only pointed at.
  #}
@@ -45,7 +45,6 @@ $gateway = $registry-&gt;get('paypal');</code></pre>
             <li><code>omnibridge/laravel</code><span>{{ '@messages.compat.bridge_laravel'|trans }}</span></li>
         </ul>
         {% endif %}
-        {% set compat_page = doc_path('glitchr/omniscient', 'compatibilite') %}
-        {% if compat_page %}<p class="om-note">{{ '@messages.compat.read_more'|trans({url: path('wikidoc_manual', {path: compat_page})})|raw }}</p>{% endif %}
+        <p class="om-note">{{ '@messages.compat.read_more'|trans({url: path('app_guide', {slug: 'compatibility'})})|raw }}</p>
     </div>
 </div>

@@ -1,1 +1,0 @@
-{"name": "glitchr/nakaya", "require": {"php": ">=8.2", "glitchr/omnibase": "3.x-dev", "glitchr/omnitrade": "1.x-dev", "omnitrade/stripe": "1.x-dev"}}

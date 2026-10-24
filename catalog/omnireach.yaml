@@ -1,0 +1,124 @@
+# The omnireach entry of the Omniscient catalogue. Written by `bin/console
+# app:catalog:import` from the packages' repositories; the phrase and the
+# text are the site's own, edited here. Each package: its kind, what its
+# composer.json says, its GitHub repository and development branch, whether
+# its README says it was verified against the real service, whether it has
+# a docs/ folder (see config/documentation.yaml).
+family: omnireach
+phrase:
+  en: "Read what outside tools know of a site's audience."
+  fr: 'Lire ce que les outils extérieurs savent de l’audience d’un site.'
+packages:
+  omnireach/bing-webmaster:
+    kind: provider
+    description: "Omnireach's Bing Webmaster Tools, under any PHP host: a site's search queries and pages in Bing with their clicks, impressions, CTR and average position, week by week or over a period, through the Bing Webmaster API (JSON, API key)."
+    license: MIT
+    keywords:
+      - bing
+      - bing-webmaster
+      - seo
+      - search
+      - queries
+      - positions
+      - framework-agnostic
+      - omnireach
+    repository: glitchr-studio/omnireach-bing-webmaster
+    branch: 1.x
+    requires:
+      - omniscient/omnireach
+    verification: partial
+    verification_note: 'Positions are passed as Bing gives them (not verified against a live account).'
+  omnireach/ga4:
+    kind: provider
+    description: "Omnireach's Google Analytics 4, under any PHP host: visitors, sessions, pageviews, bounce rate and session length of a property, by landing page, page, source, country, device or day, through the Google Analytics Data API (runReport; a service account's key or an access token)."
+    license: MIT
+    keywords:
+      - google
+      - google-analytics
+      - ga4
+      - analytics
+      - audience
+      - data-api
+      - framework-agnostic
+      - omnireach
+    repository: glitchr-studio/omnireach-ga4
+    branch: 1.x
+    requires:
+      - omniscient/omnireach
+    verification: partial
+    verification_note: '- Not verified live: no Google account was used.'
+  omnireach/matomo:
+    kind: provider
+    description: "Omnireach's Matomo, under any PHP host: visits, visitors, pageviews, bounce rate and visit length of a site, by entry page, page, referrer, country, device or day, through Matomo's Reporting API (self-hosted or Matomo Cloud), the token sent by POST."
+    license: MIT
+    keywords:
+      - matomo
+      - analytics
+      - audience
+      - reporting-api
+      - entry-pages
+      - framework-agnostic
+      - omnireach
+    repository: glitchr-studio/omnireach-matomo
+    branch: 1.x
+    requires:
+      - omniscient/omnireach
+    verification: partial
+    verification_note: '- Verified live (docker compose run --rm omnireach live, 2026-10-24): demo.matomo.cloud, site 1, anonymous - the whole site over the last seven days, then entry pages over two days. — - Not verified: a self-hosted installation with a token.'
+  omnireach/plausible:
+    kind: provider
+    description: "Omnireach's Plausible, under any PHP host: visitors, visits, pageviews, bounce rate and visit duration of a site, by page, entry page, source, country, device or day, through Plausible's Stats API v2 (plausible.io or a self-hosted Community Edition)."
+    license: MIT
+    keywords:
+      - plausible
+      - analytics
+      - audience
+      - stats-api
+      - privacy
+      - framework-agnostic
+      - omnireach
+    repository: glitchr-studio/omnireach-plausible
+    branch: 1.x
+    requires:
+      - omniscient/omnireach
+    verification: partial
+    verification_note: '- Not verified live: no Plausible key was used.'
+  omnireach/search-console:
+    kind: provider
+    description: "Omnireach's Google Search Console, under any PHP host: a property's search queries, pages, countries and devices with their clicks, impressions, CTR and average position, day by day or over a period, through the Search Console API (a service account's key or an access token)."
+    license: MIT
+    keywords:
+      - google
+      - search-console
+      - seo
+      - search
+      - queries
+      - positions
+      - framework-agnostic
+      - omnireach
+    repository: glitchr-studio/omnireach-search-console
+    branch: 1.x
+    requires:
+      - omniscient/omnireach
+    verification: partial
+    verification_note: '- Not verified live: no Google account was used.'
+  omniscient/omnireach:
+    kind: family
+    description: "Omnireach: what outside tools know of a site's audience, under any PHP host - search queries, pages and positions from the search engines (Search Console, Bing Webmaster Tools), visitors, entry pages and sources from the analytics tools (Matomo, Plausible, Google Analytics 4), one query and one report whoever answers; a taken-over site's history over any period. Providers are packages of their own (omnireach/search-console, omnireach/bing-webmaster, omnireach/matomo, omnireach/plausible, omnireach/ga4); the Symfony and Laravel bridges live in omnibridge."
+    license: MIT
+    keywords:
+      - seo
+      - search-console
+      - bing-webmaster
+      - analytics
+      - matomo
+      - plausible
+      - ga4
+      - audience
+      - framework-agnostic
+      - omnireach
+    repository: glitchr-studio/omnireach
+    branch: 1.x
+    verification: partial
+    verification_note: "- Verified live (docker compose run --rm omnireach live, 2026-10-24): Matomo's public demo (demo.matomo.cloud, anonymous) - the whole site over a week and its entry pages day by day. — - Not verified live: Search Console, Bing Webmaster, Plausible and Google Analytics (each needs an account and a key)."
+    docs: true

@@ -1,0 +1,133 @@
+# The omnifilm entry of the Omniscient catalogue. Written by `bin/console
+# app:catalog:import` from the packages' repositories; the phrase and the
+# text are the site's own, edited here. Each package: its kind, what its
+# composer.json says, its GitHub repository and development branch, whether
+# its README says it was verified against the real service, whether it has
+# a docs/ folder (see config/documentation.yaml).
+family: omnifilm
+phrase:
+  en: 'Describe a work: film, series, episode.'
+  fr: 'Décrire une œuvre : film, série, épisode.'
+packages:
+  omnifilm/omdb:
+    kind: provider
+    description: 'Omnifilm''s OMDb, under any PHP host: films, series and episodes by their IMDb number with the IMDb, Rotten Tomatoes and Metacritic scores OMDb gathers, a search by title, a season''s episodes; its key in the query, its "N/A" read as nothing.'
+    license: MIT
+    keywords:
+      - omdb
+      - imdb
+      - film
+      - movie
+      - tv
+      - series
+      - ratings
+      - rotten-tomatoes
+      - framework-agnostic
+      - omnifilm
+    repository: glitchr-studio/omnifilm-omdb
+    branch: 1.x
+    requires:
+      - omniscient/omnifilm
+    verification: partial
+    verification_note: '- Not verified live: no key.'
+  omnifilm/tmdb:
+    kind: provider
+    description: "Omnifilm's The Movie Database, under any PHP host, over php-tmdb/api: search, a film's or a series' record with its cast, crew and identifiers across registers in one call, an episode by its IMDb or TheTVDB number, a season's episodes, and where to watch in a country (JustWatch's data); php-tmdb's client runs over the application's HTTP client and a PSR-14 dispatcher of its own."
+    license: MIT
+    keywords:
+      - tmdb
+      - themoviedb
+      - film
+      - movie
+      - tv
+      - series
+      - episode
+      - watch-providers
+      - framework-agnostic
+      - omnifilm
+    repository: glitchr-studio/omnifilm-tmdb
+    branch: 1.x
+    requires:
+      - omniscient/omnifilm
+    verification: partial
+    verification_note: '- Not verified live: no key.'
+  omnifilm/trakt:
+    kind: provider
+    description: "Omnifilm's Trakt, under any PHP host: search, a film's or a show's record and its people, a work or an episode by its Trakt, IMDb, TMDB or TheTVDB number, a season's episodes, through Trakt's public API with an application's client id (no user signed in)."
+    license: MIT
+    keywords:
+      - trakt
+      - film
+      - movie
+      - tv
+      - series
+      - episode
+      - framework-agnostic
+      - omnifilm
+    repository: glitchr-studio/omnifilm-trakt
+    branch: 1.x
+    requires:
+      - omniscient/omnifilm
+    verification: partial
+    verification_note: '- Not verified live: no client id.'
+  omnifilm/tvdb:
+    kind: provider
+    description: "Omnifilm's TheTVDB, under any PHP host: series and their episodes in aired order, films, a work by its TheTVDB, IMDb or TMDB number, people and translations in the language asked, through TheTVDB's API v4 (a token got once from the project's key and a subscriber's PIN)."
+    license: MIT
+    keywords:
+      - thetvdb
+      - tvdb
+      - tv
+      - series
+      - episode
+      - film
+      - framework-agnostic
+      - omnifilm
+    repository: glitchr-studio/omnifilm-tvdb
+    branch: 1.x
+    requires:
+      - omniscient/omnifilm
+    verification: partial
+    verification_note: '- Not verified live: no key.'
+  omnifilm/wikidata:
+    kind: provider
+    description: "Omnifilm's Wikidata, under any PHP host: films, series and episodes from Wikidata's open records (CC0) through the MediaWiki API, with no key - a search narrowed to works on the server, a work by its Q-number or by its IMDb, TMDB or TheTVDB identifier, its genres, cast and crew labelled in the language asked, its poster from Wikimedia Commons; the User-Agent and maxlag Wikimedia's policies ask."
+    license: MIT
+    keywords:
+      - wikidata
+      - wikibase
+      - film
+      - movie
+      - tv
+      - series
+      - imdb
+      - open-data
+      - framework-agnostic
+      - omnifilm
+    repository: glitchr-studio/omnifilm-wikidata
+    branch: 1.x
+    requires:
+      - omniscient/omnifilm
+    verification: verified
+    verification_note: '- Verified live (docker compose run --rm omnifilm live, 2026-10-24): Stalker found by a search narrowed to 1979, The Shawshank Redemption by its IMDb number (TMDB 278, Frank Darabont), Game of Thrones by its TMDB series number (Q23572, tt0944947, TheTVDB 121361, 2011).'
+  omniscient/omnifilm:
+    kind: family
+    description: "Omnifilm: the record of a film, a series or an episode under any PHP host, whoever keeps it - titles, dates, cast and crew, pictures, identifiers across registers (IMDb, TMDB, TheTVDB, Trakt, Wikidata), a season's episodes and where to watch, behind contracts by capability. Providers are packages of their own (omnifilm/tmdb, omnifilm/omdb, omnifilm/tvdb, omnifilm/trakt, omnifilm/wikidata); the Symfony and Laravel bridges live in omnibridge."
+    license: MIT
+    keywords:
+      - film
+      - movie
+      - tv
+      - series
+      - episode
+      - filmography
+      - tmdb
+      - imdb
+      - wikidata
+      - framework-agnostic
+      - omnifilm
+    repository: glitchr-studio/omnifilm
+    branch: 1.x
+    verification: partial
+    verification_note: '- Verified live: Wikidata (no key) - a search, a film by its IMDb number, a series by its TMDB number (docker compose run --rm omnifilm live). — - Not verified live: TMDB, OMDb, TheTVDB, Trakt - no account was used.'
+    docs: true

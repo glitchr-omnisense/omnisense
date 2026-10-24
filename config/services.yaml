@@ -6,19 +6,24 @@ parameters:
     # The GitHub organisation the packages live under: the "edit this page"
     # links, the repository links, the Sponsors page.
     app.site.github: "glitchr-studio"
+    # The public origin of the static site (SITE_URL): the canonical and
+    # alternate links, the sitemap, the feeds, robots.txt.
+    app.site.url: '%env(SITE_URL)%'
+    env(SITE_URL): 'http://localhost:8135'
 
-    # The catalogue (app:packages:sync, App\Catalogue\*): where the packages'
-    # repositories and the sites' composer.json are mounted, read only.
+    # The content the site is built from: the curated catalogue (one file per
+    # family), the cross-ecosystem guides, the news, the documentation manifest
+    # and where app:docs:fetch writes each package's docs/ at its pinned ref.
+    app.catalog_dir: '%kernel.project_dir%/catalog'
+    app.guides_dir: '%kernel.project_dir%/docs'
+    app.news_dir: '%kernel.project_dir%/news'
+    app.documentation_file: '%kernel.project_dir%/config/documentation.yaml'
+    app.docs_dir: '%env(default:app.docs_dir_default:DOCS_DIR)%'
+    app.docs_dir_default: '%kernel.project_dir%/var/docs'
+    # app:catalog:import only: the working copies of the packages (~/Sites,
+    # read only), never read by the website itself.
     app.catalogue.repos_dir: '%env(OMNI_REPOS)%'
-    app.catalogue.sites_dir: '%env(OMNI_SITES)%'
     env(OMNI_REPOS): '/srv/repos'
-    env(OMNI_SITES): '/srv/sites'
-    env(GITHUB_SPONSORS_TOKEN): ''
-    env(GITHUB_SPONSORS_LOGIN): 'glitchr-studio'
-    env(TYPESENSE_SCHEME): 'http'
-    env(TYPESENSE_HOST): 'search'
-    env(TYPESENSE_PORT): '8108'
-    env(TYPESENSE_SECRET): 'omniscient-search-key'
     env(BACKUP_USERNAME): ''
     env(BACKUP_PASSWORD): ''
     env(AKISMET_KEY): ''
@@ -59,36 +64,23 @@ services:
             - '../src/Kernel.php'
             - '../src/DataFixtures/'
 
+    # A static site counts no page view on a server (the core's counter writes
+    # to the database at the end of each request): every address is excluded.
+    Base\Subscriber\PageViewSubscriber:
+        arguments:
+            $excludedPrefixes: ['/']
+
     # Required by webauthn.yaml's repositories (see Chapaland's services.yaml:
     # the alias is resolved before Doctrine would make them autowireable).
     Base\Repository\User\PasskeyRepository: ~
     Base\Security\WebauthnUserEntityRepository: ~
 
-# Fixtures only exist where doctrine/fixtures-bundle (require-dev) does.
-when@dev:
-    services:
-        App\DataFixtures\:
-            resource: '../src/DataFixtures/'
-            autowire: true
-            autoconfigure: true
-
 when@test:
     parameters:
-        # The tests read their own repositories and sites (a real environment
-        # variable - the containers' OMNI_REPOS - would win over .env.test).
+        # The tests read their own content: a catalogue, a manifest and a fetched
+        # manual of their own (a real environment variable would win over .env.test).
+        app.catalog_dir: '%kernel.project_dir%/tests/Fixtures/catalog'
+        app.documentation_file: '%kernel.project_dir%/tests/Fixtures/documentation.yaml'
+        app.docs_dir: '%kernel.project_dir%/tests/Fixtures/docs'
+        app.news_dir: '%kernel.project_dir%/tests/Fixtures/news'
         app.catalogue.repos_dir: '%kernel.project_dir%/tests/Fixtures/repos'
-        app.catalogue.sites_dir: '%kernel.project_dir%/tests/Fixtures/sites'
-    services:
-        # The outside world, answered here: no test calls it for real.
-        App\Tests\Mock\NoNetwork: ~
-        # Typesense too: omnibase/docs talks to this instead of the "search" container.
-        App\Tests\Mock\FakeTypesense: ~
-        Base\Wikidoc\Search\TypesenseClientInterface: '@App\Tests\Mock\FakeTypesense'
-        # The fixtures' repositories are files without a .git: their tags and
-        # branches are given here, as libgit2 would read them.
-        App\Tests\Mock\FakeVersions: { autowire: true }
-        App\Catalogue\Versions: '@App\Tests\Mock\FakeVersions'
-        App\DataFixtures\:
-            resource: '../src/DataFixtures/'
-            autowire: true
-            autoconfigure: true

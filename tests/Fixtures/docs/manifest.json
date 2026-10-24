@@ -1,0 +1,8 @@
+{
+    "manuals": {
+        "omnitrade": {
+            "1.x": {"repository": "glitchr-studio/omnitrade", "ref": "1111111111111111111111111111111111111111", "commit": "1111111111111111111111111111111111111111", "path": "docs/", "files": 3},
+            "0.9": {"repository": "glitchr-studio/omnitrade", "ref": "2222222222222222222222222222222222222222", "commit": "2222222222222222222222222222222222222222", "path": "docs/", "files": 1}
+        }
+    }
+}

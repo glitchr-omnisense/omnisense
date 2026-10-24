@@ -1,0 +1,81 @@
+# The omnisign entry of the Omniscient catalogue. Written by `bin/console
+# app:catalog:import` from the packages' repositories; the phrase and the
+# text are the site's own, edited here. Each package: its kind, what its
+# composer.json says, its GitHub repository and development branch, whether
+# its README says it was verified against the real service, whether it has
+# a docs/ folder (see config/documentation.yaml).
+family: omnisign
+phrase:
+  en: 'Have a document signed.'
+  fr: 'Faire signer un document.'
+text:
+  en: 'One contract for having documents signed: create an envelope (documents, signers, fields, a simple, advanced or qualified level), send it, follow it, remind, cancel, sign in the page, download the signed documents and their evidence - Yousign, DocuSign, DocuSeal.'
+  fr: 'Un seul contrat pour faire signer : créer une enveloppe (documents, signataires, champs, niveau simple, avancé ou qualifié), l’envoyer, la suivre, relancer, annuler, signer dans la page, télécharger les documents signés et leurs preuves — Yousign, DocuSign, DocuSeal.'
+packages:
+  omniscient/omnisign:
+    kind: family
+    description: "Omnisign: one contract for having documents signed - create an envelope (documents, signers, fields, a level: simple, advanced, qualified), send it, follow it, remind, cancel, sign in the application's page, download the signed documents and their evidence, hear the provider's webhooks - whoever signs: Yousign (omnisign/yousign), DocuSign (omnisign/docusign), a DocuSeal instance (omnisign/docuseal); and its Symfony bundle."
+    license: MIT
+    keywords:
+      - signature
+      - e-signature
+      - eidas
+      - yousign
+      - docusign
+      - docuseal
+      - omnisign
+    repository: glitchr-studio/omnisign
+    branch: 1.x
+    verification: unstated
+    docs: true
+  omnisign/docuseal:
+    kind: provider
+    description: "Omnisign DocuSeal: documents signed on a DocuSeal instance of one's own (open source, AGPL) or DocuSeal's cloud - a submission from a template, or from a PDF where the edition allows it, its submitters, embedded signing, reminders, the signed documents and the audit log, webhooks with their X-Docuseal-Signature checked; nothing leaves for a third party when self-hosted."
+    license: MIT
+    keywords:
+      - signature
+      - e-signature
+      - docuseal
+      - self-hosted
+      - omnisign
+    repository: glitchr-studio/omnisign-docuseal
+    branch: 1.x
+    requires:
+      - omniscient/omnisign
+    verification: verified
+    verification_note: 'Verified in real on 2026-10-08 against an instance of the open-source edition run in Docker: created, signing link, completed, downloaded (signed PDF and audit log), archived.'
+    docs: true
+  omnisign/docusign:
+    kind: provider
+    description: "Omnisign DocuSign: envelopes through DocuSign's eSignature REST API v2.1 - JWT grant with the application's RSA key, documents, signers in order, signature tabs, embedded signing (recipient views), reminders, voiding, the combined signed document and the certificate of completion, Connect webhooks with their HMAC checked."
+    license: MIT
+    keywords:
+      - signature
+      - e-signature
+      - docusign
+      - omnisign
+    repository: glitchr-studio/omnisign-docusign
+    branch: 1.x
+    requires:
+      - omniscient/omnisign
+    verification: partial
+    verification_note: "Documentation: the options and the JWT grant, from an envelope to DocuSign's, Connect, what was verified. — Not verified in real: no developer account."
+    docs: true
+  omnisign/yousign:
+    kind: provider
+    description: "Omnisign Yousign: simple, advanced and qualified electronic signatures through Yousign's public API v3 (Youtrust since its new name) - a signature request built from documents, signers and fields, activated, followed, reminded, cancelled; signing in the application's page; the signed documents and the audit trail; webhooks with their signature checked."
+    license: MIT
+    keywords:
+      - signature
+      - e-signature
+      - eidas
+      - yousign
+      - youtrust
+      - omnisign
+    repository: glitchr-studio/omnisign-yousign
+    branch: 1.x
+    requires:
+      - omniscient/omnisign
+    verification: partial
+    verification_note: 'Documentation: the options, how an envelope becomes a signature request, levels and authentication, the webhooks, what was verified. — Not verified in real: no account.'
+    docs: true

@@ -1,0 +1,1389 @@
+# The documentation each package publishes in its own repository (its docs/
+# folder), read by the website at an immutable commit. Each package has its
+# own version series; a series names the branch it follows and the commit it
+# is read at. No package has a release tag yet: every ref is the head of the
+# published development branch (origin/<branch>) when it was pinned.
+#
+#   bin/console app:catalog:import          new packages and series, pinned refs kept
+#   bin/console app:catalog:import --pin    every series moved to its branch's head
+#   bin/console app:docs:fetch              the docs/ folders at these refs, into var/docs
+#
+# A series kept for history keeps its ref: add it by hand, with its tag or commit.
+packages:
+  flowjs:
+    package: '@glitchr/flowjs'
+    repository: glitchr-studio/flowjs
+    default: master
+    versions:
+      master:
+        branch: master
+        ref: c779981e9418e26366fb1b4422fc2f4e01c79aab
+        path: docs/
+  graphjs:
+    package: '@glitchr/graphjs'
+    repository: glitchr-studio/graphjs
+    default: main
+    versions:
+      main:
+        branch: main
+        ref: 7c5466fb04c33788443f76863a5780df5ea8a5e0
+        path: docs/
+  omniauth:
+    package: omniscient/omniauth
+    repository: glitchr-studio/omniauth
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: b70fae030622f2aecd15547700abe80ac928d4ff
+        path: docs/
+  omniauth-google:
+    package: omniauth/google
+    repository: glitchr-studio/omniauth-google
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: bb38e1bd009cfd9025fc6ca3370985838aff3046
+        path: docs/
+  omniauth-otp:
+    package: omniauth/otp
+    repository: glitchr-studio/omniauth-otp
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: f41a3a7e9eb1aec22ee1c828b4f0c05a9095fb05
+        path: docs/
+  omniauth-webauthn:
+    package: omniauth/webauthn
+    repository: glitchr-studio/omniauth-webauthn
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: eb5b83a52004f67c11be978b6cf16808410cef8d
+        path: docs/
+  omnibank:
+    package: omniscient/omnibank
+    repository: glitchr-studio/omnibank
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: ed3e93c7172dfde1bda9413e64fbc26efdbbb382
+        path: docs/
+  omnibase:
+    package: omniscient/omnibase
+    repository: glitchr-studio/omnibase
+    default: 4.x
+    versions:
+      4.x:
+        branch: 4.x
+        ref: d92b04c357052accabe8a6499177a636d4243f20
+        path: docs/
+  omnibase-admin:
+    package: omnibase/admin
+    repository: glitchr-studio/omnibase-admin
+    default: main
+    versions:
+      main:
+        branch: main
+        ref: ba57c267f8ed29d0749aab15b98701ec34802151
+        path: docs/
+  omnibase-agenda:
+    package: omnibase/agenda
+    repository: glitchr-studio/omnibase-agenda
+    default: main
+    versions:
+      main:
+        branch: main
+        ref: c1c8fc10647306a50aeea6478d17e67e889c2522
+        path: docs/
+  omnibase-blog:
+    package: omnibase/blog
+    repository: glitchr-studio/omnibase-blog
+    default: main
+    versions:
+      main:
+        branch: main
+        ref: 4dd1ec2dbf02b2a76b5c6d445edc1657176dea43
+        path: docs/
+  omnibase-broadcast:
+    package: omnibase/broadcast
+    repository: glitchr-studio/omnibase-broadcast
+    default: main
+    versions:
+      main:
+        branch: main
+        ref: dae28246033ad5b7d26cf8650d4058cb39a2eebb
+        path: docs/
+  omnibase-classroom:
+    package: omnibase/classroom
+    repository: glitchr-studio/omnibase-classroom
+    default: main
+    versions:
+      main:
+        branch: main
+        ref: 191be7d2e68a016a9092e764febca4a2654f7518
+        path: docs/
+  omnibase-consulting:
+    package: omnibase/consulting
+    repository: glitchr-studio/omnibase-consulting
+    default: main
+    versions:
+      main:
+        branch: main
+        ref: bc2d985a6ea26d13ddef08177deba9977aa541ca
+        path: docs/
+  omnibase-docs:
+    package: omnibase/docs
+    repository: glitchr-studio/omnibase-docs
+    default: '2.0'
+    versions:
+      '2.0':
+        branch: '2.0'
+        ref: 30f818ca0b16f2ba9df0cdeae843601fa457754f
+        path: docs/
+  omnibase-estate:
+    package: omnibase/estate
+    repository: glitchr-studio/omnibase-estate
+    default: main
+    versions:
+      main:
+        branch: main
+        ref: 9db4feadc15d6a34a5950c3d70dde907e9b34c75
+        path: docs/
+  omnibase-forge:
+    package: omnibase/forge
+    repository: glitchr-studio/omnibase-forge
+    default: main
+    versions:
+      main:
+        branch: main
+        ref: 29656ff0b771e4caa46d24a6f4cb51f3a34c3652
+        path: docs/
+  omnibase-gallery:
+    package: omnibase/gallery
+    repository: glitchr-studio/omnibase-gallery
+    default: main
+    versions:
+      main:
+        branch: main
+        ref: 92b66642643ffff3280a7c3bf68819c08f65363d
+        path: docs/
+  omnibase-health:
+    package: omnibase/health
+    repository: glitchr-studio/omnibase-health
+    default: main
+    versions:
+      main:
+        branch: main
+        ref: 28956d95323104df86144c0adf5340a82eb8e8dd
+        path: docs/
+  omnibase-lawyer:
+    package: omnibase/lawyer
+    repository: glitchr-studio/omnibase-lawyer
+    default: main
+    versions:
+      main:
+        branch: main
+        ref: abd1ac17af6d13ef0ec1e93e1df2b929a7bafe9e
+        path: docs/
+  omnibase-legal:
+    package: omnibase/legal
+    repository: glitchr-studio/omnibase-legal
+    default: main
+    versions:
+      main:
+        branch: main
+        ref: 777c064d183f7368f37f0ff78c6ab518041a824e
+        path: docs/
+  omnibase-mailbox:
+    package: omnibase/mailbox
+    repository: glitchr-studio/omnibase-mailbox
+    default: main
+    versions:
+      main:
+        branch: main
+        ref: fceebb2389ecc9634cbc500688a12d29144ae1e7
+        path: docs/
+  omnibase-marketplace:
+    package: omnibase/marketplace
+    repository: glitchr-studio/omnibase-marketplace
+    default: main
+    versions:
+      main:
+        branch: main
+        ref: cab42e4ec03dd8c4569c27cf7154e44a9824d2e8
+        path: docs/
+  omnibase-notary:
+    package: omnibase/notary
+    repository: glitchr-studio/omnibase-notary
+    default: main
+    versions:
+      main:
+        branch: main
+        ref: a8f661ba1e782b8a55fb1aaed9163d10b629fa0c
+        path: docs/
+  omnibase-office:
+    package: omnibase/office
+    repository: glitchr-studio/omnibase-office
+    default: main
+    versions:
+      main:
+        branch: main
+        ref: 8cf9f0a3cd33ccaf882e43172b2df69912411f73
+        path: docs/
+  omnibase-restaurant:
+    package: omnibase/restaurant
+    repository: glitchr-studio/omnibase-restaurant
+    default: main
+    versions:
+      main:
+        branch: main
+        ref: e14894e7b2fba9e915e2f2cef9ecc7001f31b99c
+        path: docs/
+  omnibase-scholar:
+    package: omnibase/scholar
+    repository: glitchr-studio/omnibase-scholar
+    default: main
+    versions:
+      main:
+        branch: main
+        ref: 679893dae505c99f909579d43be3bc078ba2020a
+        path: docs/
+  omnibase-video:
+    package: omnibase/video
+    repository: glitchr-studio/omnibase-video
+    default: main
+    versions:
+      main:
+        branch: main
+        ref: 42e9e52e8996830f5b65a17f480b743f3eea3152
+        path: docs/
+  omnibill:
+    package: omniscient/omnibill
+    repository: glitchr-studio/omnibill
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 9353d19ff0f7829a4cd9a3687283d472e6bb13e5
+        path: docs/
+  omnibill-afnor:
+    package: omnibill/afnor
+    repository: glitchr-studio/omnibill-afnor
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: ef83da0ef037487d1e60b53a409343c1b8249d63
+        path: docs/
+  omnibill-chorus-pro:
+    package: omnibill/chorus-pro
+    repository: glitchr-studio/omnibill-chorus-pro
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 39bcd17929d1bf10134f7fdfbdb88a047d5d0da7
+        path: docs/
+  omnibill-email:
+    package: omnibill/email
+    repository: glitchr-studio/omnibill-email
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 2f31546295bc39e2638f98da802cf0dce08f25e7
+        path: docs/
+  omnibridge-composer:
+    package: omnibridge/composer
+    repository: glitchr-studio/omnibridge-composer
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: b034292d6b5bb1b58bb06b11b57f488f5278d476
+        path: docs/
+  omnibus:
+    package: omniscient/omnibus
+    repository: glitchr-studio/omnibus
+    default: 2.x
+    versions:
+      2.x:
+        branch: 2.x
+        ref: 26e76a963ab9a590372be518323b3116b9edadb3
+        path: docs/
+  omnidns:
+    package: omniscient/omnidns
+    repository: glitchr-studio/omnidns
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 8857d9dbb9eacd8c3c9015e3e680bab548744cea
+        path: docs/
+  omnidrive:
+    package: omniscient/omnidrive
+    repository: glitchr-studio/omnidrive
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 1cd190090c46fedbc786d6fa74d64899a39cd6d3
+        path: docs/
+  omnifilm:
+    package: omniscient/omnifilm
+    repository: glitchr-studio/omnifilm
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 5b358e738e6b30892df368eff69b79869f71b285
+        path: docs/
+  omnifood:
+    package: omniscient/omnifood
+    repository: glitchr-studio/omnifood
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: ee00bae20491bdb8bca2a523ecb7fa4ef42425d2
+        path: docs/
+  omnifood-deliveroo:
+    package: omnifood/deliveroo
+    repository: glitchr-studio/omnifood-deliveroo
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 118043649e0914eb45a34ef275b9b5c996aa6b66
+        path: docs/
+  omnifood-justeat:
+    package: omnifood/justeat
+    repository: glitchr-studio/omnifood-justeat
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: b6620f872b29d1c7b367a8d4dac91ad611dadbb6
+        path: docs/
+  omnifood-thefork:
+    package: omnifood/thefork
+    repository: glitchr-studio/omnifood-thefork
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 90f8296195deeb2c1a0908e0b20c4008a1e259ff
+        path: docs/
+  omnifood-ubereats:
+    package: omnifood/ubereats
+    repository: glitchr-studio/omnifood-ubereats
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: bc2eb80d0a177b960dcf74734947178ab0e48721
+        path: docs/
+  omnifood-zenchef:
+    package: omnifood/zenchef
+    repository: glitchr-studio/omnifood-zenchef
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 873652af152f05bcf26d1d07e897422a69eecc10
+        path: docs/
+  omnifund:
+    package: omniscient/omnifund
+    repository: glitchr-studio/omnifund
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 4a1eae2450a7e1347861ffef16dd1be25e6d9f41
+        path: docs/
+  omnigame:
+    package: omniscient/omnigame
+    repository: glitchr-studio/omnigame
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: c9be9f827f32111cba43bd43e3fd40c8ba793495
+        path: docs/
+  omnilab:
+    package: omniscient/omnilab
+    repository: glitchr-studio/omnilab
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 198f69b9d37eb3c591f139eeb7a52122ffc83505
+        path: docs/
+  omnilab-brightsky:
+    package: omnilab/brightsky
+    repository: glitchr-studio/omnilab-brightsky
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 1a535b56149f290b0e90b01d76222c19f88453a3
+        path: docs/
+  omnilab-cactus:
+    package: omnilab/cactus
+    repository: glitchr-studio/omnilab-cactus
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 4cc6b17107b59699f123633a29061b2fadeddbca
+        path: docs/
+  omnilab-cams:
+    package: omnilab/cams
+    repository: glitchr-studio/omnilab-cams
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 7ee552d961fb9c3b8994943b838afd77af41a84c
+        path: docs/
+  omnilab-cds:
+    package: omnilab/cds
+    repository: glitchr-studio/omnilab-cds
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: d7ab8f91e5398200dc2f1164e17989837356cbe2
+        path: docs/
+  omnilab-chebi:
+    package: omnilab/chebi
+    repository: glitchr-studio/omnilab-chebi
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 70932438923c5d6779bb9fed465765b1e9847e51
+        path: docs/
+  omnilab-chembl:
+    package: omnilab/chembl
+    repository: glitchr-studio/omnilab-chembl
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 9ba57ed64efe9681308a76a7739d7d8fce256cbc
+        path: docs/
+  omnilab-clinvar:
+    package: omnilab/clinvar
+    repository: glitchr-studio/omnilab-clinvar
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 77192625001f9a65811512eb790f4c81dff44326
+        path: docs/
+  omnilab-cod:
+    package: omnilab/cod
+    repository: glitchr-studio/omnilab-cod
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: dd0bbc4eec38d87b16f80c667f158c950d699bbe
+        path: docs/
+  omnilab-codata:
+    package: omnilab/codata
+    repository: glitchr-studio/omnilab-codata
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 66b9e083f37b9e3211c972647c9ba0ff8902d005
+        path: docs/
+  omnilab-col:
+    package: omnilab/col
+    repository: glitchr-studio/omnilab-col
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: f82c4f1642e1d476f0ad9aa5a2a93834e53c2bb1
+        path: docs/
+  omnilab-copernicus:
+    package: omnilab/copernicus
+    repository: glitchr-studio/omnilab-copernicus
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 7dcdb8386321a42ce8650feff8d9c2253ba07931
+        path: docs/
+  omnilab-donki:
+    package: omnilab/donki
+    repository: glitchr-studio/omnilab-donki
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 07241519917c825eb115d82ee119206a43d63588
+        path: docs/
+  omnilab-earthdata:
+    package: omnilab/earthdata
+    repository: glitchr-studio/omnilab-earthdata
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 0e19f7c3726ddc2bc77bf0ef4d5f340b2e1c7eab
+        path: docs/
+  omnilab-ebird:
+    package: omnilab/ebird
+    repository: glitchr-studio/omnilab-ebird
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 3b6e24901fd43976ce609567c76dc00de382cb69
+        path: docs/
+  omnilab-elevation:
+    package: omnilab/elevation
+    repository: glitchr-studio/omnilab-elevation
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 5e86fbce3008382781c64afb2b7cbff2ba49090a
+        path: docs/
+  omnilab-emsc:
+    package: omnilab/emsc
+    repository: glitchr-studio/omnilab-emsc
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: b0651352b521d8adfc30498c15b5b10b0006560f
+        path: docs/
+  omnilab-ensembl:
+    package: omnilab/ensembl
+    repository: glitchr-studio/omnilab-ensembl
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 647f70741873c9b8f3b103ad852a7c24cbc89cd2
+        path: docs/
+  omnilab-exoplanets:
+    package: omnilab/exoplanets
+    repository: glitchr-studio/omnilab-exoplanets
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: c841c5bb3cc2b09a5b5fbcdc3a5fdb92b6daedc2
+        path: docs/
+  omnilab-gaia:
+    package: omnilab/gaia
+    repository: glitchr-studio/omnilab-gaia
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: a10c0d5ef8185f2c214911698da614ed02520018
+        path: docs/
+  omnilab-gbif:
+    package: omnilab/gbif
+    repository: glitchr-studio/omnilab-gbif
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 8e4762b77e59d34ea9734d7bac684f63342ceb20
+        path: docs/
+  omnilab-gwas:
+    package: omnilab/gwas
+    repository: glitchr-studio/omnilab-gwas
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: c50c3e9d9eb789003c33e5892858c32f8b9d0142
+        path: docs/
+  omnilab-hgnc:
+    package: omnilab/hgnc
+    repository: glitchr-studio/omnilab-hgnc
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 24eea87b26634c7f4c7a36e3229127860bb1b3fe
+        path: docs/
+  omnilab-horizons:
+    package: omnilab/horizons
+    repository: glitchr-studio/omnilab-horizons
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 779c1166129744a25be8a640987954122b78d0ca
+        path: docs/
+  omnilab-inaturalist:
+    package: omnilab/inaturalist
+    repository: glitchr-studio/omnilab-inaturalist
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: ca12a0e3171c801bd301960f4a62fa8a335b4b2e
+        path: docs/
+  omnilab-interpro:
+    package: omnilab/interpro
+    repository: glitchr-studio/omnilab-interpro
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 3a2a991f782b0310ef6bb9aa66545e3560e1de04
+        path: docs/
+  omnilab-itis:
+    package: omnilab/itis
+    repository: glitchr-studio/omnilab-itis
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 9217777a6fb40c8e37010a4fddd750343e50755a
+        path: docs/
+  omnilab-iucn:
+    package: omnilab/iucn
+    repository: glitchr-studio/omnilab-iucn
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 35b2dd237f8358bfb1aee928caf72ba829e8f56d
+        path: docs/
+  omnilab-jpl:
+    package: omnilab/jpl
+    repository: glitchr-studio/omnilab-jpl
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: fecf6f0584b86fab01964ed2e053aa8a7e8fa1b4
+        path: docs/
+  omnilab-kegg:
+    package: omnilab/kegg
+    repository: glitchr-studio/omnilab-kegg
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: f24a465edfb75725a867f35f1a6f195d9637b8db
+        path: docs/
+  omnilab-launches:
+    package: omnilab/launches
+    repository: glitchr-studio/omnilab-launches
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: e9824823e0822704f094b01aae48f84428ca7462
+        path: docs/
+  omnilab-materials-project:
+    package: omnilab/materials-project
+    repository: glitchr-studio/omnilab-materials-project
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: e6d55b484f6158e8a36ebfaca5b8deab7f99e2ac
+        path: docs/
+  omnilab-mpc:
+    package: omnilab/mpc
+    repository: glitchr-studio/omnilab-mpc
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 131702d778aa1b74e5f66f44a21a3cb588c08a73
+        path: docs/
+  omnilab-ncbi:
+    package: omnilab/ncbi
+    repository: glitchr-studio/omnilab-ncbi
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 6a4949f46e963312c5ef64df6ab2c427d2473b69
+        path: docs/
+  omnilab-ned:
+    package: omnilab/ned
+    repository: glitchr-studio/omnilab-ned
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 1db1759466168846313144d02d4b07ef82678ed7
+        path: docs/
+  omnilab-noaa:
+    package: omnilab/noaa
+    repository: glitchr-studio/omnilab-noaa
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 5338ae53bf2d7eb70ff29ca440b75f88a1e3b55f
+        path: docs/
+  omnilab-obis:
+    package: omnilab/obis
+    repository: glitchr-studio/omnilab-obis
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: ed8a2d3efaed6bf939993462d964419fd5f7d85f
+        path: docs/
+  omnilab-open-meteo:
+    package: omnilab/open-meteo
+    repository: glitchr-studio/omnilab-open-meteo
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: b82c646e16360eab8321304c6549c20ec783503d
+        path: docs/
+  omnilab-openaq:
+    package: omnilab/openaq
+    repository: glitchr-studio/omnilab-openaq
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: fea31206e2d8e84ea982cac9f8cdb8a67ddf9691
+        path: docs/
+  omnilab-opentargets:
+    package: omnilab/opentargets
+    repository: glitchr-studio/omnilab-opentargets
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 94f1d568e651130f39932423c14af0d0a7c5d9c6
+        path: docs/
+  omnilab-oqmd:
+    package: omnilab/oqmd
+    repository: glitchr-studio/omnilab-oqmd
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: ad00ef775374ec4c45c166e9a6387cb4cc3fe566
+        path: docs/
+  omnilab-pbdb:
+    package: omnilab/pbdb
+    repository: glitchr-studio/omnilab-pbdb
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: ee29bc6716bb574e9b5e8fa6a8a79ca5eec6773e
+        path: docs/
+  omnilab-pdb:
+    package: omnilab/pdb
+    repository: glitchr-studio/omnilab-pdb
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: ea9ddda7ca0744123e77afe62e1addd0aa41b132
+        path: docs/
+  omnilab-pubchem:
+    package: omnilab/pubchem
+    repository: glitchr-studio/omnilab-pubchem
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 337f6f828190bc326c6855e3dece4b04ff143776
+        path: docs/
+  omnilab-quickgo:
+    package: omnilab/quickgo
+    repository: glitchr-studio/omnilab-quickgo
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 0350dd4193c5ebaee03edcb56d85aad57e84fb0f
+        path: docs/
+  omnilab-reactome:
+    package: omnilab/reactome
+    repository: glitchr-studio/omnilab-reactome
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: a8b88078b5bed4bb85e5a5ba160d1cee3c4b28b1
+        path: docs/
+  omnilab-rhea:
+    package: omnilab/rhea
+    repository: glitchr-studio/omnilab-rhea
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: c959c92c6bec46889199c7d009465050951d4675
+        path: docs/
+  omnilab-simbad:
+    package: omnilab/simbad
+    repository: glitchr-studio/omnilab-simbad
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 61d10aa2cda68493082d3967fd965e1ed5be9c2a
+        path: docs/
+  omnilab-string:
+    package: omnilab/string
+    repository: glitchr-studio/omnilab-string
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 249c77f9405e683699d3c3a41e4864916ec5fbb1
+        path: docs/
+  omnilab-swpc:
+    package: omnilab/swpc
+    repository: glitchr-studio/omnilab-swpc
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 9e97a66b0bd406ade5375b7705900450f0af9f3b
+        path: docs/
+  omnilab-tides:
+    package: omnilab/tides
+    repository: glitchr-studio/omnilab-tides
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: e5da1c3600ae4fe30873bf6503827b93d67fce49
+        path: docs/
+  omnilab-uniprot:
+    package: omnilab/uniprot
+    repository: glitchr-studio/omnilab-uniprot
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 548a2fd9a42ebd3cd63c500206045d14a034c380
+        path: docs/
+  omnilab-usgs:
+    package: omnilab/usgs
+    repository: glitchr-studio/omnilab-usgs
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: f082c8e045d899b8036783ceb24b38add0b1935b
+        path: docs/
+  omnilab-usgs-water:
+    package: omnilab/usgs-water
+    repository: glitchr-studio/omnilab-usgs-water
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 85b96ca31368b28d138ca61df6a85ef239362983
+        path: docs/
+  omnilab-vizier:
+    package: omnilab/vizier
+    repository: glitchr-studio/omnilab-vizier
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 417ab5cd9086d82f92c0d5b64f914974bf2d2671
+        path: docs/
+  omnilab-wikidata:
+    package: omnilab/wikidata
+    repository: glitchr-studio/omnilab-wikidata
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 4662a9877090561786133397b5260e8fe93d2995
+        path: docs/
+  omnilab-worms:
+    package: omnilab/worms
+    repository: glitchr-studio/omnilab-worms
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: b80fba439b62ed24b8de99468a9c64102cd8a1a6
+        path: docs/
+  omnilex:
+    package: omniscient/omnilex
+    repository: glitchr-studio/omnilex
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: df3871082b49942b241cd1bb6bc29e1b95e38622
+        path: docs/
+  omnilex-eurlex:
+    package: omnilex/eurlex
+    repository: glitchr-studio/omnilex-eurlex
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 76a065d8af3fa41d8a2d90f8800522898c215212
+        path: docs/
+  omnilex-judilibre:
+    package: omnilex/judilibre
+    repository: glitchr-studio/omnilex-judilibre
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 42bac3eb114a26199d0857d1a9d6d39a12f3d81c
+        path: docs/
+  omnilex-justice-administrative:
+    package: omnilex/justice-administrative
+    repository: glitchr-studio/omnilex-justice-administrative
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 891c376f7034249e3479e6b5ac1c0b1017171c02
+        path: docs/
+  omnilex-legifrance:
+    package: omnilex/legifrance
+    repository: glitchr-studio/omnilex-legifrance
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: c1afa5b0b1eb00d2c82ab1d405581cd26a347a25
+        path: docs/
+  omnimap:
+    package: omniscient/omnimap
+    repository: glitchr-studio/omnimap
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 630bf94fb561eac68c47d99cf708fe249564fa0c
+        path: docs/
+  omnimeet:
+    package: omniscient/omnimeet
+    repository: glitchr-studio/omnimeet
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 504bfbcdd7bbddbca67e9b2ee71529cf4d0d4001
+        path: docs/
+  omnimeet-direct:
+    package: omnimeet/direct
+    repository: glitchr-studio/omnimeet-direct
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 941bc71a27d590f01a46e5fcbcb9485d3b644efc
+        path: docs/
+  omnimeet-jitsi:
+    package: omnimeet/jitsi
+    repository: glitchr-studio/omnimeet-jitsi
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 4bfd82b8004ea11c8c47c251daf0faea70728e88
+        path: docs/
+  omnipost:
+    package: omniscient/omnipost
+    repository: glitchr-studio/omnipost
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: f7a222d6114c718d9d9ab15d28691f7a66cbef51
+        path: docs/
+  omnireach:
+    package: omniscient/omnireach
+    repository: glitchr-studio/omnireach
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 20e03fedf198bf4b9a5eee8a8a4430a848c569de
+        path: docs/
+  omnireview:
+    package: omniscient/omnireview
+    repository: glitchr-studio/omnireview
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 17739087d9af1d4309d33b79befa73ba1b3de094
+        path: docs/
+  omnireview-google:
+    package: omnireview/google
+    repository: glitchr-studio/omnireview-google
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 7cec086527a7d1c1a9376b2dedfba23bab5e355d
+        path: docs/
+  omnireview-tripadvisor:
+    package: omnireview/tripadvisor
+    repository: glitchr-studio/omnireview-tripadvisor
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: d12fcfba68d4bf1efbb592ee5227c3b3350434eb
+        path: docs/
+  omnireview-trustpilot:
+    package: omnireview/trustpilot
+    repository: glitchr-studio/omnireview-trustpilot
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: e97173e98f2bef1d37a451d18087a40fbe441a24
+        path: docs/
+  omnischolar:
+    package: omniscient/omnischolar
+    repository: glitchr-studio/omnischolar
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: bba400e32993470e5a5635b063aae98479562b45
+        path: docs/
+  omnischolar-arxiv:
+    package: omnischolar/arxiv
+    repository: glitchr-studio/omnischolar-arxiv
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 43bb94645c8e112d2c7b7c94d491104ed4cd787a
+        path: docs/
+  omnischolar-crossref:
+    package: omnischolar/crossref
+    repository: glitchr-studio/omnischolar-crossref
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 619f27a64eb957266c5662b0f8a84721d9648b33
+        path: docs/
+  omnischolar-hal:
+    package: omnischolar/hal
+    repository: glitchr-studio/omnischolar-hal
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 783481d03b3e18cafe1188690fa2363b103fee0c
+        path: docs/
+  omnischolar-inspire:
+    package: omnischolar/inspire
+    repository: glitchr-studio/omnischolar-inspire
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: e715df151adbe464da957837522c83c279b5578e
+        path: docs/
+  omnischolar-openalex:
+    package: omnischolar/openalex
+    repository: glitchr-studio/omnischolar-openalex
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: ab42a93efa884e5ab5b193309695352a347b9d98
+        path: docs/
+  omnischolar-openlibrary:
+    package: omnischolar/openlibrary
+    repository: glitchr-studio/omnischolar-openlibrary
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 097d74a5f6160e5efdfbc57274197cab39221e6c
+        path: docs/
+  omnischolar-orcid:
+    package: omnischolar/orcid
+    repository: glitchr-studio/omnischolar-orcid
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 20c015dff0e8a8cec100930708a8896b39384240
+        path: docs/
+  omnisearch:
+    package: omniscient/omnisearch
+    repository: glitchr-studio/omnisearch
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: d51ed876ba69e80877136ef53d0726c965edc5c1
+        path: docs/
+  omnisearch-typesense:
+    package: omnisearch/typesense
+    repository: glitchr-studio/omnisearch-typesense
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 3d7855584641c978a25ce66d15aa781b8929b247
+        path: docs/
+  omnishare:
+    package: omniscient/omnishare
+    repository: glitchr-studio/omnishare
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 7c79ccec5c41e3a857e3b3a5bde4e4716e1596f4
+        path: docs/
+  omnishield:
+    package: omniscient/omnishield
+    repository: glitchr-studio/omnishield
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: af9859007fb10525127c908d48ba936e9b8be71f
+        path: docs/
+  omnishield-akismet:
+    package: omnishield/akismet
+    repository: glitchr-studio/omnishield-akismet
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 3663b2de54f516c890b02606bc4dd9186772c1d1
+        path: docs/
+  omnishield-altcha:
+    package: omnishield/altcha
+    repository: glitchr-studio/omnishield-altcha
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 3c976224bf5efef5d17165b359afb2a32aaa6527
+        path: docs/
+  omnishield-disposable:
+    package: omnishield/disposable
+    repository: glitchr-studio/omnishield-disposable
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: c8808bc3fed858e34ccb55b9f126adfebf11269e
+        path: docs/
+  omnishield-recaptcha:
+    package: omnishield/recaptcha
+    repository: glitchr-studio/omnishield-recaptcha
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 43d02941b343947c68f4af53cf98af9158c72806
+        path: docs/
+  omnishield-stopforumspam:
+    package: omnishield/stopforumspam
+    repository: glitchr-studio/omnishield-stopforumspam
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 940afc62b484862c6ca34612be3018523c8a70cc
+        path: docs/
+  omnishield-turnstile:
+    package: omnishield/turnstile
+    repository: glitchr-studio/omnishield-turnstile
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: e6d905afbdf79eb37470c2cb8c71e76cbe9ad8fc
+        path: docs/
+  omnisign:
+    package: omniscient/omnisign
+    repository: glitchr-studio/omnisign
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: f77f7c214a36539f92893cb81724dabb2ed3da9f
+        path: docs/
+  omnisign-docuseal:
+    package: omnisign/docuseal
+    repository: glitchr-studio/omnisign-docuseal
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 197e0f40a0576674a8354239dc3842a33a44e919
+        path: docs/
+  omnisign-docusign:
+    package: omnisign/docusign
+    repository: glitchr-studio/omnisign-docusign
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: cf00e42a334e1520efda30cffcf9a7b00043191a
+        path: docs/
+  omnisign-yousign:
+    package: omnisign/yousign
+    repository: glitchr-studio/omnisign-yousign
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 72819b6deea05cdac9e4953d78f778270633781e
+        path: docs/
+  omnisong:
+    package: omniscient/omnisong
+    repository: glitchr-studio/omnisong
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: ffc501f2628094f8233144bdd9ab5415794799ca
+        path: docs/
+  omnistate:
+    package: omniscient/omnistate
+    repository: glitchr-studio/omnistate
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: e40052a42ec9df719f63ca800726949e56ce4e9e
+        path: docs/
+  omnistate-annuaire-sante:
+    package: omnistate/annuaire-sante
+    repository: glitchr-studio/omnistate-annuaire-sante
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: b16e398e5a02b6f6b718f7bc99db08468ae51bfd
+        path: docs/
+  omnistate-matchid:
+    package: omnistate/matchid
+    repository: glitchr-studio/omnistate-matchid
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 30beb7fd5c795bbcec7a6ca64508cc80f94e80ac
+        path: docs/
+  omnistate-nara:
+    package: omnistate/nara
+    repository: glitchr-studio/omnistate-nara
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: f12e234a1409fd71511163e7491f4e135f7abbae
+        path: docs/
+  omnistate-national-archives-uk:
+    package: omnistate/national-archives-uk
+    repository: glitchr-studio/omnistate-national-archives-uk
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: ef50c40143230fcdc17d1781544114127b801455
+        path: docs/
+  omnistate-openarchieven:
+    package: omnistate/openarchieven
+    repository: glitchr-studio/omnistate-openarchieven
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 6a247f8ac0bbc63a3bc5dc50614bb203d0dd2ec8
+        path: docs/
+  omniticket:
+    package: omniscient/omniticket
+    repository: glitchr-studio/omniticket
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 2ae6ff181dee648d1ee84930a0c5ad8b56a792fd
+        path: docs/
+  omnitrade:
+    package: omniscient/omnitrade
+    repository: glitchr-studio/omnitrade
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 2fbfa1d74d087a8b032efdb0363de43471de202e
+        path: docs/
+  omnitrade-amazon:
+    package: omnitrade/amazon
+    repository: glitchr-studio/omnitrade-amazon
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: b6c2de474782368d2cc9aebac443072a31010d00
+        path: docs/
+  omnitrade-shopify:
+    package: omnitrade/shopify
+    repository: glitchr-studio/omnitrade-shopify
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 5de536239466662e9f5b5045b26ca723ac812a82
+        path: docs/
+  omnitrade-stripe:
+    package: omnitrade/stripe
+    repository: glitchr-studio/omnitrade-stripe
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: e81c2542476a014072fb6f947a23d6003dd72cf5
+        path: docs/
+  omnitrade-web:
+    package: omnitrade/web
+    repository: glitchr-studio/omnitrade-web
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: d2b9958a4d5cdc07f1c5a8abe7b9823d12f422bd
+        path: docs/
+  omnitrade-woocommerce:
+    package: omnitrade/woocommerce
+    repository: glitchr-studio/omnitrade-woocommerce
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 7a53f637d7d1a869d7d220a1bbea03649001b603
+        path: docs/

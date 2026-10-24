@@ -1,0 +1,23 @@
+{# A manual's contents: its folders as sections, its pages as links; the current page marked. #}
+{% macro nodes(pages, manual, series, current) %}
+    {% import _self as self %}
+    <ul>
+        {% for node in pages %}
+            <li{% if current is not null and node.contains(current) %} class="is-open"{% endif %}>
+                {% if node.section %}
+                    <span class="manual-tree-section">{{ node.title }}</span>
+                {% else %}
+                    <a href="{{ path('app_manual_page', {key: manual.key, series: series, path: node.path}) }}"{% if node.path == current %} aria-current="page"{% endif %}>{{ node.title }}</a>
+                {% endif %}
+                {% if node.children is not empty %}{{ self.nodes(node.children, manual, series, current) }}{% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endmacro %}
+{% import _self as self %}
+<nav class="manual-tree" aria-label="{{ '@messages.manual.contents'|trans }}">
+    {% if home %}
+    <ul><li><a href="{{ path('app_manual', {key: manual.key, series: series}) }}"{% if current == '' %} aria-current="page"{% endif %}>{{ '@messages.manual.home'|trans }}</a></li></ul>
+    {% endif %}
+    {{ self.nodes(tree, manual, series, current) }}
+</nav>

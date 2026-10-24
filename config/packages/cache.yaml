@@ -1,3 +1,5 @@
+# A static site: the application runs at build time, in one process - no shared
+# Redis pool, no APCu layer.
 framework:
     cache:
         prefix_seed: '%env(APP_SECRET)%'
@@ -9,18 +11,3 @@ framework:
                 adapter: cache.adapter.filesystem
             doctrine.system_cache_pool:
                 adapter: cache.adapter.filesystem
-                
-            cache.redis:
-                adapter: cache.adapter.redis
-                provider: 'redis://%env(REDIS_HOST)%:6379'
-                default_lifetime: 3600
-
-            cache.apcu:
-                adapter: cache.adapter.apcu
-                default_lifetime: 60
-
-            cache.layered:
-                adapter: cache.adapter.chain
-                adapters:
-                    - cache.apcu
-                    - cache.redis

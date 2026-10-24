@@ -1,0 +1,40 @@
+# The omnishare entry of the Omniscient catalogue. Written by `bin/console
+# app:catalog:import` from the packages' repositories; the phrase and the
+# text are the site's own, edited here. Each package: its kind, what its
+# composer.json says, its GitHub repository and development branch, whether
+# its README says it was verified against the real service, whether it has
+# a docs/ folder (see config/documentation.yaml).
+family: omnishare
+phrase:
+  en: 'Share a page to the social networks, without their scripts.'
+  fr: 'Partager une page sur les réseaux, sans leurs scripts.'
+text:
+  en: "A page's address, title, text, picture and hashtags turned into each network's own share page, an e-mail, a copied link and the device's share sheet. Plain links: no network script, no cookie, no credential."
+  fr: 'L’adresse, le titre, le texte, l’image et les mots-dièse d’une page changés en la page de partage de chaque réseau, un e-mail, un lien copié et la feuille de partage de l’appareil. De simples liens : aucun script de réseau, aucun cookie, aucun identifiant.'
+packages:
+  omniscient/omnishare:
+    kind: family
+    description: "Omnishare: share links to social networks - a page's address, title, text, picture and hashtags turned into each network's own share page (Facebook, X, Pinterest, LinkedIn, Bluesky, Mastodon, Threads, WhatsApp, Telegram, Reddit), an e-mail, a copied link and the device's share sheet. Plain links: no network script, no cookie, no credential. One JSON for Twig, Blade and React."
+    license: MIT
+    keywords:
+      - share
+      - 'share links'
+      - 'share buttons'
+      - social
+      - facebook
+      - x
+      - twitter
+      - pinterest
+      - linkedin
+      - bluesky
+      - mastodon
+      - threads
+      - whatsapp
+      - telegram
+      - reddit
+      - omnishare
+    repository: glitchr-studio/omnishare
+    branch: 1.x
+    verification: partial
+    verification_note: "- Verified live on 2026-10-23, signed out, in a headless Chrome (see docs/networks.md): WhatsApp and Telegram show the title and the address on their share page; Facebook, X, Pinterest, LinkedIn, Threads and Reddit keep the address (and, for those that take them, the title, picture, hashtags and account) through their  — - Not verified: what each network's composer shows once signed in (no account was used; Mastodon's and Bluesky's read in their code, not seen); Mastodon's return to the share page after its sign-in (Devise's default, read, not seen); the e-mail in a mail client other than the browser's handler; Mastodon instances other"
+    docs: true

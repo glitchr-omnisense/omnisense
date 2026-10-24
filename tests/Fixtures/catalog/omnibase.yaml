@@ -1,0 +1,14 @@
+family: omnibase
+phrase:
+  en: The core of the sites, and optional ready-made structures.
+packages:
+  omniscient/omnibase:
+    kind: core
+    description: The core of the sites.
+    repository: glitchr-studio/omnibase
+    branch: 4.x
+  omnibase/blog:
+    kind: structure
+    description: Posts, comments, a feed.
+    repository: glitchr-studio/omnibase-blog
+    branch: main

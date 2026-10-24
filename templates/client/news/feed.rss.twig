@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>{{ site.name }} · {{ '@messages.news.title'|trans }}</title>
+        <link>{{ site_url('app_news') }}</link>
+        <description>{{ '@messages.news.description'|trans }}</description>
+        <language>{{ app.request.locale|lang }}</language>
+        <atom:link href="{{ site_url('app_news_rss') }}" rel="self" type="application/rss+xml"/>
+{% for item in items %}
+        <item>
+            <title>{{ item.title }}</title>
+            <link>{{ site_url('app_news_item', {slug: item.slug}) }}</link>
+            <guid isPermaLink="true">{{ site_url('app_news_item', {slug: item.slug}) }}</guid>
+            <pubDate>{{ item.date|date('D, d M Y H:i:s \\G\\M\\T', 'UTC') }}</pubDate>
+            <description>{{ item.summary }}</description>
+        </item>
+{% endfor %}
+    </channel>
+</rss>

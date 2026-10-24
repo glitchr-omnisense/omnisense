@@ -14,6 +14,7 @@
 {% endblock %}
 
 {% set route = app.request.attributes.get('_route')|default('') %}
+{#- The section the page belongs to: the route's name without its locale (app_package.fr → app_package.). -#}
 
 {% block layout %}
 <a class="om-skip" href="#content">{{ '@messages.nav.skip'|trans }}</a>
@@ -23,11 +24,11 @@
         <a class="om-mark" href="{{ path('app_index') }}" aria-label="{{ site.name }}"><b>Omni</b><i>scient</i></a>
         <nav class="om-nav" id="om-nav" aria-label="{{ '@messages.nav.label'|trans }}">
             <ul>
-                {# The documentation first; the catalogue is reached from it, not from here. #}
-                <li><a href="{{ path('wikidoc_index') }}" {{ route starts with 'wikidoc_' or route in ['app_packages', 'app_package', 'app_family'] ? 'aria-current="page"' }}>{{ '@messages.nav.docs'|trans }}</a></li>
-                <li><a href="{{ path('app_install') }}" {{ route == 'app_install' ? 'aria-current="page"' }}>{{ '@messages.nav.install'|trans }}</a></li>
-                <li><a href="{{ path('blog_index') }}" {{ route starts with 'blog_' ? 'aria-current="page"' }}>{{ '@messages.nav.blog'|trans }}</a></li>
-                <li><a href="{{ path('app_support') }}" {{ route == 'app_support' ? 'aria-current="page"' }}>{{ '@messages.nav.support'|trans }}</a></li>
+                <li><a href="{{ path('app_docs') }}" {{ route starts with 'app_docs' or route starts with 'app_guide' or route starts with 'app_manual' ? 'aria-current="page"' }}>{{ '@messages.nav.docs'|trans }}</a></li>
+                <li><a href="{{ path('app_packages') }}" {{ route starts with 'app_packages' or route starts with 'app_package.' or route starts with 'app_family' ? 'aria-current="page"' }}>{{ '@messages.nav.packages'|trans }}</a></li>
+                <li><a href="{{ path('app_news') }}" {{ route starts with 'app_news' ? 'aria-current="page"' }}>{{ '@messages.nav.blog'|trans }}</a></li>
+                <li><a href="{{ path('app_search') }}" {{ route starts with 'app_search' ? 'aria-current="page"' }}>{{ '@messages.nav.search'|trans }}</a></li>
+                <li><a href="{{ path('app_support') }}" {{ route starts with 'app_support' ? 'aria-current="page"' }}>{{ '@messages.nav.support'|trans }}</a></li>
             </ul>
         </nav>
         <button type="button" class="om-menu-button" data-menu-target="button" data-action="menu#toggle" aria-controls="om-nav" aria-expanded="false">{{ '@messages.nav.menu'|trans }}</button>
@@ -49,10 +50,10 @@
             <nav aria-label="{{ '@messages.footer.plan'|trans }}">
                 <h2>{{ '@messages.footer.plan'|trans }}</h2>
                 <ul>
-                    <li><a href="{{ path('wikidoc_index') }}">{{ '@messages.nav.docs'|trans }}</a></li>
-                    <li><a href="{{ path('app_install') }}">{{ '@messages.nav.install'|trans }}</a></li>
+                    <li><a href="{{ path('app_docs') }}">{{ '@messages.nav.docs'|trans }}</a></li>
                     <li><a href="{{ path('app_packages') }}">{{ '@messages.nav.packages'|trans }}</a></li>
-                    <li><a href="{{ path('blog_index') }}">{{ '@messages.nav.blog'|trans }}</a></li>
+                    <li><a href="{{ path('app_news') }}">{{ '@messages.nav.blog'|trans }}</a></li>
+                    <li><a href="{{ path('app_search') }}">{{ '@messages.nav.search'|trans }}</a></li>
                     <li><a href="{{ path('app_support') }}">{{ '@messages.nav.support'|trans }}</a></li>
                 </ul>
             </nav>
@@ -60,16 +61,16 @@
                 <h2>{{ '@messages.footer.sources'|trans }}</h2>
                 <ul>
                     <li><a href="{{ site.githubUrl }}" rel="noopener">GitHub · {{ site.github }}</a></li>
-                    <li><a href="https://packagist.org/packages/glitchr/" rel="noopener">Packagist · glitchr</a></li>
-                    <li><a href="{{ path('blog_feed') }}" data-transparent-ignore>{{ '@messages.footer.feed'|trans }}</a></li>
+                    <li><a href="https://packagist.org/packages/omniscient/" rel="noopener">Packagist · omniscient</a></li>
+                    <li><a href="{{ path('app_news_atom') }}" data-transparent-ignore>{{ '@messages.footer.feed'|trans }} (Atom)</a></li>
+                    <li><a href="{{ path('app_news_rss') }}" data-transparent-ignore>{{ '@messages.footer.feed'|trans }} (RSS)</a></li>
                 </ul>
             </div>
             <div>
-                <div class="om-footer-head"><h2>{{ '@messages.footer.site'|trans }}</h2>{% include '@Consent/_cookie.html.twig' with {place: 'footer'} %}</div>
+                <h2>{{ '@messages.footer.site'|trans }}</h2>
                 <ul>
                     <li><a href="{{ path('app_legal') }}">{{ '@messages.footer.legal'|trans }}</a></li>
                     <li><a href="{{ path('app_privacy') }}">{{ '@messages.footer.privacy'|trans }}</a></li>
-                    <li><button type="button" class="om-footer-link" data-consent-open aria-controls="ga-cookie-footer">{{ '@messages.footer.cookies'|trans }}</button></li>
                 </ul>
             </div>
         </div>

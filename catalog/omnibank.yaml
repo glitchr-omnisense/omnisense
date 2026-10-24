@@ -1,0 +1,95 @@
+# The omnibank entry of the Omniscient catalogue. Written by `bin/console
+# app:catalog:import` from the packages' repositories; the phrase and the
+# text are the site's own, edited here. Each package: its kind, what its
+# composer.json says, its GitHub repository and development branch, whether
+# its README says it was verified against the real service, whether it has
+# a docs/ folder (see config/documentation.yaml).
+family: omnibank
+phrase:
+  en: 'Read a bank account.'
+  fr: 'Lire un compte en banque.'
+text:
+  en: 'One contract for bank access: accounts, balances, transactions, transfers, consents and webhooks, over statement files and bank APIs.'
+  fr: 'Un seul contrat pour l’accès bancaire : comptes, soldes, écritures, virements, consentements et webhooks, depuis des relevés en fichiers ou les interfaces des banques.'
+packages:
+  omnibank/bridge:
+    kind: provider
+    description: 'Omnibank Bridge: bank aggregation through Bridge API v3 (bridgeapi.io) - its Connect sessions for the consent, accounts, balances, transactions, item webhooks.'
+    license: MIT
+    keywords:
+      - bank
+      - 'open banking'
+      - psd2
+      - bridge
+      - bridgeapi
+      - omnibank
+    repository: glitchr-studio/omnibank-bridge
+    branch: 1.x
+    requires:
+      - omniscient/omnibank
+    verification: unverified
+    verification_note: "Unverified. Written from Bridge's published v3 documentation and recorded answers (Tests/Fixtures); it has not yet been run against a real Bridge sandbox."
+  omnibank/files:
+    kind: provider
+    description: 'Omnibank Files: bank statements read from the files banks export - CAMT.053, OFX (SGML and XML), CSV with a column map - and SEPA credit transfers written as pain.001.001.03. No network.'
+    license: MIT
+    keywords:
+      - bank
+      - camt.053
+      - ofx
+      - csv
+      - pain.001
+      - sepa
+      - omnibank
+    repository: glitchr-studio/omnibank-files
+    branch: 1.x
+    requires:
+      - omniscient/omnibank
+    verification: unstated
+  omnibank/powens:
+    kind: provider
+    description: 'Omnibank Powens: bank aggregation through Powens (ex Budget Insight) - its Webview for the consent, accounts, balances, transactions, CONNECTION_SYNCED webhooks.'
+    license: MIT
+    keywords:
+      - bank
+      - 'open banking'
+      - psd2
+      - powens
+      - 'budget insight'
+      - omnibank
+    repository: glitchr-studio/omnibank-powens
+    branch: 1.x
+    requires:
+      - omniscient/omnibank
+    verification: unverified
+    verification_note: "Unverified. Written from Powens' published documentation and recorded answers (Tests/Fixtures); it has not yet been run against a real Powens sandbox."
+  omnibank/qonto:
+    kind: provider
+    description: "Omnibank Qonto: a Qonto organization's accounts, balances and transactions over its Business API, with an API key."
+    license: MIT
+    keywords:
+      - bank
+      - qonto
+      - omnibank
+    repository: glitchr-studio/omnibank-qonto
+    branch: 1.x
+    requires:
+      - omniscient/omnibank
+    verification: unverified
+    verification_note: "Unverified. Written from Qonto's published API documentation and recorded answers (Tests/Fixtures); it has not yet been run against a real Qonto organization or the sandbox."
+  omniscient/omnibank:
+    kind: family
+    description: "Omnibank: one contract for bank access - accounts, balances, transactions, transfers, consents and webhooks - over statement files and bank APIs, and its Symfony bundle (Omnitrade's sibling for banking)."
+    license: MIT
+    keywords:
+      - bank
+      - 'open banking'
+      - psd2
+      - camt.053
+      - ofx
+      - sepa
+      - omnibank
+    repository: glitchr-studio/omnibank
+    branch: 1.x
+    verification: unstated
+    docs: true

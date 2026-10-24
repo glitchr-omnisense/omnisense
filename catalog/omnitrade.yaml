@@ -1,0 +1,120 @@
+# The omnitrade entry of the Omniscient catalogue. Written by `bin/console
+# app:catalog:import` from the packages' repositories; the phrase and the
+# text are the site's own, edited here. Each package: its kind, what its
+# composer.json says, its GitHub repository and development branch, whether
+# its README says it was verified against the real service, whether it has
+# a docs/ folder (see config/documentation.yaml).
+family: omnitrade
+phrase:
+  en: 'Take payments and sell, whatever the provider.'
+  fr: 'Encaisser et vendre, quel que soit le prestataire.'
+text:
+  en: 'One contract for payment providers and commerce platforms: purchase, authorize, capture, refund, webhooks, platform orders.'
+  fr: 'Un seul contrat pour les prestataires de paiement et les plateformes de commerce : achat, autorisation, capture, remboursement, webhooks, commandes des plateformes.'
+packages:
+  omniscient/omnitrade:
+    kind: family
+    description: "Omnitrade: one contract for payment providers and commerce platforms - purchase, authorize, capture, refund, webhooks, platform orders - and its Symfony bundle (Omnibus's sibling for trade)."
+    license: MIT
+    keywords:
+      - payment
+      - gateway
+      - stripe
+      - paypal
+      - shopify
+      - woocommerce
+      - omnitrade
+    repository: glitchr-studio/omnitrade
+    branch: 1.x
+    verification: unstated
+    docs: true
+  omnitrade/amazon:
+    kind: provider
+    description: "Omnitrade Amazon: products read through Amazon's Creators API (the successor of the Product Advertising API 5) and affiliate links with the Associates tag."
+    license: MIT
+    keywords:
+      - amazon
+      - 'creators api'
+      - associates
+      - affiliate
+      - omnitrade
+    repository: glitchr-studio/omnitrade-amazon
+    branch: 1.x
+    requires:
+      - omniscient/omnitrade
+    verification: unstated
+    docs: true
+  omnitrade/paypal:
+    kind: provider
+    description: "Omnitrade PayPal: orders approved on PayPal's page and captured on return, authorizations, refunds and webhook events, over the v2 REST API."
+    license: MIT
+    keywords:
+      - payment
+      - paypal
+      - omnitrade
+    repository: glitchr-studio/omnitrade-paypal
+    branch: 1.x
+    requires:
+      - omniscient/omnitrade
+    verification: unstated
+  omnitrade/shopify:
+    kind: provider
+    description: "Omnitrade Shopify: a sale paid on the shop's invoice page (draft orders), the shop's orders, its catalogue (products, variants, inventory) and its webhooks, over the Admin GraphQL API."
+    license: MIT
+    keywords:
+      - shopify
+      - commerce
+      - omnitrade
+    repository: glitchr-studio/omnitrade-shopify
+    branch: 1.x
+    requires:
+      - omniscient/omnitrade
+    verification: unstated
+    docs: true
+  omnitrade/stripe:
+    kind: provider
+    description: 'Omnitrade Stripe: cards and wallets through Checkout (the hosted page), refunds, webhook events and the catalogue of Stripe Products and Prices, on omnipay/stripe.'
+    license: MIT
+    keywords:
+      - payment
+      - stripe
+      - omnitrade
+    repository: glitchr-studio/omnitrade-stripe
+    branch: 1.x
+    requires:
+      - omniscient/omnitrade
+    verification: unstated
+    docs: true
+  omnitrade/web:
+    kind: provider
+    description: 'Omnitrade Web: any product page read from its own markup - JSON-LD Product (and ProductGroup), microdata, OpenGraph - as an Omnitrade Product, and affiliate links by host.'
+    license: MIT
+    keywords:
+      - product
+      - json-ld
+      - opengraph
+      - microdata
+      - schema.org
+      - affiliate
+      - omnitrade
+    repository: glitchr-studio/omnitrade-web
+    branch: 1.x
+    requires:
+      - omniscient/omnitrade
+    verification: unstated
+    docs: true
+  omnitrade/woocommerce:
+    kind: provider
+    description: "Omnitrade WooCommerce: a sale paid on the shop's checkout (orders created unpaid), the shop's orders and their payment state, refunds, the catalogue (products, variations, stock) and webhooks, over the REST API v3."
+    license: MIT
+    keywords:
+      - woocommerce
+      - wordpress
+      - commerce
+      - omnitrade
+    repository: glitchr-studio/omnitrade-woocommerce
+    branch: 1.x
+    requires:
+      - omniscient/omnitrade
+    verification: unstated
+    docs: true

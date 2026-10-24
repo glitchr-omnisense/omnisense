@@ -14,7 +14,10 @@ framework:
         handler_id: null
         cookie_secure: auto
         cookie_samesite: lax
-        storage_factory_id: session.storage.factory.dynamic
+        # No visitor has a session: the pages are rendered at build time, as a
+        # visitor, and served static. omnibase's listeners that read the session
+        # get an empty one, kept in a file.
+        storage_factory_id: session.storage.factory.mock_file
         cookie_lifetime: 0
         gc_maxlifetime: 86400
         name: PHPSESSID
@@ -33,8 +36,6 @@ when@dev:
 when@test:
     framework:
         test: true
-        http_client:
-            mock_response_factory: App\Tests\Mock\NoNetwork
         http_cache: false
         session:
             storage_factory_id: session.storage.factory.mock_file

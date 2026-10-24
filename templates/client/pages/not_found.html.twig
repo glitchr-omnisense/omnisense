@@ -1,0 +1,23 @@
+{# The page for an unknown address: 404.html in the static export. #}
+{% extends 'layout1.html.twig' %}
+
+{#- Served at any unknown address: no canonical address, no language alternates. -#}
+{% set canonical = false %}
+{% set alternate_locales = [] %}
+
+{% block title %}{{ '@messages.not_found.title'|trans }}{% endblock %}
+
+{% block content %}
+<div class="om-wrap om-page om-text">
+    <header class="om-head is-page">
+        <p class="om-cote">404</p>
+        <h1>{{ '@messages.not_found.title'|trans }}</h1>
+        <p class="om-lead">{{ '@messages.not_found.lead'|trans }}</p>
+    </header>
+    <p class="om-actions">
+        <a class="om-button" href="{{ path('app_index') }}">{{ '@messages.not_found.home'|trans }}</a>
+        <a class="om-button is-line" href="{{ path('app_docs') }}">{{ '@messages.nav.docs'|trans }}</a>
+        <a class="om-button is-line" href="{{ path('app_search') }}">{{ '@messages.nav.search'|trans }}</a>
+    </p>
+</div>
+{% endblock %}

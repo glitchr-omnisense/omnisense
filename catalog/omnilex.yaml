@@ -1,0 +1,110 @@
+# The omnilex entry of the Omniscient catalogue. Written by `bin/console
+# app:catalog:import` from the packages' repositories; the phrase and the
+# text are the site's own, edited here. Each package: its kind, what its
+# composer.json says, its GitHub repository and development branch, whether
+# its README says it was verified against the real service, whether it has
+# a docs/ folder (see config/documentation.yaml).
+family: omnilex
+phrase:
+  en: 'Read the sources of law.'
+  fr: 'Lire les sources du droit.'
+text:
+  en: 'One contract for the sources of law: texts, codes and case law, searched with filters, read in the version in force at a date; identifiers normalised and validated (ECLI, NOR, CELEX).'
+  fr: 'Un seul contrat pour les sources du droit : textes, codes et jurisprudence, cherchés avec des filtres, lus dans leur version en vigueur à une date ; identifiants normalisés et validés (ECLI, NOR, CELEX).'
+packages:
+  omnilex/eurlex:
+    kind: provider
+    description: "Omnilex EUR-Lex: EU law and the case law of the Court of Justice from the Publications Office's open endpoint (Cellar: SPARQL and resources by CELEX number) - an act in its consolidated version at a date, one article of it, a judgment by ECLI, the links between acts and judgments, what is new - no key."
+    license: MIT
+    keywords:
+      - law
+      - eu-law
+      - eur-lex
+      - cellar
+      - celex
+      - ecli
+      - sparql
+      - omnilex
+    repository: glitchr-studio/omnilex-eurlex
+    branch: 1.x
+    requires:
+      - omniscient/omnilex
+    verification: verified
+    verification_note: 'Verified against the real service on 2026-10-04 (see docs/).'
+    docs: true
+  omnilex/judilibre:
+    kind: provider
+    description: 'Omnilex Judilibre: the decisions of the Cour de cassation and of the judicial courts from the Judilibre API (PISTE) - search with filters, one decision with its zones, the texts it applies and the case law it is brought together with, what changed since a date; pseudonymised, never re-identified.'
+    license: MIT
+    keywords:
+      - law
+      - case-law
+      - judilibre
+      - cour-de-cassation
+      - piste
+      - ecli
+      - omnilex
+    repository: glitchr-studio/omnilex-judilibre
+    branch: 1.x
+    requires:
+      - omniscient/omnilex
+    verification: unverified
+    verification_note: 'Not verified against the real service'
+    docs: true
+  omnilex/justice-administrative:
+    kind: provider
+    description: "Omnilex justice administrative: the decisions of the Conseil d'État, the administrative courts of appeal and the administrative tribunals from their open data (opendata.justice-administrative.fr) - search by text, court, kind and dates, one decision with its full text, what was added since a date - no key."
+    license: MIT
+    keywords:
+      - law
+      - case-law
+      - conseil-etat
+      - justice-administrative
+      - open-data
+      - ecli
+      - omnilex
+    repository: glitchr-studio/omnilex-justice-administrative
+    branch: 1.x
+    requires:
+      - omniscient/omnilex
+    verification: verified
+    verification_note: "What this package asks is the JSON interface the site's own search engine calls (/recherche/api/...), read from the engine's pages and verified call by call on 2026-10-04."
+    docs: true
+  omnilex/legifrance:
+    kind: provider
+    description: 'Omnilex Légifrance: codes, laws, decrees and the Journal officiel from the Légifrance API (PISTE) - a text or one article as in force at a date, search in the codes, the consolidated texts and the case law, the links of an article, the texts published since a date.'
+    license: MIT
+    keywords:
+      - law
+      - legislation
+      - legifrance
+      - piste
+      - dila
+      - codes
+      - omnilex
+    repository: glitchr-studio/omnilex-legifrance
+    branch: 1.x
+    requires:
+      - omniscient/omnilex
+    verification: unverified
+    verification_note: 'Not verified against the real service'
+    docs: true
+  omniscient/omnilex:
+    kind: family
+    description: "Omnilex: one contract for the sources of law - texts, codes and case law, searched with filters (jurisdiction, date, subject, type), read in the version in force at a date, their links followed, what is new listed - from Légifrance, Judilibre, EUR-Lex and the French administrative courts' open data; identifiers (ECLI, NOR, CELEX, pourvoi, Légifrance) normalised and validated; and its Symfony bundle."
+    license: MIT
+    keywords:
+      - law
+      - legal
+      - legislation
+      - case-law
+      - legifrance
+      - judilibre
+      - eur-lex
+      - ecli
+      - celex
+      - omnilex
+    repository: glitchr-studio/omnilex
+    branch: 1.x
+    verification: unstated
+    docs: true

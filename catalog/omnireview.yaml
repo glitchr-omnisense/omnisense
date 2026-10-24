@@ -1,0 +1,78 @@
+# The omnireview entry of the Omniscient catalogue. Written by `bin/console
+# app:catalog:import` from the packages' repositories; the phrase and the
+# text are the site's own, edited here. Each package: its kind, what its
+# composer.json says, its GitHub repository and development branch, whether
+# its README says it was verified against the real service, whether it has
+# a docs/ folder (see config/documentation.yaml).
+family: omnireview
+phrase:
+  en: 'Read what customers say elsewhere.'
+  fr: 'Lire ce que les clients disent ailleurs.'
+text:
+  en: "One contract for what customers say elsewhere: the rating, the reviews, the establishment's reply, the invitation to leave a review - Google, Tripadvisor, Trustpilot -, each platform with its terms of display; the origin, the date and the link always shown."
+  fr: 'Un seul contrat pour ce que les clients disent ailleurs : la note, les avis, la réponse de l’établissement, l’invitation à laisser un avis — Google, Tripadvisor, Trustpilot —, chaque plateforme avec ses conditions d’affichage ; l’origine, la date et le lien toujours montrés.'
+packages:
+  omnireview/google:
+    kind: provider
+    description: "Omnireview Google: an establishment's Google rating and reviews through the Places API (New) - up to five, with their authors' attribution - and, for its owner, every review and replying through the Business Profile API; the link to leave a review; Google's display and caching rules declared."
+    license: MIT
+    keywords:
+      - reviews
+      - google-reviews
+      - places-api
+      - business-profile
+      - omnireview
+    repository: glitchr-studio/omnireview-google
+    branch: 1.x
+    requires:
+      - omniscient/omnireview
+    verification: partial
+    verification_note: "Documentation: the options, the calls, Google's terms, what was verified. — Not verified in real: no key - but for the link to write a review, which answered."
+    docs: true
+  omnireview/tripadvisor:
+    kind: provider
+    description: "Omnireview Tripadvisor: a location's rating, bubbles and up to five reviews through Tripadvisor's Content API, the link to write one; its display requirements declared - logo, bubbles from Tripadvisor's addresses, pages kept out of search engines."
+    license: MIT
+    keywords:
+      - reviews
+      - tripadvisor
+      - content-api
+      - omnireview
+    repository: glitchr-studio/omnireview-tripadvisor
+    branch: 1.x
+    requires:
+      - omniscient/omnireview
+    verification: partial
+    verification_note: "Documentation: the options, the calls, Tripadvisor's display rules, what was verified. — Not verified in real: no key."
+    docs: true
+  omnireview/trustpilot:
+    kind: provider
+    description: "Omnireview Trustpilot: a business unit's TrustScore and reviews, the links to its profile and to review it, replying and inviting customers with the business user's token; Trustpilot's 24-hour refresh declared."
+    license: MIT
+    keywords:
+      - reviews
+      - trustpilot
+      - trustscore
+      - omnireview
+    repository: glitchr-studio/omnireview-trustpilot
+    branch: 1.x
+    requires:
+      - omniscient/omnireview
+    verification: partial
+    verification_note: "Documentation: the options, the calls, Trustpilot's terms, what was verified. — Not verified in real: no key."
+    docs: true
+  omniscient/omnireview:
+    kind: family
+    description: "Omnireview: what customers say of an establishment elsewhere - its rating, its reviews, replying as the establishment, inviting a customer to review, the link to leave one - whoever hosts them: Google (omnireview/google), Tripadvisor (omnireview/tripadvisor), Trustpilot (omnireview/trustpilot), each platform's terms of display and caching declared; and its Symfony and Twig bridges, which always show the origin, the date and the link."
+    license: MIT
+    keywords:
+      - reviews
+      - ratings
+      - google-reviews
+      - tripadvisor
+      - trustpilot
+      - omnireview
+    repository: glitchr-studio/omnireview
+    branch: 1.x
+    verification: unstated
+    docs: true
