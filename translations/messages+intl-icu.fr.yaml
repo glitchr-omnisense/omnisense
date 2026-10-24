@@ -187,6 +187,7 @@ legal:
   publisher: Publication
   publisher_text: Ce site est publié par {publisher}.
   host: Hébergement
+  host_text: 'Le site est un ensemble de fichiers statiques servis par {host}, un service de GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis.'
   host_missing: Le site n’est pas encore en ligne. L’hébergeur sera indiqué à la mise en ligne.
   packages: Les paquets
   packages_text: Les paquets présentés sont publiés par l’organisation glitchr-studio. La licence de chacun est celle que déclare son dépôt, reprise sur sa fiche.
@@ -201,6 +202,8 @@ privacy:
   cookies_text: Aucun cookie n’est posé. Le choix entre clair et sombre, si vous le faites, est gardé dans votre propre navigateur (stockage local) et n’en sort pas.
   services: Services interrogés
   services_text: 'Les pages ne chargent rien depuis d’autres services : les polices et les scripts sont ceux du site. Les liens vers GitHub, Packagist ou npm vous y emmènent ; rien ne leur est demandé pendant votre lecture.'
+  host: L’hébergeur
+  host_text: 'Les pages sont servies par {host} (GitHub, Inc.), qui enregistre l’adresse IP de chaque visiteur pour la sécurité de son service, comme le dit sa déclaration de confidentialité. Le site lui-même n’en reçoit rien.'
   rights: Vos droits
   rights_text: 'Le site ne garde aucune donnée personnelle. Pour toute question : {email}.'
 start:

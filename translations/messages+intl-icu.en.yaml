@@ -187,6 +187,7 @@ legal:
   publisher: Publication
   publisher_text: This site is published by {publisher}.
   host: Hosting
+  host_text: 'The site is a set of static files served by {host}, a service of GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, United States.'
   host_missing: The site is not online yet. The host will be named when it is.
   packages: The packages
   packages_text: The packages presented are published by the glitchr-studio organisation. Each one's licence is the one its repository declares, repeated on its sheet.
@@ -201,6 +202,8 @@ privacy:
   cookies_text: No cookie is set. The choice between light and dark, if you make one, is kept in your own browser (local storage) and never leaves it.
   services: Services asked
   services_text: 'The pages load nothing from other services: the fonts and scripts are the site''s own. Links to GitHub, Packagist or npm take you there; nothing is asked of them while you read.'
+  host: The host
+  host_text: 'The pages are served by {host} (GitHub, Inc.), which records each visitor''s IP address for the security of its service, as its privacy statement says. The site itself receives none of it.'
   rights: Your rights
   rights_text: 'The site keeps no personal data. For any question: {email}.'
 start:

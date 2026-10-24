@@ -836,11 +836,12 @@ endif
 static:
 	@$(DOCKER_COMPOSER) bin/omnibridge-static build $(ARGS)
 
-## Serve dist/ with a plain nginx on http://localhost:8135 (no PHP); make static-stop removes it
+## Serve dist/ with a plain nginx on http://localhost:8135 as GitHub Pages does (no PHP); STATIC_BASE_PATH=/omniscient for a build whose SITE_URL has that folder; make static-stop removes it
+STATIC_BASE_PATH ?=
 static-serve:
 	@docker rm -f $(APP_NAME)-static >/dev/null 2>&1 || true
-	@docker run -d --name $(APP_NAME)-static -p 8135:80 -v "$(CURDIR)/dist:/srv/static:ro" -v "$(CURDIR)/tests/smoke/nginx.conf:/etc/nginx/conf.d/default.conf:ro" nginx:1.27-alpine >/dev/null
-	@printf "http://localhost:8135\n"
+	@docker run -d --name $(APP_NAME)-static -p 8135:80 -e BASE_PATH="$(STATIC_BASE_PATH)" -v "$(CURDIR)/dist:/srv/www$(STATIC_BASE_PATH):ro" -v "$(CURDIR)/tests/smoke/nginx.conf.template:/etc/nginx/templates/default.conf.template:ro" nginx:1.27-alpine >/dev/null
+	@printf "http://localhost:8135$(STATIC_BASE_PATH)/\n"
 
 static-stop:
 	@docker rm -f $(APP_NAME)-static >/dev/null 2>&1 || true
