@@ -18,7 +18,20 @@ class Identity
         #[Autowire('%app.site.host%')] private readonly string $host,
         #[Autowire('%app.site.github%')] private readonly string $github,
         #[Autowire('%env(MAILER_CONTACT)%')] private readonly string $contact,
+        #[Autowire('%app.site.url%')] private readonly string $url = 'http://localhost:8135',
     ) {
+    }
+
+    /** The static site's public origin, without a trailing slash (SITE_URL). */
+    public function getUrl(): string
+    {
+        return rtrim($this->url, '/');
+    }
+
+    /** An address of the site made absolute at its public origin: "/news" → "https://…/news". */
+    public function absolute(string $path): string
+    {
+        return $this->getUrl().'/'.ltrim($path, '/');
     }
 
     public function getName(): string

@@ -1,17 +1,11 @@
 import { Controller } from '@hotwired/stimulus';
 
 /*
- * Light / dark. omnibase's Themizer renders theme-mode-<mode> on <html>
- * from the USER/THEME/MODE cookie (USER/THEME/PREFERS_MODE resolves "auto"):
- * this writes both and swaps the class at once, so the next page - rendered
- * by the server, or swapped in by transparent.js - agrees.
- *
- * The cookies are the visitor's preferences (USER, omnibase/consent): they go
- * through the answer. Refused, nothing is written: the choice holds for the
- * page, the next one follows the system again.
+ * Light / dark. The choice is kept in the reader's browser (localStorage,
+ * "om-theme") and applied by base.html.twig's inline script before the
+ * first paint of the next page: the site is static, no server reads it.
+ * Without a choice the system's preference holds (prefers-color-scheme).
  */
-const YEAR = 60 * 60 * 24 * 365;
-
 export default class extends Controller {
     toggle() {
         const html = document.documentElement;
@@ -22,7 +16,6 @@ export default class extends Controller {
         html.classList.toggle('theme-mode-dark', dark);
         html.classList.toggle('theme-mode-light', !dark);
 
-        window.Consent?.cookie('USER', 'THEME/MODE', mode, YEAR);
-        window.Consent?.cookie('USER', 'THEME/PREFERS_MODE', mode, YEAR);
+        try { localStorage.setItem('om-theme', mode); } catch (e) { /* private browsing: the choice holds for this page */ }
     }
 }

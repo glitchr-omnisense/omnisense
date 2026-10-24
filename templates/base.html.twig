@@ -43,7 +43,16 @@
         <meta property="og:description" content="{{ meta.description }}">
         <meta property="og:type"        content="{{ meta.type }}">
         <meta property="og:locale"      content="{{ meta.locale }}">
-        <meta property="og:url"         content="{{ app.request.uri }}">
+        {#- The page's canonical address and its other languages (hreflang): the same route under each locale. -#}
+        {% set _alternates = page_alternates(alternate_locales ?? null) %}
+        {% set _canonical = _alternates[app.request.locale|lang] ?? site_url(app.request.attributes.get('_route') ?: 'app_index', (app.request.attributes.get('_route_params') ?? {})|filter((v, k) => k != '_canonical_route')) %}
+        {% if canonical ?? true %}
+        <meta property="og:url"         content="{{ _canonical }}">
+        <link rel="canonical" href="{{ _canonical }}">
+        {% endif %}
+        {% for locale, href in _alternates %}<link rel="alternate" hreflang="{{ locale }}" href="{{ href }}">
+        {% endfor %}{% if _alternates.en is defined %}<link rel="alternate" hreflang="x-default" href="{{ _alternates.en }}">{% endif %}
+        <link rel="alternate" type="application/atom+xml" title="{{ '@messages.footer.feed'|trans }}" href="{{ site_url('app_news_atom') }}">
         {% endblock %}
 
         {% block icon %}
@@ -58,7 +67,9 @@
         {% block stylesheets %}{% endblock %}
     {% endblock %}
 
-    <script>window.APP_DEPLOY_VERSION = "{{ deploy_version() }}";</script>
+    <script>window.APP_DEPLOY_VERSION = "{{ deploy_version() }}";
+    {#- The reader's light / dark choice (theme_controller.js), applied before the first paint: a static page has no cookie to read it from. #}
+    try { var m = localStorage.getItem('om-theme'); if (m === 'dark' || m === 'light') document.documentElement.classList.add('theme-mode-' + m); } catch (e) {}</script>
     </head>
 
     <body>

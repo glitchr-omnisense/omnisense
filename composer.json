@@ -1,82 +1,63 @@
 {
-    "name": "glitchr/omniscient",
-    "description": "Omniscient : la vitrine de l'écosystème Omni (familles, fournisseurs, bundles omnibase) et la documentation de chaque paquet, lue dans son dépôt",
+    "name": "omniscient/omniscient",
+    "description": "Omniscient: the Omni ecosystem's website - guides, news, the package catalogue and each package's documentation, built statically by omnibridge/static",
     "type": "project",
-    "license": "proprietary",
+    "license": "MIT",
     "repositories": [
         {
-            "type": "git",
-            "url": "https://github.com/glitchr-studio/omnibase.git"
+            "_comment": "Direct VCS sources on GitHub (glitchr-studio): a *-dev constraint resolved through Packagist can pin a stale commit. no-api: plain git, no GitHub API quota.",
+            "type": "vcs",
+            "url": "https://github.com/glitchr-studio/omnibase.git",
+            "no-api": true
         },
         {
-            "type": "git",
-            "url": "https://github.com/glitchr-studio/omnibase-admin.git"
+            "type": "vcs",
+            "url": "https://github.com/glitchr-studio/well-known.git",
+            "no-api": true
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/glitchr-studio/backup-manager.git",
+            "no-api": true
         },
         {
             "type": "vcs",
             "url": "https://github.com/glitchr-studio/symfony-profiler-pack.git",
             "no-api": true
-        },
-        {
-            "type": "path",
-            "url": "../omnibase/blog",
-            "options": {
-                "symlink": true,
-                "versions": {
-                    "omnibase/blog": "dev-main"
-                }
-            }
-        },
-        {
-            "type": "path",
-            "url": "../omnibase/consent",
-            "options": {
-                "symlink": true,
-                "versions": {
-                    "omnibase/consent": "dev-main"
-                }
-            }
-        },
-        {
-            "type": "path",
-            "url": "../omnibase/docs",
-            "options": {
-                "symlink": true,
-                "versions": {
-                    "omnibase/docs": "2.0.x-dev"
-                }
-            }
         }
     ],
     "require": {
-        "php": ">=8.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "php": ">=8.2",
+        "phpdocumentor/reflection-docblock": "^5.3",
+        "phpoffice/phpspreadsheet": "^1.23|^2.0",
+        "phpstan/phpdoc-parser": "^1.23",
+        "api-platform/doctrine-orm": "^4.0",
+        "api-platform/symfony": "^4.0",
+        "doctrine/collections": "^3.1",
         "doctrine/doctrine-bundle": "^3.2.4",
         "doctrine/doctrine-migrations-bundle": "^3.3",
-        "embed/embed": "^4.4",
-        "git/git-bundle": "1.x-dev",
         "glitchr/backup-manager": "4.0.*-dev",
-        "glitchr/base-plugin": "2.0.*-dev",
-        "glitchr/doctrine-dc2type": "1.0.*-dev",
-        "glitchr/omnibase": "3.x-dev as 3.0.x-dev",
-        "glitchr/typesense-bundle": "2.0.*-dev",
-        "glitchr/ux-google": "1.0.*-dev",
         "glitchr/well-known": "1.0.*-dev",
         "guzzlehttp/guzzle": "^7.4",
         "hwi/oauth-bundle": "^2.1",
         "jaybizzle/crawler-detect": "^1.2",
         "league/commonmark": "^2.7",
         "league/flysystem-async-aws-s3": "*",
+        "league/flysystem-bundle": "^3.1",
         "league/flysystem-ftp": "^3.1",
         "nelmio/cors-bundle": "^2.3",
-        "omnibase/admin": "dev-main",
-        "omnibase/blog": "dev-main",
-        "omnibase/consent": "dev-main",
-        "omnibase/docs": "2.0.x-dev",
-        "phpdocumentor/reflection-docblock": "^5.3",
-        "phpoffice/phpspreadsheet": "^1.23|^2.0",
-        "phpstan/phpdoc-parser": "^1.23",
+        "nelmio/security-bundle": "^3.0",
+        "omnibridge/composer": "1.x-dev",
+        "omnibridge/doctrine": "1.x-dev",
+        "omnibridge/static": "1.x-dev",
+        "omnibridge/symfony": "1.x-dev",
+        "omnibridge/twig": "1.x-dev",
+        "omniscient/omnibase": "4.x-dev as 4.0.x-dev",
+        "omniscient/omnibridge": "1.x-dev",
+        "omniscient/omnidrive": "1.x-dev",
+        "scheb/2fa": "^7.0|^8.0",
         "symfony/apache-pack": "^1.0",
         "symfony/asset": "^8.0",
         "symfony/cache": "^8.0",
@@ -142,9 +123,8 @@
             "composer/package-versions-deprecated": true,
             "symfony/flex": true,
             "symfony/runtime": true,
-            "glitchr/base-plugin": true,
-            "glitchr/doctrine-dc2type": true,
-            "php-http/discovery": true
+            "php-http/discovery": true,
+            "omnibridge/composer": true
         },
         "platform": {
             "ext-amqp": "2.2.0",
@@ -179,7 +159,7 @@
             "App\\": "src/"
         },
         "exclude-from-classmap": [
-            "vendor/glitchr/omnibase/src/Admin/"
+            "vendor/omniscient/omnibase/src/Admin/"
         ]
     },
     "autoload-dev": {

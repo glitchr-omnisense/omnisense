@@ -1,0 +1,35 @@
+# The tests' catalogue: one family, its providers.
+family: omnitrade
+phrase:
+  en: Take payments and sell, whatever the provider.
+  fr: Encaisser et vendre, quel que soit le prestataire.
+text:
+  en: One contract for payment providers.
+packages:
+  omniscient/omnitrade:
+    kind: family
+    description: 'Omnitrade: one contract for payment providers.'
+    license: MIT
+    keywords: [payment, gateway]
+    repository: glitchr-studio/omnitrade
+    branch: 1.x
+    verification: unstated
+    docs: true
+  omnitrade/stripe:
+    kind: provider
+    description: 'Stripe for Omnitrade: Checkout, refunds, webhooks.'
+    license: MIT
+    repository: glitchr-studio/omnitrade-stripe
+    branch: 1.x
+    requires: [omniscient/omnitrade]
+    verification: verified
+    verification_note: Verified against the real service on 2026-10-01.
+  omnitrade/paypal:
+    kind: provider
+    description: 'PayPal for Omnitrade.'
+    license: MIT
+    repository: glitchr-studio/omnitrade-paypal
+    branch: 1.x
+    requires: [omniscient/omnitrade]
+    verification: unverified
+    verification_note: Unverified. Written from the published documentation.

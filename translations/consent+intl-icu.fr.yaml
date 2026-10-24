@@ -1,3 +1,0 @@
-# Les mots d'omnibase/consent, là où ce site en dit moins : il garde votre
-# session, votre langue et votre thème (comme le dit sa page de confidentialité).
-text: "Le site ne garde que ce qui le fait marcher : votre session, votre langue, votre thème. Pas de pub, pas de pistage.{privacy, select, none {} other { <a href=\"{privacy}\">Confidentialité</a>.}}"

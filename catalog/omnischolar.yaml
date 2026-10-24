@@ -1,0 +1,155 @@
+# The omnischolar entry of the Omniscient catalogue. Written by `bin/console
+# app:catalog:import` from the packages' repositories; the phrase and the
+# text are the site's own, edited here. Each package: its kind, what its
+# composer.json says, its GitHub repository and development branch, whether
+# its README says it was verified against the real service, whether it has
+# a docs/ folder (see config/documentation.yaml).
+family: omnischolar
+phrase:
+  en: "Gather a researcher's publications."
+  fr: 'Rassembler les publications d’un chercheur.'
+text:
+  en: 'One contract for publications: author profiles, works, books and their editions, citations, read from several sources, merged and deduplicated, exported as BibTeX, RIS or CSL-JSON.'
+  fr: 'Un seul contrat pour les publications : profils d’auteur, travaux, livres et leurs éditions, citations, lus dans plusieurs bases, fusionnés et dédoublonnés, exportés en BibTeX, RIS ou CSL-JSON.'
+packages:
+  omnischolar/arxiv:
+    kind: provider
+    description: 'Omnischolar arXiv: preprints by author name, arXiv id or search, with abstracts, categories, PDFs and the DOI of the published version - no key, three seconds between calls.'
+    license: MIT
+    keywords:
+      - scholarly
+      - publications
+      - arxiv
+      - preprints
+      - physics
+      - omnischolar
+    repository: glitchr-studio/omnischolar-arxiv
+    branch: 1.x
+    requires:
+      - omniscient/omnischolar
+    verification: unstated
+    docs: true
+  omnischolar/crossref:
+    kind: provider
+    description: 'Omnischolar Crossref: the reference metadata of any Crossref DOI, the works deposited with an ORCID, a bibliographic search - no key, in the polite pool with a mailto.'
+    license: MIT
+    keywords:
+      - scholarly
+      - publications
+      - crossref
+      - doi
+      - metadata
+      - omnischolar
+    repository: glitchr-studio/omnischolar-crossref
+    branch: 1.x
+    requires:
+      - omniscient/omnischolar
+    verification: unstated
+    docs: true
+  omnischolar/hal:
+    kind: provider
+    description: 'Omnischolar HAL: the deposits of the French open archive by idHAL, ORCID or name, their open-access full texts, and a filter by domain (shs.droit for legal scholarship) - no key.'
+    license: MIT
+    keywords:
+      - scholarly
+      - publications
+      - hal
+      - open-archive
+      - doctrine
+      - shs
+      - omnischolar
+    repository: glitchr-studio/omnischolar-hal
+    branch: 1.x
+    requires:
+      - omniscient/omnischolar
+    verification: unstated
+    docs: true
+  omnischolar/inspire:
+    kind: provider
+    description: 'Omnischolar INSPIRE-HEP: high-energy physics authors (BAI, ORCID), their positions and citation summary, their literature with citation counts - no key.'
+    license: MIT
+    keywords:
+      - scholarly
+      - publications
+      - inspire
+      - hep
+      - physics
+      - citations
+      - omnischolar
+    repository: glitchr-studio/omnischolar-inspire
+    branch: 1.x
+    requires:
+      - omniscient/omnischolar
+    verification: unstated
+    docs: true
+  omnischolar/openalex:
+    kind: provider
+    description: "Omnischolar OpenAlex: an author's profile and counts (works, citations, h-index), their works with abstracts, citations and open-access links, any work by DOI - through the OpenAlex API, no key needed."
+    license: MIT
+    keywords:
+      - scholarly
+      - publications
+      - openalex
+      - citations
+      - h-index
+      - omnischolar
+    repository: glitchr-studio/omnischolar-openalex
+    branch: 1.x
+    requires:
+      - omniscient/omnischolar
+    verification: unstated
+    docs: true
+  omnischolar/openlibrary:
+    kind: provider
+    description: "Omnischolar Open Library: an author's books, one record per edition with ISBNs, publisher and cover, for the Merger to group - no key."
+    license: MIT
+    keywords:
+      - scholarly
+      - publications
+      - openlibrary
+      - books
+      - isbn
+      - covers
+      - omnischolar
+    repository: glitchr-studio/omnischolar-openlibrary
+    branch: 1.x
+    requires:
+      - omniscient/omnischolar
+    verification: unstated
+    docs: true
+  omnischolar/orcid:
+    kind: provider
+    description: "Omnischolar ORCID: a researcher's identity, CV (employments, education, distinctions...) and declared works, through ORCID's public API - no key."
+    license: MIT
+    keywords:
+      - scholarly
+      - publications
+      - orcid
+      - cv
+      - researcher
+      - omnischolar
+    repository: glitchr-studio/omnischolar-orcid
+    branch: 1.x
+    requires:
+      - omniscient/omnischolar
+    verification: unstated
+    docs: true
+  omniscient/omnischolar:
+    kind: family
+    description: "Omnischolar: one contract for a researcher's publications - author profiles, works, books and their editions, citations - read from OpenAlex, HAL, Crossref, ORCID, Open Library, arXiv and INSPIRE, merged and deduplicated, exported as BibTeX, RIS or CSL-JSON; and its Symfony bundle."
+    license: MIT
+    keywords:
+      - scholarly
+      - publications
+      - bibliography
+      - openalex
+      - hal
+      - crossref
+      - orcid
+      - bibtex
+      - csl
+      - omnischolar
+    repository: glitchr-studio/omnischolar
+    branch: 1.x
+    verification: unstated
+    docs: true

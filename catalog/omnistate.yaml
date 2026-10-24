@@ -1,0 +1,182 @@
+# The omnistate entry of the Omniscient catalogue. Written by `bin/console
+# app:catalog:import` from the packages' repositories; the phrase and the
+# text are the site's own, edited here. Each package: its kind, what its
+# composer.json says, its GitHub repository and development branch, whether
+# its README says it was verified against the real service, whether it has
+# a docs/ folder (see config/documentation.yaml).
+family: omnistate
+phrase:
+  en: 'Ask the public registers what they know.'
+  fr: 'Demander aux registres publics ce qu’ils savent.'
+text:
+  en: 'One contract for what states and registries know: companies, VAT numbers, domains and networks, and the registers its providers add.'
+  fr: 'Un seul contrat pour ce que savent les États et les registres : entreprises, numéros de TVA, noms de domaine et réseaux, et les registres que ses fournisseurs ajoutent.'
+packages:
+  omniscient/omnistate:
+    kind: family
+    description: 'Omnistate: one contract for what states and registries know - companies, VAT numbers, domains and networks (the Omnipay of public registers).'
+    license: MIT
+    keywords:
+      - company
+      - registry
+      - siren
+      - siret
+      - vat
+      - vies
+      - rdap
+      - iana
+      - kyc
+      - 'civil registry'
+      - genealogy
+    repository: glitchr-studio/omnistate
+    branch: 1.x
+    verification: unstated
+    docs: true
+  omnistate/annuaire-entreprises:
+    kind: provider
+    description: "Omnistate Annuaire des Entreprises: French companies from the State's Recherche d'entreprises API (INSEE Sirene + INPI's RNE) - free, no key."
+    license: MIT
+    keywords:
+      - siren
+      - siret
+      - sirene
+      - rne
+      - insee
+      - inpi
+      - france
+      - company
+      - omnistate
+    repository: glitchr-studio/omnistate-annuaire-entreprises
+    branch: 1.x
+    requires:
+      - omniscient/omnistate
+    verification: unstated
+  omnistate/annuaire-sante:
+    kind: provider
+    description: "Omnistate Annuaire Santé: French health professionals (RPPS: profession, specialties, workplaces, MSSanté addresses) and facilities (FINESS) from the ANS's FHIR API."
+    license: MIT
+    keywords:
+      - rpps
+      - finess
+      - 'annuaire sante'
+      - ans
+      - fhir
+      - mssante
+      - health
+      - france
+      - omnistate
+    repository: glitchr-studio/omnistate-annuaire-sante
+    branch: 1.x
+    requires:
+      - omniscient/omnistate
+    verification: unstated
+    docs: true
+  omnistate/iana:
+    kind: provider
+    description: "Omnistate IANA: domains, IP addresses and AS numbers through IANA's RDAP bootstrap - the registrar, the dates, the name servers, who holds a network. Free, no key."
+    license: MIT
+    keywords:
+      - rdap
+      - iana
+      - whois
+      - domain
+      - ip
+      - asn
+      - registrar
+      - omnistate
+    repository: glitchr-studio/omnistate-iana
+    branch: 1.x
+    requires:
+      - omniscient/omnistate
+    verification: unstated
+  omnistate/matchid:
+    kind: provider
+    description: "Omnistate matchID: France's deaths since 1970 (INSEE's file of deceased persons) searched through deces.matchid.io - names, birth, death, the act's number."
+    license: MIT
+    keywords:
+      - genealogy
+      - 'civil registry'
+      - 'etat civil'
+      - deces
+      - insee
+      - matchid
+      - france
+      - omnistate
+    repository: glitchr-studio/omnistate-matchid
+    branch: 1.x
+    requires:
+      - omniscient/omnistate
+    verification: unstated
+    docs: true
+  omnistate/nara:
+    kind: provider
+    description: 'Omnistate NARA: the National Archives Catalog of the United States (Catalog API v2) - federal files that name a person (pension files, military service records, draft cards, naturalization indexes), with their reference and links to their scanned pages. A catalogue, not civil registration; an API key is needed.'
+    license: MIT
+    keywords:
+      - genealogy
+      - archives
+      - 'national archives'
+      - nara
+      - 'united states'
+      - catalog
+      - omnistate
+    repository: glitchr-studio/omnistate-nara
+    branch: 1.x
+    requires:
+      - omniscient/omnistate
+    verification: unstated
+    docs: true
+  omnistate/national-archives-uk:
+    kind: provider
+    description: "Omnistate National Archives UK: the Discovery catalogue of the UK's National Archives and 2,500 other archives - documents that name a person (wills, service records, parish papers), with their reference. A catalogue, not civil registration."
+    license: MIT
+    keywords:
+      - genealogy
+      - archives
+      - 'national archives'
+      - discovery
+      - 'united kingdom'
+      - catalogue
+      - omnistate
+    repository: glitchr-studio/omnistate-national-archives-uk
+    branch: 1.x
+    requires:
+      - omniscient/omnistate
+    verification: unstated
+    docs: true
+  omnistate/openarchieven:
+    kind: provider
+    description: "Omnistate Open Archives: births, baptisms, marriages, deaths, burials and more from the indexes of Dutch and Belgian archives (openarchieven.nl), with the archive's reference and the scan of the act."
+    license: MIT
+    keywords:
+      - genealogy
+      - 'civil registry'
+      - 'burgerlijke stand'
+      - 'open archives'
+      - openarchieven
+      - a2a
+      - netherlands
+      - belgium
+      - omnistate
+    repository: glitchr-studio/omnistate-openarchieven
+    branch: 1.x
+    requires:
+      - omniscient/omnistate
+    verification: unstated
+    docs: true
+  omnistate/vies:
+    kind: provider
+    description: "Omnistate VIES: EU VAT numbers checked with the European Commission's VIES (REST - no SOAP extension needed), with a consultation number as proof."
+    license: MIT
+    keywords:
+      - vat
+      - vies
+      - eu
+      - intra-community
+      - 'reverse charge'
+      - omnistate
+    repository: glitchr-studio/omnistate-vies
+    branch: 1.x
+    requires:
+      - omniscient/omnistate
+    verification: unstated

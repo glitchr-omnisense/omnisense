@@ -36,17 +36,13 @@
     @include light;
 
     // What the bundles' stylesheets read: no colour of their own.
-    // omnibase/docs (the manuals):
+    // The documentation pages (_manual.scss):
     --manual-ink: var(--om-ink); --manual-soft: var(--om-soft); --manual-line: var(--om-line); --manual-bg: var(--om-paper); --manual-surface: var(--om-sheet);
     --manual-accent: var(--om-blue); --manual-on-accent: var(--om-paper); --manual-mark: var(--om-mark); --manual-radius: 2px; --manual-top: calc(#{$om-header} + 1.25rem);
     --manual-font: #{$om-text}; --manual-font-display: #{$om-display}; --manual-font-mono: #{$om-mono};
     --manual-code-bg: var(--om-sheet); --manual-note: var(--om-blue); --manual-tip: var(--om-ok); --manual-warning: var(--om-warn); --manual-caution: var(--om-no);
     // omnibase/blog (the announcements):
     --blog-accent: var(--om-blue); --blog-ink: var(--om-ink); --blog-soft: var(--om-soft); --blog-line: var(--om-line); --blog-surface: var(--om-sheet); --blog-measure: #{$om-measure}; --blog-measure-post: 46rem;
-    // omnibase/consent (the cookie answer):
-    --consent-ink: var(--om-ink); --consent-soft: var(--om-soft); --consent-bg: var(--om-sheet); --consent-line: var(--om-line);
-    --consent-accent: var(--om-ink); --consent-on-accent: var(--om-paper); --consent-danger: var(--om-no); --consent-hover: var(--om-wash);
-    --consent-radius: 2px; --consent-font: #{$om-text}; --consent-shadow: 4px 4px 0 var(--om-line);
 }
 html.theme-mode-dark { @include dark; }
 @media (prefers-color-scheme: dark) { html:not(.theme-mode-light) { @include dark; } }

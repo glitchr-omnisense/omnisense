@@ -1,16 +1,11 @@
-{#
- # Support: what GitHub Sponsors says of the organisation - its tiers, its
- # goal, its sponsors - or, plainly, that nothing is known: the site has no
- # token, GitHub did not answer, or the Sponsors page is not open. Nothing
- # is shown in the place of an answer.
- #}
+{# Support: GitHub Sponsors, and the other ways to help - use, report, document. #}
 {% extends 'layout1.html.twig' %}
 
 {% block title %}{{ '@messages.support.title'|trans }}{% endblock %}
 {% block description %}{{ '@messages.support.description'|trans }}{% endblock %}
 
 {% block content %}
-<div class="om-wrap om-page om-support" data-sponsors="{{ sponsors.state }}">
+<div class="om-wrap om-page om-support">
     <header class="om-head is-page">
         <p class="om-cote">{{ '@messages.support.eyebrow'|trans }}</p>
         <h1>{{ '@messages.support.title'|trans }}</h1>
@@ -19,47 +14,8 @@
 
     <section class="om-tier" id="sponsors">
         <header><h2>GitHub Sponsors</h2></header>
-
-        {% if sponsors.open %}
-            {% if sponsors.description %}<p class="om-lead">{{ sponsors.description }}</p>{% endif %}
-            <p class="om-actions"><a class="om-button" href="{{ sponsors.url }}" rel="noopener"><i class="fa-brands fa-github" aria-hidden="true"></i> {{ '@messages.support.sponsor'|trans({login: sponsors.login}) }}</a></p>
-
-            {% if sponsors.goal %}
-            <div class="om-goal">
-                <p class="om-cote">{{ '@messages.support.goal'|trans }}</p>
-                <p><b>{{ sponsors.goal.title }}</b>{% if sponsors.goal.description %} — {{ sponsors.goal.description }}{% endif %}</p>
-                <div class="om-goal-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ sponsors.goal.percent }}"><span style="width: {{ min(100, sponsors.goal.percent) }}%"></span></div>
-                <p class="om-source">{{ sponsors.goal.percent }} %</p>
-            </div>
-            {% endif %}
-
-            {% if sponsors.tiers %}
-            <h3 class="om-cote">{{ '@messages.support.tiers'|trans }}</h3>
-            <ul class="om-tiers">
-                {% for tier in sponsors.tiers %}
-                <li><b>{{ tier.name }}</b>{% if tier.description %}<span>{{ tier.description }}</span>{% endif %}<em>{{ (tier.oneTime ? '@messages.support.once' : '@messages.support.monthly')|trans }}</em></li>
-                {% endfor %}
-            </ul>
-            {% endif %}
-
-            <h3 class="om-cote">{{ '@messages.support.wall'|trans({count: sponsors.total}) }}</h3>
-            {% if sponsors.sponsors %}
-            <ul class="om-wall">
-                {% for sponsor in sponsors.sponsors %}
-                <li><a href="{{ sponsor.url }}" rel="noopener">{% if sponsor.avatar %}<img src="{{ sponsor.avatar }}" alt="" width="40" height="40" loading="lazy">{% endif %}<span>{{ sponsor.name ?? sponsor.login }}</span></a></li>
-                {% endfor %}
-            </ul>
-            {% endif %}
-            {% if sponsors.privateCount %}<p class="om-source">{{ '@messages.support.private'|trans({count: sponsors.privateCount}) }}</p>{% endif %}
-            {% if sponsors.total == 0 %}<p class="om-none">{{ '@messages.support.no_sponsor'|trans }}</p>{% endif %}
-            {% if sponsors.at %}<p class="om-source">{{ '@messages.support.asked_on'|trans({date: sponsors.at|format_datetime('medium', 'short')}) }}</p>{% endif %}
-        {% else %}
-            <div class="om-nodata" role="status">
-                <p class="om-nodata-title">{{ '@messages.support.nodata'|trans }}</p>
-                <p>{{ ('@messages.support.state.' ~ sponsors.state)|trans({login: sponsors.login}) }}</p>
-                <p class="om-source">{{ '@messages.support.nothing_invented'|trans }}</p>
-            </div>
-        {% endif %}
+        <p>{{ '@messages.support.sponsors_text'|trans }}</p>
+        <p class="om-actions"><a class="om-button" href="https://github.com/sponsors/{{ site.github }}" rel="noopener"><i class="fa-brands fa-github" aria-hidden="true"></i> {{ '@messages.support.sponsor'|trans({login: site.github}) }}</a></p>
     </section>
 
     <section class="om-tier" id="otherwise">
@@ -67,7 +23,7 @@
         <ul class="om-ways">
             <li><b>{{ '@messages.support.way.use'|trans }}</b><span>{{ '@messages.support.way.use_text'|trans }}</span><a href="{{ path('app_packages') }}">{{ '@messages.nav.packages'|trans }}</a></li>
             <li><b>{{ '@messages.support.way.report'|trans }}</b><span>{{ '@messages.support.way.report_text'|trans }}</span><a href="{{ site.githubUrl }}" rel="noopener">github.com/{{ site.github }}</a></li>
-            <li><b>{{ '@messages.support.way.document'|trans }}</b><span>{{ '@messages.support.way.document_text'|trans }}</span><a href="{{ path('wikidoc_index') }}">{{ '@messages.nav.docs'|trans }}</a></li>
+            <li><b>{{ '@messages.support.way.document'|trans }}</b><span>{{ '@messages.support.way.document_text'|trans }}</span><a href="{{ path('app_docs') }}">{{ '@messages.nav.docs'|trans }}</a></li>
         </ul>
     </section>
 </div>

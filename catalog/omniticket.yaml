@@ -1,0 +1,127 @@
+# The omniticket entry of the Omniscient catalogue. Written by `bin/console
+# app:catalog:import` from the packages' repositories; the phrase and the
+# text are the site's own, edited here. Each package: its kind, what its
+# composer.json says, its GitHub repository and development branch, whether
+# its README says it was verified against the real service, whether it has
+# a docs/ folder (see config/documentation.yaml).
+family: omniticket
+phrase:
+  en: 'Read the tickets sold elsewhere.'
+  fr: 'Lire les billets vendus ailleurs.'
+packages:
+  omniscient/omniticket:
+    kind: family
+    description: 'Omniticket: tickets sold elsewhere, read and checked under any PHP host - the events a ticketing service sells (dates, rates, places left, sold out, where to buy), who comes (attendees), and whether a ticket code is valid at the door, one contract whoever sells them. Providers are packages of their own (omniticket/weezevent, omniticket/billetweb, omniticket/helloasso, omniticket/eventbrite, omniticket/ticketmaster); the Symfony and Laravel bridges live in omnibridge.'
+    license: MIT
+    keywords:
+      - ticketing
+      - tickets
+      - events
+      - attendees
+      - check-in
+      - weezevent
+      - billetweb
+      - helloasso
+      - eventbrite
+      - ticketmaster
+      - framework-agnostic
+      - omniticket
+    repository: glitchr-studio/omniticket
+    branch: 1.x
+    verification: partial
+    verification_note: "- Verified live (docker compose run --rm omniticket live, 2026-10-24): Weezevent's public endpoint (GET /event/categories, no key) - its host and its JSON. — - Not verified live: every call that needs an account or a key (all five providers' events, attendees and checks)."
+    docs: true
+  omniticket/billetweb:
+    kind: provider
+    description: "Omniticket's Billetweb, under any PHP host: an organizer's events with their rates, sessions and places left, the attendees of an event (incrementally, as Billetweb asks), and a ticket's barcode checked at the door - read only, through Billetweb's API v1."
+    license: MIT
+    keywords:
+      - billetweb
+      - ticketing
+      - tickets
+      - events
+      - attendees
+      - check-in
+      - framework-agnostic
+      - omniticket
+    repository: glitchr-studio/omniticket-billetweb
+    branch: 1.x
+    requires:
+      - omniscient/omniticket
+    verification: partial
+    verification_note: '- Not verified live: no Billetweb account was used.'
+  omniticket/eventbrite:
+    kind: provider
+    description: "Omniticket's Eventbrite, under any PHP host: an organization's events with their ticket classes, price range and availability, the attendees of an event (incrementally), and a ticket's barcode checked among them - read only, through Eventbrite's API v3."
+    license: MIT
+    keywords:
+      - eventbrite
+      - ticketing
+      - tickets
+      - events
+      - attendees
+      - check-in
+      - framework-agnostic
+      - omniticket
+    repository: glitchr-studio/omniticket-eventbrite
+    branch: 1.x
+    requires:
+      - omniscient/omniticket
+    verification: partial
+    verification_note: "- Not verified live: no Eventbrite token was used; the response shapes were not re-read on 2026-10-24 (the documentation's pages render them in the browser)."
+  omniticket/helloasso:
+    kind: provider
+    description: "Omniticket's HelloAsso, under any PHP host: an association's event forms with their tiers, the registrations of an event, and a ticket's QR code checked among them - read only, through HelloAsso's API v5 (OAuth2 client credentials)."
+    license: MIT
+    keywords:
+      - helloasso
+      - association
+      - ticketing
+      - tickets
+      - events
+      - attendees
+      - framework-agnostic
+      - omniticket
+    repository: glitchr-studio/omniticket-helloasso
+    branch: 1.x
+    requires:
+      - omniscient/omniticket
+    verification: partial
+    verification_note: '- Not verified live: no HelloAsso account or sandbox was used.'
+  omniticket/ticketmaster:
+    kind: provider
+    description: "Omniticket's Ticketmaster, under any PHP host: public events from the Discovery API (dates, venue, price range, sale status, the purchase link) - a catalogue, read only."
+    license: MIT
+    keywords:
+      - ticketmaster
+      - discovery-api
+      - events
+      - concerts
+      - tickets
+      - framework-agnostic
+      - omniticket
+    repository: glitchr-studio/omniticket-ticketmaster
+    branch: 1.x
+    requires:
+      - omniscient/omniticket
+    verification: partial
+    verification_note: '- Not verified live: no Ticketmaster key was used.'
+  omniticket/weezevent:
+    kind: provider
+    description: "Omniticket's Weezevent, under any PHP host: an organizer's events with their rates (categories flattened), sessions and sales period, the participants of an event (incrementally), and a ticket's barcode checked at the door - read only, through Weezevent's API (api.weezevent.com)."
+    license: MIT
+    keywords:
+      - weezevent
+      - ticketing
+      - tickets
+      - events
+      - attendees
+      - check-in
+      - framework-agnostic
+      - omniticket
+    repository: glitchr-studio/omniticket-weezevent
+    branch: 1.x
+    requires:
+      - omniscient/omniticket
+    verification: partial
+    verification_note: '- Verified live (docker compose run --rm omniticket live, 2026-10-24): GET /event/categories, no key - the host and the JSON as read. — Not verified: whether a very large participant list is cut without paging (max and page are documented without their base).'

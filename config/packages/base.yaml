@@ -49,8 +49,8 @@ base:
     use_custom: true
   
   parameter_bag:
-    use_hot_bag: true
-    use_setting_bag: true
+    use_hot_bag: false
+    use_setting_bag: false
 
   router:
     use_custom: true
@@ -81,7 +81,7 @@ base:
     use_form2: true
     use_bootstrap: true
 
-    default_path: '%kernel.project_dir%/vendor/glitchr/omnibase/templates'
+    default_path: '%kernel.project_dir%/vendor/omniscient/omnibase/templates'
     form_themes:
         - '@Base/form/form_div_layout.html.twig'
 

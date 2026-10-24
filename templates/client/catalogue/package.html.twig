@@ -1,30 +1,19 @@
 {#
- # A package: what its repository says of it (description, licence, branch,
- # what it requires), where it stands (its registry, whether its README says
- # it was tried for real - with the README's own sentence), its versions read
- # in its repository (git/git-bundle), and its manual: the versions, the contents.
+ # A package: what its catalogue entry says of it (description, licence,
+ # branch, what it requires), whether its README says it was tried for real -
+ # with the README's own sentence -, and its manual: the series, the contents.
  #}
 {% extends 'layout1.html.twig' %}
-
-{% macro nodes(pages, manual, version) %}
-    {% import _self as self %}
-    <ul>
-        {% for node in pages %}
-        <li>{% if node.isSection %}<span>{{ node.title }}</span>{% else %}<a href="{{ path('wikidoc_manual', {path: manual.urlPath(version.name, node.path)}) }}">{{ node.title }}</a>{% endif %}{% if node.children %}{{ self.nodes(node.children, manual, version) }}{% endif %}</li>
-        {% endfor %}
-    </ul>
-{% endmacro %}
 
 {% block title %}{{ package.name }}{% endblock %}
 {% block description %}{{ package.description ?? package.name }}{% endblock %}
 
 {% block content %}
-{% set registry = package.npm ? 'npm' : 'Packagist' %}
 <div class="om-wrap om-page">
     <header class="om-head is-page">
         <p class="om-cote">
             <a href="{{ path('app_packages') }}">{{ '@messages.catalogue.title'|trans }}</a>
-            {% if own %} / <a href="{{ path('app_family', {family: package.family}) }}">Omni{{ family_suffix(package.family) }}</a>{% endif %}
+            {% if family and family.hasPage %} / <a href="{{ path('app_family', {family: family.name}) }}">Omni{{ family.suffix }}</a>{% endif %}
             / {{ ('@messages.floors.' ~ package.tier.value ~ '.one')|trans }}
         </p>
         <h1 class="om-package-title"><span>{{ package.npm ? '@' }}{{ package.vendor }}/</span>{{ package.shortName }}</h1>
@@ -33,20 +22,13 @@
 
         <div class="om-install">
             <code data-copy-source>{{ package.installCommand }}</code>
-            {% if package.published is same as(false) %}<p class="om-install-note">{{ '@messages.package.not_published'|trans({registry: registry}) }}</p>{% endif %}
+            <p class="om-install-note">{{ '@messages.package.dev_branch'|trans }}</p>
         </div>
 
         <div class="om-actions">
-            {% if manual %}<a class="om-button" href="{{ path('wikidoc_manual', {path: manual.urlPath()}) }}">{{ '@messages.package.read_manual'|trans }}</a>{% endif %}
+            {% if manual %}<a class="om-button" href="{{ path('app_manual', {key: manual.key, series: manual.default}) }}">{{ '@messages.package.read_manual'|trans }}</a>{% endif %}
             {% if package.repositoryUrl %}<a class="om-button is-line" href="{{ package.repositoryUrl }}" rel="noopener">{{ '@messages.package.repository'|trans }}</a>{% endif %}
-            {% if app.user %}
-            <form method="post" action="{{ path('app_package_follow', {vendor: package.vendor, name: package.shortName}) }}" class="om-follow">
-                <input type="hidden" name="_token" value="{{ csrf_token('follow-' ~ package.id) }}">
-                <button type="submit" class="om-button is-line{{ following ? ' is-on' }}" aria-pressed="{{ following ? 'true' : 'false' }}"><i class="fa-{{ following ? 'solid' : 'regular' }} fa-bell" aria-hidden="true"></i> {{ (following ? '@messages.package.following' : '@messages.package.follow')|trans }}</button>
-            </form>
-            {% else %}
-            <a class="om-button is-line" href="{{ path('security_login') }}"><i class="fa-regular fa-bell" aria-hidden="true"></i> {{ '@messages.package.follow'|trans }}</a>
-            {% endif %}
+            <a class="om-button is-line" href="{{ package.registryUrl }}" rel="noopener">{{ package.registry }}</a>
         </div>
     </header>
 
@@ -54,23 +36,10 @@
         <section class="om-sheet" aria-labelledby="om-sheet-title">
             <h2 id="om-sheet-title" class="om-cote">{{ '@messages.package.sheet'|trans }}</h2>
             <dl>
-                <div><dt>{{ '@messages.package.floor'|trans }}</dt><dd>{{ ('@messages.floors.' ~ package.tier.value ~ '.one')|trans }}{% if own and own != package %} · <a href="{{ path('app_family', {family: package.family}) }}">Omni{{ family_suffix(package.family) }}</a>{% endif %}</dd></div>
+                <div><dt>{{ '@messages.package.floor'|trans }}</dt><dd>{{ ('@messages.floors.' ~ package.tier.value ~ '.one')|trans }}{% if family and family.hasPage and family.own != package %} · <a href="{{ path('app_family', {family: family.name}) }}">Omni{{ family.suffix }}</a>{% endif %}</dd></div>
                 <div><dt>{{ '@messages.package.license'|trans }}</dt><dd>{{ package.license ?? '—' }}</dd></div>
                 <div><dt>{{ '@messages.package.branch'|trans }}</dt><dd>{% if package.branch %}<code>{{ package.branch }}</code>{% else %}—{% endif %}</dd></div>
-                <div><dt>{{ '@messages.package.repository'|trans }}</dt><dd>{% if package.repositoryUrl %}<a href="{{ package.repositoryUrl }}" rel="noopener">{{ package.repositoryUrl|replace({'https://': ''}) }}</a>{% else %}—{% endif %}</dd></div>
-                <div>
-                    <dt>{{ registry }}</dt>
-                    <dd>
-                        {% if package.published is same as(true) %}
-                            <a href="{{ package.registryUrl }}" rel="noopener">{{ '@messages.package.published'|trans }}</a>{% if package.publishedVersion %} · <code>{{ package.publishedVersion }}</code>{% endif %}{% if package.downloads is not null %} · {{ '@messages.package.downloads'|trans({count: package.downloads}) }}{% endif %}
-                        {% elseif package.published is same as(false) %}
-                            {{ '@messages.state.absent'|trans({registry: registry}) }}
-                        {% else %}
-                            {{ '@messages.state.unknown'|trans({registry: registry}) }}
-                        {% endif %}
-                        {% if package.registryCheckedAt %}<small>{{ '@messages.state.asked_on'|trans({date: package.registryCheckedAt|format_date('medium')}) }}</small>{% endif %}
-                    </dd>
-                </div>
+                <div><dt>{{ '@messages.package.repository'|trans }}</dt><dd>{% if package.repositoryUrl %}<a href="{{ package.repositoryUrl }}" rel="noopener">{{ package.repository }}</a>{% else %}—{% endif %}</dd></div>
                 <div>
                     <dt>{{ '@messages.package.verified'|trans }}</dt>
                     <dd>
@@ -79,9 +48,7 @@
                     </dd>
                 </div>
                 {% if package.keywords %}<div><dt>{{ '@messages.package.keywords'|trans }}</dt><dd class="om-keywords">{% for keyword in package.keywords %}<span>{{ keyword }}</span>{% endfor %}</dd></div>{% endif %}
-                <div><dt>{{ '@messages.package.followers'|trans }}</dt><dd>{{ followers }}</dd></div>
             </dl>
-            <p class="om-source">{{ '@messages.package.read_on'|trans({date: package.syncedAt|format_datetime('medium', 'short')}) }}</p>
         </section>
 
         <div class="om-package-main">
@@ -89,16 +56,12 @@
                 <header><h2>{{ '@messages.package.manual'|trans }}</h2></header>
                 {% if manual %}
                 <p class="om-manual-versions">
-                    {{ '@messages.package.versions'|trans({count: manual.versions|length}) }}
-                    {% for v in manual.versions %}<a href="{{ path('wikidoc_manual', {path: manual.urlPath(v.name)}) }}"{% if version and v.name == version.name %} aria-current="true"{% endif %}>{{ v.name }}</a>{% endfor %}
-                    <span>{{ '@messages.package.pages'|trans({count: pages}) }}</span>
+                    {{ '@messages.package.versions'|trans({count: manual.series|length}) }}
+                    {% for s in manual.series %}<a href="{{ path('app_manual', {key: manual.key, series: s}) }}"{% if s == manual.default %} aria-current="true"{% endif %}>{{ s }}</a>{% endfor %}
                 </p>
-                {% import _self as self %}
-                <nav class="om-contents" aria-label="{{ '@messages.package.contents'|trans }}">
-                    {% if home %}<ul><li><a href="{{ path('wikidoc_manual', {path: manual.urlPath(version.name)}) }}">{{ '@wikidoc.manual.home'|trans }}</a></li></ul>{% endif %}
-                    {{ self.nodes(tree, manual, version) }}
-                </nav>
-                {% if package.docPages == 0 %}<p class="om-note">{{ '@messages.package.readme_only'|trans }}</p>{% endif %}
+                {% if tree %}
+                <div class="om-contents">{% include 'partials/_doc_tree.html.twig' with {series: manual.default, current: null, home: true} %}</div>
+                {% endif %}
                 {% else %}
                 <p class="om-none">{{ '@messages.package.no_manual'|trans }}</p>
                 {% endif %}
@@ -117,38 +80,6 @@
                 {% endif %}
             </section>
             {% endif %}
-
-            <section class="om-tier" id="versions">
-                <header><h2>{{ '@messages.versions.title'|trans }}</h2><p>{{ '@messages.versions.lead'|trans }}</p></header>
-                {% if versions.read %}
-                <dl class="om-constraints">
-                    <div><dt>{{ '@messages.versions.constraint_stable'|trans }}</dt><dd><code>{{ versions.constraint('stable') ?? '—' }}</code></dd></div>
-                    <div><dt>{{ '@messages.versions.constraint_dev'|trans }}</dt><dd><code>{{ versions.constraint('dev') ?? '—' }}</code></dd></div>
-                </dl>
-                <h3 class="om-cote">{{ '@messages.versions.tags'|trans }}</h3>
-                {% if versions.tags %}
-                <ul class="om-tags">{% for tag in versions.tags %}<li><code>{{ tag.name }}</code>{% if tag.date %} <time datetime="{{ tag.date|date('Y-m-d') }}">{{ tag.date|format_date('medium') }}</time>{% endif %}</li>{% endfor %}</ul>
-                {% else %}
-                <p class="om-none">{{ '@messages.versions.no_tag'|trans }}</p>
-                {% endif %}
-                <h3 class="om-cote">{{ '@messages.versions.branches'|trans }}</h3>
-                <ul class="om-branches">
-                    {% for branch in versions.branches %}
-                    <li>
-                        <p class="om-branch-head"><code>{{ branch.name }}</code> <code class="om-branch-version">{{ branch.version }}</code>{% if branch.default %} <span class="om-fact is-verified">{{ '@messages.versions.branch_default'|trans }}</span>{% endif %}</p>
-                        <ol class="om-commits">
-                            {% for commit in branch.commits %}
-                            <li><code>{{ commit.sha }}</code> <time datetime="{{ commit.date|date('c') }}">{{ commit.date|format_date('short') }}</time> <span title="{{ commit.subject }}">{{ commit.subject|length > 120 ? commit.subject|slice(0, 120) ~ '…' : commit.subject }}</span></li>
-                            {% endfor %}
-                        </ol>
-                    </li>
-                    {% endfor %}
-                </ul>
-                {% else %}
-                <p class="om-none">{{ '@messages.versions.unread'|trans }}{% if package.publishedVersion %} <code>{{ package.publishedVersion }}</code>{% endif %}</p>
-                {% endif %}
-                {% if not package.npm %}<p><a class="om-more" href="{{ path('app_install', {framework: package.tier.value in ['foundation', 'component'] ? 'symfony' : 'bare'}|merge(install_params(package))) }}">{{ '@messages.versions.install'|trans }}</a></p>{% endif %}
-            </section>
         </div>
     </div>
 </div>

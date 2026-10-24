@@ -1,0 +1,134 @@
+# The website: built statically by omnibridge/static, never deployed from here.
+#
+#   pull request  tests, the whole site built, uploaded as an artifact: the preview
+#   main          the same, plus a second build compared with the first (deterministic),
+#                 smoke tests in headless Chrome over a plain static server, and the
+#                 sitemap, the search indexes and the feeds checked
+#
+# Hosting is a separate decision: the artifact of a main build is what a deployment
+# would publish (omnibridge-static.json lists every file's checksum).
+name: website
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: website-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  # The static site's public origin (canonical links, sitemap, feeds): a repository
+  # variable once the host is chosen.
+  SITE_URL: ${{ vars.SITE_URL || 'http://localhost:8135' }}
+  # No session, no form, no signed value on a static site: the kernel only needs one to boot.
+  APP_SECRET: static-site-build-not-a-secret
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - uses: shivammathur/setup-php@bf6b4fbd49ca58e4608c9c89fba0b8d90bd2a39f # 2.35.5
+        with:
+          php-version: '8.4'
+          extensions: bcmath, ctype, curl, dom, exif, ftp, gd, iconv, igbinary, imagick, intl, mbstring, pdo_sqlite, sodium, sqlite3, xml, xsl, zip
+          ini-values: memory_limit=2G
+          coverage: none
+          tools: composer:v2
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '22'
+          cache: yarn
+
+      - name: Composer cache
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
+        with:
+          path: ~/.cache/composer
+          key: composer-${{ hashFiles('composer.lock') }}
+          restore-keys: composer-
+
+      - name: Install
+        run: |
+          composer install --no-interaction --no-progress --prefer-dist
+          yarn install --frozen-lockfile
+
+      - name: Validate
+        run: |
+          composer validate --no-check-publish
+          php bin/console lint:container
+          php bin/console lint:twig templates
+          php bin/console lint:yaml config catalog translations --parse-tags
+
+      - name: Tests
+        run: php vendor/bin/phpunit
+
+      # Each package's docs/ at the commit config/documentation.yaml pins: a ref never
+      # changes, so what was fetched is kept from one run to the next.
+      - name: Documentation cache
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
+        with:
+          path: var/docs
+          key: docs-${{ hashFiles('config/documentation.yaml') }}
+          restore-keys: docs-
+
+      - name: Build
+        run: bin/omnibridge-static build --out=dist
+
+      - name: Build again, same files
+        if: github.event_name != 'pull_request'
+        run: |
+          bin/omnibridge-static build --out=dist-again --skip-assets
+          cmp dist/omnibridge-static.json dist-again/omnibridge-static.json
+          diff -r dist dist-again
+          rm -rf dist-again
+
+      - name: Sitemap, search and feeds
+        run: |
+          python3 - <<'EOF'
+          import json, xml.etree.ElementTree as ET
+          ns = {'s': 'http://www.sitemaps.org/schemas/sitemap/0.9', 'x': 'http://www.w3.org/1999/xhtml'}
+          urls = ET.parse('dist/sitemap.xml').getroot().findall('s:url', ns)
+          alternates = sum(len(u.findall('x:link', ns)) for u in urls)
+          assert len(urls) > 500 and alternates > 0, (len(urls), alternates)
+          for index in ('dist/search.json', 'dist/fr/search.json'):
+              entries = json.load(open(index))['entries']
+              kinds = {e['k'] for e in entries}
+              assert {'guide', 'news', 'doc', 'family', 'provider'} <= kinds, (index, kinds)
+          for feed in ('dist/news/feed.atom', 'dist/news/feed.rss', 'dist/fr/actualites/feed.atom', 'dist/fr/actualites/feed.rss'):
+              ET.parse(feed)
+          manifest = json.load(open('dist/omnibridge-static.json'))
+          errors = [d for d in manifest['diagnostics'] if d['level'] != 'notice']
+          assert not errors, errors
+          print(f"{len(urls)} addresses in the sitemap ({alternates} language alternates), {len(manifest['pages'])} pages, {len(manifest['files'])} files")
+          EOF
+
+      - name: Smoke tests in headless Chrome
+        if: github.event_name != 'pull_request'
+        run: |
+          docker run -d --name static -p 8135:80 -v "$PWD/dist:/srv/static:ro" -v "$PWD/tests/smoke/nginx.conf:/etc/nginx/conf.d/default.conf:ro" nginx:1.27-alpine
+          for _ in $(seq 1 30); do curl -fs http://localhost:8135/ >/dev/null && break; sleep 1; done
+          node tests/smoke/chrome.mjs http://localhost:8135 smoke-shots
+
+      - name: Upload the site
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: website-${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.number) || github.sha }}
+          path: dist
+          retention-days: ${{ github.event_name == 'pull_request' && 14 || 90 }}
+
+      - name: Upload the smoke tests' screenshots
+        if: always() && github.event_name != 'pull_request'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: smoke-shots-${{ github.sha }}
+          path: smoke-shots
+          if-no-files-found: ignore

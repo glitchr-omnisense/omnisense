@@ -1,14 +1,15 @@
 import { Controller } from '@hotwired/stimulus';
 
 /*
- * The package search (templates/client/catalogue/index.html.twig). The form
- * is a plain GET form and works without this file. With it the rows are
+ * The package search (templates/client/catalogue/index.html.twig). Every
+ * row is in the page; with this file the rows are
  * narrowed as one types, without asking the server: every row is on the
  * page, each with the haystack App\Catalogue\PackageSearch searches (name,
  * family, description, keywords; lower case, without accents), and scored
  * as it scores - each word has to be found, a word in the name counts more,
  * the exact short name most; without words, the order of the floors. The
- * address bar follows, so a search can be shared.
+ * address's fragment follows (#q=...), so a search can be shared: a static
+ * host answers the same page whatever the query, the fragment is the page's.
  */
 export default class extends Controller {
     static targets = ['q', 'family', 'list', 'count', 'send'];
@@ -17,6 +18,16 @@ export default class extends Controller {
     connect() {
         this.sendTarget.hidden = true;
         this.rows = [...this.listTarget.children];
+        // The page is static: a shared address's question (#q=...&family=...&kind=..., or the same as a query) is read here.
+        const params = new URLSearchParams(location.hash.length > 1 ? location.hash.slice(1) : location.search);
+        if (params.has('q')) this.qTarget.value = params.get('q');
+        if (params.has('family')) this.familyTarget.value = params.get('family');
+        const kind = params.get('kind');
+        if (kind) {
+            const radio = this.element.querySelector(`input[name="kind"][value="${CSS.escape(kind)}"]`);
+            if (radio) radio.checked = true;
+        }
+        if (params.toString()) this.apply();
     }
 
     filter() {
@@ -47,7 +58,7 @@ export default class extends Controller {
         if (family) params.set('family', family);
         if (kind) params.set('kind', kind);
         const query = params.toString();
-        history.replaceState(history.state, '', this.urlValue + (query ? '?' + query : ''));
+        history.replaceState(history.state, '', this.urlValue + (query ? '#' + query : ''));
     }
 }
 

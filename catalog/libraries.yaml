@@ -1,0 +1,36 @@
+# The libraries entry of the Omniscient catalogue. Written by `bin/console
+# app:catalog:import` from the packages' repositories; the phrase and the
+# text are the site's own, edited here. Each package: its kind, what its
+# composer.json says, its GitHub repository and development branch, whether
+# its README says it was verified against the real service, whether it has
+# a docs/ folder (see config/documentation.yaml).
+family: libraries
+phrase:
+  en: "The house's JavaScript libraries, without dependency."
+  fr: 'Les bibliothèques JavaScript de la maison, sans dépendance.'
+packages:
+  '@glitchr/flowjs':
+    kind: library
+    description: 'Navigation without page loads, sticky scroll effects, scroll stops, sortable lists, AJAX channels, cookies and consent - one library, one module per feature'
+    license: MIT
+    repository: glitchr-studio/flowjs
+    branch: master
+    verification: unstated
+    docs: true
+  '@glitchr/graphjs':
+    kind: library
+    description: 'A layered directed graph you can drag and zoom: HTML nodes, SVG links, no dependency'
+    license: MIT
+    keywords:
+      - graph
+      - dag
+      - tree
+      - 'family tree'
+      - pipeline
+      - layout
+      - pan
+      - zoom
+    repository: glitchr-studio/graphjs
+    branch: main
+    verification: unstated
+    docs: true

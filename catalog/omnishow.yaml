@@ -1,0 +1,18 @@
+# The omnishow entry of the Omniscient catalogue. Written by `bin/console
+# app:catalog:import` from the packages' repositories; the phrase and the
+# text are the site's own, edited here. Each package: its kind, what its
+# composer.json says, its GitHub repository and development branch, whether
+# its README says it was verified against the real service, whether it has
+# a docs/ folder (see config/documentation.yaml).
+family: omnishow
+phrase:
+  en: 'Play a video hosted elsewhere.'
+  fr: 'Jouer une vidéo hébergée ailleurs.'
+packages:
+  omnishow/youtube:
+    kind: provider
+    description: 'Reserved, not released yet: YouTube for glitchr/omnishow, the family for video sources hosted elsewhere.'
+    license: MIT
+    repository: glitchr-studio/omnishow-youtube
+    branch: 1.x
+    verification: unstated

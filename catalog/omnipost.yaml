@@ -1,0 +1,57 @@
+# The omnipost entry of the Omniscient catalogue. Written by `bin/console
+# app:catalog:import` from the packages' repositories; the phrase and the
+# text are the site's own, edited here. Each package: its kind, what its
+# composer.json says, its GitHub repository and development branch, whether
+# its README says it was verified against the real service, whether it has
+# a docs/ folder (see config/documentation.yaml).
+family: omnipost
+phrase:
+  en: 'Publish on the social networks.'
+  fr: 'Publier sur les réseaux sociaux.'
+text:
+  en: "One contract for publishing - a reel, a picture, a carousel -, reading one's own feed, and knowing what each network imposes."
+  fr: 'Un seul contrat pour publier — un reel, une photo, un carrousel —, lire son propre fil, et connaître ce que chaque réseau impose.'
+packages:
+  omnipost/instagram:
+    kind: provider
+    description: "Omnipost Instagram: the account's feed, the publication of pictures, carousels and reels, and the long-lived token's refresh, through the Instagram API with Instagram Login."
+    license: MIT
+    keywords:
+      - social
+      - instagram
+      - reels
+      - omnipost
+    repository: glitchr-studio/omnipost-instagram
+    branch: 1.x
+    requires:
+      - omniscient/omnipost
+    verification: unstated
+  omnipost/youtube:
+    kind: provider
+    description: "Omnipost YouTube: the channel's videos through the Data API (a key), and Shorts uploaded through OAuth."
+    license: MIT
+    keywords:
+      - social
+      - youtube
+      - shorts
+      - omnipost
+    repository: glitchr-studio/omnipost-youtube
+    branch: 1.x
+    requires:
+      - omniscient/omnipost
+    verification: unstated
+  omniscient/omnipost:
+    kind: family
+    description: "Omnipost: one contract for publishing a post - a reel, a picture, a carousel - on the social networks, reading one's own feed, and the capabilities each network imposes - and its Symfony bundle."
+    license: MIT
+    keywords:
+      - social
+      - publishing
+      - instagram
+      - youtube
+      - reels
+      - omnipost
+    repository: glitchr-studio/omnipost
+    branch: 1.x
+    verification: unstated
+    docs: true

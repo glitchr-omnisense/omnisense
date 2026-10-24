@@ -1,474 +1,304 @@
 site:
-  slogan: "Les paquets Omni et leur documentation"
-  description: "Omniscient présente l’écosystème Omni — le socle (le cœur omnibase, les familles et leurs fournisseurs, les ponts) et des structures toutes prêtes, facultatives — et publie la documentation de chaque paquet, lue dans son dépôt."
-  keywords: "omnibase, omnitrade, omnibus, Symfony, PHP, paquets, documentation, Glitch Art"
-
+  slogan: Les paquets Omni et leur documentation
+  description: Omniscient présente l’écosystème Omni — le socle (le cœur omnibase, les familles et leurs fournisseurs, les ponts) et des structures toutes prêtes, facultatives — et publie la documentation de chaque paquet, lue dans son dépôt.
+  keywords: omnibase, omnitrade, omnibus, Symfony, PHP, paquets, documentation, Glitch Art
 offline:
-  title: "Vous êtes hors ligne"
-  message: "Vérifiez votre connexion et réessayez."
-  retry: "Réessayer"
-
+  title: Vous êtes hors ligne
+  message: Vérifiez votre connexion et réessayez.
+  retry: Réessayer
 nav:
-  skip: "Aller au contenu"
-  label: "Le site"
-  menu: "Menu"
-  packages: "Paquets"
-  docs: "Documentation"
-  install: "Installer"
-  blog: "Annonces"
-  support: "Soutenir"
-  languages: "Langue"
-  theme: "Clair ou sombre"
-  access: "Accès"
-  account: "Compte"
-  admin: "Administration"
-  logout: "Se déconnecter"
-
+  skip: Aller au contenu
+  label: Le site
+  menu: Menu
+  packages: Paquets
+  docs: Documentation
+  blog: Annonces
+  support: Soutenir
+  languages: Langue
+  theme: Clair ou sombre
+  search: Recherche
 footer:
-  what: "L’écosystème Omni, paquet par paquet : ce que chacun fait, où il en est, et son manuel, lu dans son dépôt."
-  plan: "Plan"
-  sources: "Les paquets"
-  feed: "Annonces · flux RSS"
-  site: "Le site"
-  legal: "Mentions légales"
-  privacy: "Confidentialité"
-  cookies: "Cookies"
-
+  what: 'L’écosystème Omni, paquet par paquet : ce que chacun fait, où il en est, et son manuel, lu dans son dépôt.'
+  plan: Plan
+  sources: Les paquets
+  feed: Annonces · flux RSS
+  site: Le site
+  legal: Mentions légales
+  privacy: Confidentialité
 home:
-  title: "Omniscient : l’écosystème Omni et sa documentation"
-  kicker: "Un préfixe, plusieurs familles"
-  kicker_count: "{packages} paquets · {families} familles"
-  families_label: "Les familles"
-  empty: "Le catalogue n’a pas encore été lu dans les dépôts."
-  to_catalogue: "Le catalogue"
-  to_docs: "La documentation"
-  families_eyebrow: "Les familles"
-  families_title: "Un contrat par domaine, un paquet par service"
-  families_lead: "Une famille écrit une fois ce qu’un domaine demande aux services du dehors - tarifs et étiquettes pour les colis, paiements et remboursements pour le commerce - et chaque fournisseur le remplit pour un service. Changer de service, c’est changer une ligne de configuration."
-  providers: "{count, plural, =0 {aucun fournisseur} one {# fournisseur} other {# fournisseurs}}"
-  read_eyebrow: "Lire"
-  read_title: "Chaque paquet a son manuel"
-  read_lead: "Les manuels sont les fichiers Markdown de chaque dépôt, tels qu’ils y sont écrits : une version par branche, un lien vers le fichier pour le corriger."
-  search_label: "Chercher dans tous les manuels"
-  search_submit: "Chercher"
-  figure_packages: "paquets au catalogue"
-  figure_manuals: "manuels publiés"
-  figure_families: "familles"
-  to_support: "Soutenir"
-  news: "Annonces"
-  all_news: "Toutes les annonces"
-  no_news: "Aucune annonce pour l’instant."
-  search_placeholder: "webhook, MockHttpClient, make build…"
-  tags_label: "Les familles, une étiquette chacune"
-  bridges_eyebrow: "omnibridge"
-  bridges_title: "Un pont par cadre, pas un par structure"
-  bridges_lead: "Le cœur et ses structures ne connaîtront aucun cadre. Un pont les relie toutes d’un coup à Symfony, à Doctrine, à Twig, à React - une colle générique qui ne connaît aucune structure. Un autre cadre, c’est un pont de plus, pas chaque structure à réécrire."
-  bridge_found: "Au catalogue"
-  bridge_planned: "Prévu"
-  bridge_symfony: "Conteneur, routage, formulaires, sécurité."
-  bridge_doctrine: "Le stockage : Doctrine tient seul."
-  bridge_twig: "Le rendu : Twig tient seul."
-  bridge_composer: "L’installation ; aujourd’hui glitchr/base-plugin."
-  bridge_laravel: "Quand quelqu’un s’en servira."
-  bridge_react: "Les pages en composants React, depuis n’importe quel cadre."
-  announced: "Annoncées, pas encore écrites :"
-
+  title: 'Omniscient : l’écosystème Omni et sa documentation'
+  kicker: Un préfixe, plusieurs familles
+  kicker_count: '{packages} paquets · {families} familles'
+  families_label: Les familles
+  empty: Le catalogue n’a pas encore été lu dans les dépôts.
+  to_catalogue: Le catalogue
+  to_docs: La documentation
+  families_eyebrow: Les familles
+  families_title: Un contrat par domaine, un paquet par service
+  families_lead: Une famille écrit une fois ce qu’un domaine demande aux services du dehors - tarifs et étiquettes pour les colis, paiements et remboursements pour le commerce - et chaque fournisseur le remplit pour un service. Changer de service, c’est changer une ligne de configuration.
+  providers: '{count, plural, =0 {aucun fournisseur} one {# fournisseur} other {# fournisseurs}}'
+  read_eyebrow: Lire
+  read_title: Chaque paquet a son manuel
+  read_lead: 'Les manuels sont les fichiers Markdown de chaque dépôt, tels qu’ils y sont écrits : une version par branche, un lien vers le fichier pour le corriger.'
+  search_label: Chercher dans tous les manuels
+  search_submit: Chercher
+  figure_packages: paquets au catalogue
+  figure_manuals: manuels publiés
+  figure_families: familles
+  to_support: Soutenir
+  news: Annonces
+  all_news: Toutes les annonces
+  no_news: Aucune annonce pour l’instant.
+  search_placeholder: webhook, MockHttpClient, make build…
+  tags_label: Les familles, une étiquette chacune
+  bridges_eyebrow: omnibridge
+  bridges_title: Un pont par cadre, pas un par structure
+  bridges_lead: Le cœur et ses structures ne connaîtront aucun cadre. Un pont les relie toutes d’un coup à Symfony, à Doctrine, à Twig, à React - une colle générique qui ne connaît aucune structure. Un autre cadre, c’est un pont de plus, pas chaque structure à réécrire.
+  bridge_found: Au catalogue
+  bridge_planned: Prévu
+  bridge_symfony: Conteneur, routage, formulaires, sécurité.
+  bridge_doctrine: 'Le stockage : Doctrine tient seul.'
+  bridge_twig: 'Le rendu : Twig tient seul.'
+  bridge_composer: L’installation ; aujourd’hui glitchr/base-plugin.
+  bridge_laravel: Quand quelqu’un s’en servira.
+  bridge_react: Les pages en composants React, depuis n’importe quel cadre.
+  announced: 'Annoncées, pas encore écrites :'
 floors:
-  eyebrow: "Le socle"
-  title: "Le cœur, les familles, les ponts"
-  lead: "Ce que tout site peut prendre : omnibase, le cœur des sites ; les familles, un contrat par domaine, que leurs fournisseurs remplissent service par service ; les ponts, qui relient le tout à un cadre. Les fournisseurs ne sont pas listés ici : ils se cherchent."
-  packages: "{count, plural, one {paquet} other {paquets}}"
-  note: "Un site prend le socle, les familles qu’il appelle et les ponts de son cadre. Les structures préparées s’ajoutent si elles font gagner du temps : rien dans le socle ni dans les familles n’en dépend."
-  libraries: "S’y ajoutent <a href=\"{url}\">{count, plural, one {# bibliothèque JavaScript} other {# bibliothèques JavaScript}}</a>."
+  eyebrow: Le socle
+  title: Le cœur, les familles, les ponts
+  lead: 'Ce que tout site peut prendre : omnibase, le cœur des sites ; les familles, un contrat par domaine, que leurs fournisseurs remplissent service par service ; les ponts, qui relient le tout à un cadre. Les fournisseurs ne sont pas listés ici : ils se cherchent.'
+  packages: '{count, plural, one {paquet} other {paquets}}'
+  note: 'Un site prend le socle, les familles qu’il appelle et les ponts de son cadre. Les structures préparées s’ajoutent si elles font gagner du temps : rien dans le socle ni dans les familles n’en dépend.'
+  libraries: S’y ajoutent <a href="{url}">{count, plural, one {# bibliothèque JavaScript} other {# bibliothèques JavaScript}}</a>.
   foundation:
-    name: "Cœur"
-    one: "Cœur"
-    pattern: "glitchr/omnibase"
-    text: "Le cœur dont tout site part : comptes et sécurité, back-office, traductions, images, formulaires."
+    name: Cœur
+    one: Cœur
+    pattern: glitchr/omnibase
+    text: 'Le cœur dont tout site part : comptes et sécurité, back-office, traductions, images, formulaires.'
   component:
-    name: "Structures préparées"
-    one: "Structure préparée"
-    pattern: "omnibase/<métier>"
-    text: "Une structure toute prête pour un métier — entités, écrans, back-office, traductions, données de démonstration — déjà assemblée sur le socle. Facultative : la prendre pour aller vite, ou écrire la sienne sur le socle et les familles."
+    name: Structures préparées
+    one: Structure préparée
+    pattern: omnibase/<métier>
+    text: 'Une structure toute prête pour un métier — entités, écrans, back-office, traductions, données de démonstration — déjà assemblée sur le socle. Facultative : la prendre pour aller vite, ou écrire la sienne sur le socle et les familles.'
   family:
-    name: "Familles"
-    one: "Famille"
-    pattern: "omniscient/omni<domaine>"
-    text: "Le contrat d’un domaine - colis, paiements, registres publics, données scientifiques - en PHP nu, quel que soit le service derrière. Sous omniscient/, ou encore glitchr/ pour celles qui n’ont pas déménagé."
+    name: Familles
+    one: Famille
+    pattern: omniscient/omni<domaine>
+    text: Le contrat d’un domaine - colis, paiements, registres publics, données scientifiques - en PHP nu, quel que soit le service derrière. Sous omniscient/, ou encore glitchr/ pour celles qui n’ont pas déménagé.
   provider:
-    name: "Fournisseurs"
-    one: "Fournisseur"
-    pattern: "omni<domaine>/<service>"
-    text: "Un service qui remplit le contrat de sa famille : un paquet par service, à installer seul."
+    name: Fournisseurs
+    one: Fournisseur
+    pattern: omni<domaine>/<service>
+    text: 'Un service qui remplit le contrat de sa famille : un paquet par service, à installer seul.'
   bridge:
-    name: "Ponts"
-    one: "Pont"
-    pattern: "omnibridge/<cible>"
-    text: "La colle entre le socle et un cadre, un stockage ou une couche de rendu. Il ne connaît aucune structure : un pont les sert toutes."
+    name: Ponts
+    one: Pont
+    pattern: omnibridge/<cible>
+    text: 'La colle entre le socle et un cadre, un stockage ou une couche de rendu. Il ne connaît aucune structure : un pont les sert toutes.'
   library:
-    name: "Bibliothèques"
-    one: "Bibliothèque"
-    pattern: "@glitchr/<nom>"
-    text: "Les bibliothèques JavaScript de la maison, sans dépendance."
-  providers_count: "{count, plural, =0 {aucun fournisseur} one {# fournisseur à chercher} other {# fournisseurs à chercher}}"
-
-families:
-  omnibase:
-    phrase: "Le cœur des sites, et des structures toutes prêtes, facultatives."
-    text: "glitchr/omnibase est fait pour Symfony : comptes et sécurité, back-office, traductions, images, formulaires. Les structures préparées omnibase/<métier> y assemblent un métier d’avance ; elles sont facultatives : rien dans le socle ni dans les familles n’en dépend."
-  omnibus:
-    phrase: "Expédier un colis, quel que soit le transporteur."
-    text: "Un seul contrat pour les transporteurs : tarifs, étiquettes, suivi, points relais."
-  omnitrade:
-    phrase: "Encaisser et vendre, quel que soit le prestataire."
-    text: "Un seul contrat pour les prestataires de paiement et les plateformes de commerce : achat, autorisation, capture, remboursement, webhooks, commandes des plateformes."
-  omnistate:
-    phrase: "Demander aux registres publics ce qu’ils savent."
-    text: "Un seul contrat pour ce que savent les États et les registres : entreprises, numéros de TVA, noms de domaine et réseaux, et les registres que ses fournisseurs ajoutent."
-  omnibank:
-    phrase: "Lire un compte en banque."
-    text: "Un seul contrat pour l’accès bancaire : comptes, soldes, écritures, virements, consentements et webhooks, depuis des relevés en fichiers ou les interfaces des banques."
-  omnisong:
-    phrase: "Faire écouter le catalogue d’un musicien."
-    text: "Un seul contrat pour écouter un catalogue : disques, plages, extraits, les liens vers chaque plateforme, et les lecteurs qui les jouent."
-  omnipost:
-    phrase: "Publier sur les réseaux sociaux."
-    text: "Un seul contrat pour publier — un reel, une photo, un carrousel —, lire son propre fil, et connaître ce que chaque réseau impose."
-  omnifood:
-    phrase: "Recevoir les commandes et les réservations d’un restaurant."
-    text: "Un seul contrat pour les plateformes de restauration : commandes en livraison, réservations de table, cartes, établissements, webhooks."
-  omnischolar:
-    phrase: "Rassembler les publications d’un chercheur."
-    text: "Un seul contrat pour les publications : profils d’auteur, travaux, livres et leurs éditions, citations, lus dans plusieurs bases, fusionnés et dédoublonnés, exportés en BibTeX, RIS ou CSL-JSON."
-  omnilab:
-    phrase: "Lire ce que la science sait d’une chose, ou mesure en un lieu."
-    text: "Un seul contrat pour les API scientifiques publiques, quel que soit le domaine : une entité (un composé, une réaction, une structure cristalline, un matériau, une constante physique, un gène, une protéine et ses domaines, une structure de protéine, une voie biologique, une maladie, un variant génétique, une espèce, un astre, une galaxie, une exoplanète, un astéroïde ou une comète, un séisme, une éruption solaire, un lancement de fusée) avec ses propriétés, leurs unités et ses identifiants dans d’autres bases, suivis d’une base à l’autre ; une série (une variable mesurée en un lieu, ou à une station météo, hydrométrique ou marégraphique, sur une période : météo, climat, air, rivières, marées ; la course d’une planète ou d’une comète dans le ciel de ce lieu) ; les occurrences d’un lieu et d’une période (les relevés et observations d’une espèce, les séismes d’une région, les lancements d’un mois) ; un produit catalogué (une scène satellite ; un jeu de données ou la table d’un catalogue astronomique, trouvés par texte ; le fichier d’une demande, suivie jusqu’à ce qu’il soit prêt ; au sens de STAC). Ses sources, par domaine — chimie : PubChem, ChEBI, ChEMBL, KEGG (usage académique), les réactions biochimiques de Rhea, le résolveur d’identifiants chimiques du NCI/CADD (avec OPSIN pour les noms systématiques) ; cristaux et matériaux : la Crystallography Open Database, le Materials Project, l’OQMD ; physique : les constantes fondamentales du CODATA (NIST) ; gènes, protéines et maladies : UniProt, NCBI Gene, HGNC, Ensembl (avec les plantes, champignons et invertébrés d’Ensembl Genomes), RCSB PDB, InterPro et Pfam, la Gene Ontology (QuickGO), les interactions de protéines de STRING, Reactome, les cibles, maladies et médicaments d’Open Targets, ClinVar, le GWAS Catalog ; le vivant : NCBI Taxonomy, le Catalogue of Life (sur lequel GBIF bâtit sa taxonomie), GBIF, ITIS, iNaturalist, eBird (les oiseaux ; une clé au-delà de sa taxonomie), la Liste rouge de l'UICN (avec un jeton) ; la mer : OBIS et le World Register of Marine Species (WoRMS) ; les fossiles : la Paleobiology Database ; le ciel : SIMBAD, NED (galaxies et quasars), les catalogues VizieR du CDS, le catalogue Gaia DR3 de l’ESA, l’archive des exoplanètes de la NASA ; le système solaire : la base des petits corps du JPL, le Minor Planet Center, les éphémérides de JPL Horizons ; la Terre : les catalogues des séismes de l’USGS et de l’EMSC, Open-Meteo, la NOAA (les relevés des stations du NCEI, le National Weather Service), le Deutscher Wetterdienst (par Bright Sky), le Copernicus Data Space, les entrepôts de données climat et atmosphère de Copernicus (C3S, CAMS), NASA Earthdata, les altitudes (Open Topo Data) ; l’eau : les rivières et les puits de l’USGS, les marées et niveaux d’eau de la NOAA (CO-OPS) ; l’air : les mesures d’OpenAQ (avec une clé) ; la météo de l’espace : le Space Weather Prediction Center de la NOAA (les aurores, l’indice Kp, le vent solaire), les événements DONKI de la NASA (éruptions, éjections de masse coronale, tempêtes) ; le spatial : les lancements de Launch Library 2 ; et Wikidata pour tous."
-  omnilex:
-    phrase: "Lire les sources du droit."
-    text: "Un seul contrat pour les sources du droit : textes, codes et jurisprudence, cherchés avec des filtres, lus dans leur version en vigueur à une date ; identifiants normalisés et validés (ECLI, NOR, CELEX)."
-  omnimeet:
-    phrase: "Ouvrir une salle de visio et y faire entrer quelqu’un."
-    text: "Un seul contrat pour la visioconférence : ouvrir une salle, y faire entrer un participant, la fermer, lire son état — que l’appel passe de navigateur à navigateur ou par un service de conférence."
-  omnishield:
-    phrase: "Garder un formulaire : captcha, pourriel, adresses connues pour abus."
-    text: "Un seul contrat pour garder un formulaire : ce jeton est-il valable (ALTCHA, Turnstile, reCAPTCHA), ce texte est-il un pourriel (Akismet), cette adresse est-elle connue pour abus (StopForumSpam, domaines jetables) — quel que soit celui qui répond ; un champ de formulaire et une contrainte côté Symfony."
-  omnishow:
-    phrase: "Jouer une vidéo hébergée ailleurs."
-  omnisign:
-    phrase: "Faire signer un document."
-    text: "Un seul contrat pour faire signer : créer une enveloppe (documents, signataires, champs, niveau simple, avancé ou qualifié), l’envoyer, la suivre, relancer, annuler, signer dans la page, télécharger les documents signés et leurs preuves — Yousign, DocuSign, DocuSeal."
-  omnibill:
-    phrase: "Transmettre et recevoir une facture électronique."
-    text: "Un seul contrat pour la facture électronique : déposer un fichier conforme (Factur-X, UBL, CII), suivre ses statuts, recevoir les factures des fournisseurs, déclarer un statut, chercher une entreprise dans l’annuaire, transmettre l’e-reporting — par courriel, une plateforme agréée (XP Z12-013) ou Chorus Pro."
-  omnireview:
-    phrase: "Lire ce que les clients disent ailleurs."
-    text: "Un seul contrat pour ce que les clients disent ailleurs : la note, les avis, la réponse de l’établissement, l’invitation à laisser un avis — Google, Tripadvisor, Trustpilot —, chaque plateforme avec ses conditions d’affichage ; l’origine, la date et le lien toujours montrés."
-  omniticket:
-    phrase: "Lire les billets vendus ailleurs."
-  omnireach:
-    phrase: "Lire ce que les outils extérieurs savent de l’audience d’un site."
-  omnifilm:
-    phrase: "Décrire une œuvre : film, série, épisode."
-  omnigame:
-    phrase: "Suivre un jeu sur les boutiques."
-  omnidns:
-    phrase: "Gérer un nom de domaine là où il est enregistré."
-
+    name: Bibliothèques
+    one: Bibliothèque
+    pattern: '@glitchr/<nom>'
+    text: Les bibliothèques JavaScript de la maison, sans dépendance.
+  providers_count: '{count, plural, =0 {aucun fournisseur} one {# fournisseur à chercher} other {# fournisseurs à chercher}}'
 catalogue:
-  eyebrow: "Catalogue"
-  title: "Les paquets"
-  description: "Les {count} paquets de l’écosystème Omni : le cœur, les familles et leurs fournisseurs, les ponts, les bibliothèques, et les structures préparées, facultatives."
-  lead: "{count, plural, =0 {Aucun paquet} one {# paquet} other {# paquets}}, étage par étage. Rien n’est saisi ici : chaque ligne est lue dans le dépôt du paquet, et son état sur son registre lui est demandé."
-  synced: "Dépôts lus le {date}. Registres : {published} publiés, {unpublished} absents{unknown, plural, =0 {} one {, # sans réponse} other {, # sans réponse}}."
-  never_synced: "Les dépôts n’ont pas encore été lus."
-  floors: "Les étages"
-  empty: "Le catalogue est vide : la commande app:packages:sync n’a pas encore lu les dépôts."
-  and_providers: "et leurs fournisseurs"
-  no_description: "Son dépôt ne le décrit pas."
-  manual: "Manuel"
-  announced_title: "Annoncées, pas encore écrites"
-  announced_lead: "Des noms posés pour qu’une même question n’ait pas deux familles. Aucun code, aucun paquet à installer : elles ne font pas partie du catalogue."
-  planned: "prévue"
-  reserved: "nom réservé"
-
+  eyebrow: Catalogue
+  title: Les paquets
+  description: 'Les {count} paquets de l’écosystème Omni : le cœur, les familles et leurs fournisseurs, les ponts, les bibliothèques, et les structures préparées, facultatives.'
+  lead: '{count, plural, =0 {Aucun paquet} one {# paquet} other {# paquets}}, étage par étage. Rien n’est saisi ici : chaque ligne est lue dans le dépôt du paquet, et son état sur son registre lui est demandé.'
+  floors: Les étages
+  and_providers: et leurs fournisseurs
+  no_description: Son dépôt ne le décrit pas.
+  manual: Manuel
+  curated: 'Tenu dans les fichiers catalog/ du site, lus dans chaque dépôt : {families} familles, {providers} fournisseurs, {documented} paquets avec un manuel.'
 state:
-  absent: "Absent de {registry}"
-  unknown: "{registry} n’a pas été interrogé"
-  asked_on: "{date}"
-  verified: "Vérifié en réel"
-  partial: "Vérifié en partie"
-  unverified: "Non vérifié en réel"
-  unstated: "Son README ne le dit pas"
-
+  verified: Vérifié en réel
+  partial: Vérifié en partie
+  unverified: Non vérifié en réel
+  unstated: Son README ne le dit pas
 family:
-  manual: "Lire son manuel"
-  own: "La famille"
-  own_foundation: "Le socle"
-  providers_lead: "Un paquet par service, à installer seul. Ce que chaque README dit de sa vérification est repris tel quel."
-  no_provider: "Aucun fournisseur n’a été trouvé dans les dépôts."
-
+  manual: Lire son manuel
+  own: La famille
+  own_foundation: Le socle
+  providers_lead: Un paquet par service, à installer seul. Ce que chaque README dit de sa vérification est repris tel quel.
+  no_provider: Aucun fournisseur n’a été trouvé dans les dépôts.
 package:
-  not_published: "Ce paquet n’est pas encore sur {registry} : la commande ne le trouvera pas tant qu’il n’y est pas soumis."
-  read_manual: "Lire le manuel"
-  repository: "Dépôt"
-  follow: "Suivre"
-  following: "Suivi"
-  sheet: "Fiche"
-  floor: "Étage"
-  license: "Licence"
-  branch: "Branche"
-  published: "publié"
-  downloads: "{count, plural, =0 {aucun téléchargement} one {# téléchargement} other {# téléchargements}}"
-  verified: "Vérifié en réel"
-  from_readme: "Extrait de son README"
-  keywords: "Mots-clés"
-  followers: "Suivi par"
-  read_on: "Lu dans son dépôt le {date}."
-  manual: "Manuel"
-  versions: "{count, plural, one {Version} other {Versions}}"
-  pages: "{count, plural, =0 {aucune page} one {# page} other {# pages}}"
-  contents: "Sommaire du manuel"
-  readme_only: "Ce paquet n’a pas de dossier docs/ : son manuel est son README."
-  no_manual: "Ce paquet n’a ni dossier docs/ ni README."
-  links: "Dépendances"
-  requires: "Il requiert"
-  required_by: "{count, plural, one {Requis par # paquet} other {Requis par # paquets}}"
-
+  read_manual: Lire le manuel
+  repository: Dépôt
+  sheet: Fiche
+  floor: Étage
+  license: Licence
+  branch: Branche
+  verified: Vérifié en réel
+  from_readme: Extrait de son README
+  keywords: Mots-clés
+  manual: Manuel
+  versions: '{count, plural, one {Version} other {Versions}}'
+  no_manual: Ce paquet n’a ni dossier docs/ ni README.
+  links: Dépendances
+  requires: Il requiert
+  required_by: '{count, plural, one {Requis par # paquet} other {Requis par # paquets}}'
+  dev_branch: 'Aucun paquet de l’écosystème n’a encore de version stable : la commande demande sa branche de développement.'
+  readme: README
 docs:
-  eyebrow: "Documentation"
-  count: "{manuals} manuels · {groups} familles et groupes"
-  description: "La documentation de l’écosystème Omni : {count} manuels, un par paquet, lus dans les dépôts."
-  lead: "{count, plural, one {# manuel} other {# manuels}}, un par paquet. La source est le Markdown du dossier docs/ de chaque dépôt : un crayon sur chaque page pour proposer une modification."
-  engine_typesense: "Recherche : Typesense."
-  engine_local: "Recherche : l’index des pages (le moteur de recherche est éteint)."
-  group_library: "Bibliothèques JavaScript"
-  group_other: "Autres"
-  readme_only: "README seul"
-  start_eyebrow: "Par où commencer"
-  start_title: "Démarrer"
-  start_lead: "Les pages qui valent pour tous les paquets : ce qu’ils sont, où ils tournent, ce qu’ils ont en commun, comment les corriger."
-  way_demarrer: "Le socle et les structures préparées, facultatives ; installer une famille ou le cœur en trois lignes."
-  way_compatibilite: "Ce qui tourne en PHP nu aujourd’hui, ce qui est fait pour Symfony, ce qui deviendra agnostique."
-  way_conventions: "Noms, versions et contraintes Composer, licence MIT, « vérifié en réel »."
-  way_contribuer: "Le crayon, la bifurcation, la demande de fusion ; écrire une page."
-  way_install: "Cadre, canal, ce qu’il vous faut : les commandes, le bloc composer.json, les bundles."
-  reference_eyebrow: "Référence"
-  reference_title: "Un manuel par paquet"
-  reference_lead: "Le dossier docs/ et le README de chaque dépôt, une version par branche. L’état de chaque paquet — publié, vérifié, ses versions — se lit dans <a href=\"{url}\">la recherche des paquets</a>."
-  contribute_eyebrow: "Contribuer"
-  contribute_title: "Corriger une page"
-  contribute_text: "Sur chaque page, le crayon « Proposer une modification » ouvre l’éditeur de GitHub sur le fichier Markdown, à la branche lue. Sans droit d’écriture, GitHub propose la bifurcation et la demande de fusion ; la page est corrigée ici à la lecture suivante du dépôt."
-  contribute_more: "Le parcours en détail"
-  pencil: "Proposer une modification"
-  pencil_title: "Ouvrir {file} dans l’éditeur de GitHub, sur la branche {branch}"
-
+  eyebrow: Documentation
+  count: '{manuals} manuels · {groups} familles et groupes'
+  description: 'La documentation de l’écosystème Omni : les guides qui valent pour tous les paquets, et {count} manuels, chacun lu dans le dépôt de son paquet à un commit épinglé.'
+  lead: Les guides d’abord ; puis {count, plural, one {# manuel} other {# manuels}}, un par paquet, lu dans le dossier docs/ de son dépôt au commit que le site épingle — un crayon sur chaque page pour proposer une correction.
+  group_library: Bibliothèques JavaScript
+  group_other: Autres
+  start_eyebrow: Par où commencer
+  start_title: Démarrer
+  start_lead: 'Les pages qui valent pour tous les paquets : ce qu’ils sont, où ils tournent, ce qu’ils ont en commun, comment les corriger.'
+  reference_eyebrow: Référence
+  reference_title: Un manuel par paquet
+  reference_lead: Le dossier docs/ de chaque paquet, lu à un commit immuable ; chaque paquet a sa propre série de versions. Où en est chaque paquet se lit dans <a href="{url}">la recherche des paquets</a>.
+  contribute_eyebrow: Contribuer
+  contribute_title: Corriger une page
+  contribute_text: Sur chaque page, le crayon « Proposer une correction » ouvre l’éditeur de GitHub sur le fichier Markdown, à la branche que suit la série. Sans droit d’écriture, GitHub propose la copie (fork) et la demande de fusion ; la page change ici quand son commit est épinglé à nouveau.
+  contribute_more: Le parcours en détail
+  pencil: Proposer une modification
+  pencil_title: Ouvrir {file} dans l’éditeur de GitHub, sur la branche {branch}
+  title: Documentation
+  none: Aucun manuel n’est déclaré dans config/documentation.yaml.
+  pages: '{count, plural, =0 {non récupéré} one {# page} other {# pages}}'
+  guides: Guides
+  group_libraries: Bibliothèques JavaScript
+  group_omnibridge: Ponts
 support:
-  eyebrow: "Soutenir"
-  title: "Soutenir les paquets"
-  description: "Soutenir l’écosystème Omni : GitHub Sponsors, et les autres façons d’aider."
-  lead: "Les {packages} paquets du catalogue sont du logiciel libre ; la licence de chacun est sur sa fiche. Les entretenir prend du temps : celui de les essayer contre les vrais services, de suivre leurs changements, d’écrire leurs manuels."
-  sponsor: "Soutenir {login} sur GitHub"
-  goal: "Objectif en cours"
-  tiers: "Paliers"
-  monthly: "par mois"
-  once: "une fois"
-  wall: "{count, plural, =0 {Aucun soutien pour l’instant} one {# soutien} other {# soutiens}}"
-  private: "{count, plural, one {# soutien préfère ne pas être nommé.} other {# soutiens préfèrent ne pas être nommés.}}"
-  no_sponsor: "La page est ouverte ; personne ne s’y est encore inscrit."
-  asked_on: "D’après GitHub, le {date}."
-  nodata: "Pas de données."
-  state:
-    unconfigured: "Ce site n’a pas de jeton GitHub : il n’a rien demandé à GitHub Sponsors, et ne sait pas si la page de {login} y est ouverte. Aucun palier, aucun objectif, aucun soutien ne peut donc être affiché."
-    unreachable: "GitHub Sponsors n’a pas répondu. Aucun palier, aucun objectif, aucun soutien ne peut être affiché pour l’instant."
-    closed: "D’après GitHub, {login} n’a pas de page Sponsors ouverte. Il n’y a donc ni palier, ni objectif, ni soutien à afficher."
-  nothing_invented: "Rien n’est affiché à la place : ni exemple, ni chiffre supposé."
-  otherwise: "Sans argent"
-  otherwise_lead: "Ce qui aide autant."
+  eyebrow: Soutenir
+  title: Soutenir les paquets
+  description: 'Soutenir l’écosystème Omni : GitHub Sponsors, et les autres façons d’aider.'
+  lead: 'Les {packages} paquets du catalogue sont du logiciel libre ; la licence de chacun est sur sa fiche. Les entretenir prend du temps : celui de les essayer contre les vrais services, de suivre leurs changements, d’écrire leurs manuels.'
+  sponsor: Soutenir {login} sur GitHub
+  otherwise: Sans argent
+  otherwise_lead: Ce qui aide autant.
   way:
-    use: "S’en servir"
-    use_text: "Un paquet essayé dans un vrai projet en apprend plus que tous ses tests."
-    report: "Signaler"
-    report_text: "Un service qui a changé, une réponse mal lue, un cas oublié : chaque dépôt a ses tickets."
-    document: "Corriger un manuel"
-    document_text: "Chaque page a son lien « Modifier cette page », vers le fichier dans le dépôt."
-
-account:
-  eyebrow: "Compte"
-  title: "Mon compte"
-  lead: "Bonjour {name}."
-  settings: "Réglages du compte"
-  register: "Créer un compte"
-  follows: "Paquets suivis"
-  follows_lead: "Pour chacun : ce que sert son registre aujourd’hui, et ce qui a changé depuis le jour où vous l’avez suivi."
-  no_follow: "Vous ne suivez aucun paquet. Le bouton « Suivre » est sur la page de chaque paquet du <a href=\"{url}\">catalogue</a>."
-  new_version: "Nouvelle version : {before} → {now}"
-  since: "Suivi depuis le {date}"
-  unfollow: "Ne plus suivre"
-
+    use: S’en servir
+    use_text: Un paquet essayé dans un vrai projet en apprend plus que tous ses tests.
+    report: Signaler
+    report_text: 'Un service qui a changé, une réponse mal lue, un cas oublié : chaque dépôt a ses tickets.'
+    document: Corriger un manuel
+    document_text: Chaque page a son lien « Modifier cette page », vers le fichier dans le dépôt.
+  sponsors_text: 'La page GitHub Sponsors de l’organisation dit ce que le soutien finance : essayer les paquets contre les vrais services, suivre leurs changements, écrire leurs manuels.'
 legal:
-  title: "Mentions légales"
-  publisher: "Publication"
-  publisher_text: "Ce site est publié par {publisher}."
-  host: "Hébergement"
-  host_missing: "Le site n’est pas en ligne : c’est une démonstration locale. L’hébergeur sera indiqué à la mise en ligne."
-  packages: "Les paquets"
-  packages_text: "Les paquets présentés sont publiés par l’organisation glitchr-studio. La licence de chacun est celle que déclare son dépôt, reprise sur sa fiche."
-  sources: "D’où viennent les informations"
-  sources_text: "La fiche d’un paquet est lue dans son dépôt (composer.json ou package.json, README) ; sa présence sur Packagist ou npm est demandée à ces registres, à la date indiquée ; sa documentation est le contenu de son dossier docs/. Les services tiers cités dans les manuels appartiennent à leurs propriétaires."
-  fonts: "Caractères"
-  fonts_text: "Les caractères sont servis par le site, sans appel à un tiers : Bricolage Grotesque (Atelier Triay), IBM Plex Sans et IBM Plex Mono (IBM), tous trois sous SIL Open Font License 1.1."
-
+  title: Mentions légales
+  publisher: Publication
+  publisher_text: Ce site est publié par {publisher}.
+  host: Hébergement
+  host_missing: 'Le site n’est pas en ligne : c’est une démonstration locale. L’hébergeur sera indiqué à la mise en ligne.'
+  packages: Les paquets
+  packages_text: Les paquets présentés sont publiés par l’organisation glitchr-studio. La licence de chacun est celle que déclare son dépôt, reprise sur sa fiche.
+  sources: D’où viennent les informations
+  sources_text: La fiche d’un paquet est lue dans son dépôt (composer.json ou package.json, README) ; sa présence sur Packagist ou npm est demandée à ces registres, à la date indiquée ; sa documentation est le contenu de son dossier docs/. Les services tiers cités dans les manuels appartiennent à leurs propriétaires.
+  fonts: Caractères
+  fonts_text: 'Les caractères sont servis par le site, sans appel à un tiers : Bricolage Grotesque (Atelier Triay), IBM Plex Sans et IBM Plex Mono (IBM), tous trois sous SIL Open Font License 1.1.'
 privacy:
-  title: "Confidentialité"
-  intro: "Ce site ne fait pas de suivi publicitaire et ne vend aucune donnée."
-  accounts: "Comptes"
-  accounts_text: "Un compte sert à suivre des paquets. Il garde l’identifiant et l’adresse choisis, le mot de passe sous forme de condensat, et la liste des paquets suivis. Pour y accéder, les corriger ou les faire supprimer : {email}."
-  cookies: "Cookies"
-  cookies_text: "Seuls les cookies nécessaires au site (la langue, le thème, la session) sont déposés ; le rond au pied de chaque page permet de les refuser."
-  services: "Services interrogés"
-  services_text: "Le site demande à Packagist et à npm si un paquet y est publié, et à GitHub Sponsors l’état de la page de l’organisation quand un jeton est configuré. Ces demandes partent du serveur : elles ne transmettent rien des visiteurs."
-  rights: "Vos droits"
-  rights_text: "Vous pouvez demander l’accès à vos données, leur rectification ou leur effacement en écrivant à {email}, et saisir la Commission nationale de l’informatique et des libertés (CNIL) d’une réclamation."
-
+  title: Confidentialité
+  intro: 'Ce site est un ensemble de pages statiques : aucun compte, aucun formulaire, aucun suivi, aucun cookie.'
+  cookies: Cookies et stockage
+  cookies_text: Aucun cookie n’est posé. Le choix entre clair et sombre, si vous le faites, est gardé dans votre propre navigateur (stockage local) et n’en sort pas.
+  services: Services interrogés
+  services_text: 'Les pages ne chargent rien depuis d’autres services : les polices et les scripts sont ceux du site. Les liens vers GitHub, Packagist ou npm vous y emmènent ; rien ne leur est demandé pendant votre lecture.'
+  rights: Vos droits
+  rights_text: 'Le site ne garde aucune donnée personnelle. Pour toute question : {email}.'
 start:
-  to_docs: "Lire la documentation"
-  to_install: "Composer son installation"
-  docs_lead: "Chaque paquet a son manuel, lu dans son dépôt. Commencez par celui de la famille dont vous avez besoin, ou composez votre installation."
-
-install:
-  eyebrow: "Installer"
-  title: "Composer son installation"
-  description: "Choisissez le cadre, le canal et ce qu’il vous faut — le cœur, des familles et leurs fournisseurs, un pont, une structure préparée : les commandes Composer, le bloc composer.json et, sous Symfony, les bundles à déclarer."
-  lead: "Une ligne par choix : les commandes se composent en dessous, chaque paquet à sa version mineure quand une version existe, sinon à sa branche de développement. Les fournisseurs des familles choisies se cochent."
-  framework: "Cadre"
-  bare: "PHP nu"
-  laravel_note: "pas de pont encore : comme en PHP nu"
-  framework_bare: "PHP nu"
-  framework_symfony: "Symfony"
-  framework_laravel: "Laravel"
-  channel: "Canal"
-  stable: "Stable"
-  stable_note: "dernière version publiée"
-  dev: "Développement"
-  dev_note: "la branche en cours"
-  providers: "Fournisseurs"
-  submit: "Composer"
-  empty: "Choisissez au moins un paquet."
-  refused: "{names} : pour {framework}, pas encore. Le cœur omnibase et les structures préparées sont des bundles Symfony aujourd’hui."
-  commands: "Les commandes"
-  why: "D’où vient chaque contrainte"
-  package: "Paquet"
-  constraint: "Contrainte"
-  source: "Source"
-  from_release: "dernière version étiquetée, à la version mineure"
-  from_branch: "branche de développement (aucune version étiquetée)"
-  on_packagist: "sur Packagist"
-  on_github: "dépôt GitHub (pas encore sur Packagist)"
-  on_github_unknown: "dépôt GitHub (Packagist n’a pas encore été interrogé : le dépôt est déclaré par précaution)"
-  note_dev: "Un des paquets n’existe encore qu’en branche de développement : minimum-stability dev, et prefer-stable pour que tout le reste reste en versions stables."
-  note_vcs: "{count, plural, one {Un paquet n’est pas encore sur Packagist : son dépôt est déclaré.} other {# paquets ne sont pas encore sur Packagist : leurs dépôts sont déclarés.}}"
-  note_plugin: "omnibase s’installe avec son greffon Composer (glitchr/base-plugin) : il faut l’autoriser."
-  note_symfony: "Le bundle de chaque famille est dans son paquet (Bridge/Symfony), sans recette Flex : la ligne de config/bundles.php ci-dessus, puis ses passerelles sous la clé de la famille."
-  note_bare: "En PHP nu, le registre de la famille se monte à la main : new Registry([$fabriques], $config). Rien du cadre n’est chargé."
-  note_laravel: "Pas encore de pont Laravel : une famille s’y utilise comme en PHP nu, son registre monté dans un fournisseur de services. omnibase n’y tourne pas encore."
-  need: "Il vous faut"
-  need_core: "Le cœur"
-  need_core_note: "omnibase, Symfony aujourd’hui"
-  need_family: "Des familles"
-  need_family_note: "et leurs fournisseurs"
-  need_bridge: "Un pont"
-  need_bridge_note: "vers un cadre, un stockage, un rendu"
-  need_structure: "Une structure préparée"
-  need_structure_note: "facultative"
-  family: "Familles"
-  providers_note: "ceux des familles choisies"
-  providers_browse: "Les parcourir dans la recherche"
-  bridge: "Pont"
-  structure: "Structure"
-  structure_note: "facultative, Symfony aujourd’hui"
-  structure_hint: "Une structure toute prête pour un métier, déjà assemblée sur le socle. Facultative : rien dans le socle ni dans les familles n’en dépend."
-  unknown: "{count, plural, one {Aucun fournisseur de {family} ne s’appelle {names}.} other {Aucun fournisseur de {family} ne s’appelle ainsi : {names}.}}"
-  on_packagist_empty: "sur Packagist, sans version encore lue : son dépôt est déclaré"
-  family_note: "une ou plusieurs"
-  providers_count: "{count, plural, =0 {Aucun fournisseur} one {# fournisseur} other {# fournisseurs}} dans {families}"
-  providers_of: "{shown} sur {count} dans {families}"
-  providers_picked: "{count, plural, one {# choisi} other {# choisis}}"
-  providers_no_family: "Choisissez au moins une famille : ses fournisseurs s’affichent ici."
-  providers_filter: "Filtrer par nom"
-  providers_none_match: "Aucun ne correspond au filtre."
-  providers_none: "Aucun fournisseur encore."
-
+  to_docs: Lire la documentation
+  to_install: Composer son installation
+  docs_lead: Chaque paquet a son manuel, lu dans son dépôt. Commencez par celui de la famille dont vous avez besoin, ou composez votre installation.
 compat:
-  eyebrow: "Compatibilité"
-  title: "Compatible avec n’importe quel cadre — aujourd’hui les familles, demain le cœur"
-  lead: "Ce qui est vrai aujourd’hui, et ce qui le sera. Sans date : le chantier du socle vient après les sites en cours."
-  now: "Aujourd’hui"
-  later: "Prévu"
-  families_title: "Les familles tournent en PHP nu"
-  families_text: "Le cœur d’une famille <code>omni*</code> ne requiert ni Symfony, ni Doctrine, ni Twig : seulement des bibliothèques autonomes. Son registre se monte à la main, dans un script, une application Laravel ou Symfony. Le pont Symfony est dans le paquet, sous <code>Bridge/Symfony</code>, et rien n’en est chargé ailleurs."
-  families_proof: "La preuve : chaque famille a un test sans cadre (<code>Tests/BareTest.php</code>) qui monte son registre à la main et vérifie qu’aucune classe d’un cadre n’est chargée."
-  omnibase_title: "omnibase est fait pour Symfony"
-  omnibase_text: "<code>glitchr/omnibase</code> et les structures préparées <code>omnibase/*</code> sont aujourd’hui des bundles Symfony : leurs écrans, leur stockage et leurs gabarits s’appuient sur Symfony, Doctrine et Twig."
-  agnostic_title: "omnibase deviendra agnostique"
-  agnostic_text: "Le métier de chaque structure passera à la racine de son paquet (objets, règles, contrats), ses parts de cadre dans des ponts du même paquet (<code>Bridge/Symfony</code>, <code>Bridge/Doctrine</code>, <code>Bridge/Twig</code>). Une colle générique, qui ne connaît aucune structure, les reliera à chaque cadre :"
-  bridge_symfony: "conteneur, routage, formulaires, sécurité"
-  bridge_doctrine: "le stockage (Doctrine est autonome)"
-  bridge_twig: "le rendu (Twig est autonome)"
-  bridge_composer: "l’installation, aujourd’hui glitchr/base-plugin"
-  bridge_laravel: "quand quelqu’un s’en servira"
-  read_more: "Le détail, et ce qu’il impose à chaque paquet : <a href=\"{url}\">la page Compatibilité de la documentation</a>."
-  bridges_below: "Cette colle, c’est <a href=\"{url}\">omnibridge</a>, décrit plus haut."
-
-versions:
-  title: "Versions"
-  lead: "Lues dans son dépôt (étiquettes, branches, derniers commits)."
-  tags: "Versions étiquetées"
-  no_tag: "Aucune version étiquetée : le paquet se suit à sa branche de développement."
-  branches: "Branches"
-  branch_default: "branche suivie"
-  constraint_stable: "Stable"
-  constraint_dev: "Développement"
-  unread: "Le dépôt de ce paquet n’a pas pu être lu ici."
-  install: "Composer une installation avec ce paquet"
-
+  eyebrow: Compatibilité
+  title: Compatible avec n’importe quel cadre — aujourd’hui les familles, demain le cœur
+  lead: 'Ce qui est vrai aujourd’hui, et ce qui le sera. Sans date : le chantier du socle vient après les sites en cours.'
+  now: Aujourd’hui
+  later: Prévu
+  families_title: Les familles tournent en PHP nu
+  families_text: 'Le cœur d’une famille <code>omni*</code> ne requiert ni Symfony, ni Doctrine, ni Twig : seulement des bibliothèques autonomes. Son registre se monte à la main, dans un script, une application Laravel ou Symfony. Le pont Symfony est dans le paquet, sous <code>Bridge/Symfony</code>, et rien n’en est chargé ailleurs.'
+  families_proof: 'La preuve : chaque famille a un test sans cadre (<code>Tests/BareTest.php</code>) qui monte son registre à la main et vérifie qu’aucune classe d’un cadre n’est chargée.'
+  omnibase_title: omnibase est fait pour Symfony
+  omnibase_text: '<code>glitchr/omnibase</code> et les structures préparées <code>omnibase/*</code> sont aujourd’hui des bundles Symfony : leurs écrans, leur stockage et leurs gabarits s’appuient sur Symfony, Doctrine et Twig.'
+  agnostic_title: omnibase deviendra agnostique
+  agnostic_text: 'Le métier de chaque structure passera à la racine de son paquet (objets, règles, contrats), ses parts de cadre dans des ponts du même paquet (<code>Bridge/Symfony</code>, <code>Bridge/Doctrine</code>, <code>Bridge/Twig</code>). Une colle générique, qui ne connaît aucune structure, les reliera à chaque cadre :'
+  bridge_symfony: conteneur, routage, formulaires, sécurité
+  bridge_doctrine: le stockage (Doctrine est autonome)
+  bridge_twig: le rendu (Twig est autonome)
+  bridge_composer: l’installation, aujourd’hui glitchr/base-plugin
+  bridge_laravel: quand quelqu’un s’en servira
+  read_more: 'Le détail, et ce qu’il impose à chaque paquet : <a href="{url}">la page Compatibilité de la documentation</a>.'
+  bridges_below: Cette colle, c’est <a href="{url}">omnibridge</a>, décrit plus haut.
 structures:
-  optional: "Facultatif"
-  eyebrow: "Les structures préparées"
-  title: "Une structure toute prête, si elle fait gagner du temps"
-  count: "{count, plural, one {structure} other {structures}}"
-  note: "Rien dans le socle ni dans les familles n’en dépend. Symfony aujourd’hui, comme le cœur ; toutes se trouvent dans la recherche des paquets."
-  optional_note: "Structure préparée, facultative : rien dans le socle ni dans les familles n’en dépend."
-
+  optional: Facultatif
+  eyebrow: Les structures préparées
+  title: Une structure toute prête, si elle fait gagner du temps
+  count: '{count, plural, one {structure} other {structures}}'
+  note: Rien dans le socle ni dans les familles n’en dépend. Symfony aujourd’hui, comme le cœur ; toutes se trouvent dans la recherche des paquets.
+  optional_note: 'Structure préparée, facultative : rien dans le socle ni dans les familles n’en dépend.'
 search:
-  eyebrow: "Paquets"
-  title: "Chercher un paquet"
-  description: "Chercher parmi les {count} paquets de l’écosystème Omni : par nom, par famille, par sorte."
-  lead: "{count, plural, =0 {Aucun paquet} one {# paquet} other {# paquets}}, chacun lu dans son dépôt et demandé à son registre. Un mot se cherche dans le nom, la famille, la description et les mots-clés."
-  label: "Nom, service ou mot-clé"
-  placeholder: "stripe, colissimo, pubchem, captcha…"
-  submit: "Chercher"
-  family: "Famille"
-  any_family: "Toutes"
-  kind: "Sorte"
-  any_kind: "Tout"
-  count: "{count, plural, =0 {Aucun paquet} one {# paquet} other {# paquets}}"
-  count_many: "{count} paquets"
-  none: "Aucun paquet ne répond : un autre mot, ou une autre famille ?"
-  version_title: "Dernière version sur {registry}"
-  untested: "Non testé en réel"
-  partly_tested: "Testé en partie"
-  docs: "Manuel"
-
+  eyebrow: Paquets
+  title: Chercher un paquet
+  description: 'Chercher parmi les {count} paquets de l’écosystème Omni : par nom, par famille, par sorte.'
+  lead: '{count, plural, =0 {Aucun paquet} one {# paquet} other {# paquets}}, chacun lu dans son dépôt et demandé à son registre. Un mot se cherche dans le nom, la famille, la description et les mots-clés.'
+  label: Nom, service ou mot-clé
+  placeholder: stripe, colissimo, pubchem, captcha…
+  submit: Chercher
+  family: Famille
+  any_family: Toutes
+  kind: Sorte
+  any_kind: Tout
+  count: '{count, plural, =0 {Aucun paquet} one {# paquet} other {# paquets}}'
+  count_many: '{count} paquets'
+  none: 'Aucun paquet ne répond : un autre mot, ou une autre famille ?'
+  version_title: Sa branche de développement, telle que Composer la demande
+  untested: Non testé en réel
+  partly_tested: Testé en partie
+  docs: Manuel
 kind:
-  core: "Cœur"
-  family: "Familles"
-  provider: "Fournisseurs"
-  structure: "Structures préparées"
-  bridge: "Ponts"
-  library: "Bibliothèques JS"
-  core_one: "Cœur"
-  family_one: "Famille"
-  provider_one: "Fournisseur"
-  structure_one: "Structure préparée"
-  bridge_one: "Pont"
-  library_one: "Bibliothèque JS"
+  core: Cœur
+  family: Familles
+  provider: Fournisseurs
+  structure: Structures préparées
+  bridge: Ponts
+  library: Bibliothèques JS
+  core_one: Cœur
+  family_one: Famille
+  provider_one: Fournisseur
+  structure_one: Structure préparée
+  bridge_one: Pont
+  library_one: Bibliothèque JS
+manual:
+  contents: Le sommaire du manuel
+  home: Accueil
+  all: Toute la documentation
+  version: Version
+  breadcrumb: Où vous êtes
+  menu: Sommaire
+  copy: Copier
+  copied: Copié
+  on_this_page: Sur cette page
+  not_default: Vous lisez la série {version} ; la série actuelle est {current}.
+  see_current: Lire {current}
+  eol: La série {version} n’est plus maintenue.
+  read_at: Lu à
+  branch: série de la branche {branch}
+  previous: Précédent
+  next: Suivant
+  no_home: 'Ce manuel n’a pas de page d’accueil : ses pages sont au sommaire.'
+  not_fetched: Cette série n’a pas été récupérée (bin/console app:docs:fetch).
+news:
+  eyebrow: Actualités
+  title: Actualités
+  description: Annonces et notes de version de l’écosystème Omni.
+  lead: 'Annonces et notes de version, un fichier Markdown chacune dans le dossier news/ du site : proposées par demande de fusion, publiées à la fusion, avec leurs flux Atom et RSS.'
+site_search:
+  eyebrow: Recherche
+  title: Chercher dans le site
+  description: Chercher dans les guides, les actualités, les paquets et chaque manuel de l’écosystème Omni.
+  lead: Les guides, les actualités, chaque paquet et chaque page de la série actuelle des manuels — la réponse vient de votre navigateur, d’un index écrit avec le site.
+  kind_guide: Guide
+  kind_news: Actualité
+  kind_doc: Manuel
+  noscript: 'La recherche se fait dans votre navigateur et demande JavaScript. Sinon : <a href="{packages}">la liste des paquets</a>, <a href="{docs}">la documentation</a>.'
+not_found:
+  title: Cette page n’existe pas
+  lead: L’adresse a pu changer, ou la page n’a jamais été écrite. La documentation et la recherche partent d’ici.
+  home: Accueil

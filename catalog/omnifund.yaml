@@ -1,0 +1,88 @@
+# The omnifund entry of the Omniscient catalogue. Written by `bin/console
+# app:catalog:import` from the packages' repositories; the phrase and the
+# text are the site's own, edited here. Each package: its kind, what its
+# composer.json says, its GitHub repository and development branch, whether
+# its README says it was verified against the real service, whether it has
+# a docs/ folder (see config/documentation.yaml).
+family: omnifund
+phrase:
+  en: 'Read who funds a project.'
+  fr: 'Lire qui finance un projet.'
+text:
+  en: 'Who funds a project, wherever the funding is received: the profile (backers, income, goal), the sponsors and the tiers offered, from GitHub Sponsors, Open Collective or Liberapay.'
+  fr: 'Qui finance un projet, où que le financement soit reçu : le profil (soutiens, revenus, objectif), les soutiens et les paliers proposés, depuis GitHub Sponsors, Open Collective ou Liberapay.'
+packages:
+  omnifund/github-sponsors:
+    kind: provider
+    description: "Omnifund's GitHub Sponsors, under any PHP host: a user's or an organization's listing read through GitHub's GraphQL API - its page, its goal, its tiers, the number of sponsors and the public ones."
+    license: MIT
+    keywords:
+      - sponsors
+      - github-sponsors
+      - github
+      - graphql
+      - funding
+      - framework-agnostic
+      - omnifund
+    repository: glitchr-studio/omnifund-github-sponsors
+    branch: 1.x
+    requires:
+      - omniscient/omnifund
+    verification: partial
+    verification_note: "- Verified live (2026-10-24, a token): glitchr-studio's listing; sindresorhus's tiers and two sponsors. — - Not verified live: an active goal (none at hand)."
+  omnifund/liberapay:
+    kind: provider
+    description: "Omnifund's Liberapay, under any PHP host: an account's public profile read from Liberapay's public.json - patrons counted, weekly income, goal, summary (no key; Liberapay keeps patrons and tiers private)."
+    license: MIT
+    keywords:
+      - donations
+      - liberapay
+      - funding
+      - patrons
+      - framework-agnostic
+      - omnifund
+    repository: glitchr-studio/omnifund-liberapay
+    branch: 1.x
+    requires:
+      - omniscient/omnifund
+    verification: verified
+    verification_note: "- Verified live without a key (2026-10-24): the Liberapay team's profile."
+  omnifund/opencollective:
+    kind: provider
+    description: "Omnifund's Open Collective, under any PHP host: a collective read through Open Collective's GraphQL API v2 - its profile and yearly budget, its tiers, its backers (public data, no key needed; a personal token raises the rate limit)."
+    license: MIT
+    keywords:
+      - sponsors
+      - backers
+      - opencollective
+      - open-collective
+      - graphql
+      - funding
+      - donations
+      - framework-agnostic
+      - omnifund
+    repository: glitchr-studio/omnifund-opencollective
+    branch: 1.x
+    requires:
+      - omniscient/omnifund
+    verification: partial
+    verification_note: "- Verified live without a key (2026-10-24): webpack's profile, tiers and three backers. — - Not verified: a personal token."
+  omniscient/omnifund:
+    kind: family
+    description: 'Omnifund: who funds a project, read under any PHP host, wherever the funding is received - the profile (backers counted, income, goal), the sponsors and the tiers offered, from GitHub Sponsors, Open Collective or Liberapay. Providers are packages of their own (omnifund/github-sponsors, omnifund/opencollective, omnifund/liberapay); no framework in require.'
+    license: MIT
+    keywords:
+      - sponsors
+      - sponsorship
+      - funding
+      - donations
+      - github-sponsors
+      - opencollective
+      - liberapay
+      - framework-agnostic
+      - omnifund
+    repository: glitchr-studio/omnifund
+    branch: 1.x
+    verification: partial
+    verification_note: "- Verified live (docker compose run --rm omnifund live, 2026-10-24): Open Collective's GraphQL API without a key (webpack: profile, tiers, three backers); Liberapay's public.json (the Liberapay team); GitHub's GraphQL API with a token (glitchr-studio's listing, sindresorhus's tiers and two sponsors). — - Not verified: GitHub's goal as a live answer (no listing at hand had an active goal: the shape is GitHub's schema, accepted by the live query); an Open Collective personal token; any site using omnifund (none yet - the omniscient site still reads GitHub Sponsors with its own call)."
+    docs: true

@@ -1,0 +1,161 @@
+# The omnidrive entry of the Omniscient catalogue. Written by `bin/console
+# app:catalog:import` from the packages' repositories; the phrase and the
+# text are the site's own, edited here. Each package: its kind, what its
+# composer.json says, its GitHub repository and development branch, whether
+# its README says it was verified against the real service, whether it has
+# a docs/ folder (see config/documentation.yaml).
+family: omnidrive
+phrase:
+  en: 'Read and write files, wherever they are kept.'
+  fr: 'Lire et écrire des fichiers, où qu’ils soient gardés.'
+text:
+  en: 'One contract for files wherever they are kept - a directory of this machine, an S3 bucket, an SFTP or FTP server - by the name the application gives each storage; Flysystem is the engine behind it, never in its signatures.'
+  fr: 'Un contrat pour les fichiers où qu’ils soient gardés — un dossier de cette machine, un compartiment S3, un serveur SFTP ou FTP — par le nom que l’application donne à chaque stockage ; Flysystem est le moteur derrière, jamais dans ses signatures.'
+packages:
+  omnidrive/azure:
+    kind: provider
+    description: 'Omnidrive Azure: a container of Azure Blob Storage as an omnidrive drive, through azure-oss/storage-blob-flysystem (the adapter The PHP League names in place of its own, abandoned) - a connection string, a prefix, public and signed (SAS) addresses.'
+    license: MIT
+    keywords:
+      - storage
+      - azure
+      - blob
+      - flysystem
+      - omnidrive
+    repository: glitchr-studio/omnidrive-azure
+    branch: 1.x
+    requires:
+      - omniscient/omnidrive
+    verification: partial
+    verification_note: '- Not verified: Azure Blob Storage itself (Azurite only); an account with a hierarchical namespace (Data Lake Gen2); a connection string with a SAS; Entra ID credentials (not mapped).'
+  omnidrive/dropbox:
+    kind: provider
+    description: 'Omnidrive Dropbox: a folder of Dropbox as an omnidrive drive, through spatie/flysystem-dropbox - an access token or a refresh token renewed on its own, a prefix, temporary links.'
+    license: MIT
+    keywords:
+      - storage
+      - dropbox
+      - flysystem
+      - omnidrive
+    repository: glitchr-studio/omnidrive-dropbox
+    branch: 1.x
+    requires:
+      - omniscient/omnidrive
+    verification: partial
+    verification_note: '- Not verified: Dropbox itself - no account here.'
+  omnidrive/ftp:
+    kind: provider
+    description: 'Omnidrive FTP: a directory of an FTP or FTPS server as an omnidrive drive, through league/flysystem-ftp (ext-ftp) - passive mode, a server behind NAT, binary transfers, Unix modes.'
+    license: MIT
+    keywords:
+      - storage
+      - ftp
+      - ftps
+      - flysystem
+      - omnidrive
+    repository: glitchr-studio/omnidrive-ftp
+    branch: 1.x
+    requires:
+      - omniscient/omnidrive
+    verification: partial
+    verification_note: "- Not verified: FTPS; a server behind NAT; Windows servers. vsftpd (3.0.5, seen 2026-10-23): its STAT answers nothing for a file below a subdirectory, so a file's visibility cannot be read there and a copy, which keeps its source's visibility by default, fails: give such a drive retain_visibility: false."
+  omnidrive/gdrive:
+    kind: provider
+    description: 'Omnidrive Google Drive: a folder of Google Drive (My Drive or a shared drive) as an omnidrive drive, through masbug/flysystem-google-drive-ext - OAuth refresh token or service account, paths by name.'
+    license: MIT
+    keywords:
+      - storage
+      - google-drive
+      - flysystem
+      - omnidrive
+    repository: glitchr-studio/omnidrive-gdrive
+    branch: 1.x
+    requires:
+      - omniscient/omnidrive
+    verification: partial
+    verification_note: "- Not verified: Google Drive itself - no account here: GdriveLiveTest runs the contract against an account with OMNIDRIVE_GDRIVE_CLIENT_ID, _CLIENT_SECRET and _REFRESH_TOKEN, or OMNIDRIVE_GDRIVE_SERVICE_ACCOUNT (and _SHARED_DRIVE_ID), in the folder OMNIDRIVE_GDRIVE_ROOT; so neither the contract's operations, visibility"
+  omnidrive/local:
+    kind: provider
+    description: "Omnidrive Local: a directory of this machine as an omnidrive drive, through league/flysystem-local - its root, its Unix modes, its public address, the file's local path."
+    license: MIT
+    keywords:
+      - storage
+      - filesystem
+      - local
+      - flysystem
+      - omnidrive
+    repository: glitchr-studio/omnidrive-local
+    branch: 1.x
+    requires:
+      - omniscient/omnidrive
+    verification: partial
+    verification_note: '- Not verified: Windows paths and permissions.'
+  omnidrive/s3:
+    kind: provider
+    description: 'Omnidrive S3: an S3 bucket - AWS, MinIO, Scaleway, OVHcloud, Cloudflare R2... - as an omnidrive drive, through league/flysystem-async-aws-s3: its region or endpoint, its keys, a prefix, public and signed temporary addresses.'
+    license: MIT
+    keywords:
+      - storage
+      - s3
+      - aws
+      - minio
+      - flysystem
+      - omnidrive
+    repository: glitchr-studio/omnidrive-s3
+    branch: 1.x
+    requires:
+      - omniscient/omnidrive
+    verification: partial
+    verification_note: "- Not verified: AWS S3 itself, Scaleway, OVHcloud, R2 (MinIO only); objects' ACLs (MinIO answers 501; an AWS bucket made since April 2023 refuses ACLs unless its Object Ownership allows them - OMNIDRIVE_S3_ACL=1 runs that test against one that does); uploads over 5 GB (AsyncAws's multipart upload, never run here)."
+  omnidrive/sftp:
+    kind: provider
+    description: "Omnidrive SFTP: a directory of an SFTP server, over SSH, as an omnidrive drive, through league/flysystem-sftp-v3 (phpseclib 3, pure PHP) - a password, a private key or the SSH agent, the server's key checked, Unix modes."
+    license: MIT
+    keywords:
+      - storage
+      - sftp
+      - ssh
+      - phpseclib
+      - flysystem
+      - omnidrive
+    repository: glitchr-studio/omnidrive-sftp
+    branch: 1.x
+    requires:
+      - omniscient/omnidrive
+    verification: partial
+    verification_note: "- Not verified: a private key, the SSH agent, the server's key checked (host_fingerprint)."
+  omnidrive/webdav:
+    kind: provider
+    description: 'Omnidrive WebDAV: a collection of a WebDAV server - Nextcloud, ownCloud, Apache mod_dav, any - as an omnidrive drive, through league/flysystem-webdav (sabre/dav) - basic or digest authentication, a prefix.'
+    license: MIT
+    keywords:
+      - storage
+      - webdav
+      - nextcloud
+      - owncloud
+      - flysystem
+      - omnidrive
+    repository: glitchr-studio/omnidrive-webdav
+    branch: 1.x
+    requires:
+      - omniscient/omnidrive
+    verification: partial
+    verification_note: "- Not verified: ownCloud, nginx's WebDAV, digest and NTLM authentication, a proxy."
+  omniscient/omnidrive:
+    kind: family
+    description: 'Omnidrive: one contract for reading and writing files wherever they are kept - a directory of this machine, an S3 bucket, an SFTP (SSH) or FTP server - by the name the application gives each storage; Flysystem is the engine behind it, never in its signatures.'
+    license: MIT
+    keywords:
+      - storage
+      - filesystem
+      - files
+      - s3
+      - sftp
+      - ftp
+      - flysystem
+      - omnidrive
+    repository: glitchr-studio/omnidrive
+    branch: 1.x
+    verification: partial
+    verification_note: "- Not verified: Dropbox and Google Drive themselves - their live tests run with an account's tokens (OMNIDRIVE_DROPBOX_*, OMNIDRIVE_GDRIVE_*), none was at hand; Azure Blob Storage itself (Azurite only) and an account with a hierarchical namespace; ownCloud; AWS S3 itself and the other S3 services (Scaleway, OVHcloud, R"
+    docs: true

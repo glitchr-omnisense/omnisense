@@ -1,0 +1,29 @@
+{#
+ # The search over the whole site, in the reader's browser: assets/search.js
+ # loads this language's index (/search.json, written with the site) and
+ # answers as one types; the question stays in the address (?q=). Without
+ # script, the way to the package list and the documentation.
+ #}
+{% extends 'layout1.html.twig' %}
+
+{% block title %}{{ '@messages.site_search.title'|trans }}{% endblock %}
+{% block description %}{{ '@messages.site_search.description'|trans }}{% endblock %}
+
+{% block content %}
+<div class="om-wrap om-page om-site-search" data-site-search="{{ path('app_search_index') }}"
+     data-one="{{ '@messages.search.count'|trans({count: 1}) }}" data-many="{{ '@messages.search.count_many'|trans({count: '%n'}) }}" data-none="{{ '@messages.search.none'|trans }}"
+     data-kinds="{{ {guide: '@messages.site_search.kind_guide'|trans, news: '@messages.site_search.kind_news'|trans, doc: '@messages.site_search.kind_doc'|trans, core: '@messages.kind.core_one'|trans, family: '@messages.kind.family_one'|trans, provider: '@messages.kind.provider_one'|trans, bridge: '@messages.kind.bridge_one'|trans, structure: '@messages.kind.structure_one'|trans, library: '@messages.kind.library_one'|trans}|json_encode }}">
+    <header class="om-head is-page">
+        <p class="om-cote">{{ '@messages.site_search.eyebrow'|trans }}</p>
+        <h1>{{ '@messages.site_search.title'|trans }}</h1>
+        <p class="om-lead">{{ '@messages.site_search.lead'|trans }}</p>
+    </header>
+    <form class="om-search om-finder-box" role="search" action="{{ path('app_search') }}" method="get">
+        <label for="om-site-q">{{ '@messages.home.search_label'|trans }}</label>
+        <div><input id="om-site-q" type="search" name="q" placeholder="{{ '@messages.home.search_placeholder'|trans }}" autocomplete="off" spellcheck="false" data-site-search-input><button type="submit" class="om-button">{{ '@messages.home.search_submit'|trans }}</button></div>
+    </form>
+    <p class="om-finder-count" aria-live="polite" data-site-search-count></p>
+    <ol class="om-hits om-site-hits" data-site-search-results></ol>
+    <noscript><p class="om-none">{{ '@messages.site_search.noscript'|trans({packages: path('app_packages'), docs: path('app_docs')})|raw }}</p></noscript>
+</div>
+{% endblock %}

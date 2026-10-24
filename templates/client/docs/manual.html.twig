@@ -1,0 +1,83 @@
+{#
+ # A page of a package's manual: the sidebar (the manual, its series, its
+ # contents), the breadcrumb, the prose read from the package's docs/ at the
+ # pinned commit, "on this page", previous / next, and where the page comes
+ # from - its repository, the series' branch and the exact commit. The pencil
+ # opens GitHub's editor on the source at the series' branch.
+ #}
+{% extends 'layout1.html.twig' %}
+
+{% set fallback_title = page ? (page.path == '' ? manual.package : page.title) : manual.package %}
+{#- The page's own title: its front matter's, else its first heading. -#}
+{% set page_title = rendered ? (rendered.meta.title ?? rendered.title ?? fallback_title) : fallback_title %}
+{% block title %}{{ page_title }}{{ page_title != manual.package ? ' · ' ~ manual.package }} {{ series }}{% endblock %}
+{% block description %}{{ rendered ? rendered.excerpt(160) : (package.description ?? manual.package) }}{% endblock %}
+
+{% block content %}
+{% set file = page ? (source.path ? source.path ~ '/' : '') ~ page.file : null %}
+<div class="manual" data-manual-page>
+    <aside class="manual-side" id="manual-side">
+        <div class="manual-id">
+            <a class="manual-all" href="{{ path('app_docs') }}">{{ '@messages.manual.all'|trans }}</a>
+            <a class="manual-name" href="{{ path('app_manual', {key: manual.key, series: series}) }}">{{ manual.package }}</a>
+            {% if manual.series|length > 1 %}
+            <details class="manual-versions">
+                <summary><span class="manual-versions-label">{{ '@messages.manual.version'|trans }}</span> <b>{{ series }}</b></summary>
+                <ul>{% for s in manual.series %}<li><a href="{{ path('app_manual', {key: manual.key, series: s}) }}"{% if s == series %} aria-current="true"{% endif %}>{{ s }}</a></li>{% endfor %}</ul>
+            </details>
+            {% else %}
+            <p class="manual-versions is-single"><span class="manual-versions-label">{{ '@messages.manual.version'|trans }}</span> <b>{{ series }}</b></p>
+            {% endif %}
+        </div>
+        <form class="manual-search" role="search" action="{{ path('app_search') }}" method="get">
+            <label class="manual-search-label" for="manual-q">{{ '@messages.home.search_label'|trans }}</label>
+            <input id="manual-q" type="search" name="q" autocomplete="off" spellcheck="false" placeholder="{{ '@messages.home.search_placeholder'|trans }}">
+            <button type="submit" class="manual-search-submit">{{ '@messages.home.search_submit'|trans }}</button>
+        </form>
+        {% include 'partials/_doc_tree.html.twig' with {current: page ? page.path : null} %}
+    </aside>
+
+    <article class="manual-page">
+        <nav class="manual-crumbs" aria-label="{{ '@messages.manual.breadcrumb'|trans }}">
+            <ol>
+                <li><a href="{{ path('app_docs') }}">{{ '@messages.docs.title'|trans }}</a></li>
+                <li><a href="{{ path('app_manual', {key: manual.key, series: series}) }}">{{ manual.package }}</a></li>
+                <li><span>{{ series }}</span></li>
+                {% if page and page.path != '' %}<li aria-current="page"><span>{{ page.title }}</span></li>{% endif %}
+            </ol>
+            <button type="button" class="manual-menu-button" data-manual-menu aria-controls="manual-side" aria-expanded="false">{{ '@messages.manual.menu'|trans }}</button>
+        </nav>
+
+        {% if series != manual.default %}
+        <p class="manual-notice" role="note">{{ '@messages.manual.not_default'|trans({version: series, current: manual.default}) }} <a href="{{ path('app_manual', {key: manual.key, series: manual.default}) }}">{{ '@messages.manual.see_current'|trans({current: manual.default}) }}</a></p>
+        {% endif %}
+        {% if source.eol %}<p class="manual-notice is-eol" role="note">{{ '@messages.manual.eol'|trans({version: series}) }}</p>{% endif %}
+
+        <div class="manual-prose" data-text-copy="{{ '@messages.manual.copy'|trans }}" data-text-copied="{{ '@messages.manual.copied'|trans }}">
+            {% if file and source.branch %}
+            <a class="manual-pencil" href="https://github.com/{{ manual.repository }}/edit/{{ source.branch }}/{{ file }}" rel="noopener" title="{{ '@messages.docs.pencil_title'|trans({file: file, branch: source.branch}) }}"><i class="fa-solid fa-pen" aria-hidden="true"></i><span>{{ '@messages.docs.pencil'|trans }}</span></a>
+            {% endif %}
+            <h1>{{ page_title }}</h1>
+            {% if rendered %}
+                {{ rendered.html|raw }}
+            {% else %}
+                {% if package and package.description %}<p>{{ package.description }}</p>{% endif %}
+                {% if tree %}<p>{{ '@messages.manual.no_home'|trans }}</p>{% else %}<p class="om-none">{{ '@messages.manual.not_fetched'|trans }}</p>{% endif %}
+            {% endif %}
+        </div>
+
+        <footer class="manual-foot">
+            <p class="manual-edit">
+                <span class="manual-source">{{ '@messages.manual.read_at'|trans }} <a href="https://github.com/{{ manual.repository }}/tree/{{ commit ?? source.ref }}/{{ source.path }}" rel="noopener"><code>{{ manual.repository }}</code> · <code>{{ (commit ?? source.ref)|slice(0, 12) }}</code></a>{% if source.branch %} ({{ '@messages.manual.branch'|trans({branch: source.branch}) }}){% endif %}</span>
+                {% if file %}<span class="manual-source"><a href="https://github.com/{{ manual.repository }}/blob/{{ commit ?? source.ref }}/{{ file }}" rel="noopener"><code>{{ file }}</code></a></span>{% endif %}
+            </p>
+            <nav class="manual-neighbours" aria-label="{{ '@messages.manual.previous'|trans }} / {{ '@messages.manual.next'|trans }}">
+                {% if previous %}<a rel="prev" href="{{ previous.path == '' ? path('app_manual', {key: manual.key, series: series}) : path('app_manual_page', {key: manual.key, series: series, path: previous.path}) }}"><small>{{ '@messages.manual.previous'|trans }}</small><span>{{ previous.path == '' ? '@messages.manual.home'|trans : previous.title }}</span></a>{% else %}<span></span>{% endif %}
+                {% if next %}<a rel="next" href="{{ path('app_manual_page', {key: manual.key, series: series, path: next.path}) }}"><small>{{ '@messages.manual.next'|trans }}</small><span>{{ next.title }}</span></a>{% endif %}
+            </nav>
+        </footer>
+    </article>
+
+    {% include 'partials/_doc_toc.html.twig' with {headings: rendered ? rendered.headings : []} %}
+</div>
+{% endblock %}

@@ -23,18 +23,6 @@ return [
     Symfony\UX\TwigComponent\TwigComponentBundle::class => ['all' => true],
     ApiPlatform\Symfony\Bundle\ApiPlatformBundle::class => ['all' => true],
     Webauthn\Bundle\WebauthnBundle::class => ['all' => true],
-    Google\GoogleBundle::class => ['all' => true],
     Base\BaseBundle::class => ['all' => true],
-    Base\Admin\AdminBundle::class => ['all' => true],
-    // The announcements (omnibase/blog), the manuals read in each package's
-    // repository (omnibase/docs) and their search (glitchr/typesense-bundle).
-    Base\Blog\BlogBundle::class => ['all' => true],
-    Base\Wikidoc\WikidocBundle::class => ['all' => true],
-    Typesense\Bundle\TypesenseBundle::class => ['all' => true],
-    // The cookie answer: the circle in the footer, its panel (omnibase/consent).
-    Base\Consent\ConsentBundle::class => ['all' => true],
-    // Each package's repository read through libgit2: its tags, its branches, their
-    // last commits (git/git-bundle ships no Flex recipe).
-    Git\GitBundle::class => ['all' => true],
     Glitchr\ProfilerPack\ProfilerPackBundle::class => ['dev' => true, 'test' => true],
 ];

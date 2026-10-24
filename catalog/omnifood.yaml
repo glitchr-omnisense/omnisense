@@ -1,0 +1,122 @@
+# The omnifood entry of the Omniscient catalogue. Written by `bin/console
+# app:catalog:import` from the packages' repositories; the phrase and the
+# text are the site's own, edited here. Each package: its kind, what its
+# composer.json says, its GitHub repository and development branch, whether
+# its README says it was verified against the real service, whether it has
+# a docs/ folder (see config/documentation.yaml).
+family: omnifood
+phrase:
+  en: "Receive a restaurant's orders and reservations."
+  fr: 'Recevoir les commandes et les réservations d’un restaurant.'
+text:
+  en: 'One contract for the restaurant platforms: delivery orders, table reservations, menus, stores, webhooks.'
+  fr: 'Un seul contrat pour les plateformes de restauration : commandes en livraison, réservations de table, cartes, établissements, webhooks.'
+packages:
+  omnifood/deliveroo:
+    kind: provider
+    description: 'Omnifood Deliveroo: the orders (read, listed, accepted, rejected, prep stages), the menu and the items out of stock, the site opened or closed and its hours, the order and rider webhooks checked - through the Deliveroo Partner Platform APIs.'
+    license: MIT
+    keywords:
+      - restaurant
+      - delivery
+      - deliveroo
+      - omnifood
+    repository: glitchr-studio/omnifood-deliveroo
+    branch: 1.x
+    requires:
+      - omniscient/omnifood
+    verification: unverified
+    verification_note: "Not verified against the live API (non vérifié en réel). Deliveroo gives production keys only to approved partners: this package is written from Deliveroo's public documentation (https://api-docs.deliveroo.com, read on 2026-10-04) and tested against recorded answers."
+    docs: true
+  omnifood/justeat:
+    kind: provider
+    description: 'Omnifood Just Eat: the orders JET Connect sends to the restaurant, the menu and the items out of stock, the restaurant set offline and its service times - Just Eat, Takeaway, Skip The Dishes, Menulog - through the public JET Connect API.'
+    license: MIT
+    keywords:
+      - restaurant
+      - delivery
+      - justeat
+      - takeaway
+      - jet-connect
+      - omnifood
+    repository: glitchr-studio/omnifood-justeat
+    branch: 1.x
+    requires:
+      - omniscient/omnifood
+    verification: unverified
+    verification_note: "Not verified against the live API (non vérifié en réel). JET gives its API key only to partners under a commercial agreement: this package is written from JET's public documentation (https://developers.just-eat.com/documentation/jet-connect and https://uk.api.just-eat.io/docs/jetconnect/openapi.yaml, read on 2026-10-04"
+    docs: true
+  omnifood/thefork:
+    kind: provider
+    description: "Omnifood TheFork: the restaurant's reservations read, created, updated and cancelled, its tables closed or opened online, the webhooks read - through TheFork's B2B API (TheFork Manager)."
+    license: MIT
+    keywords:
+      - restaurant
+      - reservations
+      - booking
+      - thefork
+      - lafourchette
+      - omnifood
+    repository: glitchr-studio/omnifood-thefork
+    branch: 1.x
+    requires:
+      - omniscient/omnifood
+    verification: unverified
+    verification_note: "Not verified against the live API (non vérifié en réel). TheFork sends its keys only to partners it has accepted: this package is written from TheFork's public documentation (https://docs.thefork.io/B2B-API/introduction and https://api.thefork.io/manager/openapi.json, read on 2026-10-04) and tested against recorded ans"
+    docs: true
+  omnifood/ubereats:
+    kind: provider
+    description: 'Omnifood Uber Eats: the orders (read, accepted, denied, ready, cancelled), the menu and its items suspended, the store paused and its holiday hours, the webhooks checked - through the Uber Eats Marketplace APIs.'
+    license: MIT
+    keywords:
+      - restaurant
+      - delivery
+      - uber-eats
+      - ubereats
+      - omnifood
+    repository: glitchr-studio/omnifood-ubereats
+    branch: 1.x
+    requires:
+      - omniscient/omnifood
+    verification: unverified
+    verification_note: "Not verified against the live API (non vérifié en réel). Uber gives API access only to approved partners: this package is written from Uber's public documentation (https://developer.uber.com/docs/eats/introduction, read on 2026-10-04) and tested against recorded answers."
+    docs: true
+  omnifood/zenchef:
+    kind: provider
+    description: "Omnifood Zenchef: the restaurant's credentials and a client ready for Zenchef's partner API, whose documentation Zenchef sends on request - every reservation call refused until it is public."
+    license: MIT
+    keywords:
+      - restaurant
+      - reservations
+      - booking
+      - zenchef
+      - omnifood
+    repository: glitchr-studio/omnifood-zenchef
+    branch: 1.x
+    requires:
+      - omniscient/omnifood
+    verification: unverified
+    verification_note: 'Not verified against the live API (non vérifié en réel), and nothing guessed: every reservation call throws NotSupportedException until the documentation is in hand.'
+    docs: true
+  omniscient/omnifood:
+    kind: family
+    description: 'Omnifood: one contract for the restaurant platforms - delivery orders (Uber Eats, Deliveroo, Just Eat) and table reservations (TheFork, Zenchef) - their menus, their stores, their webhooks, and its Symfony bundle.'
+    license: MIT
+    keywords:
+      - restaurant
+      - food
+      - delivery
+      - orders
+      - reservations
+      - menu
+      - ubereats
+      - deliveroo
+      - justeat
+      - thefork
+      - zenchef
+      - omnifood
+    repository: glitchr-studio/omnifood
+    branch: 1.x
+    verification: unverified
+    verification_note: "None of these platforms gives credentials without a partner agreement: every package is written from the platform's public documentation and tested against recorded answers (MockHttpClient), not verified against the live APIs."
+    docs: true

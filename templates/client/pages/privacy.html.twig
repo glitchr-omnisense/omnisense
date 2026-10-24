@@ -1,4 +1,4 @@
-{# The privacy page: what an account keeps, the cookies, what is asked of other services. #}
+{# The privacy page: no account, no cookie, nothing asked of other services by the pages. #}
 {% extends 'layout1.html.twig' %}
 
 {% block title %}{{ '@messages.privacy.title'|trans }}{% endblock %}
@@ -6,8 +6,6 @@
 {% block content %}
 <div class="om-wrap om-page om-text">
     <header class="om-head is-page"><p class="om-cote">{{ '@messages.footer.site'|trans }}</p><h1>{{ '@messages.privacy.title'|trans }}</h1><p class="om-lead">{{ '@messages.privacy.intro'|trans }}</p></header>
-    <h2>{{ '@messages.privacy.accounts'|trans }}</h2>
-    <p>{{ '@messages.privacy.accounts_text'|trans({email: site.email}) }}</p>
     <h2>{{ '@messages.privacy.cookies'|trans }}</h2>
     <p>{{ '@messages.privacy.cookies_text'|trans }}</p>
     <h2>{{ '@messages.privacy.services'|trans }}</h2>

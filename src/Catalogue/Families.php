@@ -3,34 +3,19 @@
 namespace App\Catalogue;
 
 /**
- * What the site says of the families that the repositories cannot: the
- * order the home page turns the suffixes in, and the names announced in the
- * registry of plan 0 (§3, §13) for which nothing is written yet.
- *
- * Which families EXIST is never read here: it is what the catalogue found
- * in a repository (PackageRepository::findFamilies()). A family listed in
- * ORDER and not found is simply not shown; one found and not listed comes
- * last. The sentence of each is a text of the site (`families.<name>.*` in
- * the translations).
+ * What the site says of the families that the catalog files do not: the
+ * order the home page turns the suffixes in. Which families EXIST is the
+ * catalogue's (one catalog/<family>.yaml each); a family missing from ORDER
+ * comes last, in alphabetical order.
  */
 final class Families
 {
     /** Omni + base, bus, trade...: the order the suffix turns in. */
-    public const ORDER = ['omnibase', 'omnibus', 'omnitrade', 'omnistate', 'omnibank', 'omnisong', 'omnipost', 'omnifood', 'omnischolar', 'omnilab', 'omnilex', 'omnimeet', 'omnishield', 'omnisign', 'omnibill', 'omnireview'];
-
-    /**
-     * Announced, not written: `planned` has a first site waiting for it,
-     * `reserved` holds a name so that nobody writes the same thing under
-     * another one. Shown as such, apart from the catalogue, and dropped
-     * from this list by the page itself the day the family is found.
-     */
-    public const ANNOUNCED = [
-        'omnishow' => 'planned',
-        'omniticket' => 'reserved',
-        'omnireach' => 'reserved',
-        'omnifilm' => 'reserved',
-        'omnigame' => 'reserved',
-        'omnidns' => 'reserved',
+    public const ORDER = [
+        'omnibase', 'omnibus', 'omnitrade', 'omnistate', 'omnibank', 'omnisong', 'omnipost', 'omnifood', 'omnischolar',
+        'omnilab', 'omnilex', 'omnimeet', 'omnishield', 'omnisign', 'omnibill', 'omnireview', 'omniauth', 'omnidrive',
+        'omnimap', 'omnisearch', 'omnishare', 'omnifund', 'omnishow', 'omniticket', 'omnireach', 'omnifilm', 'omnigame',
+        'omnidns', 'omnibridge',
     ];
 
     /** "omnitrade" → "trade": what turns after "Omni". */
@@ -52,17 +37,5 @@ final class Families
         uksort($families, static fn (string $a, string $b): int => [$rank[$a] ?? \PHP_INT_MAX, $a] <=> [$rank[$b] ?? \PHP_INT_MAX, $b]);
 
         return $families;
-    }
-
-    /**
-     * The announced names that are still only names.
-     *
-     * @param list<string> $existing the families found in a repository
-     *
-     * @return array<string, string> name => planned|reserved
-     */
-    public static function announced(array $existing): array
-    {
-        return array_diff_key(self::ANNOUNCED, array_flip($existing));
     }
 }

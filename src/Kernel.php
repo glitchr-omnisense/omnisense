@@ -7,7 +7,7 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
-$_SERVER["APP_TIMER"] = microtime(true);
+$_SERVER['APP_TIMER'] = microtime(true);
 
 class Kernel extends BaseKernel
 {

@@ -1,0 +1,9 @@
+family: omnibridge
+phrase:
+  en: The glue between the foundation and a framework.
+packages:
+  omnibridge/static:
+    kind: bridge
+    description: A static export for any application.
+    repository: glitchr-studio/omnibridge-static
+    branch: 1.x

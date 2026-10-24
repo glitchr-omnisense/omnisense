@@ -1,0 +1,359 @@
+# The omnibus entry of the Omniscient catalogue. Written by `bin/console
+# app:catalog:import` from the packages' repositories; the phrase and the
+# text are the site's own, edited here. Each package: its kind, what its
+# composer.json says, its GitHub repository and development branch, whether
+# its README says it was verified against the real service, whether it has
+# a docs/ folder (see config/documentation.yaml).
+family: omnibus
+phrase:
+  en: 'Ship a parcel, whatever the carrier.'
+  fr: 'Expédier un colis, quel que soit le transporteur.'
+text:
+  en: 'One contract for parcel carriers: rates, labels, tracking, pickup points.'
+  fr: 'Un seul contrat pour les transporteurs : tarifs, étiquettes, suivi, points relais.'
+packages:
+  omnibus/amazon:
+    kind: provider
+    description: 'Omnibus Amazon Shipping: rates, shipments and labels, tracking and cancellations - the Selling Partner Shipping API v2.'
+    license: MIT
+    keywords:
+      - shipping
+      - carrier
+      - omnibus
+      - amazon
+    repository: glitchr-studio/omnibus-amazon
+    branch: 2.x
+    requires:
+      - omniscient/omnibus
+    verification: unstated
+  omnibus/aramex:
+    kind: provider
+    description: 'Omnibus Aramex: rates, shipments and labels, tracking and offices - the Shipping, Tracking and Location services (JSON).'
+    license: MIT
+    keywords:
+      - shipping
+      - carrier
+      - omnibus
+      - aramex
+    repository: glitchr-studio/omnibus-aramex
+    branch: 2.x
+    requires:
+      - omniscient/omnibus
+    verification: unstated
+  omnibus/auspost:
+    kind: provider
+    description: 'Omnibus Australia Post: prices, shipments and labels, tracking - the Shipping and Tracking API.'
+    license: MIT
+    keywords:
+      - shipping
+      - carrier
+      - omnibus
+      - auspost
+    repository: glitchr-studio/omnibus-auspost
+    branch: 2.x
+    requires:
+      - omniscient/omnibus
+    verification: unstated
+  omnibus/bluedart:
+    kind: provider
+    description: 'Omnibus Blue Dart: waybills and labels, tracking - the Blue Dart API gateway.'
+    license: MIT
+    keywords:
+      - shipping
+      - carrier
+      - omnibus
+      - bluedart
+    repository: glitchr-studio/omnibus-bluedart
+    branch: 2.x
+    requires:
+      - omniscient/omnibus
+    verification: unverified
+    verification_note: "Built from Blue Dart's published API documentation and tested on recorded answers; unverified against the sandbox until an account's keys are at hand."
+  omnibus/canada-post:
+    kind: provider
+    description: 'Omnibus Canada Post: rates, non-contract shipments and labels, tracking and post offices - the REST (XML) web services.'
+    license: MIT
+    keywords:
+      - shipping
+      - carrier
+      - omnibus
+      - 'canada post'
+    repository: glitchr-studio/omnibus-canada-post
+    branch: 2.x
+    requires:
+      - omniscient/omnibus
+    verification: unstated
+  omnibus/canpar:
+    kind: provider
+    description: 'Omnibus Canpar: rates, shipments and labels, tracking - the CanShip web services (SOAP).'
+    license: MIT
+    keywords:
+      - shipping
+      - carrier
+      - omnibus
+      - canpar
+    repository: glitchr-studio/omnibus-canpar
+    branch: 2.x
+    requires:
+      - omniscient/omnibus
+    verification: unstated
+  omnibus/chronopost:
+    kind: provider
+    description: 'Omnibus Chronopost: prices (Quickcost), shipments and labels, tracking and Pickup relay points - the SOAP web services.'
+    license: MIT
+    keywords:
+      - shipping
+      - carrier
+      - omnibus
+      - chronopost
+    repository: glitchr-studio/omnibus-chronopost
+    branch: 2.x
+    requires:
+      - omniscient/omnibus
+    verification: partial
+    verification_note: 'Not verified against a real contract: the codes and fields are those of the public integrations of Chronopost Food; the order of scheduledValue in the request and the Saturday service in particular are to be confirmed on a first real skybill.'
+  omnibus/colissimo:
+    kind: provider
+    description: 'Omnibus Colissimo (La Poste): rates from configuration; labels, tracking and relay points to come.'
+    license: MIT
+    keywords:
+      - shipping
+      - omnibus
+      - colissimo
+      - 'la poste'
+    repository: glitchr-studio/omnibus-colissimo
+    branch: 2.x
+    requires:
+      - omniscient/omnibus
+    verification: unstated
+  omnibus/db-schenker:
+    kind: provider
+    description: 'Omnibus DB Schenker: tracking through the eSchenker API; rates from configuration, shipments booked in the portal.'
+    license: MIT
+    keywords:
+      - shipping
+      - carrier
+      - omnibus
+      - 'db schenker'
+    repository: glitchr-studio/omnibus-db-schenker
+    branch: 2.x
+    requires:
+      - omniscient/omnibus
+    verification: unverified
+    verification_note: "The booking action is built on the Open API's published shape and is unverified: it needs an account's key (from the Schenker partner portal) to be run against the service."
+  omnibus/dhl:
+    kind: provider
+    description: 'Omnibus DHL Express: rates, labels and tracking - MyDHL API; service points through the DHL location finder.'
+    license: MIT
+    keywords:
+      - shipping
+      - carrier
+      - omnibus
+      - dhl
+    repository: glitchr-studio/omnibus-dhl
+    branch: 2.x
+    requires:
+      - omniscient/omnibus
+    verification: unstated
+  omnibus/dtdc:
+    kind: provider
+    description: 'Omnibus DTDC: consignments and labels, cancellations, tracking - the DTDC customer integration API.'
+    license: MIT
+    keywords:
+      - shipping
+      - carrier
+      - omnibus
+      - dtdc
+    repository: glitchr-studio/omnibus-dtdc
+    branch: 2.x
+    requires:
+      - omniscient/omnibus
+    verification: unverified
+    verification_note: "Built from DTDC's published integration documentation and tested on recorded answers; unverified against the demo environment until an account's keys are at hand."
+  omnibus/fedex:
+    kind: provider
+    description: 'Omnibus FedEx: rate quotes, labels, tracking and locations - the REST APIs with OAuth2.'
+    license: MIT
+    keywords:
+      - shipping
+      - carrier
+      - omnibus
+      - fedex
+    repository: glitchr-studio/omnibus-fedex
+    branch: 2.x
+    requires:
+      - omniscient/omnibus
+    verification: unstated
+  omnibus/gls:
+    kind: provider
+    description: 'Omnibus GLS: shipments and labels through ShipIT, cancellations, tracking.'
+    license: MIT
+    keywords:
+      - shipping
+      - carrier
+      - omnibus
+      - gls
+    repository: glitchr-studio/omnibus-gls
+    branch: 2.x
+    requires:
+      - omniscient/omnibus
+    verification: unstated
+  omnibus/jdl-express:
+    kind: provider
+    description: 'Omnibus JD Logistics: waybills, interception and traces - the JD Open Platform (signed requests).'
+    license: MIT
+    keywords:
+      - shipping
+      - carrier
+      - omnibus
+      - 'jdl express'
+    repository: glitchr-studio/omnibus-jdl-express
+    branch: 2.x
+    requires:
+      - omniscient/omnibus
+    verification: unverified
+    verification_note: "Built from JD Logistics' published open platform documentation and tested on recorded answers; unverified against UAT until an account's keys are at hand."
+  omnibus/mondial-relay:
+    kind: provider
+    description: 'Omnibus Mondial Relay carrier: relay points, labels, tracking (Web_Services.asmx, no ext-soap needed).'
+    license: MIT
+    keywords:
+      - shipping
+      - omnibus
+      - 'mondial relay'
+      - 'point relais'
+      - inpost
+    repository: glitchr-studio/omnibus-mondial-relay
+    branch: 2.x
+    requires:
+      - omniscient/omnibus
+    verification: unstated
+  omnibus/offline:
+    kind: provider
+    description: 'Omnibus offline carrier: the shop ships by itself - configured rates, a tracking number typed by hand, its own counters as pickup points.'
+    license: MIT
+    keywords:
+      - shipping
+      - omnibus
+      - offline
+      - 'click and collect'
+    repository: glitchr-studio/omnibus-offline
+    branch: 2.x
+    requires:
+      - omniscient/omnibus
+    verification: unstated
+  omnibus/purolator:
+    kind: provider
+    description: 'Omnibus Purolator: estimates, shipments and labels, tracking - the E-Ship Web Services (SOAP).'
+    license: MIT
+    keywords:
+      - shipping
+      - carrier
+      - omnibus
+      - purolator
+    repository: glitchr-studio/omnibus-purolator
+    branch: 2.x
+    requires:
+      - omniscient/omnibus
+    verification: unstated
+  omnibus/royal-mail:
+    kind: provider
+    description: 'Omnibus Royal Mail: orders and postage labels through Click & Drop, tracking through the Tracking API.'
+    license: MIT
+    keywords:
+      - shipping
+      - carrier
+      - omnibus
+      - 'royal mail'
+    repository: glitchr-studio/omnibus-royal-mail
+    branch: 2.x
+    requires:
+      - omniscient/omnibus
+    verification: unstated
+  omnibus/sf-express:
+    kind: provider
+    description: 'Omnibus SF Express: orders, cancellations and route tracking - the SF Express open API (signed requests).'
+    license: MIT
+    keywords:
+      - shipping
+      - carrier
+      - omnibus
+      - 'sf express'
+    repository: glitchr-studio/omnibus-sf-express
+    branch: 2.x
+    requires:
+      - omniscient/omnibus
+    verification: unverified
+    verification_note: "Built from SF's published open platform documentation and tested on recorded answers; unverified against the sandbox until an account's keys are at hand."
+  omnibus/tnt:
+    kind: provider
+    description: 'Omnibus TNT Express: prices, shipments and labels, tracking - ExpressConnect (XML).'
+    license: MIT
+    keywords:
+      - shipping
+      - carrier
+      - omnibus
+      - tnt
+    repository: glitchr-studio/omnibus-tnt
+    branch: 2.x
+    requires:
+      - omniscient/omnibus
+    verification: unstated
+  omnibus/ups:
+    kind: provider
+    description: 'Omnibus UPS: rates, labels, tracking and Access Point locations - the REST APIs with OAuth2.'
+    license: MIT
+    keywords:
+      - shipping
+      - carrier
+      - omnibus
+      - ups
+    repository: glitchr-studio/omnibus-ups
+    branch: 2.x
+    requires:
+      - omniscient/omnibus
+    verification: unstated
+  omnibus/usps:
+    kind: provider
+    description: 'Omnibus USPS: prices, labels, tracking and drop-off locations - the USPS APIs v3 with OAuth2.'
+    license: MIT
+    keywords:
+      - shipping
+      - carrier
+      - omnibus
+      - usps
+    repository: glitchr-studio/omnibus-usps
+    branch: 2.x
+    requires:
+      - omniscient/omnibus
+    verification: unstated
+  omnibus/zto-express:
+    kind: provider
+    description: 'Omnibus ZTO Express: orders, cancellations and traces - the ZTO open API (signed requests).'
+    license: MIT
+    keywords:
+      - shipping
+      - carrier
+      - omnibus
+      - 'zto express'
+    repository: glitchr-studio/omnibus-zto-express
+    branch: 2.x
+    requires:
+      - omniscient/omnibus
+    verification: unverified
+    verification_note: "Built from ZTO's published open platform documentation and tested on recorded answers; unverified against the test environment until an account's keys are at hand."
+  omniscient/omnibus:
+    kind: family
+    description: 'Omnibus: one contract for parcel carriers - rates, labels, tracking, pickup points - and its Symfony bundle (the Payum of shipping).'
+    license: MIT
+    keywords:
+      - shipping
+      - carrier
+      - parcel
+      - label
+      - tracking
+      - 'pickup point'
+    repository: glitchr-studio/omnibus
+    branch: 2.x
+    verification: unstated
+    docs: true

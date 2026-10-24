@@ -1,0 +1,83 @@
+# The omnibill entry of the Omniscient catalogue. Written by `bin/console
+# app:catalog:import` from the packages' repositories; the phrase and the
+# text are the site's own, edited here. Each package: its kind, what its
+# composer.json says, its GitHub repository and development branch, whether
+# its README says it was verified against the real service, whether it has
+# a docs/ folder (see config/documentation.yaml).
+family: omnibill
+phrase:
+  en: 'Send and receive an electronic invoice.'
+  fr: 'Transmettre et recevoir une facture électronique.'
+text:
+  en: "One contract for electronic invoices: submit a conformant file (Factur-X, UBL, CII), follow its statuses, receive suppliers' invoices, declare a status, look a company up in the directory, transmit e-reporting - by e-mail, through an approved platform (XP Z12-013) or Chorus Pro."
+  fr: 'Un seul contrat pour la facture électronique : déposer un fichier conforme (Factur-X, UBL, CII), suivre ses statuts, recevoir les factures des fournisseurs, déclarer un statut, chercher une entreprise dans l’annuaire, transmettre l’e-reporting — par courriel, une plateforme agréée (XP Z12-013) ou Chorus Pro.'
+packages:
+  omnibill/afnor:
+    kind: provider
+    description: "Omnibill AFNOR: an approved platform (plateforme agréée) through the standard API of XP Z12-013 - the Flow Service (submit an invoice, a lifecycle status or an e-reporting file, follow its acknowledgement, receive suppliers' invoices and statuses, webhooks with their signature checked) and the Directory Service (where a SIREN or a SIRET receives); any platform that implements the standard, by its address."
+    license: MIT
+    keywords:
+      - invoice
+      - e-invoicing
+      - facture-electronique
+      - xp-z12-013
+      - plateforme-agreee
+      - omnibill
+    repository: glitchr-studio/omnibill-afnor
+    branch: 1.x
+    requires:
+      - omniscient/omnibill
+    verification: partial
+    verification_note: "Documentation: the sources and what is missing from them, the options, each operation and its route, the webhooks' signature, what was verified. — Not verified against a platform: no account."
+    docs: true
+  omnibill/chorus-pro:
+    kind: provider
+    description: "Omnibill Chorus Pro: invoices to the French public sector through PISTE - a conformant file deposited (deposer/flux), its deposit followed and the invoice's status read (rechercher/fournisseur), the PISTE client credentials and the technical account's cpro-account header."
+    license: MIT
+    keywords:
+      - invoice
+      - e-invoicing
+      - chorus-pro
+      - piste
+      - b2g
+      - omnibill
+    repository: glitchr-studio/omnibill-chorus-pro
+    branch: 1.x
+    requires:
+      - omniscient/omnibill
+    verification: partial
+    verification_note: "Documentation: the options, the routes, the statuses' reading, what was verified. — Not verified in real: no PISTE account."
+    docs: true
+  omnibill/email:
+    kind: provider
+    description: "Omnibill E-mail: the invoice attached to an e-mail sent through symfony/mailer, its statuses (sent, paid, refused...) kept by hand in a store of the application's - the default gateway of omniscient/omnibill, and the tests'; no platform, no approval."
+    license: MIT
+    keywords:
+      - invoice
+      - e-invoicing
+      - email
+      - mailer
+      - omnibill
+    repository: glitchr-studio/omnibill-email
+    branch: 1.x
+    requires:
+      - omniscient/omnibill
+    verification: verified
+    verification_note: 'Documentation: the options, the message, the store, what was verified - an invoice sent for real to a local SMTP server, on 2026-10-08.'
+    docs: true
+  omniscient/omnibill:
+    kind: family
+    description: "Omnibill: one contract for transmitting and receiving electronic invoices - submit a conformant file (Factur-X, UBL, CII), follow its lifecycle statuses, receive suppliers' invoices, declare a status, look a company up in the directory, transmit e-reporting - whoever carries it: an e-mail (omnibill/email), an approved platform's standard API XP Z12-013 (omnibill/afnor), Chorus Pro (omnibill/chorus-pro); and its Symfony bundle."
+    license: MIT
+    keywords:
+      - invoice
+      - e-invoicing
+      - facture-electronique
+      - factur-x
+      - xp-z12-013
+      - chorus-pro
+      - omnibill
+    repository: glitchr-studio/omnibill
+    branch: 1.x
+    verification: unstated
+    docs: true

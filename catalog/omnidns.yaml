@@ -1,0 +1,106 @@
+# The omnidns entry of the Omniscient catalogue. Written by `bin/console
+# app:catalog:import` from the packages' repositories; the phrase and the
+# text are the site's own, edited here. Each package: its kind, what its
+# composer.json says, its GitHub repository and development branch, whether
+# its README says it was verified against the real service, whether it has
+# a docs/ folder (see config/documentation.yaml).
+family: omnidns
+phrase:
+  en: 'Manage a domain name where it is registered.'
+  fr: 'Gérer un nom de domaine là où il est enregistré.'
+packages:
+  omnidns/cloudflare:
+    kind: provider
+    description: "Omnidns's Cloudflare, under any PHP host: the records of a zone (over cloudflare/sdk, proxying kept), and the domains Cloudflare Registrar holds for an account with their terms - an API token."
+    license: MIT
+    keywords:
+      - dns
+      - domain
+      - cloudflare
+      - dns-records
+      - registrar
+      - framework-agnostic
+      - omnidns
+    repository: glitchr-studio/omnidns-cloudflare
+    branch: 1.x
+    requires:
+      - omniscient/omnidns
+    verification: partial
+    verification_note: '- Not verified live: no Cloudflare token at hand.'
+  omnidns/gandi:
+    kind: provider
+    description: "Omnidns's Gandi, under any PHP host: whether a domain is free and its price, registering and renewing it, the account's domains and their terms, their name servers, and LiveDNS records - Gandi's API v5 with a personal access token, on the application's HTTP client."
+    license: MIT
+    keywords:
+      - dns
+      - domain
+      - registrar
+      - gandi
+      - livedns
+      - dns-records
+      - framework-agnostic
+      - omnidns
+    repository: glitchr-studio/omnidns-gandi
+    branch: 1.x
+    requires:
+      - omniscient/omnidns
+    verification: partial
+    verification_note: '- Not verified live: no Gandi account at hand.'
+  omnidns/ovh:
+    kind: provider
+    description: "Omnidns's OVHcloud, under any PHP host: whether a domain is free and its price, registering it (a cart checked out) and renewing it, the account's domains and their terms, their name servers, and the records of their zones - over the official ovh/ovh client."
+    license: MIT
+    keywords:
+      - dns
+      - domain
+      - registrar
+      - ovh
+      - ovhcloud
+      - dns-records
+      - framework-agnostic
+      - omnidns
+    repository: glitchr-studio/omnidns-ovh
+    branch: 1.x
+    requires:
+      - omniscient/omnidns
+    verification: partial
+    verification_note: '- Not verified live: no OVHcloud account at hand (an anonymous cart is answered "You must login first" for a domain''s offers, 2026-10-24).'
+  omnidns/scaleway:
+    kind: provider
+    description: "Omnidns's Scaleway, under any PHP host: whether a domain is free, registering and renewing it, the project's domains and their terms, their name servers, and the records of their zones - Scaleway's Domains and DNS API with a secret key, on the application's HTTP client."
+    license: MIT
+    keywords:
+      - dns
+      - domain
+      - registrar
+      - scaleway
+      - dns-records
+      - framework-agnostic
+      - omnidns
+    repository: glitchr-studio/omnidns-scaleway
+    branch: 1.x
+    requires:
+      - omniscient/omnidns
+    verification: partial
+    verification_note: '- Not verified live: no Scaleway key at hand.'
+  omniscient/omnidns:
+    kind: family
+    description: "Omnidns: a domain name where it is registered, under any PHP host - whether it is free and at what price, registering and renewing it, the account's domains and their terms, their name servers, and the records of their zones; from OVH, Gandi, Cloudflare or Scaleway through one set of models. Providers are packages of their own (omnidns/ovh, omnidns/gandi, omnidns/cloudflare, omnidns/scaleway); no framework in require."
+    license: MIT
+    keywords:
+      - dns
+      - domain
+      - domains
+      - registrar
+      - dns-records
+      - ovh
+      - gandi
+      - cloudflare
+      - scaleway
+      - framework-agnostic
+      - omnidns
+    repository: glitchr-studio/omnidns
+    branch: 1.x
+    verification: partial
+    verification_note: '- Not verified live: none of the four providers. Every one needs an account and a key, OVH''s availability included (its order cart answers "You must login first" to an anonymous question, checked 2026-10-24); no account was at hand.'
+    docs: true

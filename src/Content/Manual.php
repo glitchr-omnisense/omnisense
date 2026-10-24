@@ -1,0 +1,35 @@
+<?php
+
+namespace App\Content;
+
+/**
+ * A package's documentation as config/documentation.yaml declares it: its
+ * key in the addresses (/docs/<key>/<series>/...), its package, its GitHub
+ * repository, its default series and every series with the commit it is
+ * read at.
+ */
+final class Manual
+{
+    /**
+     * @param array<string, array{branch: ?string, ref: string, path: string, eol: bool}> $versions series => source
+     */
+    public function __construct(
+        public readonly string $key,
+        public readonly string $package,
+        public readonly string $repository,
+        public readonly string $default,
+        public readonly array $versions,
+    ) {
+    }
+
+    /** @return list<string> */
+    public function series(): array
+    {
+        return array_keys($this->versions);
+    }
+
+    public function has(string $series): bool
+    {
+        return isset($this->versions[$series]);
+    }
+}

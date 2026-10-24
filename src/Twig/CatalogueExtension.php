@@ -3,26 +3,30 @@
 namespace App\Twig;
 
 use App\Catalogue\Families;
-use App\Catalogue\InstallChoice;
 use App\Catalogue\PackageSearch;
-use App\Entity\Package;
-use App\Repository\PackageRepository;
-use Base\Wikidoc\Manual\Manual;
-use Base\Wikidoc\Manual\ManualRegistry;
+use App\Site\Identity;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Routing\Exception\ExceptionInterface as RoutingException;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
 
 /**
- * What the templates ask of the catalogue: a package's manual, a manual's
- * package, a family's suffix, the manuals grouped as the catalogue, a name
- * marked as the home page shows it.
+ * What the templates ask beyond the controllers' variables: a name marked
+ * as the home page shows it, a family's suffix, a package's search
+ * haystack, and the current page in each language (hreflang, the language
+ * link, the canonical address).
  */
 class CatalogueExtension extends AbstractExtension
 {
+    /** The site's languages, the default first (English at the root, French under /fr). */
+    public const LOCALES = ['en', 'fr'];
+
     public function __construct(
-        private readonly ManualRegistry $manuals,
-        private readonly PackageRepository $packages,
+        private readonly RequestStack $requests,
+        private readonly UrlGeneratorInterface $urls,
+        private readonly Identity $site,
     ) {
     }
 
@@ -30,6 +34,18 @@ class CatalogueExtension extends AbstractExtension
     {
         return [
             new TwigFilter('omni_mark', self::mark(...), ['is_safe' => ['html']]),
+        ];
+    }
+
+    public function getFunctions(): array
+    {
+        return [
+            new TwigFunction('family_suffix', Families::suffix(...)),
+            new TwigFunction('search_haystack', PackageSearch::haystack(...)),
+            new TwigFunction('page_alternates', $this->alternates(...)),
+            new TwigFunction('site_locales', static fn (): array => self::LOCALES),
+            // An address at the static site's public origin (SITE_URL), whatever host renders the page.
+            new TwigFunction('site_url', fn (string $route, array $parameters = []): string => $this->site->absolute($this->urls->generate($route, $parameters))),
         ];
     }
 
@@ -47,106 +63,38 @@ class CatalogueExtension extends AbstractExtension
             : htmlspecialchars($part), explode('/', $name)));
     }
 
-    public function getFunctions(): array
-    {
-        return [
-            new TwigFunction('manual_of', fn (Package $package): ?Manual => $this->manuals->get($package->getHandle())),
-            new TwigFunction('package_of', fn (Manual|string $manual): ?Package => $this->packages->findOneByHandle($manual instanceof Manual ? $manual->getKey() : $manual)),
-            new TwigFunction('family_suffix', Families::suffix(...)),
-            new TwigFunction('search_haystack', PackageSearch::haystack(...)),
-            new TwigFunction('install_params', InstallChoice::paramsFor(...)),
-            new TwigFunction('doc_path', $this->docPath(...)),
-            new TwigFunction('manual_pages', $this->manualPages(...)),
-            new TwigFunction('manual_groups', $this->groups(...)),
-        ];
-    }
-
     /**
-     * The address, in the manuals, of a page of a manual at its default
-     * version ("glitchr/omniscient/main/compatibilite"); null when the manual
-     * is not there, so that a template can leave the link out.
-     */
-    public function docPath(string $manual, string $page = ''): ?string
-    {
-        $found = $this->manuals->get($manual);
-        if (null === $found) {
-            return null;
-        }
-        $version = $found->getDefaultVersion() ?? array_values($found->versions)[0] ?? null;
-
-        return null === $version ? null : $found->urlPath($version->name, $page);
-    }
-
-    /**
-     * The pages of a manual at its default version, in reading order, each
-     * with its address: what the documentation's entry page lists for the
-     * site's own pages (getting started, compatibility, contributing).
+     * The current page's address in each language it exists in, absolute:
+     * the same route under its other locale, with the same parameters.
      *
-     * @return list<array{title: string, path: string}>
+     * @param list<string>|null $only the languages the page is written in (a piece of news may be in one)
+     *
+     * @return array<string, string> locale => URL
      */
-    public function manualPages(string $manual): array
+    public function alternates(?array $only = null): array
     {
-        $found = $this->manuals->get($manual);
-        $version = $found?->getDefaultVersion() ?? ($found ? array_values($found->versions)[0] ?? null : null);
-        if (null === $found || null === $version) {
+        $request = $this->requests->getMainRequest();
+        $route = (string) $request?->attributes->get('_route', '');
+        if ('' === $route || null === $request) {
+            return [];
+        }
+        // omnibase's router answers a localized route by its canonical name (app_package, not app_package.fr).
+        $canonical = (string) preg_replace('/\.(?:'.implode('|', self::LOCALES).')$/', '', $route);
+        $params = (array) $request->attributes->get('_route_params', []);
+        unset($params['_locale'], $params['_canonical_route']);
+
+        $out = [];
+        foreach (self::LOCALES as $locale) {
+            try {
+                $out[$locale] = $this->site->absolute($this->urls->generate($canonical, ['_locale' => $locale] + $params));
+            } catch (RoutingException) {
+            }
+        }
+        // A route that is not localized has the same address in every language: no alternates.
+        if (\count(array_unique($out)) < \count($out)) {
             return [];
         }
 
-        $pages = [];
-        foreach ($this->manuals->pages($found, $version)->getSequence() as $page) {
-            if (!$page->isSection()) {
-                $pages[] = ['title' => $page->title, 'path' => $found->urlPath($version->name, $page->path)];
-            }
-        }
-
-        return $pages;
-    }
-
-    /**
-     * The manuals as the catalogue groups its packages: omnibase and its
-     * components, then each family with its providers, then the libraries,
-     * then what the catalogue does not know.
-     *
-     * @param array<string, Manual> $manuals
-     *
-     * @return list<array{family: ?string, kind: string, manuals: list<array{manual: Manual, package: ?Package}>}>
-     */
-    public function groups(array $manuals): array
-    {
-        $packages = [];
-        foreach ($this->packages->findCatalogue() as $package) {
-            $packages[$package->getHandle()] = $package;
-        }
-
-        $groups = [];
-        foreach ($manuals as $key => $manual) {
-            if ('glitchr/omniscient' === $key) {
-                continue; // the site's own pages: the entry page shows them first, not among the packages
-            }
-            $package = $packages[$key] ?? null;
-            $group = match (true) {
-                null === $package => '~other',
-                null === $package->getFamily() => '~library',
-                default => $package->getFamily(),
-            };
-            $groups[$group][] = ['manual' => $manual, 'package' => $package];
-        }
-
-        $ordered = [];
-        foreach (array_keys(Families::ordered($groups)) as $name) {
-            $members = $groups[$name];
-            usort($members, static fn (array $a, array $b): int => [$a['package']?->getTier()->order() ?? 9, $a['manual']->getKey()] <=> [$b['package']?->getTier()->order() ?? 9, $b['manual']->getKey()]);
-            $ordered[] = [
-                'family' => str_starts_with($name, '~') ? null : $name,
-                'kind' => match ($name) {
-                    '~library' => 'library',
-                    '~other' => 'other',
-                    default => 'family',
-                },
-                'manuals' => $members,
-            ];
-        }
-
-        return $ordered;
+        return null === $only ? $out : array_intersect_key($out, array_flip($only));
     }
 }

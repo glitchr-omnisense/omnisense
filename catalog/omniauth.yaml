@@ -1,0 +1,116 @@
+# The omniauth entry of the Omniscient catalogue. Written by `bin/console
+# app:catalog:import` from the packages' repositories; the phrase and the
+# text are the site's own, edited here. Each package: its kind, what its
+# composer.json says, its GitHub repository and development branch, whether
+# its README says it was verified against the real service, whether it has
+# a docs/ folder (see config/documentation.yaml).
+family: omniauth
+phrase:
+  en: 'Sign people in, by whichever factors.'
+  fr: 'Faire se connecter, par les facteurs que l’on veut.'
+text:
+  en: 'Who signs in, and by which factors, under any PHP host: accounts, the proofs of each method (password, sign-in link, code by e-mail, backup codes, trusted devices), the second-factor rule, and sign-in through identity providers; passkeys (WebAuthn) and one-time passwords are packages of their own.'
+  fr: 'Qui se connecte, et par quels facteurs, sous n’importe quel hôte PHP : les comptes, les preuves de chaque méthode (mot de passe, lien de connexion, code par e-mail, codes de secours, appareils de confiance), la règle du second facteur, et la connexion par des fournisseurs d’identité ; les clés d’accès (WebAuthn) et les mots de passe à usage unique sont des paquets à part.'
+packages:
+  omniauth/google:
+    kind: provider
+    description: 'Omniauth''s Google sign-in, under any PHP host, over league/oauth2-google: Google as an OpenID Connect provider for omniauth''s identity providers (Omniauth\OAuth\) - scopes "openid email profile", the nonce in the authorization address, the ID token''s issuer, audience, authorized party, lifetime, nonce and Workspace domain ("hd") checked, "email_verified" read as Google sends it, the userinfo when there is no ID token -, its factory for a host''s configuration.'
+    license: MIT
+    keywords:
+      - authentication
+      - sign-in
+      - google
+      - oauth
+      - oauth2
+      - openid-connect
+      - framework-agnostic
+      - omniauth
+    repository: glitchr-studio/omniauth-google
+    branch: 1.x
+    requires:
+      - omniscient/omniauth
+    verification: partial
+    verification_note: "- Not verified: a real Google - no client id and secret were at hand: the recorded answers are written from Google's documentation, not captured, and the ID token's signature is not checked (a token from the token endpoint over TLS, OpenID Connect Core §3.1.3.7 (6))."
+    docs: true
+  omniauth/oauth:
+    kind: provider
+    description: 'Abandoned: omniauth''s sign-in through identity providers is omniscient/omniauth''s own since 2026-10-23 (Omniauth\OAuth\, the same namespace and class names; each provider a package of its own, omniauth/google first). This last release holds no code and requires omniscient/omniauth: require omniscient/omniauth instead.'
+    license: MIT
+    keywords:
+      - authentication
+      - sign-in
+      - oauth
+      - oauth2
+      - openid-connect
+      - omniauth
+      - abandoned
+    repository: glitchr-studio/omniauth-oauth
+    branch: 1.x
+    requires:
+      - omniscient/omniauth
+    verification: unstated
+  omniauth/otp:
+    kind: provider
+    description: "Omniauth's one-time passwords over spomky-labs/otphp, under any PHP host - authenticator applications (TOTP; HOTP possible): the second factor, its enrolment (a secret and its otpauth:// address) and its revocation, with scheb/2fa's parameters (SHA1, 30 s, 6 digits, the same leeway and provisioning address) so the secrets an application keeps today go on working, a code accepted once only, and the secrets sealed at rest with libsodium (SodiumSecretBox, the key in the host's vault; the ones kept in clear read until rewritten). Formerly omniauth/totp, which it replaces (the Omniauth\\Totp\\ names stay aliases for one release)."
+    license: MIT
+    keywords:
+      - authentication
+      - two-factor
+      - 2fa
+      - totp
+      - hotp
+      - authenticator
+      - otp
+      - sodium
+      - framework-agnostic
+      - omniauth
+    repository: glitchr-studio/omniauth-otp
+    branch: 1.x
+    requires:
+      - omniscient/omniauth
+    verification: partial
+    verification_note: "- Not verified: a real phone's application (at AU7, in Chrome, against the site); concurrent tries of the same code against CacheUsedSteps."
+    docs: true
+  omniauth/webauthn:
+    kind: provider
+    description: "Omniauth's WebAuthn over web-auth/webauthn-lib, under any PHP host - passkeys: the sign-in (request options, then the assertion checked: origin, relying party, user verification required, counter and backup flags kept) and the registration (creation options, then the attestation checked), on the credential record as omnibase's userPasskey table holds it - the 13 fields of WebAuthn's CredentialRecord, in their base64 text - so a passkey registered by web-auth/webauthn-symfony-bundle signs in here and one registered here is read by the bundle. A software authenticator (P-256) signs real assertions in tests. Formerly omniauth/passkey, which it replaces (the Omniauth\\Passkey\\ names stay aliases for one release)."
+    license: MIT
+    keywords:
+      - authentication
+      - sign-in
+      - passkey
+      - webauthn
+      - fido2
+      - framework-agnostic
+      - omniauth
+    repository: glitchr-studio/omniauth-webauthn
+    branch: 1.x
+    requires:
+      - omniscient/omniauth
+    verification: partial
+    verification_note: '- every refusal: a forged signature, an unknown passkey, a challenge used twice, another challenge, another origin, another relying party, a host the relying party does not serve, a person not verified (sign-in and registration), a counter gone back, the same authenticator registered twice, an unreadable credential; th'
+    docs: true
+  omniscient/omniauth:
+    kind: family
+    description: "Omniauth: who signs in, and by which factors, under any PHP host - the contracts (accounts, the stores of each proof, the second-factor rule, the host's small duties), the conductor (begin, then verify; the attempt, the result), the methods that need no library (password through symfony/password-hasher, sign-in link, code by e-mail, backup codes, trusted devices in scheb/2fa's cookie format), the sign-in through identity providers (Omniauth\\OAuth\\: state, PKCE and nonce, the linking by the provider's subject, the sign-up of an unknown identity; each provider a package of its own, omniauth/google first), PSR-14 events and Testing helpers. WebAuthn (passkeys) and one-time passwords (TOTP) are packages of their own; the Symfony and Laravel bridges live in omnibridge."
+    license: MIT
+    keywords:
+      - authentication
+      - sign-in
+      - two-factor
+      - 2fa
+      - password
+      - magic-link
+      - backup-codes
+      - trusted-device
+      - oauth
+      - oauth2
+      - openid-connect
+      - pkce
+      - framework-agnostic
+      - omniauth
+    repository: glitchr-studio/omniauth
+    branch: 1.x
+    verification: partial
+    verification_note: "- Not verified: an application's own stores (omnibase fills them at step AU4); a real host (the bridges come with AU6 and AU8); a cookie written by a running scheb/2fa on an application (the encoder is compared, not a browser's cookie); concurrent tries against CacheThrottle (read then written, not atomic: a host that "
+    docs: true

@@ -1,3 +1,0 @@
-base_admin_crud:
-    resource: .
-    type: base_admin

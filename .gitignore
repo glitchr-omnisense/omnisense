@@ -115,3 +115,10 @@ deployments/docker/proxy/ssl/*
 
 # glitchr/canva's default token file (the app keeps its token in the settings instead).
 /var/canva/
+var/docs
+
+# The static website (bin/omnibridge-static build)
+/dist/
+/var/static/
+/.cache/
+/public/wysiwyg

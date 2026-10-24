@@ -1,0 +1,65 @@
+#!/bin/sh
+# The whole static website, from a checkout: each package's documentation at
+# its pinned commit, the front-end build, the export of every page by
+# omnibridge/static, and the check of the folder against its manifest.
+#
+#   bin/omnibridge-static build [--out=dist] [--local=<folder of working copies>] [--skip-assets] [--verify]
+#   bin/omnibridge-static check [dist]
+#
+# Runs where PHP 8.4 (with the core's extensions) and Node are: the CI image,
+# or the site's container (make static). No database, no Redis, no network
+# but GitHub for the documentation (none with --local).
+#
+# Environment: SITE_URL, the public origin of the static site (canonical
+# links, sitemap, feeds) - http://localhost:8135 by default, a preview's own
+# address in CI.
+set -eu
+cd "$(dirname "$0")/.."
+
+command=${1:-build}
+[ $# -gt 0 ] && shift
+
+out=dist
+local=
+assets=1
+verify=
+for argument in "$@"; do
+    case "$argument" in
+        --out=*) out=${argument#--out=} ;;
+        --local=*) local=${argument#--local=} ;;
+        --skip-assets) assets= ;;
+        --verify) verify=--verify ;;
+        *) [ "$command" = check ] && out=$argument || { echo "Unknown option: $argument" >&2; exit 2; } ;;
+    esac
+done
+
+# A build renders as a visitor of the production site, in one process: no host
+# reduction, no queue, no setting read from a database.
+export APP_ENV="${APP_ENV:-prod}" APP_DEBUG="${APP_DEBUG:-0}" HTTP_REDUCTION=0 MESSENGER_TRANSPORT_DSN=sync://
+export SITE_URL="${SITE_URL:-http://localhost:8135}"
+# The pages sign nothing (no session, no form): the kernel needs a secret only to boot.
+export APP_SECRET="${APP_SECRET:-static-site-build-not-a-secret}"
+
+case "$command" in
+    build)
+        echo "== documentation (config/documentation.yaml)"
+        php bin/console app:docs:fetch ${local:+--local="$local"}
+        if [ -n "$assets" ]; then
+            echo "== front end (Encore)"
+            [ -d node_modules ] || yarn install --frozen-lockfile
+            yarn run prod
+        fi
+        php bin/console assets:install public --no-interaction >/dev/null
+        php bin/console cache:clear --no-warmup >/dev/null
+        echo "== export (omnibridge/static) to $out"
+        php vendor/bin/omnibridge-static build static.php --out="$out" --strict $verify
+        php vendor/bin/omnibridge-static check "$out"
+        ;;
+    check)
+        php vendor/bin/omnibridge-static check "$out"
+        ;;
+    *)
+        echo "Usage: bin/omnibridge-static build|check [options]" >&2
+        exit 2
+        ;;
+esac

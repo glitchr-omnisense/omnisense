@@ -1,0 +1,1110 @@
+# The omnilab entry of the Omniscient catalogue. Written by `bin/console
+# app:catalog:import` from the packages' repositories; the phrase and the
+# text are the site's own, edited here. Each package: its kind, what its
+# composer.json says, its GitHub repository and development branch, whether
+# its README says it was verified against the real service, whether it has
+# a docs/ folder (see config/documentation.yaml).
+family: omnilab
+phrase:
+  en: 'Read what science knows of a thing, or measures at a place.'
+  fr: 'Lire ce que la science sait d’une chose, ou mesure en un lieu.'
+text:
+  en: "One contract for the public science-data APIs, whatever the domain: an entity (a compound, a reaction, a crystal structure, a material, a physical constant, a gene, a protein and its domains, a protein structure, a biological pathway, a disease, a genetic variant, a species, a star, a galaxy, an exoplanet, an asteroid or a comet, an earthquake, a solar flare, a rocket launch) with its properties, their units and its identifiers in other bases, followed from one base to the next; a series (a variable measured at a place, or at a weather, river or tide station, over a time: weather, climate, air, rivers, tides; a planet's or a comet's path across that place's sky); the occurrences of a place and a period (the records and observations of a species, the earthquakes of a region, the launches of a month); a catalogued product (a satellite scene; a dataset or an astronomical catalogue's table, found by text; the file of a request, followed until it is ready; STAC-like). Its sources, by domain - chemistry: PubChem, ChEBI, ChEMBL, KEGG (for academic use), Rhea's biochemical reactions, the NCI/CADD Chemical Identifier Resolver (with OPSIN for systematic names); crystals and materials: the Crystallography Open Database, the Materials Project, OQMD; physics: CODATA's fundamental constants (NIST); genes, proteins and diseases: UniProt, NCBI Gene, HGNC, Ensembl (with the plants, fungi and invertebrates of Ensembl Genomes), RCSB PDB, InterPro and Pfam, the Gene Ontology (QuickGO), STRING's protein interactions, Reactome, Open Targets' targets, diseases and drugs, ClinVar, the GWAS Catalog; the living world: NCBI Taxonomy, the Catalogue of Life (on which GBIF builds its taxonomy), GBIF, ITIS, iNaturalist, eBird (birds; a key beyond its taxonomy), the IUCN Red List (with a token); the sea: OBIS and the World Register of Marine Species (WoRMS); fossils: the Paleobiology Database; the sky: SIMBAD, NED (galaxies and quasars), the CDS's VizieR catalogues, ESA's Gaia DR3 catalogue, the NASA Exoplanet Archive; the solar system: the JPL Small-Body Database, the Minor Planet Center, JPL Horizons' ephemerides; the Earth: the earthquake catalogues of the USGS and the EMSC, Open-Meteo, NOAA (NCEI's station records, the National Weather Service), the Deutscher Wetterdienst (through Bright Sky), the Copernicus Data Space, the Copernicus Climate and Atmosphere Data Stores (C3S, CAMS), NASA Earthdata, elevations (Open Topo Data); water: the USGS's rivers and wells, NOAA's tides and water levels (CO-OPS); air: OpenAQ's measurements (with a key); space weather: NOAA's Space Weather Prediction Center (the aurora, the Kp index, the solar wind), NASA's DONKI events (flares, coronal mass ejections, storms); spaceflight: the launches of Launch Library 2; and Wikidata across them all."
+  fr: "Un seul contrat pour les API scientifiques publiques, quel que soit le domaine : une entité (un composé, une réaction, une structure cristalline, un matériau, une constante physique, un gène, une protéine et ses domaines, une structure de protéine, une voie biologique, une maladie, un variant génétique, une espèce, un astre, une galaxie, une exoplanète, un astéroïde ou une comète, un séisme, une éruption solaire, un lancement de fusée) avec ses propriétés, leurs unités et ses identifiants dans d’autres bases, suivis d’une base à l’autre ; une série (une variable mesurée en un lieu, ou à une station météo, hydrométrique ou marégraphique, sur une période : météo, climat, air, rivières, marées ; la course d’une planète ou d’une comète dans le ciel de ce lieu) ; les occurrences d’un lieu et d’une période (les relevés et observations d’une espèce, les séismes d’une région, les lancements d’un mois) ; un produit catalogué (une scène satellite ; un jeu de données ou la table d’un catalogue astronomique, trouvés par texte ; le fichier d’une demande, suivie jusqu’à ce qu’il soit prêt ; au sens de STAC). Ses sources, par domaine — chimie : PubChem, ChEBI, ChEMBL, KEGG (usage académique), les réactions biochimiques de Rhea, le résolveur d’identifiants chimiques du NCI/CADD (avec OPSIN pour les noms systématiques) ; cristaux et matériaux : la Crystallography Open Database, le Materials Project, l’OQMD ; physique : les constantes fondamentales du CODATA (NIST) ; gènes, protéines et maladies : UniProt, NCBI Gene, HGNC, Ensembl (avec les plantes, champignons et invertébrés d’Ensembl Genomes), RCSB PDB, InterPro et Pfam, la Gene Ontology (QuickGO), les interactions de protéines de STRING, Reactome, les cibles, maladies et médicaments d’Open Targets, ClinVar, le GWAS Catalog ; le vivant : NCBI Taxonomy, le Catalogue of Life (sur lequel GBIF bâtit sa taxonomie), GBIF, ITIS, iNaturalist, eBird (les oiseaux ; une clé au-delà de sa taxonomie), la Liste rouge de l'UICN (avec un jeton) ; la mer : OBIS et le World Register of Marine Species (WoRMS) ; les fossiles : la Paleobiology Database ; le ciel : SIMBAD, NED (galaxies et quasars), les catalogues VizieR du CDS, le catalogue Gaia DR3 de l’ESA, l’archive des exoplanètes de la NASA ; le système solaire : la base des petits corps du JPL, le Minor Planet Center, les éphémérides de JPL Horizons ; la Terre : les catalogues des séismes de l’USGS et de l’EMSC, Open-Meteo, la NOAA (les relevés des stations du NCEI, le National Weather Service), le Deutscher Wetterdienst (par Bright Sky), le Copernicus Data Space, les entrepôts de données climat et atmosphère de Copernicus (C3S, CAMS), NASA Earthdata, les altitudes (Open Topo Data) ; l’eau : les rivières et les puits de l’USGS, les marées et niveaux d’eau de la NOAA (CO-OPS) ; l’air : les mesures d’OpenAQ (avec une clé) ; la météo de l’espace : le Space Weather Prediction Center de la NOAA (les aurores, l’indice Kp, le vent solaire), les événements DONKI de la NASA (éruptions, éjections de masse coronale, tempêtes) ; le spatial : les lancements de Launch Library 2 ; et Wikidata pour tous."
+packages:
+  omnilab/brightsky:
+    kind: provider
+    description: "Omnilab Bright Sky: the Deutscher Wetterdienst's open data through Bright Sky - hourly weather at a point or a DWD or WMO station, the observations back to 2010 joined to the MOSMIX forecasts (temperature, dew point, humidity, precipitation and its probability, pressure, wind and gusts, cloud cover, visibility, sunshine, solar irradiation), or days made from the hours; a station as an entity; no key needed."
+    license: MIT
+    keywords:
+      - science
+      - earth-sciences
+      - weather
+      - meteorology
+      - dwd
+      - bright-sky
+      - mosmix
+      - omnilab
+    repository: glitchr-studio/omnilab-brightsky
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/cactus:
+    kind: provider
+    description: 'Omnilab Cactus: the NCI/CADD Chemical Identifier Resolver - a structure from a name, a CAS number, an InChIKey, an InChI or a SMILES, and its standard InChIKey, InChI, SMILES, IUPAC name, formula, molecular weight, CAS numbers, names and picture; OPSIN for a name it cannot read; no key.'
+    license: MIT
+    keywords:
+      - science
+      - chemistry
+      - cactus
+      - cir
+      - opsin
+      - inchi
+      - smiles
+      - omnilab
+    repository: glitchr-studio/omnilab-cactus
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/cams:
+    kind: provider
+    description: "Omnilab CAMS: the Copernicus Atmosphere Monitoring Service's Atmosphere Data Store - its datasets (European air quality forecasts and reanalyses, global atmospheric composition, greenhouse gases, fire emissions, solar radiation) as products over a place and a period, its catalogue's search, a dataset's variables and request form, what a request would cost, read without an account; with an account's key, a request submitted and followed until its file is the product's asset. The store runs the Climate Data Store's software: omnilab/cds's source, on the ADS."
+    license: MIT
+    keywords:
+      - science
+      - atmosphere
+      - air-quality
+      - greenhouse-gases
+      - cams
+      - copernicus
+      - ecmwf
+      - omnilab
+    repository: glitchr-studio/omnilab-cams
+    branch: 1.x
+    requires:
+      - omnilab/cds
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/cds:
+    kind: provider
+    description: "Omnilab CDS: the Copernicus Climate Data Store - its datasets (ERA5, ERA5-Land, seasonal forecasts, climate projections, satellite and in-situ observations) as products over a place and a period, its catalogue's search, a dataset's variables and request form, what a request would cost, read without an account; with an account's key, a request submitted and followed until its file (NetCDF, GRIB, zip) is the product's asset to download. The client of ECMWF's data stores, which omnilab/cams uses for the Atmosphere Data Store."
+    license: MIT
+    keywords:
+      - science
+      - climate
+      - reanalysis
+      - era5
+      - copernicus
+      - c3s
+      - ecmwf
+      - omnilab
+    repository: glitchr-studio/omnilab-cds
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/chebi:
+    kind: provider
+    description: 'Omnilab ChEBI: a chemical entity of biological interest by ChEBI id, InChIKey, CAS number, KEGG id or name - its definition, formula, masses, charge, SMILES, InChI, structure depiction, its ontology (what it is a kind of, its roles, functional parents, conjugates) and its identifiers in CAS, KEGG and the other bases - and a search, through the REST API of ChEBI 2.0 (EMBL-EBI), no key needed.'
+    license: MIT
+    keywords:
+      - science
+      - chemistry
+      - chebi
+      - ontology
+      - ebi
+      - inchikey
+      - omnilab
+    repository: glitchr-studio/omnilab-chebi
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/chembl:
+    kind: provider
+    description: "Omnilab ChEMBL: a bioactive molecule by ChEMBL id, InChIKey or name - its type, maximum development phase, computed properties (molecular weight, ALogP, polar surface area, hydrogen bond donors and acceptors, Lipinski's rule of five, QED), SMILES, InChI, structure depiction, mechanisms of action and their targets, and its identifiers in ChEBI, PubChem, UNII and DSSTox through UniChem - and a search by text or InChIKey, through the ChEMBL data web services (EMBL-EBI), no key needed."
+    license: MIT
+    keywords:
+      - science
+      - chemistry
+      - chembl
+      - drug-discovery
+      - bioactivity
+      - ebi
+      - inchikey
+      - omnilab
+    repository: glitchr-studio/omnilab-chembl
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/clinvar:
+    kind: provider
+    description: "Omnilab ClinVar: a variation by its VariationID or VCV accession - its name, type, germline classification, review status, conditions, genes, protein change, consequence, location, SPDI, allele frequencies, aliases - its dbSNP id as a cross-reference, its genes and conditions (Mondo, OMIM, Orphanet, HPO) as related things, and a search in ClinVar's query language, through the NCBI's E-utilities, no key needed."
+    license: MIT
+    keywords:
+      - science
+      - biology
+      - clinvar
+      - ncbi
+      - variants
+      - 'clinical significance'
+      - genetics
+      - omnilab
+    repository: glitchr-studio/omnilab-clinvar
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/cod:
+    kind: provider
+    description: "Omnilab COD: a crystal structure of the Crystallography Open Database by its COD id (9008565) - its names, formula, unit cell with uncertainties, space group, Z, temperature, radiation, R factors, publication and DOI - the entry it duplicates as a related thing, its CIF as a file; a search of the entries' metadata; no key."
+    license: MIT
+    keywords:
+      - science
+      - chemistry
+      - crystallography
+      - cod
+      - 'crystal structures'
+      - cif
+      - minerals
+      - omnilab
+    repository: glitchr-studio/omnilab-cod
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/codata:
+    kind: provider
+    description: "Omnilab CODATA: the fundamental physical constants of CODATA as NIST publishes them (2022 adjustment) - each constant by NIST's short name (mp, c) or its name, its value, standard uncertainty and unit, whether exact, its value as published; a search; two calls in all, no key."
+    license: MIT
+    keywords:
+      - science
+      - physics
+      - codata
+      - nist
+      - 'physical constants'
+      - units
+      - omnilab
+    repository: glitchr-studio/omnilab-codata
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/col:
+    kind: provider
+    description: "Omnilab Catalogue of Life: a taxon or synonym of the Catalogue of Life by its COL id, by the GBIF key that names it (GBIF's taxonomy is the COL eXtended Release) or by its name - authority, rank, status, classification, vernacular names, distribution, scrutinizer, source record; its GBIF key and the iNaturalist, WoRMS or ITIS records COL names as cross-references; parent, accepted name and synonyms related - and a search of names, through ChecklistBank's API, no key needed."
+    license: MIT
+    keywords:
+      - science
+      - biodiversity
+      - taxonomy
+      - catalogue-of-life
+      - checklistbank
+      - gbif
+      - omnilab
+    repository: glitchr-studio/omnilab-col
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/copernicus:
+    kind: provider
+    description: "Omnilab Copernicus: the products of the Copernicus Data Space Ecosystem's STAC catalogue - Sentinel-1, -2, -3, -5P, Landsat, MODIS, the Copernicus DEM and services - searched by collection, point or box, period and cloud cover, page by page, with their footprints, properties, assets and thumbnails; open without an account (downloading the assets needs a CDSE token and stays with the application)."
+    license: MIT
+    keywords:
+      - science
+      - earth-observation
+      - satellite
+      - sentinel
+      - stac
+      - copernicus
+      - omnilab
+    repository: glitchr-studio/omnilab-copernicus
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/donki:
+    kind: provider
+    description: "Omnilab DONKI: NASA's space weather events from the CCMC's Database Of Notifications, Knowledge, Information - solar flares (GOES class, begin, peak, end, source, active region), coronal mass ejections (speed, half angle, direction, type), geomagnetic storms (Kp), interplanetary shocks, solar energetic particle events, magnetopause crossings, radiation belt enhancements, high speed streams - by activity id, or every event of a period, with the events each is linked to; no key needed."
+    license: MIT
+    keywords:
+      - science
+      - astronomy
+      - space-weather
+      - donki
+      - nasa
+      - ccmc
+      - solar-flares
+      - cme
+      - geomagnetic-storms
+      - omnilab
+    repository: glitchr-studio/omnilab-donki
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/earthdata:
+    kind: provider
+    description: "Omnilab Earthdata: NASA's Common Metadata Repository (CMR) - the granules of NASA's Earth observation collections (HLS, MODIS, VIIRS, GPM, SMAP, ICESat-2, OPERA...) as products by collection, point or box, period and cloud cover, page by page, with their footprints, attributes, browse images and files (https at the archive, s3 in AWS); the collections searched by text; open without an account, the files downloaded with an Earthdata Login token (an option)."
+    license: MIT
+    keywords:
+      - science
+      - earth-observation
+      - satellite
+      - nasa
+      - earthdata
+      - cmr
+      - modis
+      - hls
+      - omnilab
+    repository: glitchr-studio/omnilab-earthdata
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: verified
+    verification_note: "See docs/ for the calls, the mapping, the CMR's STAC (option stac: LPCLOUD: the same granules through the core's STAC reader, one archive at a time, slower), and what was verified."
+    docs: true
+  omnilab/ebird:
+    kind: provider
+    description: "Omnilab eBird: a bird taxon of the eBird/Clements taxonomy by its species code (no key) - scientific and common names in a locale, category, order, family, banding codes - and, with the user's eBird API key, a taxon by name, a search of names, a checklist, and the recent observations around a point or in a region or a region's observations of a day, through the eBird API 2.0."
+    license: MIT
+    keywords:
+      - science
+      - biodiversity
+      - birds
+      - ornithology
+      - ebird
+      - occurrences
+      - omnilab
+    repository: glitchr-studio/omnilab-ebird
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/elevation:
+    kind: provider
+    description: "Omnilab Elevation: the elevation of points and of a profile between two points from a digital elevation model (SRTM, ASTER, EU-DEM, Mapzen, ETOPO1, GEBCO...), through Open Topo Data's public API or a self-hosted instance, as Points with their elevation in metres, outside the contract's shapes; no key needed (100 locations a call, a call a second, 1,000 a day on the public instance)."
+    license: MIT
+    keywords:
+      - science
+      - earth-sciences
+      - elevation
+      - dem
+      - srtm
+      - topography
+      - opentopodata
+      - omnilab
+    repository: glitchr-studio/omnilab-elevation
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/emsc:
+    kind: provider
+    description: "Omnilab EMSC: an earthquake of the European-Mediterranean Seismological Centre's catalogue by its SeismicPortal id - magnitude and type, place, depth, time, Flinn-Engdahl region, contributing agency - and the earthquakes of a box or around a point over a period as series (count per step, each one's magnitude or depth, or the step's maximum, mean...) or as occurrences, entities with their time and place a page at a time, through the SeismicPortal's FDSN event web service, no key needed."
+    license: MIT
+    keywords:
+      - science
+      - earth-sciences
+      - seismology
+      - earthquakes
+      - emsc
+      - seismicportal
+      - fdsn
+      - omnilab
+    repository: glitchr-studio/omnilab-emsc
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/ensembl:
+    kind: provider
+    description: "Omnilab Ensembl: a gene, transcript, protein or exon of Ensembl by its id, or a gene by its symbol in a species - its symbol, name, biotype, species, assembly and place on the genome, a gene's NCBI Gene record and Swiss-Prot proteins and a protein's UniProt entries as cross-references, its species, gene, transcripts and protein as related things - and the genes a symbol names, through the Ensembl REST API, no key needed."
+    license: MIT
+    keywords:
+      - science
+      - biology
+      - genomics
+      - gene
+      - ensembl
+      - transcript
+      - genome
+      - omnilab
+    repository: glitchr-studio/omnilab-ensembl
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/exoplanets:
+    kind: provider
+    description: "Omnilab NASA Exoplanet Archive: a confirmed exoplanet by its name (51 Peg b, Kepler-22b, Proxima Centauri b, Dimidium) - its mass, radius, density, orbit, equilibrium temperature and insolation with units and uncertainties, how, when and where it was discovered, its host star's parameters and the system's position, distance and magnitudes, the host star's designations (HD, HIP, TIC, Gaia DR3) as a related thing - a search by name and a selection by simple criteria, through the archive's TAP service in ADQL, no key needed."
+    license: MIT
+    keywords:
+      - science
+      - astronomy
+      - exoplanets
+      - nasa
+      - ipac
+      - tap
+      - adql
+      - planets
+      - omnilab
+    repository: glitchr-studio/omnilab-exoplanets
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/gaia:
+    kind: provider
+    description: "Omnilab Gaia: a source of ESA's Gaia DR3 by its source_id or designation (Gaia DR3 4472832130942575872) - its position at epoch J2016.0, parallax, proper motion and RUWE, its G, BP, RP and RVS magnitudes, radial velocity and line broadening, its astrophysical parameters (GSP-Phot temperature, gravity, metallicity, distance, extinction; FLAME radius, mass, luminosity, age; Apsis spectral type), its class probabilities and Hipparcos number - and the sources of a cone on the sky, through the ESA Gaia Archive's TAP service in ADQL, no key needed."
+    license: MIT
+    keywords:
+      - science
+      - astronomy
+      - gaia
+      - esa
+      - astrometry
+      - tap
+      - adql
+      - stars
+      - omnilab
+    repository: glitchr-studio/omnilab-gaia
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/gbif:
+    kind: provider
+    description: "Omnilab GBIF: a taxon of GBIF's taxonomy (the Catalogue of Life eXtended Release since June 2026) by its key, its legacy GBIF Backbone number, its NCBI Taxonomy id or a scientific name GBIF matches - its name, authority, rank, status, IUCN Red List category, common name, publication and classification, its legacy number and NCBI id as cross-references, its parent as a related thing - a search, and the occurrences of a place and a period (by taxon, country, basis of record), each with its time and place and its taxon related, through the GBIF API, no key needed."
+    license: MIT
+    keywords:
+      - science
+      - biodiversity
+      - taxonomy
+      - gbif
+      - species
+      - catalogue-of-life
+      - occurrences
+      - omnilab
+    repository: glitchr-studio/omnilab-gbif
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/gwas:
+    kind: provider
+    description: "Omnilab GWAS Catalog: a study by its accession (GCST000854), a variant by its rs id, a trait by its EFO, Mondo or HPO id - reported and mapped traits, samples, ancestries, platforms, functional class, location, mapped genes, studies - each with its strongest associations and the studies, variants and traits they tie it to as related things, a search of traits, and the associations paged with their p-values, effect sizes and risk alleles, through the NHGRI-EBI GWAS Catalog's REST API v2, no key needed."
+    license: MIT
+    keywords:
+      - science
+      - biology
+      - gwas
+      - 'gwas catalog'
+      - 'genetic associations'
+      - snp
+      - efo
+      - omnilab
+    repository: glitchr-studio/omnilab-gwas
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/hgnc:
+    kind: provider
+    description: "Omnilab HGNC: a human gene by its HGNC id (HGNC:4827), approved, previous or alias symbol, or an id HGNC records (NCBI Gene, Ensembl, UniProt, OMIM) - its approved name, locus group and type, location, previous symbols and names, aliases, gene groups, status, dates, MANE Select, RefSeq and CCDS ids - its NCBI Gene, Ensembl, UniProt and OMIM ids as cross-references, and a search, through HGNC's REST service, no key needed."
+    license: MIT
+    keywords:
+      - science
+      - biology
+      - hgnc
+      - genes
+      - 'gene nomenclature'
+      - 'human genome'
+      - omim
+      - omnilab
+    repository: glitchr-studio/omnilab-hgnc
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/horizons:
+    kind: provider
+    description: "Omnilab Horizons: the ephemeris of a body of the solar system - a planet, a moon, the Sun, an asteroid, a comet, a spacecraft - seen from a place on the Earth over a period, as series: right ascension and declination, azimuth and elevation, airmass, apparent magnitude, illuminated fraction, angular diameter, distances to the observer and to the Sun and their rates, solar elongation and phase angle, through NASA/JPL's Horizons API, no key needed."
+    license: MIT
+    keywords:
+      - science
+      - astronomy
+      - horizons
+      - jpl
+      - nasa
+      - ephemeris
+      - solar-system
+      - planets
+      - asteroids
+      - comets
+      - omnilab
+    repository: glitchr-studio/omnilab-horizons
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/inaturalist:
+    kind: provider
+    description: 'Omnilab iNaturalist: a taxon of iNaturalist by its id or a name it matches - its rank, common name in a language, iconic group, IUCN status, lineage, Wikipedia summary, observation count, default photo with its licence and attribution, its parent as a related thing - a search of its names, and the observations of a place and a period (research grade by default; by taxon, licence, quality grade), each with its time and place, its taxon related and its licence, through the iNaturalist API (v1 for taxa, v2 for observations), no key needed.'
+    license: MIT
+    keywords:
+      - science
+      - biodiversity
+      - taxonomy
+      - inaturalist
+      - citizen-science
+      - observations
+      - occurrences
+      - omnilab
+    repository: glitchr-studio/omnilab-inaturalist
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/interpro:
+    kind: provider
+    description: 'Omnilab InterPro: an InterPro entry (IPR000971) or a Pfam family (PF00042) - its name, type, description, member signatures, GO terms, protein and structure counts, Pfam clan, representative structure, overlapping entries and hierarchy - a UniProt protein with the InterPro entries and Pfam families it matches, by type and position, as related things, and a search of InterPro entries, through the InterPro API, no key needed.'
+    license: MIT
+    keywords:
+      - science
+      - biology
+      - interpro
+      - pfam
+      - 'protein domains'
+      - 'protein families'
+      - uniprot
+      - omnilab
+    repository: glitchr-studio/omnilab-interpro
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/itis:
+    kind: provider
+    description: 'Omnilab ITIS: a taxon of the Integrated Taxonomic Information System by its TSN or its name - authority, rank, usage and why, accepted name, hierarchy, common names, geographic divisions, jurisdictional origins, credibility rating; parent, accepted name, synonyms and children related - and a search of scientific and common names, through the ITIS JSON web service, no key needed.'
+    license: MIT
+    keywords:
+      - science
+      - biodiversity
+      - taxonomy
+      - itis
+      - tsn
+      - omnilab
+    repository: glitchr-studio/omnilab-itis
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/iucn:
+    kind: provider
+    description: "Omnilab IUCN Red List: a taxon of the IUCN Red List of Threatened Species by its SIS id or scientific name - classification, authority, common names, synonyms, assessing group - with its latest global assessment (Red List category, criteria, population trend, year, possibly extinct, citation), through the Red List API v4 with the user's API token."
+    license: MIT
+    keywords:
+      - science
+      - biodiversity
+      - conservation
+      - iucn
+      - red-list
+      - taxonomy
+      - omnilab
+    repository: glitchr-studio/omnilab-iucn
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/jpl:
+    kind: provider
+    description: "Omnilab JPL: an asteroid or a comet by its number, designation or name, from NASA/JPL's Small-Body Database API - its orbit (elements at their epoch with their uncertainties, period, MOID), physical parameters (absolute magnitude, diameter, albedo, rotation period, density, spectral types), NEO and PHA flags, discovery and IAU citation, close approaches to the Earth and Sentry's impact risk - and a search by name or designation (SBDB Query API), no key needed."
+    license: MIT
+    keywords:
+      - science
+      - astronomy
+      - jpl
+      - nasa
+      - asteroids
+      - comets
+      - small-bodies
+      - sbdb
+      - omnilab
+    repository: glitchr-studio/omnilab-jpl
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/kegg:
+    kind: provider
+    description: "Omnilab KEGG: a compound (C07481), a drug (D00528), a reaction (R00200), a pathway map (map00010, hsa00010) or an enzyme (2.7.1.40) by its KEGG identifier - names, formula and masses, a reaction's equation, a pathway's class and description, an enzyme's class and systematic name - the same thing in CAS, ChEBI, ChEMBL and Rhea as identifiers, its reactions, pathways, enzymes, compounds and GO terms as related things; a compound by its ChEBI id; a search; through KEGG's REST API (rest.kegg.jp), for academic use by academic users only."
+    license: MIT
+    keywords:
+      - science
+      - chemistry
+      - kegg
+      - compounds
+      - reactions
+      - pathways
+      - enzymes
+      - omnilab
+    repository: glitchr-studio/omnilab-kegg
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/launches:
+    kind: provider
+    description: "Omnilab Launches: orbital launches of The Space Devs' Launch Library 2, past and planned - a launch by id (rocket, provider, mission and orbit, pad and its place, date and its precision, window, status, probability, failure), a search by text, and the launches of a period as occurrences, each with its time and its pad's place, filtered by provider, rocket, location, crew, status or orbit; no key needed (15 calls an hour)."
+    license: MIT
+    keywords:
+      - science
+      - spaceflight
+      - launches
+      - launch-library
+      - thespacedevs
+      - rockets
+      - omnilab
+    repository: glitchr-studio/omnilab-launches
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/materials-project:
+    kind: provider
+    description: "Omnilab Materials Project: computed properties of inorganic materials by Materials Project id (mp-149) - formula, symmetry, density, energies per atom, stability, band gap, magnetism, elastic moduli - and the materials of a formula or a chemical system, through api.materialsproject.org (an account's key required). Not tested live."
+    license: MIT
+    keywords:
+      - science
+      - chemistry
+      - materials
+      - 'materials project'
+      - dft
+      - 'crystal structures'
+      - omnilab
+    repository: glitchr-studio/omnilab-materials-project
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/mpc:
+    kind: provider
+    description: "Omnilab MPC: a minor planet, comet or natural satellite of the IAU's Minor Planet Center by its number, designation (provisional, packed or not) or name - its designations, name and naming citation, its orbit as the MPC computes it (osculating elements with their uncertainties, perihelion, period, MOIDs), absolute magnitude, observations, oppositions, arc and uncertainty parameter; a search of the names; its latest observations - through the MPC's APIs, no key needed."
+    license: MIT
+    keywords:
+      - science
+      - astronomy
+      - minor-planet-center
+      - mpc
+      - asteroids
+      - comets
+      - orbits
+      - astrometry
+      - omnilab
+    repository: glitchr-studio/omnilab-mpc
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/ncbi:
+    kind: provider
+    description: 'Omnilab NCBI: a gene of NCBI Gene by its GeneID - symbol, name, organism, place on the genome, summary, its UniProt and Ensembl ids - and a taxon of NCBI Taxonomy by its id or a name - scientific name, rank, lineage, common name, GBIF key - and a search of either, through NCBI Datasets v2 and E-utilities, no key needed (one for ten calls a second).'
+    license: MIT
+    keywords:
+      - science
+      - biology
+      - taxonomy
+      - ncbi
+      - gene
+      - entrez
+      - omnilab
+    repository: glitchr-studio/omnilab-ncbi
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/ned:
+    kind: provider
+    description: "Omnilab NED: an object of the NASA/IPAC Extragalactic Database - a galaxy, a quasar, a cluster, a radio source - by any of its names: its preferred name, type, J2000 position with its uncertainty, redshift with its uncertainty and quality, galactic coordinates, and how many references, photometric points, redshift-independent distances, images and spectra NED holds for it; the objects of a cone on the sky - through NED's ObjectLookup and TAP services, no key needed."
+    license: MIT
+    keywords:
+      - science
+      - astronomy
+      - ned
+      - nasa
+      - ipac
+      - galaxies
+      - quasars
+      - redshift
+      - tap
+      - adql
+      - omnilab
+    repository: glitchr-studio/omnilab-ned
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/noaa:
+    kind: provider
+    description: "Omnilab NOAA: weather and climate observations as series at a point - the station records of the world from NCEI's Access Data Service (GHCN-Daily by day, the Global Summary of the Month and of the Year: TMAX, TMIN, TAVG, PRCP, SNOW, AWND... in metric units) at the nearest station that has them or at a station named, and, for a point of the United States, the National Weather Service's observations of the nearest station (seven days back) joined to its grid's forecast (seven days ahead); no key."
+    license: MIT
+    keywords:
+      - science
+      - weather
+      - climate
+      - observations
+      - forecast
+      - ghcn
+      - noaa
+      - ncei
+      - nws
+      - omnilab
+    repository: glitchr-studio/omnilab-noaa
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/obis:
+    kind: provider
+    description: 'Omnilab OBIS: a marine taxon of the Ocean Biodiversity Information System by its WoRMS AphiaID or its name - rank, status, classification, vernacular names, NCBI id, habitat, how many records OBIS holds - and the occurrences of a place and a period (by taxon, depth, dataset, Red List species), each with its time, place, depth, the sea surface temperature and salinity at its place, its taxon related, through the OBIS API v3, no key needed.'
+    license: MIT
+    keywords:
+      - science
+      - biodiversity
+      - marine
+      - ocean
+      - obis
+      - worms
+      - occurrences
+      - omnilab
+    repository: glitchr-studio/omnilab-obis
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/open-meteo:
+    kind: provider
+    description: 'Omnilab Open-Meteo: weather series at a point - hourly, every 15 minutes or daily, any variable Open-Meteo names, with the units it answers in - from the forecast API (92 days back, 16 ahead) and the historical archive (ERA5, from 1940), joined when a period spans both; and the air quality at a point (PM2.5, PM10, NO2, O3, the European and US indices, pollens...), hourly or daily, from 2013 to five days ahead; free for non-commercial use, a key or a self-hosted instance otherwise.'
+    license: MIT
+    keywords:
+      - science
+      - weather
+      - climate
+      - forecast
+      - era5
+      - air-quality
+      - cams
+      - open-meteo
+      - omnilab
+    repository: glitchr-studio/omnilab-open-meteo
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/openaq:
+    kind: provider
+    description: "Omnilab OpenAQ: air quality measurements of the OpenAQ platform (API v3) - the hourly or daily averages of a pollutant (PM2.5, PM10, NO2, O3, SO2, CO, black carbon... by OpenAQ's parameter names) at the nearest location of a point measuring it, in the sensor's unit. An OpenAQ API key is required (the user's own, sent as X-API-Key); not tested live."
+    license: MIT
+    keywords:
+      - science
+      - earth-sciences
+      - air-quality
+      - pollution
+      - pm25
+      - openaq
+      - omnilab
+    repository: glitchr-studio/omnilab-openaq
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/opentargets:
+    kind: provider
+    description: "Omnilab Open Targets: a target by its Ensembl gene, a disease or phenotype by its EFO, Mondo, HPO or Orphanet id, a drug by its ChEMBL id - names, descriptions, locations, classes, therapeutic areas, parents, mechanisms of action, indications - their associations with scores, drugs and clinical candidates, UniProt, HGNC, OMIM and Orphanet ids, InterPro domains and Reactome pathways, a search, and the associations paged, through the Open Targets Platform's GraphQL API, no key needed."
+    license: MIT
+    keywords:
+      - science
+      - biology
+      - 'open targets'
+      - 'drug discovery'
+      - 'target-disease associations'
+      - diseases
+      - efo
+      - mondo
+      - chembl
+      - omnilab
+    repository: glitchr-studio/omnilab-opentargets
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/oqmd:
+    kind: provider
+    description: 'Omnilab OQMD: the Open Quantum Materials Database - an entry by its OQMD id (formula, space group, prototype, volume, formation energy, hull distance, band gap, ICSD id) and the entries of a composition or a phase space, through its RESTful API, no key. Not tested live.'
+    license: MIT
+    keywords:
+      - science
+      - chemistry
+      - materials
+      - oqmd
+      - dft
+      - 'formation energy'
+      - omnilab
+    repository: glitchr-studio/omnilab-oqmd
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/pbdb:
+    kind: provider
+    description: 'Omnilab PBDB: a taxon of the Paleobiology Database, fossil or living, by its number or name - rank, accepted name, common name, extant or not, first and last appearances (intervals and ages in Ma), occurrences counted, classification, ecology, reference - a fossil occurrence by its number, a search of names, and the fossil occurrences of a place and an age (outside the contract: an age is no date), through the PBDB data service 1.2, no key needed.'
+    license: MIT
+    keywords:
+      - science
+      - palaeontology
+      - paleontology
+      - fossils
+      - pbdb
+      - taxonomy
+      - omnilab
+    repository: glitchr-studio/omnilab-pbdb
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/pdb:
+    kind: provider
+    description: "Omnilab PDB: an entry of the Protein Data Bank by its PDB id through RCSB PDB's GraphQL Data API - its title, keywords, method, resolution, weight, dates, primary citation and authors, its polymer entities and ligands, an image of its assembly; the UniProt proteins of its chains, their organisms and its ligands (ChEBI, PubChem or InChIKey) as related things, never its identifiers; a removed entry's only replacement - and RCSB's full-text search, no key needed."
+    license: MIT
+    keywords:
+      - science
+      - biology
+      - structural-biology
+      - protein-structure
+      - pdb
+      - rcsb
+      - graphql
+      - omnilab
+    repository: glitchr-studio/omnilab-pdb
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/pubchem:
+    kind: provider
+    description: "Omnilab PubChem: a compound by CID, name, InChIKey, InChI, CAS number or SMILES - its computed properties with units (formula, weight, XLogP, TPSA...), synonyms, description, 2D structure image and its identifiers in ChEBI, ChEMBL, Wikidata, CAS, UNII, DSSTox and KEGG - through PubChem's PUG-REST, no key needed, at PubChem's pace."
+    license: MIT
+    keywords:
+      - science
+      - chemistry
+      - pubchem
+      - compounds
+      - inchikey
+      - cas
+      - omnilab
+    repository: glitchr-studio/omnilab-pubchem
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/quickgo:
+    kind: provider
+    description: "Omnilab QuickGO: a Gene Ontology term (GO:0005829) - its name, definition, aspect, synonyms, comment, obsolescence, direct parents by relation and children - a UniProt protein with the GO terms it is annotated to by aspect and evidence, its annotations with their evidence, reference and curator, and a search of terms, through the EBI's QuickGO services, no key needed."
+    license: MIT
+    keywords:
+      - science
+      - biology
+      - 'gene ontology'
+      - go
+      - quickgo
+      - annotations
+      - uniprot
+      - omnilab
+    repository: glitchr-studio/omnilab-quickgo
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/reactome:
+    kind: provider
+    description: "Omnilab Reactome: a pathway or a reaction by its stable identifier (R-HSA-70171) - its names, species, summary, compartments, GO biological process, Rhea reaction, inputs, outputs and catalysts, review status, release dates, DOI and diagram - its participants (UniProt proteins, ChEBI small molecules), organism, sub-events and orthologous events as related things, a search by text, and the pathways of a protein or a molecule (UniProt, ChEBI), through Reactome's Content Service, no key needed."
+    license: MIT
+    keywords:
+      - science
+      - biology
+      - reactome
+      - pathways
+      - reactions
+      - uniprot
+      - chebi
+      - omnilab
+    repository: glitchr-studio/omnilab-reactome
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/rhea:
+    kind: provider
+    description: "Omnilab Rhea: a biochemical reaction by any of its four Rhea ids (18157, 18160) or its KEGG reaction (R00200) - its equation, status, balance, transport, sides and their participants, citations - its quartet and KEGG reaction as identifiers, its ChEBI participants, EC numbers, GO term, Reactome events and the reviewed UniProt proteins that catalyse it as related things; a search; through Rhea's SPARQL endpoint and REST search, no key."
+    license: MIT
+    keywords:
+      - science
+      - chemistry
+      - biochemistry
+      - rhea
+      - reactions
+      - chebi
+      - enzymes
+      - omnilab
+    repository: glitchr-studio/omnilab-rhea
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/simbad:
+    kind: provider
+    description: 'Omnilab SIMBAD: an astronomical object beyond the solar system by any of its identifiers (M31, Betelgeuse, HD 39801...) - its main identifier, object type, ICRS coordinates, proper motion, parallax, radial velocity and redshift, spectral and morphological types, magnitudes and other designations - and a search by identifier or name, through the TAP service of SIMBAD (CDS, Strasbourg) in ADQL, no key needed.'
+    license: MIT
+    keywords:
+      - science
+      - astronomy
+      - simbad
+      - cds
+      - tap
+      - adql
+      - stars
+      - galaxies
+      - omnilab
+    repository: glitchr-studio/omnilab-simbad
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/string:
+    kind: provider
+    description: "Omnilab STRING: a protein by its STRING id (9606.ENSP00000269305), UniProt accession, Ensembl protein or name - its preferred name, protein name, annotation, species and Ensembl protein - its interaction partners as related things with their combined scores, the network among proteins with each evidence channel's score, and their functional enrichment (GO, KEGG, Reactome, Pfam, InterPro, diseases), through STRING's API, no key needed."
+    license: MIT
+    keywords:
+      - science
+      - biology
+      - string
+      - 'protein-protein interactions'
+      - networks
+      - enrichment
+      - uniprot
+      - omnilab
+    repository: glitchr-studio/omnilab-string
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/swpc:
+    kind: provider
+    description: "Omnilab SWPC: NOAA's Space Weather Prediction Center - the probability of an aurora overhead at a point (OVATION's nowcast) as a series, and outside the contract, space weather not being at a place on the Earth, the planetary Kp index observed and predicted, the solar wind at L1 (speed, density, temperature, Bt, Bz), the alerts, warnings and watches, and the NOAA scales; through SWPC's public JSON files, no key needed."
+    license: MIT
+    keywords:
+      - science
+      - space-weather
+      - aurora
+      - kp-index
+      - solar-wind
+      - noaa
+      - swpc
+      - omnilab
+    repository: glitchr-studio/omnilab-swpc
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/tides:
+    kind: provider
+    description: "Omnilab Tides: NOAA CO-OPS (Tides and Currents) - a station's water level every six minutes, verified hourly heights and highs and lows, tide predictions (every six minutes, hourly, or the highs and lows), water and air temperature as series, at a station named or the nearest one of a point, cut to the API's length limits; a station as an entity; through the CO-OPS Data and Metadata APIs, no key needed."
+    license: MIT
+    keywords:
+      - science
+      - earth-sciences
+      - oceanography
+      - tides
+      - water-level
+      - noaa
+      - co-ops
+      - omnilab
+    repository: glitchr-studio/omnilab-tides
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: partial
+    verification_note: 'Recent water levels are preliminary, not verified; the predictions are astronomical, they do not include the weather.'
+    docs: true
+  omnilab/uniprot:
+    kind: provider
+    description: "Omnilab UniProt: a protein of UniProtKB by accession or entry name - its names, gene, organism, function, length, mass and sequence, cofactors, ligands, location and keywords, its NCBI Gene and Ensembl genes as cross-references, its organism, PDB structures and ligands as related things - and UniProt's search, through the UniProt REST API, no key needed."
+    license: MIT
+    keywords:
+      - science
+      - biology
+      - protein
+      - uniprot
+      - uniprotkb
+      - sequence
+      - omnilab
+    repository: glitchr-studio/omnilab-uniprot
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/usgs:
+    kind: provider
+    description: "Omnilab USGS: an earthquake of the USGS catalogue (ComCat) by its event id - magnitude and type, place, depth, time, felt reports and intensities (DYFI, ShakeMap), tsunami flag, PAGER alert level, its ids in the other networks - and the earthquakes of a box or around a point over a period as series (count per step, each one's magnitude or depth, or the step's maximum, mean...) or as occurrences, entities with their time and place a page at a time, through the FDSN event web service, no key needed."
+    license: MIT
+    keywords:
+      - science
+      - earth-sciences
+      - seismology
+      - earthquakes
+      - usgs
+      - fdsn
+      - comcat
+      - omnilab
+    repository: glitchr-studio/omnilab-usgs
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/usgs-water:
+    kind: provider
+    description: "Omnilab USGS Water: the USGS's water data through the Water Data OGC APIs (which replace the WaterServices) - a monitoring location's series (discharge, gage height, water temperature, any parameter by its USGS code) as recorded every 5 or 15 minutes, hourly, or as the USGS's daily statistics, at a station named or the nearest one of a point; a monitoring location as an entity with its place, drainage area and the series it keeps; the locations by name. No key needed; an api.data.gov key raises the rate limit."
+    license: MIT
+    keywords:
+      - science
+      - earth-sciences
+      - hydrology
+      - streamflow
+      - water
+      - usgs
+      - nwis
+      - omnilab
+    repository: glitchr-studio/omnilab-usgs-water
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/vizier:
+    kind: provider
+    description: "Omnilab VizieR: the CDS's library of published astronomical catalogues (Strasbourg) - its tables whose description holds a text, as datasets (id, catalogue, title, authors, rows), and the rows of a table around a point of the sky or an object, each column with its unit and description - through TAPVizieR in ADQL, no key needed."
+    license: MIT
+    keywords:
+      - science
+      - astronomy
+      - vizier
+      - cds
+      - catalogues
+      - tap
+      - adql
+      - omnilab
+    repository: glitchr-studio/omnilab-vizier
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/wikidata:
+    kind: provider
+    description: "Omnilab Wikidata: an item by Q-number, by the identifier of a science base its statements carry (PubChem CID, ChEBI, CAS, InChIKey, ChEMBL, UniProt, NCBI Gene and Taxonomy, Ensembl, GBIF, iNaturalist, SIMBAD, JPL SBDB, USGS earthquake, UNII, DSSTox, KEGG) or by label - its label, description and aliases in the language asked, those identifiers as cross-references, a few properties with units (mass, melting and boiling points, density...) - and a search by label, narrowed to a domain, through the Wikidata Action API, no key needed, within Wikimedia's usage policy."
+    license: MIT
+    keywords:
+      - science
+      - wikidata
+      - wikimedia
+      - linked-data
+      - cross-references
+      - identifiers
+      - omnilab
+    repository: glitchr-studio/omnilab-wikidata
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omnilab/worms:
+    kind: provider
+    description: 'Omnilab WoRMS: a taxon of the World Register of Marine Species by its AphiaID, its name, or the ITIS TSN, NCBI taxon or IUCN id WoRMS knows it by - accepted name and status, classification, synonyms, vernacular names, habitat flags, the citation WoRMS asks for, its ITIS, NCBI and IUCN ids as cross-references - and a search of names, through the WoRMS REST service, no key needed.'
+    license: MIT
+    keywords:
+      - science
+      - biodiversity
+      - taxonomy
+      - marine
+      - worms
+      - aphia
+      - omnilab
+    repository: glitchr-studio/omnilab-worms
+    branch: 1.x
+    requires:
+      - omniscient/omnilab
+    verification: unstated
+    docs: true
+  omniscient/omnilab:
+    kind: family
+    description: 'Omnilab: one contract for the public science-data APIs - entities (a compound, a gene, a protein, a species, a star, an earthquake) with their properties, units and cross-references, series (a variable measured at a place over time: weather, climate, air) and catalogued products (a satellite scene, a dataset, STAC-like) - whatever the domain; a Collector that follows cross-references from one base to the next, and a Symfony bundle.'
+    license: MIT
+    keywords:
+      - science
+      - open-data
+      - chemistry
+      - biology
+      - astronomy
+      - earth-observation
+      - weather
+      - stac
+      - pubchem
+      - chebi
+      - wikidata
+      - uniprot
+      - gbif
+      - simbad
+      - earthquakes
+      - ensembl
+      - pdb
+      - inaturalist
+      - omnilab
+    repository: glitchr-studio/omnilab
+    branch: 1.x
+    verification: unstated
+    docs: true

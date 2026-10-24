@@ -1,0 +1,86 @@
+{#
+ # The documentation's entry page: a way in by need - the site's own guides
+ # (docs/<locale>/*.md) -, then the reference, a manual per package read in
+ # its own repository at a pinned commit, grouped by family as the catalogue
+ # groups its packages; the search over all of it.
+ #}
+{% extends 'layout1.html.twig' %}
+
+{% block title %}{{ '@messages.docs.title'|trans }}{% endblock %}
+{% block description %}{{ '@messages.docs.description'|trans({count: manuals|length}) }}{% endblock %}
+
+{% block content %}
+{% set groups = {} %}
+{% for manual in manuals %}
+    {% set package = catalogue.find(manual.package) %}
+    {% set group = package and package.family ? package.family : (package and package.tier.value == 'bridge' ? 'omnibridge' : (package and package.tier.value == 'library' ? 'libraries' : 'other')) %}
+    {% set groups = groups|merge({(group): (groups[group] ?? [])|merge([{manual: manual, package: package}])}) %}
+{% endfor %}
+<div class="om-wrap om-page om-docs-index">
+    <header class="om-head is-page manual-index-head">
+        <p class="om-cote">{{ '@messages.docs.count'|trans({manuals: manuals|length, groups: groups|length}) }}</p>
+        <h1>{{ '@messages.docs.title'|trans }}</h1>
+        <p class="om-lead">{{ '@messages.docs.lead'|trans({count: manuals|length}) }}</p>
+        <form class="om-search om-docs-search" role="search" action="{{ path('app_search') }}" method="get">
+            <label for="om-docs-q">{{ '@messages.home.search_label'|trans }}</label>
+            <div><input id="om-docs-q" type="search" name="q" placeholder="{{ '@messages.home.search_placeholder'|trans }}" autocomplete="off" spellcheck="false"><button type="submit" class="om-button">{{ '@messages.home.search_submit'|trans }}</button></div>
+        </form>
+    </header>
+
+    <section class="om-tier om-docs-start" id="start">
+        <header>
+            <p class="om-cote">1 — {{ '@messages.docs.start_eyebrow'|trans }}</p>
+            <h2>{{ '@messages.docs.start_title'|trans }}</h2>
+            <p>{{ '@messages.docs.start_lead'|trans }}</p>
+        </header>
+        <ol class="om-docs-ways">
+            {% for guide in guides %}
+            <li><a href="{{ path('app_guide', {slug: guide.slug}) }}"><span class="om-cote">{{ '%02d'|format(loop.index) }}</span><span class="om-docs-way-title">{{ guide.title }}</span><span class="om-docs-way-text">{{ guide.description }}</span></a></li>
+            {% endfor %}
+        </ol>
+    </section>
+
+    <section class="om-tier om-docs-reference" id="reference">
+        <header>
+            <p class="om-cote">2 — {{ '@messages.docs.reference_eyebrow'|trans }}</p>
+            <h2>{{ '@messages.docs.reference_title'|trans }}</h2>
+            <p>{{ '@messages.docs.reference_lead'|trans({url: path('app_packages')})|raw }}</p>
+        </header>
+        {% if manuals is empty %}<p class="om-none">{{ '@messages.docs.none'|trans }}</p>{% endif %}
+        <nav class="om-anchors" aria-label="{{ '@messages.docs.reference_title'|trans }}">
+            {% for name, entries in groups %}<a href="#{{ name }}"><span>{% if name starts with 'omni' and name != 'omnibridge' %}Omni<b>{{ family_suffix(name) }}</b>{% else %}{{ ('@messages.docs.group_' ~ name)|trans }}{% endif %}</span><span class="om-cote">{{ entries|length }}</span></a>{% endfor %}
+        </nav>
+        {% for name, entries in groups %}
+        <section class="om-family om-docs-group" id="{{ name }}">
+            <header>
+                {% if catalogue.family(name) and catalogue.family(name).hasPage %}
+                    <h3><a href="{{ path('app_family', {family: name}) }}">Omni<b>{{ family_suffix(name) }}</b></a></h3>
+                    <p>{{ catalogue.family(name).phrase(app.request.locale|lang) }}</p>
+                {% else %}
+                    <h3>{% if name starts with 'omni' and name != 'omnibridge' %}Omni<b>{{ family_suffix(name) }}</b>{% else %}{{ ('@messages.docs.group_' ~ name)|trans }}{% endif %}</h3>
+                {% endif %}
+            </header>
+            <ul class="om-manuals">
+                {% for entry in entries %}
+                {% set manual = entry.manual %}
+                <li>
+                    <a class="om-row-name" href="{{ path('app_manual', {key: manual.key, series: manual.default}) }}">{{ manual.package }}</a>
+                    <span class="om-manual-versions">{% for s in manual.series %}<a href="{{ path('app_manual', {key: manual.key, series: s}) }}">{{ s }}</a>{% endfor %}</span>
+                    <span class="om-manual-size">{{ '@messages.docs.pages'|trans({count: documentation.pages(manual, manual.default)|length}) }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+        {% endfor %}
+    </section>
+
+    <section class="om-tier om-docs-contribute" id="contribute">
+        <header>
+            <p class="om-cote">3 — {{ '@messages.docs.contribute_eyebrow'|trans }}</p>
+            <h2>{{ '@messages.docs.contribute_title'|trans }}</h2>
+        </header>
+        <p class="om-docs-contribute-text">{{ '@messages.docs.contribute_text'|trans }}</p>
+        <p class="om-actions">{% if guides.contributing is defined %}<a class="om-button is-line" href="{{ path('app_guide', {slug: 'contributing'}) }}">{{ '@messages.docs.contribute_more'|trans }}</a>{% endif %} <a class="om-button is-line" href="{{ site.githubUrl }}" rel="noopener">GitHub · {{ site.github }}</a></p>
+    </section>
+</div>
+{% endblock %}
