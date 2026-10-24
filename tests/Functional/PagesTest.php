@@ -33,6 +33,7 @@ final class PagesTest extends SiteTestCase
         }
         self::assertStringContainsString('Not tested live', $html, 'omnitrade/paypal\'s README says so');
         self::assertStringNotContainsString('?kind=', $html, 'a static page has no query: the filters are in the fragment');
+        self::assertStringContainsString('href="/packages#family-omnitrade.kind-provider"', $this->get('/'), 'a fragment the core\'s scripts can read as a CSS selector');
         self::assertStringContainsString('href="/fr/paquets"', $this->get('/fr/paquets'));
     }
 
@@ -130,7 +131,9 @@ final class PagesTest extends SiteTestCase
     public function testRobotsAndTheUnknownAddressesPage(): void
     {
         self::assertSame("User-agent: *\nAllow: /\n\nSitemap: http://localhost:8135/sitemap.xml\n", $this->get('/robots.txt'));
+        $this->get('/fr');
         $html = $this->get('/not-found', 404);
+        self::assertStringContainsString('lang="en"', $html, 'in English, whatever page came before');
         self::assertStringNotContainsString('rel="canonical"', $html);
         self::assertStringNotContainsString('hreflang=', $html);
     }

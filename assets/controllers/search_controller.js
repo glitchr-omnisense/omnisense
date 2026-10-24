@@ -8,8 +8,8 @@ import { Controller } from '@hotwired/stimulus';
  * family, description, keywords; lower case, without accents), and scored
  * as it scores - each word has to be found, a word in the name counts more,
  * the exact short name most; without words, the order of the floors. The
- * address's fragment follows (#q=...), so a search can be shared: a static
- * host answers the same page whatever the query, the fragment is the page's.
+ * address follows (?q=...), so a search can be shared: a static host answers
+ * the same page whatever the query, and this file reads it again.
  */
 export default class extends Controller {
     static targets = ['q', 'family', 'list', 'count', 'send'];
@@ -18,8 +18,14 @@ export default class extends Controller {
     connect() {
         this.sendTarget.hidden = true;
         this.rows = [...this.listTarget.children];
-        // The page is static: a shared address's question (#q=...&family=...&kind=..., or the same as a query) is read here.
-        const params = new URLSearchParams(location.hash.length > 1 ? location.hash.slice(1) : location.search);
+        // The page is static: the question of a shared address (?q=...&family=...&kind=...) is read here,
+        // and the links of the other pages' filters (#family-omnilab.kind-provider: a fragment that is
+        // also a valid CSS selector, as the core's scripts read it as one).
+        const params = new URLSearchParams(location.search);
+        for (const token of location.hash.slice(1).split('.')) {
+            const match = /^(family|kind)-([a-z]+)$/.exec(token);
+            if (match) params.set(match[1], match[2]);
+        }
         if (params.has('q')) this.qTarget.value = params.get('q');
         if (params.has('family')) this.familyTarget.value = params.get('family');
         const kind = params.get('kind');
@@ -58,7 +64,7 @@ export default class extends Controller {
         if (family) params.set('family', family);
         if (kind) params.set('kind', kind);
         const query = params.toString();
-        history.replaceState(history.state, '', this.urlValue + (query ? '#' + query : ''));
+        history.replaceState(history.state, '', this.urlValue + (query ? '?' + query : ''));
     }
 }
 

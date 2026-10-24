@@ -53,16 +53,17 @@ home:
   tags_label: Les familles, une étiquette chacune
   bridges_eyebrow: omnibridge
   bridges_title: Un pont par cadre, pas un par structure
-  bridges_lead: Le cœur et ses structures ne connaîtront aucun cadre. Un pont les relie toutes d’un coup à Symfony, à Doctrine, à Twig, à React - une colle générique qui ne connaît aucune structure. Un autre cadre, c’est un pont de plus, pas chaque structure à réécrire.
+  bridges_lead: 'Le cœur ne connaît aucun cadre : un pont le relie à Symfony, à Laravel, à Doctrine, à Twig, à React — une colle générique qui ne connaît aucune structure. Un autre cadre, c’est un pont de plus, pas la réécriture de chaque structure.'
   bridge_found: Au catalogue
   bridge_planned: Prévu
   bridge_symfony: Conteneur, routage, formulaires, sécurité.
   bridge_doctrine: 'Le stockage : Doctrine tient seul.'
   bridge_twig: 'Le rendu : Twig tient seul.'
-  bridge_composer: L’installation ; aujourd’hui glitchr/base-plugin.
-  bridge_laravel: Quand quelqu’un s’en servira.
+  bridge_composer: 'L’installation : les stubs et les retouches déclarées du cœur.'
+  bridge_laravel: Les contrats du cœur sur le conteneur de Laravel.
   bridge_react: Les pages en composants React, depuis n’importe quel cadre.
   announced: 'Annoncées, pas encore écrites :'
+  bridge_static: L’export statique des pages publiques de toute application — ce site.
 floors:
   eyebrow: Le socle
   title: Le cœur, les familles, les ponts
@@ -73,7 +74,7 @@ floors:
   foundation:
     name: Cœur
     one: Cœur
-    pattern: glitchr/omnibase
+    pattern: omniscient/omnibase
     text: 'Le cœur dont tout site part : comptes et sécurité, back-office, traductions, images, formulaires.'
   component:
     name: Structures préparées
@@ -105,7 +106,7 @@ catalogue:
   eyebrow: Catalogue
   title: Les paquets
   description: 'Les {count} paquets de l’écosystème Omni : le cœur, les familles et leurs fournisseurs, les ponts, les bibliothèques, et les structures préparées, facultatives.'
-  lead: '{count, plural, =0 {Aucun paquet} one {# paquet} other {# paquets}}, étage par étage. Rien n’est saisi ici : chaque ligne est lue dans le dépôt du paquet, et son état sur son registre lui est demandé.'
+  lead: '{count, plural, =0 {Aucun paquet} one {# paquet} other {# paquets}}, étage par étage, du catalogue du site : chaque ligne a été lue dans le dépôt du paquet.'
   floors: Les étages
   and_providers: et leurs fournisseurs
   no_description: Son dépôt ne le décrit pas.
@@ -186,11 +187,11 @@ legal:
   publisher: Publication
   publisher_text: Ce site est publié par {publisher}.
   host: Hébergement
-  host_missing: 'Le site n’est pas en ligne : c’est une démonstration locale. L’hébergeur sera indiqué à la mise en ligne.'
+  host_missing: Le site n’est pas encore en ligne. L’hébergeur sera indiqué à la mise en ligne.
   packages: Les paquets
   packages_text: Les paquets présentés sont publiés par l’organisation glitchr-studio. La licence de chacun est celle que déclare son dépôt, reprise sur sa fiche.
   sources: D’où viennent les informations
-  sources_text: La fiche d’un paquet est lue dans son dépôt (composer.json ou package.json, README) ; sa présence sur Packagist ou npm est demandée à ces registres, à la date indiquée ; sa documentation est le contenu de son dossier docs/. Les services tiers cités dans les manuels appartiennent à leurs propriétaires.
+  sources_text: La page d’un paquet vient du catalogue du site, lu dans son dépôt (composer.json ou package.json, README) ; sa documentation est son dossier docs/ au commit que le site épingle, indiqué sur chaque page. Les services tiers cités dans les manuels appartiennent à leurs propriétaires.
   fonts: Caractères
   fonts_text: 'Les caractères sont servis par le site, sans appel à un tiers : Bricolage Grotesque (Atelier Triay), IBM Plex Sans et IBM Plex Mono (IBM), tous trois sous SIL Open Font License 1.1.'
 privacy:
@@ -204,26 +205,25 @@ privacy:
   rights_text: 'Le site ne garde aucune donnée personnelle. Pour toute question : {email}.'
 start:
   to_docs: Lire la documentation
-  to_install: Composer son installation
-  docs_lead: Chaque paquet a son manuel, lu dans son dépôt. Commencez par celui de la famille dont vous avez besoin, ou composez votre installation.
+  docs_lead: Chaque paquet a son manuel, lu dans son dépôt à un commit épinglé. Commencez par les guides, ou par la famille qu’il vous faut.
 compat:
   eyebrow: Compatibilité
-  title: Compatible avec n’importe quel cadre — aujourd’hui les familles, demain le cœur
-  lead: 'Ce qui est vrai aujourd’hui, et ce qui le sera. Sans date : le chantier du socle vient après les sites en cours.'
+  title: 'N’importe quel cadre : les familles en PHP nu, le cœur par ses ponts'
+  lead: Ce qui est vrai aujourd’hui. Aucune date n’est promise pour le reste.
   now: Aujourd’hui
-  later: Prévu
+  later: Ensuite
   families_title: Les familles tournent en PHP nu
   families_text: 'Le cœur d’une famille <code>omni*</code> ne requiert ni Symfony, ni Doctrine, ni Twig : seulement des bibliothèques autonomes. Son registre se monte à la main, dans un script, une application Laravel ou Symfony. Le pont Symfony est dans le paquet, sous <code>Bridge/Symfony</code>, et rien n’en est chargé ailleurs.'
   families_proof: 'La preuve : chaque famille a un test sans cadre (<code>Tests/BareTest.php</code>) qui monte son registre à la main et vérifie qu’aucune classe d’un cadre n’est chargée.'
-  omnibase_title: omnibase est fait pour Symfony
-  omnibase_text: '<code>glitchr/omnibase</code> et les structures préparées <code>omnibase/*</code> sont aujourd’hui des bundles Symfony : leurs écrans, leur stockage et leurs gabarits s’appuient sur Symfony, Doctrine et Twig.'
-  agnostic_title: omnibase deviendra agnostique
-  agnostic_text: 'Le métier de chaque structure passera à la racine de son paquet (objets, règles, contrats), ses parts de cadre dans des ponts du même paquet (<code>Bridge/Symfony</code>, <code>Bridge/Doctrine</code>, <code>Bridge/Twig</code>). Une colle générique, qui ne connaît aucune structure, les reliera à chaque cadre :'
+  omnibase_title: omnibase 4 tourne par ses ponts
+  omnibase_text: '<code>omniscient/omnibase</code> 4.x ne requiert que sa fondation, sans cadre : Symfony vient par <code>omnibridge/symfony</code>, Laravel par <code>omnibridge/laravel</code>, le stockage et le rendu par <code>omnibridge/doctrine</code> et <code>omnibridge/twig</code>.'
+  agnostic_title: Les structures préparées suivent
+  agnostic_text: 'Les structures préparées <code>omnibase/*</code> sont aujourd’hui des bundles Symfony sur le cœur ; chacune passe son métier à la racine de son paquet (objets, règles, contrats) quand elle est reprise, ses parts de cadre dans des ponts. La colle générique, qui ne connaît aucune structure :'
   bridge_symfony: conteneur, routage, formulaires, sécurité
   bridge_doctrine: le stockage (Doctrine est autonome)
   bridge_twig: le rendu (Twig est autonome)
-  bridge_composer: l’installation, aujourd’hui glitchr/base-plugin
-  bridge_laravel: quand quelqu’un s’en servira
+  bridge_composer: 'l’installation : les stubs et les retouches déclarées du cœur'
+  bridge_laravel: les contrats du cœur sur le conteneur de Laravel
   read_more: 'Le détail, et ce qu’il impose à chaque paquet : <a href="{url}">la page Compatibilité de la documentation</a>.'
   bridges_below: Cette colle, c’est <a href="{url}">omnibridge</a>, décrit plus haut.
 structures:
@@ -237,7 +237,7 @@ search:
   eyebrow: Paquets
   title: Chercher un paquet
   description: 'Chercher parmi les {count} paquets de l’écosystème Omni : par nom, par famille, par sorte.'
-  lead: '{count, plural, =0 {Aucun paquet} one {# paquet} other {# paquets}}, chacun lu dans son dépôt et demandé à son registre. Un mot se cherche dans le nom, la famille, la description et les mots-clés.'
+  lead: '{count, plural, =0 {Aucun paquet} one {# paquet} other {# paquets}}, du catalogue du site, chacun lu dans son dépôt. Un mot se cherche dans le nom, la famille, la description et les mots-clés.'
   label: Nom, service ou mot-clé
   placeholder: stripe, colissimo, pubchem, captcha…
   submit: Chercher

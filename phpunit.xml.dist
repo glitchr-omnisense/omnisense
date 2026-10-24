@@ -11,13 +11,10 @@
         <server name="APP_ENV" value="test" force="true"/>
         <env name="APP_ENV" value="test" force="true"/>
         <env name="APP_DEBUG" value="1" force="true"/>
+        <!-- The tests read their addresses at this origin, whatever SITE_URL the build has. -->
+        <env name="SITE_URL" value="http://localhost:8135" force="true"/>
         <server name="SHELL_VERBOSITY" value="-1"/>
         <server name="KERNEL_CLASS" value="App\Kernel"/>
-        <!-- base-bundle's UserTracker reads the client IP from the $_SERVER
-             global at sign-in (UserInfoTrait::getIp/getAgent), not from the
-             Request, and refuses a null. -->
-        <server name="REMOTE_ADDR" value="127.0.0.1"/>
-        <server name="HTTP_USER_AGENT" value="PHPUnit"/>
     </php>
 
     <testsuites>
