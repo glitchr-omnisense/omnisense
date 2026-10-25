@@ -6088,12 +6088,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-studio/omnibase.git",
-                "reference": "d92b04c357052accabe8a6499177a636d4243f20"
+                "reference": "8120e65c4d43bee45b46c9e17367648d262450f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-studio/omnibase/zipball/d92b04c357052accabe8a6499177a636d4243f20",
-                "reference": "d92b04c357052accabe8a6499177a636d4243f20",
+                "url": "https://api.github.com/repos/glitchr-studio/omnibase/zipball/8120e65c4d43bee45b46c9e17367648d262450f4",
+                "reference": "8120e65c4d43bee45b46c9e17367648d262450f4",
                 "shasum": ""
             },
             "require": {
@@ -6314,7 +6314,7 @@
                 "helper",
                 "symfony"
             ],
-            "time": "2026-10-24T07:16:14+00:00"
+            "time": "2026-10-24T18:45:17+00:00"
         },
         {
             "name": "omniscient/omnibridge",
