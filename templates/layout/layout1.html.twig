@@ -43,9 +43,14 @@
 <footer class="om-footer">
     <div class="om-wrap">
         <div class="om-footer-grid">
+            {#- Its name and what it is, Glitch Art's signature at their left (as on Anaëlle's and Brieuc's sites): the
+             # year and the monkey as tall as the two lines, a dotted rule between, no detail line. Black, white at night. -#}
             <div class="om-footer-id">
-                <p class="om-mark is-small"><b>Omni</b><i>scient</i></p>
-                <p>{{ '@messages.footer.what'|trans }}</p>
+                {% include '@Base/partials/_credits.html.twig' with {color: 'black', detail: false} %}
+                <div>
+                    <p class="om-mark is-small"><b>Omni</b><i>scient</i></p>
+                    <p>{{ '@messages.footer.what'|trans }}</p>
+                </div>
             </div>
             <nav aria-label="{{ '@messages.footer.plan'|trans }}">
                 <h2>{{ '@messages.footer.plan'|trans }}</h2>
@@ -73,10 +78,6 @@
                     <li><a href="{{ path('app_privacy') }}">{{ '@messages.footer.privacy'|trans }}</a></li>
                 </ul>
             </div>
-        </div>
-        <div class="om-footer-credits">
-            {#- Glitch Art's signature, omnibase's own, on the right: black, white at night (layout1.scss). -#}
-            {% include '@Base/partials/_credits.html.twig' with {color: 'black', site_name: site.name} %}
         </div>
     </div>
 </footer>
