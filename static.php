@@ -66,10 +66,14 @@ return static function (array $host): Site {
     $news = $container->get(News::class);
     $documentation = $container->get(Documentation::class);
 
-    $manuals = static function (bool $pages) use ($documentation): array {
+    // A manual's pages, of its current series or of its older ones (out of the sitemap, noindex).
+    $manuals = static function (bool $pages, bool $current) use ($documentation): array {
         $rows = [];
         foreach ($documentation->manuals() as $manual) {
             foreach ($manual->series() as $series) {
+                if ($manual->isCurrent($series) !== $current) {
+                    continue;
+                }
                 if (!$pages) {
                     $rows[] = ['key' => $manual->key, 'series' => $series];
                     continue;
@@ -102,12 +106,23 @@ return static function (array $host): Site {
                 'app_news_item.fr' => static fn (): array => $slugs($news->slugs('fr')),
                 'app_manual_root' => $keys,
                 'app_manual_latest' => $keys,
-                'app_manual' => static fn (): array => $manuals(false),
-                'app_manual_page' => static fn (): array => $manuals(true),
+                'app_manual' => static fn (): array => $manuals(false, true),
+                'app_manual_page' => static fn (): array => $manuals(true, true),
             ],
             // The page for unknown addresses is written as 404.html, not as a page of its own.
             exclude: ['app_not_found'],
             actions: ['App\Controller\\'],
+        ))
+        // The older series of a manual (omnibase 3.x beside 4.x): published, linked from the version
+        // selector, not in sitemap.xml - their pages say noindex, the current series is the one indexed.
+        ->provide(new RouteCollectionProvider(
+            $routes,
+            parameters: [
+                'app_manual' => static fn (): array => $manuals(false, false),
+                'app_manual_page' => static fn (): array => $manuals(true, false),
+            ],
+            include: ['app_manual', 'app_manual.*', 'app_manual_page', 'app_manual_page.*'],
+            noSitemap: ['*'],
         ))
         ->renderWith($renderer)
         ->publicDir($root.'/public')

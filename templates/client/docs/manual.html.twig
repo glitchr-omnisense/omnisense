@@ -12,6 +12,9 @@
 {% set page_title = rendered ? (rendered.meta.title ?? rendered.title ?? fallback_title) : fallback_title %}
 {% block title %}{{ page_title }}{{ page_title != manual.package ? ' · ' ~ manual.package }} {{ series }}{% endblock %}
 {% block description %}{{ rendered ? rendered.excerpt(160) : (package.description ?? manual.package) }}{% endblock %}
+{#- An older series: read, followed, not indexed (the current series is). -#}
+{% block meta %}{{ parent() }}{% if not manual.isCurrent(series) %}<meta name="robots" content="noindex, follow">
+{% endif %}{% endblock %}
 
 {% block content %}
 {% set file = page ? (source.path ? source.path ~ '/' : '') ~ page.file : null %}
@@ -23,7 +26,7 @@
             {% if manual.series|length > 1 %}
             <details class="manual-versions">
                 <summary><span class="manual-versions-label">{{ '@messages.manual.version'|trans }}</span> <b>{{ series }}</b></summary>
-                <ul>{% for s in manual.series %}<li><a href="{{ path('app_manual', {key: manual.key, series: s}) }}"{% if s == series %} aria-current="true"{% endif %}>{{ s }}</a></li>{% endfor %}</ul>
+                <ul>{% for s, href in versions %}<li><a href="{{ href }}" data-series="{{ s }}"{% if s == series %} aria-current="true"{% endif %}>{{ s }}{% if manual.isCurrent(s) %} <small>{{ '@messages.manual.current'|trans }}</small>{% endif %}</a></li>{% endfor %}</ul>
             </details>
             {% else %}
             <p class="manual-versions is-single"><span class="manual-versions-label">{{ '@messages.manual.version'|trans }}</span> <b>{{ series }}</b></p>
@@ -49,7 +52,7 @@
         </nav>
 
         {% if series != manual.default %}
-        <p class="manual-notice" role="note">{{ '@messages.manual.not_default'|trans({version: series, current: manual.default}) }} <a href="{{ path('app_manual', {key: manual.key, series: manual.default}) }}">{{ '@messages.manual.see_current'|trans({current: manual.default}) }}</a></p>
+        <p class="manual-notice" role="note">{{ '@messages.manual.not_default'|trans({version: series, current: manual.default}) }} <a href="{{ versions[manual.default] }}">{{ '@messages.manual.see_current'|trans({current: manual.default}) }}</a></p>
         {% endif %}
         {% if source.eol %}<p class="manual-notice is-eol" role="note">{{ '@messages.manual.eol'|trans({version: series}) }}</p>{% endif %}
 
@@ -68,7 +71,7 @@
 
         <footer class="manual-foot">
             <p class="manual-edit">
-                <span class="manual-source">{{ '@messages.manual.read_at'|trans }} <a href="https://github.com/{{ manual.repository }}/tree/{{ commit ?? source.ref }}/{{ source.path }}" rel="noopener"><code>{{ manual.repository }}</code> · <code>{{ (commit ?? source.ref)|slice(0, 12) }}</code></a>{% if source.branch %} ({{ '@messages.manual.branch'|trans({branch: source.branch}) }}){% endif %}</span>
+                <span class="manual-source">{{ '@messages.manual.read_at'|trans }} <a href="https://github.com/{{ manual.repository }}/tree/{{ commit ?? source.ref }}/{{ source.path }}" rel="noopener"><code>{{ manual.repository }}</code> · <code>{{ (commit ?? source.ref)|slice(0, 12) }}</code></a>{% if source.branch %} ({{ (source.pinned == 'branch-head' ? '@messages.manual.branch_head' : '@messages.manual.branch')|trans({branch: source.branch}) }}){% endif %}</span>
                 {% if file %}<span class="manual-source"><a href="https://github.com/{{ manual.repository }}/blob/{{ commit ?? source.ref }}/{{ file }}" rel="noopener"><code>{{ file }}</code></a></span>{% endif %}
             </p>
             <nav class="manual-neighbours" aria-label="{{ '@messages.manual.previous'|trans }} / {{ '@messages.manual.next'|trans }}">
