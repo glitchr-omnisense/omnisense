@@ -20,8 +20,11 @@ const PAGES = [
     ['landing-fr', '/fr', '.om-hero'],
     ['guide', '/guides/architecture', '.manual-prose h1'],
     ['packages', '/packages', '.om-hit'],
-    ['package', '/packages/omniscient/omnibase', '.om-sheet'],
-    ['manual', '/docs/omnitrade/1.x', '.manual-prose'],
+    // A package with a manual is its manual: one page, its table of contents in a sidebar.
+    ['manual', '/docs/omnitrade/1.x', '.manual-prose [data-path]'],
+    ['manual-toc', '/docs/omnibase/4.x', '[data-omnidocs-toc] a'],
+    ['api', '/docs/omnidrive/1.x/api', '.manual-prose .doc-part-title'],
+    ['libraries', '/families/libraries', '.om-rows'],
     ['news', '/news', '.om-news-list li'],
     ['search', '/search?q=stripe', '.om-site-hits li'],
     ['not-found', '/this-page-does-not-exist', '.om-head'],

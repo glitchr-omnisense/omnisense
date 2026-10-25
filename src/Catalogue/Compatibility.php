@@ -22,6 +22,9 @@ class Compatibility
     ) {
     }
 
+    /** @var array<string, array<string, mixed>>|null */
+    private ?array $byName = null;
+
     public function generated(): ?string
     {
         $generated = $this->data()['generated'] ?? null;
@@ -46,6 +49,18 @@ class Compatibility
         natsort($labels);
 
         return array_values($labels);
+    }
+
+    /**
+     * One package's row, for the compact header of its manual; null for a library or a package without a repository.
+     *
+     * @return array{package: Package, jobs: array<string, string>, runs: list<array{workflow: string, url: string, conclusion: string, at: string, head: string}>, suite: ?string, test: ?string, conformance: string, stale: bool}|null
+     */
+    public function of(Package $package): ?array
+    {
+        $this->byName ??= array_column(array_map(static fn (array $row): array => ['name' => $row['package']->getName(), 'row' => $row], $this->rows()), 'row', 'name');
+
+        return $this->byName[$package->getName()] ?? null;
     }
 
     /**

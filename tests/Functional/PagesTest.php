@@ -11,7 +11,8 @@ final class PagesTest extends SiteTestCase
         self::assertStringContainsString('<html', $html);
         self::assertStringContainsString('lang="en"', $html);
         self::assertStringContainsString('Take payments and sell, whatever the provider.', $html, 'the family\'s phrase, from catalog/omnitrade.yaml');
-        self::assertStringContainsString('href="/families/omnitrade"', $html);
+        self::assertStringContainsString('href="/docs/omnitrade/1.x"', $html, 'a family leads straight to its core\'s documentation');
+        self::assertStringContainsString('href="/families/libraries"', $html, 'the JavaScript libraries, at the families\' level');
         self::assertStringContainsString('The first news', $html);
         self::assertStringContainsString('href="/guides/getting-started"', $html, 'the guides of docs/en');
         // The language alternates and the canonical address, at SITE_URL.
@@ -21,7 +22,7 @@ final class PagesTest extends SiteTestCase
         $fr = $this->get('/fr');
         self::assertStringContainsString('lang="fr"', $fr);
         self::assertStringContainsString('Encaisser et vendre, quel que soit le prestataire.', $fr);
-        self::assertStringContainsString('href="/fr/familles/omnitrade"', $fr);
+        self::assertStringContainsString('href="/fr/docs/omnitrade/1.x"', $fr);
         self::assertStringContainsString('La première actualité', $fr);
     }
 
@@ -43,24 +44,27 @@ final class PagesTest extends SiteTestCase
         self::assertStringContainsString('composer require omnitrade/stripe:1.x-dev', $html);
         self::assertStringContainsString('Verified against the real service on 2026-10-01.', $html);
         self::assertStringContainsString('href="https://github.com/glitchr-studio/omnitrade-stripe"', $html);
-        self::assertStringContainsString('href="/packages/omniscient/omnitrade"', $html, 'what it requires');
+        self::assertStringContainsString('href="/docs/omnitrade/1.x"', $html, 'what it requires: its documentation');
 
-        $own = $this->get('/packages/omniscient/omnitrade');
-        self::assertStringContainsString('href="/docs/omnitrade/1.x"', $own, 'its manual, at its default series');
-        self::assertStringContainsString('href="/docs/omnitrade/1.x/installation"', $own);
-        self::assertStringContainsString('href="/docs/omnitrade/0.9"', $own);
+        $this->get('/packages/omniscient/omnitrade', 301);
+        self::assertSame('/docs/omnitrade/1.x', $this->client->getResponse()->headers->get('Location'), 'a package with a manual: its manual, no page between');
 
         $this->get('/packages/omnitrade/nothing', 404);
     }
 
-    public function testAFamilyPageListsItsProviders(): void
+    public function testAFamilyIsItsCoresDocumentationAndTheLibrariesAList(): void
     {
-        $html = $this->get('/families/omnitrade');
-        self::assertStringContainsString('Omni<b>trade</b>', $html);
-        self::assertStringContainsString('One contract for payment providers.', $html);
-        self::assertStringContainsString('href="/packages/omnitrade/paypal"', $html);
+        $this->get('/families/omnitrade', 301);
+        self::assertSame('/docs/omnitrade/1.x', $this->client->getResponse()->headers->get('Location'), 'no page between a family and its documentation');
+        $html = $this->get('/docs/omnitrade/1.x');
+        self::assertStringContainsString('href="/packages/omnitrade/paypal"', $html, 'its providers, listed beside it');
         // The bridges have no family page.
         $this->get('/families/omnibridge', 404);
+
+        $libraries = $this->get('/families/libraries');
+        self::assertStringContainsString('JavaScript libraries', $libraries, 'a family with no core: a page that lists its libraries');
+        self::assertStringContainsString('href="/packages/glitchr/flowjs"', $libraries);
+        self::assertStringContainsString('Bibliothèques JavaScript', $this->get('/fr/familles/libraries'));
     }
 
     public function testTheGuidesAreTheSitesMarkdownInEachLanguage(): void
@@ -117,10 +121,12 @@ final class PagesTest extends SiteTestCase
         self::assertSame(1, $kinds['family']);
         self::assertSame(2, $kinds['provider']);
         self::assertSame(2, $kinds['news']);
-        self::assertSame(3, $kinds['doc'], 'the default series\' home and two pages');
+        self::assertSame(1, $kinds['doc'], 'the default series\' one page');
+        self::assertSame(2, $kinds['section'], 'its two pages, parts of it');
         self::assertGreaterThanOrEqual(5, $kinds['guide']);
         $urls = array_column($index['entries'], 'u');
-        self::assertContains('/docs/omnitrade/1.x/guides/webhooks', $urls);
+        self::assertContains('/docs/omnitrade/1.x#guides-webhooks', $urls);
+        self::assertContains('/docs/omnitrade/1.x#guides-webhooks-signatures', $urls, 'a heading, at its anchor of the one page');
         self::assertNotContains('/docs/omnitrade/0.9', $urls, 'only the default series is searched');
 
         $fr = json_decode($this->get('/fr/search.json'), true, flags: \JSON_THROW_ON_ERROR);
@@ -149,7 +155,7 @@ final class PagesTest extends SiteTestCase
 
     public function testNoPageOpensTheDatabase(): void
     {
-        foreach (['/', '/fr', '/packages', '/families/omnitrade', '/packages/omnitrade/stripe', '/docs', '/docs/omnitrade/1.x/installation', '/guides/architecture', '/news/first', '/news/feed.atom', '/search.json'] as $path) {
+        foreach (['/', '/fr', '/packages', '/packages/omnitrade/stripe', '/docs', '/docs/omnitrade/1.x', '/guides/architecture', '/news/first', '/news/feed.atom', '/search.json'] as $path) {
             $this->get($path);
         }
         self::assertFalse(static::getContainer()->get('doctrine.dbal.default_connection')->isConnected(), 'the pages are rendered from files: no database at build time');

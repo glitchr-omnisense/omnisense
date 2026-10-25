@@ -26,6 +26,8 @@ footer:
   legal: Legal notice
   privacy: Privacy
 home:
+  libraries: JavaScript libraries
+  libraries_count: '{count, plural, =0 {no library} one {# library} other {# libraries}}'
   title: 'Omniscient: the Omni ecosystem and its documentation'
   kicker: One prefix, several families
   kicker_count: '{packages} packages · {families} families'
@@ -269,6 +271,11 @@ kind:
   bridge_one: Bridge
   library_one: JS library
 manual:
+  api: API reference
+  api_lead: 'Read from the package''s own PHP files at the commit {commit}: its namespaces, classes, interfaces and enums, their public constants, properties and methods with their PHPDoc, and the options its factories take. Nothing of it is run.'
+  guide: Manual
+  switch: The manual or its API reference
+  website: Its website
   contents: The manual's contents
   home: Home
   all: All the documentation

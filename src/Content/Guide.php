@@ -2,6 +2,8 @@
 
 namespace App\Content;
 
+use Omnidocs\Model\Rendered;
+
 /** A cross-ecosystem guide: docs/<locale>/<slug>.md. */
 final class Guide
 {

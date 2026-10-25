@@ -1,36 +1,45 @@
-{# A family: the question it asks, its own package, the providers that answer (catalog/<family>.yaml). #}
+{#
+ # A family whose core has no manual of its own, or the JavaScript libraries (a
+ # family with no core): what it asks, its packages, each linked straight to its
+ # documentation (catalog/<family>.yaml). A family whose core has a manual has
+ # no page: /families/<family> redirects to that manual.
+ #}
 {% extends 'layout1.html.twig' %}
 
-{% set is_core = own.tier.value == 'foundation' %}
-{% block title %}Omni{{ family.suffix }}{% endblock %}
+{% set is_core = own and own.tier.value == 'foundation' %}
+{% set name = own ? 'Omni' ~ family.suffix : '@messages.home.libraries'|trans %}
+{% block title %}{{ name }}{% endblock %}
 {% block description %}{{ phrase }}{% endblock %}
 
 {% block content %}
 <div class="om-wrap om-page">
     <header class="om-head is-page">
-        <p class="om-cote"><a href="{{ path('app_packages') }}">{{ '@messages.catalogue.title'|trans }}</a> / {{ (is_core ? '@messages.floors.foundation.name' : '@messages.floors.family.name')|trans }}</p>
-        <h1 class="om-family-title">Omni<b>{{ family.suffix }}</b></h1>
+        <p class="om-cote"><a href="{{ path('app_packages') }}">{{ '@messages.catalogue.title'|trans }}</a> / {{ (own ? (is_core ? '@messages.floors.foundation.name' : '@messages.floors.family.name') : '@messages.docs.group_library')|trans }}</p>
+        <h1 class="om-family-title">{% if own %}Omni<b>{{ family.suffix }}</b>{% else %}{{ name }}{% endif %}</h1>
         {% if phrase %}<p class="om-lead">{{ phrase }}</p>{% endif %}
         {% if text %}<p class="om-family-text">{{ text }}</p>{% endif %}
+        {% if own %}
         <p class="om-actions">
-            {% if manual %}<a class="om-button" href="{{ path('app_manual', {key: manual.key, series: manual.default}) }}">{{ '@messages.family.manual'|trans }}</a>{% endif %}
-            <a class="om-button is-line" href="{{ path('app_package', {vendor: own.vendor, name: own.shortName}) }}">{{ own.name }}</a>
+            <a class="om-button is-line" href="{{ doc_url(own) }}">{{ own.name }}</a>
             {% if own.repositoryUrl %}<a class="om-button is-line" href="{{ own.repositoryUrl }}" rel="noopener">GitHub</a>{% endif %}
         </p>
+        {% endif %}
     </header>
 
+    {% if own %}
     <section class="om-tier">
         <header><h2>{{ (is_core ? '@messages.family.own_foundation' : '@messages.family.own')|trans }}</h2></header>
         <ul class="om-rows">{% include 'partials/_package_row.html.twig' with {package: own} %}</ul>
     </section>
+    {% endif %}
 
     <section class="om-tier">
         <header>
-            <h2>{{ (is_core ? '@messages.floors.component.name' : '@messages.floors.provider.name')|trans }} <small>{{ members|length }}</small></h2>
-            <p>{{ (is_core ? '@messages.floors.component.text' : '@messages.family.providers_lead')|trans }}</p>
+            <h2>{{ (own ? (is_core ? '@messages.floors.component.name' : '@messages.floors.provider.name') : '@messages.home.libraries')|trans }} <small>{{ members|length }}</small></h2>
+            {% if own %}<p>{{ (is_core ? '@messages.floors.component.text' : '@messages.family.providers_lead')|trans }}</p>{% endif %}
         </header>
         {% if members %}
-        <ul class="om-rows">{% for package in members %}{% include 'partials/_package_row.html.twig' with {short: true} %}{% endfor %}</ul>
+        <ul class="om-rows">{% for package in members %}{% include 'partials/_package_row.html.twig' with {short: own is not null} %}{% endfor %}</ul>
         {% else %}
         <p class="om-none">{{ '@messages.family.no_provider'|trans }}</p>
         {% endif %}

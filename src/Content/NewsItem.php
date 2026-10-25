@@ -2,6 +2,8 @@
 
 namespace App\Content;
 
+use Omnidocs\Model\Rendered;
+
 /** One piece of news: news/<YYYY-MM-DD>-<slug>.<locale>.md. */
 final class NewsItem
 {

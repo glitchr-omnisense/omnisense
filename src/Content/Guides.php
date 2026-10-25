@@ -2,6 +2,7 @@
 
 namespace App\Content;
 
+use Omnidocs\Markdown\MarkdownRenderer;
 use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -22,7 +23,7 @@ class Guides
     private array $guides = [];
 
     public function __construct(
-        private readonly Markdown $markdown,
+        private readonly MarkdownRenderer $markdown,
         private readonly UrlGeneratorInterface $urls,
         #[Autowire('%app.guides_dir%')] private readonly string $dir,
     ) {

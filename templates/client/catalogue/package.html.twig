@@ -13,7 +13,7 @@
     <header class="om-head is-page">
         <p class="om-cote">
             <a href="{{ path('app_packages') }}">{{ '@messages.catalogue.title'|trans }}</a>
-            {% if family and family.hasPage %} / <a href="{{ path('app_family', {family: family.name}) }}">Omni{{ family.suffix }}</a>{% endif %}
+            {% if family and family.hasPage %} / <a href="{{ family_url(family.name) }}">Omni{{ family.suffix }}</a>{% endif %}
             / {{ ('@messages.floors.' ~ package.tier.value ~ '.one')|trans }}
         </p>
         <h1 class="om-package-title"><span>{{ package.npm ? '@' }}{{ package.vendor }}/</span>{{ package.shortName }}</h1>
@@ -36,7 +36,7 @@
         <section class="om-sheet" aria-labelledby="om-sheet-title">
             <h2 id="om-sheet-title" class="om-cote">{{ '@messages.package.sheet'|trans }}</h2>
             <dl>
-                <div><dt>{{ '@messages.package.floor'|trans }}</dt><dd>{{ ('@messages.floors.' ~ package.tier.value ~ '.one')|trans }}{% if family and family.hasPage and family.own != package %} · <a href="{{ path('app_family', {family: family.name}) }}">Omni{{ family.suffix }}</a>{% endif %}</dd></div>
+                <div><dt>{{ '@messages.package.floor'|trans }}</dt><dd>{{ ('@messages.floors.' ~ package.tier.value ~ '.one')|trans }}{% if family and family.hasPage and family.own != package %} · <a href="{{ family_url(family.name) }}">Omni{{ family.suffix }}</a>{% endif %}</dd></div>
                 <div><dt>{{ '@messages.package.license'|trans }}</dt><dd>{{ package.license ?? '—' }}</dd></div>
                 <div><dt>{{ '@messages.package.branch'|trans }}</dt><dd>{% if package.branch %}<code>{{ package.branch }}</code>{% else %}—{% endif %}</dd></div>
                 <div><dt>{{ '@messages.package.repository'|trans }}</dt><dd>{% if package.repositoryUrl %}<a href="{{ package.repositoryUrl }}" rel="noopener">{{ package.repository }}</a>{% else %}—{% endif %}</dd></div>
@@ -76,7 +76,7 @@
                 {% endif %}
                 {% if required_by %}
                 <h3 class="om-cote">{{ '@messages.package.required_by'|trans({count: required_by|length}) }}</h3>
-                <p class="om-names">{% for other in required_by %}<a href="{{ path('app_package', {vendor: other.vendor, name: other.shortName}) }}">{{ other.name }}</a>{% endfor %}</p>
+                <p class="om-names">{% for other in required_by %}<a href="{{ doc_url(other) }}">{{ other.name }}</a>{% endfor %}</p>
                 {% endif %}
             </section>
             {% endif %}

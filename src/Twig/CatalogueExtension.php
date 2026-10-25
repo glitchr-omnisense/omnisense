@@ -2,7 +2,10 @@
 
 namespace App\Twig;
 
+use App\Catalogue\Catalogue;
 use App\Catalogue\Families;
+use App\Catalogue\Package;
+use App\Content\Documentation;
 use App\Catalogue\PackageSearch;
 use App\Site\Identity;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -27,6 +30,8 @@ class CatalogueExtension extends AbstractExtension
         private readonly RequestStack $requests,
         private readonly UrlGeneratorInterface $urls,
         private readonly Identity $site,
+        private readonly Documentation $documentation,
+        private readonly Catalogue $catalogue,
     ) {
     }
 
@@ -44,9 +49,33 @@ class CatalogueExtension extends AbstractExtension
             new TwigFunction('search_haystack', PackageSearch::haystack(...)),
             new TwigFunction('page_alternates', $this->alternates(...)),
             new TwigFunction('site_locales', static fn (): array => self::LOCALES),
+            // Where a link to a package or a family lands: its documentation, never a page that leads to it.
+            new TwigFunction('doc_url', $this->docUrl(...)),
+            new TwigFunction('family_url', $this->familyUrl(...)),
             // An address at the static site's public origin (SITE_URL), whatever host renders the page.
             new TwigFunction('site_url', fn (string $route, array $parameters = []): string => $this->site->absolute($this->urls->generate($route, $parameters))),
         ];
+    }
+
+    /** A package's manual (its one page), or its catalogue page when it has none. */
+    public function docUrl(Package|string $package): string
+    {
+        $name = $package instanceof Package ? $package->getName() : $package;
+        $manual = $this->documentation->manualOf($name);
+        if (null !== $manual) {
+            return $this->urls->generate('app_manual', ['key' => $manual->key, 'series' => $manual->default]);
+        }
+        $found = $package instanceof Package ? $package : $this->catalogue->find($name);
+
+        return null !== $found ? $this->urls->generate('app_package', ['vendor' => $found->getVendor(), 'name' => $found->getShortName()]) : $this->urls->generate('app_packages');
+    }
+
+    /** A family's core's manual, where its providers are listed; the family's page when its core has none (the libraries). */
+    public function familyUrl(string $family): string
+    {
+        $own = $this->catalogue->family($family)?->getOwn();
+
+        return null !== $own && null !== $this->documentation->manualOf($own->getName()) ? $this->docUrl($own) : $this->urls->generate('app_family', ['family' => $family]);
     }
 
     /**

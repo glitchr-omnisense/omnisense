@@ -19,6 +19,8 @@ final class Manual
         public readonly string $repository,
         public readonly string $default,
         public readonly array $versions,
+        /** The package's own website, when it has one (config/documentation.yaml's `website`). */
+        public readonly ?string $website = null,
     ) {
     }
 

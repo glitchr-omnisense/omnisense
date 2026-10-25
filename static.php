@@ -88,6 +88,19 @@ return static function (array $host): Site {
 
         return $rows;
     };
+    // A PHP package's API reference, of its current series or of its older ones.
+    $apis = static function (bool $current) use ($documentation): array {
+        $rows = [];
+        foreach ($documentation->manuals() as $manual) {
+            foreach ($manual->series() as $series) {
+                if ($manual->isCurrent($series) === $current && null !== $documentation->api($manual, $series)) {
+                    $rows[] = ['key' => $manual->key, 'series' => $series];
+                }
+            }
+        }
+
+        return $rows;
+    };
     $keys = static fn (): array => array_map(static fn ($m): array => ['key' => $m->key], array_values($documentation->manuals()));
     $slugs = static fn (array $slugs): array => array_map(static fn (string $slug): array => ['slug' => $slug], $slugs);
 
@@ -98,7 +111,7 @@ return static function (array $host): Site {
         ->provide(new RouteCollectionProvider(
             $routes,
             parameters: [
-                'app_family' => static fn (): array => array_values(array_map(static fn ($f): array => ['family' => $f->name], array_filter($catalogue->families(), static fn ($f): bool => $f->hasPage()))),
+                'app_family' => static fn (): array => array_values(array_map(static fn ($f): array => ['family' => $f->name], array_filter($catalogue->families(), static fn ($f): bool => $f->hasPage() || 'libraries' === $f->name))),
                 'app_package' => static fn (): array => array_values(array_map(static fn ($p): array => ['vendor' => $p->getVendor(), 'name' => $p->getShortName()], $catalogue->all())),
                 'app_guide.en' => static fn (): array => $slugs(array_keys($guides->all('en'))),
                 'app_guide.fr' => static fn (): array => $slugs(array_keys($guides->all('fr'))),
@@ -107,7 +120,9 @@ return static function (array $host): Site {
                 'app_manual_root' => $keys,
                 'app_manual_latest' => $keys,
                 'app_manual' => static fn (): array => $manuals(false, true),
+                // Each page's former address: a redirection to its part of the manual's one page.
                 'app_manual_page' => static fn (): array => $manuals(true, true),
+                'app_manual_api' => static fn (): array => $apis(true),
             ],
             // The page for unknown addresses is written as 404.html, not as a page of its own.
             exclude: ['app_not_found'],
@@ -120,8 +135,9 @@ return static function (array $host): Site {
             parameters: [
                 'app_manual' => static fn (): array => $manuals(false, false),
                 'app_manual_page' => static fn (): array => $manuals(true, false),
+                'app_manual_api' => static fn (): array => $apis(false),
             ],
-            include: ['app_manual', 'app_manual.*', 'app_manual_page', 'app_manual_page.*'],
+            include: ['app_manual', 'app_manual.*', 'app_manual_page', 'app_manual_page.*', 'app_manual_api', 'app_manual_api.*'],
             noSitemap: ['*'],
         ))
         ->renderWith($renderer)

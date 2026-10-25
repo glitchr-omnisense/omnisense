@@ -2,6 +2,7 @@
 
 namespace App\Content;
 
+use Omnidocs\Markdown\MarkdownRenderer;
 use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
@@ -21,7 +22,7 @@ class News
     private array $items = [];
 
     public function __construct(
-        private readonly Markdown $markdown,
+        private readonly MarkdownRenderer $markdown,
         #[Autowire('%app.news_dir%')] private readonly string $dir,
     ) {
     }

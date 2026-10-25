@@ -3,21 +3,32 @@
 namespace App\Controller;
 
 use App\Catalogue\Catalogue;
+use App\Catalogue\Compatibility;
 use App\Content\Documentation;
 use App\Content\Manual;
 use App\Site\Locale;
+use Omnibridge\Static\StaticResponse;
+use Omnidocs\OnePage;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 /**
- * Each package's manual: /docs/<key>/<series>/<page>, read from its own
- * repository's docs/ at the commit config/documentation.yaml pins. Each
- * package has its own series; /docs/<key> and /docs/<key>/latest are
- * redirections to its default series, never canonical content. An older
- * series than the default is published with a notice and kept out of search
- * engines' indexes (noindex, out of the sitemap).
+ * Each package's documentation, one page per package and series:
+ * /docs/<key>/<series> holds the whole of its docs/ folder - the home, then
+ * every page in reading order (omnidocs' OnePage) - read from its own
+ * repository at the commit config/documentation.yaml pins, beside a sidebar
+ * whose table of contents sticks and follows the reading; its header says
+ * what the catalogue knew of the package (CI, live check, version,
+ * repository), a family's core lists its providers. /docs/<key>/<series>/api
+ * is a PHP package's API reference, read from its sources.
+ *
+ * The former address of each page, /docs/<key>/<series>/<page>, redirects
+ * to its part of the one page, the visitor's #anchor carried over. /docs/<key>
+ * and /docs/<key>/latest redirect to the default series. An older series is
+ * published with a notice, out of search engines' indexes.
  */
 class DocumentationController extends AbstractController
 {
@@ -27,6 +38,7 @@ class DocumentationController extends AbstractController
     public function __construct(
         private readonly Documentation $documentation,
         private readonly Catalogue $catalogue,
+        private readonly Compatibility $compatibility,
     ) {
     }
 
@@ -45,51 +57,77 @@ class DocumentationController extends AbstractController
     #[Route(['en' => '/docs/{key}/{series}', 'fr' => '/fr/docs/{key}/{series}'], name: 'app_manual', requirements: ['key' => self::KEY, 'series' => self::SERIES], methods: ['GET'])]
     public function manualHome(Request $request, string $key, string $series): Response
     {
-        return $this->page($request, $key, $series, '');
+        $manual = $this->series($key, $series);
+        $locale = Locale::of($request);
+        $url = $this->generateUrl('app_manual', ['key' => $key, 'series' => $series, '_locale' => $locale]);
+
+        return $this->onePage($manual, $series, $this->documentation->onePage($manual, $series, $url), $locale, false);
     }
 
+    #[Route(['en' => '/docs/{key}/{series}/api', 'fr' => '/fr/docs/{key}/{series}/api'], name: 'app_manual_api', requirements: ['key' => self::KEY, 'series' => self::SERIES], methods: ['GET'], priority: 5)]
+    public function api(Request $request, string $key, string $series): Response
+    {
+        $manual = $this->series($key, $series);
+        $version = $this->documentation->api($manual, $series) ?? throw $this->createNotFoundException(sprintf('%s %s has no API reference.', $key, $series));
+        $locale = Locale::of($request);
+        $url = $this->generateUrl('app_manual_api', ['key' => $key, 'series' => $series, '_locale' => $locale]);
+
+        return $this->onePage($manual, $series, new OnePage($version, $this->documentation->linker($manual, $series, $url), $url), $locale, true);
+    }
+
+    /** A page's former address: its part of the one page, the visitor's #anchor carried over (prefixed as the part's are). */
     #[Route(['en' => '/docs/{key}/{series}/{path}', 'fr' => '/fr/docs/{key}/{series}/{path}'], name: 'app_manual_page', requirements: ['key' => self::KEY, 'series' => self::SERIES, 'path' => '[a-z0-9][a-z0-9/-]*'], methods: ['GET'])]
     public function page(Request $request, string $key, string $series, string $path): Response
     {
-        $manual = $this->manual($key);
-        if (!$manual->has($series)) {
-            throw $this->createNotFoundException(sprintf('%s has no series "%s".', $key, $series));
-        }
-        $page = $this->documentation->page($manual, $series, $path);
-        if (null === $page && '' !== $path) {
+        $manual = $this->series($key, $series);
+        if (null === $this->documentation->page($manual, $series, $path)) {
             throw $this->createNotFoundException(sprintf('%s %s has no page "%s".', $key, $series, $path));
         }
-        $locale = Locale::of($request);
-        $url = fn (string $to, ?string $fragment): string => $this->generateUrl('' === $to ? 'app_manual' : 'app_manual_page', array_filter(['key' => $key, 'series' => $series, 'path' => $to, '_locale' => $locale], static fn ($v): bool => '' !== $v)).(null !== $fragment ? '#'.$fragment : '');
+        $url = $this->generateUrl('app_manual', ['key' => $key, 'series' => $series, '_locale' => Locale::of($request)]);
+        $one = $this->documentation->onePage($manual, $series, $url);
+        $redirect = $one?->redirects()[$path] ?? throw $this->createNotFoundException();
 
-        // The version selector: the same page in each series when it has it, else that series' home.
+        return new RedirectResponse($url.'#'.$redirect['anchor'], Response::HTTP_MOVED_PERMANENTLY, [StaticResponse::FRAGMENT_HEADER => $redirect['prefix']]);
+    }
+
+    private function onePage(Manual $manual, string $series, ?OnePage $one, string $locale, bool $api): Response
+    {
+        $package = $this->catalogue->find($manual->package);
+        $family = null !== $package && null !== $package->getFamily() ? $this->catalogue->family($package->getFamily()) : null;
+        // The version selector: the same page in each series.
         $versions = [];
         foreach ($manual->series() as $other) {
-            $same = '' !== $path && null !== $this->documentation->page($manual, $other, $path);
-            $versions[$other] = $this->generateUrl($same ? 'app_manual_page' : 'app_manual', array_filter(['key' => $key, 'series' => $other, 'path' => $same ? $path : '', '_locale' => $locale], static fn ($v): bool => '' !== $v));
+            $versions[$other] = $this->generateUrl($api && null !== $this->documentation->api($manual, $other) ? 'app_manual_api' : 'app_manual', ['key' => $manual->key, 'series' => $other, '_locale' => $locale]);
         }
-
-        $pages = $this->documentation->pages($manual, $series);
-        $index = null !== $page ? array_search($page, $pages, false) : false;
+        // A family's own package lists the family's other packages, each straight to its manual.
+        $members = null !== $family && $family->getOwn() === $package ? $family->getMembers() : [];
 
         return $this->render('client/docs/manual.html.twig', [
             'manual' => $manual,
             'series' => $series,
             'versions' => $versions,
-            // An older series: no canonical link to itself and noindex - its pages differ from the
-            // current series' (a canonical pointing there would be ignored), and a search should land
-            // on the current series; static.php keeps them out of the sitemap.
             'canonical' => $manual->isCurrent($series),
             'source' => $manual->versions[$series],
             'commit' => $this->documentation->commit($manual, $series),
-            'package' => $this->catalogue->find($manual->package),
-            'page' => $page,
-            'rendered' => null !== $page ? $this->documentation->render($manual, $series, $page, $url) : null,
-            'tree' => $this->documentation->tree($manual, $series),
-            'home' => $this->documentation->home($manual, $series),
-            'previous' => false !== $index && $index > 0 ? $pages[$index - 1] : null,
-            'next' => false !== $index && isset($pages[$index + 1]) ? $pages[$index + 1] : null,
+            'package' => $package,
+            'family' => $family,
+            'members' => $members,
+            'requires' => null !== $package ? array_values(array_filter(array_map($this->catalogue->find(...), $package->getRequires()))) : [],
+            'compat' => null !== $package ? $this->compatibility->of($package) : null,
+            'one' => $one,
+            'api' => $api,
+            'has_api' => null !== $this->documentation->api($manual, $series),
         ]);
+    }
+
+    private function series(string $key, string $series): Manual
+    {
+        $manual = $this->manual($key);
+        if (!$manual->has($series)) {
+            throw $this->createNotFoundException(sprintf('%s has no series "%s".', $key, $series));
+        }
+
+        return $manual;
     }
 
     private function manual(string $key): Manual

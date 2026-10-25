@@ -5,6 +5,22 @@
     "license": "MIT",
     "repositories": [
         {
+            "_comment": "omnidocs, read from GitHub (glitchr-studio) until Packagist serves it",
+            "type": "vcs",
+            "url": "https://github.com/glitchr-studio/omnidocs.git",
+            "no-api": true
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/glitchr-studio/omnidocs-markdown.git",
+            "no-api": true
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/glitchr-studio/omnidocs-php.git",
+            "no-api": true
+        },
+        {
             "_comment": "Direct VCS sources on GitHub (glitchr-studio): a *-dev constraint resolved through Packagist can pin a stale commit. no-api: plain git, no GitHub API quota.",
             "type": "vcs",
             "url": "https://github.com/glitchr-studio/omnibase.git",
@@ -30,9 +46,6 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "php": ">=8.2",
-        "phpdocumentor/reflection-docblock": "^5.3",
-        "phpoffice/phpspreadsheet": "^1.23|^2.0",
-        "phpstan/phpdoc-parser": "^1.23",
         "api-platform/doctrine-orm": "^4.0",
         "api-platform/symfony": "^4.0",
         "doctrine/collections": "^3.1",
@@ -54,9 +67,15 @@
         "omnibridge/static": "1.x-dev",
         "omnibridge/symfony": "1.x-dev",
         "omnibridge/twig": "1.x-dev",
+        "omnidocs/markdown": "1.x-dev",
+        "omnidocs/php": "1.x-dev",
         "omniscient/omnibase": "4.x-dev as 4.0.x-dev",
         "omniscient/omnibridge": "1.x-dev",
+        "omniscient/omnidocs": "1.x-dev",
         "omniscient/omnidrive": "1.x-dev",
+        "phpdocumentor/reflection-docblock": "^5.3",
+        "phpoffice/phpspreadsheet": "^1.23|^2.0",
+        "phpstan/phpdoc-parser": "^1.23",
         "scheb/2fa": "^7.0|^8.0",
         "symfony/apache-pack": "^1.0",
         "symfony/asset": "^8.0",

@@ -4,7 +4,7 @@
  # without its vendor.
  #}
 <li class="om-row">
-    <a class="om-row-name" href="{{ path('app_package', {vendor: package.vendor, name: package.shortName}) }}">
+    <a class="om-row-name" href="{{ doc_url(package) }}">
         {%- if short|default(false) %}<span>{{ package.vendor }}/</span>{{ package.shortName }}{% else %}{{ package.name }}{% endif -%}
     </a>
     <p class="om-row-text">{{ package.description ?? '@messages.catalogue.no_description'|trans }}</p>

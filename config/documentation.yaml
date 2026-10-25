@@ -21,7 +21,7 @@ packages:
     versions:
       master:
         branch: master
-        ref: c779981e9418e26366fb1b4422fc2f4e01c79aab
+        ref: c417356d88462fd39e3f989b25cfdc09760653f2
         pinned: branch-head
         path: docs/
   graphjs:
