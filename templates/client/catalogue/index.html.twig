@@ -19,6 +19,7 @@
         <h1>{{ '@messages.search.title'|trans }}</h1>
         <p class="om-lead">{{ '@messages.search.lead'|trans({count: counts.packages}) }}</p>
         <p class="om-source">{{ '@messages.catalogue.curated'|trans({families: counts.families, providers: counts.providers, documented: counts.documented}) }}</p>
+        <p class="om-source"><a href="{{ path('app_compatibility') }}">{{ '@messages.dashboard.link'|trans }}</a></p>
     </header>
 
     <div data-controller="search" data-search-url-value="{{ path('app_packages') }}">

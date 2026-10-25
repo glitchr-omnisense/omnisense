@@ -307,3 +307,26 @@ not_found:
   title: This page does not exist
   lead: The address may have changed, or the page was never written. The documentation and the search start from here.
   home: Home
+dashboard:
+  eyebrow: Compatibility dashboard
+  title: Every package, as its CI and its README say
+  description: 'For every package of the Omni ecosystem: its CI jobs, its family''s conformance suite, and whether it was verified against the real service.'
+  lead: 'Generated at each build of the site from GitHub: the jobs of each package''s last CI run on its development branch, whether its tests run its family''s conformance suite, and what its README says of a live check. No cell is written by hand.'
+  generated: 'Read from GitHub on {date} UTC, {count} packages.'
+  never: 'Not read from GitHub yet: bin/console app:compat:fetch writes it.'
+  package: Package
+  conformance: Conformance suite
+  live: Live check
+  stale: 'GitHub did not answer at the last build: what it said before is shown.'
+  stale_short: stale
+  link: Compatibility dashboard
+  how: 'A provider runs its family''s conformance suite when one of its test classes uses the family''s <code>Testing\…ContractTests</code> trait; see <a href="{guide}">Writing a provider</a>.'
+  ci:
+    success: passed
+    failure: failed
+    other: other
+  suite:
+    passes: runs, CI green
+    fails: runs, CI red
+    unknown: runs, no CI read
+    missing: not wired

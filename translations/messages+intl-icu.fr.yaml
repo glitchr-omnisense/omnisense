@@ -307,3 +307,26 @@ not_found:
   title: Cette page n’existe pas
   lead: L’adresse a pu changer, ou la page n’a jamais été écrite. La documentation et la recherche partent d’ici.
   home: Accueil
+dashboard:
+  eyebrow: Tableau de compatibilité
+  title: Chaque paquet, tel que sa CI et son README le disent
+  description: 'Pour chaque paquet de l''écosystème Omni : les jobs de sa CI, la suite de conformité de sa famille, et s''il a été vérifié contre le service réel.'
+  lead: 'Généré à chaque construction du site depuis GitHub : les jobs de la dernière CI de chaque paquet sur sa branche de développement, si ses tests passent la suite de conformité de sa famille, et ce que son README dit d''une vérification en réel. Aucune case n''est écrite à la main.'
+  generated: 'Lu sur GitHub le {date} UTC, {count} paquets.'
+  never: 'Pas encore lu sur GitHub : bin/console app:compat:fetch l''écrit.'
+  package: Paquet
+  conformance: Suite de conformité
+  live: Vérification en réel
+  stale: 'GitHub n''a pas répondu à la dernière construction : ce qu''il disait avant est affiché.'
+  stale_short: ancien
+  link: Tableau de compatibilité
+  how: 'Un provider passe la suite de conformité de sa famille quand une de ses classes de test utilise le trait <code>Testing\…ContractTests</code> de la famille ; voir <a href="{guide}">Écrire un provider</a>.'
+  ci:
+    success: réussie
+    failure: échouée
+    other: autre
+  suite:
+    passes: branchée, CI verte
+    fails: branchée, CI rouge
+    unknown: branchée, CI non lue
+    missing: non branchée

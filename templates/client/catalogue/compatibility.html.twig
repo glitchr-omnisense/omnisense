@@ -1,0 +1,55 @@
+{#
+ # The compatibility dashboard: one row per package, generated - its CI jobs
+ # on its development branch (each job a column: the PHP version, the
+ # framework it tests), the conformance suite its tests run and whether that CI
+ # passed, what its README says of a live check. The data: config/compatibility.yaml,
+ # written at build time by app:compat:fetch from GitHub; the README's state
+ # from catalog/<family>.yaml. No cell is kept by hand.
+ #}
+{% extends 'layout1.html.twig' %}
+
+{% block title %}{{ '@messages.dashboard.title'|trans }}{% endblock %}
+{% block description %}{{ '@messages.dashboard.description'|trans }}{% endblock %}
+
+{% set badge = {success: 'is-yes', failure: 'is-no', timed_out: 'is-no', startup_failure: 'is-no'} %}
+{% block content %}
+<div class="om-wrap om-page">
+    <header class="om-head is-page">
+        <p class="om-cote">{{ '@messages.dashboard.eyebrow'|trans }}</p>
+        <h1>{{ '@messages.dashboard.title'|trans }}</h1>
+        <p class="om-lead">{{ '@messages.dashboard.lead'|trans }}</p>
+        <p class="om-source">{% if generated %}{{ '@messages.dashboard.generated'|trans({date: generated|date('Y-m-d H:i'), count: rows|length}) }}{% else %}{{ '@messages.dashboard.never'|trans }}{% endif %}</p>
+    </header>
+
+    <div class="om-compat-scroll" tabindex="0" role="region" aria-label="{{ '@messages.dashboard.title'|trans }}">
+    <table class="om-compat-table">
+        <thead>
+            <tr>
+                <th scope="col">{{ '@messages.dashboard.package'|trans }}</th>
+                {% for label in labels %}<th scope="col">{{ label }}</th>{% endfor %}
+                <th scope="col">{{ '@messages.dashboard.conformance'|trans }}</th>
+                <th scope="col">{{ '@messages.dashboard.live'|trans }}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for row in rows %}
+            {% set package = row.package %}
+            <tr data-name="{{ package.name }}" data-conformance="{{ row.conformance }}">
+                <th scope="row"><a href="{{ path('app_package', {vendor: package.vendor, name: package.shortName}) }}">{{ package.name }}</a>{% if row.stale %} <span class="om-fact is-unknown" title="{{ '@messages.dashboard.stale'|trans }}">{{ '@messages.dashboard.stale_short'|trans }}</span>{% endif %}</th>
+                {% for label in labels %}
+                    {% set conclusion = row.jobs[label] ?? null %}
+                    <td>{% if conclusion is null %}<span class="om-compat-none">—</span>{% else %}{% set run = row.runs|first %}<a class="om-fact {{ badge[conclusion] ?? 'is-unknown' }}" href="{{ run.url }}" rel="noopener">{{ ('@messages.dashboard.ci.' ~ (conclusion in ['success', 'failure'] ? conclusion : 'other'))|trans }}</a>{% endif %}</td>
+                {% endfor %}
+                <td>
+                    {% if row.conformance == 'none' %}<span class="om-compat-none">—</span>
+                    {% else %}<span class="om-fact {{ {passes: 'is-yes', fails: 'is-no', missing: 'is-no'}[row.conformance] ?? 'is-unknown' }}" title="{{ row.suite ? row.suite ~ ' (' ~ row.test ~ ')' : '' }}">{{ ('@messages.dashboard.suite.' ~ row.conformance)|trans }}</span>{% endif %}
+                </td>
+                <td><span class="om-fact is-{{ package.verification.value }}" title="{{ package.verificationNote }}">{{ ('@messages.state.' ~ package.verification.value)|trans }}</span></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    <p class="om-note">{{ '@messages.dashboard.how'|trans({guide: path('app_guide', {slug: 'providers'})})|raw }}</p>
+</div>
+{% endblock %}
