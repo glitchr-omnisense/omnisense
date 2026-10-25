@@ -406,3 +406,12 @@ html.theme-mode-dark .om-footer-credits .ga-credits { --ga-credits-ink: #fff; }
     .manual-prose :is(h2, h3, h4):hover .heading-anchor, .manual-prose .heading-anchor:focus { opacity: 1; }
     .manual-notice.is-eol { border-color: var(--om-no); }
 }
+
+// The compatibility dashboard: a wide table that scrolls on its own, never the page.
+.om-compat-scroll { overflow-x: auto; margin: 0 0 1.5rem; border: 1px solid var(--om-line); &:focus-visible { outline: 2px solid var(--om-blue); outline-offset: 2px; } }
+.om-compat-table { width: 100%; border-collapse: collapse; font-size: .92rem; line-height: 1.45;
+    th, td { padding: .45rem .7rem; border-bottom: 1px solid var(--om-line); text-align: left; vertical-align: middle; white-space: nowrap; }
+    thead th { position: sticky; top: 0; background: var(--om-paper); @include fine(.8rem, 600); color: var(--om-soft); }
+    tbody th { font-weight: 500; a { text-decoration: none; } }
+    tbody tr:hover { background: color-mix(in srgb, var(--om-line) 35%, transparent); } }
+.om-compat-none { color: var(--om-soft); }

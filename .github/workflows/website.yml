@@ -109,6 +109,14 @@ jobs:
           restore-keys: docs-
 
       # For GitHub Pages: .nojekyll, the redirections as pages, every address under BASE_PATH.
+      # The compatibility dashboard's data, from GitHub's Actions API with the job's token. A failure
+      # (a rate limit) keeps config/compatibility.yaml as committed: the build never depends on it.
+      - name: Compatibility data
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: php bin/console app:compat:fetch --no-interaction
+
       - name: Build
         run: bin/omnibridge-static build --out=dist --github-pages
 

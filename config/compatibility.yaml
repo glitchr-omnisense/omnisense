@@ -1,0 +1,2193 @@
+# The compatibility dashboard's data (/compatibility), written by
+# `bin/console app:compat:fetch` from GitHub's Actions and Git APIs at build
+# time: each package's last finished run of each testing workflow on its
+# development branch, its jobs, and the conformance suite its tests run.
+# Generated - not edited by hand. The README's "Verified, and not" is read by
+# app:catalog:import into catalog/<family>.yaml.
+generated: '2026-10-25T10:58:40+00:00'
+packages:
+  omniauth/google:
+    repository: glitchr-studio/omniauth-google
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omniauth-google/actions/runs/40182827705'
+        head: 8df02efb5feddf7388df35f9e168103debd13447
+        at: '2026-10-25T09:58:36Z'
+        conclusion: failure
+        jobs:
+          - { label: 'PHP 8.4', conclusion: failure }
+    conformance:
+      suite: Omniauth\Testing\ProviderContractTests
+      test: Tests/GoogleContractTest.php
+  omniauth/oauth:
+    repository: glitchr-studio/omniauth-oauth
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omniauth-oauth/actions/runs/39897342952'
+        head: fdd6f8fbca355aea47e0cae80be700dbef877472
+        at: '2026-10-24T13:41:59Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omniauth/otp:
+    repository: glitchr-studio/omniauth-otp
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omniauth-otp/actions/runs/39897355210'
+        head: f41a3a7e9eb1aec22ee1c828b4f0c05a9095fb05
+        at: '2026-10-24T13:42:01Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omniauth/webauthn:
+    repository: glitchr-studio/omniauth-webauthn
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omniauth-webauthn/actions/runs/39897350927'
+        head: eb5b83a52004f67c11be978b6cf16808410cef8d
+        at: '2026-10-24T13:42:17Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omnibank/bridge:
+    repository: glitchr-studio/omnibank-bridge
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnibank/files:
+    repository: glitchr-studio/omnibank-files
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnibank/powens:
+    repository: glitchr-studio/omnibank-powens
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnibank/qonto:
+    repository: glitchr-studio/omnibank-qonto
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnibase/admin:
+    repository: glitchr-studio/omnibase-admin
+    branch: main
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnibase/agenda:
+    repository: glitchr-studio/omnibase-agenda
+    branch: main
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnibase/blog:
+    repository: glitchr-studio/omnibase-blog
+    branch: main
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnibase/broadcast:
+    repository: glitchr-studio/omnibase-broadcast
+    branch: main
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnibase/classroom:
+    repository: glitchr-studio/omnibase-classroom
+    branch: main
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnibase/consent:
+    repository: glitchr-studio/omnibase-consent
+    branch: main
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnibase/consulting:
+    repository: glitchr-studio/omnibase-consulting
+    branch: main
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnibase/docs:
+    repository: glitchr-studio/omnibase-docs
+    branch: '2.0'
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnibase/estate:
+    repository: glitchr-studio/omnibase-estate
+    branch: main
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnibase/faq:
+    repository: glitchr-studio/omnibase-faq
+    branch: main
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnibase/forge:
+    repository: glitchr-studio/omnibase-forge
+    branch: main
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnibase/forum:
+    repository: glitchr-studio/omnibase-forum
+    branch: main
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnibase/gallery:
+    repository: glitchr-studio/omnibase-gallery
+    branch: main
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnibase/health:
+    repository: glitchr-studio/omnibase-health
+    branch: main
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnibase/lawyer:
+    repository: glitchr-studio/omnibase-lawyer
+    branch: main
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnibase/ledger:
+    repository: glitchr-studio/omnibase-ledger
+    branch: main
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnibase/legal:
+    repository: glitchr-studio/omnibase-legal
+    branch: main
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnibase/mailbox:
+    repository: glitchr-studio/omnibase-mailbox
+    branch: main
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnibase/marketplace:
+    repository: glitchr-studio/omnibase-marketplace
+    branch: main
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnibase/music:
+    repository: glitchr-studio/omnibase-music
+    branch: main
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnibase/newsletter:
+    repository: glitchr-studio/omnibase-newsletter
+    branch: main
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnibase/notary:
+    repository: glitchr-studio/omnibase-notary
+    branch: main
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnibase/office:
+    repository: glitchr-studio/omnibase-office
+    branch: main
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnibase/press:
+    repository: glitchr-studio/omnibase-press
+    branch: main
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnibase/restaurant:
+    repository: glitchr-studio/omnibase-restaurant
+    branch: main
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnibase/scholar:
+    repository: glitchr-studio/omnibase-scholar
+    branch: main
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnibase/social:
+    repository: glitchr-studio/omnibase-social
+    branch: main
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnibase/video:
+    repository: glitchr-studio/omnibase-video
+    branch: main
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnibill/afnor:
+    repository: glitchr-studio/omnibill-afnor
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnibill/chorus-pro:
+    repository: glitchr-studio/omnibill-chorus-pro
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnibill/email:
+    repository: glitchr-studio/omnibill-email
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnibridge/composer:
+    repository: glitchr-studio/omnibridge-composer
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnibridge-composer/actions/runs/39511229412'
+        head: b034292d6b5bb1b58bb06b11b57f488f5278d476
+        at: '2026-10-24T13:42:21Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omnibridge/doctrine:
+    repository: glitchr-studio/omnibridge-doctrine
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnibridge-doctrine/actions/runs/39534510527'
+        head: 402cefd1677b86fe296913d5b28ffbec662ec7ce
+        at: '2026-10-24T13:42:19Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omnibridge/laravel:
+    repository: glitchr-studio/omnibridge-laravel
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnibridge-laravel/actions/runs/40132257994'
+        head: 0f94ee3bad8c8ad35ed915d65a85f33c3344962f
+        at: '2026-10-24T21:01:32Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omnibridge/react:
+    repository: glitchr-studio/omnibridge-react
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnibridge-react/actions/runs/40064378409'
+        head: 3e68b9397c1107c54c798e2cf045b3f350d2104e
+        at: '2026-10-24T04:58:15Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omnibridge/static:
+    repository: glitchr-studio/omnibridge-static
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnibridge-static/actions/runs/40095953344'
+        head: 3b0cadc2e048ee97708c758bb13df4171f81cd41
+        at: '2026-10-24T12:56:15Z'
+        conclusion: success
+        jobs:
+          - { label: export, conclusion: success }
+          - { label: 'PHP 8.4', conclusion: success }
+      -
+        workflow: .github/workflows/ci.yml
+        url: 'https://github.com/glitchr-studio/omnibridge-static/actions/runs/40074671226'
+        head: 4313f7cd6c81f0887f4c599dc872de8eb42b392d
+        at: '2026-10-24T07:34:28Z'
+        conclusion: failure
+        jobs: {}
+    conformance:
+      suite: null
+      test: null
+  omnibridge/symfony:
+    repository: glitchr-studio/omnibridge-symfony
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnibridge-symfony/actions/runs/40072204984'
+        head: 67129dbab0797e7bf6568503a6889faeaa4f1115
+        at: '2026-10-24T06:58:05Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omnibridge/twig:
+    repository: glitchr-studio/omnibridge-twig
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnibridge-twig/actions/runs/40131823927'
+        head: 976de23bf64ef16e573f01752b4e166216919fc5
+        at: '2026-10-24T20:54:19Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omnibus/amazon:
+    repository: glitchr-studio/omnibus-amazon
+    branch: 2.x
+    ci: {}
+    conformance:
+      suite: Omnibus\Testing\GatewayContractTests
+      test: Tests/AmazonContractTest.php
+  omnibus/aramex:
+    repository: glitchr-studio/omnibus-aramex
+    branch: 2.x
+    ci: {}
+    conformance:
+      suite: Omnibus\Testing\GatewayContractTests
+      test: Tests/AramexContractTest.php
+  omnibus/auspost:
+    repository: glitchr-studio/omnibus-auspost
+    branch: 2.x
+    ci: {}
+    conformance:
+      suite: Omnibus\Testing\GatewayContractTests
+      test: Tests/AuspostContractTest.php
+  omnibus/bluedart:
+    repository: glitchr-studio/omnibus-bluedart
+    branch: 2.x
+    ci: {}
+    conformance:
+      suite: Omnibus\Testing\GatewayContractTests
+      test: Tests/BluedartContractTest.php
+  omnibus/canada-post:
+    repository: glitchr-studio/omnibus-canada-post
+    branch: 2.x
+    ci: {}
+    conformance:
+      suite: Omnibus\Testing\GatewayContractTests
+      test: Tests/CanadaPostContractTest.php
+  omnibus/canpar:
+    repository: glitchr-studio/omnibus-canpar
+    branch: 2.x
+    ci: {}
+    conformance:
+      suite: Omnibus\Testing\GatewayContractTests
+      test: Tests/CanparContractTest.php
+  omnibus/chronopost:
+    repository: glitchr-studio/omnibus-chronopost
+    branch: 2.x
+    ci: {}
+    conformance:
+      suite: Omnibus\Testing\GatewayContractTests
+      test: Tests/ChronopostContractTest.php
+  omnibus/colissimo:
+    repository: glitchr-studio/omnibus-colissimo
+    branch: 2.x
+    ci: {}
+    conformance:
+      suite: Omnibus\Testing\GatewayContractTests
+      test: Tests/ColissimoContractTest.php
+  omnibus/db-schenker:
+    repository: glitchr-studio/omnibus-db-schenker
+    branch: 2.x
+    ci: {}
+    conformance:
+      suite: Omnibus\Testing\GatewayContractTests
+      test: Tests/DbSchenkerContractTest.php
+  omnibus/dhl:
+    repository: glitchr-studio/omnibus-dhl
+    branch: 2.x
+    ci: {}
+    conformance:
+      suite: Omnibus\Testing\GatewayContractTests
+      test: Tests/DhlContractTest.php
+  omnibus/dtdc:
+    repository: glitchr-studio/omnibus-dtdc
+    branch: 2.x
+    ci: {}
+    conformance:
+      suite: Omnibus\Testing\GatewayContractTests
+      test: Tests/DtdcContractTest.php
+  omnibus/fedex:
+    repository: glitchr-studio/omnibus-fedex
+    branch: 2.x
+    ci: {}
+    conformance:
+      suite: Omnibus\Testing\GatewayContractTests
+      test: Tests/FedexContractTest.php
+  omnibus/gls:
+    repository: glitchr-studio/omnibus-gls
+    branch: 2.x
+    ci: {}
+    conformance:
+      suite: Omnibus\Testing\GatewayContractTests
+      test: Tests/GlsContractTest.php
+  omnibus/jdl-express:
+    repository: glitchr-studio/omnibus-jdl-express
+    branch: 2.x
+    ci: {}
+    conformance:
+      suite: Omnibus\Testing\GatewayContractTests
+      test: Tests/JdlExpressContractTest.php
+  omnibus/mondial-relay:
+    repository: glitchr-studio/omnibus-mondial-relay
+    branch: 2.x
+    ci: {}
+    conformance:
+      suite: Omnibus\Testing\GatewayContractTests
+      test: Tests/MondialRelayContractTest.php
+  omnibus/offline:
+    repository: glitchr-studio/omnibus-offline
+    branch: 2.x
+    ci: {}
+    conformance:
+      suite: Omnibus\Testing\GatewayContractTests
+      test: Tests/OfflineContractTest.php
+  omnibus/purolator:
+    repository: glitchr-studio/omnibus-purolator
+    branch: 2.x
+    ci: {}
+    conformance:
+      suite: Omnibus\Testing\GatewayContractTests
+      test: Tests/PurolatorContractTest.php
+  omnibus/royal-mail:
+    repository: glitchr-studio/omnibus-royal-mail
+    branch: 2.x
+    ci: {}
+    conformance:
+      suite: Omnibus\Testing\GatewayContractTests
+      test: Tests/RoyalMailContractTest.php
+  omnibus/sf-express:
+    repository: glitchr-studio/omnibus-sf-express
+    branch: 2.x
+    ci: {}
+    conformance:
+      suite: Omnibus\Testing\GatewayContractTests
+      test: Tests/SfExpressContractTest.php
+  omnibus/tnt:
+    repository: glitchr-studio/omnibus-tnt
+    branch: 2.x
+    ci: {}
+    conformance:
+      suite: Omnibus\Testing\GatewayContractTests
+      test: Tests/TntContractTest.php
+  omnibus/ups:
+    repository: glitchr-studio/omnibus-ups
+    branch: 2.x
+    ci: {}
+    conformance:
+      suite: Omnibus\Testing\GatewayContractTests
+      test: Tests/UpsContractTest.php
+  omnibus/usps:
+    repository: glitchr-studio/omnibus-usps
+    branch: 2.x
+    ci: {}
+    conformance:
+      suite: Omnibus\Testing\GatewayContractTests
+      test: Tests/UspsContractTest.php
+  omnibus/zto-express:
+    repository: glitchr-studio/omnibus-zto-express
+    branch: 2.x
+    ci: {}
+    conformance:
+      suite: Omnibus\Testing\GatewayContractTests
+      test: Tests/ZtoExpressContractTest.php
+  omnidns/cloudflare:
+    repository: glitchr-studio/omnidns-cloudflare
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnidns-cloudflare/actions/runs/40065378521'
+        head: 8a12253ddcf6459d5b46f8583bf696b08465e5fa
+        at: '2026-10-24T13:41:01Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omnidns/gandi:
+    repository: glitchr-studio/omnidns-gandi
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnidns-gandi/actions/runs/40065374511'
+        head: caab4004d48e22b1286713609183d7f691be0398
+        at: '2026-10-24T13:40:56Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omnidns/ovh:
+    repository: glitchr-studio/omnidns-ovh
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnidns-ovh/actions/runs/40065371771'
+        head: ea2cfebbcb1bb623a20c6fcc240c5c74aa19095f
+        at: '2026-10-24T13:41:00Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omnidns/scaleway:
+    repository: glitchr-studio/omnidns-scaleway
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnidns-scaleway/actions/runs/40065380996'
+        head: d32e37a310f65102ae015cbf946d908757ad5cec
+        at: '2026-10-24T05:13:32Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omnidrive/azure:
+    repository: glitchr-studio/omnidrive-azure
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnidrive-azure/actions/runs/40065184097'
+        head: 15be3ea0b5414bf39ff86267201209b3a0a63be7
+        at: '2026-10-24T13:41:05Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: Omnidrive\Testing\DriveContractTests
+      test: Tests/AzureLiveTest.php
+  omnidrive/dropbox:
+    repository: glitchr-studio/omnidrive-dropbox
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnidrive-dropbox/actions/runs/40065189314'
+        head: 6d3b188866de5f3ed7be2b65f0f94d22dd65228f
+        at: '2026-10-24T13:40:56Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: Omnidrive\Testing\DriveContractTests
+      test: Tests/DropboxDriveTest.php
+  omnidrive/ftp:
+    repository: glitchr-studio/omnidrive-ftp
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnidrive-ftp/actions/runs/39917381237'
+        head: e98fa976df89a048351f004f440bd6912d88de8f
+        at: '2026-10-24T13:41:55Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: Omnidrive\Testing\DriveContractTests
+      test: Tests/FtpLiveTest.php
+  omnidrive/gdrive:
+    repository: glitchr-studio/omnidrive-gdrive
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnidrive-gdrive/actions/runs/40065213867'
+        head: 277dce8cd0111375089647d0bc85bb9ed3808ca5
+        at: '2026-10-24T05:11:21Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: Omnidrive\Testing\DriveContractTests
+      test: Tests/GdriveLiveTest.php
+  omnidrive/local:
+    repository: glitchr-studio/omnidrive-local
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnidrive-local/actions/runs/39917347304'
+        head: fb2c8463f8ea7d30ab5f9505922a800d089a5e2f
+        at: '2026-10-24T13:42:00Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: Omnidrive\Testing\DriveContractTests
+      test: Tests/LocalDriveTest.php
+  omnidrive/s3:
+    repository: glitchr-studio/omnidrive-s3
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnidrive-s3/actions/runs/39917356793'
+        head: 343684edd8f7c2e0eed5f0e0f587cf49a521dbd1
+        at: '2026-10-24T13:41:54Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: Omnidrive\Testing\DriveContractTests
+      test: Tests/S3LiveTest.php
+  omnidrive/sftp:
+    repository: glitchr-studio/omnidrive-sftp
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnidrive-sftp/actions/runs/39917368727'
+        head: d3b088a0708f69251b306b09dcd0806f13d325c3
+        at: '2026-10-24T13:41:51Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: Omnidrive\Testing\DriveContractTests
+      test: Tests/SftpLiveTest.php
+  omnidrive/webdav:
+    repository: glitchr-studio/omnidrive-webdav
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnidrive-webdav/actions/runs/40065180465'
+        head: ef9eeb5bb298bd3be756174044478e0d73b952ef
+        at: '2026-10-24T05:10:21Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: Omnidrive\Testing\DriveContractTests
+      test: Tests/WebdavLiveTest.php
+  omnifilm/omdb:
+    repository: glitchr-studio/omnifilm-omdb
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnifilm-omdb/actions/runs/40065254172'
+        head: 8dbb321aac82044e850f41533353a6753a8ca248
+        at: '2026-10-24T05:11:29Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omnifilm/tmdb:
+    repository: glitchr-studio/omnifilm-tmdb
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnifilm-tmdb/actions/runs/40065251937'
+        head: 7d41f5bf5e103b3b0c6e80157deb525e3943be73
+        at: '2026-10-24T05:11:32Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omnifilm/trakt:
+    repository: glitchr-studio/omnifilm-trakt
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnifilm-trakt/actions/runs/40065257787'
+        head: 50ac1d4e7156d8fce48fef18aad32a4de3e53a13
+        at: '2026-10-24T05:11:38Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omnifilm/tvdb:
+    repository: glitchr-studio/omnifilm-tvdb
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnifilm-tvdb/actions/runs/40065255963'
+        head: d6753fa8682d341ecfbf420c40ced78a717b332e
+        at: '2026-10-24T05:11:45Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omnifilm/wikidata:
+    repository: glitchr-studio/omnifilm-wikidata
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnifilm-wikidata/actions/runs/40065259883'
+        head: 5a14755be3005ea80b64acccac19995c2731a337
+        at: '2026-10-24T05:11:42Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omnifood/deliveroo:
+    repository: glitchr-studio/omnifood-deliveroo
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnifood/justeat:
+    repository: glitchr-studio/omnifood-justeat
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnifood/thefork:
+    repository: glitchr-studio/omnifood-thefork
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnifood/ubereats:
+    repository: glitchr-studio/omnifood-ubereats
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnifood/zenchef:
+    repository: glitchr-studio/omnifood-zenchef
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnifund/github-sponsors:
+    repository: glitchr-studio/omnifund-github-sponsors
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnifund-github-sponsors/actions/runs/40064294943'
+        head: f918c670ebd1b540b1f0855158eb4e4ff0e3b8c8
+        at: '2026-10-24T13:41:36Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omnifund/liberapay:
+    repository: glitchr-studio/omnifund-liberapay
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnifund-liberapay/actions/runs/40064312122'
+        head: e75bf0b10c8a2dceff5af93f9bce830a187f3687
+        at: '2026-10-24T13:41:29Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omnifund/opencollective:
+    repository: glitchr-studio/omnifund-opencollective
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnifund-opencollective/actions/runs/40064304776'
+        head: 7e53aadbc130bf0c0d89988cd2428adb4c2c6aec
+        at: '2026-10-24T13:41:38Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omnigame/gog:
+    repository: glitchr-studio/omnigame-gog
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnigame-gog/actions/runs/40066177511'
+        head: 1d4d60de3247937a01f159d4a1898bbcf53475f0
+        at: '2026-10-24T05:25:42Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omnigame/igdb:
+    repository: glitchr-studio/omnigame-igdb
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnigame-igdb/actions/runs/40066181842'
+        head: b69f61f995c9b65f13d12c4b1f8c9795b556b8f5
+        at: '2026-10-24T05:25:48Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omnigame/itch:
+    repository: glitchr-studio/omnigame-itch
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnigame-itch/actions/runs/40066179746'
+        head: f89cc592343a1606bbe0f0860d492d2525ed5f97
+        at: '2026-10-24T05:25:50Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omnigame/rawg:
+    repository: glitchr-studio/omnigame-rawg
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnigame-rawg/actions/runs/40066184237'
+        head: 8e4da614ee6de01105b385993e48047ef96bb2ad
+        at: '2026-10-24T05:26:05Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omnigame/steam:
+    repository: glitchr-studio/omnigame-steam
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnigame-steam/actions/runs/40066175360'
+        head: 26dbd6c9beb88ff2cc7b37668923e5d4810a28f0
+        at: '2026-10-24T05:25:50Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omnilab/brightsky:
+    repository: glitchr-studio/omnilab-brightsky
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/cactus:
+    repository: glitchr-studio/omnilab-cactus
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/cams:
+    repository: glitchr-studio/omnilab-cams
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/cds:
+    repository: glitchr-studio/omnilab-cds
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/chebi:
+    repository: glitchr-studio/omnilab-chebi
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/chembl:
+    repository: glitchr-studio/omnilab-chembl
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/clinvar:
+    repository: glitchr-studio/omnilab-clinvar
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/cod:
+    repository: glitchr-studio/omnilab-cod
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/codata:
+    repository: glitchr-studio/omnilab-codata
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/col:
+    repository: glitchr-studio/omnilab-col
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/copernicus:
+    repository: glitchr-studio/omnilab-copernicus
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/donki:
+    repository: glitchr-studio/omnilab-donki
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/earthdata:
+    repository: glitchr-studio/omnilab-earthdata
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/ebird:
+    repository: glitchr-studio/omnilab-ebird
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/elevation:
+    repository: glitchr-studio/omnilab-elevation
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/emsc:
+    repository: glitchr-studio/omnilab-emsc
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/ensembl:
+    repository: glitchr-studio/omnilab-ensembl
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/exoplanets:
+    repository: glitchr-studio/omnilab-exoplanets
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/gaia:
+    repository: glitchr-studio/omnilab-gaia
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/gbif:
+    repository: glitchr-studio/omnilab-gbif
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/gwas:
+    repository: glitchr-studio/omnilab-gwas
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/hgnc:
+    repository: glitchr-studio/omnilab-hgnc
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/horizons:
+    repository: glitchr-studio/omnilab-horizons
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/inaturalist:
+    repository: glitchr-studio/omnilab-inaturalist
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/interpro:
+    repository: glitchr-studio/omnilab-interpro
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/itis:
+    repository: glitchr-studio/omnilab-itis
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/iucn:
+    repository: glitchr-studio/omnilab-iucn
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/jpl:
+    repository: glitchr-studio/omnilab-jpl
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/kegg:
+    repository: glitchr-studio/omnilab-kegg
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/launches:
+    repository: glitchr-studio/omnilab-launches
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/materials-project:
+    repository: glitchr-studio/omnilab-materials-project
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/mpc:
+    repository: glitchr-studio/omnilab-mpc
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/ncbi:
+    repository: glitchr-studio/omnilab-ncbi
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/ned:
+    repository: glitchr-studio/omnilab-ned
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/noaa:
+    repository: glitchr-studio/omnilab-noaa
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/obis:
+    repository: glitchr-studio/omnilab-obis
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/open-meteo:
+    repository: glitchr-studio/omnilab-open-meteo
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/openaq:
+    repository: glitchr-studio/omnilab-openaq
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/opentargets:
+    repository: glitchr-studio/omnilab-opentargets
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/oqmd:
+    repository: glitchr-studio/omnilab-oqmd
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/pbdb:
+    repository: glitchr-studio/omnilab-pbdb
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/pdb:
+    repository: glitchr-studio/omnilab-pdb
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/pubchem:
+    repository: glitchr-studio/omnilab-pubchem
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/quickgo:
+    repository: glitchr-studio/omnilab-quickgo
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/reactome:
+    repository: glitchr-studio/omnilab-reactome
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/rhea:
+    repository: glitchr-studio/omnilab-rhea
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/simbad:
+    repository: glitchr-studio/omnilab-simbad
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/string:
+    repository: glitchr-studio/omnilab-string
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/swpc:
+    repository: glitchr-studio/omnilab-swpc
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/tides:
+    repository: glitchr-studio/omnilab-tides
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/uniprot:
+    repository: glitchr-studio/omnilab-uniprot
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/usgs:
+    repository: glitchr-studio/omnilab-usgs
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/usgs-water:
+    repository: glitchr-studio/omnilab-usgs-water
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/vizier:
+    repository: glitchr-studio/omnilab-vizier
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/wikidata:
+    repository: glitchr-studio/omnilab-wikidata
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilab/worms:
+    repository: glitchr-studio/omnilab-worms
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilex/eurlex:
+    repository: glitchr-studio/omnilex-eurlex
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilex/judilibre:
+    repository: glitchr-studio/omnilex-judilibre
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilex/justice-administrative:
+    repository: glitchr-studio/omnilex-justice-administrative
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnilex/legifrance:
+    repository: glitchr-studio/omnilex-legifrance
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnimap/google:
+    repository: glitchr-studio/omnimap-google
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnimap-google/actions/runs/40183422022'
+        head: 550084421b357a927a62355fd65ec7cb38209fbd
+        at: '2026-10-25T10:07:25Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: Omnimap\Testing\ProviderContractTests
+      test: Tests/GoogleContractTest.php
+  omnimap/openstreetmap:
+    repository: glitchr-studio/omnimap-openstreetmap
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnimap-openstreetmap/actions/runs/40183419210'
+        head: 81cc7840dadce1da67ca2005d5e0dc6162d4e10c
+        at: '2026-10-25T10:07:10Z'
+        conclusion: failure
+        jobs:
+          - { label: 'PHP 8.4', conclusion: failure }
+    conformance:
+      suite: Omnimap\Testing\ProviderContractTests
+      test: Tests/OpenStreetMapContractTest.php
+  omnimeet/direct:
+    repository: glitchr-studio/omnimeet-direct
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnimeet/jitsi:
+    repository: glitchr-studio/omnimeet-jitsi
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnipost/instagram:
+    repository: glitchr-studio/omnipost-instagram
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnipost/youtube:
+    repository: glitchr-studio/omnipost-youtube
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnireach/bing-webmaster:
+    repository: glitchr-studio/omnireach-bing-webmaster
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnireach-bing-webmaster/actions/runs/40065870581'
+        head: a7c7670d3fbd8a8d52fcdbc4a7a5837b1ed299dc
+        at: '2026-10-24T13:40:57Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omnireach/ga4:
+    repository: glitchr-studio/omnireach-ga4
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnireach-ga4/actions/runs/40065891501'
+        head: 938e9f90368dd31da449bcb67ec8c007dcc998b6
+        at: '2026-10-24T13:40:36Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omnireach/matomo:
+    repository: glitchr-studio/omnireach-matomo
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnireach-matomo/actions/runs/40065877814'
+        head: 4436fe8a49c3e9422aa8298aac5cee5a0f095915
+        at: '2026-10-24T13:40:43Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omnireach/plausible:
+    repository: glitchr-studio/omnireach-plausible
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnireach-plausible/actions/runs/40065885504'
+        head: 70449c723641be8bc07b027c39e2535a1cbc924b
+        at: '2026-10-24T13:40:40Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omnireach/search-console:
+    repository: glitchr-studio/omnireach-search-console
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnireach-search-console/actions/runs/40065863977'
+        head: 9e59d5fa2d04e828a05e4801e688978405030f27
+        at: '2026-10-24T13:40:43Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omnireview/google:
+    repository: glitchr-studio/omnireview-google
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnireview/tripadvisor:
+    repository: glitchr-studio/omnireview-tripadvisor
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnireview/trustpilot:
+    repository: glitchr-studio/omnireview-trustpilot
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnischolar/arxiv:
+    repository: glitchr-studio/omnischolar-arxiv
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnischolar/crossref:
+    repository: glitchr-studio/omnischolar-crossref
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnischolar/hal:
+    repository: glitchr-studio/omnischolar-hal
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnischolar/inspire:
+    repository: glitchr-studio/omnischolar-inspire
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnischolar/openalex:
+    repository: glitchr-studio/omnischolar-openalex
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnischolar/openlibrary:
+    repository: glitchr-studio/omnischolar-openlibrary
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnischolar/orcid:
+    repository: glitchr-studio/omnischolar-orcid
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omniscient/omniauth:
+    repository: glitchr-studio/omniauth
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omniauth/actions/runs/40182821590'
+        head: cd01d2dad12dd47e3a41e75c40a7f4637c611d97
+        at: '2026-10-25T09:58:58Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: Omniauth\Testing\ProviderContractTests
+      test: Tests/FakeProviderContractTest.php
+  omniscient/omnibank:
+    repository: glitchr-studio/omnibank
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omniscient/omnibase:
+    repository: glitchr-studio/omnibase
+    branch: 4.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnibase/actions/runs/40133454578'
+        head: 7e875b6863a7effeea52c91b5475f21d11411aaa
+        at: '2026-10-24T21:27:46Z'
+        conclusion: failure
+        jobs:
+          - { label: 'Harness (core and plugins)', conclusion: success }
+          - { label: 'PHP 8.4', conclusion: failure }
+    conformance:
+      suite: null
+      test: null
+  omniscient/omnibill:
+    repository: glitchr-studio/omnibill
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omniscient/omnibridge:
+    repository: glitchr-studio/omnibridge
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnibridge/actions/runs/40099905694'
+        head: 4016d512aa07312632071839d63ecdba7ccdf9d6
+        at: '2026-10-24T13:51:34Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omniscient/omnibus:
+    repository: glitchr-studio/omnibus
+    branch: 2.x
+    ci: {}
+    conformance:
+      suite: Omnibus\Testing\GatewayContractTests
+      test: Tests/RecordedCarrierContractTest.php
+  omniscient/omnidns:
+    repository: glitchr-studio/omnidns
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnidns/actions/runs/40065368692'
+        head: 8857d9dbb9eacd8c3c9015e3e680bab548744cea
+        at: '2026-10-24T05:13:20Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omniscient/omnidrive:
+    repository: glitchr-studio/omnidrive
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnidrive/actions/runs/40099757325'
+        head: 85b3fb331cf24470d995388bb939115e173268ee
+        at: '2026-10-24T13:49:35Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: Omnidrive\Testing\DriveContractTests
+      test: Tests/InMemoryDriveTest.php
+  omniscient/omnifilm:
+    repository: glitchr-studio/omnifilm
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnifilm/actions/runs/40065154714'
+        head: 5b358e738e6b30892df368eff69b79869f71b285
+        at: '2026-10-24T05:10:14Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omniscient/omnifood:
+    repository: glitchr-studio/omnifood
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omniscient/omnifund:
+    repository: glitchr-studio/omnifund
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnifund/actions/runs/40064287773'
+        head: 4a1eae2450a7e1347861ffef16dd1be25e6d9f41
+        at: '2026-10-24T04:56:49Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omniscient/omnigame:
+    repository: glitchr-studio/omnigame
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnigame/actions/runs/40066095507'
+        head: c9be9f827f32111cba43bd43e3fd40c8ba793495
+        at: '2026-10-24T05:24:33Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omniscient/omnilab:
+    repository: glitchr-studio/omnilab
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omniscient/omnilex:
+    repository: glitchr-studio/omnilex
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omniscient/omnimap:
+    repository: glitchr-studio/omnimap
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnimap/actions/runs/40183398356'
+        head: f3b8367d624d42813ccec7842b20b812209351a1
+        at: '2026-10-25T10:06:57Z'
+        conclusion: failure
+        jobs:
+          - { label: 'PHP 8.4', conclusion: failure }
+    conformance:
+      suite: Omnimap\Testing\ProviderContractTests
+      test: Tests/TestTilesContractTest.php
+  omniscient/omnimeet:
+    repository: glitchr-studio/omnimeet
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omniscient/omnipost:
+    repository: glitchr-studio/omnipost
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omniscient/omnireach:
+    repository: glitchr-studio/omnireach
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnireach/actions/runs/40065854934'
+        head: 20e03fedf198bf4b9a5eee8a8a4430a848c569de
+        at: '2026-10-24T05:20:51Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omniscient/omnireview:
+    repository: glitchr-studio/omnireview
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omniscient/omnischolar:
+    repository: glitchr-studio/omnischolar
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omniscient/omnisearch:
+    repository: glitchr-studio/omnisearch
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnisearch/actions/runs/40182446526'
+        head: 27970dc67acd6b3f1cf2d6cbb0062f0f2361a784
+        at: '2026-10-25T09:53:03Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: Omnisearch\Testing\DriverContractTests
+      test: Tests/MemoryDriverContractTest.php
+  omniscient/omnishare:
+    repository: glitchr-studio/omnishare
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnishare/actions/runs/40065359349'
+        head: 7c79ccec5c41e3a857e3b3a5bde4e4716e1596f4
+        at: '2026-10-24T05:13:07Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omniscient/omnishield:
+    repository: glitchr-studio/omnishield
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: Omnishield\Testing\GatewayContractTests
+      test: Tests/FixedGatewayContractTest.php
+  omniscient/omnisign:
+    repository: glitchr-studio/omnisign
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omniscient/omnisong:
+    repository: glitchr-studio/omnisong
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omniscient/omnistate:
+    repository: glitchr-studio/omnistate
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omniscient/omniticket:
+    repository: glitchr-studio/omniticket
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omniticket/actions/runs/40064848183'
+        head: 2ae6ff181dee648d1ee84930a0c5ad8b56a792fd
+        at: '2026-10-24T05:05:20Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omniscient/omnitrade:
+    repository: glitchr-studio/omnitrade
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnisearch/typesense:
+    repository: glitchr-studio/omnisearch-typesense
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omnisearch-typesense/actions/runs/40183093568'
+        head: ec609a56429373ee36ece5a66f0de47eb99dbba6
+        at: '2026-10-25T10:02:45Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: Omnisearch\Testing\DriverContractTests
+      test: Tests/TypesenseContractTest.php
+  omnishield/akismet:
+    repository: glitchr-studio/omnishield-akismet
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: Omnishield\Testing\GatewayContractTests
+      test: Tests/AkismetContractTest.php
+  omnishield/altcha:
+    repository: glitchr-studio/omnishield-altcha
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: Omnishield\Testing\GatewayContractTests
+      test: Tests/AltchaContractTest.php
+  omnishield/disposable:
+    repository: glitchr-studio/omnishield-disposable
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: Omnishield\Testing\GatewayContractTests
+      test: Tests/DisposableContractTest.php
+  omnishield/recaptcha:
+    repository: glitchr-studio/omnishield-recaptcha
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: Omnishield\Testing\GatewayContractTests
+      test: Tests/RecaptchaContractTest.php
+  omnishield/stopforumspam:
+    repository: glitchr-studio/omnishield-stopforumspam
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: Omnishield\Testing\GatewayContractTests
+      test: Tests/StopforumspamContractTest.php
+  omnishield/turnstile:
+    repository: glitchr-studio/omnishield-turnstile
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: Omnishield\Testing\GatewayContractTests
+      test: Tests/TurnstileContractTest.php
+  omnishow/youtube:
+    repository: glitchr-studio/omnishow-youtube
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnisign/docuseal:
+    repository: glitchr-studio/omnisign-docuseal
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnisign/docusign:
+    repository: glitchr-studio/omnisign-docusign
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnisign/yousign:
+    repository: glitchr-studio/omnisign-yousign
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnisong/itunes:
+    repository: glitchr-studio/omnisong-itunes
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnisong/odesli:
+    repository: glitchr-studio/omnisong-odesli
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnistate/annuaire-entreprises:
+    repository: glitchr-studio/omnistate-annuaire-entreprises
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: Omnistate\Testing\RegistryContractTests
+      test: Tests/AnnuaireEntreprisesContractTest.php
+  omnistate/annuaire-sante:
+    repository: glitchr-studio/omnistate-annuaire-sante
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: Omnistate\Testing\RegistryContractTests
+      test: Tests/AnnuaireSanteContractTest.php
+  omnistate/iana:
+    repository: glitchr-studio/omnistate-iana
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: Omnistate\Testing\RegistryContractTests
+      test: Tests/RdapContractTest.php
+  omnistate/matchid:
+    repository: glitchr-studio/omnistate-matchid
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: Omnistate\Testing\RegistryContractTests
+      test: Tests/MatchIdContractTest.php
+  omnistate/nara:
+    repository: glitchr-studio/omnistate-nara
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: Omnistate\Testing\RegistryContractTests
+      test: Tests/NaraContractTest.php
+  omnistate/national-archives-uk:
+    repository: glitchr-studio/omnistate-national-archives-uk
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: Omnistate\Testing\RegistryContractTests
+      test: Tests/NationalArchivesUkContractTest.php
+  omnistate/openarchieven:
+    repository: glitchr-studio/omnistate-openarchieven
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: Omnistate\Testing\RegistryContractTests
+      test: Tests/OpenArchievenContractTest.php
+  omnistate/vies:
+    repository: glitchr-studio/omnistate-vies
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: Omnistate\Testing\RegistryContractTests
+      test: Tests/ViesContractTest.php
+  omniticket/billetweb:
+    repository: glitchr-studio/omniticket-billetweb
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omniticket-billetweb/actions/runs/40064855029'
+        head: 8d02381822e3e97ddf7576dd375b483093673fe0
+        at: '2026-10-24T13:41:34Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omniticket/eventbrite:
+    repository: glitchr-studio/omniticket-eventbrite
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omniticket-eventbrite/actions/runs/40064877172'
+        head: 5b605c146ecd45c52dadfc0a2456c5ee6ac29a88
+        at: '2026-10-24T13:41:17Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omniticket/helloasso:
+    repository: glitchr-studio/omniticket-helloasso
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omniticket-helloasso/actions/runs/40064868759'
+        head: b0acd4f220ce55fe62f82e165d9a57ea544201c4
+        at: '2026-10-24T13:41:23Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omniticket/ticketmaster:
+    repository: glitchr-studio/omniticket-ticketmaster
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omniticket-ticketmaster/actions/runs/40064883954'
+        head: 482b4dcf4e430871fe2c8e8bb9791a932d339002
+        at: '2026-10-24T05:05:48Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omniticket/weezevent:
+    repository: glitchr-studio/omniticket-weezevent
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-studio/omniticket-weezevent/actions/runs/40064861276'
+        head: 1b3c56899afc3aa8a8f3f990d2c7af9611782f29
+        at: '2026-10-24T13:41:20Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omnitrade/amazon:
+    repository: glitchr-studio/omnitrade-amazon
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: Omnitrade\Testing\GatewayContractTests
+      test: Tests/AmazonContractTest.php
+  omnitrade/paypal:
+    repository: glitchr-studio/omnitrade-paypal
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: Omnitrade\Testing\GatewayContractTests
+      test: Tests/PayPalContractTest.php
+  omnitrade/shopify:
+    repository: glitchr-studio/omnitrade-shopify
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: Omnitrade\Testing\GatewayContractTests
+      test: Tests/ShopifyContractTest.php
+  omnitrade/stripe:
+    repository: glitchr-studio/omnitrade-stripe
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: Omnitrade\Testing\GatewayContractTests
+      test: Tests/StripeContractTest.php
+  omnitrade/web:
+    repository: glitchr-studio/omnitrade-web
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: Omnitrade\Testing\GatewayContractTests
+      test: Tests/WebContractTest.php
+  omnitrade/woocommerce:
+    repository: glitchr-studio/omnitrade-woocommerce
+    branch: 1.x
+    ci: {}
+    conformance:
+      suite: Omnitrade\Testing\GatewayContractTests
+      test: Tests/WooCommerceContractTest.php

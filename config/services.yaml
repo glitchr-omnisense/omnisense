@@ -21,6 +21,8 @@ parameters:
     app.guides_dir: '%kernel.project_dir%/docs'
     app.news_dir: '%kernel.project_dir%/news'
     app.documentation_file: '%kernel.project_dir%/config/documentation.yaml'
+    # The compatibility dashboard's data, written by app:compat:fetch (GitHub's Actions API) at build time.
+    app.compatibility_file: '%kernel.project_dir%/config/compatibility.yaml'
     app.docs_dir: '%env(default:app.docs_dir_default:DOCS_DIR)%'
     app.docs_dir_default: '%kernel.project_dir%/var/docs'
     # app:catalog:import only: the working copies of the packages (~/Sites,
@@ -84,6 +86,7 @@ when@test:
         # manual of their own (a real environment variable would win over .env.test).
         app.catalog_dir: '%kernel.project_dir%/tests/Fixtures/catalog'
         app.documentation_file: '%kernel.project_dir%/tests/Fixtures/documentation.yaml'
+        app.compatibility_file: '%kernel.project_dir%/tests/Fixtures/compatibility.yaml'
         app.docs_dir: '%kernel.project_dir%/tests/Fixtures/docs'
         app.news_dir: '%kernel.project_dir%/tests/Fixtures/news'
         app.catalogue.repos_dir: '%kernel.project_dir%/tests/Fixtures/repos'

@@ -1,0 +1,31 @@
+# The compatibility dashboard's data for the tests (the format app:compat:fetch writes).
+generated: '2026-10-25T12:00:00+00:00'
+packages:
+  omnitrade/stripe:
+    repository: glitchr-studio/omnitrade-stripe
+    branch: 1.x
+    ci:
+      - workflow: ci
+        url: 'https://github.com/glitchr-studio/omnitrade-stripe/actions/runs/12'
+        head: bbb
+        at: '2026-10-25T10:00:00Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: Omnitrade\Testing\GatewayContractTests
+      test: Tests/StripeContractTest.php
+  omnitrade/paypal:
+    repository: glitchr-studio/omnitrade-paypal
+    branch: 1.x
+    ci:
+      - workflow: ci
+        url: 'https://github.com/glitchr-studio/omnitrade-paypal/actions/runs/13'
+        head: ccc
+        at: '2026-10-25T10:00:00Z'
+        conclusion: failure
+        jobs:
+          - { label: 'PHP 8.4', conclusion: failure }
+    conformance:
+      suite: Omnitrade\Testing\GatewayContractTests
+      test: Tests/PayPalContractTest.php
