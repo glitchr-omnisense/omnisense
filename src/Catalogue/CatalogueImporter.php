@@ -93,8 +93,12 @@ class CatalogueImporter
             # The documentation each package publishes in its own repository (its docs/
             # folder), read by the website at an immutable commit. Each package has its
             # own version series; a series names the branch it follows and the commit it
-            # is read at. No package has a release tag yet: every ref is the head of the
-            # published development branch (origin/<branch>) when it was pinned.
+            # is read at. No package has a release tag yet: every ref is the head of a
+            # published branch (origin/<branch>) when it was pinned - `pinned: branch-head`
+            # (a series read at a release tag would say `pinned: tag`). A package with
+            # several maintained series (release branches such as 3.x and 4.x, each with a
+            # docs/ folder) lists each; `default` is the current one, the others are shown
+            # with a notice and kept out of search engines' indexes.
             #
             #   bin/console app:catalog:import          new packages and series, pinned refs kept
             #   bin/console app:catalog:import --pin    every series moved to its branch's head
@@ -119,7 +123,7 @@ class CatalogueImporter
         $series = $package->branch;
         $current = $versions[$series] ?? null;
         if (null === $current || ($pin && ($current['ref'] ?? null) !== $package->head)) {
-            $versions[$series] = ['branch' => $series, 'ref' => $package->head, 'path' => 'docs/'];
+            $versions[$series] = ['branch' => $series, 'ref' => $package->head, 'pinned' => 'branch-head', 'path' => 'docs/'];
             ++$report['pinned'];
         }
 

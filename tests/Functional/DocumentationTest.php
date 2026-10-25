@@ -2,6 +2,8 @@
 
 namespace App\Tests\Functional;
 
+use Symfony\Component\Yaml\Yaml;
+
 /** Each package's manual, read from its fetched docs/ at the pinned commit (tests/Fixtures/docs). */
 final class DocumentationTest extends SiteTestCase
 {
@@ -48,5 +50,41 @@ final class DocumentationTest extends SiteTestCase
         $this->get('/docs/omnitrade/2.x', 404);
         $this->get('/docs/omnitrade/1.x/nothing', 404);
         $this->get('/docs/nothing/1.x', 404);
+    }
+
+    public function testTheVersionSelectorKeepsThePageAndOnlyTheCurrentSeriesIsIndexed(): void
+    {
+        $current = $this->get('/docs/omnitrade/1.x/installation');
+        self::assertMatchesRegularExpression('#<link rel="canonical" href="https?://[^/"]+/docs/omnitrade/1\.x/installation">#', $current, 'the current series is canonical');
+        self::assertStringNotContainsString('noindex', $current);
+        self::assertMatchesRegularExpression('#<a href="/docs/omnitrade/1.x/installation" data-series="1.x" aria-current="true">1.x <small>current</small></a>#', $current, 'the selector marks the series read and the current one');
+        self::assertStringContainsString('<a href="/docs/omnitrade/0.9" data-series="0.9">0.9</a>', $current, 'a series without the page: its home');
+        self::assertStringContainsString('head of the branch 1.x when pinned', $current, 'the manifest says the ref is a branch head');
+
+        $old = $this->get('/docs/omnitrade/0.9');
+        self::assertStringContainsString('<meta name="robots" content="noindex, follow">', $old, 'an older series is not indexed');
+        self::assertStringNotContainsString('rel="canonical"', $old, 'nor canonical: its content is not the current series\'');
+        self::assertStringContainsString('You are reading the 0.9 series; the current one is 1.x.', $old);
+        self::assertStringContainsString('<a href="/docs/omnitrade/1.x">Read 1.x</a>', $old);
+
+        $french = $this->get('/fr/docs/omnitrade/0.9');
+        self::assertStringContainsString('<a href="/fr/docs/omnitrade/1.x" data-series="1.x">1.x <small>actuelle</small></a>', $french);
+        self::assertStringContainsString('noindex, follow', $french);
+    }
+
+    /** The site's own manifest: every series pinned at a full commit, said to be a branch head or a tag, its default among its series. */
+    public function testTheManifestPinsEverySeries(): void
+    {
+        $manuals = Yaml::parseFile(\dirname(__DIR__, 2).'/config/documentation.yaml')['packages'];
+        foreach ($manuals as $key => $manual) {
+            self::assertArrayHasKey((string) $manual['default'], $manual['versions'], $key.': its default is one of its series');
+            foreach ($manual['versions'] as $series => $version) {
+                self::assertMatchesRegularExpression('/^[0-9a-f]{40}$/', $version['ref'], $key.' '.$series);
+                self::assertContains($version['pinned'] ?? null, ['branch-head', 'tag'], $key.' '.$series);
+                self::assertSame((string) $series, (string) $version['branch'], $key.': a series follows the branch of its name');
+            }
+        }
+        self::assertSame(['4.x', '3.x'], array_map('strval', array_keys($manuals['omnibase']['versions'])), 'omnibase\'s two series with a docs/ folder');
+        self::assertSame('4.x', $manuals['omnibase']['default']);
     }
 }

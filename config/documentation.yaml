@@ -1,8 +1,12 @@
 # The documentation each package publishes in its own repository (its docs/
 # folder), read by the website at an immutable commit. Each package has its
 # own version series; a series names the branch it follows and the commit it
-# is read at. No package has a release tag yet: every ref is the head of the
-# published development branch (origin/<branch>) when it was pinned.
+# is read at. No package has a release tag yet: every ref is the head of a
+# published branch (origin/<branch>) when it was pinned - `pinned: branch-head`
+# (a series read at a release tag would say `pinned: tag`). A package with
+# several maintained series (release branches such as 3.x and 4.x, each with a
+# docs/ folder) lists each; `default` is the current one, the others are shown
+# with a notice and kept out of search engines' indexes.
 #
 #   bin/console app:catalog:import          new packages and series, pinned refs kept
 #   bin/console app:catalog:import --pin    every series moved to its branch's head
@@ -18,6 +22,7 @@ packages:
       master:
         branch: master
         ref: c779981e9418e26366fb1b4422fc2f4e01c79aab
+        pinned: branch-head
         path: docs/
   graphjs:
     package: '@glitchr/graphjs'
@@ -27,6 +32,7 @@ packages:
       main:
         branch: main
         ref: 7c5466fb04c33788443f76863a5780df5ea8a5e0
+        pinned: branch-head
         path: docs/
   omniauth:
     package: omniscient/omniauth
@@ -36,6 +42,7 @@ packages:
       1.x:
         branch: 1.x
         ref: b70fae030622f2aecd15547700abe80ac928d4ff
+        pinned: branch-head
         path: docs/
   omniauth-google:
     package: omniauth/google
@@ -45,6 +52,7 @@ packages:
       1.x:
         branch: 1.x
         ref: bb38e1bd009cfd9025fc6ca3370985838aff3046
+        pinned: branch-head
         path: docs/
   omniauth-otp:
     package: omniauth/otp
@@ -54,6 +62,7 @@ packages:
       1.x:
         branch: 1.x
         ref: f41a3a7e9eb1aec22ee1c828b4f0c05a9095fb05
+        pinned: branch-head
         path: docs/
   omniauth-webauthn:
     package: omniauth/webauthn
@@ -63,6 +72,7 @@ packages:
       1.x:
         branch: 1.x
         ref: eb5b83a52004f67c11be978b6cf16808410cef8d
+        pinned: branch-head
         path: docs/
   omnibank:
     package: omniscient/omnibank
@@ -72,6 +82,7 @@ packages:
       1.x:
         branch: 1.x
         ref: ed3e93c7172dfde1bda9413e64fbc26efdbbb382
+        pinned: branch-head
         path: docs/
   omnibase:
     package: omniscient/omnibase
@@ -80,7 +91,13 @@ packages:
     versions:
       4.x:
         branch: 4.x
-        ref: d92b04c357052accabe8a6499177a636d4243f20
+        ref: 7e875b6863a7effeea52c91b5475f21d11411aaa
+        pinned: branch-head
+        path: docs/
+      3.x:
+        branch: 3.x
+        ref: dab12e9a30fe862d13342ca201c4e041cb1c1570
+        pinned: branch-head
         path: docs/
   omnibase-admin:
     package: omnibase/admin
@@ -90,6 +107,7 @@ packages:
       main:
         branch: main
         ref: ba57c267f8ed29d0749aab15b98701ec34802151
+        pinned: branch-head
         path: docs/
   omnibase-agenda:
     package: omnibase/agenda
@@ -99,6 +117,7 @@ packages:
       main:
         branch: main
         ref: c1c8fc10647306a50aeea6478d17e67e889c2522
+        pinned: branch-head
         path: docs/
   omnibase-blog:
     package: omnibase/blog
@@ -108,6 +127,7 @@ packages:
       main:
         branch: main
         ref: 4dd1ec2dbf02b2a76b5c6d445edc1657176dea43
+        pinned: branch-head
         path: docs/
   omnibase-broadcast:
     package: omnibase/broadcast
@@ -117,6 +137,7 @@ packages:
       main:
         branch: main
         ref: dae28246033ad5b7d26cf8650d4058cb39a2eebb
+        pinned: branch-head
         path: docs/
   omnibase-classroom:
     package: omnibase/classroom
@@ -126,6 +147,7 @@ packages:
       main:
         branch: main
         ref: 191be7d2e68a016a9092e764febca4a2654f7518
+        pinned: branch-head
         path: docs/
   omnibase-consulting:
     package: omnibase/consulting
@@ -135,6 +157,7 @@ packages:
       main:
         branch: main
         ref: bc2d985a6ea26d13ddef08177deba9977aa541ca
+        pinned: branch-head
         path: docs/
   omnibase-docs:
     package: omnibase/docs
@@ -144,6 +167,7 @@ packages:
       '2.0':
         branch: '2.0'
         ref: 30f818ca0b16f2ba9df0cdeae843601fa457754f
+        pinned: branch-head
         path: docs/
   omnibase-estate:
     package: omnibase/estate
@@ -153,6 +177,7 @@ packages:
       main:
         branch: main
         ref: 9db4feadc15d6a34a5950c3d70dde907e9b34c75
+        pinned: branch-head
         path: docs/
   omnibase-forge:
     package: omnibase/forge
@@ -162,6 +187,7 @@ packages:
       main:
         branch: main
         ref: 29656ff0b771e4caa46d24a6f4cb51f3a34c3652
+        pinned: branch-head
         path: docs/
   omnibase-gallery:
     package: omnibase/gallery
@@ -171,6 +197,7 @@ packages:
       main:
         branch: main
         ref: 92b66642643ffff3280a7c3bf68819c08f65363d
+        pinned: branch-head
         path: docs/
   omnibase-health:
     package: omnibase/health
@@ -180,6 +207,7 @@ packages:
       main:
         branch: main
         ref: 28956d95323104df86144c0adf5340a82eb8e8dd
+        pinned: branch-head
         path: docs/
   omnibase-lawyer:
     package: omnibase/lawyer
@@ -189,6 +217,7 @@ packages:
       main:
         branch: main
         ref: abd1ac17af6d13ef0ec1e93e1df2b929a7bafe9e
+        pinned: branch-head
         path: docs/
   omnibase-legal:
     package: omnibase/legal
@@ -198,6 +227,7 @@ packages:
       main:
         branch: main
         ref: 777c064d183f7368f37f0ff78c6ab518041a824e
+        pinned: branch-head
         path: docs/
   omnibase-mailbox:
     package: omnibase/mailbox
@@ -207,6 +237,7 @@ packages:
       main:
         branch: main
         ref: fceebb2389ecc9634cbc500688a12d29144ae1e7
+        pinned: branch-head
         path: docs/
   omnibase-marketplace:
     package: omnibase/marketplace
@@ -216,6 +247,7 @@ packages:
       main:
         branch: main
         ref: cab42e4ec03dd8c4569c27cf7154e44a9824d2e8
+        pinned: branch-head
         path: docs/
   omnibase-notary:
     package: omnibase/notary
@@ -225,6 +257,7 @@ packages:
       main:
         branch: main
         ref: a8f661ba1e782b8a55fb1aaed9163d10b629fa0c
+        pinned: branch-head
         path: docs/
   omnibase-office:
     package: omnibase/office
@@ -234,6 +267,7 @@ packages:
       main:
         branch: main
         ref: 8cf9f0a3cd33ccaf882e43172b2df69912411f73
+        pinned: branch-head
         path: docs/
   omnibase-restaurant:
     package: omnibase/restaurant
@@ -243,6 +277,7 @@ packages:
       main:
         branch: main
         ref: e14894e7b2fba9e915e2f2cef9ecc7001f31b99c
+        pinned: branch-head
         path: docs/
   omnibase-scholar:
     package: omnibase/scholar
@@ -252,6 +287,7 @@ packages:
       main:
         branch: main
         ref: 679893dae505c99f909579d43be3bc078ba2020a
+        pinned: branch-head
         path: docs/
   omnibase-video:
     package: omnibase/video
@@ -261,6 +297,7 @@ packages:
       main:
         branch: main
         ref: 42e9e52e8996830f5b65a17f480b743f3eea3152
+        pinned: branch-head
         path: docs/
   omnibill:
     package: omniscient/omnibill
@@ -270,6 +307,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 9353d19ff0f7829a4cd9a3687283d472e6bb13e5
+        pinned: branch-head
         path: docs/
   omnibill-afnor:
     package: omnibill/afnor
@@ -279,6 +317,7 @@ packages:
       1.x:
         branch: 1.x
         ref: ef83da0ef037487d1e60b53a409343c1b8249d63
+        pinned: branch-head
         path: docs/
   omnibill-chorus-pro:
     package: omnibill/chorus-pro
@@ -288,6 +327,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 39bcd17929d1bf10134f7fdfbdb88a047d5d0da7
+        pinned: branch-head
         path: docs/
   omnibill-email:
     package: omnibill/email
@@ -297,6 +337,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 2f31546295bc39e2638f98da802cf0dce08f25e7
+        pinned: branch-head
         path: docs/
   omnibridge-composer:
     package: omnibridge/composer
@@ -306,6 +347,7 @@ packages:
       1.x:
         branch: 1.x
         ref: b034292d6b5bb1b58bb06b11b57f488f5278d476
+        pinned: branch-head
         path: docs/
   omnibus:
     package: omniscient/omnibus
@@ -315,6 +357,7 @@ packages:
       2.x:
         branch: 2.x
         ref: 26e76a963ab9a590372be518323b3116b9edadb3
+        pinned: branch-head
         path: docs/
   omnidns:
     package: omniscient/omnidns
@@ -324,6 +367,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 8857d9dbb9eacd8c3c9015e3e680bab548744cea
+        pinned: branch-head
         path: docs/
   omnidrive:
     package: omniscient/omnidrive
@@ -333,6 +377,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 1cd190090c46fedbc786d6fa74d64899a39cd6d3
+        pinned: branch-head
         path: docs/
   omnifilm:
     package: omniscient/omnifilm
@@ -342,6 +387,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 5b358e738e6b30892df368eff69b79869f71b285
+        pinned: branch-head
         path: docs/
   omnifood:
     package: omniscient/omnifood
@@ -351,6 +397,7 @@ packages:
       1.x:
         branch: 1.x
         ref: ee00bae20491bdb8bca2a523ecb7fa4ef42425d2
+        pinned: branch-head
         path: docs/
   omnifood-deliveroo:
     package: omnifood/deliveroo
@@ -360,6 +407,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 118043649e0914eb45a34ef275b9b5c996aa6b66
+        pinned: branch-head
         path: docs/
   omnifood-justeat:
     package: omnifood/justeat
@@ -369,6 +417,7 @@ packages:
       1.x:
         branch: 1.x
         ref: b6620f872b29d1c7b367a8d4dac91ad611dadbb6
+        pinned: branch-head
         path: docs/
   omnifood-thefork:
     package: omnifood/thefork
@@ -378,6 +427,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 90f8296195deeb2c1a0908e0b20c4008a1e259ff
+        pinned: branch-head
         path: docs/
   omnifood-ubereats:
     package: omnifood/ubereats
@@ -387,6 +437,7 @@ packages:
       1.x:
         branch: 1.x
         ref: bc2eb80d0a177b960dcf74734947178ab0e48721
+        pinned: branch-head
         path: docs/
   omnifood-zenchef:
     package: omnifood/zenchef
@@ -396,6 +447,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 873652af152f05bcf26d1d07e897422a69eecc10
+        pinned: branch-head
         path: docs/
   omnifund:
     package: omniscient/omnifund
@@ -405,6 +457,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 4a1eae2450a7e1347861ffef16dd1be25e6d9f41
+        pinned: branch-head
         path: docs/
   omnigame:
     package: omniscient/omnigame
@@ -414,6 +467,7 @@ packages:
       1.x:
         branch: 1.x
         ref: c9be9f827f32111cba43bd43e3fd40c8ba793495
+        pinned: branch-head
         path: docs/
   omnilab:
     package: omniscient/omnilab
@@ -423,6 +477,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 198f69b9d37eb3c591f139eeb7a52122ffc83505
+        pinned: branch-head
         path: docs/
   omnilab-brightsky:
     package: omnilab/brightsky
@@ -432,6 +487,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 1a535b56149f290b0e90b01d76222c19f88453a3
+        pinned: branch-head
         path: docs/
   omnilab-cactus:
     package: omnilab/cactus
@@ -441,6 +497,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 4cc6b17107b59699f123633a29061b2fadeddbca
+        pinned: branch-head
         path: docs/
   omnilab-cams:
     package: omnilab/cams
@@ -450,6 +507,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 7ee552d961fb9c3b8994943b838afd77af41a84c
+        pinned: branch-head
         path: docs/
   omnilab-cds:
     package: omnilab/cds
@@ -459,6 +517,7 @@ packages:
       1.x:
         branch: 1.x
         ref: d7ab8f91e5398200dc2f1164e17989837356cbe2
+        pinned: branch-head
         path: docs/
   omnilab-chebi:
     package: omnilab/chebi
@@ -468,6 +527,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 70932438923c5d6779bb9fed465765b1e9847e51
+        pinned: branch-head
         path: docs/
   omnilab-chembl:
     package: omnilab/chembl
@@ -477,6 +537,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 9ba57ed64efe9681308a76a7739d7d8fce256cbc
+        pinned: branch-head
         path: docs/
   omnilab-clinvar:
     package: omnilab/clinvar
@@ -486,6 +547,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 77192625001f9a65811512eb790f4c81dff44326
+        pinned: branch-head
         path: docs/
   omnilab-cod:
     package: omnilab/cod
@@ -495,6 +557,7 @@ packages:
       1.x:
         branch: 1.x
         ref: dd0bbc4eec38d87b16f80c667f158c950d699bbe
+        pinned: branch-head
         path: docs/
   omnilab-codata:
     package: omnilab/codata
@@ -504,6 +567,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 66b9e083f37b9e3211c972647c9ba0ff8902d005
+        pinned: branch-head
         path: docs/
   omnilab-col:
     package: omnilab/col
@@ -513,6 +577,7 @@ packages:
       1.x:
         branch: 1.x
         ref: f82c4f1642e1d476f0ad9aa5a2a93834e53c2bb1
+        pinned: branch-head
         path: docs/
   omnilab-copernicus:
     package: omnilab/copernicus
@@ -522,6 +587,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 7dcdb8386321a42ce8650feff8d9c2253ba07931
+        pinned: branch-head
         path: docs/
   omnilab-donki:
     package: omnilab/donki
@@ -531,6 +597,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 07241519917c825eb115d82ee119206a43d63588
+        pinned: branch-head
         path: docs/
   omnilab-earthdata:
     package: omnilab/earthdata
@@ -540,6 +607,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 0e19f7c3726ddc2bc77bf0ef4d5f340b2e1c7eab
+        pinned: branch-head
         path: docs/
   omnilab-ebird:
     package: omnilab/ebird
@@ -549,6 +617,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 3b6e24901fd43976ce609567c76dc00de382cb69
+        pinned: branch-head
         path: docs/
   omnilab-elevation:
     package: omnilab/elevation
@@ -558,6 +627,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 5e86fbce3008382781c64afb2b7cbff2ba49090a
+        pinned: branch-head
         path: docs/
   omnilab-emsc:
     package: omnilab/emsc
@@ -567,6 +637,7 @@ packages:
       1.x:
         branch: 1.x
         ref: b0651352b521d8adfc30498c15b5b10b0006560f
+        pinned: branch-head
         path: docs/
   omnilab-ensembl:
     package: omnilab/ensembl
@@ -576,6 +647,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 647f70741873c9b8f3b103ad852a7c24cbc89cd2
+        pinned: branch-head
         path: docs/
   omnilab-exoplanets:
     package: omnilab/exoplanets
@@ -585,6 +657,7 @@ packages:
       1.x:
         branch: 1.x
         ref: c841c5bb3cc2b09a5b5fbcdc3a5fdb92b6daedc2
+        pinned: branch-head
         path: docs/
   omnilab-gaia:
     package: omnilab/gaia
@@ -594,6 +667,7 @@ packages:
       1.x:
         branch: 1.x
         ref: a10c0d5ef8185f2c214911698da614ed02520018
+        pinned: branch-head
         path: docs/
   omnilab-gbif:
     package: omnilab/gbif
@@ -603,6 +677,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 8e4762b77e59d34ea9734d7bac684f63342ceb20
+        pinned: branch-head
         path: docs/
   omnilab-gwas:
     package: omnilab/gwas
@@ -612,6 +687,7 @@ packages:
       1.x:
         branch: 1.x
         ref: c50c3e9d9eb789003c33e5892858c32f8b9d0142
+        pinned: branch-head
         path: docs/
   omnilab-hgnc:
     package: omnilab/hgnc
@@ -621,6 +697,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 24eea87b26634c7f4c7a36e3229127860bb1b3fe
+        pinned: branch-head
         path: docs/
   omnilab-horizons:
     package: omnilab/horizons
@@ -630,6 +707,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 779c1166129744a25be8a640987954122b78d0ca
+        pinned: branch-head
         path: docs/
   omnilab-inaturalist:
     package: omnilab/inaturalist
@@ -639,6 +717,7 @@ packages:
       1.x:
         branch: 1.x
         ref: ca12a0e3171c801bd301960f4a62fa8a335b4b2e
+        pinned: branch-head
         path: docs/
   omnilab-interpro:
     package: omnilab/interpro
@@ -648,6 +727,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 3a2a991f782b0310ef6bb9aa66545e3560e1de04
+        pinned: branch-head
         path: docs/
   omnilab-itis:
     package: omnilab/itis
@@ -657,6 +737,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 9217777a6fb40c8e37010a4fddd750343e50755a
+        pinned: branch-head
         path: docs/
   omnilab-iucn:
     package: omnilab/iucn
@@ -666,6 +747,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 35b2dd237f8358bfb1aee928caf72ba829e8f56d
+        pinned: branch-head
         path: docs/
   omnilab-jpl:
     package: omnilab/jpl
@@ -675,6 +757,7 @@ packages:
       1.x:
         branch: 1.x
         ref: fecf6f0584b86fab01964ed2e053aa8a7e8fa1b4
+        pinned: branch-head
         path: docs/
   omnilab-kegg:
     package: omnilab/kegg
@@ -684,6 +767,7 @@ packages:
       1.x:
         branch: 1.x
         ref: f24a465edfb75725a867f35f1a6f195d9637b8db
+        pinned: branch-head
         path: docs/
   omnilab-launches:
     package: omnilab/launches
@@ -693,6 +777,7 @@ packages:
       1.x:
         branch: 1.x
         ref: e9824823e0822704f094b01aae48f84428ca7462
+        pinned: branch-head
         path: docs/
   omnilab-materials-project:
     package: omnilab/materials-project
@@ -702,6 +787,7 @@ packages:
       1.x:
         branch: 1.x
         ref: e6d55b484f6158e8a36ebfaca5b8deab7f99e2ac
+        pinned: branch-head
         path: docs/
   omnilab-mpc:
     package: omnilab/mpc
@@ -711,6 +797,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 131702d778aa1b74e5f66f44a21a3cb588c08a73
+        pinned: branch-head
         path: docs/
   omnilab-ncbi:
     package: omnilab/ncbi
@@ -720,6 +807,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 6a4949f46e963312c5ef64df6ab2c427d2473b69
+        pinned: branch-head
         path: docs/
   omnilab-ned:
     package: omnilab/ned
@@ -729,6 +817,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 1db1759466168846313144d02d4b07ef82678ed7
+        pinned: branch-head
         path: docs/
   omnilab-noaa:
     package: omnilab/noaa
@@ -738,6 +827,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 5338ae53bf2d7eb70ff29ca440b75f88a1e3b55f
+        pinned: branch-head
         path: docs/
   omnilab-obis:
     package: omnilab/obis
@@ -747,6 +837,7 @@ packages:
       1.x:
         branch: 1.x
         ref: ed8a2d3efaed6bf939993462d964419fd5f7d85f
+        pinned: branch-head
         path: docs/
   omnilab-open-meteo:
     package: omnilab/open-meteo
@@ -756,6 +847,7 @@ packages:
       1.x:
         branch: 1.x
         ref: b82c646e16360eab8321304c6549c20ec783503d
+        pinned: branch-head
         path: docs/
   omnilab-openaq:
     package: omnilab/openaq
@@ -765,6 +857,7 @@ packages:
       1.x:
         branch: 1.x
         ref: fea31206e2d8e84ea982cac9f8cdb8a67ddf9691
+        pinned: branch-head
         path: docs/
   omnilab-opentargets:
     package: omnilab/opentargets
@@ -774,6 +867,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 94f1d568e651130f39932423c14af0d0a7c5d9c6
+        pinned: branch-head
         path: docs/
   omnilab-oqmd:
     package: omnilab/oqmd
@@ -783,6 +877,7 @@ packages:
       1.x:
         branch: 1.x
         ref: ad00ef775374ec4c45c166e9a6387cb4cc3fe566
+        pinned: branch-head
         path: docs/
   omnilab-pbdb:
     package: omnilab/pbdb
@@ -792,6 +887,7 @@ packages:
       1.x:
         branch: 1.x
         ref: ee29bc6716bb574e9b5e8fa6a8a79ca5eec6773e
+        pinned: branch-head
         path: docs/
   omnilab-pdb:
     package: omnilab/pdb
@@ -801,6 +897,7 @@ packages:
       1.x:
         branch: 1.x
         ref: ea9ddda7ca0744123e77afe62e1addd0aa41b132
+        pinned: branch-head
         path: docs/
   omnilab-pubchem:
     package: omnilab/pubchem
@@ -810,6 +907,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 337f6f828190bc326c6855e3dece4b04ff143776
+        pinned: branch-head
         path: docs/
   omnilab-quickgo:
     package: omnilab/quickgo
@@ -819,6 +917,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 0350dd4193c5ebaee03edcb56d85aad57e84fb0f
+        pinned: branch-head
         path: docs/
   omnilab-reactome:
     package: omnilab/reactome
@@ -828,6 +927,7 @@ packages:
       1.x:
         branch: 1.x
         ref: a8b88078b5bed4bb85e5a5ba160d1cee3c4b28b1
+        pinned: branch-head
         path: docs/
   omnilab-rhea:
     package: omnilab/rhea
@@ -837,6 +937,7 @@ packages:
       1.x:
         branch: 1.x
         ref: c959c92c6bec46889199c7d009465050951d4675
+        pinned: branch-head
         path: docs/
   omnilab-simbad:
     package: omnilab/simbad
@@ -846,6 +947,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 61d10aa2cda68493082d3967fd965e1ed5be9c2a
+        pinned: branch-head
         path: docs/
   omnilab-string:
     package: omnilab/string
@@ -855,6 +957,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 249c77f9405e683699d3c3a41e4864916ec5fbb1
+        pinned: branch-head
         path: docs/
   omnilab-swpc:
     package: omnilab/swpc
@@ -864,6 +967,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 9e97a66b0bd406ade5375b7705900450f0af9f3b
+        pinned: branch-head
         path: docs/
   omnilab-tides:
     package: omnilab/tides
@@ -873,6 +977,7 @@ packages:
       1.x:
         branch: 1.x
         ref: e5da1c3600ae4fe30873bf6503827b93d67fce49
+        pinned: branch-head
         path: docs/
   omnilab-uniprot:
     package: omnilab/uniprot
@@ -882,6 +987,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 548a2fd9a42ebd3cd63c500206045d14a034c380
+        pinned: branch-head
         path: docs/
   omnilab-usgs:
     package: omnilab/usgs
@@ -891,6 +997,7 @@ packages:
       1.x:
         branch: 1.x
         ref: f082c8e045d899b8036783ceb24b38add0b1935b
+        pinned: branch-head
         path: docs/
   omnilab-usgs-water:
     package: omnilab/usgs-water
@@ -900,6 +1007,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 85b96ca31368b28d138ca61df6a85ef239362983
+        pinned: branch-head
         path: docs/
   omnilab-vizier:
     package: omnilab/vizier
@@ -909,6 +1017,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 417ab5cd9086d82f92c0d5b64f914974bf2d2671
+        pinned: branch-head
         path: docs/
   omnilab-wikidata:
     package: omnilab/wikidata
@@ -918,6 +1027,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 4662a9877090561786133397b5260e8fe93d2995
+        pinned: branch-head
         path: docs/
   omnilab-worms:
     package: omnilab/worms
@@ -927,6 +1037,7 @@ packages:
       1.x:
         branch: 1.x
         ref: b80fba439b62ed24b8de99468a9c64102cd8a1a6
+        pinned: branch-head
         path: docs/
   omnilex:
     package: omniscient/omnilex
@@ -936,6 +1047,7 @@ packages:
       1.x:
         branch: 1.x
         ref: df3871082b49942b241cd1bb6bc29e1b95e38622
+        pinned: branch-head
         path: docs/
   omnilex-eurlex:
     package: omnilex/eurlex
@@ -945,6 +1057,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 76a065d8af3fa41d8a2d90f8800522898c215212
+        pinned: branch-head
         path: docs/
   omnilex-judilibre:
     package: omnilex/judilibre
@@ -954,6 +1067,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 42bac3eb114a26199d0857d1a9d6d39a12f3d81c
+        pinned: branch-head
         path: docs/
   omnilex-justice-administrative:
     package: omnilex/justice-administrative
@@ -963,6 +1077,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 891c376f7034249e3479e6b5ac1c0b1017171c02
+        pinned: branch-head
         path: docs/
   omnilex-legifrance:
     package: omnilex/legifrance
@@ -972,6 +1087,7 @@ packages:
       1.x:
         branch: 1.x
         ref: c1afa5b0b1eb00d2c82ab1d405581cd26a347a25
+        pinned: branch-head
         path: docs/
   omnimap:
     package: omniscient/omnimap
@@ -981,6 +1097,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 630bf94fb561eac68c47d99cf708fe249564fa0c
+        pinned: branch-head
         path: docs/
   omnimeet:
     package: omniscient/omnimeet
@@ -990,6 +1107,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 504bfbcdd7bbddbca67e9b2ee71529cf4d0d4001
+        pinned: branch-head
         path: docs/
   omnimeet-direct:
     package: omnimeet/direct
@@ -999,6 +1117,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 941bc71a27d590f01a46e5fcbcb9485d3b644efc
+        pinned: branch-head
         path: docs/
   omnimeet-jitsi:
     package: omnimeet/jitsi
@@ -1008,6 +1127,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 4bfd82b8004ea11c8c47c251daf0faea70728e88
+        pinned: branch-head
         path: docs/
   omnipost:
     package: omniscient/omnipost
@@ -1017,6 +1137,7 @@ packages:
       1.x:
         branch: 1.x
         ref: f7a222d6114c718d9d9ab15d28691f7a66cbef51
+        pinned: branch-head
         path: docs/
   omnireach:
     package: omniscient/omnireach
@@ -1026,6 +1147,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 20e03fedf198bf4b9a5eee8a8a4430a848c569de
+        pinned: branch-head
         path: docs/
   omnireview:
     package: omniscient/omnireview
@@ -1035,6 +1157,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 17739087d9af1d4309d33b79befa73ba1b3de094
+        pinned: branch-head
         path: docs/
   omnireview-google:
     package: omnireview/google
@@ -1044,6 +1167,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 7cec086527a7d1c1a9376b2dedfba23bab5e355d
+        pinned: branch-head
         path: docs/
   omnireview-tripadvisor:
     package: omnireview/tripadvisor
@@ -1053,6 +1177,7 @@ packages:
       1.x:
         branch: 1.x
         ref: d12fcfba68d4bf1efbb592ee5227c3b3350434eb
+        pinned: branch-head
         path: docs/
   omnireview-trustpilot:
     package: omnireview/trustpilot
@@ -1062,6 +1187,7 @@ packages:
       1.x:
         branch: 1.x
         ref: e97173e98f2bef1d37a451d18087a40fbe441a24
+        pinned: branch-head
         path: docs/
   omnischolar:
     package: omniscient/omnischolar
@@ -1071,6 +1197,7 @@ packages:
       1.x:
         branch: 1.x
         ref: bba400e32993470e5a5635b063aae98479562b45
+        pinned: branch-head
         path: docs/
   omnischolar-arxiv:
     package: omnischolar/arxiv
@@ -1080,6 +1207,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 43bb94645c8e112d2c7b7c94d491104ed4cd787a
+        pinned: branch-head
         path: docs/
   omnischolar-crossref:
     package: omnischolar/crossref
@@ -1089,6 +1217,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 619f27a64eb957266c5662b0f8a84721d9648b33
+        pinned: branch-head
         path: docs/
   omnischolar-hal:
     package: omnischolar/hal
@@ -1098,6 +1227,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 783481d03b3e18cafe1188690fa2363b103fee0c
+        pinned: branch-head
         path: docs/
   omnischolar-inspire:
     package: omnischolar/inspire
@@ -1107,6 +1237,7 @@ packages:
       1.x:
         branch: 1.x
         ref: e715df151adbe464da957837522c83c279b5578e
+        pinned: branch-head
         path: docs/
   omnischolar-openalex:
     package: omnischolar/openalex
@@ -1116,6 +1247,7 @@ packages:
       1.x:
         branch: 1.x
         ref: ab42a93efa884e5ab5b193309695352a347b9d98
+        pinned: branch-head
         path: docs/
   omnischolar-openlibrary:
     package: omnischolar/openlibrary
@@ -1125,6 +1257,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 097d74a5f6160e5efdfbc57274197cab39221e6c
+        pinned: branch-head
         path: docs/
   omnischolar-orcid:
     package: omnischolar/orcid
@@ -1134,6 +1267,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 20c015dff0e8a8cec100930708a8896b39384240
+        pinned: branch-head
         path: docs/
   omnisearch:
     package: omniscient/omnisearch
@@ -1143,6 +1277,7 @@ packages:
       1.x:
         branch: 1.x
         ref: d51ed876ba69e80877136ef53d0726c965edc5c1
+        pinned: branch-head
         path: docs/
   omnisearch-typesense:
     package: omnisearch/typesense
@@ -1152,6 +1287,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 3d7855584641c978a25ce66d15aa781b8929b247
+        pinned: branch-head
         path: docs/
   omnishare:
     package: omniscient/omnishare
@@ -1161,6 +1297,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 7c79ccec5c41e3a857e3b3a5bde4e4716e1596f4
+        pinned: branch-head
         path: docs/
   omnishield:
     package: omniscient/omnishield
@@ -1170,6 +1307,7 @@ packages:
       1.x:
         branch: 1.x
         ref: af9859007fb10525127c908d48ba936e9b8be71f
+        pinned: branch-head
         path: docs/
   omnishield-akismet:
     package: omnishield/akismet
@@ -1179,6 +1317,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 3663b2de54f516c890b02606bc4dd9186772c1d1
+        pinned: branch-head
         path: docs/
   omnishield-altcha:
     package: omnishield/altcha
@@ -1188,6 +1327,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 3c976224bf5efef5d17165b359afb2a32aaa6527
+        pinned: branch-head
         path: docs/
   omnishield-disposable:
     package: omnishield/disposable
@@ -1197,6 +1337,7 @@ packages:
       1.x:
         branch: 1.x
         ref: c8808bc3fed858e34ccb55b9f126adfebf11269e
+        pinned: branch-head
         path: docs/
   omnishield-recaptcha:
     package: omnishield/recaptcha
@@ -1206,6 +1347,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 43d02941b343947c68f4af53cf98af9158c72806
+        pinned: branch-head
         path: docs/
   omnishield-stopforumspam:
     package: omnishield/stopforumspam
@@ -1215,6 +1357,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 940afc62b484862c6ca34612be3018523c8a70cc
+        pinned: branch-head
         path: docs/
   omnishield-turnstile:
     package: omnishield/turnstile
@@ -1224,6 +1367,7 @@ packages:
       1.x:
         branch: 1.x
         ref: e6d905afbdf79eb37470c2cb8c71e76cbe9ad8fc
+        pinned: branch-head
         path: docs/
   omnisign:
     package: omniscient/omnisign
@@ -1233,6 +1377,7 @@ packages:
       1.x:
         branch: 1.x
         ref: f77f7c214a36539f92893cb81724dabb2ed3da9f
+        pinned: branch-head
         path: docs/
   omnisign-docuseal:
     package: omnisign/docuseal
@@ -1242,6 +1387,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 197e0f40a0576674a8354239dc3842a33a44e919
+        pinned: branch-head
         path: docs/
   omnisign-docusign:
     package: omnisign/docusign
@@ -1251,6 +1397,7 @@ packages:
       1.x:
         branch: 1.x
         ref: cf00e42a334e1520efda30cffcf9a7b00043191a
+        pinned: branch-head
         path: docs/
   omnisign-yousign:
     package: omnisign/yousign
@@ -1260,6 +1407,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 72819b6deea05cdac9e4953d78f778270633781e
+        pinned: branch-head
         path: docs/
   omnisong:
     package: omniscient/omnisong
@@ -1269,6 +1417,7 @@ packages:
       1.x:
         branch: 1.x
         ref: ffc501f2628094f8233144bdd9ab5415794799ca
+        pinned: branch-head
         path: docs/
   omnistate:
     package: omniscient/omnistate
@@ -1278,6 +1427,7 @@ packages:
       1.x:
         branch: 1.x
         ref: e40052a42ec9df719f63ca800726949e56ce4e9e
+        pinned: branch-head
         path: docs/
   omnistate-annuaire-sante:
     package: omnistate/annuaire-sante
@@ -1287,6 +1437,7 @@ packages:
       1.x:
         branch: 1.x
         ref: b16e398e5a02b6f6b718f7bc99db08468ae51bfd
+        pinned: branch-head
         path: docs/
   omnistate-matchid:
     package: omnistate/matchid
@@ -1296,6 +1447,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 30beb7fd5c795bbcec7a6ca64508cc80f94e80ac
+        pinned: branch-head
         path: docs/
   omnistate-nara:
     package: omnistate/nara
@@ -1305,6 +1457,7 @@ packages:
       1.x:
         branch: 1.x
         ref: f12e234a1409fd71511163e7491f4e135f7abbae
+        pinned: branch-head
         path: docs/
   omnistate-national-archives-uk:
     package: omnistate/national-archives-uk
@@ -1314,6 +1467,7 @@ packages:
       1.x:
         branch: 1.x
         ref: ef50c40143230fcdc17d1781544114127b801455
+        pinned: branch-head
         path: docs/
   omnistate-openarchieven:
     package: omnistate/openarchieven
@@ -1323,6 +1477,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 6a247f8ac0bbc63a3bc5dc50614bb203d0dd2ec8
+        pinned: branch-head
         path: docs/
   omniticket:
     package: omniscient/omniticket
@@ -1332,6 +1487,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 2ae6ff181dee648d1ee84930a0c5ad8b56a792fd
+        pinned: branch-head
         path: docs/
   omnitrade:
     package: omniscient/omnitrade
@@ -1341,6 +1497,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 2fbfa1d74d087a8b032efdb0363de43471de202e
+        pinned: branch-head
         path: docs/
   omnitrade-amazon:
     package: omnitrade/amazon
@@ -1350,6 +1507,7 @@ packages:
       1.x:
         branch: 1.x
         ref: b6c2de474782368d2cc9aebac443072a31010d00
+        pinned: branch-head
         path: docs/
   omnitrade-shopify:
     package: omnitrade/shopify
@@ -1359,6 +1517,7 @@ packages:
       1.x:
         branch: 1.x
         ref: 5de536239466662e9f5b5045b26ca723ac812a82
+        pinned: branch-head
         path: docs/
   omnitrade-stripe:
     package: omnitrade/stripe
@@ -1368,6 +1527,7 @@ packages:
       1.x:
         branch: 1.x
         ref: e81c2542476a014072fb6f947a23d6003dd72cf5
+        pinned: branch-head
         path: docs/
   omnitrade-web:
     package: omnitrade/web
@@ -1377,6 +1537,7 @@ packages:
       1.x:
         branch: 1.x
         ref: d2b9958a4d5cdc07f1c5a8abe7b9823d12f422bd
+        pinned: branch-head
         path: docs/
   omnitrade-woocommerce:
     package: omnitrade/woocommerce
@@ -1386,4 +1547,5 @@ packages:
       1.x:
         branch: 1.x
         ref: 7a53f637d7d1a869d7d220a1bbea03649001b603
+        pinned: branch-head
         path: docs/

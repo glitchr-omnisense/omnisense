@@ -283,6 +283,8 @@ manual:
   eol: La série {version} n’est plus maintenue.
   read_at: Lu à
   branch: série de la branche {branch}
+  branch_head: tête de la branche {branch} quand elle a été épinglée
+  current: actuelle
   previous: Précédent
   next: Suivant
   no_home: 'Ce manuel n’a pas de page d’accueil : ses pages sont au sommaire.'

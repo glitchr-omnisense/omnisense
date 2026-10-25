@@ -283,6 +283,8 @@ manual:
   eol: The {version} series is no longer maintained.
   read_at: Read at
   branch: series of the branch {branch}
+  branch_head: head of the branch {branch} when pinned
+  current: current
   previous: Previous
   next: Next
   no_home: 'This manual has no home page: its pages are in the contents.'

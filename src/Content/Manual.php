@@ -11,7 +11,7 @@ namespace App\Content;
 final class Manual
 {
     /**
-     * @param array<string, array{branch: ?string, ref: string, path: string, eol: bool}> $versions series => source
+     * @param array<string, array{branch: ?string, ref: string, pinned: ?string, path: string, eol: bool}> $versions series => source
      */
     public function __construct(
         public readonly string $key,
@@ -31,5 +31,11 @@ final class Manual
     public function has(string $series): bool
     {
         return isset($this->versions[$series]);
+    }
+
+    /** Whether a series is the current one (the default): the others are shown with a notice, out of the sitemap, not indexed. */
+    public function isCurrent(string $series): bool
+    {
+        return $series === $this->default;
     }
 }
