@@ -54,7 +54,7 @@
         <section class="om-family om-docs-group" id="{{ name }}">
             <header>
                 {% if catalogue.family(name) and catalogue.family(name).hasPage %}
-                    <h3><a href="{{ path('app_family', {family: name}) }}">Omni<b>{{ family_suffix(name) }}</b></a></h3>
+                    <h3><a href="{{ family_url(name) }}">Omni<b>{{ family_suffix(name) }}</b></a></h3>
                     <p>{{ catalogue.family(name).phrase(app.request.locale|lang) }}</p>
                 {% else %}
                     <h3>{% if name starts with 'omni' and name != 'omnibridge' %}Omni<b>{{ family_suffix(name) }}</b>{% else %}{{ ('@messages.docs.group_' ~ name)|trans }}{% endif %}</h3>

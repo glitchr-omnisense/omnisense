@@ -43,11 +43,11 @@
 .manual { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0 2.5rem; width: 100%; max-width: 92rem; margin: 0 auto; padding: 1.25rem clamp(1rem, 3vw, 2rem) 4rem; }
 .manual-toc { display: none; }
 @media (min-width: 62rem) {
-    .manual { grid-template-columns: 16.5rem minmax(0, 1fr); }
+    .manual:not(.is-one-page) { grid-template-columns: 16.5rem minmax(0, 1fr); }
     .manual-side { position: sticky; top: var(--m-top); align-self: start; max-height: calc(100vh - var(--m-top) - 1rem); overflow-y: auto; overscroll-behavior: contain; padding-right: .5rem; }
 }
 @media (min-width: 80rem) {
-    .manual { grid-template-columns: 16.5rem minmax(0, 1fr) 14rem; }
+    .manual:not(.is-one-page) { grid-template-columns: 16.5rem minmax(0, 1fr) 14rem; }
     .manual-toc { display: block; position: sticky; top: var(--m-top); align-self: start; max-height: calc(100vh - var(--m-top) - 1rem); overflow-y: auto; }
 }
 
@@ -121,7 +121,7 @@
 .manual-notice a { margin-left: .4rem; color: inherit; font-weight: 650; }
 @media (min-width: 62rem) { .manual-menu-button { display: none; } }
 @media (max-width: 61.99rem) {
-    .manual-side { display: none; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--m-line); }
+    .manual:not(.is-one-page) .manual-side { display: none; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--m-line); }
     .manual.is-menu-open .manual-side { display: block; }
 }
 
@@ -228,3 +228,58 @@
     .manual { display: block; }
     .manual-side, .manual-toc, .manual-menu-button, .manual-neighbours, .doc-code-copy { display: none !important; }
 }
+
+/* ---- A package's documentation on one page (omnidocs' OnePage) -------------------
+ * The layout - the sidebar beside the prose, its table of contents sticking and
+ * following the reading, a drawer on a phone - is omnidocs.css', read through its
+ * custom properties (app-async.scss); what follows is the site's own look of it. */
+.manual.is-one-page { display: block; }
+.manual-head { max-width: 72rem; margin: .5rem 0 2rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--m-line); }
+.manual-head .manual-crumbs { margin-bottom: .8rem; }
+.manual-title { margin: 0 0 .5rem; font: 750 clamp(1.9rem, 3.6vw, 2.6rem)/1.12 var(--m-display); letter-spacing: -.015em; overflow-wrap: anywhere; }
+.manual-title-of { display: block; font: 500 1rem/1.4 var(--m-mono); color: var(--m-soft); letter-spacing: 0; }
+.manual-lead { max-width: 48rem; margin: 0 0 1rem; color: var(--m-soft); font-size: 1.05rem; line-height: 1.55; }
+.manual-facts { display: flex; flex-wrap: wrap; gap: .5rem 1.6rem; margin: 0 0 1rem; font-size: .88rem; }
+.manual-facts > div { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; min-width: 0; }
+.manual-facts dt { color: var(--m-soft); }
+.manual-facts dt::after { content: ":"; }
+.manual-facts dd { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem; margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.manual-facts a { color: var(--m-ink); }
+.manual-facts .manual-versions { margin: 0; }
+.manual-install { max-width: 48rem; margin: 0 0 1rem; }
+.manual-install code { overflow-wrap: anywhere; }
+.manual-switch { display: flex; gap: .25rem; margin-top: .5rem; }
+.manual-switch a { padding: .35rem .8rem; font-size: .9rem; font-weight: 600; color: var(--m-soft); text-decoration: none; border: 1px solid var(--m-line); border-radius: var(--m-radius); }
+.manual-switch a:hover { color: var(--m-ink); border-color: var(--m-ink); }
+.manual-switch a[aria-current] { color: var(--m-bg); background: var(--m-ink); border-color: var(--m-ink); }
+
+.manual.is-one-page .manual-side { font-size: .9rem; }
+.manual-side-title { margin: 1.1rem 0 .4rem; font: 700 .85rem/1.4 var(--m-font); color: var(--m-ink); }
+.manual-side-title small { font-weight: 500; color: var(--m-soft); }
+.manual-providers ul { margin: 0; padding: 0; list-style: none; max-height: 16rem; overflow-y: auto; border-left: 1px solid var(--m-line); }
+.manual-providers a { display: block; padding: .22rem .6rem; font: 500 .82rem/1.35 var(--m-mono); color: var(--m-soft); text-decoration: none; overflow-wrap: anywhere; }
+.manual-providers a:hover { color: var(--m-ink); background: var(--m-surface); }
+.manual.is-one-page .omnidocs-toc { font-size: .88rem; }
+.manual.is-one-page .omnidocs-toc a { border-radius: 0 var(--m-radius) var(--m-radius) 0; }
+.manual.is-one-page .omnidocs-toc a.is-current { color: var(--m-ink); font-weight: 600; background: var(--m-surface); }
+
+.manual.is-one-page .manual-prose { max-width: 50rem; }
+.manual-prose .doc-part + .manual-part-edit, .manual-part-edit { margin: 1.2rem 0 0; font-size: .82rem; }
+#content .manual-part-edit .manual-pencil { float: none; margin: 0; padding: 0; border: 0; background: none; font-weight: 500; line-height: 1.4; }
+.manual-part-edit { clear: both; }
+.manual-part-edit .manual-pencil { display: inline-flex; flex-wrap: wrap; gap: .35rem; align-items: baseline; color: var(--m-soft); text-decoration: none; }
+.manual-part-edit .manual-pencil:hover { color: var(--m-ink); }
+.manual-part-edit code { font: 500 .8rem/1.4 var(--m-mono); overflow-wrap: anywhere; }
+.manual-prose .doc-part { margin-top: 3rem; }
+.manual-prose .doc-part-home { margin-top: 0; }
+.manual-prose h2.doc-part-title { padding-top: 1.4rem; border-top: 2px solid var(--m-ink); font-size: 1.75rem; }
+.manual-api-note { color: var(--m-soft); font-size: .92rem; }
+.manual-prose .api-kind { margin-left: .35rem; font: 500 .75rem/1 var(--m-font); color: var(--m-soft); vertical-align: middle; }
+.manual-prose .api-declaration code { font-size: .85em; }
+.manual-prose .api-source { margin-left: .4rem; font-size: .8rem; color: var(--m-soft); }
+.manual-prose .api-members dt, .manual-prose .api-params dt { margin-top: .6rem; overflow-wrap: anywhere; }
+.manual-prose .api-members dd, .manual-prose .api-params dd { margin: .2rem 0 0 1rem; }
+.manual-prose .api-members dd > :last-child, .manual-prose .api-params dd > :last-child { margin-bottom: 0; }
+.manual-prose .api-options { display: block; overflow-x: auto; }
+.manual-prose .api-index { padding-left: 1.2rem; }
+.manual-prose h3 > code, .manual-prose h2 > code { overflow-wrap: anywhere; }

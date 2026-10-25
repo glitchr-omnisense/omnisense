@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4e4ca68af98243a43ea8c79e993b3b16",
+    "content-hash": "68456202fd2058f3a4614740088bfd3b",
     "packages": [
         {
             "name": "api-platform/doctrine-common",
@@ -5866,12 +5866,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-studio/omnibridge-static.git",
-                "reference": "3b0cadc2e048ee97708c758bb13df4171f81cd41"
+                "reference": "1054e1ffa713b9a80907682c03c51e2932f79ccb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-studio/omnibridge-static/zipball/3b0cadc2e048ee97708c758bb13df4171f81cd41",
-                "reference": "3b0cadc2e048ee97708c758bb13df4171f81cd41",
+                "url": "https://api.github.com/repos/glitchr-studio/omnibridge-static/zipball/1054e1ffa713b9a80907682c03c51e2932f79ccb",
+                "reference": "1054e1ffa713b9a80907682c03c51e2932f79ccb",
                 "shasum": ""
             },
             "require": {
@@ -5926,7 +5926,7 @@
                 "issues": "https://github.com/glitchr-studio/omnibridge-static/issues",
                 "source": "https://github.com/glitchr-studio/omnibridge-static/tree/1.x"
             },
-            "time": "2026-10-24T12:55:28+00:00"
+            "time": "2026-10-25T13:37:24+00:00"
         },
         {
             "name": "omnibridge/symfony",
@@ -6081,6 +6081,134 @@
                 "source": "https://github.com/glitchr-studio/omnibridge-twig/tree/1.x"
             },
             "time": "2026-10-23T17:11:02+00:00"
+        },
+        {
+            "name": "omnidocs/markdown",
+            "version": "1.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/glitchr-studio/omnidocs-markdown.git",
+                "reference": "67e47dea730b79d373c1e9323d69dbe3fba2e46f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/glitchr-studio/omnidocs-markdown/zipball/67e47dea730b79d373c1e9323d69dbe3fba2e46f",
+                "reference": "67e47dea730b79d373c1e9323d69dbe3fba2e46f",
+                "shasum": ""
+            },
+            "require": {
+                "league/commonmark": "^2.6",
+                "omniscient/omnidocs": "^1.0@dev",
+                "php": ">=8.2",
+                "symfony/yaml": "^6.4|^7.0|^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Omnidocs\\Markdown\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Omnidocs\\Markdown\\Tests\\": "Tests/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marco Meyer",
+                    "email": "marco.meyer@glitchr.io"
+                }
+            ],
+            "description": "Omnidocs Markdown: a folder of Markdown files as an omnidocs manual - its contents from the folders and the files (their front matter, a number before their name), each page rendered with league/commonmark as symfony.com/doc writes its pages: callouts (note, tip, caution, versionadded...), code with a caption and in tabs, version badges, links between pages and to the repository; and a changelog read as releases.",
+            "homepage": "https://github.com/glitchr-studio/omnidocs-markdown",
+            "keywords": [
+                "changelog",
+                "commonmark",
+                "documentation",
+                "manual",
+                "markdown",
+                "omnidocs"
+            ],
+            "time": "2026-10-25T14:01:23+00:00"
+        },
+        {
+            "name": "omnidocs/php",
+            "version": "1.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/glitchr-studio/omnidocs-php.git",
+                "reference": "eac3e2c5132cfcb55bfc4fc6f2cd0c56fa0140da"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/glitchr-studio/omnidocs-php/zipball/eac3e2c5132cfcb55bfc4fc6f2cd0c56fa0140da",
+                "reference": "eac3e2c5132cfcb55bfc4fc6f2cd0c56fa0140da",
+                "shasum": ""
+            },
+            "require": {
+                "nikic/php-parser": "^5.0",
+                "omniscient/omnidocs": "^1.0@dev",
+                "php": ">=8.2",
+                "phpdocumentor/reflection-docblock": "^5.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Omnidocs\\Php\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Omnidocs\\Php\\Tests\\": "Tests/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marco Meyer",
+                    "email": "marco.meyer@glitchr.io"
+                }
+            ],
+            "description": "Omnidocs PHP: a PHP package's API reference, read from its sources - its namespaces, classes, interfaces, traits and enums, their public constants, properties and methods with their signatures and PHPDoc, and the options its factories' configuration takes - as an omnidocs manual (nikic/php-parser, phpdocumentor/reflection-docblock); nothing is loaded nor run.",
+            "homepage": "https://github.com/glitchr-studio/omnidocs-php",
+            "keywords": [
+                "api reference",
+                "documentation",
+                "omnidocs",
+                "php",
+                "php-parser",
+                "phpdoc"
+            ],
+            "time": "2026-10-25T14:01:23+00:00"
         },
         {
             "name": "omniscient/omnibase",
@@ -6373,6 +6501,78 @@
                 "source": "https://github.com/glitchr-studio/omnibridge/tree/1.x"
             },
             "time": "2026-10-21T13:25:17+00:00"
+        },
+        {
+            "name": "omniscient/omnidocs",
+            "version": "1.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/glitchr-studio/omnidocs.git",
+                "reference": "4cf4198df052036a6f6343224c747bbae87c706b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/glitchr-studio/omnidocs/zipball/4cf4198df052036a6f6343224c747bbae87c706b",
+                "reference": "4cf4198df052036a6f6343224c747bbae87c706b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11.0"
+            },
+            "suggest": {
+                "omnidocs/doxygen": "The XML output of Doxygen",
+                "omnidocs/jsdoc": "The JSON JSDoc explains (jsdoc -X): a JavaScript library's API",
+                "omnidocs/markdown": "A folder of Markdown files, written as symfony.com/doc writes its pages (league/commonmark)",
+                "omnidocs/sphinx": "The output of Sphinx's JSON builder and its objects.inv"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Omnidocs\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/",
+                    "/docker/"
+                ]
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Omnidocs\\Tests\\": "Tests/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marco Meyer",
+                    "email": "marco.meyer@glitchr.io"
+                }
+            ],
+            "description": "Omnidocs: one model of a manual, whatever wrote it - Markdown, Sphinx, Doxygen, JSDoc: its versions, its pages (title, contents, headings, the file to edit), its API entries and their anchors, read through one source contract; a search index a static page searches, and the HTML conventions of symfony.com/doc (callouts, versionadded, code with captions and tabs) every format renders to.",
+            "homepage": "https://github.com/glitchr-studio/omnidocs",
+            "keywords": [
+                "api reference",
+                "documentation",
+                "doxygen",
+                "jsdoc",
+                "manual",
+                "markdown",
+                "omnidocs",
+                "search index",
+                "sphinx",
+                "static site"
+            ],
+            "time": "2026-10-25T14:24:27+00:00"
         },
         {
             "name": "omniscient/omnidrive",
@@ -19776,8 +19976,11 @@
         "omnibridge/static": 20,
         "omnibridge/symfony": 20,
         "omnibridge/twig": 20,
+        "omnidocs/markdown": 20,
+        "omnidocs/php": 20,
         "omniscient/omnibase": 20,
         "omniscient/omnibridge": 20,
+        "omniscient/omnidocs": 20,
         "omniscient/omnidrive": 20
     },
     "prefer-stable": false,

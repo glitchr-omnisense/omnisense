@@ -26,6 +26,8 @@ footer:
   legal: Mentions légales
   privacy: Confidentialité
 home:
+  libraries: Bibliothèques JavaScript
+  libraries_count: '{count, plural, =0 {aucune bibliothèque} one {# bibliothèque} other {# bibliothèques}}'
   title: 'Omniscient : l’écosystème Omni et sa documentation'
   kicker: Un préfixe, plusieurs familles
   kicker_count: '{packages} paquets · {families} familles'
@@ -269,6 +271,11 @@ kind:
   bridge_one: Pont
   library_one: Bibliothèque JS
 manual:
+  api: Référence de l’API
+  api_lead: 'Lue dans les fichiers PHP du paquet au commit {commit} : ses espaces de noms, classes, interfaces et énumérations, leurs constantes, propriétés et méthodes publiques avec leur PHPDoc, et les options que prennent ses fabriques. Rien n’en est exécuté.'
+  guide: Manuel
+  switch: Le manuel ou la référence de son API
+  website: Son site
   contents: Le sommaire du manuel
   home: Accueil
   all: Toute la documentation

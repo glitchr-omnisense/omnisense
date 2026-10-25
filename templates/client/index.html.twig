@@ -38,8 +38,9 @@
             {% if families %}
             <ul class="om-omni-tags" aria-label="{{ '@messages.home.tags_label'|trans }}">
                 {% for family in families %}
-                <li><a href="{{ path('app_family', {family: family.name}) }}" data-suffix-target="item" data-action="mouseenter->suffix#pick focus->suffix#pick" data-suffix="{{ family.suffix }}" data-phrase="{{ family.phrase }}"{% if loop.first %} aria-current="true"{% endif %}>omni<b>{{ family.suffix }}</b><span class="visually-hidden">: {{ family.phrase }}</span></a></li>
+                <li><a href="{{ family_url(family.name) }}" data-suffix-target="item" data-action="mouseenter->suffix#pick focus->suffix#pick" data-suffix="{{ family.suffix }}" data-phrase="{{ family.phrase }}"{% if loop.first %} aria-current="true"{% endif %}>omni<b>{{ family.suffix }}</b><span class="visually-hidden">: {{ family.phrase }}</span></a></li>
                 {% endfor %}
+                {% if libraries %}<li class="is-libraries"><a href="{{ family_url('libraries') }}" title="{{ libraries.phrase }}">{{ '@messages.home.libraries'|trans }}</a></li>{% endif %}
             </ul>
             {% endif %}
         </div>
@@ -97,11 +98,18 @@
         <ul class="om-family-list is-rows">
             {% for family in families|filter(f => f.package.tier.value == 'family') %}
             <li>
-                <a class="om-family-name" href="{{ path('app_family', {family: family.name}) }}">Omni<b>{{ family.suffix }}</b></a>
+                <a class="om-family-name" href="{{ family_url(family.name) }}">Omni<b>{{ family.suffix }}</b></a>
                 <span class="om-family-question">{{ family.phrase }}</span>
                 <a class="om-family-count" href="{{ (path('app_packages') ~ '#family-' ~ family.name ~ '.kind-provider') }}">{{ '@messages.home.providers'|trans({count: family.members}) }}</a>
             </li>
             {% endfor %}
+            {% if libraries %}
+            <li class="is-libraries">
+                <a class="om-family-name" href="{{ family_url('libraries') }}">{{ '@messages.home.libraries'|trans }}</a>
+                <span class="om-family-question">{{ libraries.phrase }}</span>
+                <a class="om-family-count" href="{{ family_url('libraries') }}">{{ '@messages.home.libraries_count'|trans({count: libraries.count}) }}</a>
+            </li>
+            {% endif %}
         </ul>
     </div>
 </section>
@@ -120,7 +128,7 @@
             {% for target in ['symfony', 'laravel', 'doctrine', 'twig', 'react', 'composer', 'static'] %}
             {% set package = found_bridges['omnibridge/' ~ target]|default(null) %}
             <li>
-                <a href="{{ package ? path('app_package', {vendor: package.vendor, name: package.shortName}) : (path('app_packages') ~ '#kind-bridge') }}">
+                <a href="{{ package ? doc_url(package) : (path('app_packages') ~ '#kind-bridge') }}">
                     <span class="om-family-name">omnibridge/<b>{{ target }}</b></span>
                     <span class="om-family-question">{{ ('@messages.home.bridge_' ~ target)|trans }}</span>
                     <span class="om-family-count">{{ (package ? '@messages.home.bridge_found' : '@messages.home.bridge_planned')|trans }}</span>

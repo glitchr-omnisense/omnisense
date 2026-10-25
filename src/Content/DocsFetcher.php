@@ -20,6 +20,9 @@ use Symfony\Component\Process\Process;
  */
 class DocsFetcher
 {
+    /** Where a PHP package's own .php files and composer.json are kept beside its docs, at the same commit: its API reference's source. */
+    public const SOURCES = '.php';
+
     private readonly Filesystem $fs;
 
     /** @var array<string, string>|null repository => working copy */
@@ -67,8 +70,18 @@ class DocsFetcher
                         continue;
                     }
                 }
+                if (!str_starts_with($manual->package, '@') && !is_file($target.'/'.self::SOURCES.'/.commit')) {
+                    try {
+                        $this->fetchSources($manual, $source, $target, $local);
+                        $progress && $progress($manual->key, $series, 'sources fetched');
+                    } catch (\RuntimeException $e) {
+                        $report['failed'][$manual->key.' '.$series.' (sources)'] = $e->getMessage();
+                        $progress && $progress($manual->key, $series, 'sources failed: '.$e->getMessage());
+                    }
+                }
                 $files = 0;
-                foreach (new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($target, \FilesystemIterator::SKIP_DOTS)) as $file) {
+                $skip = new \RecursiveCallbackFilterIterator(new \RecursiveDirectoryIterator($target, \FilesystemIterator::SKIP_DOTS), static fn (\SplFileInfo $f): bool => self::SOURCES !== $f->getFilename());
+                foreach (new \RecursiveIteratorIterator($skip) as $file) {
                     $files += '.commit' !== $file->getFilename() ? 1 : 0;
                 }
                 $manifest['manuals'][$manual->key][$series] = [
@@ -128,6 +141,42 @@ class DocsFetcher
         $this->fs->remove($work.'/.git-fetch');
         file_put_contents($work.'/.commit', $commit.\PHP_EOL);
         $this->fs->rename($work, $target);
+    }
+
+    /**
+     * The package's .php files and its composer.json at the series' commit, into <target>/.php: what
+     * its API reference is read from (omnidocs/php reads them, never loads them).
+     *
+     * @param array{branch: ?string, ref: string, path: string, eol: bool} $source
+     */
+    private function fetchSources(Manual $manual, array $source, string $target, ?string $local): void
+    {
+        $work = $target.'/'.self::SOURCES.'.part';
+        $this->fs->remove([$work, $target.'/'.self::SOURCES]);
+        $this->fs->mkdir($work);
+        $clone = null !== $local ? $this->localClone($local, $manual->repository, $source['ref']) : null;
+        if (null === $clone) {
+            $clone = $work.'/.git-fetch';
+            $url = rtrim($this->gitBase ?: 'https://github.com', '/').'/'.$manual->repository.'.git';
+            $this->run(['git', 'init', '--quiet', $clone]);
+            $this->run(['git', '-C', $clone, 'fetch', '--quiet', '--depth=1', '--no-tags', $url, $source['ref']]);
+            $ref = 'FETCH_HEAD';
+        } else {
+            $ref = $source['ref'];
+        }
+        $commit = trim($this->run(['git', '-c', 'safe.directory=*', '-C', $clone, 'rev-parse', '--verify', $ref.'^{commit}']));
+        $archive = Process::fromShellCommandline(sprintf(
+            'git -c safe.directory=* -C %s archive --format=tar %s -- %s %s | tar -x -C %s',
+            escapeshellarg($clone), escapeshellarg($commit), escapeshellarg(':(glob)**/*.php'), escapeshellarg(':(glob)composer.json'), escapeshellarg($work),
+        ));
+        $archive->setTimeout(300)->run();
+        if (!$archive->isSuccessful()) {
+            $this->fs->remove($work);
+            throw new \RuntimeException(sprintf('%s: no PHP files at %s: %s', $manual->repository, $source['ref'], trim($archive->getErrorOutput())));
+        }
+        $this->fs->remove($work.'/.git-fetch');
+        file_put_contents($work.'/.commit', $commit.\PHP_EOL);
+        $this->fs->rename($work, $target.'/'.self::SOURCES);
     }
 
     /** A working copy of $repository under $root that has $ref. */

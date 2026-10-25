@@ -1,0 +1,13 @@
+family: libraries
+phrase:
+  en: "The house's JavaScript libraries, without dependency."
+  fr: 'Les bibliothèques JavaScript de la maison, sans dépendance.'
+packages:
+  '@glitchr/flowjs':
+    kind: library
+    description: 'Navigation without page loads, sticky scroll effects, scroll stops'
+    license: MIT
+    repository: glitchr-studio/flowjs
+    branch: master
+    verification: unstated
+    docs: true

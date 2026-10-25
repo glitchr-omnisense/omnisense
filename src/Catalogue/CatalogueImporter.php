@@ -127,12 +127,14 @@ class CatalogueImporter
             ++$report['pinned'];
         }
 
-        return [
+        return array_filter([
             'package' => $name,
             'repository' => $package->repository,
+            // The package's own website, written by hand: kept.
+            'website' => $existing['website'] ?? null,
             'default' => $existing['default'] ?? $series,
             'versions' => $versions,
-        ];
+        ], static fn (mixed $value): bool => null !== $value);
     }
 
     /** The file a package is listed in: its family's, the bridges', the libraries'. */

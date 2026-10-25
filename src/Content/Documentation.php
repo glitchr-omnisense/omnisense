@@ -2,6 +2,13 @@
 
 namespace App\Content;
 
+use Omnidocs\Linking\RepositoryLinker;
+use Omnidocs\Markdown\MarkdownRenderer;
+use Omnidocs\Markdown\MarkdownSource;
+use Omnidocs\Model\Node;
+use Omnidocs\Model\Version;
+use Omnidocs\OnePage;
+use Omnidocs\Php\PhpSource;
 use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Yaml\Yaml;
@@ -21,17 +28,20 @@ class Documentation
     /** @var array<string, Manual>|null */
     private ?array $manuals = null;
 
-    /** @var array<string, list<DocPage>> */
-    private array $trees = [];
+    /** @var array<string, Version|null> */
+    private array $versions = [];
 
-    /** @var array<string, Rendered> */
-    private array $rendered = [];
+    /** @var array<string, OnePage|null> */
+    private array $onePages = [];
+
+    /** @var array<string, Version|null> */
+    private array $apis = [];
 
     /** @var array<string, mixed>|null */
     private ?array $lock = null;
 
     public function __construct(
-        private readonly Markdown $markdown,
+        private readonly MarkdownRenderer $markdown,
         #[Autowire('%app.documentation_file%')] private readonly string $file,
         #[Autowire('%app.docs_dir%')] private readonly string $dir,
     ) {
@@ -55,7 +65,7 @@ class Documentation
                         'eol' => (bool) ($source['eol'] ?? false),
                     ];
                 }
-                $this->manuals[(string) $key] = new Manual((string) $key, (string) $entry['package'], (string) $entry['repository'], (string) ($entry['default'] ?? array_key_first($versions)), $versions);
+                $this->manuals[(string) $key] = new Manual((string) $key, (string) $entry['package'], (string) $entry['repository'], (string) ($entry['default'] ?? array_key_first($versions)), $versions, isset($entry['website']) ? (string) $entry['website'] : null);
             }
             ksort($this->manuals);
         }
@@ -100,201 +110,87 @@ class Documentation
     }
 
     /**
-     * A series' pages, as a tree: the folders are sections, the files pages,
-     * ordered by their front matter's order or a number before their name
-     * ("10-getting-started.md"), then by name. The home page (index.md or
-     * README.md at the root) is not in the tree.
-     *
-     * @return list<DocPage>
+     * A series read through omnidocs: its docs/ folder as a Markdown source (folders are sections,
+     * files pages, ordered by their front matter or a number before their name; index.md or README.md
+     * the home), at the commit it was fetched at.
      */
-    public function tree(Manual $manual, string $series): array
+    public function version(Manual $manual, string $series): ?Version
     {
         $id = $manual->key.'@'.$series;
-        if (!isset($this->trees[$id])) {
+        if (!\array_key_exists($id, $this->versions)) {
             $folder = $this->folder($manual, $series);
-            $this->trees[$id] = null !== $folder ? $this->scan($folder, '') : [];
+            $source = $manual->versions[$series] ?? null;
+            $this->versions[$id] = null !== $folder && null !== $source
+                ? new Version($series, new MarkdownSource($folder, '', repository: $source['path'], renderer: $this->markdown), $source['branch'], $this->commit($manual, $series) ?? $source['ref'], $source['eol'])
+                : null;
         }
 
-        return $this->trees[$id];
+        return $this->versions[$id];
     }
 
-    /** @return list<DocPage> every page of the series, depth first, the home first if it has one */
+    /** @return list<Node> a series' contents: its folders as sections, its files as pages (the home apart) */
+    public function tree(Manual $manual, string $series): array
+    {
+        return $this->version($manual, $series)?->tree() ?? [];
+    }
+
+    /** @return list<Node> every page of the series, the home first, then the tree depth first */
     public function pages(Manual $manual, string $series): array
     {
-        $flat = [];
-        $home = $this->home($manual, $series);
-        if (null !== $home) {
-            $flat[] = $home;
-        }
-        $walk = static function (array $nodes) use (&$walk, &$flat): void {
-            foreach ($nodes as $node) {
-                if (!$node->isSection()) {
-                    $flat[] = $node;
-                }
-                $walk($node->children);
-            }
-        };
-        $walk($this->tree($manual, $series));
-
-        return $flat;
+        return $this->version($manual, $series)?->pages() ?? [];
     }
 
-    public function home(Manual $manual, string $series): ?DocPage
+    public function home(Manual $manual, string $series): ?Node
     {
-        $folder = $this->folder($manual, $series);
-        foreach (['index.md', 'README.md', 'readme.md'] as $name) {
-            if (null !== $folder && is_file($folder.'/'.$name)) {
-                return new DocPage('', $this->titleOf($folder.'/'.$name, $manual->package), $name, 0);
-            }
-        }
-
-        return null;
+        return $this->version($manual, $series)?->home();
     }
 
-    public function page(Manual $manual, string $series, string $path): ?DocPage
+    public function page(Manual $manual, string $series, string $path): ?Node
     {
-        foreach ($this->pages($manual, $series) as $page) {
-            if ($page->path === $path) {
-                return $page;
-            }
-        }
-
-        return null;
+        return $this->version($manual, $series)?->node($path);
     }
 
     /**
-     * A page rendered: its links to other pages of the series go to their
-     * addresses ($pageUrl), its links to other files of the repository and
-     * its images to GitHub at the commit read - never to a moving branch.
-     *
-     * @param callable(string $path, ?string $fragment): string $pageUrl
+     * A series read as one page (omnidocs' OnePage): every page in reading order, at $url - its links
+     * between pages to their parts, its links to other files of the repository and its pictures to
+     * GitHub at the commit read, never to a moving branch.
      */
-    public function render(Manual $manual, string $series, DocPage $page, callable $pageUrl): Rendered
+    public function onePage(Manual $manual, string $series, string $url): ?OnePage
     {
-        $id = $manual->key.'@'.$series.':'.$page->path;
-        if (isset($this->rendered[$id])) {
-            return $this->rendered[$id];
-        }
-        $folder = $this->folder($manual, $series) ?? throw new \LogicException(sprintf('%s %s was not fetched.', $manual->key, $series));
-        $source = $manual->versions[$series];
-        $commit = $this->commit($manual, $series) ?? $source['ref'];
-        $byFile = [];
-        foreach ($this->pages($manual, $series) as $other) {
-            $byFile[$other->file] = $other->path;
-        }
-        $base = \dirname((string) $page->file);
-        $base = '.' === $base ? '' : $base;
-
-        $links = function (string $url, bool $image) use ($byFile, $base, $source, $manual, $commit, $pageUrl): ?string {
-            if ('' === $url || str_starts_with($url, '#') || preg_match('#^[a-z][a-z0-9+.-]*:|^//#i', $url)) {
-                return null;
-            }
-            [$target, $fragment] = explode('#', $url, 2) + [1 => null];
-            $target = self::normalise(('' !== $base ? $base.'/' : '').urldecode($target));
-            if (!$image && isset($byFile[$target])) {
-                return $pageUrl($byFile[$target], $fragment);
-            }
-            if (!$image && isset($byFile[$target.'.md'])) {
-                return $pageUrl($byFile[$target.'.md'], $fragment);
-            }
-            // Outside the pages: the file in the repository, at the commit read.
-            $inRepository = self::normalise(('' !== $source['path'] ? $source['path'].'/' : '').$target);
-            if (str_starts_with($inRepository, '../')) {
-                return null;
-            }
-
-            return $image
-                ? 'https://raw.githubusercontent.com/'.$manual->repository.'/'.$commit.'/'.$inRepository
-                : 'https://github.com/'.$manual->repository.'/blob/'.$commit.'/'.$inRepository.(null !== $fragment ? '#'.$fragment : '');
-        };
-
-        return $this->rendered[$id] = $this->markdown->render((string) file_get_contents($folder.'/'.$page->file), $links);
-    }
-
-    /** "guides/../install.md" → "install.md". */
-    private static function normalise(string $path): string
-    {
-        $parts = [];
-        foreach (explode('/', $path) as $part) {
-            if ('' === $part || '.' === $part) {
-                continue;
-            }
-            if ('..' === $part && [] !== $parts && '..' !== end($parts)) {
-                array_pop($parts);
-                continue;
-            }
-            $parts[] = $part;
+        $id = $manual->key.'@'.$series.'@'.$url;
+        if (!\array_key_exists($id, $this->onePages)) {
+            $version = $this->version($manual, $series);
+            $this->onePages[$id] = null !== $version ? new OnePage($version, $this->linker($manual, $series, $url), $url) : null;
         }
 
-        return implode('/', $parts);
+        return $this->onePages[$id];
     }
 
-    /** @return list<DocPage> */
-    private function scan(string $folder, string $relative): array
+    /** The links of a series' pages: GitHub at the commit read, for what is not a page. */
+    public function linker(Manual $manual, string $series, string $url): RepositoryLinker
     {
-        $nodes = [];
-        $entries = scandir($folder.('' !== $relative ? '/'.$relative : '')) ?: [];
-        foreach ($entries as $entry) {
-            if ('.' === $entry[0]) {
-                continue;
-            }
-            $file = ('' !== $relative ? $relative.'/' : '').$entry;
-            $full = $folder.'/'.$file;
-            [$order, $slug] = self::orderOf(pathinfo($entry, \PATHINFO_FILENAME));
-            $path = ('' !== $relative ? self::slugPath($relative).'/' : '').$slug;
-            if (is_dir($full)) {
-                $children = $this->scan($folder, $file);
-                if ([] !== $children) {
-                    $nodes[] = new DocPage($path, self::humanise($slug), null, $order, $children);
-                }
-            } elseif ('md' === strtolower(pathinfo($entry, \PATHINFO_EXTENSION)) && !('' === $relative && \in_array(strtolower($entry), ['index.md', 'readme.md'], true))) {
-                $front = $this->frontOrder($full);
-                $nodes[] = new DocPage($path, $this->titleOf($full, self::humanise($slug)), $file, $front ?? $order);
-            }
-        }
-        usort($nodes, static fn (DocPage $a, DocPage $b): int => [$a->order, $a->path] <=> [$b->order, $b->path]);
+        $commit = $this->commit($manual, $series) ?? $manual->versions[$series]['ref'] ?? null;
 
-        return $nodes;
+        return new RepositoryLinker(static fn (string $path, ?string $fragment): string => $url.(null !== $fragment ? '#'.$fragment : ''), $manual->repository, $commit);
     }
 
-    /** "10-getting-started" → [10, "getting-started"]. */
-    private static function orderOf(string $name): array
+    /**
+     * A PHP package's API reference (omnidocs/php), read from the PHP files app:docs:fetch kept beside
+     * the docs/ folder (<ref>/.php); null for a JavaScript library or a series without them.
+     */
+    public function api(Manual $manual, string $series): ?Version
     {
-        return 1 === preg_match('/^(\d+)[-_ .](.+)$/', $name, $m) ? [(int) $m[1], self::slug($m[2])] : [100, self::slug($name)];
-    }
-
-    private static function slugPath(string $relative): string
-    {
-        return implode('/', array_map(static fn (string $part): string => self::orderOf($part)[1], explode('/', $relative)));
-    }
-
-    private static function slug(string $name): string
-    {
-        return trim((string) preg_replace('/[^a-z0-9]+/', '-', strtolower($name)), '-') ?: 'page';
-    }
-
-    private static function humanise(string $slug): string
-    {
-        return ucfirst(str_replace('-', ' ', $slug));
-    }
-
-    private function titleOf(string $file, string $fallback): string
-    {
-        $head = (string) file_get_contents($file, false, null, 0, 8192);
-        if (preg_match('/\A---\R(.*?)\R---/s', $head, $front) && preg_match('/^title:\s*["\']?(.+?)["\']?\s*$/m', $front[1], $m)) {
-            return $m[1];
-        }
-        if (preg_match('/^#\s+(.+?)\s*#*\s*$/m', (string) preg_replace('/^```.*?^```/ms', '', $head), $m)) {
-            return trim(strip_tags((string) preg_replace(['/`([^`]*)`/', '/\[([^\]]*)\]\([^)]*\)/', '/[*_]{1,2}([^*_]+)[*_]{1,2}/'], '$1', $m[1])));
+        $id = $manual->key.'@'.$series;
+        if (!\array_key_exists($id, $this->apis)) {
+            $folder = $this->folder($manual, $series);
+            $source = $manual->versions[$series] ?? null;
+            $dir = null !== $folder ? $folder.'/'.DocsFetcher::SOURCES : null;
+            $php = null !== $dir && is_dir($dir) && !str_starts_with($manual->package, '@') ? new PhpSource($dir) : null;
+            $this->apis[$id] = null !== $php && null !== $source && [] !== $php->classes()
+                ? new Version($series, $php, $source['branch'], $this->commit($manual, $series) ?? $source['ref'], $source['eol'])
+                : null;
         }
 
-        return $fallback;
-    }
-
-    private function frontOrder(string $file): ?int
-    {
-        $head = (string) file_get_contents($file, false, null, 0, 2048);
-
-        return preg_match('/\A---\R(.*?)\R---/s', $head, $front) && preg_match('/^(?:order|weight|sidebar_position):\s*(\d+)/m', $front[1], $m) ? (int) $m[1] : null;
+        return $this->apis[$id];
     }
 }

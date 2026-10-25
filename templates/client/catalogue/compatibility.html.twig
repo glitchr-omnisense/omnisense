@@ -35,7 +35,7 @@
         {% for row in rows %}
             {% set package = row.package %}
             <tr data-name="{{ package.name }}" data-conformance="{{ row.conformance }}">
-                <th scope="row"><a href="{{ path('app_package', {vendor: package.vendor, name: package.shortName}) }}">{{ package.name }}</a>{% if row.stale %} <span class="om-fact is-unknown" title="{{ '@messages.dashboard.stale'|trans }}">{{ '@messages.dashboard.stale_short'|trans }}</span>{% endif %}</th>
+                <th scope="row"><a href="{{ doc_url(package) }}">{{ package.name }}</a>{% if row.stale %} <span class="om-fact is-unknown" title="{{ '@messages.dashboard.stale'|trans }}">{{ '@messages.dashboard.stale_short'|trans }}</span>{% endif %}</th>
                 {% for label in labels %}
                     {% set conclusion = row.jobs[label] ?? null %}
                     <td>{% if conclusion is null %}<span class="om-compat-none">—</span>{% else %}{% set run = row.runs|first %}<a class="om-fact {{ badge[conclusion] ?? 'is-unknown' }}" href="{{ run.url }}" rel="noopener">{{ ('@messages.dashboard.ci.' ~ (conclusion in ['success', 'failure'] ? conclusion : 'other'))|trans }}</a>{% endif %}</td>

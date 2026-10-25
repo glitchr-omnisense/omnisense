@@ -27,6 +27,8 @@ import Base from '../vendor/omniscient/omnibase/assets/boot.js';
 // and the site's search over its prebuilt JSON index.
 import './docs.js';
 import './search.js';
+// omnidocs: the one-page manuals' table of contents (the heading being read, the address on it), their drawer on a phone.
+import '../vendor/omniscient/omnidocs/assets/omnidocs.js';
 
 window.addEventListener('transparent:load', function () {
     var header = document.querySelector('.om-header');

@@ -69,6 +69,12 @@ services:
             - '../src/Kernel.php'
             - '../src/DataFixtures/'
 
+    # Markdown as every page of the site renders it (omnidocs/markdown): the guides, the news, each
+    # package's manual. Its code blocks as CommonMark writes them (assets/docs.js frames them).
+    Omnidocs\Markdown\MarkdownRenderer:
+        arguments:
+            $frames: false
+
     # A static site counts no page view on a server (the core's counter writes
     # to the database at the end of each request): every address is excluded.
     Base\Subscriber\PageViewSubscriber:

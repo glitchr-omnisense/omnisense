@@ -1,6 +1,9 @@
 twig:
     default_path: '%kernel.project_dir%/templates'
     file_name_pattern: '*.twig'
+    paths:
+        # omnidocs' partials (the table of contents of a one-page manual): @Omnidocs/toc.html.twig
+        '%kernel.project_dir%/vendor/omniscient/omnidocs/Bridge/Twig/templates': Omnidocs
 
     globals:
         # Who the site is (the header, the footer, the legal notice), from

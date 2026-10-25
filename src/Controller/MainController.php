@@ -42,6 +42,9 @@ class MainController extends AbstractController
             ];
         }
 
+        // The JavaScript libraries: at the families' level on the home page, a family with no core.
+        $libraries = $catalogue->family('libraries');
+
         $floors = [];
         foreach (Tier::cases() as $tier) {
             $floors[$tier->value] = $catalogue->findByTier($tier);
@@ -49,6 +52,7 @@ class MainController extends AbstractController
 
         return $this->render('client/index.html.twig', [
             'families' => $families,
+            'libraries' => null !== $libraries ? ['phrase' => $libraries->phrase($locale), 'count' => \count($libraries->getMembers())] : null,
             'floors' => $floors,
             // The examples on the floors turn: the families' own packages, the prepared structures on their own floor.
             'turning' => array_values(array_map(static fn (array $f): string => $f['package']->getName(), array_filter($families, static fn (array $f): bool => Tier::Family === $f['package']->getTier()))),
