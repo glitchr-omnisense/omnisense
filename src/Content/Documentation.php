@@ -49,6 +49,8 @@ class Documentation
                     $versions[(string) $series] = [
                         'branch' => isset($source['branch']) ? (string) $source['branch'] : null,
                         'ref' => (string) ($source['ref'] ?? throw new \UnexpectedValueException(sprintf('config/documentation.yaml: %s %s has no ref.', $key, $series))),
+                        // How the ref was chosen: the head of the branch when it was pinned, or a release tag.
+                        'pinned' => isset($source['pinned']) ? (string) $source['pinned'] : null,
                         'path' => trim((string) ($source['path'] ?? 'docs/'), '/'),
                         'eol' => (bool) ($source['eol'] ?? false),
                     ];

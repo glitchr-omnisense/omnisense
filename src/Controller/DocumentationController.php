@@ -15,7 +15,9 @@ use Symfony\Component\Routing\Attribute\Route;
  * Each package's manual: /docs/<key>/<series>/<page>, read from its own
  * repository's docs/ at the commit config/documentation.yaml pins. Each
  * package has its own series; /docs/<key> and /docs/<key>/latest are
- * redirections to its default series, never canonical content.
+ * redirections to its default series, never canonical content. An older
+ * series than the default is published with a notice and kept out of search
+ * engines' indexes (noindex, out of the sitemap).
  */
 class DocumentationController extends AbstractController
 {
@@ -60,12 +62,24 @@ class DocumentationController extends AbstractController
         $locale = Locale::of($request);
         $url = fn (string $to, ?string $fragment): string => $this->generateUrl('' === $to ? 'app_manual' : 'app_manual_page', array_filter(['key' => $key, 'series' => $series, 'path' => $to, '_locale' => $locale], static fn ($v): bool => '' !== $v)).(null !== $fragment ? '#'.$fragment : '');
 
+        // The version selector: the same page in each series when it has it, else that series' home.
+        $versions = [];
+        foreach ($manual->series() as $other) {
+            $same = '' !== $path && null !== $this->documentation->page($manual, $other, $path);
+            $versions[$other] = $this->generateUrl($same ? 'app_manual_page' : 'app_manual', array_filter(['key' => $key, 'series' => $other, 'path' => $same ? $path : '', '_locale' => $locale], static fn ($v): bool => '' !== $v));
+        }
+
         $pages = $this->documentation->pages($manual, $series);
         $index = null !== $page ? array_search($page, $pages, false) : false;
 
         return $this->render('client/docs/manual.html.twig', [
             'manual' => $manual,
             'series' => $series,
+            'versions' => $versions,
+            // An older series: no canonical link to itself and noindex - its pages differ from the
+            // current series' (a canonical pointing there would be ignored), and a search should land
+            // on the current series; static.php keeps them out of the sitemap.
+            'canonical' => $manual->isCurrent($series),
             'source' => $manual->versions[$series],
             'commit' => $this->documentation->commit($manual, $series),
             'package' => $this->catalogue->find($manual->package),
