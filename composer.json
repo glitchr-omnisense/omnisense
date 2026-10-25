@@ -5,22 +5,6 @@
     "license": "MIT",
     "repositories": [
         {
-            "_comment": "omnidocs, read from GitHub (glitchr-studio) until Packagist serves it",
-            "type": "vcs",
-            "url": "https://github.com/glitchr-studio/omnidocs.git",
-            "no-api": true
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/glitchr-studio/omnidocs-markdown.git",
-            "no-api": true
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/glitchr-studio/omnidocs-php.git",
-            "no-api": true
-        },
-        {
             "_comment": "Direct VCS sources on GitHub (glitchr-studio): a *-dev constraint resolved through Packagist can pin a stale commit. no-api: plain git, no GitHub API quota.",
             "type": "vcs",
             "url": "https://github.com/glitchr-studio/omnibase.git",
