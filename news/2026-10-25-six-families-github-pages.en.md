@@ -6,7 +6,7 @@ tags: [website, omnibridge, release]
 
 **GitHub Pages.** `omnibridge/static` has a GitHub Pages target: the pages
 are rendered at the root and every internal address is moved under the
-folder the site is served from (`/omniscient/` here), with a `.nojekyll`
+folder the site is served from (`/omnisense/` here), with a `.nojekyll`
 file, a `CNAME` for a custom domain, the redirections written as small
 pages, and a failed build for any address left outside the folder. This
 website is built that way by its own workflow: a pull request builds the

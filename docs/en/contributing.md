@@ -21,7 +21,7 @@ it does not keep them. Correcting a page means correcting the file.
    changes here once the series is pinned to a commit that has it.
 
 The guides, the news and the catalogue are this site's own files, in
-[its repository](https://github.com/glitchr-studio/omniscient): the same
+[its repository](https://github.com/glitchr-omnisense/omnisense): the same
 path applies, and every pull request builds a preview of the whole site.
 
 ## Write a page of a manual

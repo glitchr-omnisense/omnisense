@@ -1,6 +1,6 @@
 site:
   slogan: Les paquets Omni et leur documentation
-  description: Omniscient présente l’écosystème Omni — le socle (le cœur omnibase, les familles et leurs fournisseurs, les ponts) et des structures toutes prêtes, facultatives — et publie la documentation de chaque paquet, lue dans son dépôt.
+  description: Omnisense présente l’écosystème Omni — le socle (le cœur omnibase, les familles et leurs fournisseurs, les ponts) et des structures toutes prêtes, facultatives — et publie la documentation de chaque paquet, lue dans son dépôt.
   keywords: omnibase, omnitrade, omnibus, Symfony, PHP, paquets, documentation, Glitch Art
 offline:
   title: Vous êtes hors ligne
@@ -28,7 +28,7 @@ footer:
 home:
   libraries: Bibliothèques JavaScript
   libraries_count: '{count, plural, =0 {aucune bibliothèque} one {# bibliothèque} other {# bibliothèques}}'
-  title: 'Omniscient : l’écosystème Omni et sa documentation'
+  title: 'Omnisense : l’écosystème Omni et sa documentation'
   kicker: Un préfixe, plusieurs familles
   kicker_count: '{packages} paquets · {families} familles'
   families_label: Les familles
@@ -76,7 +76,7 @@ floors:
   foundation:
     name: Cœur
     one: Cœur
-    pattern: omniscient/omnibase
+    pattern: omnisense/omnibase
     text: 'Le cœur dont tout site part : comptes et sécurité, back-office, traductions, images, formulaires.'
   component:
     name: Structures préparées
@@ -86,8 +86,8 @@ floors:
   family:
     name: Familles
     one: Famille
-    pattern: omniscient/omni<domaine>
-    text: Le contrat d’un domaine - colis, paiements, registres publics, données scientifiques - en PHP nu, quel que soit le service derrière. Sous omniscient/, ou encore glitchr/ pour celles qui n’ont pas déménagé.
+    pattern: omnisense/omni<domaine>
+    text: Le contrat d’un domaine - colis, paiements, registres publics, données scientifiques - en PHP nu, quel que soit le service derrière. Sous omnisense/, ou encore glitchr/ pour celles qui n’ont pas déménagé.
   provider:
     name: Fournisseurs
     one: Fournisseur
@@ -192,7 +192,7 @@ legal:
   host_text: 'Le site est un ensemble de fichiers statiques servis par {host}, un service de GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis.'
   host_missing: Le site n’est pas encore en ligne. L’hébergeur sera indiqué à la mise en ligne.
   packages: Les paquets
-  packages_text: Les paquets présentés sont publiés par l’organisation glitchr-studio. La licence de chacun est celle que déclare son dépôt, reprise sur sa fiche.
+  packages_text: Les paquets présentés sont publiés par l’organisation glitchr-omnisense (les bibliothèques JavaScript par glitchr-studio). La licence de chacun est celle que déclare son dépôt, reprise sur sa fiche.
   sources: D’où viennent les informations
   sources_text: La page d’un paquet vient du catalogue du site, lu dans son dépôt (composer.json ou package.json, README) ; sa documentation est son dossier docs/ au commit que le site épingle, indiqué sur chaque page. Les services tiers cités dans les manuels appartiennent à leurs propriétaires.
   fonts: Caractères
@@ -221,7 +221,7 @@ compat:
   families_text: 'Le cœur d’une famille <code>omni*</code> ne requiert ni Symfony, ni Doctrine, ni Twig : seulement des bibliothèques autonomes. Son registre se monte à la main, dans un script, une application Laravel ou Symfony. Le pont Symfony est dans le paquet, sous <code>Bridge/Symfony</code>, et rien n’en est chargé ailleurs.'
   families_proof: 'La preuve : chaque famille a un test sans cadre (<code>Tests/BareTest.php</code>) qui monte son registre à la main et vérifie qu’aucune classe d’un cadre n’est chargée.'
   omnibase_title: omnibase 4 tourne par ses ponts
-  omnibase_text: '<code>omniscient/omnibase</code> 4.x ne requiert que sa fondation, sans cadre : Symfony vient par <code>omnibridge/symfony</code>, Laravel par <code>omnibridge/laravel</code>, le stockage et le rendu par <code>omnibridge/doctrine</code> et <code>omnibridge/twig</code>.'
+  omnibase_text: '<code>omnisense/omnibase</code> 4.x ne requiert que sa fondation, sans cadre : Symfony vient par <code>omnibridge/symfony</code>, Laravel par <code>omnibridge/laravel</code>, le stockage et le rendu par <code>omnibridge/doctrine</code> et <code>omnibridge/twig</code>.'
   agnostic_title: Les structures préparées suivent
   agnostic_text: 'Les structures préparées <code>omnibase/*</code> sont aujourd’hui des bundles Symfony sur le cœur ; chacune passe son métier à la racine de son paquet (objets, règles, contrats) quand elle est reprise, ses parts de cadre dans des ponts. La colle générique, qui ne connaît aucune structure :'
   bridge_symfony: conteneur, routage, formulaires, sécurité

@@ -1,4 +1,4 @@
-# The omnibase entry of the Omniscient catalogue. Written by `bin/console
+# The omnibase entry of the Omnisense catalogue. Written by `bin/console
 # app:catalog:import` from the packages' repositories; the phrase and the
 # text are the site's own, edited here. Each package: its kind, what its
 # composer.json says, its GitHub repository and development branch, whether
@@ -9,8 +9,8 @@ phrase:
   en: 'The core of the sites, and optional ready-made structures.'
   fr: 'Le cœur des sites, et des structures toutes prêtes, facultatives.'
 text:
-  en: 'omniscient/omnibase is the core of the sites: accounts and security, back office, translations, pictures, forms, screens - framework-free since 4.0, run under Symfony or Laravel through omnibridge. The prepared structures omnibase/<trade> assemble a trade on it in advance; they are optional: nothing in the core or the families depends on them.'
-  fr: 'omniscient/omnibase est le cœur des sites : comptes et sécurité, back-office, traductions, images, formulaires, écrans — sans cadre depuis la 4.0, il tourne sous Symfony ou Laravel par omnibridge. Les structures préparées omnibase/<métier> y assemblent un métier à l’avance ; elles sont facultatives : rien dans le cœur ni dans les familles n’en dépend.'
+  en: 'omnisense/omnibase is the core of the sites: accounts and security, back office, translations, pictures, forms, screens - framework-free since 4.0, run under Symfony or Laravel through omnibridge. The prepared structures omnibase/<trade> assemble a trade on it in advance; they are optional: nothing in the core or the families depends on them.'
+  fr: 'omnisense/omnibase est le cœur des sites : comptes et sécurité, back-office, traductions, images, formulaires, écrans — sans cadre depuis la 4.0, il tourne sous Symfony ou Laravel par omnibridge. Les structures préparées omnibase/<métier> y assemblent un métier à l’avance ; elles sont facultatives : rien dans le cœur ni dans les familles n’en dépend.'
 packages:
   omnibase/admin:
     kind: structure
@@ -22,22 +22,22 @@ packages:
       - backoffice
       - crud
       - dashboard
-    repository: glitchr-studio/omnibase-admin
+    repository: glitchr-omnisense/omnibase-admin
     branch: main
     requires:
       - omnibridge/symfony
-      - omniscient/omnibase
+      - omnisense/omnibase
     verification: unstated
     docs: true
   omnibase/agenda:
     kind: structure
     description: 'Concert dates and venues for omnibase: an Event is a Thread; the agenda page, ICS feeds and imports, Google Calendar links, JSON-LD MusicEvent.'
     license: MIT
-    repository: glitchr-studio/omnibase-agenda
+    repository: glitchr-omnisense/omnibase-agenda
     branch: main
     requires:
       - omnibridge/symfony
-      - omniscient/omnibase
+      - omnisense/omnibase
       - omnibase/admin
     verification: unstated
     docs: true
@@ -45,11 +45,11 @@ packages:
     kind: structure
     description: "Chronicles and visitors' comments for omnibase: a Post is a Thread, a Comment is read by Akismet before it goes online."
     license: MIT
-    repository: glitchr-studio/omnibase-blog
+    repository: glitchr-omnisense/omnibase-blog
     branch: main
     requires:
       - omnibridge/symfony
-      - omniscient/omnibase
+      - omnisense/omnibase
       - omnibase/admin
     verification: unstated
     docs: true
@@ -57,11 +57,11 @@ packages:
     kind: structure
     description: "A broadcast's site on omnibase: a programme, its episodes, what was played on stage (performances), the songs and who sang them - on omnibase/video's films and omnibase/music's performers."
     license: MIT
-    repository: glitchr-studio/omnibase-broadcast
+    repository: glitchr-omnisense/omnibase-broadcast
     branch: main
     requires:
       - omnibridge/symfony
-      - omniscient/omnibase
+      - omnisense/omnibase
       - omnibase/admin
       - omnibase/music
       - omnibase/video
@@ -71,11 +71,11 @@ packages:
     kind: structure
     description: "A teacher's open classroom for omnibase: levels and subjects, learning sequences and their sessions, idea cards, resources to download (free, for members, or sold through omnibase/marketplace)."
     license: MIT
-    repository: glitchr-studio/omnibase-classroom
+    repository: glitchr-omnisense/omnibase-classroom
     branch: main
     requires:
       - omnibridge/symfony
-      - omniscient/omnibase
+      - omnisense/omnibase
       - omnibase/admin
     verification: unstated
     docs: true
@@ -83,10 +83,10 @@ packages:
     kind: structure
     description: 'The cookie answer of every omnibase site, in one place: a small circle, a panel, the features the visitor answers for and what each keeps, a countdown, on @glitchr/flowjs/cookie.'
     license: MIT
-    repository: glitchr-studio/omnibase-consent
+    repository: glitchr-omnisense/omnibase-consent
     branch: main
     requires:
-      - omniscient/omnibase
+      - omnisense/omnibase
     verification: unstated
   omnibase/consulting:
     kind: structure
@@ -98,11 +98,11 @@ packages:
       - services
       - quote
       - freelance
-    repository: glitchr-studio/omnibase-consulting
+    repository: glitchr-omnisense/omnibase-consulting
     branch: main
     requires:
       - omnibridge/symfony
-      - omniscient/omnibase
+      - omnisense/omnibase
       - omnibase/admin
     verification: unstated
     docs: true
@@ -116,11 +116,11 @@ packages:
       - markdown
       - manual
       - omnibase
-    repository: glitchr-studio/omnibase-docs
+    repository: glitchr-omnisense/omnibase-docs
     branch: '2.0'
     requires:
       - omnibridge/symfony
-      - omniscient/omnibase
+      - omnisense/omnibase
     verification: unstated
     docs: true
   omnibase/estate:
@@ -135,11 +135,11 @@ packages:
       - lease
       - tenant
       - sci
-    repository: glitchr-studio/omnibase-estate
+    repository: glitchr-omnisense/omnibase-estate
     branch: main
     requires:
       - omnibridge/symfony
-      - omniscient/omnibase
+      - omnisense/omnibase
       - omnibase/admin
     verification: unstated
     docs: true
@@ -147,11 +147,11 @@ packages:
     kind: structure
     description: 'A FAQ for omnibase: questions by section, answered in the back office, and the form to ask another.'
     license: MIT
-    repository: glitchr-studio/omnibase-faq
+    repository: glitchr-omnisense/omnibase-faq
     branch: main
     requires:
       - omnibridge/symfony
-      - omniscient/omnibase
+      - omnisense/omnibase
       - omnibase/admin
     verification: unstated
   omnibase/forge:
@@ -168,14 +168,14 @@ packages:
       - time-tracking
       - quotes
       - git
-    repository: glitchr-studio/omnibase-forge
+    repository: glitchr-omnisense/omnibase-forge
     branch: main
     requires:
       - omnibridge/symfony
-      - omniscient/omnibase
+      - omnisense/omnibase
       - omnibase/admin
       - omnibase/marketplace
-      - omniscient/omnistate
+      - omnisense/omnistate
       - omnistate/annuaire-entreprises
     verification: unstated
     docs: true
@@ -188,22 +188,22 @@ packages:
       - forum
       - bbs
       - discussion
-    repository: glitchr-studio/omnibase-forum
+    repository: glitchr-omnisense/omnibase-forum
     branch: main
     requires:
       - omnibridge/symfony
-      - omniscient/omnibase
+      - omnisense/omnibase
       - omnibase/admin
     verification: unstated
   omnibase/gallery:
     kind: structure
     description: 'Albums of photographs for omnibase: an Album is a Thread, its Photos are ordered, one album is one creation.'
     license: MIT
-    repository: glitchr-studio/omnibase-gallery
+    repository: glitchr-omnisense/omnibase-gallery
     branch: main
     requires:
       - omnibridge/symfony
-      - omniscient/omnibase
+      - omnisense/omnibase
     verification: unstated
     docs: true
   omnibase/health:
@@ -219,11 +219,11 @@ packages:
       - rpps
       - teleconsultation
       - patients
-    repository: glitchr-studio/omnibase-health
+    repository: glitchr-omnisense/omnibase-health
     branch: main
     requires:
       - omnibridge/symfony
-      - omniscient/omnibase
+      - omnisense/omnibase
       - omnibase/office
     verification: unstated
     docs: true
@@ -240,11 +240,10 @@ packages:
       - RIN
       - compliance
       - déontologie
-    repository: glitchr-studio/omnibase-lawyer
+    repository: glitchr-forge/omnibase-lawyer
     branch: main
     requires:
       - omnibridge/symfony
-      - omniscient/omnibase
       - omnibase/office
     verification: unstated
     docs: true
@@ -262,12 +261,12 @@ packages:
       - lettering
       - fec
       - pcg
-    repository: glitchr-studio/omnibase-ledger
+    repository: glitchr-omnisense/omnibase-ledger
     branch: main
     requires:
-      - omniscient/omnibank
+      - omnisense/omnibank
       - omnibridge/symfony
-      - omniscient/omnibase
+      - omnisense/omnibase
       - omnibase/admin
     verification: unstated
   omnibase/legal:
@@ -286,11 +285,11 @@ packages:
       - jurist
       - compliance
       - déontologie
-    repository: glitchr-studio/omnibase-legal
+    repository: glitchr-omnisense/omnibase-legal
     branch: main
     requires:
       - omnibridge/symfony
-      - omniscient/omnibase
+      - omnisense/omnibase
     verification: unstated
     docs: true
   omnibase/mailbox:
@@ -302,11 +301,11 @@ packages:
       - mailbox
       - messaging
       - 'private messages'
-    repository: glitchr-studio/omnibase-mailbox
+    repository: glitchr-omnisense/omnibase-mailbox
     branch: main
     requires:
       - omnibridge/symfony
-      - omniscient/omnibase
+      - omnisense/omnibase
     verification: unstated
     docs: true
   omnibase/marketplace:
@@ -322,38 +321,38 @@ packages:
       - order
       - cart
       - shopify
-    repository: glitchr-studio/omnibase-marketplace
+    repository: glitchr-omnisense/omnibase-marketplace
     branch: main
     requires:
       - omnibridge/symfony
-      - omniscient/omnibase
+      - omnisense/omnibase
       - omnibase/admin
-      - omniscient/omnistate
+      - omnisense/omnistate
       - omnistate/annuaire-entreprises
       - omnistate/vies
     verification: unstated
     docs: true
   omnibase/music:
     kind: structure
-    description: "A musician's site on omnibase: discography with the label in front, repertoire, videos, instrument, performers, and a dependency-free player - the listening links through omniscient/omnisong."
+    description: "A musician's site on omnibase: discography with the label in front, repertoire, videos, instrument, performers, and a dependency-free player - the listening links through omnisense/omnisong."
     license: MIT
-    repository: glitchr-studio/omnibase-music
+    repository: glitchr-omnisense/omnibase-music
     branch: main
     requires:
       - omnibridge/symfony
-      - omniscient/omnibase
+      - omnisense/omnibase
       - omnibase/admin
-      - omniscient/omnisong
+      - omnisense/omnisong
     verification: unstated
   omnibase/newsletter:
     kind: structure
     description: 'A newsletter for omnibase: subscribers with double opt-in, campaigns written in the back office and sent through Messenger, a monthly digest drafted from the site’s sources.'
     license: MIT
-    repository: glitchr-studio/omnibase-newsletter
+    repository: glitchr-omnisense/omnibase-newsletter
     branch: main
     requires:
       - omnibridge/symfony
-      - omniscient/omnibase
+      - omnisense/omnibase
       - omnibase/admin
     verification: unstated
   omnibase/notary:
@@ -368,17 +367,16 @@ packages:
       - 'office notarial'
       - compliance
       - déontologie
-    repository: glitchr-studio/omnibase-notary
+    repository: glitchr-forge/omnibase-notary
     branch: main
     requires:
       - omnibridge/symfony
-      - omniscient/omnibase
       - omnibase/office
     verification: unstated
     docs: true
   omnibase/office:
     kind: structure
-    description: 'A professional practice on omnibase - the office, its team, its hours and contact (core), appointments by slot or by request (Booking), an encrypted document vault per recipient with its access log (Share), a video room with a waiting room, its calls carried by a omniscient/omnimeet gateway - from browser to browser by default (Visio). Shared by the regulated professions: health, notaries, lawyers.'
+    description: 'A professional practice on omnibase - the office, its team, its hours and contact (core), appointments by slot or by request (Booking), an encrypted document vault per recipient with its access log (Share), a video room with a waiting room, its calls carried by a omnisense/omnimeet gateway - from browser to browser by default (Visio). Shared by the regulated professions: health, notaries, lawyers.'
     license: MIT
     keywords:
       - symfony
@@ -390,24 +388,24 @@ packages:
       - encryption
       - webrtc
       - teleconsultation
-    repository: glitchr-studio/omnibase-office
+    repository: glitchr-omnisense/omnibase-office
     branch: main
     requires:
       - omnibridge/symfony
-      - omniscient/omnibase
+      - omnisense/omnibase
       - omnimeet/direct
-      - omniscient/omnimeet
+      - omnisense/omnimeet
     verification: unstated
     docs: true
   omnibase/press:
     kind: structure
     description: 'Press for omnibase: quotes, hi-res photos with credits, biographies in three lengths - the press kit page an artist’s agency asks for.'
     license: MIT
-    repository: glitchr-studio/omnibase-press
+    repository: glitchr-omnisense/omnibase-press
     branch: main
     requires:
       - omnibridge/symfony
-      - omniscient/omnibase
+      - omnisense/omnibase
       - omnibase/admin
     verification: unstated
   omnibase/restaurant:
@@ -423,18 +421,18 @@ packages:
       - 'kitchen display'
       - omnibase
       - omnifood
-    repository: glitchr-studio/omnibase-restaurant
+    repository: glitchr-omnisense/omnibase-restaurant
     branch: main
     requires:
       - omnibridge/symfony
-      - omniscient/omnibase
+      - omnisense/omnibase
       - omnibase/admin
       - omnibase/marketplace
     verification: unstated
     docs: true
   omnibase/scholar:
     kind: structure
-    description: "Scholar for omnibase: a researcher's site - publications read from OpenAlex, HAL, Crossref and the other omniscient/omnischolar sources, validated before they show, with manual overrides that survive each sync; the CV (positions, degrees, awards, grants, courses, supervisions), research themes and projects; publication, book, CV and teaching pages, BibTeX / RIS exports, schema.org JSON-LD."
+    description: "Scholar for omnibase: a researcher's site - publications read from OpenAlex, HAL, Crossref and the other omnisense/omnischolar sources, validated before they show, with manual overrides that survive each sync; the CV (positions, degrees, awards, grants, courses, supervisions), research themes and projects; publication, book, CV and teaching pages, BibTeX / RIS exports, schema.org JSON-LD."
     license: MIT
     keywords:
       - omnibase
@@ -445,40 +443,40 @@ packages:
       - openalex
       - hal
       - omnischolar
-    repository: glitchr-studio/omnibase-scholar
+    repository: glitchr-omnisense/omnibase-scholar
     branch: main
     requires:
       - omnibridge/symfony
-      - omniscient/omnibase
+      - omnisense/omnibase
       - omnibase/admin
-      - omniscient/omnischolar
+      - omnisense/omnischolar
     verification: unstated
     docs: true
   omnibase/social:
     kind: structure
-    description: 'Social publishing for omnibase: a reel rendered from the site’s own template (ffmpeg), published on each network through omniscient/omnipost, and the account’s feed cached for a wall on the site.'
+    description: 'Social publishing for omnibase: a reel rendered from the site’s own template (ffmpeg), published on each network through omnisense/omnipost, and the account’s feed cached for a wall on the site.'
     license: MIT
-    repository: glitchr-studio/omnibase-social
+    repository: glitchr-omnisense/omnibase-social
     branch: main
     requires:
       - omnibridge/symfony
-      - omniscient/omnibase
+      - omnisense/omnibase
       - omnibase/admin
-      - omniscient/omnipost
+      - omnisense/omnipost
     verification: unstated
   omnibase/video:
     kind: structure
     description: "A video platform on omnibase: videos and channels, resumable uploads through tusd, HLS transcoding with ffmpeg, a player that keeps playing across pages, views, likes, timed comments, playlists, subscriptions, reports, a members' studio, local suggestions (Gorse optional) and a Typesense index."
     license: MIT
-    repository: glitchr-studio/omnibase-video
+    repository: glitchr-omnisense/omnibase-video
     branch: main
     requires:
       - omnibridge/symfony
-      - omniscient/omnibase
+      - omnisense/omnibase
       - omnibase/admin
     verification: unstated
     docs: true
-  omniscient/omnibase:
+  omnisense/omnibase:
     kind: core
     description: 'omnibase: entities, view models, contracts and helpers on Doctrine and Twig; under Symfony with omnibridge/symfony'
     license: MIT
@@ -486,13 +484,13 @@ packages:
       - symfony
       - base
       - helper
-    repository: glitchr-studio/omnibase
+    repository: glitchr-omnisense/omnibase
     branch: 4.x
     requires:
       - omnibridge/composer
       - omnibridge/doctrine
       - omnibridge/twig
-      - omniscient/omnibridge
-      - omniscient/omnidrive
+      - omnisense/omnibridge
+      - omnisense/omnidrive
     verification: unstated
     docs: true

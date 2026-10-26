@@ -1,4 +1,4 @@
-# The omnistate entry of the Omniscient catalogue. Written by `bin/console
+# The omnistate entry of the Omnisense catalogue. Written by `bin/console
 # app:catalog:import` from the packages' repositories; the phrase and the
 # text are the site's own, edited here. Each package: its kind, what its
 # composer.json says, its GitHub repository and development branch, whether
@@ -12,7 +12,7 @@ text:
   en: 'One contract for what states and registries know: companies, VAT numbers, domains and networks, and the registers its providers add.'
   fr: 'Un seul contrat pour ce que savent les États et les registres : entreprises, numéros de TVA, noms de domaine et réseaux, et les registres que ses fournisseurs ajoutent.'
 packages:
-  omniscient/omnistate:
+  omnisense/omnistate:
     kind: family
     description: 'Omnistate: one contract for what states and registries know - companies, VAT numbers, domains and networks (the Omnipay of public registers).'
     license: MIT
@@ -28,7 +28,7 @@ packages:
       - kyc
       - 'civil registry'
       - genealogy
-    repository: glitchr-studio/omnistate
+    repository: glitchr-omnisense/omnistate
     branch: 1.x
     verification: unstated
     docs: true
@@ -46,10 +46,10 @@ packages:
       - france
       - company
       - omnistate
-    repository: glitchr-studio/omnistate-annuaire-entreprises
+    repository: glitchr-omnisense/omnistate-annuaire-entreprises
     branch: 1.x
     requires:
-      - omniscient/omnistate
+      - omnisense/omnistate
     verification: unstated
     docs: true
   omnistate/annuaire-sante:
@@ -66,10 +66,10 @@ packages:
       - health
       - france
       - omnistate
-    repository: glitchr-studio/omnistate-annuaire-sante
+    repository: glitchr-omnisense/omnistate-annuaire-sante
     branch: 1.x
     requires:
-      - omniscient/omnistate
+      - omnisense/omnistate
     verification: unstated
     docs: true
   omnistate/iana:
@@ -85,10 +85,10 @@ packages:
       - asn
       - registrar
       - omnistate
-    repository: glitchr-studio/omnistate-iana
+    repository: glitchr-omnisense/omnistate-iana
     branch: 1.x
     requires:
-      - omniscient/omnistate
+      - omnisense/omnistate
     verification: unstated
     docs: true
   omnistate/matchid:
@@ -104,10 +104,10 @@ packages:
       - matchid
       - france
       - omnistate
-    repository: glitchr-studio/omnistate-matchid
+    repository: glitchr-omnisense/omnistate-matchid
     branch: 1.x
     requires:
-      - omniscient/omnistate
+      - omnisense/omnistate
     verification: unstated
     docs: true
   omnistate/nara:
@@ -122,10 +122,10 @@ packages:
       - 'united states'
       - catalog
       - omnistate
-    repository: glitchr-studio/omnistate-nara
+    repository: glitchr-omnisense/omnistate-nara
     branch: 1.x
     requires:
-      - omniscient/omnistate
+      - omnisense/omnistate
     verification: unstated
     docs: true
   omnistate/national-archives-uk:
@@ -140,10 +140,10 @@ packages:
       - 'united kingdom'
       - catalogue
       - omnistate
-    repository: glitchr-studio/omnistate-national-archives-uk
+    repository: glitchr-omnisense/omnistate-national-archives-uk
     branch: 1.x
     requires:
-      - omniscient/omnistate
+      - omnisense/omnistate
     verification: unstated
     docs: true
   omnistate/openarchieven:
@@ -160,10 +160,10 @@ packages:
       - netherlands
       - belgium
       - omnistate
-    repository: glitchr-studio/omnistate-openarchieven
+    repository: glitchr-omnisense/omnistate-openarchieven
     branch: 1.x
     requires:
-      - omniscient/omnistate
+      - omnisense/omnistate
     verification: unstated
     docs: true
   omnistate/vies:
@@ -177,9 +177,9 @@ packages:
       - intra-community
       - 'reverse charge'
       - omnistate
-    repository: glitchr-studio/omnistate-vies
+    repository: glitchr-omnisense/omnistate-vies
     branch: 1.x
     requires:
-      - omniscient/omnistate
+      - omnisense/omnistate
     verification: unstated
     docs: true

@@ -1,4 +1,4 @@
-# The omnidns entry of the Omniscient catalogue. Written by `bin/console
+# The omnidns entry of the Omnisense catalogue. Written by `bin/console
 # app:catalog:import` from the packages' repositories; the phrase and the
 # text are the site's own, edited here. Each package: its kind, what its
 # composer.json says, its GitHub repository and development branch, whether
@@ -21,10 +21,10 @@ packages:
       - registrar
       - framework-agnostic
       - omnidns
-    repository: glitchr-studio/omnidns-cloudflare
+    repository: glitchr-omnisense/omnidns-cloudflare
     branch: 1.x
     requires:
-      - omniscient/omnidns
+      - omnisense/omnidns
     verification: partial
     verification_note: '- Not verified live: no Cloudflare token at hand.'
   omnidns/gandi:
@@ -40,10 +40,10 @@ packages:
       - dns-records
       - framework-agnostic
       - omnidns
-    repository: glitchr-studio/omnidns-gandi
+    repository: glitchr-omnisense/omnidns-gandi
     branch: 1.x
     requires:
-      - omniscient/omnidns
+      - omnisense/omnidns
     verification: partial
     verification_note: '- Not verified live: no Gandi account at hand.'
   omnidns/ovh:
@@ -59,10 +59,10 @@ packages:
       - dns-records
       - framework-agnostic
       - omnidns
-    repository: glitchr-studio/omnidns-ovh
+    repository: glitchr-omnisense/omnidns-ovh
     branch: 1.x
     requires:
-      - omniscient/omnidns
+      - omnisense/omnidns
     verification: partial
     verification_note: '- Not verified live: no OVHcloud account at hand (an anonymous cart is answered "You must login first" for a domain''s offers, 2026-10-24).'
   omnidns/scaleway:
@@ -77,13 +77,13 @@ packages:
       - dns-records
       - framework-agnostic
       - omnidns
-    repository: glitchr-studio/omnidns-scaleway
+    repository: glitchr-omnisense/omnidns-scaleway
     branch: 1.x
     requires:
-      - omniscient/omnidns
+      - omnisense/omnidns
     verification: partial
     verification_note: '- Not verified live: no Scaleway key at hand.'
-  omniscient/omnidns:
+  omnisense/omnidns:
     kind: family
     description: "Omnidns: a domain name where it is registered, under any PHP host - whether it is free and at what price, registering and renewing it, the account's domains and their terms, their name servers, and the records of their zones; from OVH, Gandi, Cloudflare or Scaleway through one set of models. Providers are packages of their own (omnidns/ovh, omnidns/gandi, omnidns/cloudflare, omnidns/scaleway); no framework in require."
     license: MIT
@@ -99,7 +99,7 @@ packages:
       - scaleway
       - framework-agnostic
       - omnidns
-    repository: glitchr-studio/omnidns
+    repository: glitchr-omnisense/omnidns
     branch: 1.x
     verification: partial
     verification_note: '- Not verified live: none of the four providers. Every one needs an account and a key, OVH''s availability included (its order cart answers "You must login first" to an anonymous question, checked 2026-10-24); no account was at hand.'

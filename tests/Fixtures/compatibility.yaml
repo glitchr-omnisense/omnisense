@@ -2,11 +2,11 @@
 generated: '2026-10-25T12:00:00+00:00'
 packages:
   omnitrade/stripe:
-    repository: glitchr-studio/omnitrade-stripe
+    repository: glitchr-omnisense/omnitrade-stripe
     branch: 1.x
     ci:
       - workflow: ci
-        url: 'https://github.com/glitchr-studio/omnitrade-stripe/actions/runs/12'
+        url: 'https://github.com/glitchr-omnisense/omnitrade-stripe/actions/runs/12'
         head: bbb
         at: '2026-10-25T10:00:00Z'
         conclusion: success
@@ -16,11 +16,11 @@ packages:
       suite: Omnitrade\Testing\GatewayContractTests
       test: Tests/StripeContractTest.php
   omnitrade/paypal:
-    repository: glitchr-studio/omnitrade-paypal
+    repository: glitchr-omnisense/omnitrade-paypal
     branch: 1.x
     ci:
       - workflow: ci
-        url: 'https://github.com/glitchr-studio/omnitrade-paypal/actions/runs/13'
+        url: 'https://github.com/glitchr-omnisense/omnitrade-paypal/actions/runs/13'
         head: ccc
         at: '2026-10-25T10:00:00Z'
         conclusion: failure

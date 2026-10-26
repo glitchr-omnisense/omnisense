@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d615fba77bfffcbef3ebe7b4da2b2c44",
+    "content-hash": "2d201454cf373de9a6ef8c722b2d786b",
     "packages": [
         {
             "name": "api-platform/doctrine-common",
@@ -5761,13 +5761,13 @@
             "version": "1.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/glitchr-studio/omnibridge-composer.git",
-                "reference": "b034292d6b5bb1b58bb06b11b57f488f5278d476"
+                "url": "https://github.com/glitchr-omnisense/omnibridge-composer.git",
+                "reference": "58d045098dfb62a69a457c0d2c39c6fe7479c76d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-studio/omnibridge-composer/zipball/b034292d6b5bb1b58bb06b11b57f488f5278d476",
-                "reference": "b034292d6b5bb1b58bb06b11b57f488f5278d476",
+                "url": "https://api.github.com/repos/glitchr-omnisense/omnibridge-composer/zipball/58d045098dfb62a69a457c0d2c39c6fe7479c76d",
+                "reference": "58d045098dfb62a69a457c0d2c39c6fe7479c76d",
                 "shasum": ""
             },
             "require": {
@@ -5799,7 +5799,7 @@
                 }
             ],
             "description": "A Composer plugin that knows no package: the patches and the stub providers the installed packages declare in extra.omnibridge, applied after install and update, restored when they no longer apply, recorded with checksums and checked in CI.",
-            "homepage": "https://github.com/glitchr-studio/omnibridge-composer",
+            "homepage": "https://github.com/glitchr-omnisense/omnibridge-composer",
             "keywords": [
                 "composer",
                 "omnibridge",
@@ -5808,29 +5808,29 @@
                 "stub"
             ],
             "support": {
-                "issues": "https://github.com/glitchr-studio/omnibridge-composer/issues",
-                "source": "https://github.com/glitchr-studio/omnibridge-composer/tree/1.x"
+                "issues": "https://github.com/glitchr-omnisense/omnibridge-composer/issues",
+                "source": "https://github.com/glitchr-omnisense/omnibridge-composer/tree/1.x"
             },
-            "time": "2026-10-20T22:52:40+00:00"
+            "time": "2026-10-26T05:26:57+00:00"
         },
         {
             "name": "omnibridge/doctrine",
             "version": "1.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/glitchr-studio/omnibridge-doctrine.git",
-                "reference": "402cefd1677b86fe296913d5b28ffbec662ec7ce"
+                "url": "https://github.com/glitchr-omnisense/omnibridge-doctrine.git",
+                "reference": "4218160e5b12b23ccd428d63b2b71ded3c96d769"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-studio/omnibridge-doctrine/zipball/402cefd1677b86fe296913d5b28ffbec662ec7ce",
-                "reference": "402cefd1677b86fe296913d5b28ffbec662ec7ce",
+                "url": "https://api.github.com/repos/glitchr-omnisense/omnibridge-doctrine/zipball/4218160e5b12b23ccd428d63b2b71ded3c96d769",
+                "reference": "4218160e5b12b23ccd428d63b2b71ded3c96d769",
                 "shasum": ""
             },
             "require": {
                 "doctrine/dbal": "^4.2",
                 "doctrine/orm": "^3.4",
-                "omniscient/omnibridge": "1.x-dev",
+                "omnisense/omnibridge": "1.x-dev",
                 "php": ">=8.2",
                 "symfony/cache": "^7.0|^8.0"
             },
@@ -5853,25 +5853,25 @@
                     "name": "Marco Meyer"
                 }
             ],
-            "description": "The storage glue of omnibase sites, framework-free: Doctrine reading the structure described outside of it (omniscient/omnibridge's Omnibridge\\Schema), the naming strategy that turns their entities into their tables, the UTC date types, and an entity manager built with them, for any framework reading the same database.",
+            "description": "The storage glue of omnibase sites, framework-free: Doctrine reading the structure described outside of it (omnisense/omnibridge's Omnibridge\\Schema), the naming strategy that turns their entities into their tables, the UTC date types, and an entity manager built with them, for any framework reading the same database.",
             "support": {
-                "issues": "https://github.com/glitchr-studio/omnibridge-doctrine/issues",
-                "source": "https://github.com/glitchr-studio/omnibridge-doctrine/tree/1.x"
+                "issues": "https://github.com/glitchr-omnisense/omnibridge-doctrine/issues",
+                "source": "https://github.com/glitchr-omnisense/omnibridge-doctrine/tree/1.x"
             },
-            "time": "2026-10-21T02:42:26+00:00"
+            "time": "2026-10-26T05:27:34+00:00"
         },
         {
             "name": "omnibridge/static",
             "version": "1.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/glitchr-studio/omnibridge-static.git",
-                "reference": "1054e1ffa713b9a80907682c03c51e2932f79ccb"
+                "url": "https://github.com/glitchr-omnisense/omnibridge-static.git",
+                "reference": "a0ed1120d39be39b07b6dfffc40742642d2e6aa4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-studio/omnibridge-static/zipball/1054e1ffa713b9a80907682c03c51e2932f79ccb",
-                "reference": "1054e1ffa713b9a80907682c03c51e2932f79ccb",
+                "url": "https://api.github.com/repos/glitchr-omnisense/omnibridge-static/zipball/a0ed1120d39be39b07b6dfffc40742642d2e6aa4",
+                "reference": "a0ed1120d39be39b07b6dfffc40742642d2e6aa4",
                 "shasum": ""
             },
             "require": {
@@ -5913,7 +5913,7 @@
                 }
             ],
             "description": "The static host of the omnibridge family: a generic exporter that enumerates an application's addresses (explicit lists, a router's #[Route] routes with the values of their parameters, a sitemap), renders each at build time by the application's own code (its host's request handling, its actions, or any callable), and writes a deterministic folder for a static host or a CDN - HTML pages, the files of an asset manifest (Vite, Webpack), the files the pages refer to, redirections, 404.html, sitemap.xml and a report with checksums and diagnostics (broken links, duplicate outputs, missing assets, non-deterministic pages). No framework, no bundler.",
-            "homepage": "https://github.com/glitchr-studio/omnibridge-static",
+            "homepage": "https://github.com/glitchr-omnisense/omnibridge-static",
             "keywords": [
                 "export",
                 "framework-agnostic",
@@ -5923,29 +5923,29 @@
                 "symfony"
             ],
             "support": {
-                "issues": "https://github.com/glitchr-studio/omnibridge-static/issues",
-                "source": "https://github.com/glitchr-studio/omnibridge-static/tree/1.x"
+                "issues": "https://github.com/glitchr-omnisense/omnibridge-static/issues",
+                "source": "https://github.com/glitchr-omnisense/omnibridge-static/tree/1.x"
             },
-            "time": "2026-10-25T13:37:24+00:00"
+            "time": "2026-10-26T05:26:57+00:00"
         },
         {
             "name": "omnibridge/symfony",
             "version": "1.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/glitchr-studio/omnibridge-symfony.git",
-                "reference": "67129dbab0797e7bf6568503a6889faeaa4f1115"
+                "url": "https://github.com/glitchr-omnisense/omnibridge-symfony.git",
+                "reference": "f643d67c6db4bebcd1cad5c1e25ad1933ece8748"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-studio/omnibridge-symfony/zipball/67129dbab0797e7bf6568503a6889faeaa4f1115",
-                "reference": "67129dbab0797e7bf6568503a6889faeaa4f1115",
+                "url": "https://api.github.com/repos/glitchr-omnisense/omnibridge-symfony/zipball/f643d67c6db4bebcd1cad5c1e25ad1933ece8748",
+                "reference": "f643d67c6db4bebcd1cad5c1e25ad1933ece8748",
                 "shasum": ""
             },
             "require": {
                 "doctrine/doctrine-bundle": "^2.0|^3.0",
                 "omnibridge/twig": "^1.0",
-                "omniscient/omnibridge": "^1.0",
+                "omnisense/omnibridge": "^1.0",
                 "php": ">=8.2",
                 "symfony/config": "^6.1|^7.0|^8.0",
                 "symfony/console": "^6.0|^7.0|^8.0",
@@ -5976,9 +5976,9 @@
                 "omnibridge/static": "1.x-dev",
                 "omnimap/google": "^1.0@dev",
                 "omnimap/openstreetmap": "^1.0@dev",
-                "omniscient/omniauth": "1.x-dev",
-                "omniscient/omnidrive": "^1.0@dev",
-                "omniscient/omnimap": "^1.0@dev",
+                "omnisense/omniauth": "1.x-dev",
+                "omnisense/omnidrive": "^1.0@dev",
+                "omnisense/omnimap": "^1.0@dev",
                 "phpunit/phpunit": "^11.5|^12.0",
                 "symfony/browser-kit": "^6.0|^7.0|^8.0",
                 "symfony/clock": "^6.2|^7.0|^8.0",
@@ -5990,9 +5990,9 @@
                 "omniauth/otp": "Authenticator applications through Omnibridge\\Symfony\\Auth\\ (omniauth.yaml: totp; totp.secret_key seals the secrets at rest), formerly omniauth/totp",
                 "omniauth/webauthn": "Passkeys through Omnibridge\\Symfony\\Auth\\ (omniauth.yaml: passkey), formerly omniauth/passkey",
                 "omnibridge/static": "Static\\BuildCommand: bin/console omnibridge:static:build, omnibridge/static's export of the site a static.php declares, rendered by this kernel",
-                "omniscient/omniauth": "Omnibridge\\Symfony\\Auth\\: one authenticator over omniauth for every way of signing in (password, sign-in link, e-mailed code, backup codes, trusted devices, identity providers - omniauth's Omniauth\\OAuth\\, each provider a package of its own), its second factor's token and page, its routes; config/packages/omniauth.yaml (nothing of Auth\\ without it)",
-                "omniscient/omnidrive": "Omnidrive\\Drives: the storages of league/flysystem-bundle's configuration (the services tagged flysystem.storage) as omnidrive's drives, by their names",
-                "omniscient/omnimap": "Omnibridge\\Symfony\\Map\\: maps through omnimap (config/packages/omnimap.yaml) - its providers over the application's HTTP client and cache pool, the map cache over a storage service of the application's, the cache's routes (type \"omnimap\") and controller, omnibridge/twig's MapExtension (omnimap(), omnimap_export(), omnimap_suppress()); omnimap/google and omnimap/openstreetmap registered when installed",
+                "omnisense/omniauth": "Omnibridge\\Symfony\\Auth\\: one authenticator over omniauth for every way of signing in (password, sign-in link, e-mailed code, backup codes, trusted devices, identity providers - omniauth's Omniauth\\OAuth\\, each provider a package of its own), its second factor's token and page, its routes; config/packages/omniauth.yaml (nothing of Auth\\ without it)",
+                "omnisense/omnidrive": "Omnidrive\\Drives: the storages of league/flysystem-bundle's configuration (the services tagged flysystem.storage) as omnidrive's drives, by their names",
+                "omnisense/omnimap": "Omnibridge\\Symfony\\Map\\: maps through omnimap (config/packages/omnimap.yaml) - its providers over the application's HTTP client and cache pool, the map cache over a storage service of the application's, the cache's routes (type \"omnimap\") and controller, omnibridge/twig's MapExtension (omnimap(), omnimap_export(), omnimap_suppress()); omnimap/google and omnimap/openstreetmap registered when installed",
                 "symfony/asset": "RouterUrls::asset() through the application's asset packages (assets.packages); without it, the path as it is"
             },
             "default-branch": true,
@@ -6017,51 +6017,47 @@
                     "email": "marco.meyer@glitchr.io"
                 }
             ],
-            "description": "The Symfony host of omniscient/omnibridge's contracts (urls, translations, access, sessions, tokens, environment) - adapters over Symfony's router, translator, security and kernel, their container wiring and OmnibridgeBundle - and the framework packages omniscient/omnibase no longer requires. A Symfony site requires it beside the core.",
+            "description": "The Symfony host of omnisense/omnibridge's contracts (urls, translations, access, sessions, tokens, environment) - adapters over Symfony's router, translator, security and kernel, their container wiring and OmnibridgeBundle - and the framework packages omnisense/omnibase no longer requires. A Symfony site requires it beside the core.",
             "keywords": [
                 "omnibase",
                 "omnibridge",
                 "symfony"
             ],
             "support": {
-                "issues": "https://github.com/glitchr-studio/omnibridge-symfony/issues",
-                "source": "https://github.com/glitchr-studio/omnibridge-symfony/tree/1.x"
+                "issues": "https://github.com/glitchr-omnisense/omnibridge-symfony/issues",
+                "source": "https://github.com/glitchr-omnisense/omnibridge-symfony/tree/1.x"
             },
-            "time": "2026-10-24T06:48:54+00:00"
+            "time": "2026-10-26T09:50:53+00:00"
         },
         {
             "name": "omnibridge/twig",
             "version": "1.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/glitchr-studio/omnibridge-twig.git",
-                "reference": "9ecf8b1eeee94e82eac2b0fc0d3e65d52a159f5a"
+                "url": "https://github.com/glitchr-omnisense/omnibridge-twig.git",
+                "reference": "67ea1ae62823cd8c2cdd44f691a7de6aae8c116f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-studio/omnibridge-twig/zipball/9ecf8b1eeee94e82eac2b0fc0d3e65d52a159f5a",
-                "reference": "9ecf8b1eeee94e82eac2b0fc0d3e65d52a159f5a",
+                "url": "https://api.github.com/repos/glitchr-omnisense/omnibridge-twig/zipball/67ea1ae62823cd8c2cdd44f691a7de6aae8c116f",
+                "reference": "67ea1ae62823cd8c2cdd44f691a7de6aae8c116f",
                 "shasum": ""
             },
             "require": {
-                "omniscient/omnibridge": "^1.0",
+                "omnisense/omnibridge": "^1.0",
                 "php": ">=8.2",
                 "twig/twig": "^3.10"
             },
             "require-dev": {
-                "omniscient/omnimap": "^1.0@dev",
+                "omnisense/omnimap": "^1.0@dev",
                 "phpunit/phpunit": "^11.5"
             },
             "suggest": {
-                "omniscient/omnimap": "Omnibridge\\Twig\\MapExtension: omnimap(view), omnimap_export(), omnimap_suppress() - a map's picture kept in the cache or the live map, and the buttons that change it"
+                "omnisense/omnimap": "Omnibridge\\Twig\\MapExtension: omnimap(view), omnimap_export(), omnimap_suppress() - a map's picture kept in the cache or the live map, and the buttons that change it"
             },
             "default-branch": true,
             "type": "library",
             "autoload": {
-                "files": [
-                    "src/Contract/Urls.php",
-                    "src/Contract/Translations.php"
-                ],
                 "psr-4": {
                     "Omnibridge\\Twig\\": "src/"
                 }
@@ -6075,30 +6071,30 @@
                     "name": "Marco Meyer"
                 }
             ],
-            "description": "The Twig side of omnibridge: the contract a page rendered with Twig asks of any framework (path, url, asset, trans - omniscient/omnibridge's Urls and Translations), the Twig extension that provides it where the framework does not, and helpers.",
+            "description": "The Twig side of omnibridge: the contract a page rendered with Twig asks of any framework (path, url, asset, trans - omnisense/omnibridge's Urls and Translations), the Twig extension that provides it where the framework does not, and helpers.",
             "support": {
-                "issues": "https://github.com/glitchr-studio/omnibridge-twig/issues",
-                "source": "https://github.com/glitchr-studio/omnibridge-twig/tree/1.x"
+                "issues": "https://github.com/glitchr-omnisense/omnibridge-twig/issues",
+                "source": "https://github.com/glitchr-omnisense/omnibridge-twig/tree/1.x"
             },
-            "time": "2026-10-23T17:11:02+00:00"
+            "time": "2026-10-26T09:50:53+00:00"
         },
         {
             "name": "omnidocs/markdown",
             "version": "1.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/glitchr-studio/omnidocs-markdown.git",
-                "reference": "67e47dea730b79d373c1e9323d69dbe3fba2e46f"
+                "url": "https://github.com/glitchr-omnisense/omnidocs-markdown.git",
+                "reference": "15cb171229ecdb08c282bd70f04dde058554912b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-studio/omnidocs-markdown/zipball/67e47dea730b79d373c1e9323d69dbe3fba2e46f",
-                "reference": "67e47dea730b79d373c1e9323d69dbe3fba2e46f",
+                "url": "https://api.github.com/repos/glitchr-omnisense/omnidocs-markdown/zipball/15cb171229ecdb08c282bd70f04dde058554912b",
+                "reference": "15cb171229ecdb08c282bd70f04dde058554912b",
                 "shasum": ""
             },
             "require": {
                 "league/commonmark": "^2.6",
-                "omniscient/omnidocs": "^1.0@dev",
+                "omnisense/omnidocs": "^1.0@dev",
                 "php": ">=8.2",
                 "symfony/yaml": "^6.4|^7.0|^8.0"
             },
@@ -6131,7 +6127,7 @@
                 }
             ],
             "description": "Omnidocs Markdown: a folder of Markdown files as an omnidocs manual - its contents from the folders and the files (their front matter, a number before their name), each page rendered with league/commonmark as symfony.com/doc writes its pages: callouts (note, tip, caution, versionadded...), code with a caption and in tabs, version badges, links between pages and to the repository; and a changelog read as releases.",
-            "homepage": "https://github.com/glitchr-studio/omnidocs-markdown",
+            "homepage": "https://github.com/glitchr-omnisense/omnidocs-markdown",
             "keywords": [
                 "changelog",
                 "commonmark",
@@ -6141,28 +6137,28 @@
                 "omnidocs"
             ],
             "support": {
-                "issues": "https://github.com/glitchr-studio/omnidocs-markdown/issues",
-                "source": "https://github.com/glitchr-studio/omnidocs-markdown/tree/1.x"
+                "issues": "https://github.com/glitchr-omnisense/omnidocs-markdown/issues",
+                "source": "https://github.com/glitchr-omnisense/omnidocs-markdown/tree/1.x"
             },
-            "time": "2026-10-25T14:01:23+00:00"
+            "time": "2026-10-26T05:24:13+00:00"
         },
         {
             "name": "omnidocs/php",
             "version": "1.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/glitchr-studio/omnidocs-php.git",
-                "reference": "eac3e2c5132cfcb55bfc4fc6f2cd0c56fa0140da"
+                "url": "https://github.com/glitchr-omnisense/omnidocs-php.git",
+                "reference": "aec20ba9f72d1a6fb171f0c9c5e532e3e9a7f235"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-studio/omnidocs-php/zipball/eac3e2c5132cfcb55bfc4fc6f2cd0c56fa0140da",
-                "reference": "eac3e2c5132cfcb55bfc4fc6f2cd0c56fa0140da",
+                "url": "https://api.github.com/repos/glitchr-omnisense/omnidocs-php/zipball/aec20ba9f72d1a6fb171f0c9c5e532e3e9a7f235",
+                "reference": "aec20ba9f72d1a6fb171f0c9c5e532e3e9a7f235",
                 "shasum": ""
             },
             "require": {
                 "nikic/php-parser": "^5.0",
-                "omniscient/omnidocs": "^1.0@dev",
+                "omnisense/omnidocs": "^1.0@dev",
                 "php": ">=8.2",
                 "phpdocumentor/reflection-docblock": "^5.4"
             },
@@ -6195,7 +6191,7 @@
                 }
             ],
             "description": "Omnidocs PHP: a PHP package's API reference, read from its sources - its namespaces, classes, interfaces, traits and enums, their public constants, properties and methods with their signatures and PHPDoc, and the options its factories' configuration takes - as an omnidocs manual (nikic/php-parser, phpdocumentor/reflection-docblock); nothing is loaded nor run.",
-            "homepage": "https://github.com/glitchr-studio/omnidocs-php",
+            "homepage": "https://github.com/glitchr-omnisense/omnidocs-php",
             "keywords": [
                 "api reference",
                 "documentation",
@@ -6205,23 +6201,23 @@
                 "phpdoc"
             ],
             "support": {
-                "issues": "https://github.com/glitchr-studio/omnidocs-php/issues",
-                "source": "https://github.com/glitchr-studio/omnidocs-php/tree/1.x"
+                "issues": "https://github.com/glitchr-omnisense/omnidocs-php/issues",
+                "source": "https://github.com/glitchr-omnisense/omnidocs-php/tree/1.x"
             },
-            "time": "2026-10-25T14:01:23+00:00"
+            "time": "2026-10-26T05:24:13+00:00"
         },
         {
-            "name": "omniscient/omnibase",
+            "name": "omnisense/omnibase",
             "version": "4.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/glitchr-studio/omnibase.git",
-                "reference": "ce68ebcab0984e6c9bb18ae3df3ded0b87bfe4c4"
+                "url": "https://github.com/glitchr-omnisense/omnibase.git",
+                "reference": "ac7237492f90b5e46553ee28a9d3f5deee51420b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-studio/omnibase/zipball/ce68ebcab0984e6c9bb18ae3df3ded0b87bfe4c4",
-                "reference": "ce68ebcab0984e6c9bb18ae3df3ded0b87bfe4c4",
+                "url": "https://api.github.com/repos/glitchr-omnisense/omnibase/zipball/ac7237492f90b5e46553ee28a9d3f5deee51420b",
+                "reference": "ac7237492f90b5e46553ee28a9d3f5deee51420b",
                 "shasum": ""
             },
             "require": {
@@ -6250,8 +6246,8 @@
                 "omnibridge/composer": "1.x-dev",
                 "omnibridge/doctrine": "1.x-dev",
                 "omnibridge/twig": "1.x-dev",
-                "omniscient/omnibridge": "1.x-dev",
-                "omniscient/omnidrive": "1.x-dev",
+                "omnisense/omnibridge": "1.x-dev",
+                "omnisense/omnidrive": "1.x-dev",
                 "php": "^8.4",
                 "phpoffice/phpspreadsheet": "^1.23|^2.0",
                 "picqer/php-barcode-generator": "^2.0",
@@ -6298,7 +6294,8 @@
                 "web-auth/webauthn-lib": "^5.3"
             },
             "replace": {
-                "glitchr/omnibase": "self.version"
+                "glitchr/omnibase": "self.version",
+                "omniscient/omnibase": "self.version"
             },
             "require-dev": {
                 "api-platform/symfony": "^4.0",
@@ -6310,9 +6307,9 @@
                 "omniauth/otp": "1.x-dev",
                 "omniauth/webauthn": "1.x-dev",
                 "omnibridge/symfony": "1.x-dev",
-                "omniscient/omniauth": "1.x-dev",
-                "omniscient/omnishield": "1.x-dev",
-                "omniscient/omnisign": "1.x-dev",
+                "omnisense/omniauth": "1.x-dev",
+                "omnisense/omnishield": "1.x-dev",
+                "omnisense/omnisign": "1.x-dev",
                 "omnishield/akismet": "1.x-dev",
                 "omnishield/altcha": "1.x-dev",
                 "omnishield/disposable": "1.x-dev",
@@ -6341,14 +6338,14 @@
                 "league/flysystem-bundle": "The storages of the application's configuration (local, S3, SFTP...) behind the `flysystem` service every file, image and backup service reads; without it, omnibase's local storages (local.cache, local.uploads, local.wysiwyg and their .public) (^3.1)",
                 "nelmio/cors-bundle": "CORS headers (^2.2)",
                 "nelmio/security-bundle": "Security headers: CSP, clickjacking, external redirects (^3.0)",
-                "omniauth/google": "Google sign-in through omniauth, linked by its subject in userIdentity (Base\\Auth\\UserIdentities; Base\\Auth\\PolicyLinking: never by the address an account with a second factor or an administration role); the providers' mechanics are omniscient/omniauth's own (1.x-dev)",
+                "omniauth/google": "Google sign-in through omniauth, linked by its subject in userIdentity (Base\\Auth\\UserIdentities; Base\\Auth\\PolicyLinking: never by the address an account with a second factor or an administration role); the providers' mechanics are omnisense/omniauth's own (1.x-dev)",
                 "omniauth/otp": "Authenticator applications through omniauth, on user.secret (Base\\Auth\\UserTotpSecrets), sealed at rest when omniauth.yaml sets totp.secret_key (formerly omniauth/totp) (1.x-dev)",
                 "omniauth/webauthn": "Passkeys through omniauth: Base\\Auth\\UserPasskeys, the userPasskey table as omniauth/webauthn's records (formerly omniauth/passkey) (1.x-dev)",
-                "omnibridge/symfony": "The core under Symfony (since 4.0; BaseBundle refuses to start without it): the adapters of the host's contracts over Symfony's services (Omnibridge\\Symfony\\*, since A1) and the framework packages the core no longer requires - FrameworkBundle, DoctrineBundle, SecurityBundle, TwigBundle, MonologBundle, twig/extra-bundle, Form, Routing, HttpKernel... A Symfony site requires it beside omniscient/omnibase, with the bundles below that its config/bundles.php registers; a Laravel site does not (omnibridge/laravel)",
-                "omniscient/omniauth": "Signing in under any host (Symfony, Laravel, plain PHP): Base\\Auth\\ fills omniauth's stores on omnibase's tables (the accounts, user.password, the sign-in links of userToken hashed, the e-mailed codes hashed, the backup codes, the trusted devices' version, the identities of userIdentity), Base\\Auth\\Policy is SecurityPolicy on its second-factor rule, Base\\Auth\\Listener\\* listen to its events; nothing is wired without it (1.x-dev)",
-                "omniscient/omnimap": "Maps through omnimap (config/packages/omnimap.yaml): BaseBundle registers omnibridge/symfony's OmnimapExtension where both are installed - the providers, the map cache, omnimap() in Twig, the cache's routes (1.x-dev)",
-                "omniscient/omnishield": "Base\\Service\\FormGuard's captcha, address lists and content classifier (the option `guard` of a form, Akismet behind SpamChecker): register Omnishield\\Bridge\\Symfony\\OmnishieldBundle; not on Packagist yet - a vcs repository, https://github.com/glitchr-studio/omnishield",
-                "omniscient/omnisign": "Base\\Service\\Signatures: documents signed for any entity (Base\\Entity\\Signature\\Envelope, mapped only with it), the signed file and its evidence kept in the private storage; register Omnisign\\Bridge\\Symfony\\OmnisignBundle; not on Packagist yet - a vcs repository, https://github.com/glitchr-studio/omnisign",
+                "omnibridge/symfony": "The core under Symfony (since 4.0; BaseBundle refuses to start without it): the adapters of the host's contracts over Symfony's services (Omnibridge\\Symfony\\*, since A1) and the framework packages the core no longer requires - FrameworkBundle, DoctrineBundle, SecurityBundle, TwigBundle, MonologBundle, twig/extra-bundle, Form, Routing, HttpKernel... A Symfony site requires it beside omnisense/omnibase, with the bundles below that its config/bundles.php registers; a Laravel site does not (omnibridge/laravel)",
+                "omnisense/omniauth": "Signing in under any host (Symfony, Laravel, plain PHP): Base\\Auth\\ fills omniauth's stores on omnibase's tables (the accounts, user.password, the sign-in links of userToken hashed, the e-mailed codes hashed, the backup codes, the trusted devices' version, the identities of userIdentity), Base\\Auth\\Policy is SecurityPolicy on its second-factor rule, Base\\Auth\\Listener\\* listen to its events; nothing is wired without it (1.x-dev)",
+                "omnisense/omnimap": "Maps through omnimap (config/packages/omnimap.yaml): BaseBundle registers omnibridge/symfony's OmnimapExtension where both are installed - the providers, the map cache, omnimap() in Twig, the cache's routes (1.x-dev)",
+                "omnisense/omnishield": "Base\\Service\\FormGuard's captcha, address lists and content classifier (the option `guard` of a form, Akismet behind SpamChecker): register Omnishield\\Bridge\\Symfony\\OmnishieldBundle; not on Packagist yet - a vcs repository, https://github.com/glitchr-omnisense/omnishield",
+                "omnisense/omnisign": "Base\\Service\\Signatures: documents signed for any entity (Base\\Entity\\Signature\\Envelope, mapped only with it), the signed file and its evidence kept in the private storage; register Omnisign\\Bridge\\Symfony\\OmnisignBundle; not on Packagist yet - a vcs repository, https://github.com/glitchr-omnisense/omnisign",
                 "omnishield/akismet": "Akismet behind Base\\Service\\SpamChecker (base.guard.classifier)",
                 "omnishield/altcha": "ALTCHA, the default captcha of FormGuard: a proof of work served and checked by the site, no third party, no cookie, no consent",
                 "omnishield/disposable": "Disposable e-mail domains refused at sign-up (base.guard.reputation)",
@@ -6395,7 +6392,7 @@
                 },
                 "omnibase": {
                     "bare": {
-                        "omniscient/omniauth": "1.x-dev",
+                        "omnisense/omniauth": "1.x-dev",
                         "omniauth/webauthn": "1.x-dev",
                         "omniauth/otp": "1.x-dev"
                     }
@@ -6435,26 +6432,26 @@
                 }
             ],
             "description": "omnibase: entities, view models, contracts and helpers on Doctrine and Twig; under Symfony with omnibridge/symfony",
-            "homepage": "https://github.com/glitchr-studio/omnibase",
+            "homepage": "https://github.com/glitchr-omnisense/omnibase",
             "keywords": [
                 "base",
                 "helper",
                 "symfony"
             ],
-            "time": "2026-10-25T13:27:17+00:00"
+            "time": "2026-10-26T11:51:18+00:00"
         },
         {
-            "name": "omniscient/omnibridge",
+            "name": "omnisense/omnibridge",
             "version": "1.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/glitchr-studio/omnibridge.git",
-                "reference": "71b1f14f00129ead9aaf28b39baee7f129215a7a"
+                "url": "https://github.com/glitchr-omnisense/omnibridge.git",
+                "reference": "242a293c3b9aa3de4cda8b335a883ee64e770998"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-studio/omnibridge/zipball/71b1f14f00129ead9aaf28b39baee7f129215a7a",
-                "reference": "71b1f14f00129ead9aaf28b39baee7f129215a7a",
+                "url": "https://api.github.com/repos/glitchr-omnisense/omnibridge/zipball/242a293c3b9aa3de4cda8b335a883ee64e770998",
+                "reference": "242a293c3b9aa3de4cda8b335a883ee64e770998",
                 "shasum": ""
             },
             "require": {
@@ -6462,6 +6459,9 @@
                 "psr/clock": "^1.0",
                 "psr/container": "^1.1|^2.0",
                 "psr/event-dispatcher": "^1.0"
+            },
+            "replace": {
+                "omniscient/omnibridge": "self.version"
             },
             "require-dev": {
                 "phpunit/phpunit": "^11.5"
@@ -6488,7 +6488,7 @@
                 }
             ],
             "description": "The core of the omnibridge family: the contracts any host answers for an application that runs on more than one framework (addresses, translations, languages, access, sessions, tokens, stored files, routes, environment) and the registry the application reaches them through. No framework, no ORM: each omnibridge/<host> bridge answers them with its host's services.",
-            "homepage": "https://github.com/glitchr-studio/omnibridge",
+            "homepage": "https://github.com/glitchr-omnisense/omnibridge",
             "keywords": [
                 "contracts",
                 "framework-agnostic",
@@ -6497,27 +6497,30 @@
                 "symfony"
             ],
             "support": {
-                "issues": "https://github.com/glitchr-studio/omnibridge/issues",
-                "source": "https://github.com/glitchr-studio/omnibridge/tree/1.x"
+                "issues": "https://github.com/glitchr-omnisense/omnibridge/issues",
+                "source": "https://github.com/glitchr-omnisense/omnibridge/tree/1.x"
             },
-            "time": "2026-10-21T13:25:17+00:00"
+            "time": "2026-10-26T05:14:29+00:00"
         },
         {
-            "name": "omniscient/omnidocs",
+            "name": "omnisense/omnidocs",
             "version": "1.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/glitchr-studio/omnidocs.git",
-                "reference": "4cf4198df052036a6f6343224c747bbae87c706b"
+                "url": "https://github.com/glitchr-omnisense/omnidocs.git",
+                "reference": "524f471308e940f2adfbb9712d124bbdfbce6852"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-studio/omnidocs/zipball/4cf4198df052036a6f6343224c747bbae87c706b",
-                "reference": "4cf4198df052036a6f6343224c747bbae87c706b",
+                "url": "https://api.github.com/repos/glitchr-omnisense/omnidocs/zipball/524f471308e940f2adfbb9712d124bbdfbce6852",
+                "reference": "524f471308e940f2adfbb9712d124bbdfbce6852",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.2"
+            },
+            "replace": {
+                "omniscient/omnidocs": "self.version"
             },
             "require-dev": {
                 "phpunit/phpunit": "^11.0"
@@ -6555,7 +6558,7 @@
                 }
             ],
             "description": "Omnidocs: one model of a manual, whatever wrote it - Markdown, Sphinx, Doxygen, JSDoc: its versions, its pages (title, contents, headings, the file to edit), its API entries and their anchors, read through one source contract; a search index a static page searches, and the HTML conventions of symfony.com/doc (callouts, versionadded, code with captions and tabs) every format renders to.",
-            "homepage": "https://github.com/glitchr-studio/omnidocs",
+            "homepage": "https://github.com/glitchr-omnisense/omnidocs",
             "keywords": [
                 "api reference",
                 "documentation",
@@ -6569,29 +6572,32 @@
                 "static site"
             ],
             "support": {
-                "issues": "https://github.com/glitchr-studio/omnidocs/issues",
-                "source": "https://github.com/glitchr-studio/omnidocs/tree/1.x"
+                "issues": "https://github.com/glitchr-omnisense/omnidocs/issues",
+                "source": "https://github.com/glitchr-omnisense/omnidocs/tree/1.x"
             },
-            "time": "2026-10-25T14:24:27+00:00"
+            "time": "2026-10-26T05:24:12+00:00"
         },
         {
-            "name": "omniscient/omnidrive",
+            "name": "omnisense/omnidrive",
             "version": "1.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/glitchr-studio/omnidrive.git",
-                "reference": "1cd190090c46fedbc786d6fa74d64899a39cd6d3"
+                "url": "https://github.com/glitchr-omnisense/omnidrive.git",
+                "reference": "6d0c6df1c1a7c6d00b73842264ca70c7e89c6965"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-studio/omnidrive/zipball/1cd190090c46fedbc786d6fa74d64899a39cd6d3",
-                "reference": "1cd190090c46fedbc786d6fa74d64899a39cd6d3",
+                "url": "https://api.github.com/repos/glitchr-omnisense/omnidrive/zipball/6d0c6df1c1a7c6d00b73842264ca70c7e89c6965",
+                "reference": "6d0c6df1c1a7c6d00b73842264ca70c7e89c6965",
                 "shasum": ""
             },
             "require": {
                 "league/flysystem": "^3.0",
                 "php": ">=8.2",
                 "psr/container": "^1.1|^2.0"
+            },
+            "replace": {
+                "omniscient/omnidrive": "self.version"
             },
             "require-dev": {
                 "league/flysystem-local": "^3.0",
@@ -6627,7 +6633,7 @@
                 }
             ],
             "description": "Omnidrive: one contract for reading and writing files wherever they are kept - a directory of this machine, an S3 bucket, an SFTP (SSH) or FTP server - by the name the application gives each storage; Flysystem is the engine behind it, never in its signatures.",
-            "homepage": "https://github.com/glitchr-studio/omnidrive",
+            "homepage": "https://github.com/glitchr-omnisense/omnidrive",
             "keywords": [
                 "Flysystem",
                 "files",
@@ -6639,10 +6645,10 @@
                 "storage"
             ],
             "support": {
-                "issues": "https://github.com/glitchr-studio/omnidrive/issues",
-                "source": "https://github.com/glitchr-studio/omnidrive/tree/1.x"
+                "issues": "https://github.com/glitchr-omnisense/omnidrive/issues",
+                "source": "https://github.com/glitchr-omnisense/omnidrive/tree/1.x"
             },
-            "time": "2026-10-24T05:08:55+00:00"
+            "time": "2026-10-26T05:24:13+00:00"
         },
         {
             "name": "oscarotero/html-parser",
@@ -19960,7 +19966,7 @@
     ],
     "aliases": [
         {
-            "package": "omniscient/omnibase",
+            "package": "omnisense/omnibase",
             "version": "4.9999999.9999999.9999999-dev",
             "alias": "4.0.x-dev",
             "alias_normalized": "4.0.9999999.9999999-dev"
@@ -19978,10 +19984,10 @@
         "omnibridge/twig": 20,
         "omnidocs/markdown": 20,
         "omnidocs/php": 20,
-        "omniscient/omnibase": 20,
-        "omniscient/omnibridge": 20,
-        "omniscient/omnidocs": 20,
-        "omniscient/omnidrive": 20
+        "omnisense/omnibase": 20,
+        "omnisense/omnibridge": 20,
+        "omnisense/omnidocs": 20,
+        "omnisense/omnidrive": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

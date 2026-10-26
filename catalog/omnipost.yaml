@@ -1,4 +1,4 @@
-# The omnipost entry of the Omniscient catalogue. Written by `bin/console
+# The omnipost entry of the Omnisense catalogue. Written by `bin/console
 # app:catalog:import` from the packages' repositories; the phrase and the
 # text are the site's own, edited here. Each package: its kind, what its
 # composer.json says, its GitHub repository and development branch, whether
@@ -21,11 +21,12 @@ packages:
       - instagram
       - reels
       - omnipost
-    repository: glitchr-studio/omnipost-instagram
+    repository: glitchr-omnisense/omnipost-instagram
     branch: 1.x
     requires:
-      - omniscient/omnipost
+      - omnisense/omnipost
     verification: unstated
+    docs: true
   omnipost/youtube:
     kind: provider
     description: "Omnipost YouTube: the channel's videos through the Data API (a key), and Shorts uploaded through OAuth."
@@ -35,12 +36,13 @@ packages:
       - youtube
       - shorts
       - omnipost
-    repository: glitchr-studio/omnipost-youtube
+    repository: glitchr-omnisense/omnipost-youtube
     branch: 1.x
     requires:
-      - omniscient/omnipost
+      - omnisense/omnipost
     verification: unstated
-  omniscient/omnipost:
+    docs: true
+  omnisense/omnipost:
     kind: family
     description: "Omnipost: one contract for publishing a post - a reel, a picture, a carousel - on the social networks, reading one's own feed, and the capabilities each network imposes - and its Symfony bundle."
     license: MIT
@@ -51,7 +53,7 @@ packages:
       - youtube
       - reels
       - omnipost
-    repository: glitchr-studio/omnipost
+    repository: glitchr-omnisense/omnipost
     branch: 1.x
     verification: unstated
     docs: true

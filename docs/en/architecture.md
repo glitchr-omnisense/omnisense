@@ -8,7 +8,7 @@ order: 2
 
 ## Base and App
 
-`omniscient/omnibase` holds what every site shares: its classes live under
+`omnisense/omnibase` holds what every site shares: its classes live under
 `Base\`. A site extends them under `App\` with the same names - an
 `App\Entity\User` over `Base\Entity\User`, a template of its own over the
 core's - and the core finds the site's class first. What a site overrides
@@ -23,7 +23,7 @@ host's bridge.
 
 A family answers one question - *ship a parcel*, *take a payment*, *read
 what science knows of a compound* - whatever service is behind it. Its
-package (`omniscient/omni<domain>`) holds the contract, the models and a
+package (`omnisense/omni<domain>`) holds the contract, the models and a
 registry; each provider (`omni<domain>/<service>`) is one service
 fulfilling it. A family exists only for a question asked of **at least two
 real services** that no existing library already covers.
@@ -57,7 +57,7 @@ serves: HTML, the files the pages need, redirections, `404.html`,
 internal links, duplicate outputs and pages that cannot be static.
 
 This website is built that way. It is a Symfony application on
-`omniscient/omnibase`, whose content is files in its repository:
+`omnisense/omnibase`, whose content is files in its repository:
 
 ```text
 catalog/                 one file per family: its packages, curated

@@ -12,8 +12,8 @@ structures**, which are optional.
 
 | Part | Name | What it is |
 |---|---|---|
-| Foundation: the core | `omniscient/omnibase` | what a site starts from: accounts, back office, translations, pictures, forms, screens |
-| Foundation: the families | `omniscient/omni<domain>` | one contract for one domain (parcels, payments, registers...), whatever service answers |
+| Foundation: the core | `omnisense/omnibase` | what a site starts from: accounts, back office, translations, pictures, forms, screens |
+| Foundation: the families | `omnisense/omni<domain>` | one contract for one domain (parcels, payments, registers...), whatever service answers |
 | Foundation: the providers | `omni<domain>/<service>` | one service fulfilling its family's contract: one package per service, [to search for](/packages) |
 | Foundation: the bridges | `omnibridge/<target>` | the glue between the foundation and a framework, a storage, a view layer or a static host |
 | Optional: the prepared structures | `omnibase/<trade>` | a ready-made structure for a trade - entities, screens, back office, translations, demo data - assembled on the core |
@@ -31,7 +31,7 @@ bridges (see [Compatibility](compatibility.md)).
 A family and the provider that answers - here payments, with PayPal:
 
 ```sh
-composer require omniscient/omnitrade:1.x-dev omnitrade/paypal:1.x-dev
+composer require omnisense/omnitrade:1.x-dev omnitrade/paypal:1.x-dev
 ```
 
 ```php
@@ -56,13 +56,13 @@ declare it in `config/bundles.php` and its gateways under the family's key
 
 ## Install the core
 
-`omniscient/omnibase` comes with its Composer plugin, `omnibridge/composer`
+`omnisense/omnibase` comes with its Composer plugin, `omnibridge/composer`
 (the stubs and the one patch the core declares), which must be allowed, and
 the bridge of the host framework:
 
 ```sh
 composer config allow-plugins.omnibridge/composer true
-composer require omniscient/omnibase:4.x-dev omnibridge/symfony:1.x-dev
+composer require omnisense/omnibase:4.x-dev omnibridge/symfony:1.x-dev
 ```
 
 Then, if it saves time, a prepared structure: `omnibase/blog`,

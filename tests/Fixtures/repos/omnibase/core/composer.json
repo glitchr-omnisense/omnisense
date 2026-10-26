@@ -1,1 +1,1 @@
-{"name": "glitchr/omnibase", "type": "symfony-bundle", "description": "The foundation of the test catalogue.", "license": "LGPL-3.0-or-later", "keywords": ["symfony"], "require": {"glitchr/base-plugin": "2.0.*-dev"}, "support": {"source": "https://github.com/glitchr-studio/omnibase"}}
+{"name": "glitchr/omnibase", "type": "symfony-bundle", "description": "The foundation of the test catalogue.", "license": "LGPL-3.0-or-later", "keywords": ["symfony"], "require": {"glitchr/base-plugin": "2.0.*-dev"}, "support": {"source": "https://github.com/glitchr-omnisense/omnibase"}}

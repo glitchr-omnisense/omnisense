@@ -163,7 +163,7 @@ class CompatibilityFetcher
     /** @return array<mixed> */
     private function json(string $url): array
     {
-        $headers = ['Accept' => 'application/vnd.github+json', 'X-GitHub-Api-Version' => '2022-11-28', 'User-Agent' => 'omniscient-website'];
+        $headers = ['Accept' => 'application/vnd.github+json', 'X-GitHub-Api-Version' => '2022-11-28', 'User-Agent' => 'omnisense-website'];
         if (null !== $this->token && '' !== $this->token) {
             $headers['Authorization'] = 'Bearer '.$this->token;
         }

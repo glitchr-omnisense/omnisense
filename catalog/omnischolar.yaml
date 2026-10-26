@@ -1,4 +1,4 @@
-# The omnischolar entry of the Omniscient catalogue. Written by `bin/console
+# The omnischolar entry of the Omnisense catalogue. Written by `bin/console
 # app:catalog:import` from the packages' repositories; the phrase and the
 # text are the site's own, edited here. Each package: its kind, what its
 # composer.json says, its GitHub repository and development branch, whether
@@ -23,10 +23,10 @@ packages:
       - preprints
       - physics
       - omnischolar
-    repository: glitchr-studio/omnischolar-arxiv
+    repository: glitchr-omnisense/omnischolar-arxiv
     branch: 1.x
     requires:
-      - omniscient/omnischolar
+      - omnisense/omnischolar
     verification: unstated
     docs: true
   omnischolar/crossref:
@@ -40,10 +40,10 @@ packages:
       - doi
       - metadata
       - omnischolar
-    repository: glitchr-studio/omnischolar-crossref
+    repository: glitchr-omnisense/omnischolar-crossref
     branch: 1.x
     requires:
-      - omniscient/omnischolar
+      - omnisense/omnischolar
     verification: unstated
     docs: true
   omnischolar/hal:
@@ -58,10 +58,10 @@ packages:
       - doctrine
       - shs
       - omnischolar
-    repository: glitchr-studio/omnischolar-hal
+    repository: glitchr-omnisense/omnischolar-hal
     branch: 1.x
     requires:
-      - omniscient/omnischolar
+      - omnisense/omnischolar
     verification: unstated
     docs: true
   omnischolar/inspire:
@@ -76,10 +76,10 @@ packages:
       - physics
       - citations
       - omnischolar
-    repository: glitchr-studio/omnischolar-inspire
+    repository: glitchr-omnisense/omnischolar-inspire
     branch: 1.x
     requires:
-      - omniscient/omnischolar
+      - omnisense/omnischolar
     verification: unstated
     docs: true
   omnischolar/openalex:
@@ -93,10 +93,10 @@ packages:
       - citations
       - h-index
       - omnischolar
-    repository: glitchr-studio/omnischolar-openalex
+    repository: glitchr-omnisense/omnischolar-openalex
     branch: 1.x
     requires:
-      - omniscient/omnischolar
+      - omnisense/omnischolar
     verification: unstated
     docs: true
   omnischolar/openlibrary:
@@ -111,10 +111,10 @@ packages:
       - isbn
       - covers
       - omnischolar
-    repository: glitchr-studio/omnischolar-openlibrary
+    repository: glitchr-omnisense/omnischolar-openlibrary
     branch: 1.x
     requires:
-      - omniscient/omnischolar
+      - omnisense/omnischolar
     verification: unstated
     docs: true
   omnischolar/orcid:
@@ -128,13 +128,13 @@ packages:
       - cv
       - researcher
       - omnischolar
-    repository: glitchr-studio/omnischolar-orcid
+    repository: glitchr-omnisense/omnischolar-orcid
     branch: 1.x
     requires:
-      - omniscient/omnischolar
+      - omnisense/omnischolar
     verification: unstated
     docs: true
-  omniscient/omnischolar:
+  omnisense/omnischolar:
     kind: family
     description: "Omnischolar: one contract for a researcher's publications - author profiles, works, books and their editions, citations - read from OpenAlex, HAL, Crossref, ORCID, Open Library, arXiv and INSPIRE, merged and deduplicated, exported as BibTeX, RIS or CSL-JSON; and its Symfony bundle."
     license: MIT
@@ -149,7 +149,7 @@ packages:
       - bibtex
       - csl
       - omnischolar
-    repository: glitchr-studio/omnischolar
+    repository: glitchr-omnisense/omnischolar
     branch: 1.x
     verification: unstated
     docs: true

@@ -1,13 +1,13 @@
 {
-    "name": "omniscient/omniscient",
-    "description": "Omniscient: the Omni ecosystem's website - guides, news, the package catalogue and each package's documentation, built statically by omnibridge/static",
+    "name": "omnisense/omnisense",
+    "description": "Omnisense: the Omni ecosystem's website - guides, news, the package catalogue and each package's documentation, built statically by omnibridge/static",
     "type": "project",
     "license": "MIT",
     "repositories": [
         {
             "_comment": "Direct VCS sources on GitHub (glitchr-studio): a *-dev constraint resolved through Packagist can pin a stale commit. no-api: plain git, no GitHub API quota.",
             "type": "vcs",
-            "url": "https://github.com/glitchr-studio/omnibase.git",
+            "url": "https://github.com/glitchr-omnisense/omnibase.git",
             "no-api": true
         },
         {
@@ -53,10 +53,10 @@
         "omnibridge/twig": "1.x-dev",
         "omnidocs/markdown": "1.x-dev",
         "omnidocs/php": "1.x-dev",
-        "omniscient/omnibase": "4.x-dev as 4.0.x-dev",
-        "omniscient/omnibridge": "1.x-dev",
-        "omniscient/omnidocs": "1.x-dev",
-        "omniscient/omnidrive": "1.x-dev",
+        "omnisense/omnibase": "4.x-dev as 4.0.x-dev",
+        "omnisense/omnibridge": "1.x-dev",
+        "omnisense/omnidocs": "1.x-dev",
+        "omnisense/omnidrive": "1.x-dev",
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpoffice/phpspreadsheet": "^1.23|^2.0",
         "phpstan/phpdoc-parser": "^1.23",
@@ -162,7 +162,7 @@
             "App\\": "src/"
         },
         "exclude-from-classmap": [
-            "vendor/omniscient/omnibase/src/Admin/"
+            "vendor/omnisense/omnibase/src/Admin/"
         ]
     },
     "autoload-dev": {

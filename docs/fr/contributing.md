@@ -22,7 +22,7 @@ fichiers Markdown, tels qu'ils y sont écrits. Ce site les rend à un commit
    qui la contient.
 
 Les guides, les actualités et le catalogue sont les fichiers de ce site, dans
-[son dépôt](https://github.com/glitchr-studio/omniscient) : le même chemin
+[son dépôt](https://github.com/glitchr-omnisense/omnisense) : le même chemin
 s'applique, et chaque demande de fusion construit un aperçu du site entier.
 
 ## Écrire une page d'un manuel

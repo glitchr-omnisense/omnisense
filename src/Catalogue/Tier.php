@@ -5,13 +5,13 @@ namespace App\Catalogue;
 /**
  * The floor a package stands on (plan 0, rules 1 to 3):
  *
- *   foundation  omniscient/omnibase (glitchr/omnibase until it moves): the
+ *   foundation  omnisense/omnibase (glitchr/omnibase until it moves): the
  *               core every site starts from
  *   component   omnibase/<trade>: a prepared structure - ready-made for a
  *               trade (entities, screens, back office, translations,
  *               fixtures), assembled on the core; optional, nothing in the
  *               core or the families depends on one
- *   family      omniscient/omniXXX (glitchr/omniXXX until it moves): one
+ *   family      omnisense/omniXXX (glitchr/omniXXX until it moves): one
  *               contract for one domain
  *   provider    omniXXX/<service>: one service fulfilling it
  *   bridge      omnibridge/<target>: the glue between omnibase and a
@@ -28,16 +28,16 @@ enum Tier: string
     case Library = 'library';
 
     /**
-     * The vendors of the core and of the families' own packages: omniscient/
-     * on Packagist (omniscient/omnilab first, the others as they move), the
+     * The vendors of the core and of the families' own packages: omnisense/
+     * on Packagist (omnisense/omnilab first, the others as they move), the
      * old glitchr/ name kept as a `replace` and read the same while both exist.
      */
-    public const HOUSE_VENDORS = ['omniscient', 'glitchr'];
+    public const HOUSE_VENDORS = ['omnisense', 'glitchr'];
 
     /**
      * The floor a package's name puts it on, and the family it belongs to
      * ("omnitrade" for glitchr/omnitrade and omnitrade/stripe, "omnilab" for
-     * omniscient/omnilab, "omnibase" for glitchr/omnibase and omnibase/blog);
+     * omnisense/omnilab, "omnibase" for glitchr/omnibase and omnibase/blog);
      * null for a name that is none of the ecosystem's.
      *
      * @return array{0: self, 1: ?string}|null

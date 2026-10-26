@@ -29,7 +29,7 @@ final class PagesTest extends SiteTestCase
     public function testThePackageSearchListsEveryPackage(): void
     {
         $html = $this->get('/packages');
-        foreach (['omniscient/omnitrade', 'omnitrade/stripe', 'omnitrade/paypal', 'omniscient/omnibase', 'omnibase/blog', 'omnibridge/static'] as $name) {
+        foreach (['omnisense/omnitrade', 'omnitrade/stripe', 'omnitrade/paypal', 'omnisense/omnibase', 'omnibase/blog', 'omnibridge/static'] as $name) {
             self::assertStringContainsString('data-name="'.$name.'"', $html, $name);
         }
         self::assertStringContainsString('Not tested live', $html, 'omnitrade/paypal\'s README says so');
@@ -43,10 +43,10 @@ final class PagesTest extends SiteTestCase
         $html = $this->get('/packages/omnitrade/stripe');
         self::assertStringContainsString('composer require omnitrade/stripe:1.x-dev', $html);
         self::assertStringContainsString('Verified against the real service on 2026-10-01.', $html);
-        self::assertStringContainsString('href="https://github.com/glitchr-studio/omnitrade-stripe"', $html);
+        self::assertStringContainsString('href="https://github.com/glitchr-omnisense/omnitrade-stripe"', $html);
         self::assertStringContainsString('href="/docs/omnitrade/1.x"', $html, 'what it requires: its documentation');
 
-        $this->get('/packages/omniscient/omnitrade', 301);
+        $this->get('/packages/omnisense/omnitrade', 301);
         self::assertSame('/docs/omnitrade/1.x', $this->client->getResponse()->headers->get('Location'), 'a package with a manual: its manual, no page between');
 
         $this->get('/packages/omnitrade/nothing', 404);

@@ -37,8 +37,9 @@ class RepositoryScanner
         $root = $this->getReposDir();
         $dirs = [];
         foreach (glob($root.'/omni*', \GLOB_ONLYDIR) ?: [] as $family) {
-            // The website's own folder is no package of the ecosystem.
-            if ('omniscient' === basename($family)) {
+            // The website's own folder is no package of the ecosystem (~/Sites/omniscient until
+            // the folder takes the new name).
+            if (\in_array(basename($family), ['omnisense', 'omniscient'], true)) {
                 continue;
             }
             $dirs = array_merge($dirs, [$family], glob($family.'/*', \GLOB_ONLYDIR) ?: []);
@@ -97,7 +98,7 @@ class RepositoryScanner
         );
     }
 
-    /** "git@github.com:glitchr-studio/omnilab.git" → "glitchr-studio/omnilab"; null off GitHub. */
+    /** "git@github.com:glitchr-omnisense/omnilab.git" → "glitchr-omnisense/omnilab"; null off GitHub. */
     public static function repositoryOf(?string $url): ?string
     {
         if (null === $url || 1 !== preg_match('#github\.com[:/]([\w.-]+/[\w.-]+?)(?:\.git)?/?$#', $url, $match)) {

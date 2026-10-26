@@ -1,4 +1,4 @@
-# The omnidocs entry of the Omniscient catalogue. Written by `bin/console
+# The omnidocs entry of the Omnisense catalogue. Written by `bin/console
 # app:catalog:import` from the packages' repositories; the phrase and the
 # text are the site's own, edited here. Each package: its kind, what its
 # composer.json says, its GitHub repository and development branch, whether
@@ -17,10 +17,10 @@ packages:
       - cpp
       - 'api reference'
       - omnidocs
-    repository: glitchr-studio/omnidocs-doxygen
+    repository: glitchr-omnisense/omnidocs-doxygen
     branch: 1.x
     requires:
-      - omniscient/omnidocs
+      - omnisense/omnidocs
     verification: partial
     verification_note: '- Not verified: Doxygen''s groups (\defgroup) and related pages beyond the main page; C, Java and Python projects; diagrams (Doxygen draws them as images, not in the XML).'
   omnidocs/jsdoc:
@@ -33,10 +33,10 @@ packages:
       - javascript
       - jsdoc
       - omnidocs
-    repository: glitchr-studio/omnidocs-jsdoc
+    repository: glitchr-omnisense/omnidocs-jsdoc
     branch: 1.x
     requires:
-      - omniscient/omnidocs
+      - omnisense/omnidocs
     verification: partial
     verification_note: "- Not verified: ES modules (export function), whose doclets JSDoc names module:x~y - read, but no library of the ecosystem is written so; JSDoc's own @module, @namespace tags beyond their names."
   omnidocs/markdown:
@@ -50,10 +50,10 @@ packages:
       - manual
       - changelog
       - omnidocs
-    repository: glitchr-studio/omnidocs-markdown
+    repository: glitchr-omnisense/omnidocs-markdown
     branch: 1.x
     requires:
-      - omniscient/omnidocs
+      - omnisense/omnidocs
     verification: partial
     verification_note: "- Not verified: Markdown written for other generators' extensions (MkDocs admonitions !!! note, Docusaurus' :::tip) - shown as written."
     docs: true
@@ -68,10 +68,10 @@ packages:
       - phpdoc
       - php-parser
       - omnidocs
-    repository: glitchr-studio/omnidocs-php
+    repository: glitchr-omnisense/omnidocs-php
     branch: 1.x
     requires:
-      - omniscient/omnidocs
+      - omnisense/omnidocs
     verification: partial
     verification_note: '- Not verified: options given otherwise than in an array literal (a constant, a method call); attributes ([...]) are not shown; a package with two classes of the same name in one namespace (one wins).'
   omnidocs/sphinx:
@@ -85,13 +85,13 @@ packages:
       - objects.inv
       - intersphinx
       - omnidocs
-    repository: glitchr-studio/omnidocs-sphinx
+    repository: glitchr-omnisense/omnidocs-sphinx
     branch: 1.x
     requires:
-      - omniscient/omnidocs
+      - omnisense/omnidocs
     verification: partial
     verification_note: "- Not verified: other domains than Python's (cpp:, js:) beyond their names; themes' extra context; MyST (Markdown) projects; math (MathJax is a script, left out: formulas show as their source)."
-  omniscient/omnidocs:
+  omnisense/omnidocs:
     kind: family
     description: 'Omnidocs: one model of a manual, whatever wrote it - Markdown, Sphinx, Doxygen, JSDoc: its versions, its pages (title, contents, headings, the file to edit), its API entries and their anchors, read through one source contract; a search index a static page searches, and the HTML conventions of symfony.com/doc (callouts, versionadded, code with captions and tabs) every format renders to.'
     license: MIT
@@ -106,7 +106,7 @@ packages:
       - 'search index'
       - 'static site'
       - omnidocs
-    repository: glitchr-studio/omnidocs
+    repository: glitchr-omnisense/omnidocs
     branch: 1.x
     verification: partial
     verification_note: "- Not verified: Sphinx themes' own JSON additions beyond the standard builder; Sphinx projects written with MyST (Markdown) - the JSON builder writes the same HTML, not tried; Doxygen's C, Java and Python output; TypeDoc (see omnidocs/jsdoc's README: why JSDoc)."

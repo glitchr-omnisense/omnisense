@@ -13,11 +13,11 @@ c'est le contrat et sa suite de conformité.
 
 ## Partir du template
 
-[glitchr-studio/omni-provider-template](https://github.com/glitchr-studio/omni-provider-template)
+[glitchr-omnisense/omni-provider-template](https://github.com/glitchr-omnisense/omni-provider-template)
 est un dépôt modèle GitHub, avec un squelette par famille. Un script remplit les noms :
 
 ```sh
-gh repo create <owner>/omnimap-maplibre --public --template glitchr-studio/omni-provider-template --clone
+gh repo create <owner>/omnimap-maplibre --public --template glitchr-omnisense/omni-provider-template --clone
 cd omnimap-maplibre
 bin/init omnimap maplibre "MapLibre"
 composer install && vendor/bin/phpunit

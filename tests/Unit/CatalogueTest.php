@@ -24,13 +24,13 @@ final class CatalogueTest extends TestCase
         self::assertSame([Tier::Bridge, null], Tier::of('omnibridge/symfony'));
         self::assertSame([Tier::Bridge, null], Tier::of('glitchr/omnibridge'));
         self::assertSame([Tier::Library, null], Tier::of('@glitchr/flowjs'));
-        // The omniscient/ vendor holds the core and the families' own packages, as glitchr/ did and still does until each moves.
-        self::assertSame([Tier::Family, 'omnilab'], Tier::of('omniscient/omnilab'));
+        // The omnisense/ vendor holds the core and the families' own packages, as glitchr/ did and still does until each moves.
+        self::assertSame([Tier::Family, 'omnilab'], Tier::of('omnisense/omnilab'));
         self::assertSame([Tier::Family, 'omnilab'], Tier::of('glitchr/omnilab'));
-        self::assertSame([Tier::Foundation, 'omnibase'], Tier::of('omniscient/omnibase'));
-        self::assertSame([Tier::Bridge, null], Tier::of('omniscient/omnibridge'));
+        self::assertSame([Tier::Foundation, 'omnibase'], Tier::of('omnisense/omnibase'));
+        self::assertSame([Tier::Bridge, null], Tier::of('omnisense/omnibridge'));
         self::assertSame([Tier::Provider, 'omnilab'], Tier::of('omnilab/pubchem'));
-        self::assertNull(Tier::of('omniscient/website'));
+        self::assertNull(Tier::of('omnisense/website'));
         // What the search calls each floor.
         self::assertSame(['core', 'structure', 'family', 'provider', 'bridge', 'library'], array_map(static fn (Tier $t): string => $t->kind(), Tier::cases()));
         self::assertSame(Tier::Component, Tier::fromKind('structure'));
@@ -77,20 +77,20 @@ final class CatalogueTest extends TestCase
 
         $trade = $packages['glitchr/omnitrade'];
         self::assertSame([Tier::Family, 'omnitrade', 'omnitrade/core', 'LGPL-3.0-or-later', 2], [$trade->tier, $trade->family, $trade->path, $trade->license, $trade->docPages]);
-        self::assertSame('glitchr-studio/omnitrade', $trade->repository, 'from composer.json\'s support.source when the folder is no git working copy');
+        self::assertSame('glitchr-omnisense/omnitrade', $trade->repository, 'from composer.json\'s support.source when the folder is no git working copy');
         self::assertSame(['payment', 'gateway'], $trade->keywords);
         self::assertContains('glitchr/omnitrade', $packages['omnitrade/stripe']->requires);
         self::assertSame(0, $packages['omnibus/offline']->docPages);
         self::assertNull($packages['omnibus/offline']->readme);
         self::assertSame('glitchr-studio/flowjs', $packages['@glitchr/flowjs']->repository);
-        self::assertSame('glitchr-studio/omnilab', RepositoryScanner::repositoryOf('git@github.com:glitchr-studio/omnilab.git'));
+        self::assertSame('glitchr-omnisense/omnilab', RepositoryScanner::repositoryOf('git@github.com:glitchr-omnisense/omnilab.git'));
         self::assertNull(RepositoryScanner::repositoryOf('git@gitlab.example.org:web/site.git'), 'off GitHub: not public, not listed');
     }
 
     public function testTheImporterWritesOneFilePerFamilyAndKeepsWhatAMaintainerWrote(): void
     {
         $fs = new Filesystem();
-        $dir = sys_get_temp_dir().'/omniscient-import-'.bin2hex(random_bytes(4));
+        $dir = sys_get_temp_dir().'/omnisense-import-'.bin2hex(random_bytes(4));
         $fs->mkdir($dir.'/catalog');
         file_put_contents($dir.'/catalog/omnitrade.yaml', "family: omnitrade\nphrase:\n  en: Written by hand.\npackages: {}\n");
         try {
@@ -116,9 +116,9 @@ final class CatalogueTest extends TestCase
 
     public function testAPackageIsAddressedAndRequiredByItsBranch(): void
     {
-        $lab = Package::fromArray('omniscient/omnilab', ['branch' => '1.x'], 'omnilab');
+        $lab = Package::fromArray('omnisense/omnilab', ['branch' => '1.x'], 'omnilab');
         self::assertSame([Tier::Family, 'omnilab', 'omnilab', '1.x-dev'], [$lab->getTier(), $lab->getFamily(), $lab->getKey(), $lab->getConstraint()]);
-        self::assertSame('composer require omniscient/omnilab:1.x-dev', $lab->getInstallCommand());
+        self::assertSame('composer require omnisense/omnilab:1.x-dev', $lab->getInstallCommand());
 
         $colissimo = Package::fromArray('omnibus/colissimo', ['branch' => '2.0'], 'omnibus');
         self::assertSame(['omnibus-colissimo', '2.0.x-dev', Tier::Provider], [$colissimo->getKey(), $colissimo->getConstraint(), $colissimo->getTier()]);

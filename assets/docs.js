@@ -12,7 +12,7 @@
  * and what belongs to one page is set up again on "transparent:load".
  */
 (function () {
-    if (window.OmniscientDocs) return;
+    if (window.OmnisenseDocs) return;
 
     var spy = null;
 
@@ -76,7 +76,7 @@
         });
     });
 
-    window.OmniscientDocs = { setup: setup };
+    window.OmnisenseDocs = { setup: setup };
     window.addEventListener('transparent:load', setup);
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', setup);
     else setup();

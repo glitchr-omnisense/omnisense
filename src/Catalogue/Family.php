@@ -43,7 +43,7 @@ final class Family
         return null !== $this->getOwn();
     }
 
-    /** The family's own package (omniscient/omnilab, omniscient/omnibase), if it has one. */
+    /** The family's own package (omnisense/omnilab, omnisense/omnibase), if it has one. */
     public function getOwn(): ?Package
     {
         foreach ($this->packages as $package) {

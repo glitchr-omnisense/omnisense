@@ -13,11 +13,11 @@ and its conformance suite.
 
 ## Start from the template
 
-[glitchr-studio/omni-provider-template](https://github.com/glitchr-studio/omni-provider-template)
+[glitchr-omnisense/omni-provider-template](https://github.com/glitchr-omnisense/omni-provider-template)
 is a GitHub template repository with a skeleton for each family. One script fills the names:
 
 ```sh
-gh repo create <owner>/omnimap-maplibre --public --template glitchr-studio/omni-provider-template --clone
+gh repo create <owner>/omnimap-maplibre --public --template glitchr-omnisense/omni-provider-template --clone
 cd omnimap-maplibre
 bin/init omnimap maplibre "MapLibre"
 composer install && vendor/bin/phpunit

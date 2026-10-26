@@ -6,7 +6,7 @@ use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
 /**
  * Who the site is - the Twig global `site`: the header, the footer, the
- * legal notice. Omniscient is the showcase of the Omni packages and the
+ * legal notice. Omnisense is the showcase of the Omni packages and the
  * place their manuals are read; it is published by the studio that writes
  * them.
  */
@@ -24,7 +24,7 @@ class Identity
 
     /**
      * The static site's public address, without a trailing slash (SITE_URL): its origin, or the folder of
-     * one it is served under ("https://glitchr-studio.github.io/omniscient").
+     * one it is served under ("https://glitchr-omnisense.github.io/omnisense").
      */
     public function getUrl(): string
     {

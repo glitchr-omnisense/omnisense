@@ -1,4 +1,4 @@
-# The omnireview entry of the Omniscient catalogue. Written by `bin/console
+# The omnireview entry of the Omnisense catalogue. Written by `bin/console
 # app:catalog:import` from the packages' repositories; the phrase and the
 # text are the site's own, edited here. Each package: its kind, what its
 # composer.json says, its GitHub repository and development branch, whether
@@ -22,10 +22,10 @@ packages:
       - places-api
       - business-profile
       - omnireview
-    repository: glitchr-studio/omnireview-google
+    repository: glitchr-omnisense/omnireview-google
     branch: 1.x
     requires:
-      - omniscient/omnireview
+      - omnisense/omnireview
     verification: partial
     verification_note: "Documentation: the options, the calls, Google's terms, what was verified. — Not verified in real: no key - but for the link to write a review, which answered."
     docs: true
@@ -38,10 +38,10 @@ packages:
       - tripadvisor
       - content-api
       - omnireview
-    repository: glitchr-studio/omnireview-tripadvisor
+    repository: glitchr-omnisense/omnireview-tripadvisor
     branch: 1.x
     requires:
-      - omniscient/omnireview
+      - omnisense/omnireview
     verification: partial
     verification_note: "Documentation: the options, the calls, Tripadvisor's display rules, what was verified. — Not verified in real: no key."
     docs: true
@@ -54,14 +54,14 @@ packages:
       - trustpilot
       - trustscore
       - omnireview
-    repository: glitchr-studio/omnireview-trustpilot
+    repository: glitchr-omnisense/omnireview-trustpilot
     branch: 1.x
     requires:
-      - omniscient/omnireview
+      - omnisense/omnireview
     verification: partial
     verification_note: "Documentation: the options, the calls, Trustpilot's terms, what was verified. — Not verified in real: no key."
     docs: true
-  omniscient/omnireview:
+  omnisense/omnireview:
     kind: family
     description: "Omnireview: what customers say of an establishment elsewhere - its rating, its reviews, replying as the establishment, inviting a customer to review, the link to leave one - whoever hosts them: Google (omnireview/google), Tripadvisor (omnireview/tripadvisor), Trustpilot (omnireview/trustpilot), each platform's terms of display and caching declared; and its Symfony and Twig bridges, which always show the origin, the date and the link."
     license: MIT
@@ -72,7 +72,7 @@ packages:
       - tripadvisor
       - trustpilot
       - omnireview
-    repository: glitchr-studio/omnireview
+    repository: glitchr-omnisense/omnireview
     branch: 1.x
     verification: unstated
     docs: true

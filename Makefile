@@ -836,7 +836,7 @@ endif
 static:
 	@$(DOCKER_COMPOSER) bin/omnibridge-static build $(ARGS)
 
-## Serve dist/ with a plain nginx on http://localhost:8135 as GitHub Pages does (no PHP); STATIC_BASE_PATH=/omniscient for a build whose SITE_URL has that folder; make static-stop removes it
+## Serve dist/ with a plain nginx on http://localhost:8135 as GitHub Pages does (no PHP); STATIC_BASE_PATH=/omnisense for a build whose SITE_URL has that folder; make static-stop removes it
 STATIC_BASE_PATH ?=
 static-serve:
 	@docker rm -f $(APP_NAME)-static >/dev/null 2>&1 || true

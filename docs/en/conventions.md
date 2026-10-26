@@ -12,8 +12,8 @@ what its README says of its verification.
 ## Names
 
 A package is named by its Composer name, never by its folder:
-`omniscient/omnistate`, not "omnistate/core". The core and each family's
-own package are under the `omniscient/` vendor; the former `glitchr/...`
+`omnisense/omnistate`, not "omnistate/core". The core and each family's
+own package are under the `omnisense/` vendor; the former `glitchr/...`
 name is declared as a `replace`, so that a project still requiring it
 receives the new package. The other names read "the family / one of its
 members": `omnitrade/stripe` is a provider for an outside service,

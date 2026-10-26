@@ -3,7 +3,7 @@
 # a folder redirected to its address with a slash and answered by its index.html, 404.html for the
 # rest. The nginx image fills ${BASE_PATH} in (/etc/nginx/templates):
 #
-#   docker run -d -p 8135:80 -e BASE_PATH=/omniscient -v "$PWD/dist:/srv/www/omniscient:ro" \
+#   docker run -d -p 8135:80 -e BASE_PATH=/omnisense -v "$PWD/dist:/srv/www/omnisense:ro" \
 #     -v "$PWD/tests/smoke/nginx.conf.template:/etc/nginx/templates/default.conf.template:ro" nginx:1.27-alpine
 server {
     listen 80;

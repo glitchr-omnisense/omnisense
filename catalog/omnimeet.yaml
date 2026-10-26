@@ -1,4 +1,4 @@
-# The omnimeet entry of the Omniscient catalogue. Written by `bin/console
+# The omnimeet entry of the Omnisense catalogue. Written by `bin/console
 # app:catalog:import` from the packages' repositories; the phrase and the
 # text are the site's own, edited here. Each package: its kind, what its
 # composer.json says, its GitHub repository and development branch, whether
@@ -24,10 +24,10 @@ packages:
       - turn
       - coturn
       - omnimeet
-    repository: glitchr-studio/omnimeet-direct
+    repository: glitchr-omnisense/omnimeet-direct
     branch: 1.x
     requires:
-      - omniscient/omnimeet
+      - omnisense/omnimeet
     verification: unstated
     docs: true
   omnimeet/jitsi:
@@ -43,14 +43,14 @@ packages:
       - jaas
       - jwt
       - omnimeet
-    repository: glitchr-studio/omnimeet-jitsi
+    repository: glitchr-omnisense/omnimeet-jitsi
     branch: 1.x
     requires:
-      - omniscient/omnimeet
+      - omnisense/omnimeet
     verification: partial
     verification_note: 'Documentation: the three kinds of instance, the token, the frame, an instance that refuses to be framed (embed: false), the webhooks, and what was verified - a real meeting on a public open instance; tokens, JaaS and webhooks against the documentation only.'
     docs: true
-  omniscient/omnimeet:
+  omnisense/omnimeet:
     kind: family
     description: "Omnimeet: one contract for video meetings - open a room, let a participant in (a JavaScript engine and its options, an embedded frame, or an address), close it, read its state, hear the provider's callbacks - whatever carries the call: the two browsers themselves (omnimeet/direct) or a conferencing service (omnimeet/jitsi); and its Symfony bundle."
     license: MIT
@@ -62,7 +62,7 @@ packages:
       - teleconsultation
       - jitsi
       - omnimeet
-    repository: glitchr-studio/omnimeet
+    repository: glitchr-omnisense/omnimeet
     branch: 1.x
     verification: unstated
     docs: true

@@ -12,8 +12,8 @@ préparées**, facultatives.
 
 | Part | Nom | Ce que c'est |
 |---|---|---|
-| Socle : le cœur | `omniscient/omnibase` | ce dont un site part : comptes, back-office, traductions, images, formulaires, écrans |
-| Socle : les familles | `omniscient/omni<domaine>` | un contrat pour un domaine (colis, paiements, registres…), quel que soit le service qui répond |
+| Socle : le cœur | `omnisense/omnibase` | ce dont un site part : comptes, back-office, traductions, images, formulaires, écrans |
+| Socle : les familles | `omnisense/omni<domaine>` | un contrat pour un domaine (colis, paiements, registres…), quel que soit le service qui répond |
 | Socle : les fournisseurs | `omni<domaine>/<service>` | un service qui remplit le contrat de sa famille : un paquet par service, [à chercher](/fr/paquets) |
 | Socle : les ponts | `omnibridge/<cible>` | la colle entre le socle et un cadre, un stockage, une couche de rendu ou un hébergement statique |
 | Facultatif : les structures préparées | `omnibase/<métier>` | une structure toute prête pour un métier — entités, écrans, back-office, traductions, données de démonstration — assemblée sur le cœur |
@@ -31,7 +31,7 @@ Symfony et sous Laravel par ses ponts (voir [Compatibilité](compatibility.md)).
 Une famille et le fournisseur qui répond — ici le paiement, avec PayPal :
 
 ```sh
-composer require omniscient/omnitrade:1.x-dev omnitrade/paypal:1.x-dev
+composer require omnisense/omnitrade:1.x-dev omnitrade/paypal:1.x-dev
 ```
 
 ```php
@@ -58,13 +58,13 @@ PHP nu, puis sur Symfony.
 
 ## Installer le cœur
 
-`omniscient/omnibase` vient avec son greffon Composer, `omnibridge/composer`
+`omnisense/omnibase` vient avec son greffon Composer, `omnibridge/composer`
 (les stubs et la seule retouche que le cœur déclare), qu'il faut autoriser,
 et le pont du cadre hôte :
 
 ```sh
 composer config allow-plugins.omnibridge/composer true
-composer require omniscient/omnibase:4.x-dev omnibridge/symfony:1.x-dev
+composer require omnisense/omnibase:4.x-dev omnibridge/symfony:1.x-dev
 ```
 
 Puis, si elle fait gagner du temps, une structure préparée : `omnibase/blog`,

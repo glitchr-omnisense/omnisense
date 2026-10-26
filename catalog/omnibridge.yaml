@@ -1,4 +1,4 @@
-# The omnibridge entry of the Omniscient catalogue. Written by `bin/console
+# The omnibridge entry of the Omnisense catalogue. Written by `bin/console
 # app:catalog:import` from the packages' repositories; the phrase and the
 # text are the site's own, edited here. Each package: its kind, what its
 # composer.json says, its GitHub repository and development branch, whether
@@ -19,22 +19,22 @@ packages:
       - patch
       - stub
       - omnibridge
-    repository: glitchr-studio/omnibridge-composer
+    repository: glitchr-omnisense/omnibridge-composer
     branch: 1.x
     verification: unstated
     docs: true
   omnibridge/doctrine:
     kind: bridge
-    description: 'The storage glue of omnibase sites, framework-free: Doctrine reading the structure described outside of it (omniscient/omnibridge''s Omnibridge\Schema), the naming strategy that turns their entities into their tables, the UTC date types, and an entity manager built with them, for any framework reading the same database.'
+    description: 'The storage glue of omnibase sites, framework-free: Doctrine reading the structure described outside of it (omnisense/omnibridge''s Omnibridge\Schema), the naming strategy that turns their entities into their tables, the UTC date types, and an entity manager built with them, for any framework reading the same database.'
     license: MIT
-    repository: glitchr-studio/omnibridge-doctrine
+    repository: glitchr-omnisense/omnibridge-doctrine
     branch: 1.x
     requires:
-      - omniscient/omnibridge
+      - omnisense/omnibridge
     verification: unstated
   omnibridge/laravel:
     kind: bridge
-    description: 'The Laravel host of omniscient/omnibase: its Foundation contracts (urls, translations, locales, access, parameters with the database settings laid over Laravel''s config, clock, events...) answered by Laravel''s services and seeded in Base\Contract\Runtime, Doctrine through omnibridge/doctrine, Twig through omnibridge/twig, and the pieces an omnibase page asks of its framework (Encore tags, the app variable, simple forms).'
+    description: 'The Laravel host of omnisense/omnibase: its Foundation contracts (urls, translations, locales, access, parameters with the database settings laid over Laravel''s config, clock, events...) answered by Laravel''s services and seeded in Base\Contract\Runtime, Doctrine through omnibridge/doctrine, Twig through omnibridge/twig, and the pieces an omnibase page asks of its framework (Encore tags, the app variable, simple forms).'
     license: MIT
     keywords:
       - laravel
@@ -42,20 +42,20 @@ packages:
       - omnibridge
       - twig
       - doctrine
-    repository: glitchr-studio/omnibridge-laravel
+    repository: glitchr-omnisense/omnibridge-laravel
     branch: 1.x
     requires:
       - omnibridge/doctrine
       - omnibridge/twig
-      - omniscient/omnibase
-      - omniscient/omnibridge
-      - omniscient/omnidrive
+      - omnisense/omnibase
+      - omnisense/omnibridge
+      - omnisense/omnidrive
     verification: unstated
   omnibridge/react:
     kind: bridge
     description: "A page of a site as a React component and its props, the same from any framework: the first visit an HTML shell holding the page, a visit within the site the page in JSON (header X-Omnibridge), the JavaScript side rendering it and following the site's links without reloading."
     license: MIT
-    repository: glitchr-studio/omnibridge-react
+    repository: glitchr-omnisense/omnibridge-react
     branch: 1.x
     verification: unstated
   omnibridge/static:
@@ -69,34 +69,34 @@ packages:
       - framework-agnostic
       - symfony
       - laravel
-    repository: glitchr-studio/omnibridge-static
+    repository: glitchr-omnisense/omnibridge-static
     branch: 1.x
     verification: partial
     verification_note: 'Not done, or not verified:'
   omnibridge/symfony:
     kind: bridge
-    description: "The Symfony host of omniscient/omnibridge's contracts (urls, translations, access, sessions, tokens, environment) - adapters over Symfony's router, translator, security and kernel, their container wiring and OmnibridgeBundle - and the framework packages omniscient/omnibase no longer requires. A Symfony site requires it beside the core."
+    description: "The Symfony host of omnisense/omnibridge's contracts (urls, translations, access, sessions, tokens, environment) - adapters over Symfony's router, translator, security and kernel, their container wiring and OmnibridgeBundle - and the framework packages omnisense/omnibase no longer requires. A Symfony site requires it beside the core."
     license: MIT
     keywords:
       - omnibase
       - omnibridge
       - symfony
-    repository: glitchr-studio/omnibridge-symfony
+    repository: glitchr-omnisense/omnibridge-symfony
     branch: 1.x
     requires:
       - omnibridge/twig
-      - omniscient/omnibridge
+      - omnisense/omnibridge
     verification: unstated
   omnibridge/twig:
     kind: bridge
-    description: "The Twig side of omnibridge: the contract a page rendered with Twig asks of any framework (path, url, asset, trans - omniscient/omnibridge's Urls and Translations), the Twig extension that provides it where the framework does not, and helpers."
+    description: "The Twig side of omnibridge: the contract a page rendered with Twig asks of any framework (path, url, asset, trans - omnisense/omnibridge's Urls and Translations), the Twig extension that provides it where the framework does not, and helpers."
     license: MIT
-    repository: glitchr-studio/omnibridge-twig
+    repository: glitchr-omnisense/omnibridge-twig
     branch: 1.x
     requires:
-      - omniscient/omnibridge
+      - omnisense/omnibridge
     verification: unstated
-  omniscient/omnibridge:
+  omnisense/omnibridge:
     kind: bridge
     description: "The core of the omnibridge family: the contracts any host answers for an application that runs on more than one framework (addresses, translations, languages, access, sessions, tokens, stored files, routes, environment) and the registry the application reaches them through. No framework, no ORM: each omnibridge/<host> bridge answers them with its host's services."
     license: MIT
@@ -106,6 +106,6 @@ packages:
       - framework-agnostic
       - symfony
       - laravel
-    repository: glitchr-studio/omnibridge
+    repository: glitchr-omnisense/omnibridge
     branch: 1.x
     verification: unstated

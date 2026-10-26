@@ -12,8 +12,8 @@ licence, et ce que leur README dit de leur vérification.
 ## Les noms
 
 Un paquet se nomme par son nom Composer, jamais par son dossier :
-`omniscient/omnistate`, pas « omnistate/core ». Le cœur et le paquet propre
-de chaque famille sont sous le vendeur `omniscient/` ; l'ancien nom
+`omnisense/omnistate`, pas « omnistate/core ». Le cœur et le paquet propre
+de chaque famille sont sous le vendeur `omnisense/` ; l'ancien nom
 `glitchr/…` est déclaré en `replace`, si bien qu'un projet qui le requiert
 encore reçoit le nouveau paquet. Les autres noms se lisent « la famille / un
 de ses membres » : `omnitrade/stripe` est un fournisseur d'un service

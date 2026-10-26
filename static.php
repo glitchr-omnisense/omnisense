@@ -1,7 +1,7 @@
 <?php
 
 /*
- * The Omniscient website's static export (omnibridge/static): every public
+ * The Omnisense website's static export (omnibridge/static): every public
  * page of the site - the routes of src/Controller, enumerated from Symfony's
  * router with the values of their parameters read from the content files -
  * rendered as a visitor by the site's own kernel, for a static host.
@@ -11,7 +11,7 @@
  *
  * Environment:
  *   SITE_URL        the static site's public address (canonical links, sitemap, feeds): an origin, or the
- *                   folder of one it is served under (https://glitchr-studio.github.io/omniscient/) - the
+ *                   folder of one it is served under (https://glitchr-omnisense.github.io/omnisense/) - the
  *                   pages are rendered at the root and omnibridge/static moves every internal address under it
  *   RENDER_ORIGIN   the origin the kernel renders at (SITE_URL's origin by default), rewritten to it in every page
  *   APP_ENV         prod for a deployable build (dev shows the profiler's toolbar)
@@ -42,7 +42,7 @@ return static function (array $host): Site {
     $static = rtrim(getenv('SITE_URL') ?: 'http://localhost:8135', '/');
     // The pages are rendered at the root of the static site's own origin (its absolute links, feeds and
     // robots.txt are then right as written); another RENDER_ORIGIN is rewritten to it in every page. Under
-    // a folder (GitHub Pages: /omniscient), the export moves the internal addresses into it.
+    // a folder (GitHub Pages: /omnisense), the export moves the internal addresses into it.
     $origin = (new Site($static))->origin();
     $render = rtrim(getenv('RENDER_ORIGIN') ?: $origin, '/');
 

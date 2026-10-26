@@ -10,7 +10,7 @@ final class DocumentationTest extends SiteTestCase
     public function testAPackagesWholeManualIsOnePage(): void
     {
         $html = $this->get('/docs/omnitrade/1.x');
-        self::assertStringContainsString('<span class="manual-title-of">omniscient/omnitrade</span> Omnitrade</h1>', $html, 'the home\'s first heading is the page\'s title');
+        self::assertStringContainsString('<span class="manual-title-of">omnisense/omnitrade</span> Omnitrade</h1>', $html, 'the home\'s first heading is the page\'s title');
         self::assertStringContainsString('<h2 id="installation" class="doc-part-title">Installation and first calls', $html, 'each page a part, its front matter\'s title at the second level');
         self::assertStringContainsString('<h2 id="guides-webhooks" class="doc-part-title">Webhooks', $html, 'a page of a folder');
         self::assertStringContainsString('<h3 id="installation-plain-php">Plain PHP', $html, 'a page\'s headings one level down, their ids prefixed');
@@ -19,10 +19,10 @@ final class DocumentationTest extends SiteTestCase
         self::assertStringContainsString('&lt;script&gt;', $html, 'raw HTML of a package\'s docs is shown, never run');
         self::assertStringNotContainsString("<script>alert('not trusted')</script>", $html);
         self::assertStringContainsString('<code>111111111111</code>', $html, 'the commit read');
-        self::assertStringContainsString('href="https://github.com/glitchr-studio/omnitrade/blob/1111111111111111111111111111111111111111/src/Bridge/Symfony/OmnitradeBundle.php"', $html, 'a file of the repository at the commit read');
-        self::assertStringContainsString('src="https://raw.githubusercontent.com/glitchr-studio/omnitrade/1111111111111111111111111111111111111111/docs/images/flow.png"', $html);
+        self::assertStringContainsString('href="https://github.com/glitchr-omnisense/omnitrade/blob/1111111111111111111111111111111111111111/src/Bridge/Symfony/OmnitradeBundle.php"', $html, 'a file of the repository at the commit read');
+        self::assertStringContainsString('src="https://raw.githubusercontent.com/glitchr-omnisense/omnitrade/1111111111111111111111111111111111111111/docs/images/flow.png"', $html);
         self::assertStringContainsString('class="doc-callout doc-callout-warning"', $html);
-        self::assertStringContainsString('href="https://github.com/glitchr-studio/omnitrade/edit/1.x/docs/10-installation.md"', $html, 'each part\'s pencil, on the series\' branch');
+        self::assertStringContainsString('href="https://github.com/glitchr-omnisense/omnitrade/edit/1.x/docs/10-installation.md"', $html, 'each part\'s pencil, on the series\' branch');
         self::assertStringContainsString('<nav class="omnidocs-toc" data-omnidocs-toc', $html, 'the sidebar\'s table of contents');
         self::assertMatchesRegularExpression('#<li><a href="\#installation">Installation and first calls</a>\s*<ul>\s*<li><a href="\#installation-plain-php">Plain PHP</a></li>#', $html);
         self::assertStringContainsString('data-omnidocs-toc-toggle aria-controls="manual-side"', $html, 'the contents\' button, on a phone');

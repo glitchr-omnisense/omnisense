@@ -1,4 +1,4 @@
-# The omnireach entry of the Omniscient catalogue. Written by `bin/console
+# The omnireach entry of the Omnisense catalogue. Written by `bin/console
 # app:catalog:import` from the packages' repositories; the phrase and the
 # text are the site's own, edited here. Each package: its kind, what its
 # composer.json says, its GitHub repository and development branch, whether
@@ -22,10 +22,10 @@ packages:
       - positions
       - framework-agnostic
       - omnireach
-    repository: glitchr-studio/omnireach-bing-webmaster
+    repository: glitchr-omnisense/omnireach-bing-webmaster
     branch: 1.x
     requires:
-      - omniscient/omnireach
+      - omnisense/omnireach
     verification: partial
     verification_note: 'Positions are passed as Bing gives them (not verified against a live account).'
   omnireach/ga4:
@@ -41,10 +41,10 @@ packages:
       - data-api
       - framework-agnostic
       - omnireach
-    repository: glitchr-studio/omnireach-ga4
+    repository: glitchr-omnisense/omnireach-ga4
     branch: 1.x
     requires:
-      - omniscient/omnireach
+      - omnisense/omnireach
     verification: partial
     verification_note: '- Not verified live: no Google account was used.'
   omnireach/matomo:
@@ -59,10 +59,10 @@ packages:
       - entry-pages
       - framework-agnostic
       - omnireach
-    repository: glitchr-studio/omnireach-matomo
+    repository: glitchr-omnisense/omnireach-matomo
     branch: 1.x
     requires:
-      - omniscient/omnireach
+      - omnisense/omnireach
     verification: partial
     verification_note: '- Verified live (docker compose run --rm omnireach live, 2026-10-24): demo.matomo.cloud, site 1, anonymous - the whole site over the last seven days, then entry pages over two days. — - Not verified: a self-hosted installation with a token.'
   omnireach/plausible:
@@ -77,10 +77,10 @@ packages:
       - privacy
       - framework-agnostic
       - omnireach
-    repository: glitchr-studio/omnireach-plausible
+    repository: glitchr-omnisense/omnireach-plausible
     branch: 1.x
     requires:
-      - omniscient/omnireach
+      - omnisense/omnireach
     verification: partial
     verification_note: '- Not verified live: no Plausible key was used.'
   omnireach/search-console:
@@ -96,13 +96,13 @@ packages:
       - positions
       - framework-agnostic
       - omnireach
-    repository: glitchr-studio/omnireach-search-console
+    repository: glitchr-omnisense/omnireach-search-console
     branch: 1.x
     requires:
-      - omniscient/omnireach
+      - omnisense/omnireach
     verification: partial
     verification_note: '- Not verified live: no Google account was used.'
-  omniscient/omnireach:
+  omnisense/omnireach:
     kind: family
     description: "Omnireach: what outside tools know of a site's audience, under any PHP host - search queries, pages and positions from the search engines (Search Console, Bing Webmaster Tools), visitors, entry pages and sources from the analytics tools (Matomo, Plausible, Google Analytics 4), one query and one report whoever answers; a taken-over site's history over any period. Providers are packages of their own (omnireach/search-console, omnireach/bing-webmaster, omnireach/matomo, omnireach/plausible, omnireach/ga4); the Symfony and Laravel bridges live in omnibridge."
     license: MIT
@@ -117,7 +117,7 @@ packages:
       - audience
       - framework-agnostic
       - omnireach
-    repository: glitchr-studio/omnireach
+    repository: glitchr-omnisense/omnireach
     branch: 1.x
     verification: partial
     verification_note: "- Verified live (docker compose run --rm omnireach live, 2026-10-24): Matomo's public demo (demo.matomo.cloud, anonymous) - the whole site over a week and its entry pages day by day. — - Not verified live: Search Console, Bing Webmaster, Plausible and Google Analytics (each needs an account and a key)."

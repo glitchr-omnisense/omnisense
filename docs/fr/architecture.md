@@ -8,7 +8,7 @@ order: 2
 
 ## Base et App
 
-`omniscient/omnibase` porte ce que tous les sites partagent : ses classes
+`omnisense/omnibase` porte ce que tous les sites partagent : ses classes
 sont sous `Base\`. Un site les étend sous `App\` avec les mêmes noms — un
 `App\Entity\User` par-dessus `Base\Entity\User`, un gabarit à lui par-dessus
 celui du cœur — et le cœur trouve d'abord la classe du site. Ce qu'un site
@@ -24,7 +24,7 @@ par le pont de l'hôte.
 
 Une famille répond à une question — *expédier un colis*, *encaisser un
 paiement*, *lire ce que la science sait d'un composé* — quel que soit le
-service derrière. Son paquet (`omniscient/omni<domaine>`) porte le contrat,
+service derrière. Son paquet (`omnisense/omni<domaine>`) porte le contrat,
 les modèles et un registre ; chaque fournisseur (`omni<domaine>/<service>`)
 est un service qui le remplit. Une famille n'existe que pour une question
 posée à **au moins deux services réels**, et qu'aucune bibliothèque
@@ -61,7 +61,7 @@ internes cassés, les sorties en double et les pages qui ne peuvent pas être
 statiques.
 
 Ce site est construit ainsi. C'est une application Symfony sur
-`omniscient/omnibase`, dont le contenu est fait de fichiers de son dépôt :
+`omnisense/omnibase`, dont le contenu est fait de fichiers de son dépôt :
 
 ```text
 catalog/                 un fichier par famille : ses paquets, tenus à la main

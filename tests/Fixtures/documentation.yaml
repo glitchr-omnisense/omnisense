@@ -1,7 +1,7 @@
 packages:
   omnitrade:
-    package: omniscient/omnitrade
-    repository: glitchr-studio/omnitrade
+    package: omnisense/omnitrade
+    repository: glitchr-omnisense/omnitrade
     default: '1.x'
     versions:
       '1.x':
