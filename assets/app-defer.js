@@ -57,3 +57,16 @@ Base.boot({
     current: '.om-nav a',
     transparent: { exit_duration: 200 }
 });
+
+// The footer's time on a static page (data-page-time, layout1.html.twig): the time the browser
+// took to make the page ready (Navigation Timing's load), where the kernel prints the request's.
+(function () {
+    function pageTime() {
+        var el = document.querySelector('[data-page-time]');
+        if (!el) return;
+        var nav = performance.getEntriesByType ? performance.getEntriesByType('navigation')[0] : null;
+        var ms = nav && nav.loadEventStart > 0 ? nav.loadEventStart : performance.now();
+        el.textContent = '[' + (ms / 1000).toFixed(2) + 's]';
+    }
+    if (document.readyState === 'complete') pageTime(); else window.addEventListener('load', pageTime);
+})();

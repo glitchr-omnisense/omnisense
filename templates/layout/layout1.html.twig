@@ -49,7 +49,15 @@
             <div class="om-footer-id">
                 <div class="om-footer-sign">
                     {% include '@Base/partials/_credits.html.twig' with {color: 'black', detail: false} %}
+                    {#- Served by the kernel, the time the request took; in the static export (omnibridge/static renders
+                     # every page in one process, where that time is the whole build's so far and differs from one
+                     # build to the next), the time the visitor's browser took to make the page ready, written by
+                     # app-defer.js. -#}
+                    {% if app.request and app.request.headers.get('User-Agent') == 'omnibridge-static' %}
+                    <span class="om-footer-time" data-page-time></span>
+                    {% else %}
                     <span class="om-footer-time">[{{ app.site.execution_time|default(0)|number_format(2) }}s]</span>
+                    {% endif %}
                 </div>
                 <div>
                     <p class="om-mark is-small"><b>Omni</b><i>sense</i></p>
