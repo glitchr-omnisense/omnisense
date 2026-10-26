@@ -24,7 +24,8 @@ final class DocumentationTest extends SiteTestCase
         self::assertStringContainsString('class="doc-callout doc-callout-warning"', $html);
         self::assertStringContainsString('href="https://github.com/glitchr-omnisense/omnitrade/edit/1.x/docs/10-installation.md"', $html, 'each part\'s pencil, on the series\' branch');
         self::assertStringContainsString('<nav class="omnidocs-toc" data-omnidocs-toc', $html, 'the sidebar\'s table of contents');
-        self::assertMatchesRegularExpression('#<li><a href="\#installation">Installation and first calls</a>\s*<ul>\s*<li><a href="\#installation-plain-php">Plain PHP</a></li>#', $html);
+        self::assertMatchesRegularExpression('#<button type="button" class="omnidocs-toc-disclose" data-omnidocs-toc-disclose aria-expanded="true" aria-controls="omnidocs-toc-installation"><span class="omnidocs-toc-dot" aria-hidden="true"></span><span class="omnidocs-toc-name">Installation and first calls</span></button>\s*<a class="omnidocs-toc-go" href="\#installation"#', $html, 'a part with sections: a disclosure, its arrow to the part');
+        self::assertMatchesRegularExpression('#<ul id="omnidocs-toc-installation" class="omnidocs-toc-children">\s*<li><a href="\#installation-plain-php">Plain PHP</a></li>#', $html);
         self::assertStringContainsString('data-omnidocs-toc-toggle aria-controls="manual-side"', $html, 'the contents\' button, on a phone');
         self::assertStringContainsString('Stripe', $html, 'the family\'s core lists its providers');
         self::assertStringContainsString('href="/packages/omnitrade/stripe"', $html, 'a provider without a manual: its sheet');
@@ -39,6 +40,24 @@ final class DocumentationTest extends SiteTestCase
         self::assertSame('installation-', $response->headers->get('X-Static-Fragment'), '/installation#plain-php lands on #installation-plain-php');
         $this->get('/fr/docs/omnitrade/1.x/guides/webhooks', 301);
         self::assertSame('/fr/docs/omnitrade/1.x#guides-webhooks', $this->client->getResponse()->headers->get('Location'));
+    }
+
+    public function testAPagePathARouteTakesKeepsItsPartButNoFormerAddress(): void
+    {
+        $html = $this->get('/docs/omnitrade/1.x');
+        self::assertStringContainsString('<h2 id="api" class="doc-part-title">The API, in short', $html, 'docs/90-api.md: its part of the one page');
+        self::assertStringContainsString('id="api-calls"', $html);
+        $documentation = static::getContainer()->get(\App\Content\Documentation::class);
+        $manual = null;
+        foreach ($documentation->manuals() as $one) {
+            $manual = 'omnitrade' === $one->key ? $one : $manual;
+        }
+        self::assertNotNull($manual);
+        $series = $manual->series()[0];
+        $former = $documentation->formerAddresses($manual, $series);
+        self::assertContains('installation', $former);
+        self::assertNotContains('api', $former, 'no redirection at /docs/omnitrade/1.x/api: the API reference\'s address');
+        self::assertNotContains('', $former, 'nor for the home');
     }
 
     public function testEachPackageHasItsOwnSeriesAndLatestIsARedirection(): void

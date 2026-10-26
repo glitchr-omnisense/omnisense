@@ -122,7 +122,7 @@ final class PagesTest extends SiteTestCase
         self::assertSame(2, $kinds['provider']);
         self::assertSame(2, $kinds['news']);
         self::assertSame(1, $kinds['doc'], 'the default series\' one page');
-        self::assertSame(2, $kinds['section'], 'its two pages, parts of it');
+        self::assertSame(3, $kinds['section'], 'its three pages, parts of it (installation, the API in short, webhooks)');
         self::assertGreaterThanOrEqual(5, $kinds['guide']);
         $urls = array_column($index['entries'], 'u');
         self::assertContains('/docs/omnitrade/1.x#guides-webhooks', $urls);

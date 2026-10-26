@@ -6148,12 +6148,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-omnisense/omnidocs-php.git",
-                "reference": "aec20ba9f72d1a6fb171f0c9c5e532e3e9a7f235"
+                "reference": "996fd59ed7826f27f48d19840551debda3b8c4cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-omnisense/omnidocs-php/zipball/aec20ba9f72d1a6fb171f0c9c5e532e3e9a7f235",
-                "reference": "aec20ba9f72d1a6fb171f0c9c5e532e3e9a7f235",
+                "url": "https://api.github.com/repos/glitchr-omnisense/omnidocs-php/zipball/996fd59ed7826f27f48d19840551debda3b8c4cb",
+                "reference": "996fd59ed7826f27f48d19840551debda3b8c4cb",
                 "shasum": ""
             },
             "require": {
@@ -6204,7 +6204,7 @@
                 "issues": "https://github.com/glitchr-omnisense/omnidocs-php/issues",
                 "source": "https://github.com/glitchr-omnisense/omnidocs-php/tree/1.x"
             },
-            "time": "2026-10-26T05:24:13+00:00"
+            "time": "2026-10-26T15:07:52+00:00"
         },
         {
             "name": "omnisense/omnibase",
@@ -6508,12 +6508,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-omnisense/omnidocs.git",
-                "reference": "524f471308e940f2adfbb9712d124bbdfbce6852"
+                "reference": "9ce91ac82a808ba0cebb2c10190af26e4e86ead0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-omnisense/omnidocs/zipball/524f471308e940f2adfbb9712d124bbdfbce6852",
-                "reference": "524f471308e940f2adfbb9712d124bbdfbce6852",
+                "url": "https://api.github.com/repos/glitchr-omnisense/omnidocs/zipball/9ce91ac82a808ba0cebb2c10190af26e4e86ead0",
+                "reference": "9ce91ac82a808ba0cebb2c10190af26e4e86ead0",
                 "shasum": ""
             },
             "require": {
@@ -6575,7 +6575,7 @@
                 "issues": "https://github.com/glitchr-omnisense/omnidocs/issues",
                 "source": "https://github.com/glitchr-omnisense/omnidocs/tree/1.x"
             },
-            "time": "2026-10-26T05:24:12+00:00"
+            "time": "2026-10-26T14:27:08+00:00"
         },
         {
             "name": "omnisense/omnidrive",

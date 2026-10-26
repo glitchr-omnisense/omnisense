@@ -78,10 +78,9 @@ return static function (array $host): Site {
                     $rows[] = ['key' => $manual->key, 'series' => $series];
                     continue;
                 }
-                foreach ($documentation->pages($manual, $series) as $page) {
-                    if ('' !== $page->path) {
-                        $rows[] = ['key' => $manual->key, 'series' => $series, 'path' => $page->path];
-                    }
+                // Each page's former address - but a path a route of the site takes (Documentation::RESERVED).
+                foreach ($documentation->formerAddresses($manual, $series) as $path) {
+                    $rows[] = ['key' => $manual->key, 'series' => $series, 'path' => $path];
                 }
             }
         }

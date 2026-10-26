@@ -262,6 +262,15 @@
 .manual.is-one-page .omnidocs-toc { font-size: .88rem; }
 .manual.is-one-page .omnidocs-toc a { border-radius: 0 var(--m-radius) var(--m-radius) 0; }
 .manual.is-one-page .omnidocs-toc a.is-current { color: var(--m-ink); font-weight: 600; background: var(--m-surface); }
+/* An entry with sections: a disclosure (its dot and name open and close them), the arrow beside it to the part. */
+.manual.is-one-page .omnidocs-toc-disclose { color: var(--m-ink); border-radius: 0 var(--m-radius) var(--m-radius) 0; }
+.manual.is-one-page .omnidocs-toc-disclose:hover { background: var(--m-surface); }
+.manual.is-one-page .omnidocs-toc-dot { width: .55rem; height: .55rem; border-width: 1.5px; }
+.manual.is-one-page .omnidocs-toc-disclose[aria-expanded="true"] .omnidocs-toc-dot { background: var(--m-accent); border-color: var(--m-accent); }
+.manual.is-one-page .omnidocs-toc-head:has(.is-current) .omnidocs-toc-disclose { color: var(--m-ink); font-weight: 600; background: var(--m-surface); border-left-color: var(--m-accent); }
+.manual.is-one-page .omnidocs-toc .omnidocs-toc-go { color: var(--m-soft); border-radius: var(--m-radius); }
+.manual.is-one-page .omnidocs-toc .omnidocs-toc-go:hover { color: var(--m-ink); background: var(--m-surface); }
+.manual.is-one-page .omnidocs-toc-entry.is-group > .omnidocs-toc-head .omnidocs-toc-name { font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; }
 
 .manual.is-one-page .manual-prose { max-width: 50rem; }
 .manual-prose .doc-part + .manual-part-edit, .manual-part-edit { margin: 1.2rem 0 0; font-size: .82rem; }
@@ -281,5 +290,20 @@
 .manual-prose .api-members dd, .manual-prose .api-params dd { margin: .2rem 0 0 1rem; }
 .manual-prose .api-members dd > :last-child, .manual-prose .api-params dd > :last-child { margin-bottom: 0; }
 .manual-prose .api-options { display: block; overflow-x: auto; }
-.manual-prose .api-index { padding-left: 1.2rem; }
+/* The reference's index: a card per class (PHP) or global (JavaScript), by namespace or group. */
+.manual-prose .api-index { margin: 1rem 0 0; }
+.manual-prose .api-group { margin: 0 0 1.6rem; }
+.manual-prose .api-group-title { margin: 0 0 .55rem; font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--m-soft); }
+.manual-prose .api-group-title code { font-size: .85rem; text-transform: none; letter-spacing: 0; }
+.manual-prose .api-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr)); gap: .75rem; margin: 0; padding: 0; list-style: none; }
+.manual-prose .api-card { display: flex; flex-direction: column; gap: .35rem; margin: 0; padding: .85rem 1rem; background: var(--m-bg); border: 1px solid var(--m-line); border-radius: calc(var(--m-radius) + 2px); }
+.manual-prose .api-card:hover { border-color: var(--m-ink); }
+.manual-prose .api-card p { margin: 0; }
+.manual-prose .api-card-name { overflow-wrap: anywhere; }
+.manual-prose .api-card-name a { text-decoration: none; }
+.manual-prose .api-card-name code { font-weight: 700; }
+.manual-prose .api-card-about { font-size: .88rem; color: var(--m-soft); }
+.manual-prose .api-card-counts { margin-top: auto !important; font: 500 .74rem/1.5 var(--m-mono); color: var(--m-ink); }
+.manual-prose .api-card-links { display: flex; gap: .4rem; font-size: .82rem; }
+.manual-prose .doc-group-title { margin: 3rem 0 0; font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--m-soft); }
 .manual-prose h3 > code, .manual-prose h2 > code { overflow-wrap: anywhere; }

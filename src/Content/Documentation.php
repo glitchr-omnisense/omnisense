@@ -145,6 +145,31 @@ class Documentation
         return $this->version($manual, $series)?->home();
     }
 
+    /**
+     * The addresses beside a series' one page that the site's own routes take (/docs/{key}/{series}/api,
+     * its PHP API reference): a manual's page with such a path keeps its part in the one page, but never a
+     * former address of its own - it would be the route's (graphjs' docs/api.md was, and the export failed).
+     */
+    public const RESERVED = ['api'];
+
+    /**
+     * The pages of a series that have a former address of their own (a redirection to their part): every
+     * page but the home and those whose path a route of the site takes (RESERVED).
+     *
+     * @return list<string>
+     */
+    public function formerAddresses(Manual $manual, string $series): array
+    {
+        $paths = [];
+        foreach ($this->pages($manual, $series) as $node) {
+            if ('' !== $node->path && !\in_array($node->path, self::RESERVED, true)) {
+                $paths[] = $node->path;
+            }
+        }
+
+        return $paths;
+    }
+
     public function page(Manual $manual, string $series, string $path): ?Node
     {
         return $this->version($manual, $series)?->node($path);

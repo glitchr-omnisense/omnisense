@@ -72,7 +72,7 @@ final class CatalogueTest extends TestCase
     {
         $packages = (new RepositoryScanner(\dirname(__DIR__).'/Fixtures/repos'))->scan();
 
-        // A workspace ("project") and another vendor's package are not the catalogue's.
+        // A workspace ("project"), another vendor's package and a template's example (omnimap/example) are not the catalogue's.
         self::assertSame(['@glitchr/flowjs', 'glitchr/omnibase', 'glitchr/omnibus', 'glitchr/omnitrade', 'omnibase/blog', 'omnibus/offline', 'omnitrade/paypal', 'omnitrade/stripe'], array_keys($packages));
 
         $trade = $packages['glitchr/omnitrade'];

@@ -21,6 +21,13 @@ class RepositoryScanner
     /** The JavaScript libraries of the house, each in a folder of its own. */
     public const LIBRARIES = ['flowjs', 'graphjs'];
 
+    /**
+     * The examples a template makes (the provider template's omnimap/example, ~/Sites/omni-provider-example):
+     * written to be copied, never published as packages of the ecosystem - never in the catalogue,
+     * whatever app:catalog:import finds.
+     */
+    public const EXAMPLES = ['omnimap/example'];
+
     public function __construct(
         #[Autowire('%app.catalogue.repos_dir%')] private readonly string $reposDir,
     ) {
@@ -66,7 +73,7 @@ class RepositoryScanner
         $json = self::json($dir.'/composer.json') ?: self::json($dir.'/package.json');
         $name = \is_string($json['name'] ?? null) ? $json['name'] : null;
         // A "project" is an application or a development workspace, not a package.
-        if (null === $name || 'project' === ($json['type'] ?? null) || null === $floor = Tier::of($name)) {
+        if (null === $name || 'project' === ($json['type'] ?? null) || \in_array($name, self::EXAMPLES, true) || null === $floor = Tier::of($name)) {
             return null;
         }
         [$tier, $family] = $floor;
