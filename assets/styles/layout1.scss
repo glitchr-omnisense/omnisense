@@ -387,9 +387,12 @@ a.om-fact:hover { border-color: var(--om-blue); color: var(--om-blue); }
 .om-footer-grid { display: grid; gap: 2rem 2.5rem; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); }
 .om-footer-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: .6rem; h2 { margin: 0; } }
 .om-footer-link { padding: 0; border: 0; background: none; color: inherit; font: inherit; text-align: left; cursor: pointer; &:hover { color: var(--om-blue); } }
-// The signature at the left of the name, a dotted rule between, the monkey as tall as the two lines.
+// The signature at the left of the name, a dotted rule between, the monkey as tall as the two lines and the time
+// the page took under it, in the signature's own type.
 .om-footer-id { display: flex; align-items: center; gap: 1.1rem;
-    .ga-credits { flex: none; align-self: stretch; display: flex; align-items: center; padding-right: 1.1rem; border-right: 1px dotted var(--om-soft); }
+    .om-footer-sign { flex: none; align-self: stretch; display: flex; flex-direction: column; justify-content: center; gap: .3rem; padding-right: 1.1rem; border-right: 1px dotted var(--om-soft); }
+    .ga-credits { display: flex; align-items: center; }
+    .om-footer-time { font: 600 .7rem/1 "Source Code Pro", ui-monospace, monospace; color: var(--om-soft); text-align: center; }
     .om-mark { margin: 0; } p { margin: .35rem 0 0; } }
 // Glitch Art's signature: black, white at night - never a colour of the site.
 html.theme-mode-dark .om-footer-id .ga-credits { --ga-credits-ink: #fff; }

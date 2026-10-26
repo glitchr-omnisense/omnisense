@@ -44,9 +44,13 @@
     <div class="om-wrap">
         <div class="om-footer-grid">
             {#- Its name and what it is, Glitch Art's signature at their left (as on Anaëlle's and Brieuc's sites): the
-             # year and the monkey as tall as the two lines, a dotted rule between, no detail line. Black, white at night. -#}
+             # year and the monkey as tall as the two lines, the time the page took under them, a dotted rule between.
+             # Black, white at night. -#}
             <div class="om-footer-id">
-                {% include '@Base/partials/_credits.html.twig' with {color: 'black', detail: false} %}
+                <div class="om-footer-sign">
+                    {% include '@Base/partials/_credits.html.twig' with {color: 'black', detail: false} %}
+                    <span class="om-footer-time">[{{ app.site.execution_time|default(0)|number_format(2) }}s]</span>
+                </div>
                 <div>
                     <p class="om-mark is-small"><b>Omni</b><i>scient</i></p>
                     <p>{{ '@messages.footer.what'|trans }}</p>
