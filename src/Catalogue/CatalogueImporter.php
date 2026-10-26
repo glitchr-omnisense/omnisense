@@ -165,7 +165,7 @@ class CatalogueImporter
     private static function header(string $family): string
     {
         return <<<YAML
-            # The {$family} entry of the Omniscient catalogue. Written by `bin/console
+            # The {$family} entry of the Omnisense catalogue. Written by `bin/console
             # app:catalog:import` from the packages' repositories; the phrase and the
             # text are the site's own, edited here. Each package: its kind, what its
             # composer.json says, its GitHub repository and development branch, whether

@@ -1,4 +1,4 @@
-# Omniscient — base stack (every environment).
+# Omnisense — base stack (every environment).
 #
 # Same orchestration as Chapaland: one PHP image (deployments/docker/web)
 # runs web, worker, cron and the one-shot composer/assets jobs; data services
@@ -111,7 +111,7 @@ services:
     restart: unless-stopped
     environment:
       TYPESENSE_DATA_DIR: /data
-      TYPESENSE_API_KEY: ${TYPESENSE_SECRET:-omniscient-search-key}
+      TYPESENSE_API_KEY: ${TYPESENSE_SECRET:-omnisense-search-key}
     networks:
       - intranet
     volumes:

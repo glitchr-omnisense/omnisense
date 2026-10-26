@@ -1,4 +1,4 @@
-# The omnifund entry of the Omniscient catalogue. Written by `bin/console
+# The omnifund entry of the Omnisense catalogue. Written by `bin/console
 # app:catalog:import` from the packages' repositories; the phrase and the
 # text are the site's own, edited here. Each package: its kind, what its
 # composer.json says, its GitHub repository and development branch, whether
@@ -24,10 +24,10 @@ packages:
       - funding
       - framework-agnostic
       - omnifund
-    repository: glitchr-studio/omnifund-github-sponsors
+    repository: glitchr-omnisense/omnifund-github-sponsors
     branch: 1.x
     requires:
-      - omniscient/omnifund
+      - omnisense/omnifund
     verification: partial
     verification_note: "- Verified live (2026-10-24, a token): glitchr-studio's listing; sindresorhus's tiers and two sponsors. — - Not verified live: an active goal (none at hand)."
   omnifund/liberapay:
@@ -41,10 +41,10 @@ packages:
       - patrons
       - framework-agnostic
       - omnifund
-    repository: glitchr-studio/omnifund-liberapay
+    repository: glitchr-omnisense/omnifund-liberapay
     branch: 1.x
     requires:
-      - omniscient/omnifund
+      - omnisense/omnifund
     verification: verified
     verification_note: "- Verified live without a key (2026-10-24): the Liberapay team's profile."
   omnifund/opencollective:
@@ -61,13 +61,13 @@ packages:
       - donations
       - framework-agnostic
       - omnifund
-    repository: glitchr-studio/omnifund-opencollective
+    repository: glitchr-omnisense/omnifund-opencollective
     branch: 1.x
     requires:
-      - omniscient/omnifund
+      - omnisense/omnifund
     verification: partial
     verification_note: "- Verified live without a key (2026-10-24): webpack's profile, tiers and three backers. — - Not verified: a personal token."
-  omniscient/omnifund:
+  omnisense/omnifund:
     kind: family
     description: 'Omnifund: who funds a project, read under any PHP host, wherever the funding is received - the profile (backers counted, income, goal), the sponsors and the tiers offered, from GitHub Sponsors, Open Collective or Liberapay. Providers are packages of their own (omnifund/github-sponsors, omnifund/opencollective, omnifund/liberapay); no framework in require.'
     license: MIT
@@ -81,8 +81,8 @@ packages:
       - liberapay
       - framework-agnostic
       - omnifund
-    repository: glitchr-studio/omnifund
+    repository: glitchr-omnisense/omnifund
     branch: 1.x
     verification: partial
-    verification_note: "- Verified live (docker compose run --rm omnifund live, 2026-10-24): Open Collective's GraphQL API without a key (webpack: profile, tiers, three backers); Liberapay's public.json (the Liberapay team); GitHub's GraphQL API with a token (glitchr-studio's listing, sindresorhus's tiers and two sponsors). — - Not verified: GitHub's goal as a live answer (no listing at hand had an active goal: the shape is GitHub's schema, accepted by the live query); an Open Collective personal token; any site using omnifund (none yet - the omniscient site still reads GitHub Sponsors with its own call)."
+    verification_note: "- Verified live (docker compose run --rm omnifund live, 2026-10-24): Open Collective's GraphQL API without a key (webpack: profile, tiers, three backers); Liberapay's public.json (the Liberapay team); GitHub's GraphQL API with a token (glitchr-studio's listing, sindresorhus's tiers and two sponsors). — - Not verified: GitHub's goal as a live answer (no listing at hand had an active goal: the shape is GitHub's schema, accepted by the live query); an Open Collective personal token; any site using omnifund (none yet - the omnisense site still reads GitHub Sponsors with its own call)."
     docs: true

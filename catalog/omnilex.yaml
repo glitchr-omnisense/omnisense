@@ -1,4 +1,4 @@
-# The omnilex entry of the Omniscient catalogue. Written by `bin/console
+# The omnilex entry of the Omnisense catalogue. Written by `bin/console
 # app:catalog:import` from the packages' repositories; the phrase and the
 # text are the site's own, edited here. Each package: its kind, what its
 # composer.json says, its GitHub repository and development branch, whether
@@ -25,10 +25,10 @@ packages:
       - ecli
       - sparql
       - omnilex
-    repository: glitchr-studio/omnilex-eurlex
+    repository: glitchr-omnisense/omnilex-eurlex
     branch: 1.x
     requires:
-      - omniscient/omnilex
+      - omnisense/omnilex
     verification: verified
     verification_note: 'Verified against the real service on 2026-10-04 (see docs/).'
     docs: true
@@ -44,10 +44,10 @@ packages:
       - piste
       - ecli
       - omnilex
-    repository: glitchr-studio/omnilex-judilibre
+    repository: glitchr-omnisense/omnilex-judilibre
     branch: 1.x
     requires:
-      - omniscient/omnilex
+      - omnisense/omnilex
     verification: unverified
     verification_note: 'Not verified against the real service'
     docs: true
@@ -63,10 +63,10 @@ packages:
       - open-data
       - ecli
       - omnilex
-    repository: glitchr-studio/omnilex-justice-administrative
+    repository: glitchr-omnisense/omnilex-justice-administrative
     branch: 1.x
     requires:
-      - omniscient/omnilex
+      - omnisense/omnilex
     verification: verified
     verification_note: "What this package asks is the JSON interface the site's own search engine calls (/recherche/api/...), read from the engine's pages and verified call by call on 2026-10-04."
     docs: true
@@ -82,14 +82,14 @@ packages:
       - dila
       - codes
       - omnilex
-    repository: glitchr-studio/omnilex-legifrance
+    repository: glitchr-omnisense/omnilex-legifrance
     branch: 1.x
     requires:
-      - omniscient/omnilex
+      - omnisense/omnilex
     verification: unverified
     verification_note: 'Not verified against the real service'
     docs: true
-  omniscient/omnilex:
+  omnisense/omnilex:
     kind: family
     description: "Omnilex: one contract for the sources of law - texts, codes and case law, searched with filters (jurisdiction, date, subject, type), read in the version in force at a date, their links followed, what is new listed - from Légifrance, Judilibre, EUR-Lex and the French administrative courts' open data; identifiers (ECLI, NOR, CELEX, pourvoi, Légifrance) normalised and validated; and its Symfony bundle."
     license: MIT
@@ -104,7 +104,7 @@ packages:
       - ecli
       - celex
       - omnilex
-    repository: glitchr-studio/omnilex
+    repository: glitchr-omnisense/omnilex
     branch: 1.x
     verification: unstated
     docs: true

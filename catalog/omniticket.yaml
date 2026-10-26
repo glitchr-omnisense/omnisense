@@ -1,4 +1,4 @@
-# The omniticket entry of the Omniscient catalogue. Written by `bin/console
+# The omniticket entry of the Omnisense catalogue. Written by `bin/console
 # app:catalog:import` from the packages' repositories; the phrase and the
 # text are the site's own, edited here. Each package: its kind, what its
 # composer.json says, its GitHub repository and development branch, whether
@@ -9,7 +9,7 @@ phrase:
   en: 'Read the tickets sold elsewhere.'
   fr: 'Lire les billets vendus ailleurs.'
 packages:
-  omniscient/omniticket:
+  omnisense/omniticket:
     kind: family
     description: 'Omniticket: tickets sold elsewhere, read and checked under any PHP host - the events a ticketing service sells (dates, rates, places left, sold out, where to buy), who comes (attendees), and whether a ticket code is valid at the door, one contract whoever sells them. Providers are packages of their own (omniticket/weezevent, omniticket/billetweb, omniticket/helloasso, omniticket/eventbrite, omniticket/ticketmaster); the Symfony and Laravel bridges live in omnibridge.'
     license: MIT
@@ -26,7 +26,7 @@ packages:
       - ticketmaster
       - framework-agnostic
       - omniticket
-    repository: glitchr-studio/omniticket
+    repository: glitchr-omnisense/omniticket
     branch: 1.x
     verification: partial
     verification_note: "- Verified live (docker compose run --rm omniticket live, 2026-10-24): Weezevent's public endpoint (GET /event/categories, no key) - its host and its JSON. — - Not verified live: every call that needs an account or a key (all five providers' events, attendees and checks)."
@@ -44,10 +44,10 @@ packages:
       - check-in
       - framework-agnostic
       - omniticket
-    repository: glitchr-studio/omniticket-billetweb
+    repository: glitchr-omnisense/omniticket-billetweb
     branch: 1.x
     requires:
-      - omniscient/omniticket
+      - omnisense/omniticket
     verification: partial
     verification_note: '- Not verified live: no Billetweb account was used.'
   omniticket/eventbrite:
@@ -63,10 +63,10 @@ packages:
       - check-in
       - framework-agnostic
       - omniticket
-    repository: glitchr-studio/omniticket-eventbrite
+    repository: glitchr-omnisense/omniticket-eventbrite
     branch: 1.x
     requires:
-      - omniscient/omniticket
+      - omnisense/omniticket
     verification: partial
     verification_note: "- Not verified live: no Eventbrite token was used; the response shapes were not re-read on 2026-10-24 (the documentation's pages render them in the browser)."
   omniticket/helloasso:
@@ -82,10 +82,10 @@ packages:
       - attendees
       - framework-agnostic
       - omniticket
-    repository: glitchr-studio/omniticket-helloasso
+    repository: glitchr-omnisense/omniticket-helloasso
     branch: 1.x
     requires:
-      - omniscient/omniticket
+      - omnisense/omniticket
     verification: partial
     verification_note: '- Not verified live: no HelloAsso account or sandbox was used.'
   omniticket/ticketmaster:
@@ -100,10 +100,10 @@ packages:
       - tickets
       - framework-agnostic
       - omniticket
-    repository: glitchr-studio/omniticket-ticketmaster
+    repository: glitchr-omnisense/omniticket-ticketmaster
     branch: 1.x
     requires:
-      - omniscient/omniticket
+      - omnisense/omniticket
     verification: partial
     verification_note: '- Not verified live: no Ticketmaster key was used.'
   omniticket/weezevent:
@@ -119,9 +119,9 @@ packages:
       - check-in
       - framework-agnostic
       - omniticket
-    repository: glitchr-studio/omniticket-weezevent
+    repository: glitchr-omnisense/omniticket-weezevent
     branch: 1.x
     requires:
-      - omniscient/omniticket
+      - omnisense/omniticket
     verification: partial
     verification_note: '- Verified live (docker compose run --rm omniticket live, 2026-10-24): GET /event/categories, no key - the host and the JSON as read. — Not verified: whether a very large participant list is cut without paging (max and page are documented without their base).'

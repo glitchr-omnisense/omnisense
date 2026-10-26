@@ -6,7 +6,7 @@ tags: [site, omnibridge, version]
 
 **GitHub Pages.** `omnibridge/static` a une cible GitHub Pages : les pages
 sont rendues à la racine et chaque adresse interne est déplacée sous le
-dossier où le site est servi (ici `/omniscient/`), avec un fichier
+dossier où le site est servi (ici `/omnisense/`), avec un fichier
 `.nojekyll`, un `CNAME` pour un domaine personnalisé, les redirections
 écrites en petites pages, et une construction en échec pour toute adresse
 restée hors du dossier. Ce site est construit ainsi par son propre

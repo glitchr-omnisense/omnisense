@@ -1,4 +1,4 @@
-# The omnibank entry of the Omniscient catalogue. Written by `bin/console
+# The omnibank entry of the Omnisense catalogue. Written by `bin/console
 # app:catalog:import` from the packages' repositories; the phrase and the
 # text are the site's own, edited here. Each package: its kind, what its
 # composer.json says, its GitHub repository and development branch, whether
@@ -23,12 +23,13 @@ packages:
       - bridge
       - bridgeapi
       - omnibank
-    repository: glitchr-studio/omnibank-bridge
+    repository: glitchr-omnisense/omnibank-bridge
     branch: 1.x
     requires:
-      - omniscient/omnibank
+      - omnisense/omnibank
     verification: unverified
     verification_note: "Unverified. Written from Bridge's published v3 documentation and recorded answers (Tests/Fixtures); it has not yet been run against a real Bridge sandbox."
+    docs: true
   omnibank/files:
     kind: provider
     description: 'Omnibank Files: bank statements read from the files banks export - CAMT.053, OFX (SGML and XML), CSV with a column map - and SEPA credit transfers written as pain.001.001.03. No network.'
@@ -41,11 +42,12 @@ packages:
       - pain.001
       - sepa
       - omnibank
-    repository: glitchr-studio/omnibank-files
+    repository: glitchr-omnisense/omnibank-files
     branch: 1.x
     requires:
-      - omniscient/omnibank
+      - omnisense/omnibank
     verification: unstated
+    docs: true
   omnibank/powens:
     kind: provider
     description: 'Omnibank Powens: bank aggregation through Powens (ex Budget Insight) - its Webview for the consent, accounts, balances, transactions, CONNECTION_SYNCED webhooks.'
@@ -57,12 +59,13 @@ packages:
       - powens
       - 'budget insight'
       - omnibank
-    repository: glitchr-studio/omnibank-powens
+    repository: glitchr-omnisense/omnibank-powens
     branch: 1.x
     requires:
-      - omniscient/omnibank
+      - omnisense/omnibank
     verification: unverified
     verification_note: "Unverified. Written from Powens' published documentation and recorded answers (Tests/Fixtures); it has not yet been run against a real Powens sandbox."
+    docs: true
   omnibank/qonto:
     kind: provider
     description: "Omnibank Qonto: a Qonto organization's accounts, balances and transactions over its Business API, with an API key."
@@ -71,13 +74,14 @@ packages:
       - bank
       - qonto
       - omnibank
-    repository: glitchr-studio/omnibank-qonto
+    repository: glitchr-omnisense/omnibank-qonto
     branch: 1.x
     requires:
-      - omniscient/omnibank
+      - omnisense/omnibank
     verification: unverified
     verification_note: "Unverified. Written from Qonto's published API documentation and recorded answers (Tests/Fixtures); it has not yet been run against a real Qonto organization or the sandbox."
-  omniscient/omnibank:
+    docs: true
+  omnisense/omnibank:
     kind: family
     description: "Omnibank: one contract for bank access - accounts, balances, transactions, transfers, consents and webhooks - over statement files and bank APIs, and its Symfony bundle (Omnitrade's sibling for banking)."
     license: MIT
@@ -89,7 +93,7 @@ packages:
       - ofx
       - sepa
       - omnibank
-    repository: glitchr-studio/omnibank
+    repository: glitchr-omnisense/omnibank
     branch: 1.x
     verification: unstated
     docs: true

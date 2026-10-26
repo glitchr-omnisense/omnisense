@@ -41,7 +41,7 @@
     --manual-accent: var(--om-blue); --manual-on-accent: var(--om-paper); --manual-mark: var(--om-mark); --manual-radius: 2px; --manual-top: calc(#{$om-header} + 1.25rem);
     --manual-font: #{$om-text}; --manual-font-display: #{$om-display}; --manual-font-mono: #{$om-mono};
     --manual-code-bg: var(--om-sheet); --manual-note: var(--om-blue); --manual-tip: var(--om-ok); --manual-warning: var(--om-warn); --manual-caution: var(--om-no);
-    // omnidocs' one-page manuals (vendor/omniscient/omnidocs/assets/omnidocs.css):
+    // omnidocs' one-page manuals (vendor/omnisense/omnidocs/assets/omnidocs.css):
     --omnidocs-bg: var(--om-paper); --omnidocs-fg: var(--om-ink); --omnidocs-muted: var(--om-soft); --omnidocs-line: var(--om-line);
     --omnidocs-soft: var(--om-sheet); --omnidocs-accent: var(--om-blue); --omnidocs-top: calc(#{$om-header} + 1.25rem); --omnidocs-drawer-top: #{$om-header}; --omnidocs-mono: #{$om-mono};
     // omnibase/blog (the announcements):

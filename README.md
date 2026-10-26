@@ -1,9 +1,9 @@
-# Omniscient
+# Omnisense
 
 The website of the Omni ecosystem: the cross-ecosystem guides, the news, the
 package catalogue and each package's documentation, read from its own
 repository at a pinned commit. A Symfony application on
-`omniscient/omnibase` 4.x, exported to static files by `omnibridge/static`:
+`omnisense/omnibase` 4.x, exported to static files by `omnibridge/static`:
 nothing runs on the server when the site is read - no database, no PHP, no
 search service.
 
@@ -35,7 +35,7 @@ bin/omnibridge-static check dist
 
 `SITE_URL` is the public address (canonical links, sitemap, feeds;
 `http://localhost:8135` by default): an origin, or the folder of one the site
-is served under (`https://glitchr-studio.github.io/omniscient/`) - the pages
+is served under (`https://glitchr-omnisense.github.io/omnisense/`) - the pages
 are rendered at the root and omnibridge/static moves every internal address
 under the folder. `--github-pages` exports for GitHub Pages (`.nojekyll`, no
 `_redirects`, any address outside the folder an error). `--local=<folder>`
@@ -45,7 +45,7 @@ builds of the same commit give the same `dist/`.
 
 With the site's containers: `make static`, then `make static-serve`
 (http://localhost:8135, an nginx that serves it as GitHub Pages does;
-`make static-serve STATIC_BASE_PATH=/omniscient` for a build under that
+`make static-serve STATIC_BASE_PATH=/omnisense` for a build under that
 folder).
 
 ## Hosting
@@ -53,7 +53,7 @@ folder).
 GitHub Pages, deployed by the `website` workflow on every push to `main`
 (pull requests build the preview artifact only). Once, on GitHub:
 Settings → Pages → Source: "GitHub Actions". The address is the one Pages
-gives the repository (`https://glitchr-studio.github.io/omniscient/`); with a
+gives the repository (`https://glitchr-omnisense.github.io/omnisense/`); with a
 custom domain, set it in Settings → Pages and set the repository variable
 `SITE_URL` to it (`https://example.org/`): the site is then built at the root.
 

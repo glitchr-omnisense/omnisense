@@ -75,7 +75,7 @@ final class Package implements \Stringable
     }
 
     /**
-     * The package's key in addresses: omniscient/omnilab is "omnilab" (the house
+     * The package's key in addresses: omnisense/omnilab is "omnilab" (the house
      * vendor dropped), omnibus/colissimo "omnibus-colissimo".
      */
     public function getKey(): string
@@ -121,7 +121,7 @@ final class Package implements \Stringable
         return $this->keywords;
     }
 
-    /** "glitchr-studio/omnilab": where the package lives on GitHub. */
+    /** "glitchr-omnisense/omnilab": where the package lives on GitHub. */
     public function getRepository(): ?string
     {
         return $this->repository;

@@ -15,7 +15,7 @@
 <!DOCTYPE html>
 <html {{ html_attributes(html_attributes) }} lang="{{ app.request.getLocale()|lang }}">
 
-    {# The tab's title: the page's own, then the site's name after a bar - "glitchr/omnitrade | Omniscient". #}
+    {# The tab's title: the page's own, then the site's name after a bar - "glitchr/omnitrade | Omnisense". #}
     {% set _page_title = block('title') is defined ? block('title')|trim : '' %}
     {% set meta = app.site.meta({
         'title'      : [(_page_title ?: null), site.name, (_page_title ? null : "@messages.site.slogan"|trans)] | join_if_exists(" | "),

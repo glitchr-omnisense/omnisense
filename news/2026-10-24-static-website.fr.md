@@ -4,9 +4,9 @@ summary: Guides, actualités, catalogue et manuel de chaque paquet, construits d
 tags: [site]
 ---
 
-Le site Omniscient est désormais un ensemble de pages statiques, exportées
+Le site Omnisense est désormais un ensemble de pages statiques, exportées
 par `omnibridge/static` depuis la même application Symfony sur
-`omniscient/omnibase`. Ce qui change pour le lecteur :
+`omnisense/omnibase`. Ce qui change pour le lecteur :
 
 - **Le contenu, ce sont des fichiers.** Les guides (`docs/`), les
   actualités (`news/`), le catalogue (`catalog/`, un fichier par famille) et

@@ -1,4 +1,4 @@
-# The omnifilm entry of the Omniscient catalogue. Written by `bin/console
+# The omnifilm entry of the Omnisense catalogue. Written by `bin/console
 # app:catalog:import` from the packages' repositories; the phrase and the
 # text are the site's own, edited here. Each package: its kind, what its
 # composer.json says, its GitHub repository and development branch, whether
@@ -24,10 +24,10 @@ packages:
       - rotten-tomatoes
       - framework-agnostic
       - omnifilm
-    repository: glitchr-studio/omnifilm-omdb
+    repository: glitchr-omnisense/omnifilm-omdb
     branch: 1.x
     requires:
-      - omniscient/omnifilm
+      - omnisense/omnifilm
     verification: partial
     verification_note: '- Not verified live: no key.'
   omnifilm/tmdb:
@@ -45,10 +45,10 @@ packages:
       - watch-providers
       - framework-agnostic
       - omnifilm
-    repository: glitchr-studio/omnifilm-tmdb
+    repository: glitchr-omnisense/omnifilm-tmdb
     branch: 1.x
     requires:
-      - omniscient/omnifilm
+      - omnisense/omnifilm
     verification: partial
     verification_note: '- Not verified live: no key.'
   omnifilm/trakt:
@@ -64,10 +64,10 @@ packages:
       - episode
       - framework-agnostic
       - omnifilm
-    repository: glitchr-studio/omnifilm-trakt
+    repository: glitchr-omnisense/omnifilm-trakt
     branch: 1.x
     requires:
-      - omniscient/omnifilm
+      - omnisense/omnifilm
     verification: partial
     verification_note: '- Not verified live: no client id.'
   omnifilm/tvdb:
@@ -83,10 +83,10 @@ packages:
       - film
       - framework-agnostic
       - omnifilm
-    repository: glitchr-studio/omnifilm-tvdb
+    repository: glitchr-omnisense/omnifilm-tvdb
     branch: 1.x
     requires:
-      - omniscient/omnifilm
+      - omnisense/omnifilm
     verification: partial
     verification_note: '- Not verified live: no key.'
   omnifilm/wikidata:
@@ -104,13 +104,13 @@ packages:
       - open-data
       - framework-agnostic
       - omnifilm
-    repository: glitchr-studio/omnifilm-wikidata
+    repository: glitchr-omnisense/omnifilm-wikidata
     branch: 1.x
     requires:
-      - omniscient/omnifilm
+      - omnisense/omnifilm
     verification: verified
     verification_note: '- Verified live (docker compose run --rm omnifilm live, 2026-10-24): Stalker found by a search narrowed to 1979, The Shawshank Redemption by its IMDb number (TMDB 278, Frank Darabont), Game of Thrones by its TMDB series number (Q23572, tt0944947, TheTVDB 121361, 2011).'
-  omniscient/omnifilm:
+  omnisense/omnifilm:
     kind: family
     description: "Omnifilm: the record of a film, a series or an episode under any PHP host, whoever keeps it - titles, dates, cast and crew, pictures, identifiers across registers (IMDb, TMDB, TheTVDB, Trakt, Wikidata), a season's episodes and where to watch, behind contracts by capability. Providers are packages of their own (omnifilm/tmdb, omnifilm/omdb, omnifilm/tvdb, omnifilm/trakt, omnifilm/wikidata); the Symfony and Laravel bridges live in omnibridge."
     license: MIT
@@ -126,7 +126,7 @@ packages:
       - wikidata
       - framework-agnostic
       - omnifilm
-    repository: glitchr-studio/omnifilm
+    repository: glitchr-omnisense/omnifilm
     branch: 1.x
     verification: partial
     verification_note: '- Verified live: Wikidata (no key) - a search, a film by its IMDb number, a series by its TMDB number (docker compose run --rm omnifilm live). — - Not verified live: TMDB, OMDb, TheTVDB, Trakt - no account was used.'

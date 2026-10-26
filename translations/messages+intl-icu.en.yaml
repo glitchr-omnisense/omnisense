@@ -1,6 +1,6 @@
 site:
   slogan: The Omni packages and their documentation
-  description: Omniscient presents the Omni ecosystem - the foundation (the omnibase core, the families and their providers, the bridges) and optional ready-made structures - and publishes each package's documentation, read in its repository.
+  description: Omnisense presents the Omni ecosystem - the foundation (the omnibase core, the families and their providers, the bridges) and optional ready-made structures - and publishes each package's documentation, read in its repository.
   keywords: omnibase, omnitrade, omnibus, Symfony, PHP, packages, documentation, Glitch Art
 offline:
   title: You are offline
@@ -28,7 +28,7 @@ footer:
 home:
   libraries: JavaScript libraries
   libraries_count: '{count, plural, =0 {no library} one {# library} other {# libraries}}'
-  title: 'Omniscient: the Omni ecosystem and its documentation'
+  title: 'Omnisense: the Omni ecosystem and its documentation'
   kicker: One prefix, several families
   kicker_count: '{packages} packages · {families} families'
   families_label: The families
@@ -76,7 +76,7 @@ floors:
   foundation:
     name: Core
     one: Core
-    pattern: omniscient/omnibase
+    pattern: omnisense/omnibase
     text: 'The core every site starts from: accounts and security, back office, translations, images, forms.'
   component:
     name: Prepared structures
@@ -86,8 +86,8 @@ floors:
   family:
     name: Families
     one: Family
-    pattern: omniscient/omni<domain>
-    text: The contract of one domain - parcels, payments, public registers, science data - in plain PHP, whoever the service behind it. Under omniscient/, or still glitchr/ for those not moved yet.
+    pattern: omnisense/omni<domain>
+    text: The contract of one domain - parcels, payments, public registers, science data - in plain PHP, whoever the service behind it. Under omnisense/, or still glitchr/ for those not moved yet.
   provider:
     name: Providers
     one: Provider
@@ -192,7 +192,7 @@ legal:
   host_text: 'The site is a set of static files served by {host}, a service of GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, United States.'
   host_missing: The site is not online yet. The host will be named when it is.
   packages: The packages
-  packages_text: The packages presented are published by the glitchr-studio organisation. Each one's licence is the one its repository declares, repeated on its sheet.
+  packages_text: The packages presented are published by the glitchr-omnisense organisation (the JavaScript libraries by glitchr-studio). Each one's licence is the one its repository declares, repeated on its sheet.
   sources: Where the information comes from
   sources_text: A package's page comes from the site's catalogue, read in its repository (composer.json or package.json, README); its documentation is its docs/ folder at the commit the site pins, shown on each page. The third-party services named in the manuals belong to their owners.
   fonts: Type
@@ -221,7 +221,7 @@ compat:
   families_text: 'The core of an <code>omni*</code> family requires neither Symfony, nor Doctrine, nor Twig: only standalone libraries. Its registry is built by hand, in a script, a Laravel or a Symfony application. The Symfony bridge is in the package, under <code>Bridge/Symfony</code>, and nothing of it is loaded elsewhere.'
   families_proof: 'The proof: each family has a framework-free test (<code>Tests/BareTest.php</code>) that builds its registry by hand and checks that no framework class is loaded.'
   omnibase_title: omnibase 4 runs through its bridges
-  omnibase_text: '<code>omniscient/omnibase</code> 4.x requires only its framework-free foundation: Symfony comes through <code>omnibridge/symfony</code>, Laravel through <code>omnibridge/laravel</code>, the storage and the rendering through <code>omnibridge/doctrine</code> and <code>omnibridge/twig</code>.'
+  omnibase_text: '<code>omnisense/omnibase</code> 4.x requires only its framework-free foundation: Symfony comes through <code>omnibridge/symfony</code>, Laravel through <code>omnibridge/laravel</code>, the storage and the rendering through <code>omnibridge/doctrine</code> and <code>omnibridge/twig</code>.'
   agnostic_title: The prepared structures follow
   agnostic_text: 'The prepared structures <code>omnibase/*</code> are Symfony bundles on the core today; each moves its trade to the root of its package (objects, rules, contracts) as it is reworked, its framework parts into bridges. The generic glue, which knows no structure:'
   bridge_symfony: container, routing, forms, security

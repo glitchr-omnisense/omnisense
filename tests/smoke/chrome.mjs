@@ -1,9 +1,9 @@
 // Smoke test of the static export in headless Chrome (CI, Node 22: global fetch and WebSocket).
 // Each page, at 1440 and at 390 (phone, touch), light and dark: no console error, no exception, no
 // failed request, no sideways scroll, what the page must hold (a CSS selector), and - for a site served
-// under a folder (GitHub Pages: /omniscient) - no request nor link of the page outside that folder.
+// under a folder (GitHub Pages: /omnisense) - no request nor link of the page outside that folder.
 //
-//   node tests/smoke/chrome.mjs http://localhost:8135[/omniscient] [screenshots dir]
+//   node tests/smoke/chrome.mjs http://localhost:8135[/omnisense] [screenshots dir]
 import { spawn } from 'node:child_process';
 import { mkdtempSync, mkdirSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';

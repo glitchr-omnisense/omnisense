@@ -1,6 +1,6 @@
 /*
- * After first paint: the glitchr plugins, started by omniscient/omnibase's
- * Base.boot() (vendor/omniscient/omnibase/assets/boot.js) - flowjs' stops, then its
+ * After first paint: the glitchr plugins, started by omnisense/omnibase's
+ * Base.boot() (vendor/omnisense/omnibase/assets/boot.js) - flowjs' stops, then its
  * navigation (links swap #content in place, the back office opens as a
  * website-in-website over the site) - and the site's own effects.
  */
@@ -21,14 +21,14 @@ import './styles/app-defer.scss';
 
 import '@glitchr/flowjs/stops';
 import '@glitchr/flowjs/navigation';
-import Base from '../vendor/omniscient/omnibase/assets/boot.js';
+import Base from '../vendor/omnisense/omnibase/assets/boot.js';
 
 // The documentation pages' copy buttons, current heading and folded contents,
 // and the site's search over its prebuilt JSON index.
 import './docs.js';
 import './search.js';
 // omnidocs: the one-page manuals' table of contents (the heading being read, the address on it), their drawer on a phone.
-import '../vendor/omniscient/omnidocs/assets/omnidocs.js';
+import '../vendor/omnisense/omnidocs/assets/omnidocs.js';
 
 window.addEventListener('transparent:load', function () {
     var header = document.querySelector('.om-header');

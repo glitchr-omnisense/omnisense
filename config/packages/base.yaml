@@ -81,7 +81,7 @@ base:
     use_form2: true
     use_bootstrap: true
 
-    default_path: '%kernel.project_dir%/vendor/omniscient/omnibase/templates'
+    default_path: '%kernel.project_dir%/vendor/omnisense/omnibase/templates'
     form_themes:
         - '@Base/form/form_div_layout.html.twig'
 

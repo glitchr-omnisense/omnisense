@@ -5,7 +5,7 @@ title: Installation and first calls
 # Install it
 
 ```sh
-composer require omniscient/omnitrade:1.x-dev
+composer require omnisense/omnitrade:1.x-dev
 ```
 
 ## Plain PHP

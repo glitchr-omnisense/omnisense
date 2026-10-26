@@ -4,9 +4,9 @@ summary: Guides, news, the catalogue and every package's manual, built from file
 tags: [website]
 ---
 
-The Omniscient website is now a set of static pages, exported by
+The Omnisense website is now a set of static pages, exported by
 `omnibridge/static` from the same Symfony application on
-`omniscient/omnibase`. What changed for readers:
+`omnisense/omnibase`. What changed for readers:
 
 - **The content is files.** The guides (`docs/`), the news (`news/`), the
   catalogue (`catalog/`, one file per family) and the list of manuals

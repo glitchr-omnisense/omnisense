@@ -1,4 +1,4 @@
-# The omnisong entry of the Omniscient catalogue. Written by `bin/console
+# The omnisong entry of the Omnisense catalogue. Written by `bin/console
 # app:catalog:import` from the packages' repositories; the phrase and the
 # text are the site's own, edited here. Each package: its kind, what its
 # composer.json says, its GitHub repository and development branch, whether
@@ -12,7 +12,7 @@ text:
   en: 'One contract for listening to a catalogue: releases, tracks, previews, the links to every platform, and the embeds that play from them.'
   fr: 'Un seul contrat pour écouter un catalogue : disques, plages, extraits, les liens vers chaque plateforme, et les lecteurs qui les jouent.'
 packages:
-  omniscient/omnisong:
+  omnisense/omnisong:
     kind: family
     description: "Omnisong: one contract for listening to a musician's catalogue - releases, tracks, previews, the links to every platform with the label first, and the embeds that play from them - and its Symfony bundle."
     license: MIT
@@ -24,7 +24,7 @@ packages:
       - itunes
       - player
       - omnisong
-    repository: glitchr-studio/omnisong
+    repository: glitchr-omnisense/omnisong
     branch: 1.x
     verification: unstated
     docs: true
@@ -38,11 +38,12 @@ packages:
       - apple-music
       - preview
       - omnisong
-    repository: glitchr-studio/omnisong-itunes
+    repository: glitchr-omnisense/omnisong-itunes
     branch: 1.x
     requires:
-      - omniscient/omnisong
+      - omnisense/omnisong
     verification: unstated
+    docs: true
   omnisong/odesli:
     kind: provider
     description: "Omnisong Odesli: one link (or an ISRC, a UPC) to the same song or album on every platform, through song.link's API."
@@ -52,8 +53,9 @@ packages:
       - odesli
       - songlink
       - omnisong
-    repository: glitchr-studio/omnisong-odesli
+    repository: glitchr-omnisense/omnisong-odesli
     branch: 1.x
     requires:
-      - omniscient/omnisong
+      - omnisense/omnisong
     verification: unstated
+    docs: true

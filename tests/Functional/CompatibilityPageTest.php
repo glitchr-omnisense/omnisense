@@ -9,9 +9,9 @@ final class CompatibilityPageTest extends SiteTestCase
     {
         $html = $this->get('/compatibility');
         self::assertStringContainsString('<th scope="col">PHP 8.4</th>', $html, 'a column per CI job label');
-        self::assertMatchesRegularExpression('#<tr data-name="omnitrade/stripe" data-conformance="passes">.*?href="https://github.com/glitchr-studio/omnitrade-stripe/actions/runs/12"#s', $html);
+        self::assertMatchesRegularExpression('#<tr data-name="omnitrade/stripe" data-conformance="passes">.*?href="https://github.com/glitchr-omnisense/omnitrade-stripe/actions/runs/12"#s', $html);
         self::assertStringContainsString('data-name="omnitrade/paypal" data-conformance="fails"', $html, 'its CI failed');
-        self::assertStringContainsString('data-name="omniscient/omnitrade" data-conformance="none"', $html, 'a family\'s core is no provider');
+        self::assertStringContainsString('data-name="omnisense/omnitrade" data-conformance="none"', $html, 'a family\'s core is no provider');
         self::assertStringContainsString('Read from GitHub on 2026-10-25 12:00 UTC', $html);
         self::assertStringContainsString('Not verified for real', $html, 'omnitrade/paypal\'s README, from the catalogue');
         self::assertStringContainsString('href="/compatibility"', $this->get('/packages'));

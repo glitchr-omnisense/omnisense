@@ -12,7 +12,7 @@
 #
 # Environment: SITE_URL, the public address of the static site (canonical
 # links, sitemap, feeds): an origin or a folder of one
-# (https://glitchr-studio.github.io/omniscient/) - http://localhost:8135 by
+# (https://glitchr-omnisense.github.io/omnisense/) - http://localhost:8135 by
 # default. --github-pages exports for GitHub Pages (.nojekyll, CNAME for a
 # custom domain, no _redirects, every address checked to stay under the folder).
 set -eu

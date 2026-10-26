@@ -1,4 +1,4 @@
-# The omnigame entry of the Omniscient catalogue. Written by `bin/console
+# The omnigame entry of the Omnisense catalogue. Written by `bin/console
 # app:catalog:import` from the packages' repositories; the phrase and the
 # text are the site's own, edited here. Each package: its kind, what its
 # composer.json says, its GitHub repository and development branch, whether
@@ -21,10 +21,10 @@ packages:
       - catalogue
       - framework-agnostic
       - omnigame
-    repository: glitchr-studio/omnigame-gog
+    repository: glitchr-omnisense/omnigame-gog
     branch: 1.x
     requires:
-      - omniscient/omnigame
+      - omnisense/omnigame
     verification: verified
     verification_note: '- Verified live (2026-10-24): a product with its US price, a search.'
   omnigame/igdb:
@@ -40,10 +40,10 @@ packages:
       - apicalypse
       - framework-agnostic
       - omnigame
-    repository: glitchr-studio/omnigame-igdb
+    repository: glitchr-omnisense/omnigame-igdb
     branch: 1.x
     requires:
-      - omniscient/omnigame
+      - omnisense/omnigame
     verification: partial
     verification_note: '- Not verified live: no credentials.'
   omnigame/itch:
@@ -59,10 +59,10 @@ packages:
       - download-keys
       - framework-agnostic
       - omnigame
-    repository: glitchr-studio/omnigame-itch
+    repository: glitchr-omnisense/omnigame-itch
     branch: 1.x
     requires:
-      - omniscient/omnigame
+      - omnisense/omnigame
     verification: partial
     verification_note: "- Verified live (2026-10-24): X-Moon's page. — - Not verified live: ownership and library (no key)."
   omnigame/rawg:
@@ -76,10 +76,10 @@ packages:
       - database
       - framework-agnostic
       - omnigame
-    repository: glitchr-studio/omnigame-rawg
+    repository: glitchr-omnisense/omnigame-rawg
     branch: 1.x
     requires:
-      - omniscient/omnigame
+      - omnisense/omnigame
     verification: partial
     verification_note: '- Not verified live: no key.'
   omnigame/steam:
@@ -95,13 +95,13 @@ packages:
       - library
       - framework-agnostic
       - omnigame
-    repository: glitchr-studio/omnigame-steam
+    repository: glitchr-omnisense/omnigame-steam
     branch: 1.x
     requires:
-      - omniscient/omnigame
+      - omnisense/omnigame
     verification: partial
     verification_note: "- Verified live (no key, 2026-10-24): Portal 2's record in English with its US price, a search. — - Not verified live: the library and ownership (no Web API key was used)."
-  omniscient/omnigame:
+  omnisense/omnigame:
     kind: family
     description: "Omnigame: a game's presence on the stores, read under any PHP host - its store record (texts, dates, studios, platforms, price, pictures, scores, identifiers on other stores), a search by title, a player's library and whether a player owns a game, behind contracts by capability. Read only: nothing is bought, granted or written. Providers are packages of their own (omnigame/steam, omnigame/gog, omnigame/itch, omnigame/igdb, omnigame/rawg); the Symfony and Laravel bridges live in omnibridge."
     license: MIT
@@ -117,7 +117,7 @@ packages:
       - library
       - framework-agnostic
       - omnigame
-    repository: glitchr-studio/omnigame
+    repository: glitchr-omnisense/omnigame
     branch: 1.x
     verification: partial
     verification_note: "- Verified live (docker compose run --rm omnigame live, no key): Steam's store (Portal 2's record and price, a search), GOG's catalogue (a product, its price, a search), an itch.io page. — - Not verified live: Steam's library and ownership, itch.io's ownership and library, IGDB, RAWG - no key was used."

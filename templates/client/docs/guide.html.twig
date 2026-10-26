@@ -25,7 +25,7 @@
             <button type="button" class="manual-menu-button" data-manual-menu aria-controls="manual-side" aria-expanded="false">{{ '@messages.manual.menu'|trans }}</button>
         </nav>
         <div class="manual-prose" data-text-copy="{{ '@messages.manual.copy'|trans }}" data-text-copied="{{ '@messages.manual.copied'|trans }}">
-            <a class="manual-pencil" href="{{ site.githubUrl }}/omniscient/edit/main/{{ guide.source }}" rel="noopener" title="{{ '@messages.docs.pencil_title'|trans({file: guide.source, branch: 'main'}) }}"><i class="fa-solid fa-pen" aria-hidden="true"></i><span>{{ '@messages.docs.pencil'|trans }}</span></a>
+            <a class="manual-pencil" href="{{ site.githubUrl }}/omnisense/edit/main/{{ guide.source }}" rel="noopener" title="{{ '@messages.docs.pencil_title'|trans({file: guide.source, branch: 'main'}) }}"><i class="fa-solid fa-pen" aria-hidden="true"></i><span>{{ '@messages.docs.pencil'|trans }}</span></a>
             <h1>{{ guide.title }}</h1>
             {{ guide.rendered.html|raw }}
         </div>

@@ -9,9 +9,9 @@
 #
 # The site's address: the repository variable SITE_URL when a custom domain is set
 # (https://example.org/), otherwise the address GitHub Pages gives the repository
-# (actions/configure-pages: https://glitchr-studio.github.io/omniscient), otherwise
-# https://glitchr-studio.github.io/omniscient/. The pages are rendered at the root and
-# omnibridge/static moves every internal address under its folder (/omniscient), and
+# (actions/configure-pages: https://glitchr-omnisense.github.io/omnisense), otherwise
+# https://glitchr-omnisense.github.io/omnisense/. The pages are rendered at the root and
+# omnibridge/static moves every internal address under its folder (/omnisense), and
 # fails the build on any left outside it.
 #
 # Settings → Pages → Source: GitHub Actions, once, before the first deployment.
@@ -58,7 +58,7 @@ jobs:
           CUSTOM_SITE_URL: ${{ vars.SITE_URL }}
           PAGES_URL: ${{ steps.pages.outputs.base_url }}
         run: |
-          site_url="${CUSTOM_SITE_URL:-${PAGES_URL:-https://glitchr-studio.github.io/omniscient/}}"
+          site_url="${CUSTOM_SITE_URL:-${PAGES_URL:-https://glitchr-omnisense.github.io/omnisense/}}"
           base_path=$(python3 -c 'import sys, urllib.parse; print(urllib.parse.urlparse(sys.argv[1]).path.rstrip("/"))' "$site_url")
           echo "SITE_URL=$site_url" >> "$GITHUB_ENV"
           echo "BASE_PATH=$base_path" >> "$GITHUB_ENV"

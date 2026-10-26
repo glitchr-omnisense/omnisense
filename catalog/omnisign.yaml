@@ -1,4 +1,4 @@
-# The omnisign entry of the Omniscient catalogue. Written by `bin/console
+# The omnisign entry of the Omnisense catalogue. Written by `bin/console
 # app:catalog:import` from the packages' repositories; the phrase and the
 # text are the site's own, edited here. Each package: its kind, what its
 # composer.json says, its GitHub repository and development branch, whether
@@ -12,7 +12,7 @@ text:
   en: 'One contract for having documents signed: create an envelope (documents, signers, fields, a simple, advanced or qualified level), send it, follow it, remind, cancel, sign in the page, download the signed documents and their evidence - Yousign, DocuSign, DocuSeal.'
   fr: 'Un seul contrat pour faire signer : créer une enveloppe (documents, signataires, champs, niveau simple, avancé ou qualifié), l’envoyer, la suivre, relancer, annuler, signer dans la page, télécharger les documents signés et leurs preuves — Yousign, DocuSign, DocuSeal.'
 packages:
-  omniscient/omnisign:
+  omnisense/omnisign:
     kind: family
     description: "Omnisign: one contract for having documents signed - create an envelope (documents, signers, fields, a level: simple, advanced, qualified), send it, follow it, remind, cancel, sign in the application's page, download the signed documents and their evidence, hear the provider's webhooks - whoever signs: Yousign (omnisign/yousign), DocuSign (omnisign/docusign), a DocuSeal instance (omnisign/docuseal); and its Symfony bundle."
     license: MIT
@@ -24,7 +24,7 @@ packages:
       - docusign
       - docuseal
       - omnisign
-    repository: glitchr-studio/omnisign
+    repository: glitchr-omnisense/omnisign
     branch: 1.x
     verification: unstated
     docs: true
@@ -38,10 +38,10 @@ packages:
       - docuseal
       - self-hosted
       - omnisign
-    repository: glitchr-studio/omnisign-docuseal
+    repository: glitchr-omnisense/omnisign-docuseal
     branch: 1.x
     requires:
-      - omniscient/omnisign
+      - omnisense/omnisign
     verification: verified
     verification_note: 'Verified in real on 2026-10-08 against an instance of the open-source edition run in Docker: created, signing link, completed, downloaded (signed PDF and audit log), archived.'
     docs: true
@@ -54,10 +54,10 @@ packages:
       - e-signature
       - docusign
       - omnisign
-    repository: glitchr-studio/omnisign-docusign
+    repository: glitchr-omnisense/omnisign-docusign
     branch: 1.x
     requires:
-      - omniscient/omnisign
+      - omnisense/omnisign
     verification: partial
     verification_note: "Documentation: the options and the JWT grant, from an envelope to DocuSign's, Connect, what was verified. — Not verified in real: no developer account."
     docs: true
@@ -72,10 +72,10 @@ packages:
       - yousign
       - youtrust
       - omnisign
-    repository: glitchr-studio/omnisign-yousign
+    repository: glitchr-omnisense/omnisign-yousign
     branch: 1.x
     requires:
-      - omniscient/omnisign
+      - omnisense/omnisign
     verification: partial
     verification_note: 'Documentation: the options, how an envelope becomes a signature request, levels and authentication, the webhooks, what was verified. — Not verified in real: no account.'
     docs: true

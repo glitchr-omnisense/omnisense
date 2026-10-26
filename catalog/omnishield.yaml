@@ -1,4 +1,4 @@
-# The omnishield entry of the Omniscient catalogue. Written by `bin/console
+# The omnishield entry of the Omnisense catalogue. Written by `bin/console
 # app:catalog:import` from the packages' repositories; the phrase and the
 # text are the site's own, edited here. Each package: its kind, what its
 # composer.json says, its GitHub repository and development branch, whether
@@ -12,7 +12,7 @@ text:
   en: 'One contract for guarding a form: is this token valid (ALTCHA, Turnstile, reCAPTCHA), is this text spam (Akismet), is this address known for abuse (StopForumSpam, disposable domains) - whoever answers; a form field and a constraint on the Symfony side.'
   fr: 'Un seul contrat pour garder un formulaire : ce jeton est-il valable (ALTCHA, Turnstile, reCAPTCHA), ce texte est-il un pourriel (Akismet), cette adresse est-elle connue pour abus (StopForumSpam, domaines jetables) — quel que soit celui qui répond ; un champ de formulaire et une contrainte côté Symfony.'
 packages:
-  omniscient/omnishield:
+  omnisense/omnishield:
     kind: family
     description: "Omnishield: one contract for guarding a form - is this token valid (a captcha: ALTCHA, Turnstile, reCAPTCHA), is this content spam (Akismet), are this address, this e-mail, this name known for abuse (StopForumSpam, disposable e-mail domains) - whoever answers; and its Symfony bridge: a form field, a constraint, the ALTCHA challenge's route, a Twig function."
     license: MIT
@@ -27,7 +27,7 @@ packages:
       - stopforumspam
       - disposable-email
       - omnishield
-    repository: glitchr-studio/omnishield
+    repository: glitchr-omnisense/omnishield
     branch: 1.x
     verification: unstated
     docs: true
@@ -41,10 +41,10 @@ packages:
       - akismet
       - comments
       - omnishield
-    repository: glitchr-studio/omnishield-akismet
+    repository: glitchr-omnisense/omnishield-akismet
     branch: 1.x
     requires:
-      - omniscient/omnishield
+      - omnisense/omnishield
     verification: verified
     verification_note: 'Documentation: what it calls, the credentials, the capabilities, an example run offline, the errors, the fields sent, the answers, the options, what was verified - nothing against Akismet itself: no key.'
     docs: true
@@ -59,10 +59,10 @@ packages:
       - privacy
       - antispam
       - omnishield
-    repository: glitchr-studio/omnishield-altcha
+    repository: glitchr-omnisense/omnishield-altcha
     branch: 1.x
     requires:
-      - omniscient/omnishield
+      - omnisense/omnishield
     verification: verified
     verification_note: 'Documentation: what it calls, the credentials, the capabilities, an example run offline, the errors, the options, the widget and its script, the challenge in the page or from a route, the action, what was verified - the whole way in PHP: issued, solved by the library, verified, refused when posted again.'
     docs: true
@@ -77,10 +77,10 @@ packages:
       - blocklist
       - antispam
       - omnishield
-    repository: glitchr-studio/omnishield-disposable
+    repository: glitchr-omnisense/omnishield-disposable
     branch: 1.x
     requires:
-      - omniscient/omnishield
+      - omnisense/omnishield
     verification: verified
     verification_note: "Documentation: what it calls, the credentials, the capabilities, an example run offline, the errors, the matching, the options, the refresh, the list's licence, what was verified."
     docs: true
@@ -94,10 +94,10 @@ packages:
       - google
       - antispam
       - omnishield
-    repository: glitchr-studio/omnishield-recaptcha
+    repository: glitchr-omnisense/omnishield-recaptcha
     branch: 1.x
     requires:
-      - omniscient/omnishield
+      - omnisense/omnishield
     verification: verified
     verification_note: "Documentation: what it calls, the credentials, the capabilities, an example run offline, the errors, the four modes, the options, the answers, the test keys, what was verified - v2 against Google with its test keys; v3 and Enterprise on answers written from Google's documentation, no key."
     docs: true
@@ -112,10 +112,10 @@ packages:
       - reputation
       - blocklist
       - omnishield
-    repository: glitchr-studio/omnishield-stopforumspam
+    repository: glitchr-omnisense/omnishield-stopforumspam
     branch: 1.x
     requires:
-      - omniscient/omnishield
+      - omnisense/omnishield
     verification: verified
     verification_note: "Documentation: what it calls, the credentials, the capabilities, an example run offline, the errors, the options, the answer and how it is read, the terms, what was verified - lookups on the documentation's values and a Tor exit node, for real, on 2026-10-07."
     docs: true
@@ -129,10 +129,10 @@ packages:
       - cloudflare
       - antispam
       - omnishield
-    repository: glitchr-studio/omnishield-turnstile
+    repository: glitchr-omnisense/omnishield-turnstile
     branch: 1.x
     requires:
-      - omniscient/omnishield
+      - omnisense/omnishield
     verification: verified
     verification_note: 'Documentation: what it calls, the credentials, the capabilities, an example run offline, the errors, the options, the answers, the testing keys, what was verified - the three testing secrets against Cloudflare, on 2026-10-07.'
     docs: true

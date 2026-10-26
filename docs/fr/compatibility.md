@@ -32,7 +32,7 @@ n'est chargée.
 
 ## Le cœur tourne sous Symfony et sous Laravel
 
-Depuis la 4.0, `omniscient/omnibase` ne requiert que sa fondation, sans
+Depuis la 4.0, `omnisense/omnibase` ne requiert que sa fondation, sans
 cadre. Le cadre vient par un pont :
 
 - **Symfony** : `omnibridge/symfony` apporte les paquets du cadre et

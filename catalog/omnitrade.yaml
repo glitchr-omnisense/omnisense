@@ -1,4 +1,4 @@
-# The omnitrade entry of the Omniscient catalogue. Written by `bin/console
+# The omnitrade entry of the Omnisense catalogue. Written by `bin/console
 # app:catalog:import` from the packages' repositories; the phrase and the
 # text are the site's own, edited here. Each package: its kind, what its
 # composer.json says, its GitHub repository and development branch, whether
@@ -12,7 +12,7 @@ text:
   en: 'One contract for payment providers and commerce platforms: purchase, authorize, capture, refund, webhooks, platform orders.'
   fr: 'Un seul contrat pour les prestataires de paiement et les plateformes de commerce : achat, autorisation, capture, remboursement, webhooks, commandes des plateformes.'
 packages:
-  omniscient/omnitrade:
+  omnisense/omnitrade:
     kind: family
     description: "Omnitrade: one contract for payment providers and commerce platforms - purchase, authorize, capture, refund, webhooks, platform orders - and its Symfony bundle (Omnibus's sibling for trade)."
     license: MIT
@@ -24,7 +24,7 @@ packages:
       - shopify
       - woocommerce
       - omnitrade
-    repository: glitchr-studio/omnitrade
+    repository: glitchr-omnisense/omnitrade
     branch: 1.x
     verification: unstated
     docs: true
@@ -38,10 +38,10 @@ packages:
       - associates
       - affiliate
       - omnitrade
-    repository: glitchr-studio/omnitrade-amazon
+    repository: glitchr-omnisense/omnitrade-amazon
     branch: 1.x
     requires:
-      - omniscient/omnitrade
+      - omnisense/omnitrade
     verification: unstated
     docs: true
   omnitrade/paypal:
@@ -52,10 +52,10 @@ packages:
       - payment
       - paypal
       - omnitrade
-    repository: glitchr-studio/omnitrade-paypal
+    repository: glitchr-omnisense/omnitrade-paypal
     branch: 1.x
     requires:
-      - omniscient/omnitrade
+      - omnisense/omnitrade
     verification: unstated
     docs: true
   omnitrade/shopify:
@@ -66,10 +66,10 @@ packages:
       - shopify
       - commerce
       - omnitrade
-    repository: glitchr-studio/omnitrade-shopify
+    repository: glitchr-omnisense/omnitrade-shopify
     branch: 1.x
     requires:
-      - omniscient/omnitrade
+      - omnisense/omnitrade
     verification: unstated
     docs: true
   omnitrade/stripe:
@@ -80,10 +80,10 @@ packages:
       - payment
       - stripe
       - omnitrade
-    repository: glitchr-studio/omnitrade-stripe
+    repository: glitchr-omnisense/omnitrade-stripe
     branch: 1.x
     requires:
-      - omniscient/omnitrade
+      - omnisense/omnitrade
     verification: unstated
     docs: true
   omnitrade/web:
@@ -98,10 +98,10 @@ packages:
       - schema.org
       - affiliate
       - omnitrade
-    repository: glitchr-studio/omnitrade-web
+    repository: glitchr-omnisense/omnitrade-web
     branch: 1.x
     requires:
-      - omniscient/omnitrade
+      - omnisense/omnitrade
     verification: unstated
     docs: true
   omnitrade/woocommerce:
@@ -113,9 +113,9 @@ packages:
       - wordpress
       - commerce
       - omnitrade
-    repository: glitchr-studio/omnitrade-woocommerce
+    repository: glitchr-omnisense/omnitrade-woocommerce
     branch: 1.x
     requires:
-      - omniscient/omnitrade
+      - omnisense/omnitrade
     verification: unstated
     docs: true

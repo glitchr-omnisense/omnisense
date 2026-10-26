@@ -5,5 +5,5 @@ packages:
   omnibridge/static:
     kind: bridge
     description: A static export for any application.
-    repository: glitchr-studio/omnibridge-static
+    repository: glitchr-omnisense/omnibridge-static
     branch: 1.x

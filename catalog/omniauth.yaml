@@ -1,4 +1,4 @@
-# The omniauth entry of the Omniscient catalogue. Written by `bin/console
+# The omniauth entry of the Omnisense catalogue. Written by `bin/console
 # app:catalog:import` from the packages' repositories; the phrase and the
 # text are the site's own, edited here. Each package: its kind, what its
 # composer.json says, its GitHub repository and development branch, whether
@@ -25,16 +25,16 @@ packages:
       - openid-connect
       - framework-agnostic
       - omniauth
-    repository: glitchr-studio/omniauth-google
+    repository: glitchr-omnisense/omniauth-google
     branch: 1.x
     requires:
-      - omniscient/omniauth
+      - omnisense/omniauth
     verification: partial
     verification_note: "- Not verified: a real Google - no client id and secret were at hand: the recorded answers are written from Google's documentation, not captured, and the ID token's signature is not checked (a token from the token endpoint over TLS, OpenID Connect Core §3.1.3.7 (6))."
     docs: true
   omniauth/oauth:
     kind: provider
-    description: 'Abandoned: omniauth''s sign-in through identity providers is omniscient/omniauth''s own since 2026-10-23 (Omniauth\OAuth\, the same namespace and class names; each provider a package of its own, omniauth/google first). This last release holds no code and requires omniscient/omniauth: require omniscient/omniauth instead.'
+    description: 'Abandoned: omniauth''s sign-in through identity providers is omnisense/omniauth''s own since 2026-10-23 (Omniauth\OAuth\, the same namespace and class names; each provider a package of its own, omniauth/google first). This last release holds no code and requires omnisense/omniauth: require omnisense/omniauth instead.'
     license: MIT
     keywords:
       - authentication
@@ -44,10 +44,10 @@ packages:
       - openid-connect
       - omniauth
       - abandoned
-    repository: glitchr-studio/omniauth-oauth
+    repository: glitchr-omnisense/omniauth-oauth
     branch: 1.x
     requires:
-      - omniscient/omniauth
+      - omnisense/omniauth
     verification: unstated
   omniauth/otp:
     kind: provider
@@ -64,10 +64,10 @@ packages:
       - sodium
       - framework-agnostic
       - omniauth
-    repository: glitchr-studio/omniauth-otp
+    repository: glitchr-omnisense/omniauth-otp
     branch: 1.x
     requires:
-      - omniscient/omniauth
+      - omnisense/omniauth
     verification: partial
     verification_note: "- Not verified: a real phone's application (at AU7, in Chrome, against the site); concurrent tries of the same code against CacheUsedSteps."
     docs: true
@@ -83,14 +83,14 @@ packages:
       - fido2
       - framework-agnostic
       - omniauth
-    repository: glitchr-studio/omniauth-webauthn
+    repository: glitchr-omnisense/omniauth-webauthn
     branch: 1.x
     requires:
-      - omniscient/omniauth
+      - omnisense/omniauth
     verification: partial
     verification_note: '- every refusal: a forged signature, an unknown passkey, a challenge used twice, another challenge, another origin, another relying party, a host the relying party does not serve, a person not verified (sign-in and registration), a counter gone back, the same authenticator registered twice, an unreadable credential; th'
     docs: true
-  omniscient/omniauth:
+  omnisense/omniauth:
     kind: family
     description: "Omniauth: who signs in, and by which factors, under any PHP host - the contracts (accounts, the stores of each proof, the second-factor rule, the host's small duties), the conductor (begin, then verify; the attempt, the result), the methods that need no library (password through symfony/password-hasher, sign-in link, code by e-mail, backup codes, trusted devices in scheb/2fa's cookie format), the sign-in through identity providers (Omniauth\\OAuth\\: state, PKCE and nonce, the linking by the provider's subject, the sign-up of an unknown identity; each provider a package of its own, omniauth/google first), PSR-14 events and Testing helpers. WebAuthn (passkeys) and one-time passwords (TOTP) are packages of their own; the Symfony and Laravel bridges live in omnibridge."
     license: MIT
@@ -109,7 +109,7 @@ packages:
       - pkce
       - framework-agnostic
       - omniauth
-    repository: glitchr-studio/omniauth
+    repository: glitchr-omnisense/omniauth
     branch: 1.x
     verification: partial
     verification_note: "- Not verified: an application's own stores (omnibase fills them at step AU4); a real host (the bridges come with AU6 and AU8); a cookie written by a running scheb/2fa on an application (the encoder is compared, not a browser's cookie); concurrent tries against CacheThrottle (read then written, not atomic: a host that "

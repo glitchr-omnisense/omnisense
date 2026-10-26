@@ -7,7 +7,7 @@
  # where the packages live, the legal pages, and Glitch Art's signature.
  #}
 
-{% block layout_name %}omniscient{% endblock %}
+{% block layout_name %}omnisense{% endblock %}
 
 {% block stylesheets_layout %}
     {{ encore_entry_link_tags('layout1') }}
@@ -21,7 +21,7 @@
 
 <header class="om-header" data-controller="menu" data-action="menu:close->menu#close">
     <div class="om-wrap om-header-inner">
-        <a class="om-mark" href="{{ path('app_index') }}" aria-label="{{ site.name }}"><b>Omni</b><i>scient</i></a>
+        <a class="om-mark" href="{{ path('app_index') }}" aria-label="{{ site.name }}"><b>Omni</b><i>sense</i></a>
         <nav class="om-nav" id="om-nav" aria-label="{{ '@messages.nav.label'|trans }}">
             <ul>
                 <li><a href="{{ path('app_docs') }}" {{ route starts with 'app_docs' or route starts with 'app_guide' or route starts with 'app_manual' ? 'aria-current="page"' }}>{{ '@messages.nav.docs'|trans }}</a></li>
@@ -52,7 +52,7 @@
                     <span class="om-footer-time">[{{ app.site.execution_time|default(0)|number_format(2) }}s]</span>
                 </div>
                 <div>
-                    <p class="om-mark is-small"><b>Omni</b><i>scient</i></p>
+                    <p class="om-mark is-small"><b>Omni</b><i>sense</i></p>
                     <p>{{ '@messages.footer.what'|trans }}</p>
                 </div>
             </div>
@@ -70,7 +70,7 @@
                 <h2>{{ '@messages.footer.sources'|trans }}</h2>
                 <ul>
                     <li><a href="{{ site.githubUrl }}" rel="noopener">GitHub · {{ site.github }}</a></li>
-                    <li><a href="https://packagist.org/packages/omniscient/" rel="noopener">Packagist · omniscient</a></li>
+                    <li><a href="https://packagist.org/packages/omnisense/" rel="noopener">Packagist · omnisense</a></li>
                     <li><a href="{{ path('app_news_atom') }}" data-transparent-ignore>{{ '@messages.footer.feed'|trans }} (Atom)</a></li>
                     <li><a href="{{ path('app_news_rss') }}" data-transparent-ignore>{{ '@messages.footer.feed'|trans }} (RSS)</a></li>
                 </ul>

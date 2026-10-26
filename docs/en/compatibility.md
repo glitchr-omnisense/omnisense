@@ -32,7 +32,7 @@ framework class is loaded.
 
 ## The core runs under Symfony and Laravel
 
-Since 4.0, `omniscient/omnibase` requires only its framework-free
+Since 4.0, `omnisense/omnibase` requires only its framework-free
 foundation. The framework comes through a bridge:
 
 - **Symfony**: `omnibridge/symfony` brings the framework packages and

@@ -8,7 +8,7 @@
  * the address (?q=), so a search can be shared and the page reloaded.
  */
 (function () {
-    if (window.OmniscientSearch) return;
+    if (window.OmnisenseSearch) return;
 
     var cache = {};
     var MAX = 60;
@@ -112,7 +112,7 @@
         if (!input.value) input.focus();
     }
 
-    window.OmniscientSearch = { setup: setup };
+    window.OmnisenseSearch = { setup: setup };
     window.addEventListener('transparent:load', setup);
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', setup);
     else setup();

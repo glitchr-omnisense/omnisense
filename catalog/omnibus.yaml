@@ -1,4 +1,4 @@
-# The omnibus entry of the Omniscient catalogue. Written by `bin/console
+# The omnibus entry of the Omnisense catalogue. Written by `bin/console
 # app:catalog:import` from the packages' repositories; the phrase and the
 # text are the site's own, edited here. Each package: its kind, what its
 # composer.json says, its GitHub repository and development branch, whether
@@ -21,10 +21,10 @@ packages:
       - carrier
       - omnibus
       - amazon
-    repository: glitchr-studio/omnibus-amazon
+    repository: glitchr-omnisense/omnibus-amazon
     branch: 2.x
     requires:
-      - omniscient/omnibus
+      - omnisense/omnibus
     verification: unstated
     docs: true
   omnibus/aramex:
@@ -36,10 +36,10 @@ packages:
       - carrier
       - omnibus
       - aramex
-    repository: glitchr-studio/omnibus-aramex
+    repository: glitchr-omnisense/omnibus-aramex
     branch: 2.x
     requires:
-      - omniscient/omnibus
+      - omnisense/omnibus
     verification: unstated
     docs: true
   omnibus/auspost:
@@ -51,10 +51,10 @@ packages:
       - carrier
       - omnibus
       - auspost
-    repository: glitchr-studio/omnibus-auspost
+    repository: glitchr-omnisense/omnibus-auspost
     branch: 2.x
     requires:
-      - omniscient/omnibus
+      - omnisense/omnibus
     verification: unstated
     docs: true
   omnibus/bluedart:
@@ -66,10 +66,10 @@ packages:
       - carrier
       - omnibus
       - bluedart
-    repository: glitchr-studio/omnibus-bluedart
+    repository: glitchr-omnisense/omnibus-bluedart
     branch: 2.x
     requires:
-      - omniscient/omnibus
+      - omnisense/omnibus
     verification: unverified
     verification_note: "Built from Blue Dart's published API documentation and tested on recorded answers; unverified against the sandbox until an account's keys are at hand."
     docs: true
@@ -82,10 +82,10 @@ packages:
       - carrier
       - omnibus
       - 'canada post'
-    repository: glitchr-studio/omnibus-canada-post
+    repository: glitchr-omnisense/omnibus-canada-post
     branch: 2.x
     requires:
-      - omniscient/omnibus
+      - omnisense/omnibus
     verification: unstated
     docs: true
   omnibus/canpar:
@@ -97,10 +97,10 @@ packages:
       - carrier
       - omnibus
       - canpar
-    repository: glitchr-studio/omnibus-canpar
+    repository: glitchr-omnisense/omnibus-canpar
     branch: 2.x
     requires:
-      - omniscient/omnibus
+      - omnisense/omnibus
     verification: unstated
     docs: true
   omnibus/chronopost:
@@ -112,10 +112,10 @@ packages:
       - carrier
       - omnibus
       - chronopost
-    repository: glitchr-studio/omnibus-chronopost
+    repository: glitchr-omnisense/omnibus-chronopost
     branch: 2.x
     requires:
-      - omniscient/omnibus
+      - omnisense/omnibus
     verification: partial
     verification_note: 'Not verified against a real contract: the codes and fields are those of the public integrations of Chronopost Food; the order of scheduledValue in the request and the Saturday service in particular are to be confirmed on a first real skybill.'
     docs: true
@@ -128,10 +128,10 @@ packages:
       - omnibus
       - colissimo
       - 'la poste'
-    repository: glitchr-studio/omnibus-colissimo
+    repository: glitchr-omnisense/omnibus-colissimo
     branch: 2.x
     requires:
-      - omniscient/omnibus
+      - omnisense/omnibus
     verification: unstated
     docs: true
   omnibus/db-schenker:
@@ -143,10 +143,10 @@ packages:
       - carrier
       - omnibus
       - 'db schenker'
-    repository: glitchr-studio/omnibus-db-schenker
+    repository: glitchr-omnisense/omnibus-db-schenker
     branch: 2.x
     requires:
-      - omniscient/omnibus
+      - omnisense/omnibus
     verification: unverified
     verification_note: "The booking action is built on the Open API's published shape and is unverified: it needs an account's key (from the Schenker partner portal) to be run against the service."
     docs: true
@@ -159,10 +159,10 @@ packages:
       - carrier
       - omnibus
       - dhl
-    repository: glitchr-studio/omnibus-dhl
+    repository: glitchr-omnisense/omnibus-dhl
     branch: 2.x
     requires:
-      - omniscient/omnibus
+      - omnisense/omnibus
     verification: unstated
     docs: true
   omnibus/dtdc:
@@ -174,10 +174,10 @@ packages:
       - carrier
       - omnibus
       - dtdc
-    repository: glitchr-studio/omnibus-dtdc
+    repository: glitchr-omnisense/omnibus-dtdc
     branch: 2.x
     requires:
-      - omniscient/omnibus
+      - omnisense/omnibus
     verification: unverified
     verification_note: "Built from DTDC's published integration documentation and tested on recorded answers; unverified against the demo environment until an account's keys are at hand."
     docs: true
@@ -190,10 +190,10 @@ packages:
       - carrier
       - omnibus
       - fedex
-    repository: glitchr-studio/omnibus-fedex
+    repository: glitchr-omnisense/omnibus-fedex
     branch: 2.x
     requires:
-      - omniscient/omnibus
+      - omnisense/omnibus
     verification: unstated
     docs: true
   omnibus/gls:
@@ -205,10 +205,10 @@ packages:
       - carrier
       - omnibus
       - gls
-    repository: glitchr-studio/omnibus-gls
+    repository: glitchr-omnisense/omnibus-gls
     branch: 2.x
     requires:
-      - omniscient/omnibus
+      - omnisense/omnibus
     verification: unstated
     docs: true
   omnibus/jdl-express:
@@ -220,10 +220,10 @@ packages:
       - carrier
       - omnibus
       - 'jdl express'
-    repository: glitchr-studio/omnibus-jdl-express
+    repository: glitchr-omnisense/omnibus-jdl-express
     branch: 2.x
     requires:
-      - omniscient/omnibus
+      - omnisense/omnibus
     verification: unverified
     verification_note: "Built from JD Logistics' published open platform documentation and tested on recorded answers; unverified against UAT until an account's keys are at hand."
     docs: true
@@ -237,10 +237,10 @@ packages:
       - 'mondial relay'
       - 'point relais'
       - inpost
-    repository: glitchr-studio/omnibus-mondial-relay
+    repository: glitchr-omnisense/omnibus-mondial-relay
     branch: 2.x
     requires:
-      - omniscient/omnibus
+      - omnisense/omnibus
     verification: unstated
     docs: true
   omnibus/offline:
@@ -252,10 +252,10 @@ packages:
       - omnibus
       - offline
       - 'click and collect'
-    repository: glitchr-studio/omnibus-offline
+    repository: glitchr-omnisense/omnibus-offline
     branch: 2.x
     requires:
-      - omniscient/omnibus
+      - omnisense/omnibus
     verification: unstated
     docs: true
   omnibus/purolator:
@@ -267,10 +267,10 @@ packages:
       - carrier
       - omnibus
       - purolator
-    repository: glitchr-studio/omnibus-purolator
+    repository: glitchr-omnisense/omnibus-purolator
     branch: 2.x
     requires:
-      - omniscient/omnibus
+      - omnisense/omnibus
     verification: unstated
     docs: true
   omnibus/royal-mail:
@@ -282,10 +282,10 @@ packages:
       - carrier
       - omnibus
       - 'royal mail'
-    repository: glitchr-studio/omnibus-royal-mail
+    repository: glitchr-omnisense/omnibus-royal-mail
     branch: 2.x
     requires:
-      - omniscient/omnibus
+      - omnisense/omnibus
     verification: unstated
     docs: true
   omnibus/sf-express:
@@ -297,10 +297,10 @@ packages:
       - carrier
       - omnibus
       - 'sf express'
-    repository: glitchr-studio/omnibus-sf-express
+    repository: glitchr-omnisense/omnibus-sf-express
     branch: 2.x
     requires:
-      - omniscient/omnibus
+      - omnisense/omnibus
     verification: unverified
     verification_note: "Built from SF's published open platform documentation and tested on recorded answers; unverified against the sandbox until an account's keys are at hand."
     docs: true
@@ -313,10 +313,10 @@ packages:
       - carrier
       - omnibus
       - tnt
-    repository: glitchr-studio/omnibus-tnt
+    repository: glitchr-omnisense/omnibus-tnt
     branch: 2.x
     requires:
-      - omniscient/omnibus
+      - omnisense/omnibus
     verification: unstated
     docs: true
   omnibus/ups:
@@ -328,10 +328,10 @@ packages:
       - carrier
       - omnibus
       - ups
-    repository: glitchr-studio/omnibus-ups
+    repository: glitchr-omnisense/omnibus-ups
     branch: 2.x
     requires:
-      - omniscient/omnibus
+      - omnisense/omnibus
     verification: unstated
     docs: true
   omnibus/usps:
@@ -343,10 +343,10 @@ packages:
       - carrier
       - omnibus
       - usps
-    repository: glitchr-studio/omnibus-usps
+    repository: glitchr-omnisense/omnibus-usps
     branch: 2.x
     requires:
-      - omniscient/omnibus
+      - omnisense/omnibus
     verification: unstated
     docs: true
   omnibus/zto-express:
@@ -358,14 +358,14 @@ packages:
       - carrier
       - omnibus
       - 'zto express'
-    repository: glitchr-studio/omnibus-zto-express
+    repository: glitchr-omnisense/omnibus-zto-express
     branch: 2.x
     requires:
-      - omniscient/omnibus
+      - omnisense/omnibus
     verification: unverified
     verification_note: "Built from ZTO's published open platform documentation and tested on recorded answers; unverified against the test environment until an account's keys are at hand."
     docs: true
-  omniscient/omnibus:
+  omnisense/omnibus:
     kind: family
     description: 'Omnibus: one contract for parcel carriers - rates, labels, tracking, pickup points - and its Symfony bundle (the Payum of shipping).'
     license: MIT
@@ -376,7 +376,7 @@ packages:
       - label
       - tracking
       - 'pickup point'
-    repository: glitchr-studio/omnibus
+    repository: glitchr-omnisense/omnibus
     branch: 2.x
     verification: partial
     verification_note: "Not verified: that the carriers' APIs answer as recorded."
