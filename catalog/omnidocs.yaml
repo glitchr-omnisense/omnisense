@@ -1,0 +1,113 @@
+# The omnidocs entry of the Omniscient catalogue. Written by `bin/console
+# app:catalog:import` from the packages' repositories; the phrase and the
+# text are the site's own, edited here. Each package: its kind, what its
+# composer.json says, its GitHub repository and development branch, whether
+# its README says it was verified against the real service, whether it has
+# a docs/ folder (see config/documentation.yaml).
+family: omnidocs
+packages:
+  omnidocs/doxygen:
+    kind: provider
+    description: "Omnidocs Doxygen: a C or C++ project's reference from Doxygen's XML output - its main page, a page per namespace, class, struct and file with its public members, their declarations, parameters and returns; notes, warnings and code examples in omnidocs' conventions."
+    license: MIT
+    keywords:
+      - documentation
+      - doxygen
+      - c
+      - cpp
+      - 'api reference'
+      - omnidocs
+    repository: glitchr-studio/omnidocs-doxygen
+    branch: 1.x
+    requires:
+      - omniscient/omnidocs
+    verification: partial
+    verification_note: '- Not verified: Doxygen''s groups (\defgroup) and related pages beyond the main page; C, Java and Python projects; diagrams (Doxygen draws them as images, not in the XML).'
+  omnidocs/jsdoc:
+    kind: provider
+    description: "Omnidocs JSDoc: a JavaScript library's API reference from the JSON JSDoc explains (jsdoc -X) - a page per global, its functions, methods and properties with their comments, parameters and source lines; a library of browser scripts (IIFE, UMD) named by the globals it sets."
+    license: MIT
+    keywords:
+      - documentation
+      - 'api reference'
+      - javascript
+      - jsdoc
+      - omnidocs
+    repository: glitchr-studio/omnidocs-jsdoc
+    branch: 1.x
+    requires:
+      - omniscient/omnidocs
+    verification: partial
+    verification_note: "- Not verified: ES modules (export function), whose doclets JSDoc names module:x~y - read, but no library of the ecosystem is written so; JSDoc's own @module, @namespace tags beyond their names."
+  omnidocs/markdown:
+    kind: provider
+    description: 'Omnidocs Markdown: a folder of Markdown files as an omnidocs manual - its contents from the folders and the files (their front matter, a number before their name), each page rendered with league/commonmark as symfony.com/doc writes its pages: callouts (note, tip, caution, versionadded...), code with a caption and in tabs, version badges, links between pages and to the repository; and a changelog read as releases.'
+    license: MIT
+    keywords:
+      - documentation
+      - markdown
+      - commonmark
+      - manual
+      - changelog
+      - omnidocs
+    repository: glitchr-studio/omnidocs-markdown
+    branch: 1.x
+    requires:
+      - omniscient/omnidocs
+    verification: partial
+    verification_note: "- Not verified: Markdown written for other generators' extensions (MkDocs admonitions !!! note, Docusaurus' :::tip) - shown as written."
+    docs: true
+  omnidocs/php:
+    kind: provider
+    description: "Omnidocs PHP: a PHP package's API reference, read from its sources - its namespaces, classes, interfaces, traits and enums, their public constants, properties and methods with their signatures and PHPDoc, and the options its factories' configuration takes - as an omnidocs manual (nikic/php-parser, phpdocumentor/reflection-docblock); nothing is loaded nor run."
+    license: MIT
+    keywords:
+      - documentation
+      - 'api reference'
+      - php
+      - phpdoc
+      - php-parser
+      - omnidocs
+    repository: glitchr-studio/omnidocs-php
+    branch: 1.x
+    requires:
+      - omniscient/omnidocs
+    verification: partial
+    verification_note: '- Not verified: options given otherwise than in an array literal (a constant, a method call); attributes ([...]) are not shown; a package with two classes of the same name in one namespace (one wins).'
+  omnidocs/sphinx:
+    kind: provider
+    description: "Omnidocs Sphinx: a Sphinx manual as an omnidocs manual, from the JSON builder's output (sphinx-build -b json) and its objects.inv - pages in the toctrees' order, admonitions and versionadded as callouts, highlighted code in frames, the API entries at their anchors with their signatures."
+    license: MIT
+    keywords:
+      - documentation
+      - sphinx
+      - restructuredtext
+      - objects.inv
+      - intersphinx
+      - omnidocs
+    repository: glitchr-studio/omnidocs-sphinx
+    branch: 1.x
+    requires:
+      - omniscient/omnidocs
+    verification: partial
+    verification_note: "- Not verified: other domains than Python's (cpp:, js:) beyond their names; themes' extra context; MyST (Markdown) projects; math (MathJax is a script, left out: formulas show as their source)."
+  omniscient/omnidocs:
+    kind: family
+    description: 'Omnidocs: one model of a manual, whatever wrote it - Markdown, Sphinx, Doxygen, JSDoc: its versions, its pages (title, contents, headings, the file to edit), its API entries and their anchors, read through one source contract; a search index a static page searches, and the HTML conventions of symfony.com/doc (callouts, versionadded, code with captions and tabs) every format renders to.'
+    license: MIT
+    keywords:
+      - documentation
+      - manual
+      - markdown
+      - sphinx
+      - doxygen
+      - jsdoc
+      - 'api reference'
+      - 'search index'
+      - 'static site'
+      - omnidocs
+    repository: glitchr-studio/omnidocs
+    branch: 1.x
+    verification: partial
+    verification_note: "- Not verified: Sphinx themes' own JSON additions beyond the standard builder; Sphinx projects written with MyST (Markdown) - the JSON builder writes the same HTML, not tried; Doxygen's C, Java and Python output; TypeDoc (see omnidocs/jsdoc's README: why JSDoc)."
+    docs: true

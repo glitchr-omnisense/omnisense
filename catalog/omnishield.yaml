@@ -46,7 +46,7 @@ packages:
     requires:
       - omniscient/omnishield
     verification: verified
-    verification_note: 'Documentation: the fields sent, the answers, the options, what was verified - nothing against Akismet itself: no key.'
+    verification_note: 'Documentation: what it calls, the credentials, the capabilities, an example run offline, the errors, the fields sent, the answers, the options, what was verified - nothing against Akismet itself: no key.'
     docs: true
   omnishield/altcha:
     kind: provider
@@ -64,7 +64,7 @@ packages:
     requires:
       - omniscient/omnishield
     verification: verified
-    verification_note: 'Documentation: the options, the widget and its script, the challenge in the page or from a route, the action, what was verified - the whole way in PHP: issued, solved by the library, verified, refused when posted again.'
+    verification_note: 'Documentation: what it calls, the credentials, the capabilities, an example run offline, the errors, the options, the widget and its script, the challenge in the page or from a route, the action, what was verified - the whole way in PHP: issued, solved by the library, verified, refused when posted again.'
     docs: true
   omnishield/disposable:
     kind: provider
@@ -82,7 +82,7 @@ packages:
     requires:
       - omniscient/omnishield
     verification: verified
-    verification_note: "Documentation: the matching, the options, the refresh, the list's licence, what was verified."
+    verification_note: "Documentation: what it calls, the credentials, the capabilities, an example run offline, the errors, the matching, the options, the refresh, the list's licence, what was verified."
     docs: true
   omnishield/recaptcha:
     kind: provider
@@ -99,7 +99,7 @@ packages:
     requires:
       - omniscient/omnishield
     verification: verified
-    verification_note: "Documentation: the four modes, the options, the answers, the test keys, what was verified - v2 against Google with its test keys; v3 and Enterprise on answers written from Google's documentation, no key."
+    verification_note: "Documentation: what it calls, the credentials, the capabilities, an example run offline, the errors, the four modes, the options, the answers, the test keys, what was verified - v2 against Google with its test keys; v3 and Enterprise on answers written from Google's documentation, no key."
     docs: true
   omnishield/stopforumspam:
     kind: provider
@@ -117,7 +117,7 @@ packages:
     requires:
       - omniscient/omnishield
     verification: verified
-    verification_note: "Documentation: the options, the answer and how it is read, the terms, what was verified - lookups on the documentation's values and a Tor exit node, for real, on 2026-10-07."
+    verification_note: "Documentation: what it calls, the credentials, the capabilities, an example run offline, the errors, the options, the answer and how it is read, the terms, what was verified - lookups on the documentation's values and a Tor exit node, for real, on 2026-10-07."
     docs: true
   omnishield/turnstile:
     kind: provider
@@ -134,5 +134,5 @@ packages:
     requires:
       - omniscient/omnishield
     verification: verified
-    verification_note: 'Documentation: the options, the answers, the testing keys, what was verified - the three testing secrets against Cloudflare, on 2026-10-07.'
+    verification_note: 'Documentation: what it calls, the credentials, the capabilities, an example run offline, the errors, the options, the answers, the testing keys, what was verified - the three testing secrets against Cloudflare, on 2026-10-07.'
     docs: true
