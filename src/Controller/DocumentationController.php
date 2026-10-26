@@ -80,7 +80,7 @@ class DocumentationController extends AbstractController
     public function page(Request $request, string $key, string $series, string $path): Response
     {
         $manual = $this->series($key, $series);
-        if (null === $this->documentation->page($manual, $series, $path)) {
+        if (!\in_array($path, $this->documentation->formerAddresses($manual, $series), true)) {
             throw $this->createNotFoundException(sprintf('%s %s has no page "%s".', $key, $series, $path));
         }
         $url = $this->generateUrl('app_manual', ['key' => $key, 'series' => $series, '_locale' => Locale::of($request)]);

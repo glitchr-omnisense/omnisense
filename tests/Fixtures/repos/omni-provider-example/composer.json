@@ -1,0 +1,7 @@
+{
+    "name": "omnimap/example",
+    "type": "library",
+    "description": "Example Tiles for omnimap: the provider template's example, no package of the catalogue.",
+    "license": "MIT",
+    "require": { "omnisense/omnimap": "^1.0@dev" }
+}
