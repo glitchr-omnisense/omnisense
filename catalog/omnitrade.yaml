@@ -57,6 +57,7 @@ packages:
     requires:
       - omniscient/omnitrade
     verification: unstated
+    docs: true
   omnitrade/shopify:
     kind: provider
     description: "Omnitrade Shopify: a sale paid on the shop's invoice page (draft orders), the shop's orders, its catalogue (products, variants, inventory) and its webhooks, over the Admin GraphQL API."

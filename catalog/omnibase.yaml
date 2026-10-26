@@ -36,6 +36,7 @@ packages:
     repository: glitchr-studio/omnibase-agenda
     branch: main
     requires:
+      - omnibridge/symfony
       - omniscient/omnibase
       - omnibase/admin
     verification: unstated
@@ -47,6 +48,7 @@ packages:
     repository: glitchr-studio/omnibase-blog
     branch: main
     requires:
+      - omnibridge/symfony
       - omniscient/omnibase
       - omnibase/admin
     verification: unstated
@@ -58,6 +60,7 @@ packages:
     repository: glitchr-studio/omnibase-broadcast
     branch: main
     requires:
+      - omnibridge/symfony
       - omniscient/omnibase
       - omnibase/admin
       - omnibase/music
@@ -71,6 +74,7 @@ packages:
     repository: glitchr-studio/omnibase-classroom
     branch: main
     requires:
+      - omnibridge/symfony
       - omniscient/omnibase
       - omnibase/admin
     verification: unstated
@@ -97,6 +101,7 @@ packages:
     repository: glitchr-studio/omnibase-consulting
     branch: main
     requires:
+      - omnibridge/symfony
       - omniscient/omnibase
       - omnibase/admin
     verification: unstated
@@ -114,6 +119,7 @@ packages:
     repository: glitchr-studio/omnibase-docs
     branch: '2.0'
     requires:
+      - omnibridge/symfony
       - omniscient/omnibase
     verification: unstated
     docs: true
@@ -132,6 +138,7 @@ packages:
     repository: glitchr-studio/omnibase-estate
     branch: main
     requires:
+      - omnibridge/symfony
       - omniscient/omnibase
       - omnibase/admin
     verification: unstated
@@ -143,6 +150,7 @@ packages:
     repository: glitchr-studio/omnibase-faq
     branch: main
     requires:
+      - omnibridge/symfony
       - omniscient/omnibase
       - omnibase/admin
     verification: unstated
@@ -163,6 +171,7 @@ packages:
     repository: glitchr-studio/omnibase-forge
     branch: main
     requires:
+      - omnibridge/symfony
       - omniscient/omnibase
       - omnibase/admin
       - omnibase/marketplace
@@ -193,6 +202,7 @@ packages:
     repository: glitchr-studio/omnibase-gallery
     branch: main
     requires:
+      - omnibridge/symfony
       - omniscient/omnibase
     verification: unstated
     docs: true
@@ -212,6 +222,7 @@ packages:
     repository: glitchr-studio/omnibase-health
     branch: main
     requires:
+      - omnibridge/symfony
       - omniscient/omnibase
       - omnibase/office
     verification: unstated
@@ -232,6 +243,7 @@ packages:
     repository: glitchr-studio/omnibase-lawyer
     branch: main
     requires:
+      - omnibridge/symfony
       - omniscient/omnibase
       - omnibase/office
     verification: unstated
@@ -254,6 +266,7 @@ packages:
     branch: main
     requires:
       - omniscient/omnibank
+      - omnibridge/symfony
       - omniscient/omnibase
       - omnibase/admin
     verification: unstated
@@ -276,6 +289,7 @@ packages:
     repository: glitchr-studio/omnibase-legal
     branch: main
     requires:
+      - omnibridge/symfony
       - omniscient/omnibase
     verification: unstated
     docs: true
@@ -338,6 +352,7 @@ packages:
     repository: glitchr-studio/omnibase-newsletter
     branch: main
     requires:
+      - omnibridge/symfony
       - omniscient/omnibase
       - omnibase/admin
     verification: unstated
@@ -356,6 +371,7 @@ packages:
     repository: glitchr-studio/omnibase-notary
     branch: main
     requires:
+      - omnibridge/symfony
       - omniscient/omnibase
       - omnibase/office
     verification: unstated
@@ -377,6 +393,7 @@ packages:
     repository: glitchr-studio/omnibase-office
     branch: main
     requires:
+      - omnibridge/symfony
       - omniscient/omnibase
       - omnimeet/direct
       - omniscient/omnimeet
@@ -389,6 +406,7 @@ packages:
     repository: glitchr-studio/omnibase-press
     branch: main
     requires:
+      - omnibridge/symfony
       - omniscient/omnibase
       - omnibase/admin
     verification: unstated
@@ -408,6 +426,7 @@ packages:
     repository: glitchr-studio/omnibase-restaurant
     branch: main
     requires:
+      - omnibridge/symfony
       - omniscient/omnibase
       - omnibase/admin
       - omnibase/marketplace
@@ -429,6 +448,7 @@ packages:
     repository: glitchr-studio/omnibase-scholar
     branch: main
     requires:
+      - omnibridge/symfony
       - omniscient/omnibase
       - omnibase/admin
       - omniscient/omnischolar
@@ -441,6 +461,7 @@ packages:
     repository: glitchr-studio/omnibase-social
     branch: main
     requires:
+      - omnibridge/symfony
       - omniscient/omnibase
       - omnibase/admin
       - omniscient/omnipost
@@ -452,6 +473,7 @@ packages:
     repository: glitchr-studio/omnibase-video
     branch: main
     requires:
+      - omnibridge/symfony
       - omniscient/omnibase
       - omnibase/admin
     verification: unstated

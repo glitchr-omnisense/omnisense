@@ -28,6 +28,7 @@ packages:
       - omniscient/omnidrive
     verification: partial
     verification_note: '- Not verified: Azure Blob Storage itself (Azurite only); an account with a hierarchical namespace (Data Lake Gen2); a connection string with a SAS; Entra ID credentials (not mapped).'
+    docs: true
   omnidrive/dropbox:
     kind: provider
     description: 'Omnidrive Dropbox: a folder of Dropbox as an omnidrive drive, through spatie/flysystem-dropbox - an access token or a refresh token renewed on its own, a prefix, temporary links.'
@@ -43,6 +44,7 @@ packages:
       - omniscient/omnidrive
     verification: partial
     verification_note: '- Not verified: Dropbox itself - no account here.'
+    docs: true
   omnidrive/ftp:
     kind: provider
     description: 'Omnidrive FTP: a directory of an FTP or FTPS server as an omnidrive drive, through league/flysystem-ftp (ext-ftp) - passive mode, a server behind NAT, binary transfers, Unix modes.'
@@ -59,6 +61,7 @@ packages:
       - omniscient/omnidrive
     verification: partial
     verification_note: "- Not verified: FTPS; a server behind NAT; Windows servers. vsftpd (3.0.5, seen 2026-10-23): its STAT answers nothing for a file below a subdirectory, so a file's visibility cannot be read there and a copy, which keeps its source's visibility by default, fails: give such a drive retain_visibility: false."
+    docs: true
   omnidrive/gdrive:
     kind: provider
     description: 'Omnidrive Google Drive: a folder of Google Drive (My Drive or a shared drive) as an omnidrive drive, through masbug/flysystem-google-drive-ext - OAuth refresh token or service account, paths by name.'
@@ -74,6 +77,7 @@ packages:
       - omniscient/omnidrive
     verification: partial
     verification_note: "- Not verified: Google Drive itself - no account here: GdriveLiveTest runs the contract against an account with OMNIDRIVE_GDRIVE_CLIENT_ID, _CLIENT_SECRET and _REFRESH_TOKEN, or OMNIDRIVE_GDRIVE_SERVICE_ACCOUNT (and _SHARED_DRIVE_ID), in the folder OMNIDRIVE_GDRIVE_ROOT; so neither the contract's operations, visibility"
+    docs: true
   omnidrive/local:
     kind: provider
     description: "Omnidrive Local: a directory of this machine as an omnidrive drive, through league/flysystem-local - its root, its Unix modes, its public address, the file's local path."
@@ -90,6 +94,7 @@ packages:
       - omniscient/omnidrive
     verification: partial
     verification_note: '- Not verified: Windows paths and permissions.'
+    docs: true
   omnidrive/s3:
     kind: provider
     description: 'Omnidrive S3: an S3 bucket - AWS, MinIO, Scaleway, OVHcloud, Cloudflare R2... - as an omnidrive drive, through league/flysystem-async-aws-s3: its region or endpoint, its keys, a prefix, public and signed temporary addresses.'
@@ -107,6 +112,7 @@ packages:
       - omniscient/omnidrive
     verification: partial
     verification_note: "- Not verified: AWS S3 itself, Scaleway, OVHcloud, R2 (MinIO only); objects' ACLs (MinIO answers 501; an AWS bucket made since April 2023 refuses ACLs unless its Object Ownership allows them - OMNIDRIVE_S3_ACL=1 runs that test against one that does); uploads over 5 GB (AsyncAws's multipart upload, never run here)."
+    docs: true
   omnidrive/sftp:
     kind: provider
     description: "Omnidrive SFTP: a directory of an SFTP server, over SSH, as an omnidrive drive, through league/flysystem-sftp-v3 (phpseclib 3, pure PHP) - a password, a private key or the SSH agent, the server's key checked, Unix modes."
@@ -124,6 +130,7 @@ packages:
       - omniscient/omnidrive
     verification: partial
     verification_note: "- Not verified: a private key, the SSH agent, the server's key checked (host_fingerprint)."
+    docs: true
   omnidrive/webdav:
     kind: provider
     description: 'Omnidrive WebDAV: a collection of a WebDAV server - Nextcloud, ownCloud, Apache mod_dav, any - as an omnidrive drive, through league/flysystem-webdav (sabre/dav) - basic or digest authentication, a prefix.'
@@ -141,6 +148,7 @@ packages:
       - omniscient/omnidrive
     verification: partial
     verification_note: "- Not verified: ownCloud, nginx's WebDAV, digest and NTLM authentication, a proxy."
+    docs: true
   omniscient/omnidrive:
     kind: family
     description: 'Omnidrive: one contract for reading and writing files wherever they are kept - a directory of this machine, an S3 bucket, an SFTP (SSH) or FTP server - by the name the application gives each storage; Flysystem is the engine behind it, never in its signatures.'

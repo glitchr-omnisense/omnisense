@@ -30,6 +30,28 @@ packages:
       - omniscient/omnimap
     verification: partial
     verification_note: "- Not verified live: Google's answers themselves (Static Maps, Geocoding, the Maps JavaScript API drawn by assets/google.js) - no key in the harness."
+    docs: true
+  omnimap/maplibre:
+    kind: provider
+    description: "Omnimap's MapLibre, under any PHP host: the live map drawn by MapLibre GL JS from a vector style (OpenFreeMap's by default: no key, no cookie), a driver for omnimap's script, and the style read on the server to name every host the browser reaches."
+    license: MIT
+    keywords:
+      - map
+      - maps
+      - maplibre
+      - maplibre-gl
+      - vector-tiles
+      - openfreemap
+      - openstreetmap
+      - framework-agnostic
+      - omnimap
+    repository: glitchr-studio/omnimap-maplibre
+    branch: 1.x
+    requires:
+      - omniscient/omnimap
+    verification: partial
+    verification_note: "- Verified live, no key (vendor/bin/phpunit --group live, 2026-10-25): OpenFreeMap's style, its TileJSON, a vector tile of Strasbourg, a glyph range and the sprite, all on the declared host; unpkg's MapLibre GL JS 5.24.0 and its stylesheet against the SHA-384 hashes the browser checks, with the CORS header that check n — - Not verified: MapLibre GL JS 6 loaded as a module (library_module), styles other than OpenFreeMap's, assets/capture.js sending a MapLibre picture to a host's cache."
+    docs: true
   omnimap/openstreetmap:
     kind: provider
     description: "Omnimap's OpenStreetMap, under any PHP host: the live map drawn by Leaflet over a tile server of your choice (a driver for omnimap's script), a view as an image made on the server from the same tiles (the application's User-Agent, the tiles kept as their Cache-Control allows, the attribution drawn), and Nominatim's geocoding through geocoder-php (one call a second at most, answers kept)."
@@ -51,6 +73,7 @@ packages:
       - omniscient/omnimap
     verification: partial
     verification_note: "- Verified live (docker compose run --rm omnimap live, 2026-10-23): an image of Kyoto made of tile.openstreetmap.org's tiles (the response headers: access-control-allow-origin: *, cache-control: max-age=91080, stale-while-revalidate=604800, stale-if-error=604800) and one Nominatim query, with the package's User-Agent. — - Not verified: Leaflet's live map (assets/leaflet.js) in a browser; another tile provider."
+    docs: true
   omniscient/omnimap:
     kind: family
     description: "Omnimap: maps under any PHP host, whoever draws them - one description of a view (centre, zoom, markers) that a provider's driver draws in the browser, the provider's image of it made on the server, geocoding over geocoder-php, and the map cache: the picture of a view, signed, cut in tiles, kept in a storage of the host's and served from it, captured by the browser or made by the server. Providers are packages of their own (omnimap/google, omnimap/openstreetmap); the Symfony and Laravel bridges live in omnibridge."

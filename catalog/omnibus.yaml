@@ -26,6 +26,7 @@ packages:
     requires:
       - omniscient/omnibus
     verification: unstated
+    docs: true
   omnibus/aramex:
     kind: provider
     description: 'Omnibus Aramex: rates, shipments and labels, tracking and offices - the Shipping, Tracking and Location services (JSON).'
@@ -40,6 +41,7 @@ packages:
     requires:
       - omniscient/omnibus
     verification: unstated
+    docs: true
   omnibus/auspost:
     kind: provider
     description: 'Omnibus Australia Post: prices, shipments and labels, tracking - the Shipping and Tracking API.'
@@ -54,6 +56,7 @@ packages:
     requires:
       - omniscient/omnibus
     verification: unstated
+    docs: true
   omnibus/bluedart:
     kind: provider
     description: 'Omnibus Blue Dart: waybills and labels, tracking - the Blue Dart API gateway.'
@@ -69,6 +72,7 @@ packages:
       - omniscient/omnibus
     verification: unverified
     verification_note: "Built from Blue Dart's published API documentation and tested on recorded answers; unverified against the sandbox until an account's keys are at hand."
+    docs: true
   omnibus/canada-post:
     kind: provider
     description: 'Omnibus Canada Post: rates, non-contract shipments and labels, tracking and post offices - the REST (XML) web services.'
@@ -83,6 +87,7 @@ packages:
     requires:
       - omniscient/omnibus
     verification: unstated
+    docs: true
   omnibus/canpar:
     kind: provider
     description: 'Omnibus Canpar: rates, shipments and labels, tracking - the CanShip web services (SOAP).'
@@ -97,6 +102,7 @@ packages:
     requires:
       - omniscient/omnibus
     verification: unstated
+    docs: true
   omnibus/chronopost:
     kind: provider
     description: 'Omnibus Chronopost: prices (Quickcost), shipments and labels, tracking and Pickup relay points - the SOAP web services.'
@@ -112,6 +118,7 @@ packages:
       - omniscient/omnibus
     verification: partial
     verification_note: 'Not verified against a real contract: the codes and fields are those of the public integrations of Chronopost Food; the order of scheduledValue in the request and the Saturday service in particular are to be confirmed on a first real skybill.'
+    docs: true
   omnibus/colissimo:
     kind: provider
     description: 'Omnibus Colissimo (La Poste): rates from configuration; labels, tracking and relay points to come.'
@@ -126,6 +133,7 @@ packages:
     requires:
       - omniscient/omnibus
     verification: unstated
+    docs: true
   omnibus/db-schenker:
     kind: provider
     description: 'Omnibus DB Schenker: tracking through the eSchenker API; rates from configuration, shipments booked in the portal.'
@@ -141,6 +149,7 @@ packages:
       - omniscient/omnibus
     verification: unverified
     verification_note: "The booking action is built on the Open API's published shape and is unverified: it needs an account's key (from the Schenker partner portal) to be run against the service."
+    docs: true
   omnibus/dhl:
     kind: provider
     description: 'Omnibus DHL Express: rates, labels and tracking - MyDHL API; service points through the DHL location finder.'
@@ -155,6 +164,7 @@ packages:
     requires:
       - omniscient/omnibus
     verification: unstated
+    docs: true
   omnibus/dtdc:
     kind: provider
     description: 'Omnibus DTDC: consignments and labels, cancellations, tracking - the DTDC customer integration API.'
@@ -170,6 +180,7 @@ packages:
       - omniscient/omnibus
     verification: unverified
     verification_note: "Built from DTDC's published integration documentation and tested on recorded answers; unverified against the demo environment until an account's keys are at hand."
+    docs: true
   omnibus/fedex:
     kind: provider
     description: 'Omnibus FedEx: rate quotes, labels, tracking and locations - the REST APIs with OAuth2.'
@@ -184,6 +195,7 @@ packages:
     requires:
       - omniscient/omnibus
     verification: unstated
+    docs: true
   omnibus/gls:
     kind: provider
     description: 'Omnibus GLS: shipments and labels through ShipIT, cancellations, tracking.'
@@ -198,6 +210,7 @@ packages:
     requires:
       - omniscient/omnibus
     verification: unstated
+    docs: true
   omnibus/jdl-express:
     kind: provider
     description: 'Omnibus JD Logistics: waybills, interception and traces - the JD Open Platform (signed requests).'
@@ -213,6 +226,7 @@ packages:
       - omniscient/omnibus
     verification: unverified
     verification_note: "Built from JD Logistics' published open platform documentation and tested on recorded answers; unverified against UAT until an account's keys are at hand."
+    docs: true
   omnibus/mondial-relay:
     kind: provider
     description: 'Omnibus Mondial Relay carrier: relay points, labels, tracking (Web_Services.asmx, no ext-soap needed).'
@@ -228,6 +242,7 @@ packages:
     requires:
       - omniscient/omnibus
     verification: unstated
+    docs: true
   omnibus/offline:
     kind: provider
     description: 'Omnibus offline carrier: the shop ships by itself - configured rates, a tracking number typed by hand, its own counters as pickup points.'
@@ -242,6 +257,7 @@ packages:
     requires:
       - omniscient/omnibus
     verification: unstated
+    docs: true
   omnibus/purolator:
     kind: provider
     description: 'Omnibus Purolator: estimates, shipments and labels, tracking - the E-Ship Web Services (SOAP).'
@@ -256,6 +272,7 @@ packages:
     requires:
       - omniscient/omnibus
     verification: unstated
+    docs: true
   omnibus/royal-mail:
     kind: provider
     description: 'Omnibus Royal Mail: orders and postage labels through Click & Drop, tracking through the Tracking API.'
@@ -270,6 +287,7 @@ packages:
     requires:
       - omniscient/omnibus
     verification: unstated
+    docs: true
   omnibus/sf-express:
     kind: provider
     description: 'Omnibus SF Express: orders, cancellations and route tracking - the SF Express open API (signed requests).'
@@ -285,6 +303,7 @@ packages:
       - omniscient/omnibus
     verification: unverified
     verification_note: "Built from SF's published open platform documentation and tested on recorded answers; unverified against the sandbox until an account's keys are at hand."
+    docs: true
   omnibus/tnt:
     kind: provider
     description: 'Omnibus TNT Express: prices, shipments and labels, tracking - ExpressConnect (XML).'
@@ -299,6 +318,7 @@ packages:
     requires:
       - omniscient/omnibus
     verification: unstated
+    docs: true
   omnibus/ups:
     kind: provider
     description: 'Omnibus UPS: rates, labels, tracking and Access Point locations - the REST APIs with OAuth2.'
@@ -313,6 +333,7 @@ packages:
     requires:
       - omniscient/omnibus
     verification: unstated
+    docs: true
   omnibus/usps:
     kind: provider
     description: 'Omnibus USPS: prices, labels, tracking and drop-off locations - the USPS APIs v3 with OAuth2.'
@@ -327,6 +348,7 @@ packages:
     requires:
       - omniscient/omnibus
     verification: unstated
+    docs: true
   omnibus/zto-express:
     kind: provider
     description: 'Omnibus ZTO Express: orders, cancellations and traces - the ZTO open API (signed requests).'
@@ -342,6 +364,7 @@ packages:
       - omniscient/omnibus
     verification: unverified
     verification_note: "Built from ZTO's published open platform documentation and tested on recorded answers; unverified against the test environment until an account's keys are at hand."
+    docs: true
   omniscient/omnibus:
     kind: family
     description: 'Omnibus: one contract for parcel carriers - rates, labels, tracking, pickup points - and its Symfony bundle (the Payum of shipping).'
@@ -355,5 +378,6 @@ packages:
       - 'pickup point'
     repository: glitchr-studio/omnibus
     branch: 2.x
-    verification: unstated
+    verification: partial
+    verification_note: "Not verified: that the carriers' APIs answer as recorded."
     docs: true

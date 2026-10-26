@@ -51,6 +51,7 @@ packages:
     requires:
       - omniscient/omnistate
     verification: unstated
+    docs: true
   omnistate/annuaire-sante:
     kind: provider
     description: "Omnistate Annuaire Santé: French health professionals (RPPS: profession, specialties, workplaces, MSSanté addresses) and facilities (FINESS) from the ANS's FHIR API."
@@ -89,6 +90,7 @@ packages:
     requires:
       - omniscient/omnistate
     verification: unstated
+    docs: true
   omnistate/matchid:
     kind: provider
     description: "Omnistate matchID: France's deaths since 1970 (INSEE's file of deceased persons) searched through deces.matchid.io - names, birth, death, the act's number."
@@ -180,3 +182,4 @@ packages:
     requires:
       - omniscient/omnistate
     verification: unstated
+    docs: true
