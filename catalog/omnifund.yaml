@@ -30,6 +30,7 @@ packages:
       - omnisense/omnifund
     verification: partial
     verification_note: "- Verified live (2026-10-24, a token): glitchr-studio's listing; sindresorhus's tiers and two sponsors. — - Not verified live: an active goal (none at hand)."
+    docs: true
   omnifund/liberapay:
     kind: provider
     description: "Omnifund's Liberapay, under any PHP host: an account's public profile read from Liberapay's public.json - patrons counted, weekly income, goal, summary (no key; Liberapay keeps patrons and tiers private)."
@@ -47,6 +48,7 @@ packages:
       - omnisense/omnifund
     verification: verified
     verification_note: "- Verified live without a key (2026-10-24): the Liberapay team's profile."
+    docs: true
   omnifund/opencollective:
     kind: provider
     description: "Omnifund's Open Collective, under any PHP host: a collective read through Open Collective's GraphQL API v2 - its profile and yearly budget, its tiers, its backers (public data, no key needed; a personal token raises the rate limit)."
@@ -67,6 +69,7 @@ packages:
       - omnisense/omnifund
     verification: partial
     verification_note: "- Verified live without a key (2026-10-24): webpack's profile, tiers and three backers. — - Not verified: a personal token."
+    docs: true
   omnisense/omnifund:
     kind: family
     description: 'Omnifund: who funds a project, read under any PHP host, wherever the funding is received - the profile (backers counted, income, goal), the sponsors and the tiers offered, from GitHub Sponsors, Open Collective or Liberapay. Providers are packages of their own (omnifund/github-sponsors, omnifund/opencollective, omnifund/liberapay); no framework in require.'
