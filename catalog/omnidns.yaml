@@ -27,6 +27,7 @@ packages:
       - omnisense/omnidns
     verification: partial
     verification_note: '- Not verified live: no Cloudflare token at hand.'
+    docs: true
   omnidns/gandi:
     kind: provider
     description: "Omnidns's Gandi, under any PHP host: whether a domain is free and its price, registering and renewing it, the account's domains and their terms, their name servers, and LiveDNS records - Gandi's API v5 with a personal access token, on the application's HTTP client."
@@ -46,6 +47,7 @@ packages:
       - omnisense/omnidns
     verification: partial
     verification_note: '- Not verified live: no Gandi account at hand.'
+    docs: true
   omnidns/ovh:
     kind: provider
     description: "Omnidns's OVHcloud, under any PHP host: whether a domain is free and its price, registering it (a cart checked out) and renewing it, the account's domains and their terms, their name servers, and the records of their zones - over the official ovh/ovh client."
@@ -65,6 +67,7 @@ packages:
       - omnisense/omnidns
     verification: partial
     verification_note: '- Not verified live: no OVHcloud account at hand (an anonymous cart is answered "You must login first" for a domain''s offers, 2026-10-24).'
+    docs: true
   omnidns/scaleway:
     kind: provider
     description: "Omnidns's Scaleway, under any PHP host: whether a domain is free, registering and renewing it, the project's domains and their terms, their name servers, and the records of their zones - Scaleway's Domains and DNS API with a secret key, on the application's HTTP client."
@@ -83,6 +86,7 @@ packages:
       - omnisense/omnidns
     verification: partial
     verification_note: '- Not verified live: no Scaleway key at hand.'
+    docs: true
   omnisense/omnidns:
     kind: family
     description: "Omnidns: a domain name where it is registered, under any PHP host - whether it is free and at what price, registering and renewing it, the account's domains and their terms, their name servers, and the records of their zones; from OVH, Gandi, Cloudflare or Scaleway through one set of models. Providers are packages of their own (omnidns/ovh, omnidns/gandi, omnidns/cloudflare, omnidns/scaleway); no framework in require."
