@@ -46,7 +46,7 @@ packages:
     docs: true
   omnisong/odesli:
     kind: provider
-    description: "Omnisong Odesli: one link (or an ISRC, a UPC) to the same song or album on every platform, through song.link's API."
+    description: "Omnisong Odesli: one link to the same song or album on every platform, through song.link's API."
     license: MIT
     keywords:
       - music
