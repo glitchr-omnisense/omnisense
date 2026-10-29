@@ -30,6 +30,7 @@ packages:
       - omnisense/omnifilm
     verification: partial
     verification_note: '- Not verified live: no key.'
+    docs: true
   omnifilm/tmdb:
     kind: provider
     description: "Omnifilm's The Movie Database, under any PHP host, over php-tmdb/api: search, a film's or a series' record with its cast, crew and identifiers across registers in one call, an episode by its IMDb or TheTVDB number, a season's episodes, and where to watch in a country (JustWatch's data); php-tmdb's client runs over the application's HTTP client and a PSR-14 dispatcher of its own."
@@ -51,6 +52,7 @@ packages:
       - omnisense/omnifilm
     verification: partial
     verification_note: '- Not verified live: no key.'
+    docs: true
   omnifilm/trakt:
     kind: provider
     description: "Omnifilm's Trakt, under any PHP host: search, a film's or a show's record and its people, a work or an episode by its Trakt, IMDb, TMDB or TheTVDB number, a season's episodes, through Trakt's public API with an application's client id (no user signed in)."
@@ -70,6 +72,7 @@ packages:
       - omnisense/omnifilm
     verification: partial
     verification_note: '- Not verified live: no client id.'
+    docs: true
   omnifilm/tvdb:
     kind: provider
     description: "Omnifilm's TheTVDB, under any PHP host: series and their episodes in aired order, films, a work by its TheTVDB, IMDb or TMDB number, people and translations in the language asked, through TheTVDB's API v4 (a token got once from the project's key and a subscriber's PIN)."
@@ -89,6 +92,7 @@ packages:
       - omnisense/omnifilm
     verification: partial
     verification_note: '- Not verified live: no key.'
+    docs: true
   omnifilm/wikidata:
     kind: provider
     description: "Omnifilm's Wikidata, under any PHP host: films, series and episodes from Wikidata's open records (CC0) through the MediaWiki API, with no key - a search narrowed to works on the server, a work by its Q-number or by its IMDb, TMDB or TheTVDB identifier, its genres, cast and crew labelled in the language asked, its poster from Wikimedia Commons; the User-Agent and maxlag Wikimedia's policies ask."
@@ -110,6 +114,7 @@ packages:
       - omnisense/omnifilm
     verification: verified
     verification_note: '- Verified live (docker compose run --rm omnifilm live, 2026-10-24): Stalker found by a search narrowed to 1979, The Shawshank Redemption by its IMDb number (TMDB 278, Frank Darabont), Game of Thrones by its TMDB series number (Q23572, tt0944947, TheTVDB 121361, 2011).'
+    docs: true
   omnisense/omnifilm:
     kind: family
     description: "Omnifilm: the record of a film, a series or an episode under any PHP host, whoever keeps it - titles, dates, cast and crew, pictures, identifiers across registers (IMDb, TMDB, TheTVDB, Trakt, Wikidata), a season's episodes and where to watch, behind contracts by capability. Providers are packages of their own (omnifilm/tmdb, omnifilm/omdb, omnifilm/tvdb, omnifilm/trakt, omnifilm/wikidata); the Symfony and Laravel bridges live in omnibridge."

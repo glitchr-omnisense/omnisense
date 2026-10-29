@@ -27,6 +27,7 @@ packages:
       - omnisense/omnigame
     verification: verified
     verification_note: '- Verified live (2026-10-24): a product with its US price, a search.'
+    docs: true
   omnigame/igdb:
     kind: provider
     description: "Omnigame's IGDB, under any PHP host: Twitch's games database through Apicalypse queries - search, a game's record by its IGDB, Steam or GOG number with its studios, platforms, cover and screenshots, score and identifiers on the stores; Twitch's application token got and renewed by itself."
@@ -46,6 +47,7 @@ packages:
       - omnisense/omnigame
     verification: partial
     verification_note: '- Not verified live: no credentials.'
+    docs: true
   omnigame/itch:
     kind: provider
     description: "Omnigame's itch.io, under any PHP host: a game page's record from its public data.json with no key, and with a server-side API key whether a player owns one of your games (download keys) and the library of the key's own account."
@@ -65,6 +67,7 @@ packages:
       - omnisense/omnigame
     verification: partial
     verification_note: "- Verified live (2026-10-24): X-Moon's page. — - Not verified live: ownership and library (no key)."
+    docs: true
   omnigame/rawg:
     kind: provider
     description: "Omnigame's RAWG, under any PHP host: search and a game's record with its studios, platforms, scores and the stores that sell it - its Steam number, itch.io page and Epic slug read from their links - with an API key."
@@ -82,6 +85,7 @@ packages:
       - omnisense/omnigame
     verification: partial
     verification_note: '- Not verified live: no key.'
+    docs: true
   omnigame/steam:
     kind: provider
     description: "Omnigame's Steam, under any PHP host: an app's store record and the store's search with no key (price in the country asked, texts in the language asked), a player's library and whether they own a game with a Steam Web API key."
@@ -101,6 +105,7 @@ packages:
       - omnisense/omnigame
     verification: partial
     verification_note: "- Verified live (no key, 2026-10-24): Portal 2's record in English with its US price, a search. — - Not verified live: the library and ownership (no Web API key was used)."
+    docs: true
   omnisense/omnigame:
     kind: family
     description: "Omnigame: a game's presence on the stores, read under any PHP host - its store record (texts, dates, studios, platforms, price, pictures, scores, identifiers on other stores), a search by title, a player's library and whether a player owns a game, behind contracts by capability. Read only: nothing is bought, granted or written. Providers are packages of their own (omnigame/steam, omnigame/gog, omnigame/itch, omnigame/igdb, omnigame/rawg); the Symfony and Laravel bridges live in omnibridge."
