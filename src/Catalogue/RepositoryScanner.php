@@ -44,9 +44,8 @@ class RepositoryScanner
         $root = $this->getReposDir();
         $dirs = [];
         foreach (glob($root.'/omni*', \GLOB_ONLYDIR) ?: [] as $family) {
-            // The website's own folder is no package of the ecosystem (~/Sites/omniscient until
-            // the folder takes the new name).
-            if (\in_array(basename($family), ['omnisense', 'omniscient'], true)) {
+            // The website's own folder is no package of the ecosystem.
+            if ('omnisense' === basename($family)) {
                 continue;
             }
             $dirs = array_merge($dirs, [$family], glob($family.'/*', \GLOB_ONLYDIR) ?: []);
