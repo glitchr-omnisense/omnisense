@@ -32,6 +32,7 @@ packages:
     requires:
       - omnisense/omnibridge
     verification: unstated
+    docs: true
   omnibridge/laravel:
     kind: bridge
     description: 'The Laravel host of omnisense/omnibase: its Foundation contracts (urls, translations, locales, access, parameters with the database settings laid over Laravel''s config, clock, events...) answered by Laravel''s services and seeded in Base\Contract\Runtime, Doctrine through omnibridge/doctrine, Twig through omnibridge/twig, and the pieces an omnibase page asks of its framework (Encore tags, the app variable, simple forms).'
@@ -51,6 +52,7 @@ packages:
       - omnisense/omnibridge
       - omnisense/omnidrive
     verification: unstated
+    docs: true
   omnibridge/react:
     kind: bridge
     description: "A page of a site as a React component and its props, the same from any framework: the first visit an HTML shell holding the page, a visit within the site the page in JSON (header X-Omnibridge), the JavaScript side rendering it and following the site's links without reloading."
@@ -58,6 +60,7 @@ packages:
     repository: glitchr-omnisense/omnibridge-react
     branch: 1.x
     verification: unstated
+    docs: true
   omnibridge/static:
     kind: bridge
     description: "The static host of the omnibridge family: a generic exporter that enumerates an application's addresses (explicit lists, a router's #[Route] routes with the values of their parameters, a sitemap), renders each at build time by the application's own code (its host's request handling, its actions, or any callable), and writes a deterministic folder for a static host or a CDN - HTML pages, the files of an asset manifest (Vite, Webpack), the files the pages refer to, redirections, 404.html, sitemap.xml and a report with checksums and diagnostics (broken links, duplicate outputs, missing assets, non-deterministic pages). No framework, no bundler."
@@ -73,6 +76,7 @@ packages:
     branch: 1.x
     verification: partial
     verification_note: 'Not done, or not verified:'
+    docs: true
   omnibridge/symfony:
     kind: bridge
     description: "The Symfony host of omnisense/omnibridge's contracts (urls, translations, access, sessions, tokens, environment) - adapters over Symfony's router, translator, security and kernel, their container wiring and OmnibridgeBundle - and the framework packages omnisense/omnibase no longer requires. A Symfony site requires it beside the core."
@@ -87,6 +91,7 @@ packages:
       - omnibridge/twig
       - omnisense/omnibridge
     verification: unstated
+    docs: true
   omnibridge/twig:
     kind: bridge
     description: "The Twig side of omnibridge: the contract a page rendered with Twig asks of any framework (path, url, asset, trans - omnisense/omnibridge's Urls and Translations), the Twig extension that provides it where the framework does not, and helpers."
@@ -96,6 +101,7 @@ packages:
     requires:
       - omnisense/omnibridge
     verification: unstated
+    docs: true
   omnisense/omnibridge:
     kind: bridge
     description: "The core of the omnibridge family: the contracts any host answers for an application that runs on more than one framework (addresses, translations, languages, access, sessions, tokens, stored files, routes, environment) and the registry the application reaches them through. No framework, no ORM: each omnibridge/<host> bridge answers them with its host's services."
@@ -109,3 +115,4 @@ packages:
     repository: glitchr-omnisense/omnibridge
     branch: 1.x
     verification: unstated
+    docs: true

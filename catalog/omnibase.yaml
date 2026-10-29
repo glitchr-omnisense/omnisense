@@ -88,6 +88,7 @@ packages:
     requires:
       - omnisense/omnibase
     verification: unstated
+    docs: true
   omnibase/consulting:
     kind: structure
     description: "Consulting for omnibase: an independent professional's services (Offering) presented on their site, the quote request on omnibase's contact model with its notice, kept and answered from the back office; the rules an offering keeps that a site or a profession adds; the hook for hours paid through omnibase/marketplace's Credit."
@@ -154,6 +155,7 @@ packages:
       - omnisense/omnibase
       - omnibase/admin
     verification: unstated
+    docs: true
   omnibase/forge:
     kind: structure
     description: 'Software forge for base-bundle: releases built from git tags, free and licensed downloads, a private Composer repository, client projects with a shared board, prepaid support hours and quotes - paid through base-bundle-market'
@@ -195,6 +197,7 @@ packages:
       - omnisense/omnibase
       - omnibase/admin
     verification: unstated
+    docs: true
   omnibase/gallery:
     kind: structure
     description: 'Albums of photographs for omnibase: an Album is a Thread, its Photos are ordered, one album is one creation.'
@@ -269,6 +272,7 @@ packages:
       - omnisense/omnibase
       - omnibase/admin
     verification: unstated
+    docs: true
   omnibase/legal:
     kind: structure
     description: "The legal professions on omnibase, one bundle and a profile for each: a lawyer's firm (the RIN's article 10 - domain name, certified specialisations, fees and their agreement, the declaration to the Ordre), a notary's office (regulated tariff and discounts, addresses in notaires.fr, the declaration to the chamber, the profession's charter), a jurist (nothing the law of 31 December 1971 reserves to a regulated profession). In common, on omnibase/office: fields of practice, a first appointment asked without an account, the client's space on the encrypted vault, who of the practice reads a document, the compliance checks of the back office."
@@ -344,6 +348,7 @@ packages:
       - omnibase/admin
       - omnisense/omnisong
     verification: unstated
+    docs: true
   omnibase/newsletter:
     kind: structure
     description: 'A newsletter for omnibase: subscribers with double opt-in, campaigns written in the back office and sent through Messenger, a monthly digest drafted from the site’s sources.'
@@ -355,6 +360,7 @@ packages:
       - omnisense/omnibase
       - omnibase/admin
     verification: unstated
+    docs: true
   omnibase/notary:
     kind: structure
     description: "The notarial regime on omnibase/office: a notary's office site within its professional rules - the regulated tariff and the discounts displayed, the consumer mediator of the notariat, e-mail addresses ending in notaires.fr, the declaration to the chamber, wording checked against comparison, no online payment; fields of practice, the client's space on the encrypted vault, and who of the office reads a document."
@@ -408,6 +414,7 @@ packages:
       - omnisense/omnibase
       - omnibase/admin
     verification: unstated
+    docs: true
   omnibase/restaurant:
     kind: structure
     description: 'A restaurant on omnibase: the dining room and its layouts (a floor-plan editor, a QR poster per table), meal services and table reservations (availability under a lock, a public form, a management link, ICS), the menu (dishes as omnibase/marketplace products, sections, set menus, EU allergens), ordering at the table by QR code (sessions, rounds, tickets), the pass for the staff, and the delivery and booking platforms through glitchr/omnifood.'
@@ -464,6 +471,7 @@ packages:
       - omnibase/admin
       - omnisense/omnipost
     verification: unstated
+    docs: true
   omnibase/video:
     kind: structure
     description: "A video platform on omnibase: videos and channels, resumable uploads through tusd, HLS transcoding with ffmpeg, a player that keeps playing across pages, views, likes, timed comments, playlists, subscriptions, reports, a members' studio, local suggestions (Gorse optional) and a Typesense index."
