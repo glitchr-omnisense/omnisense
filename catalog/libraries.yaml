@@ -11,7 +11,7 @@ phrase:
 packages:
   '@glitchr/flowjs':
     kind: library
-    description: 'Navigation without page loads, sticky scroll effects, scroll stops, sortable lists, AJAX channels, cookies and consent - one library, one module per feature'
+    description: 'Navigation without page loads (and a website in the website), sticky scroll effects, scroll stops, scroll-driven scenes, sortable lists, AJAX channels, cookies and consent - one library, one module per feature'
     license: MIT
     repository: glitchr-studio/flowjs
     branch: master

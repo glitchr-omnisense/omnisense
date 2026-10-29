@@ -252,7 +252,7 @@ packages:
     docs: true
   omnibase/ledger:
     kind: structure
-    description: 'Double-entry accounting for omnibase: books, a French chart of accounts, journals, parties and lettering, bank feeds through glitchr/omnibank, reconciliation with ranked suggestions, trial balance, general ledger, income statement, balance sheet and the FEC export'
+    description: 'Double-entry accounting for omnibase: books, a French chart of accounts, journals, parties and lettering, bank feeds through omnisense/omnibank, reconciliation with ranked suggestions, trial balance, general ledger, income statement, balance sheet and the FEC export'
     license: MIT
     keywords:
       - symfony
