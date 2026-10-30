@@ -54,7 +54,6 @@ base:
 
   router:
     use_custom: true
-    ip_access: false
 
     use_fallbacks: '%env(bool:HTTP_REDUCTION)%'
     host_fallbacks:
