@@ -4,9 +4,11 @@ app_controller:
         namespace: App\Controller
     type: attribute
 
+# omnibase 5.0: omnibridge/symfony's loader imports its Symfony controllers, then the core's actions
+# (src/Controller/Action), in the order the former "@BaseBundle/Controller" attribute import gave.
 base_controller:
-    resource: "@BaseBundle/Controller"
-    type: attribute
+    resource: .
+    type: omnibase
     prefix: /
 
 # The announcements: /blog (blog.path).

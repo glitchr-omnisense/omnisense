@@ -5,7 +5,7 @@ namespace App\Repository;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class UserRepository extends \Base\Repository\UserRepository
+class UserRepository extends \Omnibridge\Doctrine\Omnibase\Repository\UserRepository
 {
     /** The coworkers: everyone granted a staff role (ROLE_STAFF and the roles above it). */
     public function countStaff(): int

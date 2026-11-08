@@ -23,6 +23,6 @@ return [
     Symfony\UX\TwigComponent\TwigComponentBundle::class => ['all' => true],
     ApiPlatform\Symfony\Bundle\ApiPlatformBundle::class => ['all' => true],
     Webauthn\Bundle\WebauthnBundle::class => ['all' => true],
-    Base\BaseBundle::class => ['all' => true],
+    Omnibridge\Symfony\Omnibase\BaseBundle::class => ['all' => true],
     Glitchr\ProfilerPack\ProfilerPackBundle::class => ['dev' => true, 'test' => true],
 ];
