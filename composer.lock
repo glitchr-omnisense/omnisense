@@ -5943,12 +5943,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-omnisense/omnibridge-symfony.git",
-                "reference": "be2c39fb3c8b06cd4e881e7749c4ce4eea3cbea4"
+                "reference": "474fae61377b44f11be8acf20846cd881d298026"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-omnisense/omnibridge-symfony/zipball/be2c39fb3c8b06cd4e881e7749c4ce4eea3cbea4",
-                "reference": "be2c39fb3c8b06cd4e881e7749c4ce4eea3cbea4",
+                "url": "https://api.github.com/repos/glitchr-omnisense/omnibridge-symfony/zipball/474fae61377b44f11be8acf20846cd881d298026",
+                "reference": "474fae61377b44f11be8acf20846cd881d298026",
                 "shasum": ""
             },
             "require": {
@@ -6236,12 +6236,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-omnisense/omnibase.git",
-                "reference": "23856046f8b3cc964d339d8154d6a310e4d18c5d"
+                "reference": "045c33276de78c9e0bf666f2052f73a273dd8dae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-omnisense/omnibase/zipball/23856046f8b3cc964d339d8154d6a310e4d18c5d",
-                "reference": "23856046f8b3cc964d339d8154d6a310e4d18c5d",
+                "url": "https://api.github.com/repos/glitchr-omnisense/omnibase/zipball/045c33276de78c9e0bf666f2052f73a273dd8dae",
+                "reference": "045c33276de78c9e0bf666f2052f73a273dd8dae",
                 "shasum": ""
             },
             "require": {
@@ -16733,12 +16733,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-studio/symfony-profiler-pack.git",
-                "reference": "793483130af27fb976e419b9fa0b18a64a76553a"
+                "reference": "5de1bbf9dbeedd602688f71edd2880642ed0828d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-studio/symfony-profiler-pack/zipball/793483130af27fb976e419b9fa0b18a64a76553a",
-                "reference": "793483130af27fb976e419b9fa0b18a64a76553a",
+                "url": "https://api.github.com/repos/glitchr-studio/symfony-profiler-pack/zipball/5de1bbf9dbeedd602688f71edd2880642ed0828d",
+                "reference": "5de1bbf9dbeedd602688f71edd2880642ed0828d",
                 "shasum": ""
             },
             "require": {
