@@ -1,0 +1,89 @@
+// The families and their APIs as cards (/apis), the call for maintainers
+// (/contribute) and the header's star. Still a plan's sheet: rules, labels
+// in the margin, the one blue for what one acts on; a card is a cell of the
+// title block's grid, its status the three signals of the facts.
+@use "tokens" as *;
+
+// ── The header's star ──
+.om-star { gap: .35rem; padding: 0 .55rem; border: 1px solid var(--om-line); margin-right: .25rem;
+    i { font-size: 1rem; }
+    .om-star-count { padding-left: .4rem; border-left: 1px solid var(--om-line); @include mono(.8rem, 600); font-variant-numeric: tabular-nums; }
+    &:hover { border-color: var(--om-blue); }
+    &:focus-visible { outline: 2px solid var(--om-blue); outline-offset: 2px; }
+    @include small { .om-star-label { display: none; } } }
+
+// ── The filters ──
+.om-api-filters { gap: .9rem; grid-template-columns: minmax(0, 1fr); &[hidden] { display: none; } > * { min-width: 0; }
+    // A box alone, no button beside it (the cards narrow as one types).
+    .om-search input { width: 100%; border-right: 1.5px solid var(--om-ink); border-radius: 2px; } }
+.om-api-groups { display: flex; flex-wrap: wrap; gap: .75rem 1.75rem; }
+.om-api-more { border-top: 1px solid var(--om-line); padding-top: .6rem;
+    summary { display: inline-flex; gap: .4rem; align-items: center; min-height: 2.25rem; @include cote; color: var(--om-ink); cursor: pointer; list-style: none;
+        &::-webkit-details-marker { display: none; }
+        // The marker of a plan's fold: a plus that turns into a minus.
+        &::before { content: "+"; display: inline-grid; place-items: center; width: 1.25rem; height: 1.25rem; border: 1px solid var(--om-ink); border-radius: 2px; @include mono(.85rem, 700); line-height: 1; }
+        &:hover::before { border-color: var(--om-blue); color: var(--om-blue); }
+        &:focus-visible { outline: 2px solid var(--om-blue); outline-offset: 2px; } }
+    &[open] > summary::before { content: "\2212"; }
+    .om-finder-kinds { margin-top: .5rem; }
+    .om-api-picked { color: var(--om-blue); } }
+.om-api-filters .om-chip span { min-height: 2.25rem; @include fine(.875rem, 600); line-height: 1.2; display: inline-flex; align-items: center; }
+.om-api-reset { margin: 0; .om-button { min-height: 2.25rem; &:disabled { opacity: .45; cursor: default; &:hover { background: transparent; color: var(--om-ink); border-color: var(--om-ink); } } } }
+
+// ── The cards ──
+.om-api-section { margin-top: clamp(1.5rem, 4vw, 2.5rem);
+    > h2 { margin: 0 0 .75rem; padding-bottom: .4rem; border-bottom: 1.5px solid var(--om-ink); font-size: clamp(1.35rem, 2.6vw, 1.8rem); } }
+.om-cards { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--om-line); border-left: 1px solid var(--om-line);
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 18.5rem), 1fr)); }
+.om-card { display: flex; flex-direction: column; gap: .45rem; min-width: 0; padding: 1rem 1rem .9rem; background: var(--om-sheet); border-right: 1px solid var(--om-line); border-bottom: 1px solid var(--om-line);
+    &[hidden] { display: none; }
+    &:target { outline: 2px solid var(--om-blue); outline-offset: -2px; }
+    // Not built yet: a rule in the margin, as a part drawn but not yet made.
+    &.is-wanted, &.is-reserved { box-shadow: inset 3px 0 0 var(--om-warn); }
+    &.is-reserved { box-shadow: inset 3px 0 0 var(--om-soft); } }
+.om-card-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .25rem .75rem; }
+.om-card-name { margin: 0; @include display(700); font-size: 1.2rem; line-height: 1.15; overflow-wrap: anywhere; b { font-weight: 300; color: var(--om-blue); } }
+.is-family .om-card-name { @include mono(1.05rem, 700); }
+.om-card-package { margin: 0; @include fine(.85rem, 500); color: var(--om-soft); code { @include mono(.82rem, 600); color: var(--om-ink); } a { color: inherit; } }
+.om-card-text { margin: 0; font-size: .93rem; line-height: 1.45; color: var(--om-soft); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.om-card-note { margin: 0; font-size: .88rem; line-height: 1.45; color: var(--om-soft); }
+.om-card-tags { display: flex; flex-wrap: wrap; gap: .25rem; margin: 0; padding: 0; list-style: none;
+    li { padding: .05rem .45rem; border: 1px solid var(--om-line); border-radius: 2px; @include fine(.8rem, 500); color: var(--om-ink); } }
+.om-card-tags-inline { display: inline-flex; flex-wrap: wrap; gap: .25rem;
+    span { padding: .05rem .45rem; border: 1px solid var(--om-line); border-radius: 2px; @include fine(.8rem, 500); } }
+.om-card-foot { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem .75rem; margin: auto 0 0; padding-top: .35rem; }
+.om-card-count { @include cote; color: var(--om-ink); }
+.om-card-links { display: flex; flex-wrap: wrap; gap: .3rem 1rem; margin: 0; padding-top: .5rem; border-top: 1px solid var(--om-line); @include fine(.85rem, 650);
+    a { text-decoration: none; &:hover { text-decoration: underline; } } }
+.om-card-read { font-weight: 400; color: var(--om-soft); }
+.om-status { flex: none; padding: .05rem .45rem; border: 1px solid currentColor; border-radius: 2px; @include fine(.8rem, 650); line-height: 1.5;
+    &.is-available { color: var(--om-ok); }
+    &.is-reserved { color: var(--om-soft); }
+    &.is-wanted { color: var(--om-warn); } }
+
+// A provider's usage policy: four short lines, label in the margin.
+.om-policy { display: grid; gap: .15rem; margin: .1rem 0 0; font-size: .88rem;
+    > div { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); gap: .5rem; align-items: baseline; }
+    dt { @include cote; font-size: .82rem; }
+    dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+    q { font-style: italic; color: var(--om-soft); }
+    .om-fact { @include fine(.8rem, 500); line-height: 1.45; } }
+
+// ── The call ──
+.om-audiences { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0 clamp(1.5rem, 4vw, 3rem); @include wide { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+.om-audiences .om-tier > header { @include wide { grid-template-columns: minmax(0, 1fr); } }
+.om-steps { margin: 0; padding: 0; list-style: none; counter-reset: step; border-top: 1.5px solid var(--om-ink);
+    li { display: grid; grid-template-columns: 2rem minmax(0, 1fr); gap: .15rem .5rem; padding: .7rem .25rem; border-bottom: 1px solid var(--om-line); counter-increment: step;
+        &::before { content: counter(step); grid-row: span 2; @include mono(.95rem, 700); color: var(--om-blue); }
+        b { font-weight: 650; } span { color: var(--om-soft); font-size: .95rem; } } }
+.om-contribute h3 { margin: 1.5rem 0 .5rem; @include cote; color: var(--om-ink); font-size: .95rem; }
+.om-rules { margin: 0; padding-left: 1.1rem; li { margin: .3rem 0; color: var(--om-soft); font-size: .95rem; &::marker { color: var(--om-blue); } } }
+.om-policy-sample { max-width: 100%; margin: 1rem 0 0; padding: .8rem 1rem; border: 1px solid var(--om-line); background: var(--om-sheet); color: var(--om-ink); overflow-x: auto; code { @include mono(.85rem, 500); color: inherit; background: none; white-space: pre; } }
+.om-wanted { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--om-line); border-left: 1px solid var(--om-line);
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+    li { padding: .8rem .9rem; background: var(--om-sheet); border-right: 1px solid var(--om-line); border-bottom: 1px solid var(--om-line); } p { margin: 0; } }
+.om-wanted-head { display: flex; flex-wrap: wrap; gap: .25rem .6rem; align-items: baseline; }
+.om-wanted-name { @include mono(1rem, 700); text-decoration: none; b { font-weight: 300; color: var(--om-blue); } &:hover { text-decoration: underline; } }
+.om-wanted-text { margin-top: .25rem !important; font-size: .9rem; color: var(--om-soft); }
+.om-wanted-providers { display: flex; flex-wrap: wrap; gap: .25rem; margin-top: .45rem !important;
+    span { padding: .05rem .45rem; border: 1px solid var(--om-line); border-radius: 2px; @include fine(.8rem, 500); } }

@@ -84,3 +84,9 @@ The repositories are public on GitHub, under
 A code correction follows the same path: fork, commit, pull request. Each
 family has a Docker harness and a test suite; its README says how to run
 them.
+
+## Maintain a provider
+
+A provider of a family, or a family still wanted: [the contribute page](/contribute) says how one is
+proposed, who maintains it and how it is reviewed, and lists what is wanted. The companies behind
+the APIs find there how to review their provider and declare their usage policy as data.

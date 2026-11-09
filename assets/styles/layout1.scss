@@ -3,6 +3,7 @@
 @use "tokens" as *;
 @use "manual";
 @use "bundles";
+@use "apis";
 
 // ── The sheet ──────────────────────────────────────────────────────────
 .om-wrap { width: 100%; max-width: $om-measure; margin: 0 auto; padding-inline: $om-gutter; }

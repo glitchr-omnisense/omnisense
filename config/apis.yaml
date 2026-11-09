@@ -1,0 +1,841 @@
+# The families and the APIs of the Omni ecosystem, as the site shows them:
+# the catalogue's cards (/apis), the families and providers wanted
+# (/contribute), and the brief they come from. One file, written by hand.
+#
+# What the packages themselves say (description, repository, branch,
+# verification) is read from catalog/<family>.yaml, which
+# app:catalog:import writes; this file adds what no repository holds yet:
+# the status of a family that is only reserved or wanted, the capabilities,
+# and each provider's usage policy.
+#
+#   capabilities  slug: {en, fr} - the labels of the capability tags
+#   families      name: the family (omniXXX)
+#     status        available | reserved | wanted
+#                   available: its core is in the catalogue (catalog/<name>.yaml);
+#                   reserved: the name and its repositories are taken, nothing released;
+#                   wanted: proposed, looking for maintainers
+#     phrase        {en, fr}: what the family answers, in one line
+#     capabilities  slugs of `capabilities`
+#     help_wanted   true when the family looks for a maintainer
+#     providers     package: a provider ("omnilang/deepl") the catalogue does not
+#                   list yet, or one whose policy is declared here
+#       name          the service's name
+#       status        available | reserved | wanted (available: in the catalogue)
+#       capabilities  a subset of the family's
+#       help_wanted   true when no maintainer is named
+#       policy        the provider's usage policy, as its own pages say it
+#                     (read on the date given). The keys are those of
+#                     Omnisense\Contracts\Policy's export, so that the export
+#                     can replace this block provider by provider:
+#         auth          none | key | oauth | contract
+#         free          true | false: a free tier exists
+#         commercial    yes | no | conditional | unclear (on the free tier)
+#         attribution   required | per-item | encouraged | none | unclear
+#         credit        the credit the provider asks for, verbatim (optional)
+#         note          {en, fr}: the one thing to know (optional)
+#         terms         the policy page read
+#         read          the date it was read (YYYY-MM-DD)
+
+capabilities:
+  # omnibus
+  rates: { en: Rates, fr: Tarifs }
+  labels: { en: Labels, fr: Étiquettes }
+  tracking: { en: Tracking, fr: Suivi }
+  pickup-points: { en: Pickup points, fr: Points relais }
+  # omnitrade
+  payments: { en: Payments, fr: Paiements }
+  refunds: { en: Refunds, fr: Remboursements }
+  subscriptions: { en: Subscriptions, fr: Abonnements }
+  products: { en: Products, fr: Produits }
+  # omnibank
+  accounts: { en: Accounts, fr: Comptes }
+  transactions: { en: Transactions, fr: Opérations }
+  # omnistate
+  companies: { en: Companies, fr: Entreprises }
+  vat: { en: VAT numbers, fr: Numéros de TVA }
+  domains: { en: Domains and IP, fr: Domaines et IP }
+  civil-records: { en: Civil records, fr: État civil }
+  health-professionals: { en: Health professionals, fr: Professionnels de santé }
+  statistics: { en: Official statistics, fr: Statistiques publiques }
+  trademarks: { en: Trademarks and patents, fr: Marques et brevets }
+  # omnilab
+  entities: { en: Entities, fr: Entités }
+  series: { en: Series, fr: Séries }
+  weather: { en: Weather, fr: Météo }
+  occurrences: { en: Occurrences, fr: Occurrences }
+  # omnilex, omnischolar
+  law-texts: { en: Texts and codes, fr: Textes et codes }
+  case-law: { en: Case law, fr: Jurisprudence }
+  works: { en: Works, fr: Œuvres }
+  authors: { en: Authors, fr: Auteurs }
+  books: { en: Books, fr: Livres }
+  datasets: { en: Datasets, fr: Jeux de données }
+  # omnisign, omnibill
+  signature: { en: Signature, fr: Signature }
+  invoices: { en: E-invoices, fr: Factures électroniques }
+  # omnireview, omniticket, omnimeet, omnireach
+  reviews: { en: Reviews, fr: Avis }
+  events: { en: Events, fr: Événements }
+  tickets: { en: Tickets, fr: Billets }
+  rooms: { en: Video rooms, fr: Salles de visio }
+  audience: { en: Audience, fr: Audience }
+  search-queries: { en: Search queries, fr: Requêtes de recherche }
+  # omnidns, omnidrive, omnifood, omnifund
+  dns-records: { en: DNS records, fr: Enregistrements DNS }
+  registration: { en: Registration, fr: Enregistrement }
+  files: { en: Files, fr: Fichiers }
+  orders: { en: Orders, fr: Commandes }
+  reservations: { en: Reservations, fr: Réservations }
+  menus: { en: Menus, fr: Cartes }
+  food-facts: { en: Food facts, fr: Composition des aliments }
+  sponsors: { en: Sponsors, fr: Soutiens }
+  # omnimap, omniplay, omnipost, omnishow, omnisong
+  maps: { en: Maps, fr: Cartes }
+  geocoding: { en: Geocoding, fr: Géocodage }
+  tiles: { en: Tiles, fr: Tuiles }
+  games: { en: Game records, fr: Fiches de jeux }
+  players: { en: Player identity, fr: Identité des joueurs }
+  game-servers: { en: Game servers, fr: Serveurs de jeu }
+  publish: { en: Publish, fr: Publier }
+  share: { en: Share, fr: Partager }
+  videos: { en: Videos, fr: Vidéos }
+  live: { en: Live, fr: Direct }
+  releases: { en: Releases, fr: Parutions }
+  previews: { en: Previews, fr: Extraits }
+  links: { en: Platform links, fr: Liens vers les plateformes }
+  podcasts: { en: Podcasts, fr: Podcasts }
+  # omnishield, omnisearch, omniauth, omnidocs
+  captcha: { en: Captcha, fr: Captcha }
+  spam: { en: Spam, fr: Spam }
+  reputation: { en: Reputation, fr: Réputation }
+  link-safety: { en: Link safety, fr: Liens dangereux }
+  indexing: { en: Indexing, fr: Indexation }
+  search: { en: Search, fr: Recherche }
+  sign-in: { en: Sign-in, fr: Connexion }
+  one-time-codes: { en: One-time codes, fr: Codes à usage unique }
+  passkeys: { en: Passkeys, fr: Clés d’accès }
+  manuals: { en: Manuals, fr: Manuels }
+  # omnitravel, omnistay
+  timetables: { en: Timetables, fr: Horaires }
+  journeys: { en: Journeys, fr: Itinéraires }
+  real-time: { en: Real time, fr: Temps réel }
+  stays: { en: Stays, fr: Séjours }
+  bookings: { en: Bookings, fr: Réservations de séjours }
+  # proposed: omnilang
+  translate: { en: Translate, fr: Traduire }
+  detect: { en: Detect the language, fr: Reconnaître la langue }
+  glossary: { en: Glossaries, fr: Glossaires }
+  documents: { en: Documents, fr: Documents }
+  # proposed: omnical
+  calendar-events: { en: Calendar events, fr: Événements d’agenda }
+  free-busy: { en: Free / busy, fr: Disponibilités }
+  holidays: { en: Public holidays, fr: Jours fériés }
+  # proposed: omniphoto
+  photo-search: { en: Photo search, fr: Recherche de photos }
+  credits: { en: Credits, fr: Crédits }
+  # proposed: omniproof
+  identity-check: { en: Identity check, fr: Vérification d’identité }
+  tenant-file: { en: Tenant file, fr: Dossier de location }
+  # proposed: omnijob
+  job-offers: { en: Job offers, fr: Offres d’emploi }
+  # proposed: omnisport
+  fixtures: { en: Fixtures and results, fr: Calendrier et résultats }
+  standings: { en: Standings, fr: Classements }
+  # proposed: omnitally
+  journal-entries: { en: Journal entries, fr: Écritures }
+  contacts: { en: Customers and suppliers, fr: Clients et fournisseurs }
+
+families:
+  omnibus:
+    status: available
+    phrase: { en: 'Ship a parcel, whatever the carrier.', fr: 'Expédier un colis, quel que soit le transporteur.' }
+    capabilities: [rates, labels, tracking, pickup-points]
+  omnitrade:
+    status: available
+    phrase: { en: 'Take payments and sell, whatever the provider.', fr: 'Encaisser et vendre, quel que soit le prestataire.' }
+    capabilities: [payments, refunds, subscriptions, products]
+  omnibank:
+    status: available
+    phrase: { en: 'Read a bank account.', fr: 'Lire un compte bancaire.' }
+    capabilities: [accounts, transactions]
+  omnistate:
+    status: available
+    phrase: { en: 'Ask the public registers what they know.', fr: 'Demander aux registres publics ce qu’ils savent.' }
+    capabilities: [companies, vat, domains, civil-records, health-professionals, statistics, trademarks]
+    help_wanted: true
+    providers:
+      omnistate/insee:
+        name: INSEE (BDM, SDMX)
+        status: wanted
+        capabilities: [statistics]
+        help_wanted: true
+        policy:
+          auth: none
+          free: true
+          commercial: yes
+          attribution: required
+          credit: 'Source : Insee'
+          note: { en: 'Licence Ouverte 2.0; the rent and construction indices (IRL, ICC, ILAT) by series code.', fr: 'Licence Ouverte 2.0 ; les indices de loyers et de la construction (IRL, ICC, ILAT) par code de série.' }
+          terms: 'https://www.insee.fr/fr/information/2008466'
+          read: '2026-11-10'
+      omnistate/eurostat:
+        name: Eurostat
+        status: wanted
+        capabilities: [statistics]
+        help_wanted: true
+        policy:
+          auth: none
+          free: true
+          commercial: yes
+          attribution: required
+          credit: 'Source: Eurostat (dataset DOI, access date)'
+          note: { en: 'Free reuse, the source acknowledged; some third-party data excluded.', fr: 'Réutilisation libre, la source citée ; certaines données de tiers exclues.' }
+          terms: 'https://ec.europa.eu/eurostat/help/copyright-notice'
+          read: '2026-11-10'
+      omnistate/ecb:
+        name: ECB Data Portal
+        status: wanted
+        capabilities: [statistics]
+        help_wanted: true
+        policy:
+          auth: none
+          free: true
+          commercial: yes
+          attribution: required
+          credit: 'Source: ECB'
+          note: { en: 'Reference exchange rates and interest rates; modifications must be stated.', fr: 'Taux de change de référence et taux d’intérêt ; toute modification se signale.' }
+          terms: 'https://www.ecb.europa.eu/services/disclaimer/html/index.en.html'
+          read: '2026-11-10'
+  omnilab:
+    status: available
+    phrase: { en: 'Read what science knows of a thing, or measures at a place.', fr: 'Lire ce que la science sait d’une chose, ou mesure en un lieu.' }
+    capabilities: [entities, series, weather, occurrences]
+    help_wanted: true
+    providers:
+      omnilab/openweathermap:
+        name: OpenWeather
+        status: wanted
+        capabilities: [weather, series]
+        help_wanted: true
+        policy:
+          auth: key
+          free: true
+          commercial: yes
+          attribution: required
+          credit: 'Weather data provided by OpenWeather'
+          note: { en: '60 calls a minute, 1,000,000 a month on the free plan; the credit links to openweathermap.org.', fr: '60 appels par minute, 1 000 000 par mois en offre gratuite ; le crédit renvoie à openweathermap.org.' }
+          terms: 'https://openweathermap.org/price'
+          read: '2026-11-10'
+      omnilab/met-norway:
+        name: MET Norway (api.met.no)
+        status: wanted
+        capabilities: [weather, series]
+        help_wanted: true
+        policy:
+          auth: none
+          free: true
+          commercial: yes
+          attribution: required
+          credit: 'Data from MET Norway'
+          note: { en: 'CC BY 4.0; an identifying User-Agent is mandatory, under 20 requests a second, coordinates to 4 decimals.', fr: 'CC BY 4.0 ; un User-Agent identifiant est obligatoire, moins de 20 requêtes par seconde, coordonnées à 4 décimales.' }
+          terms: 'https://api.met.no/doc/TermsOfService'
+          read: '2026-11-10'
+      omnilab/meteo-france:
+        name: Météo-France
+        status: wanted
+        capabilities: [weather, series]
+        help_wanted: true
+        policy:
+          auth: key
+          free: true
+          commercial: yes
+          attribution: required
+          note: { en: 'Licence Ouverte 2.0; an account on the API portal; about 100 requests a minute per API.', fr: 'Licence Ouverte 2.0 ; un compte sur le portail des API ; environ 100 requêtes par minute et par API.' }
+          terms: 'https://portail-api.meteofrance.fr/'
+          read: '2026-11-10'
+  omnilex:
+    status: available
+    phrase: { en: 'Read the sources of law.', fr: 'Lire les sources du droit.' }
+    capabilities: [law-texts, case-law]
+  omnischolar:
+    status: available
+    phrase: { en: 'Gather a researcher’s publications.', fr: 'Rassembler les publications d’un chercheur.' }
+    capabilities: [works, authors, books, datasets]
+  omnisign:
+    status: available
+    phrase: { en: 'Have a document signed.', fr: 'Faire signer un document.' }
+    capabilities: [signature]
+  omnibill:
+    status: available
+    phrase: { en: 'Send and receive an electronic invoice.', fr: 'Émettre et recevoir une facture électronique.' }
+    capabilities: [invoices]
+  omnireview:
+    status: available
+    phrase: { en: 'Read what customers say elsewhere.', fr: 'Lire ce que les clients disent ailleurs.' }
+    capabilities: [reviews]
+  omniticket:
+    status: available
+    phrase: { en: 'Read the tickets sold elsewhere.', fr: 'Lire les billets vendus ailleurs.' }
+    capabilities: [events, tickets]
+  omnimeet:
+    status: available
+    phrase: { en: 'Open a video room and let someone in.', fr: 'Ouvrir une salle de visio et y faire entrer.' }
+    capabilities: [rooms]
+  omnireach:
+    status: available
+    phrase: { en: 'Read what outside tools know of a site’s audience.', fr: 'Lire ce que les outils extérieurs savent de l’audience d’un site.' }
+    capabilities: [audience, search-queries]
+  omnidns:
+    status: available
+    phrase: { en: 'Manage a domain name where it is registered.', fr: 'Gérer un nom de domaine là où il est enregistré.' }
+    capabilities: [registration, dns-records]
+  omnidrive:
+    status: available
+    phrase: { en: 'Read and write files, wherever they are kept.', fr: 'Lire et écrire des fichiers, où qu’ils soient gardés.' }
+    capabilities: [files]
+  omnifood:
+    status: available
+    phrase: { en: 'Receive a restaurant’s orders and reservations.', fr: 'Recevoir les commandes et les réservations d’un restaurant.' }
+    capabilities: [orders, reservations, menus, food-facts]
+    help_wanted: true
+    providers:
+      omnifood/openfoodfacts:
+        name: Open Food Facts
+        status: wanted
+        capabilities: [food-facts]
+        help_wanted: true
+        policy:
+          auth: none
+          free: true
+          commercial: yes
+          attribution: required
+          note: { en: 'Data under ODbL (attribution and share-alike); a User-Agent naming the application is asked for.', fr: 'Données sous ODbL (attribution et partage à l’identique) ; un User-Agent nommant l’application est demandé.' }
+          terms: 'https://world.openfoodfacts.org/terms-of-use'
+          read: '2026-11-10'
+  omnifund:
+    status: available
+    phrase: { en: 'Read who funds a project.', fr: 'Lire qui finance un projet.' }
+    capabilities: [sponsors]
+  omnimap:
+    status: available
+    phrase: { en: 'Draw a map, whoever provides it.', fr: 'Dessiner une carte, quel que soit le fournisseur.' }
+    capabilities: [maps, geocoding, tiles]
+  omniplay:
+    status: available
+    phrase: { en: 'Put a game on the stores, and play it online.', fr: 'Mettre un jeu sur les boutiques, et y jouer en ligne.' }
+    capabilities: [games, players, game-servers]
+  omnipost:
+    status: available
+    phrase: { en: 'Publish on the social networks, and share a page to them.', fr: 'Publier sur les réseaux sociaux, et y faire partager une page.' }
+    capabilities: [publish, share]
+    help_wanted: true
+    providers:
+      omnipost/mastodon:
+        name: Mastodon
+        status: wanted
+        capabilities: [publish]
+        help_wanted: true
+      omnipost/bluesky:
+        name: Bluesky
+        status: wanted
+        capabilities: [publish]
+        help_wanted: true
+  omnishow:
+    status: available
+    phrase: { en: 'Describe a work, play a video, follow a live stream.', fr: 'Décrire une œuvre, lire une vidéo, suivre un direct.' }
+    capabilities: [works, videos, live]
+  omnisong:
+    status: available
+    phrase: { en: 'Let a musician’s catalogue be heard.', fr: 'Faire entendre le catalogue d’un musicien.' }
+    capabilities: [releases, previews, links, podcasts]
+    help_wanted: true
+    providers:
+      omnisong/musicbrainz:
+        name: MusicBrainz
+        status: wanted
+        capabilities: [releases]
+        help_wanted: true
+      omnisong/podcastindex:
+        name: Podcast Index
+        status: wanted
+        capabilities: [podcasts]
+        help_wanted: true
+  omnishield:
+    status: available
+    phrase: { en: 'Guard a form: captcha, spam, addresses known for abuse.', fr: 'Garder un formulaire : captcha, spam, adresses connues pour abus.' }
+    capabilities: [captcha, spam, reputation, link-safety]
+  omnisearch:
+    status: available
+    phrase: { en: 'Search, whatever the engine.', fr: 'Chercher, quel que soit le moteur.' }
+    capabilities: [indexing, search]
+    help_wanted: true
+    providers:
+      omnisearch/meilisearch:
+        name: Meilisearch
+        status: wanted
+        capabilities: [indexing, search]
+        help_wanted: true
+      omnisearch/elasticsearch:
+        name: Elasticsearch / OpenSearch
+        status: wanted
+        capabilities: [indexing, search]
+        help_wanted: true
+  omniauth:
+    status: available
+    phrase: { en: 'Sign people in, by whichever factors.', fr: 'Faire entrer les gens, par les facteurs voulus.' }
+    capabilities: [sign-in, one-time-codes, passkeys]
+  omnidocs:
+    status: available
+    phrase: { en: 'One model of a manual, whatever wrote it.', fr: 'Un modèle de manuel, quel que soit l’outil qui l’a écrit.' }
+    capabilities: [manuals]
+  omnitravel:
+    status: reserved
+    phrase: { en: 'Read timetables, journeys and real time, by train, plane or city transit.', fr: 'Lire horaires, itinéraires et temps réel, en train, en avion ou en transports urbains.' }
+    capabilities: [timetables, journeys, real-time]
+    providers:
+      omnitravel/gtfs: { name: GTFS and GTFS-Realtime, status: reserved, capabilities: [timetables, real-time] }
+      omnitravel/navitia: { name: Navitia, status: reserved, capabilities: [timetables, journeys, real-time] }
+      omnitravel/transitous: { name: Transitous, status: reserved, capabilities: [journeys] }
+  omnistay:
+    status: reserved
+    phrase: { en: 'Find stays and their rates, and book them.', fr: 'Trouver des séjours et leurs tarifs, et les réserver.' }
+    capabilities: [stays, bookings]
+    providers:
+      omnistay/amadeus: { name: Amadeus Hotels, status: reserved, capabilities: [stays, bookings] }
+      omnistay/local: { name: A site’s own listings, status: reserved, capabilities: [stays, bookings] }
+
+  # Proposed (the brief ~/Sites/.agent-briefs/api-families): wanted until their names are reserved.
+  omnilang:
+    status: wanted
+    phrase: { en: 'Translate a text or a page, whatever the engine.', fr: 'Traduire un texte ou une page, quel que soit le moteur.' }
+    capabilities: [translate, detect, glossary, documents]
+    help_wanted: true
+    providers:
+      omnilang/deepl:
+        name: DeepL API
+        status: wanted
+        capabilities: [translate, glossary, documents]
+        help_wanted: true
+        policy:
+          auth: key
+          free: true
+          commercial: yes
+          attribution: required
+          note: { en: 'Developer plan: 1M characters once, no personal data; unedited output shown to users carries DeepL’s name.', fr: 'Offre Developer : 1 M de caractères une fois, aucune donnée personnelle ; un texte non relu montré au public porte le nom de DeepL.' }
+          terms: 'https://www.deepl.com/en/pro-license'
+          read: '2026-11-10'
+      omnilang/google:
+        name: Google Cloud Translation
+        status: wanted
+        capabilities: [translate, detect, glossary, documents]
+        help_wanted: true
+        policy:
+          auth: key
+          free: true
+          commercial: yes
+          attribution: required
+          credit: 'powered by Google Translate'
+          note: { en: '500,000 characters a month as a monthly credit, billing enabled; the attribution graphic beside results.', fr: '500 000 caractères par mois en crédit mensuel, facturation activée ; le logo d’attribution à côté des résultats.' }
+          terms: 'https://cloud.google.com/translate/attribution'
+          read: '2026-11-10'
+      omnilang/azure:
+        name: Azure AI Translator
+        status: wanted
+        capabilities: [translate, detect, documents]
+        help_wanted: true
+        policy:
+          auth: key
+          free: true
+          commercial: unclear
+          attribution: encouraged
+          note: { en: 'F0: 2M characters a month; texts not stored.', fr: 'F0 : 2 M de caractères par mois ; textes non conservés.' }
+          terms: 'https://learn.microsoft.com/en-us/azure/ai-services/translator/service-limits'
+          read: '2026-11-10'
+      omnilang/amazon:
+        name: Amazon Translate
+        status: wanted
+        capabilities: [translate, detect, documents]
+        help_wanted: true
+        policy:
+          auth: key
+          free: true
+          commercial: unclear
+          attribution: encouraged
+          note: { en: 'Inputs may be stored to improve the service unless an opt-out policy is set.', fr: 'Les textes peuvent servir à améliorer le service, sauf politique de refus.' }
+          terms: 'https://aws.amazon.com/translate/faqs/'
+          read: '2026-11-10'
+      omnilang/libretranslate:
+        name: LibreTranslate
+        status: wanted
+        capabilities: [translate, detect]
+        help_wanted: true
+        policy:
+          auth: key
+          free: false
+          commercial: yes
+          attribution: none
+          note: { en: 'Self-hosted server under AGPL-3.0, no key; the hosted API is paid only.', fr: 'Serveur auto-hébergé sous AGPL-3.0, sans clé ; l’API hébergée est seulement payante.' }
+          terms: 'https://github.com/LibreTranslate/LibreTranslate'
+          read: '2026-11-10'
+  omnical:
+    status: wanted
+    phrase: { en: 'Read and write a calendar, and know the public holidays.', fr: 'Lire et écrire un agenda, et connaître les jours fériés.' }
+    capabilities: [calendar-events, free-busy, holidays]
+    help_wanted: true
+    providers:
+      omnical/google:
+        name: Google Calendar
+        status: wanted
+        capabilities: [calendar-events, free-busy]
+        help_wanted: true
+        policy:
+          auth: oauth
+          free: true
+          commercial: yes
+          attribution: none
+          note: { en: 'Calendar scopes are sensitive: OAuth verification for a public app, 100 users before it.', fr: 'Les portées Agenda sont sensibles : vérification OAuth pour une app publique, 100 utilisateurs avant.' }
+          terms: 'https://developers.google.com/workspace/calendar/api/guides/quota'
+          read: '2026-11-10'
+      omnical/microsoft:
+        name: Microsoft Graph calendar
+        status: wanted
+        capabilities: [calendar-events, free-busy]
+        help_wanted: true
+        policy:
+          auth: oauth
+          free: true
+          commercial: yes
+          attribution: none
+          note: { en: 'Minimum permissions, no copies beyond need, a privacy statement, no resale.', fr: 'Permissions minimales, pas de copie au-delà du besoin, une politique de confidentialité, pas de revente.' }
+          terms: 'https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use'
+          read: '2026-11-10'
+      omnical/caldav:
+        name: CalDAV (iCloud, Fastmail, Nextcloud…)
+        status: wanted
+        capabilities: [calendar-events, free-busy]
+        help_wanted: true
+        policy:
+          auth: key
+          free: true
+          commercial: unclear
+          attribution: none
+          note: { en: 'A protocol, not a service: an app-specific password on iCloud; each server’s own terms apply.', fr: 'Un protocole, pas un service : un mot de passe d’application chez iCloud ; les conditions de chaque serveur s’appliquent.' }
+          terms: 'https://support.apple.com/en-us/102654'
+          read: '2026-11-10'
+      omnical/openholidays:
+        name: OpenHolidays API
+        status: wanted
+        capabilities: [holidays]
+        help_wanted: true
+        policy:
+          auth: none
+          free: true
+          commercial: yes
+          attribution: required
+          note: { en: 'Public and school holidays of Europe; data under ODbL, server self-hostable (AGPL-3.0).', fr: 'Jours fériés et vacances scolaires d’Europe ; données sous ODbL, serveur auto-hébergeable (AGPL-3.0).' }
+          terms: 'https://github.com/openpotato/openholidaysapi.data'
+          read: '2026-11-10'
+      omnical/nager:
+        name: Nager.Date
+        status: wanted
+        capabilities: [holidays]
+        help_wanted: true
+        policy:
+          auth: none
+          free: true
+          commercial: conditional
+          attribution: unclear
+          note: { en: 'Commercial use requires an active sponsorship; moved to nagerholidays.com.', fr: 'Un usage commercial demande un parrainage actif ; déplacé sur nagerholidays.com.' }
+          terms: 'https://nagerholidays.com/legal/termsofservice'
+          read: '2026-11-10'
+  omniphoto:
+    status: wanted
+    phrase: { en: 'Find a photo to illustrate a page, with the credit it asks for.', fr: 'Trouver une photo pour illustrer une page, avec le crédit qu’elle demande.' }
+    capabilities: [photo-search, credits]
+    help_wanted: true
+    providers:
+      omniphoto/unsplash:
+        name: Unsplash
+        status: wanted
+        capabilities: [photo-search, credits]
+        help_wanted: true
+        policy:
+          auth: key
+          free: true
+          commercial: yes
+          attribution: required
+          credit: 'Photo by {name} on Unsplash'
+          note: { en: 'Hotlinking is mandatory and each download is reported; 50 requests an hour until production approval.', fr: 'Le lien direct vers l’image est obligatoire et chaque téléchargement se signale ; 50 requêtes par heure avant l’accord de production.' }
+          terms: 'https://unsplash.com/api-terms'
+          read: '2026-11-10'
+      omniphoto/pexels:
+        name: Pexels
+        status: wanted
+        capabilities: [photo-search, credits]
+        help_wanted: true
+        policy:
+          auth: key
+          free: true
+          commercial: yes
+          attribution: required
+          credit: 'Photo by {name} on Pexels'
+          note: { en: 'New API keys were paused when read; 200 requests an hour.', fr: 'L’émission de nouvelles clés était suspendue à la lecture ; 200 requêtes par heure.' }
+          terms: 'https://www.pexels.com/api/documentation/'
+          read: '2026-11-10'
+      omniphoto/pixabay:
+        name: Pixabay
+        status: wanted
+        capabilities: [photo-search, credits]
+        help_wanted: true
+        policy:
+          auth: key
+          free: true
+          commercial: yes
+          attribution: required
+          note: { en: 'Results cached 24 hours, images downloaded to the site’s own server, no permanent hotlinking.', fr: 'Résultats gardés 24 heures, images copiées sur le serveur du site, pas de lien direct permanent.' }
+          terms: 'https://pixabay.com/api/docs/'
+          read: '2026-11-10'
+      omniphoto/openverse:
+        name: Openverse
+        status: wanted
+        capabilities: [photo-search, credits]
+        help_wanted: true
+        policy:
+          auth: none
+          free: true
+          commercial: conditional
+          attribution: per-item
+          note: { en: 'Each work’s own Creative Commons licence; 200 anonymous requests a day.', fr: 'La licence Creative Commons de chaque œuvre ; 200 requêtes anonymes par jour.' }
+          terms: 'https://docs.openverse.org/terms_of_service.html'
+          read: '2026-11-10'
+      omniphoto/wikimedia-commons:
+        name: Wikimedia Commons
+        status: wanted
+        capabilities: [photo-search, credits]
+        help_wanted: true
+        policy:
+          auth: none
+          free: true
+          commercial: conditional
+          attribution: per-item
+          note: { en: 'Each file’s own licence; a User-Agent with contact details is required.', fr: 'La licence de chaque fichier ; un User-Agent avec un contact est exigé.' }
+          terms: 'https://foundation.wikimedia.org/wiki/Policy:User-Agent_policy'
+          read: '2026-11-10'
+  omniproof:
+    status: wanted
+    phrase: { en: 'Check that a person is who they say, from an identity document.', fr: 'Vérifier qu’une personne est qui elle dit, sur pièce d’identité.' }
+    capabilities: [identity-check, tenant-file]
+    help_wanted: true
+    providers:
+      omniproof/stripe-identity:
+        name: Stripe Identity
+        status: wanted
+        capabilities: [identity-check]
+        help_wanted: true
+        policy:
+          auth: key
+          free: true
+          commercial: yes
+          attribution: none
+          note: { en: 'The first 50 checks free, then billed per check; some eligibility uses are forbidden.', fr: 'Les 50 premières vérifications gratuites, puis facturées à l’unité ; certains usages d’éligibilité sont interdits.' }
+          terms: 'https://docs.stripe.com/identity/use-cases'
+          read: '2026-11-10'
+      omniproof/veriff:
+        name: Veriff
+        status: wanted
+        capabilities: [identity-check]
+        help_wanted: true
+        policy:
+          auth: key
+          free: false
+          commercial: yes
+          attribution: unclear
+          note: { en: 'A 15-day trial, then billed per verification with a monthly minimum.', fr: 'Un essai de 15 jours, puis facturé à la vérification avec un minimum mensuel.' }
+          terms: 'https://www.veriff.com/pricing'
+          read: '2026-11-10'
+      omniproof/entrust:
+        name: Entrust Identity Verification (Onfido)
+        status: wanted
+        capabilities: [identity-check]
+        help_wanted: true
+        policy:
+          auth: contract
+          free: false
+          commercial: yes
+          attribution: unclear
+          note: { en: 'Onfido is now Entrust; a sandbox, live use under contract.', fr: 'Onfido s’appelle désormais Entrust ; un bac à sable, l’usage réel sous contrat.' }
+          terms: 'https://documentation.identity.entrust.com/getting-started/quick-start-guide/'
+          read: '2026-11-10'
+      omniproof/dossierfacile:
+        name: DossierFacile
+        status: wanted
+        capabilities: [tenant-file]
+        help_wanted: true
+        policy:
+          auth: oauth
+          free: true
+          commercial: conditional
+          attribution: required
+          note: { en: 'The French State’s tenant file, for partners who sign its charter; data kept 3 months at most.', fr: 'Le dossier de location de l’État, pour les partenaires qui signent sa charte ; données gardées 3 mois au plus.' }
+          terms: 'https://partenaire.dossierfacile.logement.gouv.fr/'
+          read: '2026-11-10'
+  omnitally:
+    status: wanted
+    phrase: { en: 'Hand the books to the accounting software the accountant uses.', fr: 'Transmettre les comptes au logiciel de l’expert-comptable.' }
+    capabilities: [journal-entries, invoices, contacts]
+    help_wanted: true
+    providers:
+      omnitally/pennylane:
+        name: Pennylane
+        status: wanted
+        capabilities: [journal-entries, invoices, contacts]
+        help_wanted: true
+        policy:
+          auth: oauth
+          free: false
+          commercial: conditional
+          attribution: none
+          note: { en: 'A token from a paid plan, or OAuth for partners; internal business use only.', fr: 'Un jeton d’une offre payante, ou OAuth pour les partenaires ; usage interne à l’entreprise seulement.' }
+          terms: 'https://pennylane.readme.io/page/api-contract-terms'
+          read: '2026-11-10'
+      omnitally/xero:
+        name: Xero
+        status: wanted
+        capabilities: [journal-entries, invoices, contacts]
+        help_wanted: true
+        policy:
+          auth: oauth
+          free: true
+          commercial: yes
+          attribution: none
+          note: { en: 'Free up to 5 connections; certification above; no AI training on API data.', fr: 'Gratuit jusqu’à 5 connexions ; certification au-delà ; pas d’entraînement d’IA sur les données.' }
+          terms: 'https://developer.xero.com/xero-developer-platform-terms-conditions'
+          read: '2026-11-10'
+      omnitally/quickbooks:
+        name: QuickBooks Online
+        status: wanted
+        capabilities: [journal-entries, invoices, contacts]
+        help_wanted: true
+        policy:
+          auth: oauth
+          free: true
+          commercial: yes
+          attribution: unclear
+          note: { en: 'Production keys only after Intuit’s app assessment.', fr: 'Clés de production seulement après l’évaluation de l’app par Intuit.' }
+          terms: 'https://developer.intuit.com/app/developer/qbo/docs/learn/limits-and-throttles'
+          read: '2026-11-10'
+      omnitally/odoo:
+        name: Odoo
+        status: wanted
+        capabilities: [journal-entries, invoices, contacts]
+        help_wanted: true
+        policy:
+          auth: key
+          free: true
+          commercial: yes
+          attribution: none
+          note: { en: 'Community edition self-hosted (LGPL-3.0); the JSON-2 API, XML-RPC being removed.', fr: 'Édition Community auto-hébergée (LGPL-3.0) ; l’API JSON-2, XML-RPC étant retiré.' }
+          terms: 'https://www.odoo.com/documentation/19.0/developer/reference/external_api.html'
+          read: '2026-11-10'
+  omnijob:
+    status: wanted
+    phrase: { en: 'Read the job offers of the job boards.', fr: 'Lire les offres d’emploi des sites d’emploi.' }
+    capabilities: [job-offers]
+    help_wanted: true
+    providers:
+      omnijob/usajobs:
+        name: USAJOBS
+        status: wanted
+        capabilities: [job-offers]
+        help_wanted: true
+        policy:
+          auth: key
+          free: true
+          commercial: yes
+          attribution: encouraged
+          terms: 'https://developer.usajobs.gov/guides/terms-of-service'
+          read: '2026-11-10'
+      omnijob/adzuna:
+        name: Adzuna
+        status: wanted
+        capabilities: [job-offers]
+        help_wanted: true
+        policy:
+          auth: key
+          free: true
+          commercial: conditional
+          attribution: required
+          note: { en: 'A licence after a 14-day trial for commercial organisations; the linked logo on every offer.', fr: 'Une licence après 14 jours d’essai pour une organisation commerciale ; le logo cliquable sur chaque offre.' }
+          terms: 'https://developer.adzuna.com/docs/terms_of_service'
+          read: '2026-11-10'
+      omnijob/arbeitnow:
+        name: Arbeitnow
+        status: wanted
+        capabilities: [job-offers]
+        help_wanted: true
+        policy:
+          auth: none
+          free: true
+          commercial: unclear
+          attribution: required
+          note: { en: 'A link back to arbeitnow.com.', fr: 'Un lien vers arbeitnow.com.' }
+          terms: 'https://www.arbeitnow.com/terms'
+          read: '2026-11-10'
+      omnijob/france-travail:
+        name: France Travail
+        status: wanted
+        capabilities: [job-offers]
+        help_wanted: true
+        policy:
+          auth: contract
+          free: true
+          commercial: unclear
+          attribution: unclear
+          note: { en: 'Withdrawn from public access in 2026: on request, for companies only.', fr: 'Retirée de l’accès public en 2026 : sur demande, pour les entreprises seulement.' }
+          terms: 'https://francetravail.io/cgu'
+          read: '2026-11-10'
+  omnisport:
+    status: wanted
+    phrase: { en: 'Read the fixtures, results and standings of a competition.', fr: 'Lire le calendrier, les résultats et le classement d’une compétition.' }
+    capabilities: [fixtures, standings]
+    help_wanted: true
+    providers:
+      omnisport/football-data:
+        name: football-data.org
+        status: wanted
+        capabilities: [fixtures, standings]
+        help_wanted: true
+        policy:
+          auth: key
+          free: true
+          commercial: unclear
+          attribution: required
+          credit: 'Football data provided by the Football-Data.org API'
+          terms: 'https://www.football-data.org/about'
+          read: '2026-11-10'
+      omnisport/thesportsdb:
+        name: TheSportsDB
+        status: wanted
+        capabilities: [fixtures, standings]
+        help_wanted: true
+        policy:
+          auth: key
+          free: true
+          commercial: no
+          attribution: required
+          note: { en: 'The free key for development only; a paid key for a published app.', fr: 'La clé gratuite pour le développement seulement ; une clé payante pour une app publiée.' }
+          terms: 'https://www.thesportsdb.com/docs_terms_of_use.php'
+          read: '2026-11-10'
+      omnisport/openf1:
+        name: OpenF1
+        status: wanted
+        capabilities: [fixtures, standings]
+        help_wanted: true
+        policy:
+          auth: none
+          free: true
+          commercial: no
+          attribution: required
+          note: { en: 'CC BY-NC-SA 4.0: non-commercial use; live data for sponsors.', fr: 'CC BY-NC-SA 4.0 : usage non commercial ; le direct pour les soutiens.' }
+          terms: 'https://openf1.org/'
+          read: '2026-11-10'

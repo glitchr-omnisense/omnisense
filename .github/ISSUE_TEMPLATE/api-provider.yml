@@ -1,0 +1,47 @@
+name: API provider
+description: For the company behind an API - review its provider, declare its usage policy, name a co-maintainer.
+title: "[omniXXX/provider] "
+labels: ["api-provider"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for looking at how your API is integrated. Everything here is public:
+        for a security matter, do not describe it here - ask in an issue for a private channel.
+  - type: input
+    id: package
+    attributes:
+      label: Package
+      description: The provider package, or the family if none exists yet.
+      placeholder: omnilab/open-meteo
+    validations:
+      required: true
+  - type: dropdown
+    id: request
+    attributes:
+      label: Request
+      multiple: true
+      options:
+        - Review the integration
+        - Declare or correct our usage policy
+        - Name a co-maintainer from our team
+        - List an API not yet in the catalogue
+    validations:
+      required: true
+  - type: textarea
+    id: policy
+    attributes:
+      label: Usage policy
+      description: The data each application reads before calling the API.
+      value: |
+        auth: none | key | oauth | contract
+        free: true | false
+        commercial: yes | no | conditional | unclear
+        attribution: required | per-item | encouraged | none | unclear
+        credit:
+        terms: https://
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything else
+      description: Endpoints being retired, rate limits, a sandbox for the tests, a contact for questions.

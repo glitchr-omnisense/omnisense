@@ -1,0 +1,61 @@
+name: Provider
+description: Propose a provider for a family, offer to maintain one, or propose a new family.
+title: "[omniXXX/provider] "
+labels: ["provider"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A provider implements one family's contract for one service. Start from
+        [omni-provider-template](https://github.com/glitchr-omnisense/omni-provider-template);
+        the families and providers wanted are on the site's contribute page.
+  - type: input
+    id: family
+    attributes:
+      label: Family
+      description: An existing family (omnilab, omnimap...), or the name proposed for a new one.
+      placeholder: omnilang
+    validations:
+      required: true
+  - type: input
+    id: service
+    attributes:
+      label: Service
+      description: The API, and the address of its documentation.
+      placeholder: DeepL API - https://developers.deepl.com/
+    validations:
+      required: true
+  - type: textarea
+    id: policy
+    attributes:
+      label: Usage policy
+      description: As the service's own pages say it, with the page read.
+      value: |
+        auth: none | key | oauth | contract
+        free: true | false
+        commercial: yes | no | conditional | unclear
+        attribution: required | per-item | encouraged | none | unclear
+        credit:
+        terms: https://
+    validations:
+      required: true
+  - type: textarea
+    id: capabilities
+    attributes:
+      label: Capabilities
+      description: Which of the family's contracts it can answer, and what it cannot.
+  - type: textarea
+    id: live
+    attributes:
+      label: What can be checked live
+      description: An account, a sandbox, a free tier - what the "Verified, and not" section will be able to say.
+  - type: dropdown
+    id: role
+    attributes:
+      label: Maintainer
+      options:
+        - I will write and maintain it
+        - I will write it, someone else should maintain it
+        - I am only suggesting it
+    validations:
+      required: true

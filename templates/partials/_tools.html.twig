@@ -1,5 +1,10 @@
 {# The language - the same page in the other language, when it exists - and light / dark: at the right of the title block. #}
 <div class="om-tools">
+    {#- The site's repository and its stars, as read at the last build (App\Site\Stars): without a count, the button alone. -#}
+    {% set star_count = stars.short %}
+    <a class="om-tool om-star" href="{{ stars.url }}" rel="noopener" title="{{ star_count is null ? '@messages.star.title_none'|trans({repository: stars.repository}) : '@messages.star.title'|trans({repository: stars.repository, count: stars.count}) }}">
+        <i class="fa-brands fa-github" aria-hidden="true"></i><span class="om-star-label">{{ '@messages.star.label'|trans }}</span>{% if star_count is not null %}<span class="om-star-count">{{ star_count }}</span>{% endif %}
+    </a>
     {% set current = app.request.locale|lang %}
     {% for other, href in page_alternates(alternate_locales ?? null)|filter((h, l) => l != current) %}
     <a class="om-tool" href="{{ href }}" hreflang="{{ other }}" lang="{{ other }}" aria-label="{{ '@messages.nav.languages'|trans }}: {{ other|upper }}">{{ other|upper }}</a>

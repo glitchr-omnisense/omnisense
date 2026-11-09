@@ -8,6 +8,8 @@ parameters:
     # The GitHub organisation the packages live under: the "edit this page"
     # links, the repository links, the Sponsors page.
     app.site.github: "glitchr-omnisense"
+    # The site's own repository: the header's "Star" button (App\Site\Stars).
+    app.site.repository: "glitchr-omnisense/omnisense"
     # The public address of the static site (SITE_URL): its origin, or the
     # folder of one it is served under (https://glitchr-omnisense.github.io/omnisense/)
     # - the canonical and alternate links, the sitemap, the feeds, robots.txt.
@@ -23,6 +25,11 @@ parameters:
     app.documentation_file: '%kernel.project_dir%/config/documentation.yaml'
     # The compatibility dashboard's data, written by app:compat:fetch (GitHub's Actions API) at build time.
     app.compatibility_file: '%kernel.project_dir%/config/compatibility.yaml'
+    # The families and APIs, their capabilities, statuses and usage policies: the
+    # cards of /apis and the wanted list of /contribute (App\Catalogue\Api\Directory).
+    app.apis_file: '%kernel.project_dir%/config/apis.yaml'
+    # The header's star count, written by app:stars:fetch at build time.
+    app.github_file: '%kernel.project_dir%/config/github.yaml'
     app.docs_dir: '%env(default:app.docs_dir_default:DOCS_DIR)%'
     app.docs_dir_default: '%kernel.project_dir%/var/docs'
     # app:catalog:import only: the working copies of the packages (~/Sites,
@@ -93,6 +100,8 @@ when@test:
         app.catalog_dir: '%kernel.project_dir%/tests/Fixtures/catalog'
         app.documentation_file: '%kernel.project_dir%/tests/Fixtures/documentation.yaml'
         app.compatibility_file: '%kernel.project_dir%/tests/Fixtures/compatibility.yaml'
+        # No star count: the header shows the button alone (PagesTest).
+        app.github_file: '%kernel.project_dir%/tests/Fixtures/github-missing.yaml'
         app.docs_dir: '%kernel.project_dir%/tests/Fixtures/docs'
         app.news_dir: '%kernel.project_dir%/tests/Fixtures/news'
         app.catalogue.repos_dir: '%kernel.project_dir%/tests/Fixtures/repos'

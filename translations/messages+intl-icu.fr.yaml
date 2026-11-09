@@ -17,6 +17,8 @@ nav:
   languages: Langue
   theme: Clair ou sombre
   search: Recherche
+  apis: API
+  contribute: Contribuer
 footer:
   what: 'L’écosystème Omni, paquet par paquet : ce que chacun fait, où il en est, et son manuel, lu dans son dépôt.'
   plan: Plan
@@ -177,6 +179,8 @@ support:
   otherwise: Sans argent
   otherwise_lead: Ce qui aide autant.
   way:
+    maintain: Maintenir un fournisseur
+    maintain_text: 'Une famille, un service : les fournisseurs en quête de mainteneur, et comment une entreprise d’API déclare sa politique.'
     use: S’en servir
     use_text: Un paquet essayé dans un vrai projet en apprend plus que tous ses tests.
     report: Signaler
@@ -337,3 +341,119 @@ dashboard:
     fails: branchée, CI rouge
     unknown: branchée, CI non lue
     missing: non branchée
+star:
+  label: Étoile
+  title: 'Mettre une étoile à {repository} sur GitHub ({count} étoiles à la dernière construction)'
+  title_none: 'Mettre une étoile à {repository} sur GitHub'
+apis:
+  eyebrow: Familles et API
+  title: Toutes les familles, toutes les API
+  description: 'Les {families} familles de l’écosystème Omni et leurs {providers} fournisseurs : ce que chacune répond, où elle en est, et la politique d’usage de chaque API.'
+  lead: '{families} familles, {providers} fournisseurs : publiés, réservés, ou recherchés et en quête de mainteneur. Filtrer par étiquettes ; l’adresse garde les filtres, une vue se partage.'
+  source: '{policies} politiques d’usage déclarées, lues sur les pages des fournisseurs ; {wanted} fournisseurs cherchent un mainteneur.'
+  to_contribute: En maintenir un, ou déclarer la politique de son API →
+  families: Familles
+  providers: Fournisseurs
+  count: 'Familles : {families} · Fournisseurs : {providers}'
+  none: Aucune carte ne répond à ces filtres.
+  providers_count: '{count, plural, =0 {aucun fournisseur encore} one {# fournisseur} other {# fournisseurs}}'
+  help_wanted: Mainteneur recherché
+  maintain: Le maintenir
+  review: Relire son intégration
+  package: Son manuel
+  yes: Oui
+  no: Non
+  status:
+    available: Disponible
+    reserved: Réservée
+    wanted: Recherchée
+  auth:
+    none: Sans clé
+    key: Clé d’API
+    oauth: OAuth
+    contract: Contrat
+    unknown: Non déclaré
+  commercial:
+    yes: Usage commercial
+    no: Non commercial seulement
+    conditional: Sous conditions
+    unclear: Pas clair
+    unknown: Non déclaré
+  attribution:
+    required: Obligatoire
+    per-item: À l’œuvre (sa licence)
+    encouraged: Encouragée
+    none: Aucune
+    unclear: Pas claire
+  policy:
+    auth: Accès
+    free: Offre gratuite
+    commercial: Usage commercial
+    attribution: Crédit
+    page: Conditions
+    undeclared: Politique d’usage pas encore déclarée. Le mainteneur du fournisseur, ou l’entreprise qui tient l’API, peut la déclarer.
+  filter:
+    search: Chercher dans les cartes
+    placeholder: 'deepl, fériés, météo, traduire…'
+    status: État
+    auth: Accès
+    commercial: Usage commercial
+    help: Mainteneurs
+    family: Famille
+    capability: Capacité
+    reset: Effacer les filtres
+contribute:
+  eyebrow: Contribuer
+  title: Maintenir un fournisseur, ou apporter son API
+  description: 'Comment un fournisseur de l’écosystème Omni s’écrit, se propose, se relit et s’entretient ; comment une entreprise déclare la politique d’usage de son API ; les familles et les fournisseurs recherchés.'
+  lead: 'Aucune équipe ne suit seule toutes les API. Chaque fournisseur est un petit paquet à part, sous le contrat d’une famille ; il vit mieux avec un mainteneur nommé, et avec l’entreprise qui tient l’API pour le relire.'
+  dev:
+    title: Pour les développeurs
+    lead: 'Un fournisseur remplit le contrat d’une famille pour un service, et rien d’autre.'
+    template: Partir du modèle
+    template_text: '<a href="https://github.com/glitchr-omnisense/omni-provider-template">omni-provider-template</a> porte un squelette par famille ; <code>bin/init &lt;famille&gt; &lt;service&gt;</code> remplit les noms, et sa suite est verte avant la première ligne.'
+    suite: Passer la suite de conformité de la famille
+    suite_text: 'Chaque cœur livre sa suite en trait PHPUnit (<code>&lt;Cœur&gt;\Testing</code>). Le fournisseur y est monté sur des réponses enregistrées (<code>MockHttpClient</code>) : la suite ne touche jamais au réseau.'
+    bare: Prouver qu’il tourne hors de tout cadre
+    bare_text: '<code>Tests/BareTest.php</code> charge chaque classe avec les seules dépendances du paquet ; aucun cadre dans <code>require</code>, un client HTTP toujours accepté de l’extérieur.'
+    ci: Garder l’intégration continue au vert
+    ci_text: 'Les workflows du squelette appellent <a href="https://github.com/glitchr-studio/ci">glitchr-studio/ci</a>, épinglé à un commit : les tests à chaque push, une version avec ses notes, l’empreinte de son archive et une attestation de provenance à chaque étiquette.'
+    propose: Le proposer
+    propose_text: 'Ouvrir un ticket « Fournisseur » : la famille, le service, sa politique d’usage, ce qui peut s’essayer en vrai. Le nom s’y arrête, puis le dépôt est créé sous glitchr-omnisense.'
+    model: Qui maintient quoi
+    model_repo: 'Chaque dépôt de fournisseur vit dans l’organisation glitchr-omnisense, sous licence MIT, pour survivre à la disponibilité d’une seule personne.'
+    model_maintainer: 'Chaque fournisseur nomme son mainteneur dans son README et dans CODEOWNERS ; l’entreprise qui tient l’API peut en être co-mainteneuse.'
+    model_review: 'Une modification est fusionnée après la relecture du mainteneur de la famille et une intégration continue verte qui passe la suite de conformité ; une modification du contrat d’une famille demande son mainteneur, jamais un fournisseur seul.'
+    model_release: 'La section « Verified, and not » du README dit ce qui a été essayé contre le vrai service, et quand ; le catalogue le montre tel qu’il est écrit.'
+    model_leave: 'Un mainteneur qui se retire le dit dans un ticket ; le fournisseur passe en « mainteneur recherché » jusqu’à ce que quelqu’un le reprenne.'
+    cta: Proposer un fournisseur
+    guide: Lire « Écrire un fournisseur »
+  company:
+    title: Pour les entreprises qui tiennent les API
+    lead: 'Une intégration relue par l’éditeur de l’API est une intégration à laquelle ses utilisateurs peuvent se fier. Trois façons d’y entrer, d’une heure à un rôle suivi.'
+    review: Relire son fournisseur
+    review_text: 'Lire le paquet qui appelle son API : les points d’accès, les erreurs qu’il traduit, les limites qu’il respecte. Un ticket ou une demande de fusion suffit.'
+    policy: Déclarer sa politique d’usage en données
+    policy_text: 'Chaque fournisseur porte sa politique en données : l’accès qu’il demande, une offre gratuite, l’usage commercial sur cette offre, le crédit à montrer (<code>Policy</code> : auth, free, commercial, attribution, credit, terms). Une application la lit avant d’appeler l’API, et montre le crédit comme il est demandé.'
+    comaintain: Le co-maintenir
+    comaintain_text: 'Être nommé dans son CODEOWNERS : les changements de l’API arrivent dans le paquet quand ils sortent, pas quand un utilisateur les remarque.'
+    listed: Être référencé
+    listed_text: 'L’API a sa carte au catalogue, avec sa politique et un lien vers ses conditions ; un fournisseur relu le dit.'
+    cta: Relire ou déclarer son API
+    see: Voir les fournisseurs publiés
+  wanted:
+    title: Recherchés
+    lead: '{wanted} fournisseurs cherchent un mainteneur : de nouvelles familles, et des services qui manquent aux familles publiées.'
+    new: Nouvelles familles
+    extended: Dans les familles publiées
+    all: Toutes les cartes en quête de mainteneur
+  contact:
+    title: Prendre contact
+    lead: 'Tout passe par le dépôt du site sur GitHub, en public : un modèle de ticket par type de demande.'
+    provider: Maintenir un fournisseur
+    provider_text: 'Une famille, un service, une proposition de le maintenir.'
+    company: Une entreprise d’API
+    company_text: 'Une relecture, une politique d’usage à déclarer, un co-mainteneur à nommer.'
+    package: Un défaut dans un paquet
+    package_text: 'Les tickets de son propre dépôt : chaque fiche de paquet y renvoie.'
+    open: Ouvrir un ticket

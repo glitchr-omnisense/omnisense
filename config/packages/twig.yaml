@@ -9,3 +9,5 @@ twig:
         # Who the site is (the header, the footer, the legal notice), from
         # config/services.yaml (App\Site\Identity).
         site: '@App\Site\Identity'
+        # The site's repository and its star count, read at build time (the header's "Star").
+        stars: '@App\Site\Stars'

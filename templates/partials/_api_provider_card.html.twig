@@ -1,0 +1,42 @@
+{#
+ # A provider as a card of /apis: its name and package, its family, its
+ # status, and its usage policy as config/apis.yaml declares it (the auth it
+ # needs, a free tier, commercial use on it, the credit it asks for, the page
+ # that says so) - "not declared yet" when the file has none. The data-*
+ # attributes are what apis_controller.js filters by.
+ #}
+{% set locale = app.request.locale|lang %}
+{% set policy = provider.policy %}
+<li class="om-card is-provider is-{{ provider.status.value }}"
+    data-kind="provider" data-family="{{ provider.family }}" data-status="{{ provider.status.value }}"
+    data-capabilities="{{ provider.capabilities|join(' ') }}" data-auth="{{ provider.auth }}" data-commercial="{{ provider.commercial }}"
+    data-help="{{ provider.helpWanted ? 1 : 0 }}" data-text="{{ api_haystack(provider, locale) }}">
+    <header class="om-card-head">
+        <h3 class="om-card-name">{{ provider.name }}</h3>
+        <span class="om-status is-{{ provider.status.value }}">{{ ('@messages.apis.status.' ~ provider.status.value)|trans }}</span>
+    </header>
+    <p class="om-card-package"><code>{{ provider.package }}</code> · <a href="#card-{{ provider.family }}">{{ provider.family }}</a></p>
+    {% if provider.description %}<p class="om-card-text">{{ provider.description }}</p>{% endif %}
+    {% if policy %}
+    <dl class="om-policy">
+        <div><dt>{{ '@messages.apis.policy.auth'|trans }}</dt><dd>{{ ('@messages.apis.auth.' ~ policy.auth)|trans }}</dd></div>
+        <div><dt>{{ '@messages.apis.policy.free'|trans }}</dt><dd><span class="om-fact is-{{ policy.free ? 'yes' : 'no' }}">{{ (policy.free ? '@messages.apis.yes' : '@messages.apis.no')|trans }}</span></dd></div>
+        <div><dt>{{ '@messages.apis.policy.commercial'|trans }}</dt><dd><span class="om-fact is-{{ {yes: 'yes', no: 'no', conditional: 'partial', unclear: 'unknown'}[policy.commercial] }}">{{ ('@messages.apis.commercial.' ~ policy.commercial)|trans }}</span></dd></div>
+        <div><dt>{{ '@messages.apis.policy.attribution'|trans }}</dt><dd>{{ ('@messages.apis.attribution.' ~ policy.attribution)|trans }}{% if policy.credit %} <q>{{ policy.credit }}</q>{% endif %}</dd></div>
+    </dl>
+    {% if policy.note(locale) %}<p class="om-card-note">{{ policy.note(locale) }}</p>{% endif %}
+    {% else %}
+    <p class="om-card-note">{{ '@messages.apis.policy.undeclared'|trans }}</p>
+    {% endif %}
+    <p class="om-card-foot">
+        <span class="om-card-tags-inline">{% for capability in provider.capabilities %}<span>{{ api_label(capability, locale) }}</span>{% endfor %}</span>
+        {% if provider.helpWanted %}<span class="om-fact is-new">{{ '@messages.apis.help_wanted'|trans }}</span>{% endif %}
+    </p>
+    <p class="om-card-links">
+        {% if provider.released %}<a href="{{ doc_url(provider.released) }}">{{ '@messages.apis.package'|trans }}</a>{% endif %}
+        {% if provider.repositoryUrl %}<a href="{{ provider.repositoryUrl }}" rel="noopener">GitHub</a>{% endif %}
+        {% if policy and policy.terms %}<a href="{{ policy.terms }}" rel="noopener">{{ '@messages.apis.policy.page'|trans }}{% if policy.read %} <span class="om-card-read">({{ policy.read }})</span>{% endif %}</a>{% endif %}
+        {% if provider.helpWanted %}<a href="{{ api_issue(stars.repository, templates.provider, '[' ~ provider.package ~ '] ') }}" rel="noopener">{{ '@messages.apis.maintain'|trans }}</a>
+        {% elseif provider.status.value == 'available' %}<a href="{{ api_issue(stars.repository, templates.company, '[' ~ provider.package ~ '] ') }}" rel="noopener">{{ '@messages.apis.review'|trans }}</a>{% endif %}
+    </p>
+</li>

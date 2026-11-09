@@ -85,3 +85,10 @@ Les dépôts sont publics sur GitHub, sous
 correction de code suit le même chemin : copie, commit, demande de fusion.
 Chaque famille a un harnais Docker et une suite de tests ; son README dit
 comment les lancer.
+
+## Maintenir un fournisseur
+
+Un fournisseur d’une famille, ou une famille encore recherchée : [la page Contribuer](/fr/contribuer)
+dit comment il se propose, qui le maintient et comment il se relit, et liste ce qui est recherché.
+Les entreprises qui tiennent les API y trouvent comment relire leur fournisseur et déclarer leur
+politique d’usage en données.

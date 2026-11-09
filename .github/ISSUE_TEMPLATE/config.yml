@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: A defect in one package
+    url: https://github.com/glitchr-omnisense
+    about: Each package has its own repository and its own issues; its page on the site links to it.

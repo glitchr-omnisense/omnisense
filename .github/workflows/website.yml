@@ -117,6 +117,14 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: php bin/console app:compat:fetch --no-interaction
 
+      # The header's star count, from GitHub's REST API with the job's token. A failure keeps
+      # config/github.yaml as committed; a page without a count shows the button alone.
+      - name: Star count
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: php bin/console app:stars:fetch --no-interaction
+
       - name: Build
         run: bin/omnibridge-static build --out=dist --github-pages
 

@@ -1,0 +1,98 @@
+{#
+ # The families and their APIs as cards: a card per family (what it answers,
+ # its capabilities, its providers, its status), then a card per provider
+ # (its family, its status, the usage policy config/apis.yaml declares).
+ # Every card is in the page, readable as a plain list without JavaScript;
+ # apis_controller.js shows the filters - tags that combine (any of a group,
+ # all of the groups) and a text search - and keeps them in the address
+ # (?family=omnilang,omnical&auth=none&q=...), which it reads again when the
+ # page opens: the page itself is static.
+ #}
+{% extends 'layout1.html.twig' %}
+
+{% block title %}{{ '@messages.apis.title'|trans }}{% endblock %}
+{% block description %}{{ '@messages.apis.description'|trans({families: counts.families, providers: counts.providers}) }}{% endblock %}
+
+{% block content %}
+{% set locale = app.request.locale|lang %}
+<div class="om-wrap om-page om-apis" data-controller="apis" data-apis-url-value="{{ path('app_apis') }}">
+    <header class="om-head is-page">
+        <p class="om-cote">{{ '@messages.apis.eyebrow'|trans }}</p>
+        <h1>{{ '@messages.apis.title'|trans }}</h1>
+        <p class="om-lead">{{ '@messages.apis.lead'|trans({families: counts.families, providers: counts.providers}) }}</p>
+        <p class="om-source">{{ '@messages.apis.source'|trans({policies: counts.policies, wanted: counts.wanted}) }} <a href="{{ path('app_contribute') }}">{{ '@messages.apis.to_contribute'|trans }}</a></p>
+    </header>
+
+    <form class="om-finder om-api-filters" role="search" method="get" action="{{ path('app_apis') }}" hidden data-apis-target="form" data-action="submit->apis#submit">
+        <div class="om-search om-finder-box">
+            <label for="om-apis-q">{{ '@messages.apis.filter.search'|trans }}</label>
+            <div>
+                <input id="om-apis-q" type="search" name="q" placeholder="{{ '@messages.apis.filter.placeholder'|trans }}" autocomplete="off" spellcheck="false" data-apis-target="q" data-action="input->apis#filter">
+            </div>
+        </div>
+        <div class="om-api-groups">
+            {% set groups = [
+                {key: 'status', values: statuses, label: '@messages.apis.filter.status', prefix: '@messages.apis.status.'},
+                {key: 'auth', values: auths, label: '@messages.apis.filter.auth', prefix: '@messages.apis.auth.'},
+                {key: 'commercial', values: commercials, label: '@messages.apis.filter.commercial', prefix: '@messages.apis.commercial.'},
+            ] %}
+            {% for group in groups %}
+            <fieldset class="om-finder-kinds">
+                <legend class="om-cote">{{ group.label|trans }}</legend>
+                {% for value in group.values %}
+                <label class="om-chip"><input type="checkbox" name="{{ group.key }}" value="{{ value }}" data-action="change->apis#filter"><span>{{ (group.prefix ~ value)|trans }}</span></label>
+                {% endfor %}
+            </fieldset>
+            {% endfor %}
+            <fieldset class="om-finder-kinds">
+                <legend class="om-cote">{{ '@messages.apis.filter.help'|trans }}</legend>
+                <label class="om-chip"><input type="checkbox" name="help" value="1" data-action="change->apis#filter"><span>{{ '@messages.apis.help_wanted'|trans }}</span></label>
+            </fieldset>
+        </div>
+        <details class="om-api-more" data-apis-target="families">
+            <summary>{{ '@messages.apis.filter.family'|trans }} <span class="om-api-picked" data-picked></span></summary>
+            <fieldset class="om-finder-kinds">
+                <legend class="visually-hidden">{{ '@messages.apis.filter.family'|trans }}</legend>
+                {% for family in families %}
+                <label class="om-chip"><input type="checkbox" name="family" value="{{ family.name }}" data-action="change->apis#filter"><span>{{ family.name }}</span></label>
+                {% endfor %}
+            </fieldset>
+        </details>
+        <details class="om-api-more" data-apis-target="capabilities">
+            <summary>{{ '@messages.apis.filter.capability'|trans }} <span class="om-api-picked" data-picked></span></summary>
+            <fieldset class="om-finder-kinds">
+                <legend class="visually-hidden">{{ '@messages.apis.filter.capability'|trans }}</legend>
+                {% for slug, label in capabilities %}
+                <label class="om-chip"><input type="checkbox" name="capability" value="{{ slug }}" data-action="change->apis#filter"><span>{{ label }}</span></label>
+                {% endfor %}
+            </fieldset>
+        </details>
+        <p class="om-api-reset"><button type="button" class="om-button is-line" data-apis-target="reset" data-action="apis#reset">{{ '@messages.apis.filter.reset'|trans }}</button></p>
+    </form>
+
+    <p class="om-finder-count" aria-live="polite" data-apis-target="count"
+       data-template="{{ '@messages.apis.count'|trans({families: '%f', providers: '%p'}) }}">
+        {{ '@messages.apis.count'|trans({families: families|length, providers: providers|length}) }}
+    </p>
+
+    <section class="om-api-section" aria-labelledby="om-apis-families">
+        <h2 id="om-apis-families">{{ '@messages.apis.families'|trans }}</h2>
+        <ol class="om-cards" data-apis-target="list">
+            {% for family in families %}
+            {% include 'partials/_api_family_card.html.twig' %}
+            {% endfor %}
+        </ol>
+        <p class="om-none" hidden data-apis-target="noFamily">{{ '@messages.apis.none'|trans }}</p>
+    </section>
+
+    <section class="om-api-section" aria-labelledby="om-apis-providers">
+        <h2 id="om-apis-providers">{{ '@messages.apis.providers'|trans }}</h2>
+        <ol class="om-cards" data-apis-target="list">
+            {% for provider in providers %}
+            {% include 'partials/_api_provider_card.html.twig' %}
+            {% endfor %}
+        </ol>
+        <p class="om-none" hidden data-apis-target="noProvider">{{ '@messages.apis.none'|trans }}</p>
+    </section>
+</div>
+{% endblock %}

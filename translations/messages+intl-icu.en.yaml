@@ -17,6 +17,8 @@ nav:
   languages: Language
   theme: Light or dark
   search: Search
+  apis: APIs
+  contribute: Contribute
 footer:
   what: 'The Omni ecosystem, package by package: what each does, where it stands, and its manual, read in its repository.'
   plan: Plan
@@ -177,6 +179,8 @@ support:
   otherwise: Without money
   otherwise_lead: What helps as much.
   way:
+    maintain: Maintain a provider
+    maintain_text: 'A family, a service: the providers looking for a maintainer, and how an API company declares its policy.'
     use: Use them
     use_text: A package tried in a real project teaches more than all its tests.
     report: Report
@@ -337,3 +341,119 @@ dashboard:
     fails: runs, CI red
     unknown: runs, no CI read
     missing: not wired
+star:
+  label: Star
+  title: 'Star {repository} on GitHub ({count} stars at the last build)'
+  title_none: 'Star {repository} on GitHub'
+apis:
+  eyebrow: Families and APIs
+  title: Every family, every API
+  description: 'The {families} families of the Omni ecosystem and their {providers} providers: what each answers, its status, and each API’s usage policy.'
+  lead: '{families} families, {providers} providers: released, reserved, or wanted and looking for someone to maintain them. Filter by tags; the address keeps the filters, so a view can be shared.'
+  source: '{policies} usage policies declared, read on the providers’ own pages; {wanted} providers looking for a maintainer.'
+  to_contribute: Maintain one, or declare your API’s policy →
+  families: Families
+  providers: Providers
+  count: 'Families: {families} · Providers: {providers}'
+  none: No card matches these filters.
+  providers_count: '{count, plural, =0 {no provider yet} one {# provider} other {# providers}}'
+  help_wanted: Help wanted
+  maintain: Maintain it
+  review: Review its integration
+  package: Its manual
+  yes: 'Yes'
+  no: 'No'
+  status:
+    available: Available
+    reserved: Reserved
+    wanted: Wanted
+  auth:
+    none: No key
+    key: API key
+    oauth: OAuth
+    contract: Contract
+    unknown: Not declared
+  commercial:
+    yes: Commercial use
+    no: Non-commercial only
+    conditional: Under conditions
+    unclear: Unclear
+    unknown: Not declared
+  attribution:
+    required: Required
+    per-item: Per item (each work’s licence)
+    encouraged: Encouraged
+    none: None
+    unclear: Unclear
+  policy:
+    auth: Access
+    free: Free tier
+    commercial: Commercial use
+    attribution: Credit
+    page: Policy
+    undeclared: Usage policy not declared yet. The provider’s maintainer, or the company behind the API, can declare it.
+  filter:
+    search: Search the cards
+    placeholder: 'deepl, holidays, weather, translate…'
+    status: Status
+    auth: Access
+    commercial: Commercial use
+    help: Maintainers
+    family: Family
+    capability: Capability
+    reset: Clear the filters
+contribute:
+  eyebrow: Contribute
+  title: Maintain a provider, or bring your API
+  description: 'How a provider of the Omni ecosystem is built, proposed, reviewed and maintained; how a company declares its API’s usage policy; the families and providers wanted.'
+  lead: 'No single team can follow every API. Each provider is a small package of its own, under one family’s contract; it lives best with a named maintainer, and with the company that runs the API looking over it.'
+  dev:
+    title: For developers
+    lead: 'A provider implements one family’s contract for one service, and nothing else.'
+    template: Start from the template
+    template_text: '<a href="https://github.com/glitchr-omnisense/omni-provider-template">omni-provider-template</a> has a skeleton per family; <code>bin/init &lt;family&gt; &lt;service&gt;</code> fills the names, and its suite is green before a line is written.'
+    suite: Run the family’s conformance suite
+    suite_text: 'Each core ships its suite as a PHPUnit trait (<code>&lt;Core&gt;\Testing</code>). The provider is built over recorded answers (<code>MockHttpClient</code>): the suite never reaches the network.'
+    bare: Prove it runs outside any framework
+    bare_text: '<code>Tests/BareTest.php</code> loads every class with the package’s own requirements; no framework in <code>require</code>, an HTTP client always accepted from outside.'
+    ci: Keep the CI green
+    ci_text: 'The skeleton’s workflows call <a href="https://github.com/glitchr-studio/ci">glitchr-studio/ci</a>, pinned to a commit: tests on each push, a release with its notes, its archive checksum and a provenance attestation on each tag.'
+    propose: Propose it
+    propose_text: 'Open a “Provider” issue: the family, the service, its usage policy, what can be checked live. The name is agreed there, then the repository is created under glitchr-omnisense.'
+    model: Who maintains what
+    model_repo: 'Every provider repository lives under the glitchr-omnisense organisation, MIT licensed, so that it outlives any one person’s availability.'
+    model_maintainer: 'Each provider names its maintainer in its README and in CODEOWNERS; a company that runs the API can be a co-maintainer.'
+    model_review: 'A change is merged after the review of the family’s maintainer and a green CI that runs the conformance suite; a change to a family’s contract needs the family’s maintainer, never a provider alone.'
+    model_release: 'The README’s “Verified, and not” says what was tried against the real service and when; the catalogue shows it as it is written.'
+    model_leave: 'A maintainer who steps back says so in an issue; the provider is marked “help wanted” until someone takes it over.'
+    cta: Propose a provider
+    guide: Read “Writing a provider”
+  company:
+    title: For the companies behind the APIs
+    lead: 'An integration you have read is one your users can trust. Three ways in, from an hour to an ongoing role.'
+    review: Review your provider
+    review_text: 'Read the package that calls your API: the endpoints, the errors it maps, the limits it respects. An issue or a pull request is enough.'
+    policy: Declare your usage policy as data
+    policy_text: 'Each provider carries its policy as data: the access it needs, a free tier, commercial use on it, the credit to show (<code>Policy</code>: auth, free, commercial, attribution, credit, terms). An application reads it before it calls you, and shows your credit as you ask.'
+    comaintain: Co-maintain it
+    comaintain_text: 'Be named in its CODEOWNERS: your changes to the API reach the package when they ship, not when a user notices.'
+    listed: Be listed
+    listed_text: 'Your API gets its card in the catalogue, with your policy and a link to your terms; a reviewed provider says so.'
+    cta: Review or declare your API
+    see: See the released providers
+  wanted:
+    title: Wanted
+    lead: '{wanted} providers are looking for a maintainer: new families, and services missing from the released ones.'
+    new: New families
+    extended: In the released families
+    all: All the cards looking for a maintainer
+  contact:
+    title: Get in touch
+    lead: 'Everything goes through the site’s repository on GitHub, in the open: one issue template per kind of request.'
+    provider: Maintain a provider
+    provider_text: 'A family, a service, a proposal to maintain it.'
+    company: An API company
+    company_text: 'A review, a usage policy to declare, a co-maintainer to name.'
+    package: A defect in a package
+    package_text: 'Its own repository’s issues: each package page links to it.'
+    open: Open an issue

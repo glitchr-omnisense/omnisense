@@ -1,0 +1,104 @@
+{#
+ # The call to maintain the providers: to developers (how a provider is
+ # built, how one is proposed, who maintains it and how it is reviewed) and
+ # to the companies behind the APIs (review or co-maintain their provider,
+ # declare their usage policy as data, be listed). Then what is wanted -
+ # the new families and the providers looked for in the released ones -,
+ # from config/apis.yaml as the cards of /apis are, and the way in: an issue
+ # of the site's repository, from one of its templates.
+ #}
+{% extends 'layout1.html.twig' %}
+
+{% block title %}{{ '@messages.contribute.title'|trans }}{% endblock %}
+{% block description %}{{ '@messages.contribute.description'|trans }}{% endblock %}
+
+{% block content %}
+{% set locale = app.request.locale|lang %}
+<div class="om-wrap om-page om-contribute">
+    <header class="om-head is-page">
+        <p class="om-cote">{{ '@messages.contribute.eyebrow'|trans }}</p>
+        <h1>{{ '@messages.contribute.title'|trans }}</h1>
+        <p class="om-lead">{{ '@messages.contribute.lead'|trans }}</p>
+    </header>
+
+    <div class="om-audiences">
+        <section class="om-tier" id="maintainers" aria-labelledby="om-maintainers">
+            <header><h2 id="om-maintainers">{{ '@messages.contribute.dev.title'|trans }}</h2><p>{{ '@messages.contribute.dev.lead'|trans }}</p></header>
+            <ol class="om-steps">
+                <li><b>{{ '@messages.contribute.dev.template'|trans }}</b><span>{{ '@messages.contribute.dev.template_text'|trans|raw }}</span></li>
+                <li><b>{{ '@messages.contribute.dev.suite'|trans }}</b><span>{{ '@messages.contribute.dev.suite_text'|trans|raw }}</span></li>
+                <li><b>{{ '@messages.contribute.dev.bare'|trans }}</b><span>{{ '@messages.contribute.dev.bare_text'|trans|raw }}</span></li>
+                <li><b>{{ '@messages.contribute.dev.ci'|trans }}</b><span>{{ '@messages.contribute.dev.ci_text'|trans|raw }}</span></li>
+                <li><b>{{ '@messages.contribute.dev.propose'|trans }}</b><span>{{ '@messages.contribute.dev.propose_text'|trans }}</span></li>
+            </ol>
+            <h3>{{ '@messages.contribute.dev.model'|trans }}</h3>
+            <ul class="om-rules">
+                <li>{{ '@messages.contribute.dev.model_repo'|trans }}</li>
+                <li>{{ '@messages.contribute.dev.model_maintainer'|trans }}</li>
+                <li>{{ '@messages.contribute.dev.model_review'|trans }}</li>
+                <li>{{ '@messages.contribute.dev.model_release'|trans }}</li>
+                <li>{{ '@messages.contribute.dev.model_leave'|trans }}</li>
+            </ul>
+            <p class="om-actions">
+                <a class="om-button" href="{{ api_issue(stars.repository, templates.provider) }}" rel="noopener">{{ '@messages.contribute.dev.cta'|trans }}</a>
+                <a class="om-button is-line" href="{{ path('app_guide', {slug: 'providers'}) }}">{{ '@messages.contribute.dev.guide'|trans }}</a>
+            </p>
+        </section>
+
+        <section class="om-tier" id="api-providers" aria-labelledby="om-companies">
+            <header><h2 id="om-companies">{{ '@messages.contribute.company.title'|trans }}</h2><p>{{ '@messages.contribute.company.lead'|trans }}</p></header>
+            <ol class="om-steps">
+                <li><b>{{ '@messages.contribute.company.review'|trans }}</b><span>{{ '@messages.contribute.company.review_text'|trans }}</span></li>
+                <li><b>{{ '@messages.contribute.company.policy'|trans }}</b><span>{{ '@messages.contribute.company.policy_text'|trans|raw }}</span></li>
+                <li><b>{{ '@messages.contribute.company.comaintain'|trans }}</b><span>{{ '@messages.contribute.company.comaintain_text'|trans }}</span></li>
+                <li><b>{{ '@messages.contribute.company.listed'|trans }}</b><span>{{ '@messages.contribute.company.listed_text'|trans }}</span></li>
+            </ol>
+            {#- Code, the same in every language (the keys of App\Catalogue\Api\Policy::fromArray()). -#}
+            <pre class="om-policy-sample"><code>policy:
+  auth: key            # none | key | oauth | contract
+  free: true
+  commercial: yes      # yes | no | conditional | unclear
+  attribution: required
+  credit: 'Data from Example'
+  terms: 'https://example.org/api-terms'</code></pre>
+            <p class="om-actions">
+                <a class="om-button" href="{{ api_issue(stars.repository, templates.company) }}" rel="noopener">{{ '@messages.contribute.company.cta'|trans }}</a>
+                <a class="om-button is-line" href="{{ path('app_apis') }}#status-available">{{ '@messages.contribute.company.see'|trans }}</a>
+            </p>
+        </section>
+    </div>
+
+    <section class="om-tier" id="wanted" aria-labelledby="om-wanted">
+        <header><h2 id="om-wanted">{{ '@messages.contribute.wanted.title'|trans }}</h2><p>{{ '@messages.contribute.wanted.lead'|trans({wanted: counts.wanted}) }}</p></header>
+        <h3>{{ '@messages.contribute.wanted.new'|trans }}</h3>
+        <ul class="om-wanted">
+            {% for family in new_families %}
+            <li>
+                <p class="om-wanted-head"><a class="om-wanted-name" href="{{ path('app_apis') }}#family-{{ family.name }}">{{ family.name|omni_mark }}</a> <span class="om-status is-{{ family.status.value }}">{{ ('@messages.apis.status.' ~ family.status.value)|trans }}</span></p>
+                <p class="om-wanted-text">{{ family.phrase(locale) }}</p>
+                <p class="om-wanted-providers">{% for provider in family.providers %}<span>{{ provider.name }}</span>{% endfor %}</p>
+            </li>
+            {% endfor %}
+        </ul>
+        <h3>{{ '@messages.contribute.wanted.extended'|trans }}</h3>
+        <ul class="om-wanted">
+            {% for family in extended %}
+            <li>
+                <p class="om-wanted-head"><a class="om-wanted-name" href="{{ path('app_apis') }}#family-{{ family.name }}.help-1">{{ family.name|omni_mark }}</a></p>
+                <p class="om-wanted-providers">{% for provider in family.wanted %}<span>{{ provider.name }}</span>{% endfor %}</p>
+            </li>
+            {% endfor %}
+        </ul>
+        <p class="om-actions"><a class="om-button is-line" href="{{ path('app_apis') }}#help-1">{{ '@messages.contribute.wanted.all'|trans }}</a></p>
+    </section>
+
+    <section class="om-tier" id="contact" aria-labelledby="om-contact">
+        <header><h2 id="om-contact">{{ '@messages.contribute.contact.title'|trans }}</h2><p>{{ '@messages.contribute.contact.lead'|trans }}</p></header>
+        <ul class="om-ways">
+            <li><b>{{ '@messages.contribute.contact.provider'|trans }}</b><span>{{ '@messages.contribute.contact.provider_text'|trans }}</span><a href="{{ api_issue(stars.repository, templates.provider) }}" rel="noopener">{{ '@messages.contribute.contact.open'|trans }}</a></li>
+            <li><b>{{ '@messages.contribute.contact.company'|trans }}</b><span>{{ '@messages.contribute.contact.company_text'|trans }}</span><a href="{{ api_issue(stars.repository, templates.company) }}" rel="noopener">{{ '@messages.contribute.contact.open'|trans }}</a></li>
+            <li><b>{{ '@messages.contribute.contact.package'|trans }}</b><span>{{ '@messages.contribute.contact.package_text'|trans }}</span><a href="{{ site.githubUrl }}" rel="noopener">github.com/{{ site.github }}</a></li>
+        </ul>
+    </section>
+</div>
+{% endblock %}

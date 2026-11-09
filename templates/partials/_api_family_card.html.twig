@@ -1,0 +1,34 @@
+{#
+ # A family as a card of /apis: its name, what it answers, its status, its
+ # capabilities and how many providers it has. The data-* attributes are what
+ # apis_controller.js filters by: the family's own facts, and the union of
+ # its providers' auth and commercial use (a family stays when one of its
+ # providers matches).
+ #}
+{% set locale = app.request.locale|lang %}
+<li class="om-card is-family is-{{ family.status.value }}" id="card-{{ family.name }}"
+    data-kind="family" data-family="{{ family.name }}" data-status="{{ family.status.value }}"
+    data-capabilities="{{ family.capabilities|join(' ') }}"
+    data-auth="{{ family.providers|map(p => p.auth)|reduce((carry, v) => v in carry ? carry : carry|merge([v]), [])|join(' ') }}"
+    data-commercial="{{ family.providers|map(p => p.commercial)|reduce((carry, v) => v in carry ? carry : carry|merge([v]), [])|join(' ') }}"
+    data-help="{{ family.helpWanted ? 1 : 0 }}" data-text="{{ api_haystack(family, locale) }}">
+    <header class="om-card-head">
+        <h3 class="om-card-name">{{ family.name|omni_mark }}</h3>
+        <span class="om-status is-{{ family.status.value }}">{{ ('@messages.apis.status.' ~ family.status.value)|trans }}</span>
+    </header>
+    <p class="om-card-text">{{ family.phrase(locale) }}</p>
+    <ul class="om-card-tags" aria-label="{{ '@messages.apis.filter.capability'|trans }}">
+        {% for capability in family.capabilities %}<li>{{ api_label(capability, locale) }}</li>{% endfor %}
+    </ul>
+    <p class="om-card-foot">
+        <span class="om-card-count">{{ '@messages.apis.providers_count'|trans({count: family.providers|length}) }}</span>
+        {% if family.helpWanted %}<span class="om-fact is-new">{{ '@messages.apis.help_wanted'|trans }}</span>{% endif %}
+    </p>
+    <p class="om-card-links">
+        {% if family.status.value == 'available' and family.name in family_pages %}
+        <a href="{{ family_url(family.name) }}">{{ '@messages.family.manual'|trans }}</a>
+        {% else %}
+        <a href="{{ api_issue(stars.repository, templates.provider, '[' ~ family.name ~ '] ') }}" rel="noopener">{{ '@messages.apis.maintain'|trans }}</a>
+        {% endif %}
+    </p>
+</li>
