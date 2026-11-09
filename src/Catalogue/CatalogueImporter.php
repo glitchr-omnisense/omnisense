@@ -26,15 +26,21 @@ class CatalogueImporter
     }
 
     /**
-     * @return array{families: int, packages: int, documented: int, pinned: int, skipped: list<string>}
+     * @return array{families: int, packages: int, documented: int, pinned: int, skipped: list<string>, merged: list<string>}
      */
     public function import(bool $pin = false): array
     {
         $scanned = $this->scanner->scan();
-        $report = ['families' => 0, 'packages' => 0, 'documented' => 0, 'pinned' => 0, 'skipped' => []];
+        $report = ['families' => 0, 'packages' => 0, 'documented' => 0, 'pinned' => 0, 'skipped' => [], 'merged' => []];
 
         $byFamily = [];
         foreach ($scanned as $name => $package) {
+            // A family merged into another (Families::MERGED): its packages are the successor's, its own are archived.
+            if (isset(Families::MERGED[$package->family ?? ''])) {
+                $report['merged'][] = $name;
+                unset($scanned[$name]);
+                continue;
+            }
             // Only what anyone can read: a package whose repository is not public on GitHub stays out.
             if (null === $package->repository) {
                 $report['skipped'][] = $name;
@@ -49,6 +55,11 @@ class CatalogueImporter
 
         if (!is_dir($this->catalogDir)) {
             mkdir($this->catalogDir, 0o775, true);
+        }
+        foreach (array_keys(Families::MERGED) as $merged) {
+            if (is_file($this->catalogDir.'/'.$merged.'.yaml')) {
+                unlink($this->catalogDir.'/'.$merged.'.yaml');
+            }
         }
         foreach ($byFamily as $family => $packages) {
             $file = $this->catalogDir.'/'.$family.'.yaml';

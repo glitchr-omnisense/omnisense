@@ -21,6 +21,9 @@ final class CatalogImportCommand
         if ($report['skipped']) {
             $io->note('Not on GitHub, left out: '.implode(', ', $report['skipped']));
         }
+        if ($report['merged']) {
+            $io->note('Of a family merged into another (App\\Catalogue\\Families::MERGED), left out: '.implode(', ', $report['merged']));
+        }
 
         return 0;
     }

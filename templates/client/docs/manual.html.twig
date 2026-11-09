@@ -26,7 +26,7 @@
         <nav class="manual-crumbs" aria-label="{{ '@messages.manual.breadcrumb'|trans }}">
             <ol>
                 <li><a href="{{ path('app_docs') }}">{{ '@messages.docs.title'|trans }}</a></li>
-                {% if family and family.own and family.own != package %}<li><a href="{{ family_url(family.name) }}">{{ family.own.name }}</a></li>{% elseif family and not family.own %}<li><a href="{{ family_url(family.name) }}">{{ '@messages.docs.group_library'|trans }}</a></li>{% endif %}
+                {% if family and family.own and family.own != package %}<li><a href="{{ family_url(family.name) }}">{{ family.own.name }}</a></li>{% elseif family and not family.own and 'libraries' == family.name %}<li><a href="{{ family_url(family.name) }}">{{ '@messages.docs.group_library'|trans }}</a></li>{% endif %}
                 <li{% if not api %} aria-current="page"{% endif %}>{% if api %}<a href="{{ path('app_manual', {key: manual.key, series: series}) }}">{{ manual.package }}</a>{% else %}<span>{{ manual.package }}</span>{% endif %}</li>
                 {% if api %}<li aria-current="page"><span>{{ '@messages.manual.api'|trans }}</span></li>{% endif %}
             </ol>

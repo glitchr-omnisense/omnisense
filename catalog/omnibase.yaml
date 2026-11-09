@@ -124,6 +124,25 @@ packages:
       - omnisense/omnibase
     verification: unstated
     docs: true
+  omnibase/drive:
+    kind: structure
+    description: "The drive application for omnibase: a site's own cloud of folders and files - who each folder is for, sharing by name, workspaces with their tasks, search, previews, zips, download counts - on the site's storage or its Google Drive"
+    license: MIT
+    keywords:
+      - symfony
+      - drive
+      - cloud
+      - file-sharing
+      - documents
+      - google-drive
+      - flysystem
+    repository: glitchr-omnisense/omnibase-drive
+    branch: main
+    requires:
+      - omnibridge/symfony
+      - omnisense/omnibase
+    verification: unstated
+    docs: true
   omnibase/estate:
     kind: structure
     description: 'Property management for omnibase: organisations, buildings and units, associates, leases and tenants, rent calls, receipts and online payment, contractors and work orders, invitations and a private space for each - posting to omnibase/ledger'
@@ -486,18 +505,17 @@ packages:
     docs: true
   omnisense/omnibase:
     kind: core
-    description: 'omnibase: entities, view models, contracts and helpers on Doctrine and Twig; under Symfony with omnibridge/symfony'
+    description: 'omnibase: entities, view models, contracts, forms and helpers for any PHP host; under Symfony with omnibridge/symfony, under Laravel with omnibridge/laravel, persisted through omnibridge/doctrine'
     license: MIT
     keywords:
-      - symfony
-      - base
-      - helper
+      - omnibase
+      - entities
+      - forms
+      - contracts
     repository: glitchr-omnisense/omnibase
-    branch: 4.x
+    branch: 5.x
     requires:
       - omnibridge/composer
-      - omnibridge/doctrine
-      - omnibridge/twig
       - omnisense/omnibridge
       - omnisense/omnidrive
     verification: unstated

@@ -3,7 +3,7 @@
 The website of the Omni ecosystem: the cross-ecosystem guides, the news, the
 package catalogue and each package's documentation, read from its own
 repository at a pinned commit. A Symfony application on
-`omnisense/omnibase` 4.x, exported to static files by `omnibridge/static`:
+`omnisense/omnibase` 5.x (omnibridge/symfony, doctrine mode), exported to static files by `omnibridge/static`:
 nothing runs on the server when the site is read - no database, no PHP, no
 search service.
 

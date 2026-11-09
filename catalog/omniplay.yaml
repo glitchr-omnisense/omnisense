@@ -1,0 +1,180 @@
+# The omniplay entry of the Omnisense catalogue. Written by `bin/console
+# app:catalog:import` from the packages' repositories; the phrase and the
+# text are the site's own, edited here. Each package: its kind, what its
+# composer.json says, its GitHub repository and development branch, whether
+# its README says it was verified against the real service, whether it has
+# a docs/ folder (see config/documentation.yaml).
+family: omniplay
+phrase:
+  en: 'Put a game on the stores, and play it online.'
+  fr: 'Mettre un jeu sur les boutiques, et y jouer en ligne.'
+text:
+  en: "One family for games, a contract per capability: a game's presence on the stores - a search, its record, a player's library and what they own - and online play - a fleet of game servers, seating, signed tickets, heartbeats, hosting and the player's identity. Each provider implements the contracts it can hold; the game servers' own packages, outside Composer, check the same tickets."
+  fr: 'Une seule famille pour les jeux, un contrat par capacité : la présence d’un jeu sur les boutiques — une recherche, sa fiche, la bibliothèque d’un joueur et ce qu’il possède — et le jeu en ligne — une flotte de serveurs, le placement, des tickets signés, les battements, l’hébergement et l’identité du joueur. Chaque fournisseur implémente les contrats qu’il peut tenir ; les paquets des serveurs de jeu, hors de Composer, vérifient les mêmes tickets.'
+packages:
+  omniplay/docker:
+    kind: provider
+    description: "Omniplay's Docker hosting, under any PHP host: game-server containers started and stopped through the Docker Engine API (a unix socket or TCP), the image, command and environment of each service given by configuration, the server's ticket secret handed to it in its environment."
+    license: MIT
+    keywords:
+      - docker
+      - container
+      - game-server
+      - hosting
+      - multiplayer
+      - framework-agnostic
+      - omniplay
+    repository: glitchr-omnisense/omniplay-docker
+    branch: 1.x
+    requires:
+      - omnisense/omniplay
+    verification: partial
+    verification_note: "- Verified live (Docker Desktop, engine 29.8.2, the socket mounted in the harness): a php:8.4-cli container started, listed by running(), its environment holding the secret and its room, stopped and removed by Docker. — - Not verified: an engine over TCP or TLS; a game server's image."
+    docs: true
+  omniplay/edgegap:
+    kind: provider
+    description: "Omniplay's Edgegap hosting, under any PHP host: game servers deployed through Edgegap's REST API near the players given (their public IPs or coordinates) or near a region's location, the deployment's status read until it has an address, stopped by its request id; the server's ticket secret handed to it in its environment, hidden."
+    license: MIT
+    keywords:
+      - edgegap
+      - game-server
+      - hosting
+      - edge
+      - multiplayer
+      - framework-agnostic
+      - omniplay
+    repository: glitchr-omnisense/omniplay-edgegap
+    branch: 1.x
+    requires:
+      - omnisense/omniplay
+    verification: partial
+    verification_note: '- Not verified: anything live - there is no Edgegap account.'
+    docs: true
+  omniplay/gog:
+    kind: provider
+    description: "Omniplay's GOG, under any PHP host, with no key: a product's record with its description and its price in the country asked, and the catalogue's search with prices, studios, genres and the store's rating."
+    license: MIT
+    keywords:
+      - gog
+      - store
+      - game
+      - games
+      - catalogue
+      - framework-agnostic
+      - omniplay
+    repository: glitchr-omnisense/omniplay-gog
+    branch: 1.x
+    requires:
+      - omnisense/omniplay
+    verification: verified
+    verification_note: '- Verified live (2026-10-24): a product with its US price, a search.'
+    docs: true
+  omniplay/igdb:
+    kind: provider
+    description: "Omniplay's IGDB, under any PHP host: Twitch's games database through Apicalypse queries - search, a game's record by its IGDB, Steam or GOG number with its studios, platforms, cover and screenshots, score and identifiers on the stores; Twitch's application token got and renewed by itself."
+    license: MIT
+    keywords:
+      - igdb
+      - twitch
+      - game
+      - games
+      - database
+      - apicalypse
+      - framework-agnostic
+      - omniplay
+    repository: glitchr-omnisense/omniplay-igdb
+    branch: 1.x
+    requires:
+      - omnisense/omniplay
+    verification: partial
+    verification_note: '- Not verified live: no credentials.'
+    docs: true
+  omniplay/itch:
+    kind: provider
+    description: "Omniplay's itch.io, under any PHP host: a game page's record from its public data.json with no key, and with a server-side API key whether a player owns one of your games (download keys) and the library of the key's own account."
+    license: MIT
+    keywords:
+      - itch
+      - itch.io
+      - indie
+      - game
+      - games
+      - download-keys
+      - framework-agnostic
+      - omniplay
+    repository: glitchr-omnisense/omniplay-itch
+    branch: 1.x
+    requires:
+      - omnisense/omniplay
+    verification: partial
+    verification_note: "- Verified live (2026-10-24): X-Moon's page. — - Not verified live: ownership and library (no key)."
+    docs: true
+  omniplay/rawg:
+    kind: provider
+    description: "Omniplay's RAWG, under any PHP host: search and a game's record with its studios, platforms, scores and the stores that sell it - its Steam number, itch.io page and Epic slug read from their links - with an API key."
+    license: MIT
+    keywords:
+      - rawg
+      - game
+      - games
+      - database
+      - framework-agnostic
+      - omniplay
+    repository: glitchr-omnisense/omniplay-rawg
+    branch: 1.x
+    requires:
+      - omnisense/omniplay
+    verification: partial
+    verification_note: '- Not verified live: no key.'
+    docs: true
+  omniplay/steam:
+    kind: provider
+    description: "Omniplay's Steam, under any PHP host: an app's store record and the store's search with no key (price in the country asked, texts in the language asked), a player's library and whether they own a game with a Steam Web API key, and a player's Steam session ticket verified on the platform (ISteamUserAuth/AuthenticateUserTicket) with the publisher key given by reference, answering the player's SteamID. Lobbies stay in the game, through the Steamworks SDK."
+    license: MIT
+    keywords:
+      - steam
+      - valve
+      - store
+      - game
+      - games
+      - library
+      - steamworks
+      - identity
+      - session-ticket
+      - multiplayer
+      - framework-agnostic
+      - omniplay
+    repository: glitchr-omnisense/omniplay-steam
+    branch: 1.x
+    requires:
+      - omnisense/omniplay
+    verification: partial
+    verification_note: "- Verified live (no key, 2026-10-24): Portal 2's record in English with its US price, a search. — - Not verified live: the library and ownership (no Web API key was used), the identity (no publisher key, no game ticket)."
+    docs: true
+  omnisense/omniplay:
+    kind: family
+    description: "Omniplay: games under any PHP host, behind contracts by capability. On the stores: a game's record (texts, dates, studios, platforms, price, pictures, scores, identifiers on other stores), a search by title, a player's library and whether a player owns a game, read only. Online play, whatever the game's engine or netcode: a fleet of game servers kept by their heartbeats, a player seated on a fitting server with a short-lived signed ticket the server checks by itself, hosting providers that start and stop servers, a player's identity verified by their platform. Providers are packages of their own (omniplay/steam, omniplay/gog, omniplay/itch, omniplay/igdb, omniplay/rawg, omniplay/docker, omniplay/edgegap, and inside the game server omniplay/dotnet, mirror, netcode, godot and node); the ticket's format and its vectors are documented for a server in any language; the Symfony and Laravel bridges live in omnibridge."
+    license: MIT
+    keywords:
+      - game
+      - games
+      - steam
+      - gog
+      - itch
+      - igdb
+      - rawg
+      - store
+      - library
+      - multiplayer
+      - game-server
+      - matchmaking
+      - ticket
+      - hmac
+      - fleet
+      - framework-agnostic
+      - omniplay
+    repository: glitchr-omnisense/omniplay
+    branch: 1.x
+    verification: partial
+    verification_note: "- Verified live: Steam's store (Portal 2's record and price, a search), GOG's catalogue, an itch.io page (no key, 2026-10-24); a container started, found, stopped and removed through Docker Desktop's socket (2026-11-08). — - Not verified live: Steam's library, ownership and identity, itch.io's ownership and library, IGDB, RAWG, Edgegap - no key nor account was used; their tests run on answers written after each API's documentation."
+    docs: true

@@ -111,7 +111,8 @@ final class DocumentationTest extends SiteTestCase
                 self::assertSame((string) $series, (string) $version['branch'], $key.': a series follows the branch of its name');
             }
         }
-        self::assertSame(['4.x', '3.x'], array_map('strval', array_keys($manuals['omnibase']['versions'])), 'omnibase\'s two series with a docs/ folder');
-        self::assertSame('4.x', $manuals['omnibase']['default']);
+        // 5.x the current one since every site moved to it (2026-11-09), 4.x and 3.x kept for history.
+        self::assertSame(['5.x', '4.x', '3.x'], array_map('strval', array_keys($manuals['omnibase']['versions'])), 'omnibase\'s three series with a docs/ folder');
+        self::assertSame('5.x', $manuals['omnibase']['default']);
     }
 }

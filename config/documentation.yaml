@@ -128,8 +128,13 @@ packages:
   omnibase:
     package: omnisense/omnibase
     repository: glitchr-omnisense/omnibase
-    default: 4.x
+    default: 5.x
     versions:
+      5.x:
+        branch: 5.x
+        ref: de146f9813b453241cb3e396ed7e0ef31f419b13
+        pinned: branch-head
+        path: docs/
       4.x:
         branch: 4.x
         ref: 80ca635dac217cd5571441a5c4763d24f17e808b
@@ -218,6 +223,16 @@ packages:
       '2.0':
         branch: '2.0'
         ref: 259f0ef9ecb3bcda826d6179b16f0f83cc4d0730
+        pinned: branch-head
+        path: docs/
+  omnibase-drive:
+    package: omnibase/drive
+    repository: glitchr-omnisense/omnibase-drive
+    default: main
+    versions:
+      main:
+        branch: main
+        ref: 74eceb1c44f1f51164716e29198c24612f3c7d35
         pinned: branch-head
         path: docs/
   omnibase-estate:
@@ -488,6 +503,16 @@ packages:
       1.x:
         branch: 1.x
         ref: 945239b171f803e38ecb0f1b17e256f3c2e384fe
+        pinned: branch-head
+        path: docs/
+  omnibridge-eloquent:
+    package: omnibridge/eloquent
+    repository: glitchr-omnisense/omnibridge-eloquent
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: a6cd864fe03d2febe762f804d5d37e549aa992c2
         pinned: branch-head
         path: docs/
   omnibridge-laravel:
@@ -940,66 +965,6 @@ packages:
         ref: f5225447a457a94f24e77bb62dc94bb00d6a5f64
         pinned: branch-head
         path: docs/
-  omnifilm:
-    package: omnisense/omnifilm
-    repository: glitchr-omnisense/omnifilm
-    default: 1.x
-    versions:
-      1.x:
-        branch: 1.x
-        ref: c7fe2a4ed8afdf9bf07d0af16a6665a7135cc5d2
-        pinned: branch-head
-        path: docs/
-  omnifilm-omdb:
-    package: omnifilm/omdb
-    repository: glitchr-omnisense/omnifilm-omdb
-    default: 1.x
-    versions:
-      1.x:
-        branch: 1.x
-        ref: 4c6e034cc1b3ce8f6c06e4b372787af9d64c26fe
-        pinned: branch-head
-        path: docs/
-  omnifilm-tmdb:
-    package: omnifilm/tmdb
-    repository: glitchr-omnisense/omnifilm-tmdb
-    default: 1.x
-    versions:
-      1.x:
-        branch: 1.x
-        ref: 8efd0a517be5d88a89a7aaad91450838e912c2df
-        pinned: branch-head
-        path: docs/
-  omnifilm-trakt:
-    package: omnifilm/trakt
-    repository: glitchr-omnisense/omnifilm-trakt
-    default: 1.x
-    versions:
-      1.x:
-        branch: 1.x
-        ref: 536d48ff96fb7b853e2525b8d73509e1ba08cecc
-        pinned: branch-head
-        path: docs/
-  omnifilm-tvdb:
-    package: omnifilm/tvdb
-    repository: glitchr-omnisense/omnifilm-tvdb
-    default: 1.x
-    versions:
-      1.x:
-        branch: 1.x
-        ref: 1b09bdf212c74aaf0ccaf64e50ab0aef686aa9a6
-        pinned: branch-head
-        path: docs/
-  omnifilm-wikidata:
-    package: omnifilm/wikidata
-    repository: glitchr-omnisense/omnifilm-wikidata
-    default: 1.x
-    versions:
-      1.x:
-        branch: 1.x
-        ref: eee508bc724f4f2e8d50ebc5a290a94d58ad11fb
-        pinned: branch-head
-        path: docs/
   omnifood:
     package: omnisense/omnifood
     repository: glitchr-omnisense/omnifood
@@ -1098,66 +1063,6 @@ packages:
       1.x:
         branch: 1.x
         ref: 70f4f8d8c334c628b3218adda0ed15ec02d3c364
-        pinned: branch-head
-        path: docs/
-  omnigame:
-    package: omnisense/omnigame
-    repository: glitchr-omnisense/omnigame
-    default: 1.x
-    versions:
-      1.x:
-        branch: 1.x
-        ref: 6010da9846bc53c3f1c23334d970267cf17940bb
-        pinned: branch-head
-        path: docs/
-  omnigame-gog:
-    package: omnigame/gog
-    repository: glitchr-omnisense/omnigame-gog
-    default: 1.x
-    versions:
-      1.x:
-        branch: 1.x
-        ref: b2951ffce100288fb5a7b13ed885b910a8894972
-        pinned: branch-head
-        path: docs/
-  omnigame-igdb:
-    package: omnigame/igdb
-    repository: glitchr-omnisense/omnigame-igdb
-    default: 1.x
-    versions:
-      1.x:
-        branch: 1.x
-        ref: b1ebd3e8521de0f085e180327b3f1dc1a40ba716
-        pinned: branch-head
-        path: docs/
-  omnigame-itch:
-    package: omnigame/itch
-    repository: glitchr-omnisense/omnigame-itch
-    default: 1.x
-    versions:
-      1.x:
-        branch: 1.x
-        ref: 8f3bd42cdafa05ec9649b369b6c5243e35edf857
-        pinned: branch-head
-        path: docs/
-  omnigame-rawg:
-    package: omnigame/rawg
-    repository: glitchr-omnisense/omnigame-rawg
-    default: 1.x
-    versions:
-      1.x:
-        branch: 1.x
-        ref: f62b44cb65006558704cd59c2482aa973807ee9a
-        pinned: branch-head
-        path: docs/
-  omnigame-steam:
-    package: omnigame/steam
-    repository: glitchr-omnisense/omnigame-steam
-    default: 1.x
-    versions:
-      1.x:
-        branch: 1.x
-        ref: 95d62f371b990750b09946813e2cc88346dd2cc4
         pinned: branch-head
         path: docs/
   omnilab:
@@ -1850,6 +1755,86 @@ packages:
         ref: c6445bd247c51f6b9f3cf276f867a0b8c6276cd1
         pinned: branch-head
         path: docs/
+  omniplay:
+    package: omnisense/omniplay
+    repository: glitchr-omnisense/omniplay
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: f88e9682690466af75ebebc920509fbd1b68d546
+        pinned: branch-head
+        path: docs/
+  omniplay-docker:
+    package: omniplay/docker
+    repository: glitchr-omnisense/omniplay-docker
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: f8a7c20c4dde18edafc007c01fde49806f7dec25
+        pinned: branch-head
+        path: docs/
+  omniplay-edgegap:
+    package: omniplay/edgegap
+    repository: glitchr-omnisense/omniplay-edgegap
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 71472e01669a5617126c6a5bed76addb8bd3035f
+        pinned: branch-head
+        path: docs/
+  omniplay-gog:
+    package: omniplay/gog
+    repository: glitchr-omnisense/omniplay-gog
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 0fdc5989844cfe8a4cb4ca1283d3e51f5a3a862b
+        pinned: branch-head
+        path: docs/
+  omniplay-igdb:
+    package: omniplay/igdb
+    repository: glitchr-omnisense/omniplay-igdb
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 11592554ed5b02c15b9ed05a6add3ae36cf6ac88
+        pinned: branch-head
+        path: docs/
+  omniplay-itch:
+    package: omniplay/itch
+    repository: glitchr-omnisense/omniplay-itch
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: adc4fa19c4c5b0b6bf978057190c8e93a3a0cde0
+        pinned: branch-head
+        path: docs/
+  omniplay-rawg:
+    package: omniplay/rawg
+    repository: glitchr-omnisense/omniplay-rawg
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: c6cc29b4b4912fa34e8a6f40ccde64bed15160be
+        pinned: branch-head
+        path: docs/
+  omniplay-steam:
+    package: omniplay/steam
+    repository: glitchr-omnisense/omniplay-steam
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: f60e828152c09500f0100d4b6c4216952d8ef873
+        pinned: branch-head
+        path: docs/
   omnipost:
     package: omnisense/omnipost
     repository: glitchr-omnisense/omnipost
@@ -1857,7 +1842,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: c0fdedaf5a3a857272dfc8e0cd0d2290424dd276
+        ref: 9bbeeac27fb8193ba717aa78c1ebcadbdde109c9
         pinned: branch-head
         path: docs/
   omnipost-instagram:
@@ -1867,7 +1852,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: d13cc9e27edec25a2308cbbc1e9e9b9495265a9e
+        ref: 799b798a2951f0e345230c567bf4842a846ef2f2
         pinned: branch-head
         path: docs/
   omnipost-youtube:
@@ -1877,7 +1862,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 83b7015767a92f63355d33e1e93f77430422ce7c
+        ref: 6e448aff34aad6db5fb75fe3edf63d50a147eced
         pinned: branch-head
         path: docs/
   omnireach:
@@ -2080,16 +2065,6 @@ packages:
         ref: fa612a42da9773ddee2bcba81360147046b665a4
         pinned: branch-head
         path: docs/
-  omnishare:
-    package: omnisense/omnishare
-    repository: glitchr-omnisense/omnishare
-    default: 1.x
-    versions:
-      1.x:
-        branch: 1.x
-        ref: 549fac9c944129c684fd7a12c1a484513467726e
-        pinned: branch-head
-        path: docs/
   omnishield:
     package: omnisense/omnishield
     repository: glitchr-omnisense/omnishield
@@ -2158,6 +2133,16 @@ packages:
       1.x:
         branch: 1.x
         ref: a2b8983a749097b767eeef000fae3e5043303f57
+        pinned: branch-head
+        path: docs/
+  omnishow-youtube:
+    package: omnishow/youtube
+    repository: glitchr-omnisense/omnishow-youtube
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 034ea698802128f2999dce44f615ff03aae03d24
         pinned: branch-head
         path: docs/
   omnisign:

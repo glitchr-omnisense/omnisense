@@ -73,7 +73,7 @@ final class CatalogueTest extends TestCase
         $packages = (new RepositoryScanner(\dirname(__DIR__).'/Fixtures/repos'))->scan();
 
         // A workspace ("project"), another vendor's package and a template's example (omnimap/example) are not the catalogue's.
-        self::assertSame(['@glitchr/flowjs', 'glitchr/omnibase', 'glitchr/omnibus', 'glitchr/omnitrade', 'omnibase/blog', 'omnibus/offline', 'omnitrade/paypal', 'omnitrade/stripe'], array_keys($packages));
+        self::assertSame(['@glitchr/flowjs', 'glitchr/omnibase', 'glitchr/omnibus', 'glitchr/omnitrade', 'omnibase/blog', 'omnibus/offline', 'omnisense/omnifilm', 'omnitrade/paypal', 'omnitrade/stripe'], array_keys($packages));
 
         $trade = $packages['glitchr/omnitrade'];
         self::assertSame([Tier::Family, 'omnitrade', 'omnitrade/core', 'LGPL-3.0-or-later', 2], [$trade->tier, $trade->family, $trade->path, $trade->license, $trade->docPages]);
@@ -93,6 +93,8 @@ final class CatalogueTest extends TestCase
         $dir = sys_get_temp_dir().'/omnisense-import-'.bin2hex(random_bytes(4));
         $fs->mkdir($dir.'/catalog');
         file_put_contents($dir.'/catalog/omnitrade.yaml', "family: omnitrade\nphrase:\n  en: Written by hand.\npackages: {}\n");
+        // A family merged into another since the last import (Families::MERGED): its file goes, its packages are not listed.
+        file_put_contents($dir.'/catalog/omnifilm.yaml', "family: omnifilm\npackages:\n  omnisense/omnifilm: {kind: family}\n");
         try {
             $report = (new CatalogueImporter(new RepositoryScanner(\dirname(__DIR__).'/Fixtures/repos'), $dir.'/catalog', $dir.'/documentation.yaml', $dir.'/translations'))->import();
 
@@ -102,6 +104,7 @@ final class CatalogueTest extends TestCase
             // The providers whose repository is not public on GitHub are left out, and said so.
             self::assertSame(['glitchr/omnitrade'], array_keys($trade['packages']));
             self::assertSame(['omnibus/offline', 'omnitrade/paypal', 'omnitrade/stripe'], $report['skipped']);
+            self::assertSame(['omnisense/omnifilm'], $report['merged'], 'a merged family\'s working copy, still on disk, is not listed');
             self::assertSame('family', $trade['packages']['glitchr/omnitrade']['kind']);
             self::assertSame(['glitchr/omnibus'], array_keys(Yaml::parseFile($dir.'/catalog/omnibus.yaml')['packages']));
             self::assertSame(['glitchr/omnibase'], Yaml::parseFile($dir.'/catalog/omnibase.yaml')['packages']['omnibase/blog']['requires']);
@@ -135,5 +138,9 @@ final class CatalogueTest extends TestCase
     {
         self::assertSame('trade', Families::suffix('omnitrade'));
         self::assertSame(['omnibase', 'omnitrade', 'omnimeet', 'omnizzz'], array_keys(Families::ordered(['omnizzz' => 1, 'omnimeet' => 1, 'omnitrade' => 1, 'omnibase' => 1])));
+        // The families merged on 2026-11-09, each into the family that took its packages; none of them still ordered.
+        self::assertSame(['omnifilm' => 'omnishow', 'omnigame' => 'omniplay', 'omnishare' => 'omnipost'], Families::MERGED);
+        self::assertSame([], array_intersect(array_keys(Families::MERGED), Families::ORDER));
+        self::assertSame([], array_diff(Families::MERGED, Families::ORDER), 'each successor has its place');
     }
 }

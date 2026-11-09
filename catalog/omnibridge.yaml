@@ -25,7 +25,7 @@ packages:
     docs: true
   omnibridge/doctrine:
     kind: bridge
-    description: 'The storage glue of omnibase sites, framework-free: Doctrine reading the structure described outside of it (omnisense/omnibridge''s Omnibridge\Schema), the naming strategy that turns their entities into their tables, the UTC date types, and an entity manager built with them, for any framework reading the same database.'
+    description: 'The storage glue of omnibase sites, framework-free: Doctrine reading the structure described outside of it (omnisense/omnibridge''s Omnibridge\Schema), the naming strategy that turns their entities into their tables, the UTC date types, and an entity manager built with them, for any framework reading the same database; and omnibase''s persistence on Doctrine (Omnibridge\Doctrine\Omnibase\: its repositories, finder compiler, mapping, DBAL types, walkers, filters and listeners), which omnisense/omnibase requires.'
     license: MIT
     repository: glitchr-omnisense/omnibridge-doctrine
     branch: 1.x
@@ -33,9 +33,25 @@ packages:
       - omnisense/omnibridge
     verification: unstated
     docs: true
+  omnibridge/eloquent:
+    kind: bridge
+    description: "omnibase's entities on Eloquent's database layer, framework-free: illuminate/database (Laravel's connection, or Capsule outside Laravel) reading the tables omnisense/omnibridge's Omnibridge\\Schema describes into the same plain PHP entities Doctrine maps - a data mapper: tables from the description, a hydrator with PHP 8.4 lazy ghosts and lazy collections, an identity map, casts; and omnibase's persistence on Eloquent (Omnibridge\\Eloquent\\Omnibase\\: its backend, scopes, repositories and finder compiler) when omnisense/omnibase is installed."
+    license: MIT
+    keywords:
+      - omnibridge
+      - omnibase
+      - eloquent
+      - data-mapper
+      - framework-agnostic
+    repository: glitchr-omnisense/omnibridge-eloquent
+    branch: 1.x
+    requires:
+      - omnisense/omnibridge
+    verification: unstated
+    docs: true
   omnibridge/laravel:
     kind: bridge
-    description: 'The Laravel host of omnisense/omnibase: its Foundation contracts (urls, translations, locales, access, parameters with the database settings laid over Laravel''s config, clock, events...) answered by Laravel''s services and seeded in Base\Contract\Runtime, Doctrine through omnibridge/doctrine, Twig through omnibridge/twig, and the pieces an omnibase page asks of its framework (Encore tags, the app variable, simple forms).'
+    description: 'The Laravel host of omnisense/omnibase: its Foundation contracts (urls, translations, locales, access, parameters with the database settings laid over Laravel''s config, clock, events...) answered by Laravel''s services and seeded in Base\Contract\Runtime, the persistence through omnibridge/eloquent or omnibridge/doctrine, Twig through omnibridge/twig, and the pieces an omnibase page asks of its framework (Encore tags, the app variable, simple forms).'
     license: MIT
     keywords:
       - laravel
@@ -46,7 +62,6 @@ packages:
     repository: glitchr-omnisense/omnibridge-laravel
     branch: 1.x
     requires:
-      - omnibridge/doctrine
       - omnibridge/twig
       - omnisense/omnibase
       - omnisense/omnibridge

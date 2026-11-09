@@ -14,8 +14,19 @@ final class Families
     public const ORDER = [
         'omnibase', 'omnibus', 'omnitrade', 'omnistate', 'omnibank', 'omnisong', 'omnipost', 'omnifood', 'omnischolar',
         'omnilab', 'omnilex', 'omnimeet', 'omnishield', 'omnisign', 'omnibill', 'omnireview', 'omniauth', 'omnidrive',
-        'omnimap', 'omnisearch', 'omnishare', 'omnifund', 'omnishow', 'omniticket', 'omnireach', 'omnifilm', 'omnigame',
-        'omnidns', 'omnibridge',
+        'omnimap', 'omnisearch', 'omnifund', 'omnishow', 'omniplay', 'omniticket', 'omnireach', 'omnidns', 'omnibridge',
+    ];
+
+    /**
+     * The families merged into another (2026-11-09): their packages are the successor's now, and their repositories
+     * are archived. app:catalog:import lists none of them, whatever working copy is still on disk, and removes their
+     * catalog file. omnifilm became omnishow's `work` contract, omnigame went into omniplay, omnishare became
+     * omnipost's share links.
+     */
+    public const MERGED = [
+        'omnifilm' => 'omnishow',
+        'omnigame' => 'omniplay',
+        'omnishare' => 'omnipost',
     ];
 
     /** "omnitrade" → "trade": what turns after "Omni". */

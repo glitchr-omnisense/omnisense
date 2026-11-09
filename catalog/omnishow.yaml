@@ -6,13 +6,30 @@
 # a docs/ folder (see config/documentation.yaml).
 family: omnishow
 phrase:
-  en: 'Play a video hosted elsewhere.'
-  fr: 'Jouer une vidéo hébergée ailleurs.'
+  en: 'Describe a work, play a video, follow a live stream.'
+  fr: 'Décrire une œuvre, jouer une vidéo, suivre un direct.'
+text:
+  en: "One family for what is shown, three contracts: work - a film's, a series' or an episode's record, where to watch it, its trailers -, video - a video hosted elsewhere, its player and its privacy-friendly player, a channel, its playlists -, and live - what a channel broadcasts and has scheduled. Each provider implements the contracts it can hold; a work links to its videos through the models, no provider duplicated."
+  fr: 'Une seule famille pour ce qui se regarde, trois contrats : l’œuvre — la fiche d’un film, d’une série ou d’un épisode, où la voir, ses bandes-annonces —, la vidéo — une vidéo hébergée ailleurs, son lecteur et son lecteur respectueux, une chaîne, ses listes de lecture — et le direct — ce qu’une chaîne diffuse et a programmé. Chaque fournisseur implémente les contrats qu’il peut tenir ; une œuvre mène à ses vidéos par les modèles, sans fournisseur en double.'
 packages:
   omnishow/youtube:
     kind: provider
-    description: 'Reserved, not released yet: YouTube for glitchr/omnishow, the family for video sources hosted elsewhere.'
+    description: "Omnishow's YouTube, under any PHP host: a video's record (title, description, duration, thumbnails, date, channel, its player and the privacy-enhanced youtube-nocookie one), a search, a channel by its identifier or @handle and its uploads, playlists, what a channel broadcasts live and has scheduled - through the YouTube Data API v3 with an API key."
     license: MIT
+    keywords:
+      - youtube
+      - video
+      - embed
+      - youtube-nocookie
+      - channel
+      - playlist
+      - live
+      - stream
+      - framework-agnostic
+      - omnishow
     repository: glitchr-omnisense/omnishow-youtube
     branch: 1.x
+    requires:
+      - omnisense/omnishow
     verification: unstated
+    docs: true

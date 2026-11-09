@@ -4,7 +4,7 @@
 # development branch, its jobs, and the conformance suite its tests run.
 # Generated - not edited by hand. The README's "Verified, and not" is read by
 # app:catalog:import into catalog/<family>.yaml.
-generated: '2026-10-25T10:58:40+00:00'
+generated: '2026-11-09T05:50:25+00:00'
 packages:
   omniauth/google:
     repository: glitchr-omnisense/omniauth-google
@@ -12,12 +12,12 @@ packages:
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omniauth-google/actions/runs/40182827705'
-        head: 8df02efb5feddf7388df35f9e168103debd13447
-        at: '2026-10-25T09:58:36Z'
-        conclusion: failure
+        url: 'https://github.com/glitchr-omnisense/omniauth-google/actions/runs/40298300512'
+        head: fce87685581f04a15d25c9116d16239dadfdade1
+        at: '2026-10-26T09:17:17Z'
+        conclusion: success
         jobs:
-          - { label: 'PHP 8.4', conclusion: failure }
+          - { label: 'PHP 8.4', conclusion: success }
     conformance:
       suite: Omniauth\Testing\ProviderContractTests
       test: Tests/GoogleContractTest.php
@@ -27,9 +27,9 @@ packages:
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omniauth-oauth/actions/runs/39897342952'
-        head: fdd6f8fbca355aea47e0cae80be700dbef877472
-        at: '2026-10-24T13:41:59Z'
+        url: 'https://github.com/glitchr-omnisense/omniauth-oauth/actions/runs/40298306344'
+        head: 5ecef05726e4bd75dfe4a2768f8794a9a9840117
+        at: '2026-10-26T09:17:24Z'
         conclusion: success
         jobs:
           - { label: 'PHP 8.4', conclusion: success }
@@ -42,9 +42,9 @@ packages:
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omniauth-otp/actions/runs/39897355210'
-        head: f41a3a7e9eb1aec22ee1c828b4f0c05a9095fb05
-        at: '2026-10-24T13:42:01Z'
+        url: 'https://github.com/glitchr-omnisense/omniauth-otp/actions/runs/40298311318'
+        head: 069bf3092f646276d6fbac6fa360a5f6808e48b2
+        at: '2026-10-26T09:17:26Z'
         conclusion: success
         jobs:
           - { label: 'PHP 8.4', conclusion: success }
@@ -57,9 +57,9 @@ packages:
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omniauth-webauthn/actions/runs/39897350927'
-        head: eb5b83a52004f67c11be978b6cf16808410cef8d
-        at: '2026-10-24T13:42:17Z'
+        url: 'https://github.com/glitchr-omnisense/omniauth-webauthn/actions/runs/40298317286'
+        head: 21b1a4b3694384556bff3c001f64e10ef78bb8ea
+        at: '2026-10-26T09:17:35Z'
         conclusion: success
         jobs:
           - { label: 'PHP 8.4', conclusion: success }
@@ -150,6 +150,13 @@ packages:
     conformance:
       suite: null
       test: null
+  omnibase/drive:
+    repository: glitchr-omnisense/omnibase-drive
+    branch: main
+    ci: {}
+    conformance:
+      suite: null
+      test: null
   omnibase/estate:
     repository: glitchr-omnisense/omnibase-estate
     branch: main
@@ -193,7 +200,7 @@ packages:
       suite: null
       test: null
   omnibase/lawyer:
-    repository: glitchr-omnisense/omnibase-lawyer
+    repository: glitchr-forge/omnibase-lawyer
     branch: main
     ci: {}
     conformance:
@@ -242,7 +249,7 @@ packages:
       suite: null
       test: null
   omnibase/notary:
-    repository: glitchr-omnisense/omnibase-notary
+    repository: glitchr-forge/omnibase-notary
     branch: main
     ci: {}
     conformance:
@@ -317,9 +324,9 @@ packages:
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnibridge-composer/actions/runs/39511229412'
-        head: b034292d6b5bb1b58bb06b11b57f488f5278d476
-        at: '2026-10-24T13:42:21Z'
+        url: 'https://github.com/glitchr-omnisense/omnibridge-composer/actions/runs/40520087175'
+        head: 8d4036f7224b4c325286bf882dcdb0cd22f1943f
+        at: '2026-10-27T14:20:24Z'
         conclusion: success
         jobs:
           - { label: 'PHP 8.4', conclusion: success }
@@ -332,12 +339,27 @@ packages:
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnibridge-doctrine/actions/runs/39534510527'
-        head: 402cefd1677b86fe296913d5b28ffbec662ec7ce
-        at: '2026-10-24T13:42:19Z'
+        url: 'https://github.com/glitchr-omnisense/omnibridge-doctrine/actions/runs/42558817140'
+        head: 17e7f77b091b3da0ae3e0b8bf11aa21ec99737f7
+        at: '2026-11-09T03:54:14Z'
         conclusion: success
         jobs:
           - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: null
+      test: null
+  omnibridge/eloquent:
+    repository: glitchr-omnisense/omnibridge-eloquent
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-omnisense/omnibridge-eloquent/actions/runs/42558820897'
+        head: a6cd864fe03d2febe762f804d5d37e549aa992c2
+        at: '2026-11-09T03:54:13Z'
+        conclusion: failure
+        jobs:
+          - { label: 'PHP 8.4', conclusion: failure }
     conformance:
       suite: null
       test: null
@@ -347,12 +369,12 @@ packages:
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnibridge-laravel/actions/runs/40132257994'
-        head: 0f94ee3bad8c8ad35ed915d65a85f33c3344962f
-        at: '2026-10-24T21:01:32Z'
-        conclusion: success
+        url: 'https://github.com/glitchr-omnisense/omnibridge-laravel/actions/runs/42555226395'
+        head: 5d71eb182e7340e6fedf1ac0756cf3eb0d706d43
+        at: '2026-11-09T03:15:00Z'
+        conclusion: failure
         jobs:
-          - { label: 'PHP 8.4', conclusion: success }
+          - { label: 'PHP 8.4', conclusion: failure }
     conformance:
       suite: null
       test: null
@@ -362,9 +384,9 @@ packages:
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnibridge-react/actions/runs/40064378409'
-        head: 3e68b9397c1107c54c798e2cf045b3f350d2104e
-        at: '2026-10-24T04:58:15Z'
+        url: 'https://github.com/glitchr-omnisense/omnibridge-react/actions/runs/40519537019'
+        head: 45e3f6916122e66ecb5eda86d67530ce70a90349
+        at: '2026-10-27T14:16:52Z'
         conclusion: success
         jobs:
           - { label: 'PHP 8.4', conclusion: success }
@@ -377,9 +399,9 @@ packages:
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnibridge-static/actions/runs/40095953344'
-        head: 3b0cadc2e048ee97708c758bb13df4171f81cd41
-        at: '2026-10-24T12:56:15Z'
+        url: 'https://github.com/glitchr-omnisense/omnibridge-static/actions/runs/40520890155'
+        head: 1ba157548bc308039f7291a044e5022de262cc18
+        at: '2026-10-27T14:25:33Z'
         conclusion: success
         jobs:
           - { label: export, conclusion: success }
@@ -400,12 +422,12 @@ packages:
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnibridge-symfony/actions/runs/40072204984'
-        head: 67129dbab0797e7bf6568503a6889faeaa4f1115
-        at: '2026-10-24T06:58:05Z'
-        conclusion: success
+        url: 'https://github.com/glitchr-omnisense/omnibridge-symfony/actions/runs/42558813656'
+        head: 335ebb97687d2ac7eaf71b1f80f8b61943e8a39f
+        at: '2026-11-09T03:54:39Z'
+        conclusion: failure
         jobs:
-          - { label: 'PHP 8.4', conclusion: success }
+          - { label: 'PHP 8.4', conclusion: failure }
     conformance:
       suite: null
       test: null
@@ -415,12 +437,12 @@ packages:
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnibridge-twig/actions/runs/40131823927'
-        head: 976de23bf64ef16e573f01752b4e166216919fc5
-        at: '2026-10-24T20:54:19Z'
-        conclusion: success
+        url: 'https://github.com/glitchr-omnisense/omnibridge-twig/actions/runs/41389436611'
+        head: 1fe2974d6d2a0741bc1f7815dc39a02403f43693
+        at: '2026-11-02T04:37:13Z'
+        conclusion: failure
         jobs:
-          - { label: 'PHP 8.4', conclusion: success }
+          - { label: 'PHP 8.4', conclusion: failure }
     conformance:
       suite: null
       test: null
@@ -591,9 +613,9 @@ packages:
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnidns-cloudflare/actions/runs/40065378521'
-        head: 8a12253ddcf6459d5b46f8583bf696b08465e5fa
-        at: '2026-10-24T13:41:01Z'
+        url: 'https://github.com/glitchr-omnisense/omnidns-cloudflare/actions/runs/40907866076'
+        head: 369cd6e3629cbe388e20b3aa56f5373c9808bb56
+        at: '2026-10-29T16:04:39Z'
         conclusion: success
         jobs:
           - { label: 'PHP 8.4', conclusion: success }
@@ -606,9 +628,9 @@ packages:
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnidns-gandi/actions/runs/40065374511'
-        head: caab4004d48e22b1286713609183d7f691be0398
-        at: '2026-10-24T13:40:56Z'
+        url: 'https://github.com/glitchr-omnisense/omnidns-gandi/actions/runs/40341022943'
+        head: f35aa1b48045837f78e2a28d9850dcfc5508db90
+        at: '2026-10-26T14:36:07Z'
         conclusion: success
         jobs:
           - { label: 'PHP 8.4', conclusion: success }
@@ -621,12 +643,12 @@ packages:
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnidns-ovh/actions/runs/40065371771'
-        head: ea2cfebbcb1bb623a20c6fcc240c5c74aa19095f
-        at: '2026-10-24T13:41:00Z'
-        conclusion: success
+        url: 'https://github.com/glitchr-omnisense/omnidns-ovh/actions/runs/40896841219'
+        head: c5a5665373dbb11142e26ea6e72639d684305aee
+        at: '2026-10-29T14:58:59Z'
+        conclusion: failure
         jobs:
-          - { label: 'PHP 8.4', conclusion: success }
+          - { label: 'PHP 8.4', conclusion: failure }
     conformance:
       suite: null
       test: null
@@ -636,24 +658,99 @@ packages:
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnidns-scaleway/actions/runs/40065380996'
-        head: d32e37a310f65102ae015cbf946d908757ad5cec
-        at: '2026-10-24T05:13:32Z'
+        url: 'https://github.com/glitchr-omnisense/omnidns-scaleway/actions/runs/40341040879'
+        head: 570cf02f7af0c3c2364fb46e6dc3dff2d25a5c34
+        at: '2026-10-26T14:36:13Z'
         conclusion: success
         jobs:
           - { label: 'PHP 8.4', conclusion: success }
     conformance:
       suite: null
       test: null
+  omnidocs/doxygen:
+    repository: glitchr-omnisense/omnidocs-doxygen
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-omnisense/omnidocs-doxygen/actions/runs/40298387419'
+        head: 2b50396085522aa1254206c67b9846c571f2f61b
+        at: '2026-10-26T09:17:56Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: Omnidocs\Testing\SourceContractTests
+      test: Tests/DoxygenSourceTest.php
+  omnidocs/jsdoc:
+    repository: glitchr-omnisense/omnidocs-jsdoc
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-omnisense/omnidocs-jsdoc/actions/runs/40338870371'
+        head: 96c0442b0aff8fb10d57140a87dbb1c95a6598a1
+        at: '2026-10-26T14:21:53Z'
+        conclusion: failure
+        jobs:
+          - { label: 'PHP 8.4', conclusion: failure }
+    conformance:
+      suite: Omnidocs\Testing\SourceContractTests
+      test: Tests/JsdocSourceTest.php
+  omnidocs/markdown:
+    repository: glitchr-omnisense/omnidocs-markdown
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-omnisense/omnidocs-markdown/actions/runs/40298400646'
+        head: 15cb171229ecdb08c282bd70f04dde058554912b
+        at: '2026-10-26T09:18:09Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: Omnidocs\Testing\SourceContractTests
+      test: Tests/FlowjsManualTest.php
+  omnidocs/php:
+    repository: glitchr-omnisense/omnidocs-php
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-omnisense/omnidocs-php/actions/runs/40346291618'
+        head: 996fd59ed7826f27f48d19840551debda3b8c4cb
+        at: '2026-10-26T15:08:36Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: Omnidocs\Testing\SourceContractTests
+      test: Tests/PhpSourceTest.php
+  omnidocs/sphinx:
+    repository: glitchr-omnisense/omnidocs-sphinx
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-omnisense/omnidocs-sphinx/actions/runs/40298411931'
+        head: dc5489d3fbed9211852caf1fab50a29106e44b5f
+        at: '2026-10-26T09:18:13Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
+    conformance:
+      suite: Omnidocs\Testing\SourceContractTests
+      test: Tests/RealOutputTest.php
   omnidrive/azure:
     repository: glitchr-omnisense/omnidrive-azure
     branch: 1.x
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnidrive-azure/actions/runs/40065184097'
-        head: 15be3ea0b5414bf39ff86267201209b3a0a63be7
-        at: '2026-10-24T13:41:05Z'
+        url: 'https://github.com/glitchr-omnisense/omnidrive-azure/actions/runs/40879861560'
+        head: c985f5bb41f0ebc2a6f1763008542da97b74bed8
+        at: '2026-10-29T13:13:21Z'
         conclusion: success
         jobs:
           - { label: 'PHP 8.4', conclusion: success }
@@ -666,9 +763,9 @@ packages:
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnidrive-dropbox/actions/runs/40065189314'
-        head: 6d3b188866de5f3ed7be2b65f0f94d22dd65228f
-        at: '2026-10-24T13:40:56Z'
+        url: 'https://github.com/glitchr-omnisense/omnidrive-dropbox/actions/runs/40879875653'
+        head: adfc7a264c15f70761aa54da40fdc604b30a87b0
+        at: '2026-10-29T13:13:21Z'
         conclusion: success
         jobs:
           - { label: 'PHP 8.4', conclusion: success }
@@ -681,9 +778,9 @@ packages:
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnidrive-ftp/actions/runs/39917381237'
-        head: e98fa976df89a048351f004f440bd6912d88de8f
-        at: '2026-10-24T13:41:55Z'
+        url: 'https://github.com/glitchr-omnisense/omnidrive-ftp/actions/runs/40879832065'
+        head: 13842d9132149cec1250806ca377029c6cd701c3
+        at: '2026-10-29T13:13:02Z'
         conclusion: success
         jobs:
           - { label: 'PHP 8.4', conclusion: success }
@@ -696,9 +793,9 @@ packages:
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnidrive-gdrive/actions/runs/40065213867'
-        head: 277dce8cd0111375089647d0bc85bb9ed3808ca5
-        at: '2026-10-24T05:11:21Z'
+        url: 'https://github.com/glitchr-omnisense/omnidrive-gdrive/actions/runs/40879889214'
+        head: 9f9ec59efea864338ba66b35c708ad9afc3e4bf3
+        at: '2026-10-29T13:13:55Z'
         conclusion: success
         jobs:
           - { label: 'PHP 8.4', conclusion: success }
@@ -711,9 +808,9 @@ packages:
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnidrive-local/actions/runs/39917347304'
-        head: fb2c8463f8ea7d30ab5f9505922a800d089a5e2f
-        at: '2026-10-24T13:42:00Z'
+        url: 'https://github.com/glitchr-omnisense/omnidrive-local/actions/runs/40879801375'
+        head: 7a875a8f6abdfb3e069804043e5a10d49d417d87
+        at: '2026-10-29T13:12:48Z'
         conclusion: success
         jobs:
           - { label: 'PHP 8.4', conclusion: success }
@@ -726,12 +823,12 @@ packages:
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnidrive-s3/actions/runs/39917356793'
-        head: 343684edd8f7c2e0eed5f0e0f587cf49a521dbd1
-        at: '2026-10-24T13:41:54Z'
-        conclusion: success
+        url: 'https://github.com/glitchr-omnisense/omnidrive-s3/actions/runs/40880329654'
+        head: adad1b569a8c4d14a2be6fd2903463267ca5c272
+        at: '2026-10-29T13:16:18Z'
+        conclusion: failure
         jobs:
-          - { label: 'PHP 8.4', conclusion: success }
+          - { label: 'PHP 8.4', conclusion: failure }
     conformance:
       suite: Omnidrive\Testing\DriveContractTests
       test: Tests/S3LiveTest.php
@@ -741,9 +838,9 @@ packages:
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnidrive-sftp/actions/runs/39917368727'
-        head: d3b088a0708f69251b306b09dcd0806f13d325c3
-        at: '2026-10-24T13:41:51Z'
+        url: 'https://github.com/glitchr-omnisense/omnidrive-sftp/actions/runs/40879817848'
+        head: 206fff7d82dee5d1cb64e9d87f5eebb1ac06a37d
+        at: '2026-10-29T13:12:58Z'
         conclusion: success
         jobs:
           - { label: 'PHP 8.4', conclusion: success }
@@ -756,90 +853,15 @@ packages:
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnidrive-webdav/actions/runs/40065180465'
-        head: ef9eeb5bb298bd3be756174044478e0d73b952ef
-        at: '2026-10-24T05:10:21Z'
+        url: 'https://github.com/glitchr-omnisense/omnidrive-webdav/actions/runs/40879847636'
+        head: f5225447a457a94f24e77bb62dc94bb00d6a5f64
+        at: '2026-10-29T13:13:12Z'
         conclusion: success
         jobs:
           - { label: 'PHP 8.4', conclusion: success }
     conformance:
       suite: Omnidrive\Testing\DriveContractTests
       test: Tests/WebdavLiveTest.php
-  omnifilm/omdb:
-    repository: glitchr-omnisense/omnifilm-omdb
-    branch: 1.x
-    ci:
-      -
-        workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnifilm-omdb/actions/runs/40065254172'
-        head: 8dbb321aac82044e850f41533353a6753a8ca248
-        at: '2026-10-24T05:11:29Z'
-        conclusion: success
-        jobs:
-          - { label: 'PHP 8.4', conclusion: success }
-    conformance:
-      suite: null
-      test: null
-  omnifilm/tmdb:
-    repository: glitchr-omnisense/omnifilm-tmdb
-    branch: 1.x
-    ci:
-      -
-        workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnifilm-tmdb/actions/runs/40065251937'
-        head: 7d41f5bf5e103b3b0c6e80157deb525e3943be73
-        at: '2026-10-24T05:11:32Z'
-        conclusion: success
-        jobs:
-          - { label: 'PHP 8.4', conclusion: success }
-    conformance:
-      suite: null
-      test: null
-  omnifilm/trakt:
-    repository: glitchr-omnisense/omnifilm-trakt
-    branch: 1.x
-    ci:
-      -
-        workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnifilm-trakt/actions/runs/40065257787'
-        head: 50ac1d4e7156d8fce48fef18aad32a4de3e53a13
-        at: '2026-10-24T05:11:38Z'
-        conclusion: success
-        jobs:
-          - { label: 'PHP 8.4', conclusion: success }
-    conformance:
-      suite: null
-      test: null
-  omnifilm/tvdb:
-    repository: glitchr-omnisense/omnifilm-tvdb
-    branch: 1.x
-    ci:
-      -
-        workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnifilm-tvdb/actions/runs/40065255963'
-        head: d6753fa8682d341ecfbf420c40ced78a717b332e
-        at: '2026-10-24T05:11:45Z'
-        conclusion: success
-        jobs:
-          - { label: 'PHP 8.4', conclusion: success }
-    conformance:
-      suite: null
-      test: null
-  omnifilm/wikidata:
-    repository: glitchr-omnisense/omnifilm-wikidata
-    branch: 1.x
-    ci:
-      -
-        workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnifilm-wikidata/actions/runs/40065259883'
-        head: 5a14755be3005ea80b64acccac19995c2731a337
-        at: '2026-10-24T05:11:42Z'
-        conclusion: success
-        jobs:
-          - { label: 'PHP 8.4', conclusion: success }
-    conformance:
-      suite: null
-      test: null
   omnifood/deliveroo:
     repository: glitchr-omnisense/omnifood-deliveroo
     branch: 1.x
@@ -881,9 +903,9 @@ packages:
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnifund-github-sponsors/actions/runs/40064294943'
-        head: f918c670ebd1b540b1f0855158eb4e4ff0e3b8c8
-        at: '2026-10-24T13:41:36Z'
+        url: 'https://github.com/glitchr-omnisense/omnifund-github-sponsors/actions/runs/40339485750'
+        head: 61864159ab1607598c7ba03707b5fde22b635edc
+        at: '2026-10-26T14:25:50Z'
         conclusion: success
         jobs:
           - { label: 'PHP 8.4', conclusion: success }
@@ -896,9 +918,9 @@ packages:
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnifund-liberapay/actions/runs/40064312122'
-        head: e75bf0b10c8a2dceff5af93f9bce830a187f3687
-        at: '2026-10-24T13:41:29Z'
+        url: 'https://github.com/glitchr-omnisense/omnifund-liberapay/actions/runs/40339494865'
+        head: 30d7434118714e47b5c270e2940ef4f5a205a827
+        at: '2026-10-26T14:25:46Z'
         conclusion: success
         jobs:
           - { label: 'PHP 8.4', conclusion: success }
@@ -911,84 +933,9 @@ packages:
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnifund-opencollective/actions/runs/40064304776'
-        head: 7e53aadbc130bf0c0d89988cd2428adb4c2c6aec
-        at: '2026-10-24T13:41:38Z'
-        conclusion: success
-        jobs:
-          - { label: 'PHP 8.4', conclusion: success }
-    conformance:
-      suite: null
-      test: null
-  omnigame/gog:
-    repository: glitchr-omnisense/omnigame-gog
-    branch: 1.x
-    ci:
-      -
-        workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnigame-gog/actions/runs/40066177511'
-        head: 1d4d60de3247937a01f159d4a1898bbcf53475f0
-        at: '2026-10-24T05:25:42Z'
-        conclusion: success
-        jobs:
-          - { label: 'PHP 8.4', conclusion: success }
-    conformance:
-      suite: null
-      test: null
-  omnigame/igdb:
-    repository: glitchr-omnisense/omnigame-igdb
-    branch: 1.x
-    ci:
-      -
-        workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnigame-igdb/actions/runs/40066181842'
-        head: b69f61f995c9b65f13d12c4b1f8c9795b556b8f5
-        at: '2026-10-24T05:25:48Z'
-        conclusion: success
-        jobs:
-          - { label: 'PHP 8.4', conclusion: success }
-    conformance:
-      suite: null
-      test: null
-  omnigame/itch:
-    repository: glitchr-omnisense/omnigame-itch
-    branch: 1.x
-    ci:
-      -
-        workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnigame-itch/actions/runs/40066179746'
-        head: f89cc592343a1606bbe0f0860d492d2525ed5f97
-        at: '2026-10-24T05:25:50Z'
-        conclusion: success
-        jobs:
-          - { label: 'PHP 8.4', conclusion: success }
-    conformance:
-      suite: null
-      test: null
-  omnigame/rawg:
-    repository: glitchr-omnisense/omnigame-rawg
-    branch: 1.x
-    ci:
-      -
-        workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnigame-rawg/actions/runs/40066184237'
-        head: 8e4da614ee6de01105b385993e48047ef96bb2ad
-        at: '2026-10-24T05:26:05Z'
-        conclusion: success
-        jobs:
-          - { label: 'PHP 8.4', conclusion: success }
-    conformance:
-      suite: null
-      test: null
-  omnigame/steam:
-    repository: glitchr-omnisense/omnigame-steam
-    branch: 1.x
-    ci:
-      -
-        workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnigame-steam/actions/runs/40066175360'
-        head: 26dbd6c9beb88ff2cc7b37668923e5d4810a28f0
-        at: '2026-10-24T05:25:50Z'
+        url: 'https://github.com/glitchr-omnisense/omnifund-opencollective/actions/runs/40339503570'
+        head: 70f4f8d8c334c628b3218adda0ed15ec02d3c364
+        at: '2026-10-26T14:25:52Z'
         conclusion: success
         jobs:
           - { label: 'PHP 8.4', conclusion: success }
@@ -1421,27 +1368,42 @@ packages:
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnimap-google/actions/runs/40183422022'
-        head: 550084421b357a927a62355fd65ec7cb38209fbd
-        at: '2026-10-25T10:07:25Z'
+        url: 'https://github.com/glitchr-omnisense/omnimap-google/actions/runs/40897863288'
+        head: 9ce6571c1a6297ea007d99374420c339343e7b3f
+        at: '2026-10-29T15:05:05Z'
+        conclusion: failure
+        jobs:
+          - { label: 'PHP 8.4', conclusion: failure }
+    conformance:
+      suite: Omnimap\Testing\ProviderContractTests
+      test: Tests/GoogleContractTest.php
+  omnimap/maplibre:
+    repository: glitchr-omnisense/omnimap-maplibre
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-omnisense/omnimap-maplibre/actions/runs/40996004134'
+        head: 0d6279a9e1291816fd5eea7d69d115f08dfc4710
+        at: '2026-10-30T03:12:19Z'
         conclusion: success
         jobs:
           - { label: 'PHP 8.4', conclusion: success }
     conformance:
       suite: Omnimap\Testing\ProviderContractTests
-      test: Tests/GoogleContractTest.php
+      test: Tests/MapLibreContractTest.php
   omnimap/openstreetmap:
     repository: glitchr-omnisense/omnimap-openstreetmap
     branch: 1.x
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnimap-openstreetmap/actions/runs/40183419210'
-        head: 81cc7840dadce1da67ca2005d5e0dc6162d4e10c
-        at: '2026-10-25T10:07:10Z'
-        conclusion: failure
+        url: 'https://github.com/glitchr-omnisense/omnimap-openstreetmap/actions/runs/40884067021'
+        head: 4f3fa313c6b2190b26989abb92ea67c0a292cdef
+        at: '2026-10-29T13:40:50Z'
+        conclusion: success
         jobs:
-          - { label: 'PHP 8.4', conclusion: failure }
+          - { label: 'PHP 8.4', conclusion: success }
     conformance:
       suite: Omnimap\Testing\ProviderContractTests
       test: Tests/OpenStreetMapContractTest.php
@@ -1456,6 +1418,111 @@ packages:
     repository: glitchr-omnisense/omnimeet-jitsi
     branch: 1.x
     ci: {}
+    conformance:
+      suite: null
+      test: null
+  omniplay/docker:
+    repository: glitchr-omnisense/omniplay-docker
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-omnisense/omniplay-docker/actions/runs/42554792404'
+        head: f8a7c20c4dde18edafc007c01fde49806f7dec25
+        at: '2026-11-09T03:09:50Z'
+        conclusion: failure
+        jobs:
+          - { label: 'PHP 8.4', conclusion: failure }
+    conformance:
+      suite: null
+      test: null
+  omniplay/edgegap:
+    repository: glitchr-omnisense/omniplay-edgegap
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-omnisense/omniplay-edgegap/actions/runs/42554796155'
+        head: 71472e01669a5617126c6a5bed76addb8bd3035f
+        at: '2026-11-09T03:09:51Z'
+        conclusion: failure
+        jobs:
+          - { label: 'PHP 8.4', conclusion: failure }
+    conformance:
+      suite: null
+      test: null
+  omniplay/gog:
+    repository: glitchr-omnisense/omniplay-gog
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-omnisense/omniplay-gog/actions/runs/42556015245'
+        head: 0fdc5989844cfe8a4cb4ca1283d3e51f5a3a862b
+        at: '2026-11-09T03:22:37Z'
+        conclusion: failure
+        jobs:
+          - { label: 'PHP 8.4', conclusion: failure }
+    conformance:
+      suite: null
+      test: null
+  omniplay/igdb:
+    repository: glitchr-omnisense/omniplay-igdb
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-omnisense/omniplay-igdb/actions/runs/42556021343'
+        head: 11592554ed5b02c15b9ed05a6add3ae36cf6ac88
+        at: '2026-11-09T03:22:41Z'
+        conclusion: failure
+        jobs:
+          - { label: 'PHP 8.4', conclusion: failure }
+    conformance:
+      suite: null
+      test: null
+  omniplay/itch:
+    repository: glitchr-omnisense/omniplay-itch
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-omnisense/omniplay-itch/actions/runs/42556028923'
+        head: adc4fa19c4c5b0b6bf978057190c8e93a3a0cde0
+        at: '2026-11-09T03:22:38Z'
+        conclusion: failure
+        jobs:
+          - { label: 'PHP 8.4', conclusion: failure }
+    conformance:
+      suite: null
+      test: null
+  omniplay/rawg:
+    repository: glitchr-omnisense/omniplay-rawg
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-omnisense/omniplay-rawg/actions/runs/42556034170'
+        head: c6cc29b4b4912fa34e8a6f40ccde64bed15160be
+        at: '2026-11-09T03:22:46Z'
+        conclusion: failure
+        jobs:
+          - { label: 'PHP 8.4', conclusion: failure }
+    conformance:
+      suite: null
+      test: null
+  omniplay/steam:
+    repository: glitchr-omnisense/omniplay-steam
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-omnisense/omniplay-steam/actions/runs/42554788066'
+        head: f60e828152c09500f0100d4b6c4216952d8ef873
+        at: '2026-11-09T03:09:44Z'
+        conclusion: failure
+        jobs:
+          - { label: 'PHP 8.4', conclusion: failure }
     conformance:
       suite: null
       test: null
@@ -1479,12 +1546,12 @@ packages:
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnireach-bing-webmaster/actions/runs/40065870581'
-        head: a7c7670d3fbd8a8d52fcdbc4a7a5837b1ed299dc
-        at: '2026-10-24T13:40:57Z'
-        conclusion: success
+        url: 'https://github.com/glitchr-omnisense/omnireach-bing-webmaster/actions/runs/40876529406'
+        head: 02a2944213b94f851ce31660ac5924dccdc7fd7d
+        at: '2026-10-29T12:50:23Z'
+        conclusion: failure
         jobs:
-          - { label: 'PHP 8.4', conclusion: success }
+          - { label: 'PHP 8.4', conclusion: failure }
     conformance:
       suite: null
       test: null
@@ -1494,9 +1561,9 @@ packages:
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnireach-ga4/actions/runs/40065891501'
-        head: 938e9f90368dd31da449bcb67ec8c007dcc998b6
-        at: '2026-10-24T13:40:36Z'
+        url: 'https://github.com/glitchr-omnisense/omnireach-ga4/actions/runs/40346019804'
+        head: f779e42c2500526c3af201be66aa03fc283876d7
+        at: '2026-10-26T15:06:47Z'
         conclusion: success
         jobs:
           - { label: 'PHP 8.4', conclusion: success }
@@ -1509,9 +1576,9 @@ packages:
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnireach-matomo/actions/runs/40065877814'
-        head: 4436fe8a49c3e9422aa8298aac5cee5a0f095915
-        at: '2026-10-24T13:40:43Z'
+        url: 'https://github.com/glitchr-omnisense/omnireach-matomo/actions/runs/40882118434'
+        head: cb405530697e56b920cdc26b6ca17242ebf7b402
+        at: '2026-10-29T13:28:07Z'
         conclusion: success
         jobs:
           - { label: 'PHP 8.4', conclusion: success }
@@ -1524,9 +1591,9 @@ packages:
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnireach-plausible/actions/runs/40065885504'
-        head: 70449c723641be8bc07b027c39e2535a1cbc924b
-        at: '2026-10-24T13:40:40Z'
+        url: 'https://github.com/glitchr-omnisense/omnireach-plausible/actions/runs/40346005107'
+        head: b4209dd29826e547d381d2a0a4bb71921a1e0dfa
+        at: '2026-10-26T15:06:42Z'
         conclusion: success
         jobs:
           - { label: 'PHP 8.4', conclusion: success }
@@ -1539,9 +1606,9 @@ packages:
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnireach-search-console/actions/runs/40065863977'
-        head: 9e59d5fa2d04e828a05e4801e688978405030f27
-        at: '2026-10-24T13:40:43Z'
+        url: 'https://github.com/glitchr-omnisense/omnireach-search-console/actions/runs/40345960968'
+        head: 25b5548dd42f47f5f9fb6319d405ee61ef70c9b3
+        at: '2026-10-26T15:06:39Z'
         conclusion: success
         jobs:
           - { label: 'PHP 8.4', conclusion: success }
@@ -1618,15 +1685,30 @@ packages:
     conformance:
       suite: null
       test: null
+  omnisearch/typesense:
+    repository: glitchr-omnisense/omnisearch-typesense
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-omnisense/omnisearch-typesense/actions/runs/40882110366'
+        head: fa612a42da9773ddee2bcba81360147046b665a4
+        at: '2026-10-29T13:28:13Z'
+        conclusion: failure
+        jobs:
+          - { label: 'PHP 8.4', conclusion: failure }
+    conformance:
+      suite: Omnisearch\Testing\DriverContractTests
+      test: Tests/TypesenseContractTest.php
   omnisense/omniauth:
     repository: glitchr-omnisense/omniauth
     branch: 1.x
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omniauth/actions/runs/40182821590'
-        head: cd01d2dad12dd47e3a41e75c40a7f4637c611d97
-        at: '2026-10-25T09:58:58Z'
+        url: 'https://github.com/glitchr-omnisense/omniauth/actions/runs/40885018571'
+        head: 66aa549da28cbe88ae03991cf370d3585a2e6493
+        at: '2026-10-29T13:47:15Z'
         conclusion: success
         jobs:
           - { label: 'PHP 8.4', conclusion: success }
@@ -1642,17 +1724,8 @@ packages:
       test: null
   omnisense/omnibase:
     repository: glitchr-omnisense/omnibase
-    branch: 4.x
-    ci:
-      -
-        workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnibase/actions/runs/40133454578'
-        head: 7e875b6863a7effeea52c91b5475f21d11411aaa
-        at: '2026-10-24T21:27:46Z'
-        conclusion: failure
-        jobs:
-          - { label: 'Harness (core and plugins)', conclusion: success }
-          - { label: 'PHP 8.4', conclusion: failure }
+    branch: 5.x
+    ci: {}
     conformance:
       suite: null
       test: null
@@ -1669,12 +1742,12 @@ packages:
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnibridge/actions/runs/40099905694'
-        head: 4016d512aa07312632071839d63ecdba7ccdf9d6
-        at: '2026-10-24T13:51:34Z'
-        conclusion: success
+        url: 'https://github.com/glitchr-omnisense/omnibridge/actions/runs/42383380237'
+        head: 203a14f282bcd555c09464657587d6f6e0ba467a
+        at: '2026-11-07T14:49:46Z'
+        conclusion: failure
         jobs:
-          - { label: 'PHP 8.4', conclusion: success }
+          - { label: 'PHP 8.4', conclusion: failure }
     conformance:
       suite: null
       test: null
@@ -1691,45 +1764,46 @@ packages:
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnidns/actions/runs/40065368692'
-        head: 8857d9dbb9eacd8c3c9015e3e680bab548744cea
-        at: '2026-10-24T05:13:20Z'
+        url: 'https://github.com/glitchr-omnisense/omnidns/actions/runs/40907797655'
+        head: 947a85a5eb080432960d1900acf49455626a3107
+        at: '2026-10-29T16:04:20Z'
         conclusion: success
         jobs:
           - { label: 'PHP 8.4', conclusion: success }
     conformance:
       suite: null
       test: null
+  omnisense/omnidocs:
+    repository: glitchr-omnisense/omnidocs
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-omnisense/omnidocs/actions/runs/40339795530'
+        head: 9ce91ac82a808ba0cebb2c10190af26e4e86ead0
+        at: '2026-10-26T14:27:50Z'
+        conclusion: failure
+        jobs:
+          - { label: js, conclusion: success }
+          - { label: 'PHP 8.4', conclusion: failure }
+    conformance:
+      suite: Omnidocs\Testing\SourceContractTests
+      test: Tests/ArraySourceContractTest.php
   omnisense/omnidrive:
     repository: glitchr-omnisense/omnidrive
     branch: 1.x
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnidrive/actions/runs/40099757325'
-        head: 85b3fb331cf24470d995388bb939115e173268ee
-        at: '2026-10-24T13:49:35Z'
+        url: 'https://github.com/glitchr-omnisense/omnidrive/actions/runs/40880344624'
+        head: c627235810f885c6545352c7e214dccaf5bf7ab1
+        at: '2026-10-29T13:16:23Z'
         conclusion: success
         jobs:
           - { label: 'PHP 8.4', conclusion: success }
     conformance:
       suite: Omnidrive\Testing\DriveContractTests
       test: Tests/InMemoryDriveTest.php
-  omnisense/omnifilm:
-    repository: glitchr-omnisense/omnifilm
-    branch: 1.x
-    ci:
-      -
-        workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnifilm/actions/runs/40065154714'
-        head: 5b358e738e6b30892df368eff69b79869f71b285
-        at: '2026-10-24T05:10:14Z'
-        conclusion: success
-        jobs:
-          - { label: 'PHP 8.4', conclusion: success }
-    conformance:
-      suite: null
-      test: null
   omnisense/omnifood:
     repository: glitchr-omnisense/omnifood
     branch: 1.x
@@ -1743,24 +1817,9 @@ packages:
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnifund/actions/runs/40064287773'
-        head: 4a1eae2450a7e1347861ffef16dd1be25e6d9f41
-        at: '2026-10-24T04:56:49Z'
-        conclusion: success
-        jobs:
-          - { label: 'PHP 8.4', conclusion: success }
-    conformance:
-      suite: null
-      test: null
-  omnisense/omnigame:
-    repository: glitchr-omnisense/omnigame
-    branch: 1.x
-    ci:
-      -
-        workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnigame/actions/runs/40066095507'
-        head: c9be9f827f32111cba43bd43e3fd40c8ba793495
-        at: '2026-10-24T05:24:33Z'
+        url: 'https://github.com/glitchr-omnisense/omnifund/actions/runs/40907807313'
+        head: 24a062b2058b312d3e75b6e12e963bfdb2748b04
+        at: '2026-10-29T16:04:10Z'
         conclusion: success
         jobs:
           - { label: 'PHP 8.4', conclusion: success }
@@ -1787,12 +1846,12 @@ packages:
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnimap/actions/runs/40183398356'
-        head: f3b8367d624d42813ccec7842b20b812209351a1
-        at: '2026-10-25T10:06:57Z'
-        conclusion: failure
+        url: 'https://github.com/glitchr-omnisense/omnimap/actions/runs/40909799808'
+        head: fd38b58a7f7e60b50a16ecad2f50c06ddd61abc9
+        at: '2026-10-29T16:16:15Z'
+        conclusion: success
         jobs:
-          - { label: 'PHP 8.4', conclusion: failure }
+          - { label: 'PHP 8.4', conclusion: success }
     conformance:
       suite: Omnimap\Testing\ProviderContractTests
       test: Tests/TestTilesContractTest.php
@@ -1800,6 +1859,21 @@ packages:
     repository: glitchr-omnisense/omnimeet
     branch: 1.x
     ci: {}
+    conformance:
+      suite: null
+      test: null
+  omnisense/omniplay:
+    repository: glitchr-omnisense/omniplay
+    branch: 1.x
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-omnisense/omniplay/actions/runs/42554783865'
+        head: f88e9682690466af75ebebc920509fbd1b68d546
+        at: '2026-11-09T03:09:50Z'
+        conclusion: success
+        jobs:
+          - { label: 'PHP 8.4', conclusion: success }
     conformance:
       suite: null
       test: null
@@ -1816,9 +1890,9 @@ packages:
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnireach/actions/runs/40065854934'
-        head: 20e03fedf198bf4b9a5eee8a8a4430a848c569de
-        at: '2026-10-24T05:20:51Z'
+        url: 'https://github.com/glitchr-omnisense/omnireach/actions/runs/40907769505'
+        head: add93e26420083dbafca6b0de1c9124e1ff3a0bf
+        at: '2026-10-29T16:04:02Z'
         conclusion: success
         jobs:
           - { label: 'PHP 8.4', conclusion: success }
@@ -1845,30 +1919,15 @@ packages:
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnisearch/actions/runs/40182446526'
-        head: 27970dc67acd6b3f1cf2d6cbb0062f0f2361a784
-        at: '2026-10-25T09:53:03Z'
-        conclusion: success
+        url: 'https://github.com/glitchr-omnisense/omnisearch/actions/runs/40882020818'
+        head: b5f0c6ba61d0fe1fc71e26649e12877782eebc5d
+        at: '2026-10-29T13:27:33Z'
+        conclusion: failure
         jobs:
-          - { label: 'PHP 8.4', conclusion: success }
+          - { label: 'PHP 8.4', conclusion: failure }
     conformance:
       suite: Omnisearch\Testing\DriverContractTests
       test: Tests/MemoryDriverContractTest.php
-  omnisense/omnishare:
-    repository: glitchr-omnisense/omnishare
-    branch: 1.x
-    ci:
-      -
-        workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnishare/actions/runs/40065359349'
-        head: 7c79ccec5c41e3a857e3b3a5bde4e4716e1596f4
-        at: '2026-10-24T05:13:07Z'
-        conclusion: success
-        jobs:
-          - { label: 'PHP 8.4', conclusion: success }
-    conformance:
-      suite: null
-      test: null
   omnisense/omnishield:
     repository: glitchr-omnisense/omnishield
     branch: 1.x
@@ -1903,12 +1962,12 @@ packages:
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omniticket/actions/runs/40064848183'
-        head: 2ae6ff181dee648d1ee84930a0c5ad8b56a792fd
-        at: '2026-10-24T05:05:20Z'
-        conclusion: success
+        url: 'https://github.com/glitchr-omnisense/omniticket/actions/runs/40907773627'
+        head: 5132f9698bdc73adb2d50c14695f9d7722f787fc
+        at: '2026-10-29T16:04:02Z'
+        conclusion: failure
         jobs:
-          - { label: 'PHP 8.4', conclusion: success }
+          - { label: 'PHP 8.4', conclusion: failure }
     conformance:
       suite: null
       test: null
@@ -1919,21 +1978,6 @@ packages:
     conformance:
       suite: null
       test: null
-  omnisearch/typesense:
-    repository: glitchr-omnisense/omnisearch-typesense
-    branch: 1.x
-    ci:
-      -
-        workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omnisearch-typesense/actions/runs/40183093568'
-        head: ec609a56429373ee36ece5a66f0de47eb99dbba6
-        at: '2026-10-25T10:02:45Z'
-        conclusion: success
-        jobs:
-          - { label: 'PHP 8.4', conclusion: success }
-    conformance:
-      suite: Omnisearch\Testing\DriverContractTests
-      test: Tests/TypesenseContractTest.php
   omnishield/akismet:
     repository: glitchr-omnisense/omnishield-akismet
     branch: 1.x
@@ -1979,7 +2023,15 @@ packages:
   omnishow/youtube:
     repository: glitchr-omnisense/omnishow-youtube
     branch: 1.x
-    ci: {}
+    ci:
+      -
+        workflow: ci
+        url: 'https://github.com/glitchr-omnisense/omnishow-youtube/actions/runs/42556861366'
+        head: 034ea698802128f2999dce44f615ff03aae03d24
+        at: '2026-11-09T03:31:51Z'
+        conclusion: failure
+        jobs:
+          - { label: 'PHP 8.4', conclusion: failure }
     conformance:
       suite: null
       test: null
@@ -2080,9 +2132,9 @@ packages:
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omniticket-billetweb/actions/runs/40064855029'
-        head: 8d02381822e3e97ddf7576dd375b483093673fe0
-        at: '2026-10-24T13:41:34Z'
+        url: 'https://github.com/glitchr-omnisense/omniticket-billetweb/actions/runs/40343499730'
+        head: 31e25a402f5d8cfdd5e0d9d3ad1716df387b56b5
+        at: '2026-10-26T14:51:30Z'
         conclusion: success
         jobs:
           - { label: 'PHP 8.4', conclusion: success }
@@ -2095,9 +2147,9 @@ packages:
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omniticket-eventbrite/actions/runs/40064877172'
-        head: 5b605c146ecd45c52dadfc0a2456c5ee6ac29a88
-        at: '2026-10-24T13:41:17Z'
+        url: 'https://github.com/glitchr-omnisense/omniticket-eventbrite/actions/runs/40343509483'
+        head: 8367283e6d4e3bd0c0b5bea388b998cd8773150b
+        at: '2026-10-26T14:52:12Z'
         conclusion: success
         jobs:
           - { label: 'PHP 8.4', conclusion: success }
@@ -2110,9 +2162,9 @@ packages:
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omniticket-helloasso/actions/runs/40064868759'
-        head: b0acd4f220ce55fe62f82e165d9a57ea544201c4
-        at: '2026-10-24T13:41:23Z'
+        url: 'https://github.com/glitchr-omnisense/omniticket-helloasso/actions/runs/40343518865'
+        head: c6d5ca286a910856bcd00078632f675b220f4531
+        at: '2026-10-26T14:55:48Z'
         conclusion: success
         jobs:
           - { label: 'PHP 8.4', conclusion: success }
@@ -2125,9 +2177,9 @@ packages:
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omniticket-ticketmaster/actions/runs/40064883954'
-        head: 482b4dcf4e430871fe2c8e8bb9791a932d339002
-        at: '2026-10-24T05:05:48Z'
+        url: 'https://github.com/glitchr-omnisense/omniticket-ticketmaster/actions/runs/40343528975'
+        head: 43d607a8c1958013ee5bc17fbbac0ab6613d8dcd
+        at: '2026-10-26T14:51:41Z'
         conclusion: success
         jobs:
           - { label: 'PHP 8.4', conclusion: success }
@@ -2140,9 +2192,9 @@ packages:
     ci:
       -
         workflow: ci
-        url: 'https://github.com/glitchr-omnisense/omniticket-weezevent/actions/runs/40064861276'
-        head: 1b3c56899afc3aa8a8f3f990d2c7af9611782f29
-        at: '2026-10-24T13:41:20Z'
+        url: 'https://github.com/glitchr-omnisense/omniticket-weezevent/actions/runs/40343542475'
+        head: cb92074ae54b8c4bda866c8672d3735841c3cf7c
+        at: '2026-10-26T14:51:48Z'
         conclusion: success
         jobs:
           - { label: 'PHP 8.4', conclusion: success }
