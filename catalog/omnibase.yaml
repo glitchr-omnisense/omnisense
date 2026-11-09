@@ -417,7 +417,7 @@ packages:
     docs: true
   omnibase/restaurant:
     kind: structure
-    description: 'A restaurant on omnibase: the dining room and its layouts (a floor-plan editor, a QR poster per table), meal services and table reservations (availability under a lock, a public form, a management link, ICS), the menu (dishes as omnibase/marketplace products, sections, set menus, EU allergens), ordering at the table by QR code (sessions, rounds, tickets), the pass for the staff, and the delivery and booking platforms through glitchr/omnifood.'
+    description: 'A restaurant on omnibase: the dining room and its layouts (a floor-plan editor, a QR poster per table), meal services and table reservations (availability under a lock, a public form, a management link, ICS), the menu (dishes as omnibase/marketplace products, sections, set menus, EU allergens), ordering at the table by QR code (sessions, rounds, tickets), the pass for the staff, and the delivery and booking platforms through omnisense/omnifood.'
     license: MIT
     keywords:
       - restaurant

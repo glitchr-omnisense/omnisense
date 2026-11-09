@@ -267,11 +267,11 @@ vendor-sync:
 		rsync -a --delete --exclude='.git/' /from/ /to/
 	@printf "${C_OK}[vendor]${C_RESET} ./vendor is in sync ✅\n"
 
-## Rebuild a single vendor's assets (usage: make build-vendor glitchr/omnibase)
+## Rebuild a single vendor's assets (usage: make build-vendor omnisense/omnibase)
 build-vendor:
 	@if [ -z "$(SERVICE)" ]; then \
 		printf "${C_ERROR}[!] Usage: make build-vendor <vendor/name>${C_RESET}\n"; \
-		printf "    Example: make build-vendor glitchr/omnibase\n"; \
+		printf "    Example: make build-vendor omnisense/omnibase\n"; \
 		exit 1; \
 	fi
 	@if [ ! -d "vendor/$(SERVICE)" ]; then \

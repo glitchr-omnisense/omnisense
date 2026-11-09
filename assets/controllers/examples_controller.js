@@ -2,7 +2,7 @@ import { Controller } from '@hotwired/stimulus';
 
 /*
  * The examples on the home page's floors turn, one at a time: a family's
- * own package on the foundation's floor (glitchr/omnibus, then
+ * own package on the foundation's floor (omnisense/omnibus, then
  * omnisense/omnilab...), a prepared structure on the optional one
  * (omnibase/blog, then omnibase/agenda...). Each drawing has its own
  * controller and the kinds it holds; where both are, they take turns.
