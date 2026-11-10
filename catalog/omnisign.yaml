@@ -14,7 +14,7 @@ text:
 packages:
   omnisense/omnisign:
     kind: family
-    description: "Omnisign: one contract for having documents signed - create an envelope (documents, signers, fields, a level: simple, advanced, qualified), send it, follow it, remind, cancel, sign in the application's page, download the signed documents and their evidence, hear the provider's webhooks - whoever signs: Yousign (omnisign/yousign), DocuSign (omnisign/docusign), a DocuSeal instance (omnisign/docuseal); and its Symfony bundle."
+    description: "Omnisign: one contract for having documents signed - create an envelope (documents, signers, fields, a level: simple, advanced, qualified), send it, follow it, remind, cancel, sign in the application's page, download the signed documents and their evidence, hear the provider's webhooks - whoever signs: Yousign (omnisign/yousign), DocuSign (omnisign/docusign), a DocuSeal instance (omnisign/docuseal) - and, since 1.1, verify an identity (a document and a selfie, the checks performed: Stripe Identity, omnisign/stripe-identity) and obtain a rental applicant's file through a consented connect flow (DossierFacile, omnisign/dossierfacile); and its Symfony bundle."
     license: MIT
     keywords:
       - signature
@@ -23,6 +23,11 @@ packages:
       - yousign
       - docusign
       - docuseal
+      - identity-verification
+      - kyc
+      - tenant-file
+      - dossierfacile
+      - stripe-identity
       - omnisign
     repository: glitchr-omnisense/omnisign
     branch: 1.x
@@ -60,6 +65,44 @@ packages:
       - omnisense/omnisign
     verification: partial
     verification_note: "Documentation: the options and the JWT grant, from an envelope to DocuSign's, Connect, what was verified. — Not verified in real: no developer account."
+    docs: true
+  omnisign/dossierfacile:
+    kind: provider
+    description: "Omnisign DossierFacile: a rental applicant's file - identity, residency, activity, income, tax, guarantors, as the State checked them - shared with the application through DossierFacile Connect (OpenID Connect on DossierFacile's Keycloak): the consent page, the code exchanged and the file read and linked, the file read again with the partner's client credentials, the partner callbacks with their x-api-key checked; the three-month retention carried on the file. For partners under DossierFacile's charter."
+    license: MIT
+    keywords:
+      - dossierfacile
+      - tenant-file
+      - rental
+      - location
+      - logement
+      - oauth
+      - omnisign
+    repository: glitchr-omnisense/omnisign-dossierfacile
+    branch: 1.x
+    requires:
+      - omnisense/omnisign
+    verification: unverified
+    verification_note: 'Not verified in real: no partner account.'
+    docs: true
+  omnisign/stripe-identity:
+    kind: provider
+    description: "Omnisign Stripe Identity: identity verification through Stripe's VerificationSessions - an identity document photographed live and a selfie matched against it, in Stripe's hosted flow or in the page; the session followed, its report read as the checks performed, cancelled, redacted; webhooks with their Stripe-Signature checked. Test mode with a test key."
+    license: MIT
+    keywords:
+      - identity
+      - identity-verification
+      - kyc
+      - eidas
+      - stripe
+      - stripe-identity
+      - omnisign
+    repository: glitchr-omnisense/omnisign-stripe-identity
+    branch: 1.x
+    requires:
+      - omnisense/omnisign
+    verification: unverified
+    verification_note: "Not verified in real: no account. A sk_test_ key is Stripe's test mode: everything runs, nothing is really checked."
     docs: true
   omnisign/yousign:
     kind: provider

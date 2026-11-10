@@ -1,0 +1,107 @@
+# The omnitravel entry of the Omnisense catalogue. Written by `bin/console
+# app:catalog:import` from the packages' repositories; the phrase and the
+# text are the site's own, edited here. Each package: its kind, what its
+# composer.json says, its GitHub repository and development branch, whether
+# its README says it was verified against the real service, whether it has
+# a docs/ folder (see config/documentation.yaml).
+family: omnitravel
+phrase:
+  en: 'Read timetables, journeys and real time, by train, plane or city transit.'
+  fr: 'Lire horaires, itinéraires et temps réel, en train, en avion ou en transports urbains.'
+text:
+  en: 'One contract for going from A to B: a stop’s next departures and arrivals in real time, journeys across modes, vehicles on their way, the network’s stops and lines - GTFS feeds, Transitous, Navitia.'
+  fr: 'Un seul contrat pour aller de A à B : les prochains départs et arrivées d’un arrêt en temps réel, les itinéraires tous modes, les véhicules en route, les arrêts et lignes du réseau — flux GTFS, Transitous, Navitia.'
+packages:
+  omnisense/omnitravel:
+    kind: family
+    description: "Omnitravel: going from A to B under any PHP host, whoever keeps the data - a stop's or a station's next departures and arrivals in real time (delays, platforms, gates, cancellations), journeys across modes, where vehicles are, the network's stops and lines with their colours. One family for urban transit, trains and planes, in four contracts: timetables, itineraries, tracking, network. Providers are packages of their own (omnitravel/gtfs, omnitravel/transitous, omnitravel/navitia), each declaring its usage policy (rate limits, rights, attribution), enforced on every call and tightened by a site's configuration - on omnisense/contracts; the Symfony and Laravel bridges live in omnibridge."
+    license: MIT
+    keywords:
+      - transit
+      - public-transport
+      - timetable
+      - departures
+      - real-time
+      - journey-planner
+      - itinerary
+      - gtfs
+      - gtfs-realtime
+      - motis
+      - transitous
+      - navitia
+      - train
+      - flight
+      - framework-agnostic
+      - omnitravel
+    repository: glitchr-omnisense/omnitravel
+    branch: 1.x
+    requires:
+      - omnisense/contracts
+    verification: unstated
+    docs: true
+  omnitravel/gtfs:
+    kind: provider
+    description: "Omnitravel's GTFS, under any PHP host: any network that publishes a static GTFS feed, imported into a store of its own (SQLite or MySQL through PDO) - its stops near a point or by name, its lines with their colours and their stops in order, a stop's next departures and arrivals from the feed's calendars - and, where the network publishes GTFS-Realtime, its trip updates (delays, cancellations, skipped stops) laid over them and its vehicles' positions, read from Protocol Buffers by hand."
+    license: MIT
+    keywords:
+      - gtfs
+      - gtfs-realtime
+      - transit
+      - public-transport
+      - timetable
+      - departures
+      - real-time
+      - protobuf
+      - sqlite
+      - framework-agnostic
+      - omnitravel
+    repository: glitchr-omnisense/omnitravel-gtfs
+    branch: 1.x
+    requires:
+      - omnisense/omnitravel
+    verification: unstated
+    docs: true
+  omnitravel/navitia:
+    kind: provider
+    description: "Omnitravel's Navitia, under any PHP host: a stop area's or a stop point's next departures and arrivals in real time, journeys from A to B, the stops near a point or by name, the lines of a coverage and their stops, its networks - from navitia.io or SNCF's api.sncf.com (the same API), with the key given by reference."
+    license: MIT
+    keywords:
+      - navitia
+      - sncf
+      - transit
+      - public-transport
+      - journey-planner
+      - departures
+      - real-time
+      - france
+      - framework-agnostic
+      - omnitravel
+    repository: glitchr-omnisense/omnitravel-navitia
+    branch: 1.x
+    requires:
+      - omnisense/contracts
+      - omnisense/omnitravel
+    verification: unstated
+    docs: true
+  omnitravel/transitous:
+    kind: provider
+    description: "Omnitravel's Transitous, under any PHP host, with no key: journeys from A to B, a stop's next departures and arrivals in real time (delays, tracks, cancellations), a stop and its lines, the stops near a point or by name - across the open timetables Transitous gathers worldwide, through its MOTIS 2 API, with the User-Agent its usage policy asks."
+    license: MIT
+    keywords:
+      - transitous
+      - motis
+      - transit
+      - public-transport
+      - journey-planner
+      - departures
+      - real-time
+      - open-data
+      - framework-agnostic
+      - omnitravel
+    repository: glitchr-omnisense/omnitravel-transitous
+    branch: 1.x
+    requires:
+      - omnisense/contracts
+      - omnisense/omnitravel
+    verification: unstated
+    docs: true

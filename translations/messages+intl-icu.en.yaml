@@ -79,7 +79,7 @@ floors:
     name: Core
     one: Core
     pattern: omnisense/omnibase
-    text: 'The core every site starts from: accounts and security, back office, translations, images, forms.'
+    text: 'The core every site starts from: accounts and security, back office, translations, images, forms. Beside it, the contracts every family builds on.'
   component:
     name: Prepared structures
     one: Prepared structure

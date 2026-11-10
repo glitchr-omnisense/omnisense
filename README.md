@@ -23,7 +23,8 @@ site (the `website` workflow's artifact).
 `config/documentation.yaml` from the working copies of the packages
 (`OMNI_REPOS`, `~/Sites` mounted read-only), keeping the phrases written by
 hand and the commits already pinned; `--pin` moves every series to its
-branch's published head. No package has a release tag yet: every pinned ref
+branch's published head. A package that only reserves its name (its
+keyword `reserved`) is left out: `config/apis.yaml` shows it as reserved. No package has a release tag yet: every pinned ref
 is a branch head's commit.
 
 ## Build

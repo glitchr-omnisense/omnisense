@@ -44,7 +44,7 @@ class CatalogueController extends AbstractController
      * family's core, where the providers are listed, each linked to its own manual). The JavaScript
      * libraries, a family with no core, have a page that lists them, each linked to its manual.
      */
-    #[Route(['en' => '/families/{family}', 'fr' => '/fr/familles/{family}'], name: 'app_family', requirements: ['family' => 'omni[a-z]+|libraries'], methods: ['GET'])]
+    #[Route(['en' => '/families/{family}', 'fr' => '/fr/familles/{family}'], name: 'app_family', requirements: ['family' => 'omni[a-z]+|libraries|contracts'], methods: ['GET'])]
     public function family(Request $request, string $family): Response
     {
         $entry = $this->catalogue->family($family) ?? throw $this->createNotFoundException(sprintf('No family "%s".', $family));

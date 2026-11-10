@@ -65,9 +65,43 @@ packages:
     verification: verified
     verification_note: 'Documentation: the options, the message, the store, what was verified - an invoice sent for real to a local SMTP server, on 2026-10-08.'
     docs: true
+  omnibill/odoo:
+    kind: provider
+    description: "Omnibill Odoo: Odoo's accounting (Odoo 19 and later, Online or self-hosted) for omnisense/omnibill's journal-entries and contacts contracts - entries posted to a journal with their accounts, partners and VAT lines, then posted and read back with their number; customers and suppliers created, updated, read, listed - through Odoo's external JSON-2 API with a user's API key (XML-RPC and JSON-RPC, removed in Odoo 22, are never called)."
+    license: MIT
+    keywords:
+      - accounting
+      - odoo
+      - journal-entries
+      - json-2
+      - omnibill
+    repository: glitchr-omnisense/omnibill-odoo
+    branch: 1.x
+    requires:
+      - omnisense/omnibill
+    verification: unverified
+    verification_note: 'Not verified in real: no instance.'
+    docs: true
+  omnibill/pennylane:
+    kind: provider
+    description: "Omnibill Pennylane: Pennylane's accounting for omnisense/omnibill's journal-entries and contacts contracts - ledger entries posted to a journal (found by code) on ledger accounts (found by number and VAT rate), read back and listed; company and individual customers and suppliers created, updated, read, listed - through Pennylane's Company API v2 with a company token or a partner app's OAuth token (OAuth helper included). Pennylane's API contract terms (internal use unless API partner) carried in its capabilities."
+    license: MIT
+    keywords:
+      - accounting
+      - pennylane
+      - journal-entries
+      - ledger
+      - omnibill
+    repository: glitchr-omnisense/omnibill-pennylane
+    branch: 1.x
+    requires:
+      - omnisense/omnibill
+    verification: unverified
+    verification_note: 'Not verified in real: no account.'
+    docs: true
   omnisense/omnibill:
     kind: family
-    description: "Omnibill: one contract for transmitting and receiving electronic invoices - submit a conformant file (Factur-X, UBL, CII), follow its lifecycle statuses, receive suppliers' invoices, declare a status, look a company up in the directory, transmit e-reporting - whoever carries it: an e-mail (omnibill/email), an approved platform's standard API XP Z12-013 (omnibill/afnor), Chorus Pro (omnibill/chorus-pro); and its Symfony bundle."
+    description: "Omnibill: one contract for transmitting and receiving electronic invoices - submit a conformant file (Factur-X, UBL, CII), follow its lifecycle statuses, receive suppliers' invoices, declare a status, look a company up in the directory, transmit e-reporting - whoever carries it: an e-mail (omnibill/email), an approved platform's standard API XP Z12-013 (omnibill/afnor), Chorus Pro (omnibill/chorus-pro); and its Symfony bundle - and, since 1.1, accounting: journal entries posted and read back, customers and suppliers, in Odoo (omnibill/odoo) or Pennylane (omnibill/pennylane)."
     license: MIT
     keywords:
       - invoice
@@ -76,6 +110,10 @@ packages:
       - factur-x
       - xp-z12-013
       - chorus-pro
+      - accounting
+      - journal-entries
+      - odoo
+      - pennylane
       - omnibill
     repository: glitchr-omnisense/omnibill
     branch: 1.x

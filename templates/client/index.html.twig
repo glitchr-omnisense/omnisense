@@ -67,17 +67,18 @@
             {% set shown = turning|slice(0, 2) %}
             {% for tier, level in {foundation: '1', family: '2', bridge: '3'} %}
             {% set packages = floors[tier] %}
-            {# The core is named by its pattern (its name as the catalogue has it): no example beside it. #}
-            {% set examples = tier == 'family' ? shown : (tier == 'bridge' ? packages|map(p => p.name)|slice(0, 4) : []) %}
+            {# The core is named by its pattern (its name as the catalogue has it), the other cores beside it (omnisense/contracts). #}
+            {% set core = tier == 'foundation' ? packages|filter(p => p.name ends with '/omnibase')|first : null %}
+            {% set examples = tier == 'family' ? shown : (tier == 'bridge' ? packages|map(p => p.name)|slice(0, 4) : packages|filter(p => p != core)|map(p => p.name)) %}
             <a class="om-floor is-{{ tier }}" href="{{ (path('app_packages') ~ '#kind-' ~ (tier == 'foundation' ? 'core' : tier)) }}">
                 <span class="om-floor-level">{{ level }}</span>
                 <span class="om-floor-body">
                     <span class="om-floor-name">{{ ('@messages.floors.' ~ tier ~ '.name')|trans }}</span>
-                    <code class="om-floor-pattern">{{ (tier == 'foundation' and packages|length ? packages|first.name : ('@messages.floors.' ~ tier ~ '.pattern')|trans)|omni_mark }}</code>
+                    <code class="om-floor-pattern">{{ (core ? core.name : ('@messages.floors.' ~ tier ~ '.pattern')|trans)|omni_mark }}</code>
                     <span class="om-floor-text">{{ ('@messages.floors.' ~ tier ~ '.text')|trans }}</span>
                     {% if examples %}<span class="om-floor-examples">
                         {%- for name in examples %}<code{% if tier == 'family' %} data-examples-target="family"{% endif %}>{{ name|omni_mark }}</code>{% endfor -%}
-                        {%- if packages|length > examples|length %}<span>+ {{ packages|length - examples|length }}</span>{% endif -%}
+                        {%- if tier != 'foundation' and packages|length > examples|length %}<span>+ {{ packages|length - examples|length }}</span>{% endif -%}
                     </span>{% endif %}
                 </span>
                 <span class="om-floor-count"><b>{{ packages|length }}</b> {{ '@messages.floors.packages'|trans({count: packages|length}) }}{% if tier == 'family' %} · {{ '@messages.floors.providers_count'|trans({count: providers_count}) }}{% endif %}</span>

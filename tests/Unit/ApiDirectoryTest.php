@@ -29,9 +29,11 @@ final class ApiDirectoryTest extends TestCase
         self::assertNotEmpty($directory->byStatus(Status::Available));
 
         foreach ($directory->byStatus(Status::Available) as $family) {
-            // Available: in the catalogue, or made of families that are, until its own core is imported (omnipulse).
-            $listed = array_filter([$family->name, ...$family->merged], static fn (string $f): bool => null !== $catalogue->family($f));
-            self::assertNotEmpty($listed, $family->name.' is available: catalog/ lists it or a family merged into it');
+            // Available: in the catalogue (omnipulse since its merge was imported, the families it took in no longer).
+            self::assertNotNull($catalogue->family($family->name), $family->name.' is available: catalog/ lists it');
+            foreach ($family->merged as $merged) {
+                self::assertNull($catalogue->family($merged), $merged.' went into '.$family->name.': no catalog file of its own');
+            }
         }
         foreach ($directory->byStatus(Status::Wanted) as $family) {
             self::assertNull($catalogue->family($family->name)?->getOwn(), $family->name.' is wanted: its core is not in the catalogue');
@@ -71,26 +73,49 @@ final class ApiDirectoryTest extends TestCase
         foreach (['omnireach', 'omnireview', 'omnifund', 'omniproof', 'omnitally'] as $gone) {
             self::assertNull($directory->family($gone), $gone.' has no card of its own');
         }
-        $reach = $directory->family('omnipulse');
-        self::assertSame(['omnireach', 'omnireview', 'omnifund'], $reach->merged);
+        $pulse = $directory->family('omnipulse');
+        self::assertSame(['omnireach', 'omnireview', 'omnifund'], $pulse->merged, 'the families it took in, named on its card');
         $byPackage = [];
-        foreach ($reach->providers as $provider) {
+        foreach ($pulse->providers as $provider) {
             $byPackage[$provider->package] = $provider;
         }
-        // From the real catalogue: catalog/omnireach.yaml, omnireview.yaml and omnifund.yaml until the merge is imported.
-        $review = array_values(array_filter($reach->providers, static fn ($p): bool => \in_array('reviews', $p->capabilities, true)));
-        $sponsors = array_values(array_filter($reach->providers, static fn ($p): bool => \in_array('sponsors', $p->capabilities, true)));
-        self::assertNotEmpty($review, 'the review platforms, under omnipulse');
-        self::assertNotEmpty($sponsors, 'the funding platforms, under omnipulse');
-        self::assertSame(['audience', 'search-queries'], $byPackage['omnireach/matomo']->capabilities, 'each brings its own capabilities');
-        // The names the merge publishes them under.
-        self::assertSame('omnipulse/matomo', $byPackage['omnireach/matomo']->successor);
-        self::assertSame('omnipulse/google-reviews', $byPackage['omnireview/google']->successor);
-        self::assertSame('google-reviews', $byPackage['omnireview/google']->name, 'the card is titled by its new name');
-        self::assertSame('omnipulse/github-sponsors', $byPackage['omnifund/github-sponsors']->successor);
+        // The merge imported: catalog/omnipulse.yaml lists its eleven providers under their new names, each with what it answers.
+        $names = array_keys($byPackage);
+        sort($names);
+        self::assertSame(['omnipulse/bing-webmaster', 'omnipulse/ga4', 'omnipulse/github-sponsors', 'omnipulse/google-reviews', 'omnipulse/liberapay', 'omnipulse/matomo', 'omnipulse/opencollective', 'omnipulse/plausible', 'omnipulse/search-console', 'omnipulse/tripadvisor', 'omnipulse/trustpilot'], $names);
+        foreach ($byPackage as $package => $provider) {
+            self::assertSame(Status::Available, $provider->status, $package);
+            self::assertNotNull($provider->released, $package.' is in the catalogue');
+            self::assertNull($provider->successor, $package.' is published under its own name');
+        }
+        self::assertSame(['audience'], $byPackage['omnipulse/matomo']->capabilities, 'each answers what it answers');
+        self::assertSame(['search-queries'], $byPackage['omnipulse/search-console']->capabilities);
+        self::assertSame(['reviews'], $byPackage['omnipulse/google-reviews']->capabilities);
+        self::assertSame(['sponsors'], $byPackage['omnipulse/liberapay']->capabilities);
         self::assertSame(['signature'], $directory->family('omnisign')->providers[0]->capabilities, 'a released signature provider does not check identities');
         self::assertSame(Status::Reserved, $directory->family('omnilang')->status);
         self::assertSame(Status::Reserved, $directory->family('omnical')->status);
+    }
+
+    public function testADeclaredStatusMatchesTheCatalogue(): void
+    {
+        $directory = self::directory();
+        foreach ($directory->providers() as $provider) {
+            // A name reserved on Packagist and GitHub, nothing released: app:catalog:import leaves it out.
+            if (Status::Available !== $provider->status) {
+                self::assertNull($provider->released, $provider->package.' is '.$provider->status->value.': not in the catalogue');
+            } else {
+                self::assertNotNull($provider->released, $provider->package.' is available: in the catalogue');
+            }
+        }
+        $statuses = static fn (string $family): array => array_combine(array_map(static fn ($p): string => $p->package, $directory->family($family)->providers), array_map(static fn ($p): string => $p->status->value, $directory->family($family)->providers));
+        $sign = $statuses('omnisign');
+        self::assertSame(['available', 'available', 'reserved', 'reserved'], [$sign['omnisign/stripe-identity'], $sign['omnisign/dossierfacile'], $sign['omnisign/veriff'], $sign['omnisign/entrust']]);
+        $bill = $statuses('omnibill');
+        self::assertSame(['available', 'available', 'reserved', 'reserved'], [$bill['omnibill/odoo'], $bill['omnibill/pennylane'], $bill['omnibill/xero'], $bill['omnibill/quickbooks']]);
+        self::assertSame(Status::Available, $directory->family('omnitravel')->status);
+        self::assertSame(Status::Available, $directory->family('omnistay')->status);
+        self::assertSame(Status::Reserved, $directory->family('omnicrawl')->status);
     }
 
     public function testAPolicyRefusesAValueItDoesNotKnow(): void

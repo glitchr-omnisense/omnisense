@@ -1,0 +1,33 @@
+# The contracts entry of the Omnisense catalogue. Written by `bin/console
+# app:catalog:import` from the packages' repositories; the phrase and the
+# text are the site's own, edited here. Each package: its kind, what its
+# composer.json says, its GitHub repository and development branch, whether
+# its README says it was verified against the real service, whether it has
+# a docs/ folder (see config/documentation.yaml).
+family: contracts
+phrase:
+  en: 'What every family builds on.'
+  fr: 'Ce sur quoi chaque famille s’appuie.'
+text:
+  en: 'The contracts the families’ providers share: a provider, its capabilities and factory, the registry of an application’s providers, JSON calls that keep keys out of every error, the testing kit - and usage policies (rate limits, rights, attribution), declared by each provider, tightened by a site, enforced on every call.'
+  fr: 'Les contrats que partagent les fournisseurs des familles : un fournisseur, ses capacités et sa fabrique, le registre des fournisseurs d’une application, des appels JSON qui gardent les clés hors de chaque erreur, l’outillage de test — et les politiques d’usage (limites de débit, droits, attribution), déclarées par chaque fournisseur, resserrées par un site, appliquées à chaque appel.'
+packages:
+  omnisense/contracts:
+    kind: core
+    description: "The contracts every omnisense provider family builds on, under any PHP host: a provider, its capabilities, its factory and configuration, the registry of an application's providers, JSON calls that keep credentials out of every error, the testing kit (recorded HTTP answers, the bare check) - and usage policies: a provider's rate limits, rights (commercial use, open source, caching, storage, attribution) and request requirements, declared as data, tightened by a site, enforced by a guard that also honours Retry-After and the RateLimit header fields."
+    license: MIT
+    keywords:
+      - contracts
+      - provider
+      - registry
+      - usage-policy
+      - rate-limit
+      - ratelimit-headers
+      - retry-after
+      - attribution
+      - framework-agnostic
+      - omnisense
+    repository: glitchr-omnisense/contracts
+    branch: 1.x
+    verification: unstated
+    docs: true

@@ -79,7 +79,7 @@ floors:
     name: Cœur
     one: Cœur
     pattern: omnisense/omnibase
-    text: 'Le cœur dont tout site part : comptes et sécurité, back-office, traductions, images, formulaires.'
+    text: 'Le cœur dont tout site part : comptes et sécurité, back-office, traductions, images, formulaires. À côté, les contrats sur lesquels s’appuie chaque famille.'
   component:
     name: Structures préparées
     one: Structure préparée

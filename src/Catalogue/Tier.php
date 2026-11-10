@@ -5,7 +5,9 @@ namespace App\Catalogue;
 /**
  * The floor a package stands on (plan 0, rules 1 to 3):
  *
- *   foundation  omnisense/omnibase: the core every site starts from
+ *   foundation  omnisense/omnibase: the core every site starts from;
+ *               omnisense/contracts: the contracts every family builds on
+ *               (a provider, its factory, the registry, usage policies)
  *   component   omnibase/<trade>: a prepared structure - ready-made for a
  *               trade (entities, screens, back office, translations,
  *               fixtures), assembled on the core; optional, nothing in the
@@ -58,6 +60,10 @@ enum Tier: string
 
             if ('omnibridge' === $package) {
                 return [self::Bridge, null];
+            }
+
+            if ('contracts' === $package) {
+                return [self::Foundation, 'contracts'];
             }
 
             return 1 === preg_match('/^omni[a-z]+$/', $package) ? [self::Family, $package] : null;

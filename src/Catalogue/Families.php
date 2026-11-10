@@ -33,6 +33,13 @@ final class Families
         'omnifund' => 'omnipulse',
     ];
 
+    /**
+     * The keyword of a package that only reserves its name (its description "Reserved, not released yet: ..."): on
+     * Packagist and GitHub so that the name is taken, nothing in it yet. app:catalog:import lists none of them;
+     * config/apis.yaml shows them as reserved.
+     */
+    public const RESERVED_KEYWORD = 'reserved';
+
     /** "omnitrade" → "trade": what turns after "Omni". */
     public static function suffix(string $family): string
     {

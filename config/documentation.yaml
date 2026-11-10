@@ -14,6 +14,16 @@
 #
 # A series kept for history keeps its ref: add it by hand, with its tag or commit.
 packages:
+  contracts:
+    package: omnisense/contracts
+    repository: glitchr-omnisense/contracts
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: ca27550f45c7f0cefe01509427cd29590248d9ac
+        pinned: branch-head
+        path: docs/
   flowjs:
     package: '@glitchr/flowjs'
     repository: glitchr-studio/flowjs
@@ -173,6 +183,16 @@ packages:
       main:
         branch: main
         ref: 3ba70fd6048579a28b3530af21a34644cb4be3ae
+        pinned: branch-head
+        path: docs/
+  omnibase-booking:
+    package: omnibase/booking
+    repository: glitchr-omnisense/omnibase-booking
+    default: main
+    versions:
+      main:
+        branch: main
+        ref: e2051702fae6eb29711929778ebd72ee61039385
         pinned: branch-head
         path: docs/
   omnibase-broadcast:
@@ -473,6 +493,26 @@ packages:
       1.x:
         branch: 1.x
         ref: 1bb02eee83ac36083bd97cf8c64f35df85c069da
+        pinned: branch-head
+        path: docs/
+  omnibill-odoo:
+    package: omnibill/odoo
+    repository: glitchr-omnisense/omnibill-odoo
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 0a38a48f620f8bd7374b3aa3c07ceff4ef1085a5
+        pinned: branch-head
+        path: docs/
+  omnibill-pennylane:
+    package: omnibill/pennylane
+    repository: glitchr-omnisense/omnibill-pennylane
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: ea7c21343032addb0782ffef5c9d7f61c4770305
         pinned: branch-head
         path: docs/
   omnibridge:
@@ -1023,46 +1063,6 @@ packages:
       1.x:
         branch: 1.x
         ref: 8536fdc8200b6aa81d7b56a3d17090d2d76b60bb
-        pinned: branch-head
-        path: docs/
-  omnifund:
-    package: omnisense/omnifund
-    repository: glitchr-omnisense/omnifund
-    default: 1.x
-    versions:
-      1.x:
-        branch: 1.x
-        ref: 24a062b2058b312d3e75b6e12e963bfdb2748b04
-        pinned: branch-head
-        path: docs/
-  omnifund-github-sponsors:
-    package: omnifund/github-sponsors
-    repository: glitchr-omnisense/omnifund-github-sponsors
-    default: 1.x
-    versions:
-      1.x:
-        branch: 1.x
-        ref: 61864159ab1607598c7ba03707b5fde22b635edc
-        pinned: branch-head
-        path: docs/
-  omnifund-liberapay:
-    package: omnifund/liberapay
-    repository: glitchr-omnisense/omnifund-liberapay
-    default: 1.x
-    versions:
-      1.x:
-        branch: 1.x
-        ref: 30d7434118714e47b5c270e2940ef4f5a205a827
-        pinned: branch-head
-        path: docs/
-  omnifund-opencollective:
-    package: omnifund/opencollective
-    repository: glitchr-omnisense/omnifund-opencollective
-    default: 1.x
-    versions:
-      1.x:
-        branch: 1.x
-        ref: 70f4f8d8c334c628b3218adda0ed15ec02d3c364
         pinned: branch-head
         path: docs/
   omnilab:
@@ -1865,104 +1865,124 @@ packages:
         ref: 6e448aff34aad6db5fb75fe3edf63d50a147eced
         pinned: branch-head
         path: docs/
-  omnireach:
-    package: omnisense/omnireach
-    repository: glitchr-omnisense/omnireach
+  omnipulse:
+    package: omnisense/omnipulse
+    repository: glitchr-omnisense/omnipulse
     default: 1.x
     versions:
       1.x:
         branch: 1.x
-        ref: add93e26420083dbafca6b0de1c9124e1ff3a0bf
+        ref: 6fdfadd7eee0a75d7c53388b87cfab5bcd312e59
         pinned: branch-head
         path: docs/
-  omnireach-bing-webmaster:
-    package: omnireach/bing-webmaster
-    repository: glitchr-omnisense/omnireach-bing-webmaster
+  omnipulse-bing-webmaster:
+    package: omnipulse/bing-webmaster
+    repository: glitchr-omnisense/omnipulse-bing-webmaster
     default: 1.x
     versions:
       1.x:
         branch: 1.x
-        ref: 02a2944213b94f851ce31660ac5924dccdc7fd7d
+        ref: be3240a27e01a34d776b3f770b1cb384a6f7492e
         pinned: branch-head
         path: docs/
-  omnireach-ga4:
-    package: omnireach/ga4
-    repository: glitchr-omnisense/omnireach-ga4
+  omnipulse-ga4:
+    package: omnipulse/ga4
+    repository: glitchr-omnisense/omnipulse-ga4
     default: 1.x
     versions:
       1.x:
         branch: 1.x
-        ref: f779e42c2500526c3af201be66aa03fc283876d7
+        ref: d98ec85d36499098dcda428f70752eb33368aa8d
         pinned: branch-head
         path: docs/
-  omnireach-matomo:
-    package: omnireach/matomo
-    repository: glitchr-omnisense/omnireach-matomo
+  omnipulse-github-sponsors:
+    package: omnipulse/github-sponsors
+    repository: glitchr-omnisense/omnipulse-github-sponsors
     default: 1.x
     versions:
       1.x:
         branch: 1.x
-        ref: cb405530697e56b920cdc26b6ca17242ebf7b402
+        ref: 64a468ff8d237fb7f241fb254adb3bf3a2a86d6e
         pinned: branch-head
         path: docs/
-  omnireach-plausible:
-    package: omnireach/plausible
-    repository: glitchr-omnisense/omnireach-plausible
+  omnipulse-google-reviews:
+    package: omnipulse/google-reviews
+    repository: glitchr-omnisense/omnipulse-google-reviews
     default: 1.x
     versions:
       1.x:
         branch: 1.x
-        ref: b4209dd29826e547d381d2a0a4bb71921a1e0dfa
+        ref: 1e3d9e5d4810332219a8dee464a5cb36e42275a4
         pinned: branch-head
         path: docs/
-  omnireach-search-console:
-    package: omnireach/search-console
-    repository: glitchr-omnisense/omnireach-search-console
+  omnipulse-liberapay:
+    package: omnipulse/liberapay
+    repository: glitchr-omnisense/omnipulse-liberapay
     default: 1.x
     versions:
       1.x:
         branch: 1.x
-        ref: 25b5548dd42f47f5f9fb6319d405ee61ef70c9b3
+        ref: 541c68a5ab5b8e99b9c6a50bca4107b8695ae700
         pinned: branch-head
         path: docs/
-  omnireview:
-    package: omnisense/omnireview
-    repository: glitchr-omnisense/omnireview
+  omnipulse-matomo:
+    package: omnipulse/matomo
+    repository: glitchr-omnisense/omnipulse-matomo
     default: 1.x
     versions:
       1.x:
         branch: 1.x
-        ref: 63f964f960af032bf168ebb2d70318ed7d29d6fe
+        ref: 25f6138ab50a4a299cd086a67fbbabe716ab9701
         pinned: branch-head
         path: docs/
-  omnireview-google:
-    package: omnireview/google
-    repository: glitchr-omnisense/omnireview-google
+  omnipulse-opencollective:
+    package: omnipulse/opencollective
+    repository: glitchr-omnisense/omnipulse-opencollective
     default: 1.x
     versions:
       1.x:
         branch: 1.x
-        ref: 9f6acfa28a655e2e2dba6aea5078a237252ce511
+        ref: 11643cbc8508f6adf2fe9b354537d557ca68e1ff
         pinned: branch-head
         path: docs/
-  omnireview-tripadvisor:
-    package: omnireview/tripadvisor
-    repository: glitchr-omnisense/omnireview-tripadvisor
+  omnipulse-plausible:
+    package: omnipulse/plausible
+    repository: glitchr-omnisense/omnipulse-plausible
     default: 1.x
     versions:
       1.x:
         branch: 1.x
-        ref: 85734c86ad314ef8a5fd7e566aab3b5fd038da41
+        ref: 6979bc9906c3d0dd06e2309cdd310eabfc32b059
         pinned: branch-head
         path: docs/
-  omnireview-trustpilot:
-    package: omnireview/trustpilot
-    repository: glitchr-omnisense/omnireview-trustpilot
+  omnipulse-search-console:
+    package: omnipulse/search-console
+    repository: glitchr-omnisense/omnipulse-search-console
     default: 1.x
     versions:
       1.x:
         branch: 1.x
-        ref: 16dd5a5e2f860016c46575f8817ffa9b647d25a6
+        ref: 92004e6a9ea76126d5ff82b8a3c4135270cfd3cd
+        pinned: branch-head
+        path: docs/
+  omnipulse-tripadvisor:
+    package: omnipulse/tripadvisor
+    repository: glitchr-omnisense/omnipulse-tripadvisor
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 727f76070728bceae9cf402554b0cd5f400eb5cb
+        pinned: branch-head
+        path: docs/
+  omnipulse-trustpilot:
+    package: omnipulse/trustpilot
+    repository: glitchr-omnisense/omnipulse-trustpilot
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 8baf7c356f867391724821bcc62a5b6eefc7d76a
         pinned: branch-head
         path: docs/
   omnischolar:
@@ -2135,6 +2155,86 @@ packages:
         ref: a2b8983a749097b767eeef000fae3e5043303f57
         pinned: branch-head
         path: docs/
+  omnishow:
+    package: omnisense/omnishow
+    repository: glitchr-omnisense/omnishow
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 34fb71a575c15c4bd3dbe9f9e55b794c74081cf0
+        pinned: branch-head
+        path: docs/
+  omnishow-omdb:
+    package: omnishow/omdb
+    repository: glitchr-omnisense/omnishow-omdb
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 1f75bb9fc75cf20bb1dcd49711cecf1b23b4761a
+        pinned: branch-head
+        path: docs/
+  omnishow-tmdb:
+    package: omnishow/tmdb
+    repository: glitchr-omnisense/omnishow-tmdb
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: b216d107807206aaa877a7154ca1217ecbe02c76
+        pinned: branch-head
+        path: docs/
+  omnishow-trakt:
+    package: omnishow/trakt
+    repository: glitchr-omnisense/omnishow-trakt
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 2f2942cb7fc28cd0f722e6192188dadf4dd4c5ee
+        pinned: branch-head
+        path: docs/
+  omnishow-tvdb:
+    package: omnishow/tvdb
+    repository: glitchr-omnisense/omnishow-tvdb
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 0c3ef1e14dea2252d339aee664e6dc54c877162a
+        pinned: branch-head
+        path: docs/
+  omnishow-twitch:
+    package: omnishow/twitch
+    repository: glitchr-omnisense/omnishow-twitch
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 922113262e2a432e31f9b61032a697703d157dfc
+        pinned: branch-head
+        path: docs/
+  omnishow-vimeo:
+    package: omnishow/vimeo
+    repository: glitchr-omnisense/omnishow-vimeo
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 327d54874fd932f38067cf5ef87e513a773f4da8
+        pinned: branch-head
+        path: docs/
+  omnishow-wikidata:
+    package: omnishow/wikidata
+    repository: glitchr-omnisense/omnishow-wikidata
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: a78922e840a0da901954375cd629731e42eb740a
+        pinned: branch-head
+        path: docs/
   omnishow-youtube:
     package: omnishow/youtube
     repository: glitchr-omnisense/omnishow-youtube
@@ -2173,6 +2273,26 @@ packages:
       1.x:
         branch: 1.x
         ref: 497cf974387b2a6c70f665993e2d1089a6c72a7f
+        pinned: branch-head
+        path: docs/
+  omnisign-dossierfacile:
+    package: omnisign/dossierfacile
+    repository: glitchr-omnisense/omnisign-dossierfacile
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: c0260cc3ae0b269d6128b9057d1c12fafc866c49
+        pinned: branch-head
+        path: docs/
+  omnisign-stripe-identity:
+    package: omnisign/stripe-identity
+    repository: glitchr-omnisense/omnisign-stripe-identity
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 3522ef1471c62deb222f309e7ca6013b44d36677
         pinned: branch-head
         path: docs/
   omnisign-yousign:
@@ -2305,6 +2425,36 @@ packages:
         ref: 146a5fd92821f79ae4991f56ce819e5cd2b923f8
         pinned: branch-head
         path: docs/
+  omnistay:
+    package: omnisense/omnistay
+    repository: glitchr-omnisense/omnistay
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: c48fa3889eb241a3329ba0d96cd8f3f08b7c5900
+        pinned: branch-head
+        path: docs/
+  omnistay-amadeus:
+    package: omnistay/amadeus
+    repository: glitchr-omnisense/omnistay-amadeus
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 35364342337e2b3773a04be98908f68bcfc4dc94
+        pinned: branch-head
+        path: docs/
+  omnistay-local:
+    package: omnistay/local
+    repository: glitchr-omnisense/omnistay-local
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 00013da9cd5140100676583139805f75a00f9adb
+        pinned: branch-head
+        path: docs/
   omniticket:
     package: omnisense/omniticket
     repository: glitchr-omnisense/omniticket
@@ -2433,5 +2583,45 @@ packages:
       1.x:
         branch: 1.x
         ref: 89c858d6194f0ca1b11402ef8a526c01f80c6c22
+        pinned: branch-head
+        path: docs/
+  omnitravel:
+    package: omnisense/omnitravel
+    repository: glitchr-omnisense/omnitravel
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: d2090deea0c0bdf99126813d7b8ac848ed1db059
+        pinned: branch-head
+        path: docs/
+  omnitravel-gtfs:
+    package: omnitravel/gtfs
+    repository: glitchr-omnisense/omnitravel-gtfs
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: ebc4c417e25e669e1c56fa890ebcb376040282da
+        pinned: branch-head
+        path: docs/
+  omnitravel-navitia:
+    package: omnitravel/navitia
+    repository: glitchr-omnisense/omnitravel-navitia
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: edceebff9fabc2095f3c3fc58addebce9ede0064
+        pinned: branch-head
+        path: docs/
+  omnitravel-transitous:
+    package: omnitravel/transitous
+    repository: glitchr-omnisense/omnitravel-transitous
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: a014487be0b6f813e56119b29b362dcd5dcc00af
         pinned: branch-head
         path: docs/

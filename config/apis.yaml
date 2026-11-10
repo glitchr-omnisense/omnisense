@@ -278,13 +278,12 @@ families:
     capabilities: [signature, identity-check, tenant-file]
     released_capabilities: [signature]
     help_wanted: true
-    note: { en: 'Identity verification joined the family on 2026-11-10 (no separate omniproof).', fr: 'La vérification d’identité a rejoint la famille le 2026-11-10 (pas d’omniproof à part).' }
+    note: { en: 'Identity verification joined the family on 2026-11-10 (no separate omniproof): Stripe Identity and DossierFacile released as 1.x-dev, Veriff and Entrust reserved.', fr: 'La vérification d’identité a rejoint la famille le 2026-11-10 (pas d’omniproof à part) : Stripe Identity et DossierFacile publiés en 1.x-dev, Veriff et Entrust réservés.' }
     providers:
       omnisign/stripe-identity:
         name: Stripe Identity
-        status: wanted
+        status: available
         capabilities: [identity-check]
-        help_wanted: true
         policy:
           auth: key
           free: true
@@ -295,7 +294,7 @@ families:
           read: '2026-11-10'
       omnisign/veriff:
         name: Veriff
-        status: wanted
+        status: reserved
         capabilities: [identity-check]
         help_wanted: true
         policy:
@@ -308,7 +307,7 @@ families:
           read: '2026-11-10'
       omnisign/entrust:
         name: Entrust Identity Verification (Onfido)
-        status: wanted
+        status: reserved
         capabilities: [identity-check]
         help_wanted: true
         policy:
@@ -321,9 +320,8 @@ families:
           read: '2026-11-10'
       omnisign/dossierfacile:
         name: DossierFacile
-        status: wanted
+        status: available
         capabilities: [tenant-file]
-        help_wanted: true
         policy:
           auth: oauth
           free: true
@@ -338,13 +336,12 @@ families:
     capabilities: [invoices, journal-entries, contacts]
     released_capabilities: [invoices]
     help_wanted: true
-    note: { en: 'French accounting software often doubles as an approved e-invoicing platform (PDP): one provider can answer both.', fr: 'Les logiciels comptables français sont souvent aussi plateformes de dématérialisation partenaires (PDP) : un même fournisseur peut répondre aux deux.' }
+    note: { en: 'French accounting software often doubles as an approved e-invoicing platform (PDP): one provider can answer both. Odoo and Pennylane released as 1.x-dev, Xero and QuickBooks reserved.', fr: 'Les logiciels comptables français sont souvent aussi plateformes de dématérialisation partenaires (PDP) : un même fournisseur peut répondre aux deux. Odoo et Pennylane publiés en 1.x-dev, Xero et QuickBooks réservés.' }
     providers:
       omnibill/pennylane:
         name: Pennylane
-        status: wanted
+        status: available
         capabilities: [journal-entries, invoices, contacts]
-        help_wanted: true
         policy:
           auth: oauth
           free: false
@@ -355,7 +352,7 @@ families:
           read: '2026-11-10'
       omnibill/xero:
         name: Xero
-        status: wanted
+        status: reserved
         capabilities: [journal-entries, invoices, contacts]
         help_wanted: true
         policy:
@@ -368,7 +365,7 @@ families:
           read: '2026-11-10'
       omnibill/quickbooks:
         name: QuickBooks Online
-        status: wanted
+        status: reserved
         capabilities: [journal-entries, invoices, contacts]
         help_wanted: true
         policy:
@@ -381,9 +378,8 @@ families:
           read: '2026-11-10'
       omnibill/odoo:
         name: Odoo
-        status: wanted
+        status: available
         capabilities: [journal-entries, invoices, contacts]
-        help_wanted: true
         policy:
           auth: key
           free: true
@@ -404,11 +400,23 @@ families:
     status: available
     phrase: { en: 'Audience, reviews and funding: the pulse of a site or project.', fr: 'Audience, avis et financement : le pouls d’un site ou d’un projet.' }
     capabilities: [audience, search-queries, reviews, sponsors]
-    note: { en: 'Named by Marco on 2026-11-10; its providers are published as omnipulse/<name>.', fr: 'Nommée par Marco le 2026-11-10 ; ses fournisseurs sont publiés sous omnipulse/<nom>.' }
+    note: { en: 'Named by Marco on 2026-11-10; its providers are published as omnipulse/<name> (omnireview/google is omnipulse/google-reviews).', fr: 'Nommée par Marco le 2026-11-10 ; ses fournisseurs sont publiés sous omnipulse/<nom> (omnireview/google est omnipulse/google-reviews).' }
     merged:
-      omnireach: { capabilities: [audience, search-queries], rename: {} }
-      omnireview: { capabilities: [reviews], rename: { google: google-reviews } }
-      omnifund: { capabilities: [sponsors], rename: {} }
+      omnireach: [audience, search-queries]
+      omnireview: [reviews]
+      omnifund: [sponsors]
+    providers:
+      omnipulse/search-console: { status: available, capabilities: [search-queries] }
+      omnipulse/bing-webmaster: { status: available, capabilities: [search-queries] }
+      omnipulse/matomo: { status: available, capabilities: [audience] }
+      omnipulse/plausible: { status: available, capabilities: [audience] }
+      omnipulse/ga4: { status: available, capabilities: [audience] }
+      omnipulse/google-reviews: { status: available, capabilities: [reviews] }
+      omnipulse/tripadvisor: { status: available, capabilities: [reviews] }
+      omnipulse/trustpilot: { status: available, capabilities: [reviews] }
+      omnipulse/github-sponsors: { status: available, capabilities: [sponsors] }
+      omnipulse/opencollective: { status: available, capabilities: [sponsors] }
+      omnipulse/liberapay: { status: available, capabilities: [sponsors] }
   omnidns:
     status: available
     phrase: { en: 'Manage a domain name where it is registered.', fr: 'Gérer un nom de domaine là où il est enregistré.' }
@@ -509,20 +517,20 @@ families:
     phrase: { en: 'One model of a manual, whatever wrote it.', fr: 'Un modèle de manuel, quel que soit l’outil qui l’a écrit.' }
     capabilities: [manuals]
   omnitravel:
-    status: reserved
+    status: available
     phrase: { en: 'Read timetables, journeys and real time, by train, plane or city transit.', fr: 'Lire horaires, itinéraires et temps réel, en train, en avion ou en transports urbains.' }
     capabilities: [timetables, journeys, real-time]
     providers:
-      omnitravel/gtfs: { name: GTFS and GTFS-Realtime, status: reserved, capabilities: [timetables, real-time] }
-      omnitravel/navitia: { name: Navitia, status: reserved, capabilities: [timetables, journeys, real-time] }
-      omnitravel/transitous: { name: Transitous, status: reserved, capabilities: [journeys] }
+      omnitravel/gtfs: { name: GTFS and GTFS-Realtime, status: available, capabilities: [timetables, real-time] }
+      omnitravel/navitia: { name: Navitia, status: available, capabilities: [timetables, journeys, real-time] }
+      omnitravel/transitous: { name: Transitous, status: available, capabilities: [journeys] }
   omnistay:
-    status: reserved
+    status: available
     phrase: { en: 'Find stays and their rates, and book them.', fr: 'Trouver des séjours et leurs tarifs, et les réserver.' }
     capabilities: [stays, bookings]
     providers:
-      omnistay/amadeus: { name: Amadeus Hotels, status: reserved, capabilities: [stays, bookings] }
-      omnistay/local: { name: A site’s own listings, status: reserved, capabilities: [stays, bookings] }
+      omnistay/amadeus: { name: Amadeus Hotels, status: available, capabilities: [stays, bookings] }
+      omnistay/local: { name: A site’s own listings, status: available, capabilities: [stays, bookings] }
 
   # Proposed (the brief ~/Sites/.agent-briefs/api-families), Marco's decisions of 2026-11-10: omnilang and
   # omnical reserved (reserve.sh), omniphoto for later, omnijob and omnisport open to contributors; omniproof

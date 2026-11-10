@@ -26,18 +26,25 @@ class CatalogueImporter
     }
 
     /**
-     * @return array{families: int, packages: int, documented: int, pinned: int, skipped: list<string>, merged: list<string>}
+     * @return array{families: int, packages: int, documented: int, pinned: int, skipped: list<string>, merged: list<string>, reserved: list<string>}
      */
     public function import(bool $pin = false): array
     {
         $scanned = $this->scanner->scan();
-        $report = ['families' => 0, 'packages' => 0, 'documented' => 0, 'pinned' => 0, 'skipped' => [], 'merged' => []];
+        $report = ['families' => 0, 'packages' => 0, 'documented' => 0, 'pinned' => 0, 'skipped' => [], 'merged' => [], 'reserved' => []];
 
         $byFamily = [];
         foreach ($scanned as $name => $package) {
             // A family merged into another (Families::MERGED): its packages are the successor's, its own are archived.
             if (isset(Families::MERGED[$package->family ?? ''])) {
                 $report['merged'][] = $name;
+                unset($scanned[$name]);
+                continue;
+            }
+            // A name reserved, nothing released yet (its composer.json's keyword "reserved"): config/apis.yaml shows it
+            // as reserved; the catalogue lists packages.
+            if (\in_array(Families::RESERVED_KEYWORD, $package->keywords, true)) {
+                $report['reserved'][] = $name;
                 unset($scanned[$name]);
                 continue;
             }

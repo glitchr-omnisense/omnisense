@@ -29,6 +29,8 @@ final class CatalogueTest extends TestCase
         self::assertSame([Tier::Family, 'omnilab'], Tier::of('glitchr/omnilab'));
         self::assertSame([Tier::Foundation, 'omnibase'], Tier::of('omnisense/omnibase'));
         self::assertSame([Tier::Bridge, null], Tier::of('omnisense/omnibridge'));
+        // The contracts every family builds on: a core of its own, beside omnibase's.
+        self::assertSame([Tier::Foundation, 'contracts'], Tier::of('omnisense/contracts'));
         self::assertSame([Tier::Provider, 'omnilab'], Tier::of('omnilab/pubchem'));
         self::assertNull(Tier::of('omnisense/website'));
         // What the search calls each floor.
@@ -73,7 +75,7 @@ final class CatalogueTest extends TestCase
         $packages = (new RepositoryScanner(\dirname(__DIR__).'/Fixtures/repos'))->scan();
 
         // A workspace ("project"), another vendor's package and a template's example (omnimap/example) are not the catalogue's.
-        self::assertSame(['@glitchr/flowjs', 'glitchr/omnibase', 'glitchr/omnibus', 'glitchr/omnitrade', 'omnibase/blog', 'omnibus/offline', 'omnisense/omnifilm', 'omnitrade/paypal', 'omnitrade/stripe'], array_keys($packages));
+        self::assertSame(['@glitchr/flowjs', 'glitchr/omnibase', 'glitchr/omnibus', 'glitchr/omnitrade', 'omnibase/blog', 'omnibus/offline', 'omnisense/omnifilm', 'omnisense/omnilang', 'omnitrade/paypal', 'omnitrade/stripe'], array_keys($packages));
 
         $trade = $packages['glitchr/omnitrade'];
         self::assertSame([Tier::Family, 'omnitrade', 'omnitrade/core', 'LGPL-3.0-or-later', 2], [$trade->tier, $trade->family, $trade->path, $trade->license, $trade->docPages]);
@@ -105,6 +107,8 @@ final class CatalogueTest extends TestCase
             self::assertSame(['glitchr/omnitrade'], array_keys($trade['packages']));
             self::assertSame(['omnibus/offline', 'omnitrade/paypal', 'omnitrade/stripe'], $report['skipped']);
             self::assertSame(['omnisense/omnifilm'], $report['merged'], 'a merged family\'s working copy, still on disk, is not listed');
+            // A name only reserved (keyword "reserved"): no file, no entry - config/apis.yaml shows it as reserved.
+            self::assertSame(['omnisense/omnilang'], $report['reserved']);
             self::assertSame('family', $trade['packages']['glitchr/omnitrade']['kind']);
             self::assertSame(['glitchr/omnibus'], array_keys(Yaml::parseFile($dir.'/catalog/omnibus.yaml')['packages']));
             self::assertSame(['glitchr/omnibase'], Yaml::parseFile($dir.'/catalog/omnibase.yaml')['packages']['omnibase/blog']['requires']);

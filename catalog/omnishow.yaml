@@ -12,6 +12,175 @@ text:
   en: "One family for what is shown, three contracts: work - a film's, a series' or an episode's record, where to watch it, its trailers -, video - a video hosted elsewhere, its player and its privacy-friendly player, a channel, its playlists -, and live - what a channel broadcasts and has scheduled. Each provider implements the contracts it can hold; a work links to its videos through the models, no provider duplicated."
   fr: 'Une seule famille pour ce qui se regarde, trois contrats : l’œuvre — la fiche d’un film, d’une série ou d’un épisode, où la voir, ses bandes-annonces —, la vidéo — une vidéo hébergée ailleurs, son lecteur et son lecteur respectueux, une chaîne, ses listes de lecture — et le direct — ce qu’une chaîne diffuse et a programmé. Chaque fournisseur implémente les contrats qu’il peut tenir ; une œuvre mène à ses vidéos par les modèles, sans fournisseur en double.'
 packages:
+  omnisense/omnishow:
+    kind: family
+    description: "Omnishow: what is shown, under any PHP host, whoever keeps it - in three families of contracts: work (the record of a film, a series or an episode: titles, dates, cast and crew, pictures, identifiers across registers, a season's episodes, where to watch, its trailers), video (a video hosted elsewhere: its record, its player and the player's privacy-friendly variant, a channel's videos, playlists, a search) and live (whether a channel is on air, its stream, its schedule). Providers are packages of their own (omnishow/tmdb, omnishow/omdb, omnishow/tvdb, omnishow/trakt, omnishow/wikidata, omnishow/youtube, omnishow/vimeo, omnishow/twitch); the Symfony and Laravel bridges live in omnibridge."
+    license: MIT
+    keywords:
+      - film
+      - movie
+      - tv
+      - series
+      - episode
+      - video
+      - live
+      - stream
+      - embed
+      - youtube
+      - vimeo
+      - twitch
+      - tmdb
+      - imdb
+      - wikidata
+      - framework-agnostic
+      - omnishow
+    repository: glitchr-omnisense/omnishow
+    branch: 1.x
+    verification: partial
+    verification_note: '- Verified live: Wikidata (no key) - a search, a film by its IMDb number, a series by its TMDB number (docker compose run --rm omnishow live), on 2026-10-26 under omnifilm. — - Not verified live: TMDB, OMDb, TheTVDB, Trakt, YouTube, Vimeo, Twitch - no account was used.'
+    docs: true
+  omnishow/omdb:
+    kind: provider
+    description: 'Omnishow''s OMDb, under any PHP host: films, series and episodes by their IMDb number with the IMDb, Rotten Tomatoes and Metacritic scores OMDb gathers, a search by title, a season''s episodes; its key in the query, its "N/A" read as nothing.'
+    license: MIT
+    keywords:
+      - omdb
+      - imdb
+      - film
+      - movie
+      - tv
+      - series
+      - ratings
+      - rotten-tomatoes
+      - framework-agnostic
+      - omnishow
+    repository: glitchr-omnisense/omnishow-omdb
+    branch: 1.x
+    requires:
+      - omnisense/omnishow
+    verification: partial
+    verification_note: '- Not verified live: no key.'
+    docs: true
+  omnishow/tmdb:
+    kind: provider
+    description: "Omnishow's The Movie Database, under any PHP host, over php-tmdb/api: search, a film's or a series' record with its cast, crew and identifiers across registers in one call, an episode by its IMDb or TheTVDB number, a season's episodes, and where to watch in a country (JustWatch's data); php-tmdb's client runs over the application's HTTP client and a PSR-14 dispatcher of its own."
+    license: MIT
+    keywords:
+      - tmdb
+      - themoviedb
+      - film
+      - movie
+      - tv
+      - series
+      - episode
+      - watch-providers
+      - framework-agnostic
+      - omnishow
+    repository: glitchr-omnisense/omnishow-tmdb
+    branch: 1.x
+    requires:
+      - omnisense/omnishow
+    verification: partial
+    verification_note: '- Not verified live: no key.'
+    docs: true
+  omnishow/trakt:
+    kind: provider
+    description: "Omnishow's Trakt, under any PHP host: search, a film's or a show's record and its people, a work or an episode by its Trakt, IMDb, TMDB or TheTVDB number, a season's episodes, through Trakt's public API with an application's client id (no user signed in)."
+    license: MIT
+    keywords:
+      - trakt
+      - film
+      - movie
+      - tv
+      - series
+      - episode
+      - framework-agnostic
+      - omnishow
+    repository: glitchr-omnisense/omnishow-trakt
+    branch: 1.x
+    requires:
+      - omnisense/omnishow
+    verification: partial
+    verification_note: '- Not verified live: no client id.'
+    docs: true
+  omnishow/tvdb:
+    kind: provider
+    description: "Omnishow's TheTVDB, under any PHP host: series and their episodes in aired order, films, a work by its TheTVDB, IMDb or TMDB number, people and translations in the language asked, through TheTVDB's API v4 (a token got once from the project's key and a subscriber's PIN)."
+    license: MIT
+    keywords:
+      - thetvdb
+      - tvdb
+      - tv
+      - series
+      - episode
+      - film
+      - framework-agnostic
+      - omnishow
+    repository: glitchr-omnisense/omnishow-tvdb
+    branch: 1.x
+    requires:
+      - omnisense/omnishow
+    verification: partial
+    verification_note: '- Not verified live: no key.'
+    docs: true
+  omnishow/twitch:
+    kind: provider
+    description: "Omnishow's Twitch, under any PHP host: whether a channel is live, its stream (title, category, viewers, start, thumbnail, its player) and its schedule, cancelled segments said - through the Helix API with an app access token from the application's client id and secret."
+    license: MIT
+    keywords:
+      - twitch
+      - helix
+      - live
+      - stream
+      - schedule
+      - framework-agnostic
+      - omnishow
+    repository: glitchr-omnisense/omnishow-twitch
+    branch: 1.x
+    requires:
+      - omnisense/omnishow
+    verification: unstated
+    docs: true
+  omnishow/vimeo:
+    kind: provider
+    description: "Omnishow's Vimeo, under any PHP host: a video's record (title, description, duration, thumbnails, date, its owner, its player and the do-not-track one with dnt=1), several in one call, a search, a user's videos, showcases as playlists - through Vimeo's API 3.4 with an access token, or an unauthenticated token from the application's client id and secret."
+    license: MIT
+    keywords:
+      - vimeo
+      - video
+      - embed
+      - dnt
+      - showcase
+      - framework-agnostic
+      - omnishow
+    repository: glitchr-omnisense/omnishow-vimeo
+    branch: 1.x
+    requires:
+      - omnisense/omnishow
+    verification: unstated
+    docs: true
+  omnishow/wikidata:
+    kind: provider
+    description: "Omnishow's Wikidata, under any PHP host: films, series and episodes from Wikidata's open records (CC0) through the MediaWiki API, with no key - a search narrowed to works on the server, a work by its Q-number or by its IMDb, TMDB or TheTVDB identifier, its genres, cast and crew labelled in the language asked, its poster from Wikimedia Commons; the User-Agent and maxlag Wikimedia's policies ask."
+    license: MIT
+    keywords:
+      - wikidata
+      - wikibase
+      - film
+      - movie
+      - tv
+      - series
+      - imdb
+      - open-data
+      - framework-agnostic
+      - omnishow
+    repository: glitchr-omnisense/omnishow-wikidata
+    branch: 1.x
+    requires:
+      - omnisense/omnishow
+    verification: verified
+    verification_note: '- Verified live (docker compose run --rm omnishow live, 2026-10-24): Stalker found by a search narrowed to 1979, The Shawshank Redemption by its IMDb number (TMDB 278, Frank Darabont), Game of Thrones by its TMDB series number (Q23572, tt0944947, TheTVDB 121361, 2011).'
+    docs: true
   omnishow/youtube:
     kind: provider
     description: "Omnishow's YouTube, under any PHP host: a video's record (title, description, duration, thumbnails, date, channel, its player and the privacy-enhanced youtube-nocookie one), a search, a channel by its identifier or @handle and its uploads, playlists, what a channel broadcasts live and has scheduled - through the YouTube Data API v3 with an API key."

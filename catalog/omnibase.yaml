@@ -53,6 +53,20 @@ packages:
       - omnibase/admin
     verification: unstated
     docs: true
+  omnibase/booking:
+    kind: structure
+    description: "Stays booking for omnibase sites, built on omnisense/omnistay: hosts' listings with their calendars (blocked nights, minimum stays, prices per night and season), bookings held without double booking (symfony/lock) and paid through omnisense/omnitrade, reviews in both directions, guest-host messages, host payouts, and the back office - the site's own listings searched beside the hotels of other omnistay providers (omnistay/amadeus)."
+    license: MIT
+    repository: glitchr-omnisense/omnibase-booking
+    branch: main
+    requires:
+      - omnibase/admin
+      - omnibridge/symfony
+      - omnisense/omnibase
+      - omnisense/omnistay
+      - omnistay/local
+    verification: unstated
+    docs: true
   omnibase/broadcast:
     kind: structure
     description: "A broadcast's site on omnibase: a programme, its episodes, what was played on stage (performances), the songs and who sang them - on omnibase/video's films and omnibase/music's performers."

@@ -1,0 +1,250 @@
+# The omnipulse entry of the Omnisense catalogue. Written by `bin/console
+# app:catalog:import` from the packages' repositories; the phrase and the
+# text are the site's own, edited here. Each package: its kind, what its
+# composer.json says, its GitHub repository and development branch, whether
+# its README says it was verified against the real service, whether it has
+# a docs/ folder (see config/documentation.yaml).
+family: omnipulse
+phrase:
+  en: 'Audience, reviews and funding: the pulse of a site or project.'
+  fr: 'Audience, avis et financement : le pouls d’un site ou d’un projet.'
+text:
+  en: 'One contract for what outside platforms know of a site or a project: its audience (search queries, pages, visits, sources), its reviews (rating, reviews, replies, invitations, each platform’s terms of display) and its funding (profile, sponsors, tiers).'
+  fr: 'Un seul contrat pour ce que les plateformes extérieures savent d’un site ou d’un projet : son audience (requêtes, pages, visites, sources), ses avis (note, avis, réponses, invitations, les conditions d’affichage de chaque plateforme) et son financement (profil, soutiens, paliers).'
+packages:
+  omnipulse/bing-webmaster:
+    kind: provider
+    description: "Omnipulse's Bing Webmaster Tools, under any PHP host: a site's search queries and pages in Bing with their clicks, impressions, CTR and average position, week by week or over a period, through the Bing Webmaster API (JSON, API key)."
+    license: MIT
+    keywords:
+      - bing
+      - bing-webmaster
+      - seo
+      - search
+      - queries
+      - positions
+      - framework-agnostic
+      - omnipulse
+    repository: glitchr-omnisense/omnipulse-bing-webmaster
+    branch: 1.x
+    requires:
+      - omnisense/omnipulse
+    verification: partial
+    verification_note: 'Positions are passed as Bing gives them (not verified against a live account).'
+    docs: true
+  omnipulse/ga4:
+    kind: provider
+    description: "Omnipulse's Google Analytics 4, under any PHP host: visitors, sessions, pageviews, bounce rate and session length of a property, by landing page, page, source, country, device or day, through the Google Analytics Data API (runReport; a service account's key or an access token)."
+    license: MIT
+    keywords:
+      - google
+      - google-analytics
+      - ga4
+      - analytics
+      - audience
+      - data-api
+      - framework-agnostic
+      - omnipulse
+    repository: glitchr-omnisense/omnipulse-ga4
+    branch: 1.x
+    requires:
+      - omnisense/omnipulse
+    verification: partial
+    verification_note: '- Not verified live: no Google account was used.'
+    docs: true
+  omnipulse/github-sponsors:
+    kind: provider
+    description: "Omnipulse's GitHub Sponsors, under any PHP host: a user's or an organization's listing read through GitHub's GraphQL API - its page, its goal, its tiers, the number of sponsors and the public ones."
+    license: MIT
+    keywords:
+      - sponsors
+      - github-sponsors
+      - github
+      - graphql
+      - funding
+      - framework-agnostic
+      - omnipulse
+    repository: glitchr-omnisense/omnipulse-github-sponsors
+    branch: 1.x
+    requires:
+      - omnisense/omnipulse
+    verification: partial
+    verification_note: "- Verified live (2026-10-24, a token): glitchr-studio's listing; sindresorhus's tiers and two sponsors. — - Not verified live: an active goal (none at hand)."
+    docs: true
+  omnipulse/google-reviews:
+    kind: provider
+    description: "Omnipulse's Google reviews: an establishment's Google rating and reviews through the Places API (New) - up to five, with their authors' attribution - and, for its owner, every review and replying through the Business Profile API; the link to leave a review; Google's display and caching rules declared."
+    license: MIT
+    keywords:
+      - reviews
+      - google-reviews
+      - places-api
+      - business-profile
+      - omnipulse
+    repository: glitchr-omnisense/omnipulse-google-reviews
+    branch: 1.x
+    requires:
+      - omnisense/omnipulse
+    verification: partial
+    verification_note: "Documentation: the options, the calls, Google's terms, what was verified. — Not verified in real: no key - but for the link to write a review, which answered."
+    docs: true
+  omnipulse/liberapay:
+    kind: provider
+    description: "Omnipulse's Liberapay, under any PHP host: an account's public profile read from Liberapay's public.json - patrons counted, weekly income, goal, summary (no key; Liberapay keeps patrons and tiers private)."
+    license: MIT
+    keywords:
+      - donations
+      - liberapay
+      - funding
+      - patrons
+      - framework-agnostic
+      - omnipulse
+    repository: glitchr-omnisense/omnipulse-liberapay
+    branch: 1.x
+    requires:
+      - omnisense/omnipulse
+    verification: verified
+    verification_note: "- Verified live without a key (2026-10-24): the Liberapay team's profile."
+    docs: true
+  omnipulse/matomo:
+    kind: provider
+    description: "Omnipulse's Matomo, under any PHP host: visits, visitors, pageviews, bounce rate and visit length of a site, by entry page, page, referrer, country, device or day, through Matomo's Reporting API (self-hosted or Matomo Cloud), the token sent by POST."
+    license: MIT
+    keywords:
+      - matomo
+      - analytics
+      - audience
+      - reporting-api
+      - entry-pages
+      - framework-agnostic
+      - omnipulse
+    repository: glitchr-omnisense/omnipulse-matomo
+    branch: 1.x
+    requires:
+      - omnisense/omnipulse
+    verification: partial
+    verification_note: '- Verified live (docker compose run --rm omnipulse live, 2026-10-24): demo.matomo.cloud, site 1, anonymous - the whole site over the last seven days, then entry pages over two days. — - Not verified: a self-hosted installation with a token.'
+    docs: true
+  omnipulse/opencollective:
+    kind: provider
+    description: "Omnipulse's Open Collective, under any PHP host: a collective read through Open Collective's GraphQL API v2 - its profile and yearly budget, its tiers, its backers (public data, no key needed; a personal token raises the rate limit)."
+    license: MIT
+    keywords:
+      - sponsors
+      - backers
+      - opencollective
+      - open-collective
+      - graphql
+      - funding
+      - donations
+      - framework-agnostic
+      - omnipulse
+    repository: glitchr-omnisense/omnipulse-opencollective
+    branch: 1.x
+    requires:
+      - omnisense/omnipulse
+    verification: partial
+    verification_note: "- Verified live without a key (2026-10-24): webpack's profile, tiers and three backers. — - Not verified: a personal token."
+    docs: true
+  omnipulse/plausible:
+    kind: provider
+    description: "Omnipulse's Plausible, under any PHP host: visitors, visits, pageviews, bounce rate and visit duration of a site, by page, entry page, source, country, device or day, through Plausible's Stats API v2 (plausible.io or a self-hosted Community Edition)."
+    license: MIT
+    keywords:
+      - plausible
+      - analytics
+      - audience
+      - stats-api
+      - privacy
+      - framework-agnostic
+      - omnipulse
+    repository: glitchr-omnisense/omnipulse-plausible
+    branch: 1.x
+    requires:
+      - omnisense/omnipulse
+    verification: partial
+    verification_note: '- Not verified live: no Plausible key was used.'
+    docs: true
+  omnipulse/search-console:
+    kind: provider
+    description: "Omnipulse's Google Search Console, under any PHP host: a property's search queries, pages, countries and devices with their clicks, impressions, CTR and average position, day by day or over a period, through the Search Console API (a service account's key or an access token)."
+    license: MIT
+    keywords:
+      - google
+      - search-console
+      - seo
+      - search
+      - queries
+      - positions
+      - framework-agnostic
+      - omnipulse
+    repository: glitchr-omnisense/omnipulse-search-console
+    branch: 1.x
+    requires:
+      - omnisense/omnipulse
+    verification: partial
+    verification_note: '- Not verified live: no Google account was used.'
+    docs: true
+  omnipulse/tripadvisor:
+    kind: provider
+    description: "Omnipulse's Tripadvisor: a location's rating, bubbles and up to five reviews through Tripadvisor's Content API, the link to write one; its display requirements declared - logo, bubbles from Tripadvisor's addresses, pages kept out of search engines."
+    license: MIT
+    keywords:
+      - reviews
+      - tripadvisor
+      - content-api
+      - omnipulse
+    repository: glitchr-omnisense/omnipulse-tripadvisor
+    branch: 1.x
+    requires:
+      - omnisense/omnipulse
+    verification: partial
+    verification_note: "Documentation: the options, the calls, Tripadvisor's display rules, what was verified. — Not verified in real: no key."
+    docs: true
+  omnipulse/trustpilot:
+    kind: provider
+    description: "Omnipulse's Trustpilot: a business unit's TrustScore and reviews, the links to its profile and to review it, replying and inviting customers with the business user's token; Trustpilot's 24-hour refresh declared."
+    license: MIT
+    keywords:
+      - reviews
+      - trustpilot
+      - trustscore
+      - omnipulse
+    repository: glitchr-omnisense/omnipulse-trustpilot
+    branch: 1.x
+    requires:
+      - omnisense/omnipulse
+    verification: partial
+    verification_note: "Documentation: the options, the calls, Trustpilot's terms, what was verified. — Not verified in real: no key."
+    docs: true
+  omnisense/omnipulse:
+    kind: family
+    description: "Omnipulse: what outside platforms know of a site or a project, under any PHP host - its audience (search queries, pages and positions from the search engines, Search Console and Bing Webmaster Tools; visitors, entry pages and sources from the analytics tools, Matomo, Plausible and Google Analytics 4: one query and one report whoever answers), its reviews (an establishment's rating and reviews, replying, inviting a customer, the link to leave one, on Google, Tripadvisor and Trustpilot, each platform's terms of display and caching declared) and its funding (the profile, sponsors and tiers on GitHub Sponsors, Open Collective and Liberapay). One Registry, contracts by capability; providers are packages of their own (omnipulse/<provider>); a Symfony bundle and Twig functions for the reviews in Bridge/, the other hosts' wiring in omnibridge."
+    license: MIT
+    keywords:
+      - seo
+      - search-console
+      - bing-webmaster
+      - analytics
+      - matomo
+      - plausible
+      - ga4
+      - audience
+      - reviews
+      - ratings
+      - google-reviews
+      - tripadvisor
+      - trustpilot
+      - sponsors
+      - funding
+      - donations
+      - github-sponsors
+      - opencollective
+      - liberapay
+      - framework-agnostic
+      - omnipulse
+    repository: glitchr-omnisense/omnipulse
+    branch: 1.x
+    verification: partial
+    verification_note: "- Verified live, earlier: Matomo's public demo (2026-10-24, 2026-10-26); Open Collective without a key, Liberapay's public.json, GitHub's GraphQL API with a token (2026-10-24). — - Not verified live: Search Console, Bing Webmaster, Plausible, Google Analytics, and none of the review platforms (each needs an account and a key)."
+    docs: true

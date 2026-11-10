@@ -1,0 +1,71 @@
+# The omnistay entry of the Omnisense catalogue. Written by `bin/console
+# app:catalog:import` from the packages' repositories; the phrase and the
+# text are the site's own, edited here. Each package: its kind, what its
+# composer.json says, its GitHub repository and development branch, whether
+# its README says it was verified against the real service, whether it has
+# a docs/ folder (see config/documentation.yaml).
+family: omnistay
+phrase:
+  en: 'Find stays and their rates, and book them.'
+  fr: 'Trouver des séjours et leurs tarifs, et les réserver.'
+text:
+  en: 'One contract for stays: hotels and homes searched through one interface, availability, nightly rates, fees and cancellation policies, bookings made and cancelled - Amadeus Hotels and a site’s own listings.'
+  fr: 'Un seul contrat pour les séjours : hôtels et logements cherchés par une seule interface, disponibilités, tarifs à la nuit, frais et conditions d’annulation, réservations faites et annulées — Amadeus Hotels et les annonces du site.'
+packages:
+  omnisense/omnistay:
+    kind: family
+    description: "Omnistay: where to stay and what to book for a trip, under any PHP host, whoever sells it - hotels and homes rented by their owners searched through one interface, a property's availability, nightly rates, fees, taxes and cancellation policy, offers re-priced, bookings made and cancelled, a property's description and calendar; car hire and packages as shared models. Providers are packages of their own (omnistay/amadeus for hotels, omnistay/local for a site's own listings)."
+    license: MIT
+    keywords:
+      - hotel
+      - booking
+      - reservation
+      - rental
+      - vacation-rental
+      - availability
+      - rates
+      - amadeus
+      - framework-agnostic
+      - omnistay
+    repository: glitchr-omnisense/omnistay
+    branch: 1.x
+    verification: unstated
+    docs: true
+  omnistay/amadeus:
+    kind: provider
+    description: "Omnistay's Amadeus, under any PHP host: hotels through Amadeus' hotel APIs - a city's or a point's hotels (Hotel List), their offers for a stay priced night by night with taxes and cancellation policy (Hotel Search), an offer re-priced before booking, a booking guaranteed by a card (Hotel Booking) - with an application's client id and secret, on the test environment by default."
+    license: MIT
+    keywords:
+      - amadeus
+      - hotel
+      - hotel-search
+      - hotel-booking
+      - gds
+      - framework-agnostic
+      - omnistay
+    repository: glitchr-omnisense/omnistay-amadeus
+    branch: 1.x
+    requires:
+      - omnisense/omnistay
+    verification: unstated
+    docs: true
+  omnistay/local:
+    kind: provider
+    description: "Omnistay's local provider, under any PHP host: a site's own listings - homes rented by their hosts - answering the same contracts as a hotel system: search by place or point, availability and offers priced line by line (nights, weekend and seasonal prices, a night's own price, extra guests, weekly and monthly discounts, cleaning, the site's service fee, a tourist tax), the calendar night by night, minimum and maximum stays, notice, check-in days, bookings held without double booking, pending holds that expire, cancellation terms. The site's storage behind one interface; no key, no network."
+    license: MIT
+    keywords:
+      - vacation-rental
+      - rental
+      - listing
+      - calendar
+      - availability
+      - pricing
+      - booking
+      - framework-agnostic
+      - omnistay
+    repository: glitchr-omnisense/omnistay-local
+    branch: 1.x
+    requires:
+      - omnisense/omnistay
+    verification: unstated
+    docs: true
