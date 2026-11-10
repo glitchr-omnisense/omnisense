@@ -32,7 +32,7 @@ class ApiExtension extends AbstractExtension
     public static function haystack(Family|Provider $card, string $locale): string
     {
         $parts = $card instanceof Family
-            ? [$card->name, $card->phrase($locale), ...$card->capabilities]
+            ? [$card->name, $card->phrase($locale), $card->note($locale) ?? '', ...$card->merged, ...$card->capabilities]
             : [$card->package, $card->name, $card->family, $card->getDescription() ?? '', $card->policy?->note($locale) ?? '', ...$card->capabilities];
 
         return self::fold(implode(' ', $parts));

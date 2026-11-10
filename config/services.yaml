@@ -54,7 +54,6 @@ parameters:
     env(GOOGLE_RECAPTCHA_V3_SECRET): ''
     env(GOOGLE_RECAPTCHA_V3_SITE_KEY): ''
     env(MAILER_TECHNICAL): 'noreply@omnisense.local'
-    env(MAILER_CONTACT): 'contact@omnisense.local'
     env(HTTP_REDUCTION): '0'
     env(HTTP_MACHINE): '[]'
     env(HTTP_DOMAIN): '[]'

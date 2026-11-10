@@ -63,6 +63,29 @@ final class ApiDirectoryTest extends TestCase
         self::assertSame('unknown', $omnibus->providers[0]->getAuth());
     }
 
+    public function testTheMergedFamiliesProvidersAreListedUnderTheFamilyTheyWentInto(): void
+    {
+        $directory = self::directory();
+        foreach (['omnireview', 'omnifund', 'omniproof', 'omnitally'] as $gone) {
+            self::assertNull($directory->family($gone), $gone.' has no card of its own');
+        }
+        $reach = $directory->family('omnireach');
+        self::assertSame(['omnireview', 'omnifund'], $reach->merged);
+        $byPackage = [];
+        foreach ($reach->providers as $provider) {
+            $byPackage[$provider->package] = $provider;
+        }
+        // From the real catalogue: catalog/omnireview.yaml and catalog/omnifund.yaml until the merge is imported.
+        $review = array_values(array_filter($reach->providers, static fn ($p): bool => \in_array('reviews', $p->capabilities, true)));
+        $sponsors = array_values(array_filter($reach->providers, static fn ($p): bool => \in_array('sponsors', $p->capabilities, true)));
+        self::assertNotEmpty($review, 'the review platforms, under omnireach');
+        self::assertNotEmpty($sponsors, 'the funding platforms, under omnireach');
+        self::assertSame(['audience', 'search-queries'], $byPackage['omnireach/matomo']->capabilities, 'its own providers keep their capabilities');
+        self::assertSame(['signature'], $directory->family('omnisign')->providers[0]->capabilities, 'a released signature provider does not check identities');
+        self::assertSame(Status::Reserved, $directory->family('omnilang')->status);
+        self::assertSame(Status::Reserved, $directory->family('omnical')->status);
+    }
+
     public function testAPolicyRefusesAValueItDoesNotKnow(): void
     {
         $this->expectException(\InvalidArgumentException::class);

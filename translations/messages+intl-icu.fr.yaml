@@ -189,6 +189,7 @@ support:
     document_text: Chaque page a son lien « Modifier cette page », vers le fichier dans le dépôt.
   sponsors_text: 'La page GitHub Sponsors de l’organisation dit ce que le soutien finance : essayer les paquets contre les vrais services, suivre leurs changements, écrire leurs manuels.'
 legal:
+  contact: 'Contact : les tickets du site sur GitHub'
   title: Mentions légales
   publisher: Publication
   publisher_text: Ce site est publié par {publisher}.
@@ -211,7 +212,7 @@ privacy:
   host: L’hébergeur
   host_text: 'Les pages sont servies par {host} (GitHub, Inc.), qui enregistre l’adresse IP de chaque visiteur pour la sécurité de son service, comme le dit sa déclaration de confidentialité. Le site lui-même n’en reçoit rien.'
   rights: Vos droits
-  rights_text: 'Le site ne garde aucune donnée personnelle. Pour toute question : {email}.'
+  rights_text: 'Le site ne garde aucune donnée personnelle. Pour toute question : <a href="{url}" rel="noopener">un ticket du dépôt du site</a>.'
 start:
   to_docs: Lire la documentation
   docs_lead: Chaque paquet a son manuel, lu dans son dépôt à un commit épinglé. Commencez par les guides, ou par la famille qu’il vous faut.
@@ -357,6 +358,7 @@ apis:
   count: 'Familles : {families} · Fournisseurs : {providers}'
   none: Aucune carte ne répond à ces filtres.
   providers_count: '{count, plural, =0 {aucun fournisseur encore} one {# fournisseur} other {# fournisseurs}}'
+  merged: 'Fusionnées dedans le 2026-11-10 : {families} ; leurs fournisseurs sont listés ici.'
   help_wanted: Mainteneur recherché
   maintain: Le maintenir
   review: Relire son intégration

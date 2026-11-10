@@ -13,7 +13,9 @@ use Symfony\Component\Yaml\Yaml;
  * capabilities, usage policies, what is wanted), joined to the catalogue
  * (catalog/*.yaml: the released packages, their descriptions and
  * repositories). A provider the catalogue lists and the file does not is a
- * card too, its policy not declared yet.
+ * card too, its policy not declared yet. A family merged into another
+ * (`merged:`) has no card of its own: its released providers are listed under
+ * the family it went into, with the capabilities it brought.
  *
  * The file is checked as it is read: a capability or a status it does not
  * declare is an error, so that a typo breaks the build, not a filter.
@@ -111,23 +113,32 @@ class Directory
             $status = Status::tryFrom((string) ($row['status'] ?? '')) ?? throw new \InvalidArgumentException(\sprintf('%s: family "%s" has no valid status.', $this->file, $name));
             $capabilities = $this->capabilityList($row['capabilities'] ?? [], $name);
             $catalogued = $this->catalogue->family($name);
+            // What the family's released providers answer, when the family grew capabilities they do not have.
+            $released = $this->capabilityList($row['released_capabilities'] ?? $capabilities, $name);
+            // The families merged into this one: their released providers are its own, with the capabilities they bring.
+            $merged = [];
+            foreach ((array) ($row['merged'] ?? []) as $from => $brought) {
+                $merged[(string) $from] = $this->capabilityList($brought, $name.' (from '.$from.')');
+            }
 
             $providers = [];
-            // The released providers first, as the catalogue orders them.
-            foreach ($catalogued?->getMembers() ?? [] as $package) {
-                if (Tier::Provider !== $package->getTier()) {
-                    continue;
+            // The released providers first, as the catalogue orders them; then those of the families merged into it.
+            foreach ([$name => $released] + $merged as $source => $sourceCapabilities) {
+                foreach ($this->catalogue->family($source)?->getMembers() ?? [] as $package) {
+                    if (Tier::Provider !== $package->getTier()) {
+                        continue;
+                    }
+                    $providers[$package->getName()] = new Provider(
+                        package: $package->getName(),
+                        family: $name,
+                        name: $package->getShortName(),
+                        status: Status::Available,
+                        capabilities: $sourceCapabilities,
+                        helpWanted: false,
+                        policy: null,
+                        released: $package,
+                    );
                 }
-                $providers[$package->getName()] = new Provider(
-                    package: $package->getName(),
-                    family: $name,
-                    name: $package->getShortName(),
-                    status: Status::Available,
-                    capabilities: $capabilities,
-                    helpWanted: false,
-                    policy: null,
-                    released: $package,
-                );
             }
             foreach ((array) ($row['providers'] ?? []) as $package => $entry) {
                 $package = (string) $package;
@@ -151,6 +162,8 @@ class Directory
             $families[$name] = new Family(
                 name: $name,
                 status: $status,
+                merged: array_keys($merged),
+                note: array_map('strval', (array) ($row['note'] ?? [])),
                 phrase: array_map('strval', (array) ($row['phrase'] ?? [])) ?: ($catalogued?->phrase ?? []),
                 capabilities: $capabilities,
                 helpWanted: (bool) ($row['help_wanted'] ?? false),

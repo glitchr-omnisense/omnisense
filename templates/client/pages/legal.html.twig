@@ -7,7 +7,7 @@
 <div class="om-wrap om-page om-text">
     <header class="om-head is-page"><p class="om-cote">{{ '@messages.footer.site'|trans }}</p><h1>{{ '@messages.legal.title'|trans }}</h1></header>
     <h2>{{ '@messages.legal.publisher'|trans }}</h2>
-    <p>{{ '@messages.legal.publisher_text'|trans({publisher: site.publisher}) }} <a href="{{ site.makerUrl }}" rel="noopener">{{ site.makerUrl|replace({'https://': ''}) }}</a> · {{ site.email }}</p>
+    <p>{{ '@messages.legal.publisher_text'|trans({publisher: site.publisher}) }} <a href="{{ site.makerUrl }}" rel="noopener">{{ site.makerUrl|replace({'https://': ''}) }}</a> · <a href="{{ site.contactUrl }}" rel="noopener">{{ '@messages.legal.contact'|trans }}</a></p>
     <h2>{{ '@messages.legal.host'|trans }}</h2>
     <p>{{ site.host ? '@messages.legal.host_text'|trans({host: site.host}) : '@messages.legal.host_missing'|trans }}</p>
     <h2>{{ '@messages.legal.packages'|trans }}</h2>

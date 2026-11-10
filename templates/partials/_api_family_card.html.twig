@@ -17,6 +17,8 @@
         <span class="om-status is-{{ family.status.value }}">{{ ('@messages.apis.status.' ~ family.status.value)|trans }}</span>
     </header>
     <p class="om-card-text">{{ family.phrase(locale) }}</p>
+    {% if family.note(locale) %}<p class="om-card-note">{{ family.note(locale) }}</p>{% endif %}
+    {% if family.merged %}<p class="om-card-note">{{ '@messages.apis.merged'|trans({families: family.merged|join(', ')}) }}</p>{% endif %}
     <ul class="om-card-tags" aria-label="{{ '@messages.apis.filter.capability'|trans }}">
         {% for capability in family.capabilities %}<li>{{ api_label(capability, locale) }}</li>{% endfor %}
     </ul>

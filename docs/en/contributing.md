@@ -80,7 +80,7 @@ the Atom and RSS feeds.
 ## The packages themselves
 
 The repositories are public on GitHub, under
-[glitchr-studio](https://github.com/glitchr-studio), under the MIT licence.
+[glitchr-omnisense](https://github.com/glitchr-omnisense), under the MIT licence.
 A code correction follows the same path: fork, commit, pull request. Each
 family has a Docker harness and a test suite; its README says how to run
 them.

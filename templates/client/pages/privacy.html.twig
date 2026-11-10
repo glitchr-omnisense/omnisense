@@ -15,6 +15,6 @@
     <p>{{ '@messages.privacy.host_text'|trans({host: site.host}) }}</p>
     {% endif %}
     <h2>{{ '@messages.privacy.rights'|trans }}</h2>
-    <p>{{ '@messages.privacy.rights_text'|trans({email: site.email}) }}</p>
+    <p>{{ '@messages.privacy.rights_text'|trans({url: site.contactUrl})|raw }}</p>
 </div>
 {% endblock %}

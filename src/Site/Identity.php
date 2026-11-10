@@ -17,7 +17,7 @@ class Identity
         #[Autowire('%app.site.publisher%')] private readonly string $publisher,
         #[Autowire('%app.site.host%')] private readonly string $host,
         #[Autowire('%app.site.github%')] private readonly string $github,
-        #[Autowire('%env(MAILER_CONTACT)%')] private readonly string $contact,
+        #[Autowire('%app.site.repository%')] private readonly string $repository,
         #[Autowire('%app.site.url%')] private readonly string $url = 'http://localhost:8135',
     ) {
     }
@@ -64,9 +64,13 @@ class Identity
         return 'https://github.com/'.$this->github;
     }
 
-    public function getEmail(): string
+    /**
+     * Where to write: the issues of the site's repository, each request in the open from one of its
+     * templates (.github/ISSUE_TEMPLATE). The site has no mailbox.
+     */
+    public function getContactUrl(): string
     {
-        return $this->contact;
+        return 'https://github.com/'.$this->repository.'/issues';
     }
 
     public function getMaker(): string

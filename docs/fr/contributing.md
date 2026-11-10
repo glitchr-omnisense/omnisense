@@ -81,7 +81,7 @@ flux Atom et RSS.
 ## Les paquets eux-mêmes
 
 Les dépôts sont publics sur GitHub, sous
-[glitchr-studio](https://github.com/glitchr-studio), sous licence MIT. Une
+[glitchr-omnisense](https://github.com/glitchr-omnisense), sous licence MIT. Une
 correction de code suit le même chemin : copie, commit, demande de fusion.
 Chaque famille a un harnais Docker et une suite de tests ; son README dit
 comment les lancer.

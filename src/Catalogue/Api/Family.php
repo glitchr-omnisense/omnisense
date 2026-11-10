@@ -9,6 +9,8 @@ final readonly class Family
      * @param array<string, string> $phrase       locale => one line
      * @param list<string>          $capabilities
      * @param list<Provider>        $providers
+     * @param list<string>          $merged       the families merged into this one
+     * @param array<string, string> $note         locale => one more thing to know
      */
     public function __construct(
         public string $name,
@@ -17,7 +19,14 @@ final readonly class Family
         public array $capabilities,
         public bool $helpWanted,
         public array $providers,
+        public array $merged = [],
+        public array $note = [],
     ) {
+    }
+
+    public function note(string $locale): ?string
+    {
+        return $this->note[$locale] ?? $this->note['en'] ?? null;
     }
 
     public function phrase(string $locale): string

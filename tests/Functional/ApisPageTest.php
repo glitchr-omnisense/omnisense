@@ -12,7 +12,16 @@ final class ApisPageTest extends SiteTestCase
         self::assertStringContainsString('data-controller="apis"', $html);
         self::assertMatchesRegularExpression('/<form class="om-finder om-api-filters"[^>]* hidden/', $html, 'without JavaScript, no filter that would do nothing');
         self::assertStringContainsString('id="card-omnilang"', $html, 'a family wanted, from config/apis.yaml');
-        self::assertStringContainsString('data-kind="family" data-family="omnilang" data-status="wanted"', $html);
+        self::assertStringContainsString('data-kind="family" data-family="omnilang" data-status="reserved"', $html, 'reserved on 2026-11-10');
+        self::assertStringContainsString('data-kind="family" data-family="omnisport" data-status="wanted"', $html, 'open to contributors, not reserved');
+        // Marco's merges of 2026-11-10: no omniproof, omnitally, omnireview or omnifund card of their own.
+        foreach (['omniproof', 'omnitally', 'omnireview', 'omnifund'] as $merged) {
+            self::assertStringNotContainsString('id="card-'.$merged.'"', $html, $merged);
+        }
+        self::assertStringContainsString('<code>omnisign/stripe-identity</code>', $html, 'identity verification is omnisign\'s');
+        self::assertStringContainsString('<code>omnibill/pennylane</code>', $html, 'accounting is omnibill\'s');
+        self::assertStringContainsString('approved e-invoicing platform (PDP)', $html);
+        self::assertStringContainsString('Merged into it on 2026-11-10: omnireview, omnifund', $html);
         self::assertStringContainsString('data-capabilities="translate detect glossary documents"', $html);
         // A provider and its policy.
         self::assertStringContainsString('<code>omnilang/deepl</code>', $html);
@@ -41,6 +50,11 @@ final class ApisPageTest extends SiteTestCase
         self::assertStringContainsString('href="/apis#family-omnistate.help-1"', $html, 'a released family with providers wanted');
         self::assertStringContainsString('issues/new?template=api-provider.yml', $html);
         self::assertStringNotContainsString('omnisense.local', $html, 'no contact address that does not exist');
+        foreach (['/privacy', '/legal', '/fr/confidentialite'] as $page) {
+            $text = $this->get($page);
+            self::assertStringNotContainsString('omnisense.local', $text, $page);
+            self::assertStringContainsString('href="https://github.com/glitchr-omnisense/omnisense/issues"', $text, $page.': the issues are the contact');
+        }
 
         $fr = $this->get('/fr/contribuer');
         self::assertStringContainsString('Pour les entreprises qui tiennent les API', $fr);

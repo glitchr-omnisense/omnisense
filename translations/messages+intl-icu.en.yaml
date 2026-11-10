@@ -189,6 +189,7 @@ support:
     document_text: Every page has its "Edit this page" link, to the file in the repository.
   sponsors_text: 'The organisation''s GitHub Sponsors page says what support pays for: trying the packages against the real services, following their changes, writing their manuals.'
 legal:
+  contact: 'Contact: the site’s issues on GitHub'
   title: Legal notice
   publisher: Publication
   publisher_text: This site is published by {publisher}.
@@ -211,7 +212,7 @@ privacy:
   host: The host
   host_text: 'The pages are served by {host} (GitHub, Inc.), which records each visitor''s IP address for the security of its service, as its privacy statement says. The site itself receives none of it.'
   rights: Your rights
-  rights_text: 'The site keeps no personal data. For any question: {email}.'
+  rights_text: 'The site keeps no personal data. For any question: <a href="{url}" rel="noopener">an issue of the site’s repository</a>.'
 start:
   to_docs: Read the documentation
   docs_lead: Each package has its manual, read in its repository at a pinned commit. Start with the guides, or with the family you need.
@@ -357,6 +358,7 @@ apis:
   count: 'Families: {families} · Providers: {providers}'
   none: No card matches these filters.
   providers_count: '{count, plural, =0 {no provider yet} one {# provider} other {# providers}}'
+  merged: 'Merged into it on 2026-11-10: {families}; their providers are listed here.'
   help_wanted: Help wanted
   maintain: Maintain it
   review: Review its integration

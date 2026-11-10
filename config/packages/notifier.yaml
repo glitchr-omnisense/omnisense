@@ -12,5 +12,3 @@ framework:
             warning: ['browser+']
             success: ['browser+']
             danger:  ['browser+']
-        admin_recipients:
-            - { email: '%env(MAILER_CONTACT)%' }
