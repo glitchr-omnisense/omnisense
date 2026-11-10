@@ -137,6 +137,10 @@ capabilities:
   calendar-events: { en: Calendar events, fr: Événements d’agenda }
   free-busy: { en: Free / busy, fr: Disponibilités }
   holidays: { en: Public holidays, fr: Jours fériés }
+  # reserved: omnicrawl
+  page-fetch: { en: Fetch a page, fr: Récupérer une page }
+  extract: { en: Extract data, fr: Extraire des données }
+  crawl-runs: { en: Crawl runs, fr: Explorations }
   # proposed: omniphoto
   photo-search: { en: Photo search, fr: Recherche de photos }
   credits: { en: Credits, fr: Crédits }
@@ -666,6 +670,17 @@ families:
           note: { en: 'Commercial use requires an active sponsorship; moved to nagerholidays.com.', fr: 'Un usage commercial demande un parrainage actif ; déplacé sur nagerholidays.com.' }
           terms: 'https://nagerholidays.com/legal/termsofservice'
           read: '2026-11-10'
+  # omnicrawl, reserved on 2026-11-10 (Marco): crawling services behind one contract, responsible by default.
+  omnicrawl:
+    status: reserved
+    phrase: { en: 'Fetch and extract web pages through crawling services, responsibly by default: robots.txt honoured, a policy per target site, provenance kept.', fr: 'Récupérer et extraire des pages web par des services d’exploration, de façon responsable par défaut : robots.txt respecté, une politique par site visé, la provenance gardée.' }
+    capabilities: [page-fetch, extract, crawl-runs]
+    help_wanted: true
+    providers:
+      omnicrawl/apify: { name: Apify, status: reserved, capabilities: [crawl-runs, extract], help_wanted: true }
+      omnicrawl/firecrawl: { name: Firecrawl, status: reserved, capabilities: [page-fetch, extract, crawl-runs], help_wanted: true }
+      omnicrawl/scrapingbee: { name: ScrapingBee, status: reserved, capabilities: [page-fetch, extract], help_wanted: true }
+      omnicrawl/zyte: { name: Zyte API, status: reserved, capabilities: [page-fetch, extract], help_wanted: true }
   omniphoto:
     status: wanted
     phrase: { en: 'Find a photo to illustrate a page, with the credit it asks for.', fr: 'Trouver une photo pour illustrer une page, avec le crédit qu’elle demande.' }
