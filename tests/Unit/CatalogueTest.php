@@ -138,8 +138,8 @@ final class CatalogueTest extends TestCase
     {
         self::assertSame('trade', Families::suffix('omnitrade'));
         self::assertSame(['omnibase', 'omnitrade', 'omnimeet', 'omnizzz'], array_keys(Families::ordered(['omnizzz' => 1, 'omnimeet' => 1, 'omnitrade' => 1, 'omnibase' => 1])));
-        // The families merged on 2026-11-09, each into the family that took its packages; none of them still ordered.
-        self::assertSame(['omnifilm' => 'omnishow', 'omnigame' => 'omniplay', 'omnishare' => 'omnipost'], Families::MERGED);
+        // The families merged on 2026-11-09 and 2026-11-10, each into the family that took its packages; none of them still ordered.
+        self::assertSame(['omnifilm' => 'omnishow', 'omnigame' => 'omniplay', 'omnishare' => 'omnipost', 'omnireach' => 'omnipulse', 'omnireview' => 'omnipulse', 'omnifund' => 'omnipulse'], Families::MERGED);
         self::assertSame([], array_intersect(array_keys(Families::MERGED), Families::ORDER));
         self::assertSame([], array_diff(Families::MERGED, Families::ORDER), 'each successor has its place');
     }

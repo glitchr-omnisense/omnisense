@@ -29,7 +29,9 @@ final class ApiDirectoryTest extends TestCase
         self::assertNotEmpty($directory->byStatus(Status::Available));
 
         foreach ($directory->byStatus(Status::Available) as $family) {
-            self::assertNotNull($catalogue->family($family->name), $family->name.' is available: catalog/'.$family->name.'.yaml lists it');
+            // Available: in the catalogue, or made of families that are, until its own core is imported (omnipulse).
+            $listed = array_filter([$family->name, ...$family->merged], static fn (string $f): bool => null !== $catalogue->family($f));
+            self::assertNotEmpty($listed, $family->name.' is available: catalog/ lists it or a family merged into it');
         }
         foreach ($directory->byStatus(Status::Wanted) as $family) {
             self::assertNull($catalogue->family($family->name)?->getOwn(), $family->name.' is wanted: its core is not in the catalogue');
@@ -66,21 +68,26 @@ final class ApiDirectoryTest extends TestCase
     public function testTheMergedFamiliesProvidersAreListedUnderTheFamilyTheyWentInto(): void
     {
         $directory = self::directory();
-        foreach (['omnireview', 'omnifund', 'omniproof', 'omnitally'] as $gone) {
+        foreach (['omnireach', 'omnireview', 'omnifund', 'omniproof', 'omnitally'] as $gone) {
             self::assertNull($directory->family($gone), $gone.' has no card of its own');
         }
-        $reach = $directory->family('omnireach');
-        self::assertSame(['omnireview', 'omnifund'], $reach->merged);
+        $reach = $directory->family('omnipulse');
+        self::assertSame(['omnireach', 'omnireview', 'omnifund'], $reach->merged);
         $byPackage = [];
         foreach ($reach->providers as $provider) {
             $byPackage[$provider->package] = $provider;
         }
-        // From the real catalogue: catalog/omnireview.yaml and catalog/omnifund.yaml until the merge is imported.
+        // From the real catalogue: catalog/omnireach.yaml, omnireview.yaml and omnifund.yaml until the merge is imported.
         $review = array_values(array_filter($reach->providers, static fn ($p): bool => \in_array('reviews', $p->capabilities, true)));
         $sponsors = array_values(array_filter($reach->providers, static fn ($p): bool => \in_array('sponsors', $p->capabilities, true)));
-        self::assertNotEmpty($review, 'the review platforms, under omnireach');
-        self::assertNotEmpty($sponsors, 'the funding platforms, under omnireach');
-        self::assertSame(['audience', 'search-queries'], $byPackage['omnireach/matomo']->capabilities, 'its own providers keep their capabilities');
+        self::assertNotEmpty($review, 'the review platforms, under omnipulse');
+        self::assertNotEmpty($sponsors, 'the funding platforms, under omnipulse');
+        self::assertSame(['audience', 'search-queries'], $byPackage['omnireach/matomo']->capabilities, 'each brings its own capabilities');
+        // The names the merge publishes them under.
+        self::assertSame('omnipulse/matomo', $byPackage['omnireach/matomo']->successor);
+        self::assertSame('omnipulse/google-reviews', $byPackage['omnireview/google']->successor);
+        self::assertSame('google-reviews', $byPackage['omnireview/google']->name, 'the card is titled by its new name');
+        self::assertSame('omnipulse/github-sponsors', $byPackage['omnifund/github-sponsors']->successor);
         self::assertSame(['signature'], $directory->family('omnisign')->providers[0]->capabilities, 'a released signature provider does not check identities');
         self::assertSame(Status::Reserved, $directory->family('omnilang')->status);
         self::assertSame(Status::Reserved, $directory->family('omnical')->status);

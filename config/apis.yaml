@@ -20,8 +20,10 @@
 #     note          {en, fr}: one more thing to know about the family (optional)
 #     released_capabilities  what its released providers answer, when the family
 #                   grew capabilities they do not have (default: all of them)
-#     merged        family: [capabilities] - the families merged into this one;
-#                   their released providers are listed under it
+#     merged        family: [capabilities], or {capabilities, rename: {old: new}} when
+#                   its packages are republished as <this family>/<name> - the
+#                   families merged into this one; their released providers are
+#                   listed under it
 #     providers     package: a provider ("omnilang/deepl") the catalogue does not
 #                   list yet, or one whose policy is declared here
 #       name          the service's name
@@ -78,7 +80,7 @@ capabilities:
   # omnisign, omnibill
   signature: { en: Signature, fr: Signature }
   invoices: { en: E-invoices, fr: Factures électroniques }
-  # omnireview, omniticket, omnimeet, omnireach
+  # omnipulse (ex-omnireach, omnireview, omnifund), omniticket, omnimeet
   reviews: { en: Reviews, fr: Avis }
   events: { en: Events, fr: Événements }
   tickets: { en: Tickets, fr: Billets }
@@ -394,12 +396,15 @@ families:
     status: available
     phrase: { en: 'Open a video room and let someone in.', fr: 'Ouvrir une salle de visio et y faire entrer.' }
     capabilities: [rooms]
-  omnireach:
+  omnipulse:
     status: available
-    phrase: { en: 'Audience, reviews and funding: what outside platforms know of a site or project.', fr: 'Audience, avis et financement : ce que les plateformes extérieures savent d’un site ou d’un projet.' }
+    phrase: { en: 'Audience, reviews and funding: the pulse of a site or project.', fr: 'Audience, avis et financement : le pouls d’un site ou d’un projet.' }
     capabilities: [audience, search-queries, reviews, sponsors]
-    released_capabilities: [audience, search-queries]
-    merged: { omnireview: [reviews], omnifund: [sponsors] }
+    note: { en: 'Named by Marco on 2026-11-10; its providers are published as omnipulse/<name>.', fr: 'Nommée par Marco le 2026-11-10 ; ses fournisseurs sont publiés sous omnipulse/<nom>.' }
+    merged:
+      omnireach: { capabilities: [audience, search-queries], rename: {} }
+      omnireview: { capabilities: [reviews], rename: { google: google-reviews } }
+      omnifund: { capabilities: [sponsors], rename: {} }
   omnidns:
     status: available
     phrase: { en: 'Manage a domain name where it is registered.', fr: 'Gérer un nom de domaine là où il est enregistré.' }
@@ -517,7 +522,7 @@ families:
 
   # Proposed (the brief ~/Sites/.agent-briefs/api-families), Marco's decisions of 2026-11-10: omnilang and
   # omnical reserved (reserve.sh), omniphoto for later, omnijob and omnisport open to contributors; omniproof
-  # went into omnisign, omnitally into omnibill, omnireview and omnifund into omnireach.
+  # went into omnisign, omnitally into omnibill, omnireach, omnireview and omnifund into omnipulse.
   omnilang:
     status: reserved
     phrase: { en: 'Translate a text or a page, whatever the engine.', fr: 'Traduire un texte ou une page, quel que soit le moteur.' }

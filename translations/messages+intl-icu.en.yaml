@@ -359,6 +359,8 @@ apis:
   none: No card matches these filters.
   providers_count: '{count, plural, =0 {no provider yet} one {# provider} other {# providers}}'
   merged: 'Merged into it on 2026-11-10: {families}; their providers are listed here.'
+  was: 'published today as {package}'
+  manual_of: '{family}’s manual'
   help_wanted: Help wanted
   maintain: Maintain it
   review: Review its integration

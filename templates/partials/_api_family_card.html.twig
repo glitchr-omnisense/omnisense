@@ -27,8 +27,10 @@
         {% if family.helpWanted %}<span class="om-fact is-new">{{ '@messages.apis.help_wanted'|trans }}</span>{% endif %}
     </p>
     <p class="om-card-links">
-        {% if family.status.value == 'available' and family.name in family_pages %}
-        <a href="{{ family_url(family.name) }}">{{ '@messages.family.manual'|trans }}</a>
+        {#- A family merged from others before its own core is published: the manuals of those it took in. -#}
+        {% set manuals = family.name in family_pages ? [family.name] : family.merged|filter(m => m in family_pages) %}
+        {% if family.status.value == 'available' and manuals %}
+        {% for name in manuals %}<a href="{{ family_url(name) }}">{{ manuals|length > 1 or name != family.name ? '@messages.apis.manual_of'|trans({family: name}) : '@messages.family.manual'|trans }}</a>{% endfor %}
         {% else %}
         <a href="{{ api_issue(stars.repository, templates.provider, '[' ~ family.name ~ '] ') }}" rel="noopener">{{ '@messages.apis.maintain'|trans }}</a>
         {% endif %}

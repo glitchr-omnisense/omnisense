@@ -15,13 +15,15 @@ final class ApisPageTest extends SiteTestCase
         self::assertStringContainsString('data-kind="family" data-family="omnilang" data-status="reserved"', $html, 'reserved on 2026-11-10');
         self::assertStringContainsString('data-kind="family" data-family="omnisport" data-status="wanted"', $html, 'open to contributors, not reserved');
         // Marco's merges of 2026-11-10: no omniproof, omnitally, omnireview or omnifund card of their own.
-        foreach (['omniproof', 'omnitally', 'omnireview', 'omnifund'] as $merged) {
+        foreach (['omniproof', 'omnitally', 'omnireach', 'omnireview', 'omnifund'] as $merged) {
             self::assertStringNotContainsString('id="card-'.$merged.'"', $html, $merged);
         }
         self::assertStringContainsString('<code>omnisign/stripe-identity</code>', $html, 'identity verification is omnisign\'s');
         self::assertStringContainsString('<code>omnibill/pennylane</code>', $html, 'accounting is omnibill\'s');
         self::assertStringContainsString('approved e-invoicing platform (PDP)', $html);
-        self::assertStringContainsString('Merged into it on 2026-11-10: omnireview, omnifund', $html);
+        self::assertStringContainsString('id="card-omnipulse"', $html);
+        self::assertStringContainsString('Audience, reviews and funding: the pulse of a site or project.', $html);
+        self::assertStringContainsString('Merged into it on 2026-11-10: omnireach, omnireview, omnifund', $html);
         self::assertStringContainsString('data-capabilities="translate detect glossary documents"', $html);
         // A provider and its policy.
         self::assertStringContainsString('<code>omnilang/deepl</code>', $html);

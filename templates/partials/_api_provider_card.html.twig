@@ -15,7 +15,11 @@
         <h3 class="om-card-name">{{ provider.name }}</h3>
         <span class="om-status is-{{ provider.status.value }}">{{ ('@messages.apis.status.' ~ provider.status.value)|trans }}</span>
     </header>
+    {% if provider.successor %}
+    <p class="om-card-package"><code>{{ provider.successor }}</code> · <a href="#card-{{ provider.family }}">{{ provider.family }}</a><br><span class="om-card-was">{{ '@messages.apis.was'|trans({package: provider.package}) }}</span></p>
+    {% else %}
     <p class="om-card-package"><code>{{ provider.package }}</code> · <a href="#card-{{ provider.family }}">{{ provider.family }}</a></p>
+    {% endif %}
     {% if provider.description %}<p class="om-card-text">{{ provider.description }}</p>{% endif %}
     {% if policy %}
     <dl class="om-policy">

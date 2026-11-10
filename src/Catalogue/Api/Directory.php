@@ -116,9 +116,15 @@ class Directory
             // What the family's released providers answer, when the family grew capabilities they do not have.
             $released = $this->capabilityList($row['released_capabilities'] ?? $capabilities, $name);
             // The families merged into this one: their released providers are its own, with the capabilities they bring.
+            // Each is a list of capabilities, or {capabilities, rename: {old short name: new}} when its packages are
+            // republished under this family's vendor (omnireview/google -> omnipulse/google-reviews).
             $merged = [];
+            $renames = [];
             foreach ((array) ($row['merged'] ?? []) as $from => $brought) {
-                $merged[(string) $from] = $this->capabilityList($brought, $name.' (from '.$from.')');
+                $brought = (array) $brought;
+                $list = array_is_list($brought) ? $brought : ($brought['capabilities'] ?? []);
+                $merged[(string) $from] = $this->capabilityList($list, $name.' (from '.$from.')');
+                $renames[(string) $from] = array_is_list($brought) ? null : array_map('strval', (array) ($brought['rename'] ?? []));
             }
 
             $providers = [];
@@ -128,15 +134,18 @@ class Directory
                     if (Tier::Provider !== $package->getTier()) {
                         continue;
                     }
+                    $rename = $renames[$source] ?? null;
+                    $short = null === $rename ? $package->getShortName() : ($rename[$package->getShortName()] ?? $package->getShortName());
                     $providers[$package->getName()] = new Provider(
                         package: $package->getName(),
                         family: $name,
-                        name: $package->getShortName(),
+                        name: $short,
                         status: Status::Available,
                         capabilities: $sourceCapabilities,
                         helpWanted: false,
                         policy: null,
                         released: $package,
+                        successor: null === $rename ? null : $name.'/'.$short,
                     );
                 }
             }

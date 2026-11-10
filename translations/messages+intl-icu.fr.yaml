@@ -359,6 +359,8 @@ apis:
   none: Aucune carte ne répond à ces filtres.
   providers_count: '{count, plural, =0 {aucun fournisseur encore} one {# fournisseur} other {# fournisseurs}}'
   merged: 'Fusionnées dedans le 2026-11-10 : {families} ; leurs fournisseurs sont listés ici.'
+  was: 'publié aujourd’hui sous {package}'
+  manual_of: 'manuel d’{family}'
   help_wanted: Mainteneur recherché
   maintain: Le maintenir
   review: Relire son intégration

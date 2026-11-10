@@ -56,6 +56,7 @@
 .om-card-links { display: flex; flex-wrap: wrap; gap: .3rem 1rem; margin: 0; padding-top: .5rem; border-top: 1px solid var(--om-line); @include fine(.85rem, 650);
     a { text-decoration: none; &:hover { text-decoration: underline; } } }
 .om-card-read { font-weight: 400; color: var(--om-soft); }
+.om-card-was { @include fine(.8rem, 400); color: var(--om-soft); code { @include mono(.8rem, 500); } }
 .om-status { flex: none; padding: .05rem .45rem; border: 1px solid currentColor; border-radius: 2px; @include fine(.8rem, 650); line-height: 1.5;
     &.is-available { color: var(--om-ok); }
     &.is-reserved { color: var(--om-soft); }

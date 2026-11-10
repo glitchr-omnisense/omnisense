@@ -6,7 +6,9 @@ use App\Catalogue\Package;
 
 /**
  * One provider's card: config/apis.yaml's entry, the catalogue's package when
- * it is released, or both.
+ * it is released, or both. A provider of a family merged into another has a
+ * successor: the name it is republished under (omnireview/google ->
+ * omnipulse/google-reviews); its links stay those of the package released.
  */
 final readonly class Provider
 {
@@ -22,6 +24,7 @@ final readonly class Provider
         public bool $helpWanted,
         public ?Policy $policy,
         public ?Package $released,
+        public ?string $successor = null,
     ) {
     }
 
