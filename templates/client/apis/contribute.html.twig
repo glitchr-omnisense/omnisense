@@ -26,6 +26,8 @@
             <header><h2 id="om-maintainers">{{ '@messages.contribute.dev.title'|trans }}</h2><p>{{ '@messages.contribute.dev.lead'|trans }}</p></header>
             <ol class="om-steps">
                 <li><b>{{ '@messages.contribute.dev.template'|trans }}</b><span>{{ '@messages.contribute.dev.template_text'|trans|raw }}</span></li>
+                <li><b>{{ '@messages.contribute.dev.declarative'|trans }}</b><span>{{ '@messages.contribute.dev.declarative_text'|trans({url: path('app_manual_page', {key: 'omnical', series: '1.x', path: 'declarative'})})|raw }}</span></li>
+                <li><b>{{ '@messages.contribute.dev.policy'|trans }}</b><span>{{ '@messages.contribute.dev.policy_text'|trans({url: path('app_manual_page', {key: 'contracts', series: '1.x', path: 'declare-your-policy'})})|raw }}</span></li>
                 <li><b>{{ '@messages.contribute.dev.suite'|trans }}</b><span>{{ '@messages.contribute.dev.suite_text'|trans|raw }}</span></li>
                 <li><b>{{ '@messages.contribute.dev.bare'|trans }}</b><span>{{ '@messages.contribute.dev.bare_text'|trans|raw }}</span></li>
                 <li><b>{{ '@messages.contribute.dev.ci'|trans }}</b><span>{{ '@messages.contribute.dev.ci_text'|trans|raw }}</span></li>
@@ -49,21 +51,27 @@
             <header><h2 id="om-companies">{{ '@messages.contribute.company.title'|trans }}</h2><p>{{ '@messages.contribute.company.lead'|trans }}</p></header>
             <ol class="om-steps">
                 <li><b>{{ '@messages.contribute.company.review'|trans }}</b><span>{{ '@messages.contribute.company.review_text'|trans }}</span></li>
-                <li><b>{{ '@messages.contribute.company.policy'|trans }}</b><span>{{ '@messages.contribute.company.policy_text'|trans|raw }}</span></li>
+                <li><b>{{ '@messages.contribute.company.policy'|trans }}</b><span>{{ '@messages.contribute.company.policy_text'|trans({url: path('app_manual_page', {key: 'contracts', series: '1.x', path: 'declare-your-policy'}), limits: path('app_manual_page', {key: 'contracts', series: '1.x', path: 'set-your-limits'}), table: path('app_api_policies')})|raw }}</span></li>
                 <li><b>{{ '@messages.contribute.company.comaintain'|trans }}</b><span>{{ '@messages.contribute.company.comaintain_text'|trans }}</span></li>
                 <li><b>{{ '@messages.contribute.company.listed'|trans }}</b><span>{{ '@messages.contribute.company.listed_text'|trans }}</span></li>
             </ol>
-            {#- Code, the same in every language (the keys of App\Catalogue\Api\Policy::fromArray()). -#}
-            <pre class="om-policy-sample"><code>policy:
-  auth: key            # none | key | oauth | contract
-  free: true
-  commercial: yes      # yes | no | conditional | unclear
-  attribution: required
-  credit: 'Data from Example'
-  terms: 'https://example.org/api-terms'</code></pre>
+            {#- Code, the same in every language: a policy.json, omnisense/contracts' schema. -#}
+            <pre class="om-policy-sample"><code>{
+  "provider": "example",
+  "rateLimits": [{"max": 1000, "window": "day", "scope": "key"}],
+  "rights": {
+    "commercial": "allowed",
+    "caching": {"permission": "allowed", "maxTtl": 86400},
+    "storage": "unknown",
+    "redistribution": "forbidden",
+    "attribution": {"required": true, "text": "Data from Example", "url": "https://example.org"}
+  },
+  "requirements": {"key": true},
+  "provenance": {"terms": "https://example.org/api-terms", "verifiedAt": "2026-11-10", "declaredBy": "provider"}
+}</code></pre>
             <p class="om-actions">
                 <a class="om-button" href="{{ api_issue(stars.repository, templates.company) }}" rel="noopener">{{ '@messages.contribute.company.cta'|trans }}</a>
-                <a class="om-button is-line" href="{{ path('app_apis') }}#status-available">{{ '@messages.contribute.company.see'|trans }}</a>
+                <a class="om-button is-line" href="{{ path('app_api_policies') }}">{{ '@messages.contribute.company.see'|trans }}</a>
             </p>
         </section>
     </div>

@@ -1,0 +1,104 @@
+# The omnicrawl entry of the Omnisense catalogue. Written by `bin/console
+# app:catalog:import` from the packages' repositories; the phrase and the
+# text are the site's own, edited here. Each package: its kind, what its
+# composer.json says, its GitHub repository and development branch, whether
+# its README says it was verified against the real service, whether it has
+# a docs/ folder (see config/documentation.yaml).
+family: omnicrawl
+packages:
+  omnicrawl/apify:
+    kind: provider
+    description: "Omnicrawl's Apify, under any PHP host: runs over a fixed set of addresses with the Cheerio Scraper actor (no link followed, one page at a time, no retry, no Apify proxy, robots.txt honoured by the actor too), the target's raw HTML, status and headers kept, behind omnicrawl's gate. Its limits and terms declared as data."
+    license: MIT
+    keywords:
+      - apify
+      - cheerio-scraper
+      - scraping
+      - omnicrawl
+      - responsible
+      - framework-agnostic
+    repository: glitchr-omnisense/omnicrawl-apify
+    branch: 1.x
+    requires:
+      - omnisense/contracts
+      - omnisense/omnicrawl
+    verification: unstated
+    docs: true
+  omnicrawl/firecrawl:
+    kind: provider
+    description: "Omnicrawl's Firecrawl (API v2), under any PHP host: pages fetched as raw HTML and batch runs over a fixed set of addresses, behind omnicrawl's gate (robots.txt, the target's declaration, per-host limits, provenance) - the family's User-Agent sent to the target, the basic proxy only (never Firecrawl's anti-bot proxies), no cache left at Firecrawl; Firecrawl always renders, so undeclared sites are refused. Its limits and terms declared as data."
+    license: MIT
+    keywords:
+      - firecrawl
+      - scraping
+      - batch-scrape
+      - omnicrawl
+      - responsible
+      - framework-agnostic
+    repository: glitchr-omnisense/omnicrawl-firecrawl
+    branch: 1.x
+    requires:
+      - omnisense/contracts
+      - omnisense/omnicrawl
+    verification: unstated
+    docs: true
+  omnicrawl/scrapingbee:
+    kind: provider
+    description: "Omnicrawl's ScrapingBee, under any PHP host: pages fetched with or without JavaScript, the target's status, headers and final address reported, behind omnicrawl's gate - and only for targets declared under a licence (one's own site, written permission), because every request goes through ScrapingBee's rotating proxies, which hide who collects. The family's User-Agent forwarded, the target's status passed through (no retry on another proxy), no premium or stealth proxy. Its limits per plan and terms declared as data."
+    license: MIT
+    keywords:
+      - scrapingbee
+      - scraping
+      - omnicrawl
+      - responsible
+      - framework-agnostic
+    repository: glitchr-omnisense/omnicrawl-scrapingbee
+    branch: 1.x
+    requires:
+      - omnisense/contracts
+      - omnisense/omnicrawl
+    verification: unstated
+    docs: true
+  omnicrawl/zyte:
+    kind: provider
+    description: "Omnicrawl's Zyte API, under any PHP host: pages fetched over HTTP with the target's headers, behind omnicrawl's gate - and only for targets declared under a licence (one's own site, written permission), because Zyte's ban avoidance cannot be turned off and may override the User-Agent. No browser mode (it cannot send the family's User-Agent). Its limits and terms declared as data."
+    license: MIT
+    keywords:
+      - zyte
+      - zyte-api
+      - scraping
+      - omnicrawl
+      - responsible
+      - framework-agnostic
+    repository: glitchr-omnisense/omnicrawl-zyte
+    branch: 1.x
+    requires:
+      - omnisense/contracts
+      - omnisense/omnicrawl
+    verification: unstated
+    docs: true
+  omnisense/omnicrawl:
+    kind: family
+    description: "Omnicrawl: fetch and extract web pages under any PHP host, through crawling services or directly, responsible by default - the target site's rules applied by the family itself before any service is called. robots.txt read and honoured per RFC 9309 for the family's own token, a usage policy per target site declared as data (allowed or refused, on what authority, with a reference and a date, its rate limits, what may be stored and republished) and a conservative default for the others (single pages for previews, no crawl run), an identified User-Agent required by every factory, per-host limits through omnisense/contracts' PolicyGuard beside the provider's own, X-Robots-Tag, meta robots and TDMRep reservations honoured, provenance on every record. Three contracts: page-fetch, extract (metadata, Open Graph, JSON-LD, selectors), crawl-runs. A direct fetcher built in; omnicrawl/apify, omnicrawl/firecrawl, omnicrawl/scrapingbee, omnicrawl/zyte as packages of their own, none of their evasion features exposed."
+    license: MIT
+    keywords:
+      - crawler
+      - scraping
+      - robots.txt
+      - rfc9309
+      - tdmrep
+      - x-robots-tag
+      - open-graph
+      - json-ld
+      - link-preview
+      - provenance
+      - rate-limit
+      - responsible
+      - framework-agnostic
+      - omnicrawl
+    repository: glitchr-omnisense/omnicrawl
+    branch: 1.x
+    requires:
+      - omnisense/contracts
+    verification: unstated
+    docs: true

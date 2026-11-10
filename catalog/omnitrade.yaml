@@ -14,7 +14,7 @@ text:
 packages:
   omnisense/omnitrade:
     kind: family
-    description: "Omnitrade: one contract for payment providers and commerce platforms - purchase, authorize, capture, refund, webhooks, platform orders - and its Symfony bundle (Omnibus's sibling for trade)."
+    description: "Omnitrade: one contract for payment providers and commerce platforms - purchase, authorize, capture, refund, webhooks, platform orders - on omnisense/contracts (usage policies, the providers' waits honoured, never a payment retried), under any PHP host; an optional Symfony bundle."
     license: MIT
     keywords:
       - payment
@@ -26,6 +26,8 @@ packages:
       - omnitrade
     repository: glitchr-omnisense/omnitrade
     branch: 1.x
+    requires:
+      - omnisense/contracts
     verification: unstated
     docs: true
   omnitrade/amazon:
@@ -55,6 +57,7 @@ packages:
     repository: glitchr-omnisense/omnitrade-paypal
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnitrade
     verification: unstated
     docs: true
@@ -69,6 +72,7 @@ packages:
     repository: glitchr-omnisense/omnitrade-shopify
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnitrade
     verification: unstated
     docs: true
@@ -83,6 +87,7 @@ packages:
     repository: glitchr-omnisense/omnitrade-stripe
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnitrade
     verification: unstated
     docs: true
@@ -116,6 +121,7 @@ packages:
     repository: glitchr-omnisense/omnitrade-woocommerce
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnitrade
     verification: unstated
     docs: true

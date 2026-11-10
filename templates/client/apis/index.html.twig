@@ -1,7 +1,8 @@
 {#
  # The families and their APIs as cards: a card per family (what it answers,
  # its capabilities, its providers, its status), then a card per provider
- # (its family, its status, the usage policy config/apis.yaml declares).
+ # (its family, its status, its usage policy: its package's policy.json, or
+ # what config/apis.yaml typed for a provider with no package yet).
  # Every card is in the page, readable as a plain list without JavaScript;
  # apis_controller.js shows the filters - tags that combine (any of a group,
  # all of the groups) and a text search - and keeps them in the address
@@ -20,7 +21,7 @@
         <p class="om-cote">{{ '@messages.apis.eyebrow'|trans }}</p>
         <h1>{{ '@messages.apis.title'|trans }}</h1>
         <p class="om-lead">{{ '@messages.apis.lead'|trans({families: counts.families, providers: counts.providers}) }}</p>
-        <p class="om-source">{{ '@messages.apis.source'|trans({policies: counts.policies, wanted: counts.wanted}) }} <a href="{{ path('app_contribute') }}">{{ '@messages.apis.to_contribute'|trans }}</a></p>
+        <p class="om-source">{{ '@messages.apis.source'|trans({declared: counts.declared, typed: counts.typed, wanted: counts.wanted}) }} <a href="{{ path('app_api_policies') }}">{{ '@messages.apis.to_policies'|trans }}</a> <a href="{{ path('app_contribute') }}">{{ '@messages.apis.to_contribute'|trans }}</a></p>
     </header>
 
     <form class="om-finder om-api-filters" role="search" method="get" action="{{ path('app_apis') }}" hidden data-apis-target="form" data-action="submit->apis#submit">

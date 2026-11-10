@@ -31,6 +31,8 @@ packages:
       - omnisign
     repository: glitchr-omnisense/omnisign
     branch: 1.x
+    requires:
+      - omnisense/contracts
     verification: unstated
     docs: true
   omnisign/docuseal:
@@ -46,6 +48,7 @@ packages:
     repository: glitchr-omnisense/omnisign-docuseal
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnisign
     verification: verified
     verification_note: 'Verified in real on 2026-10-08 against an instance of the open-source edition run in Docker: created, signing link, completed, downloaded (signed PDF and audit log), archived.'
@@ -62,6 +65,7 @@ packages:
     repository: glitchr-omnisense/omnisign-docusign
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnisign
     verification: partial
     verification_note: "Documentation: the options and the JWT grant, from an envelope to DocuSign's, Connect, what was verified. — Not verified in real: no developer account."
@@ -81,6 +85,7 @@ packages:
     repository: glitchr-omnisense/omnisign-dossierfacile
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnisign
     verification: unverified
     verification_note: 'Not verified in real: no partner account.'
@@ -100,6 +105,7 @@ packages:
     repository: glitchr-omnisense/omnisign-stripe-identity
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnisign
     verification: unverified
     verification_note: "Not verified in real: no account. A sk_test_ key is Stripe's test mode: everything runs, nothing is really checked."
@@ -118,6 +124,7 @@ packages:
     repository: glitchr-omnisense/omnisign-yousign
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnisign
     verification: partial
     verification_note: 'Documentation: the options, how an envelope becomes a signature request, levels and authentication, the webhooks, what was verified. — Not verified in real: no account.'

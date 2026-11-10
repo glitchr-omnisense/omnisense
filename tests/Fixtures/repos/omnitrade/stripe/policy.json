@@ -1,0 +1,16 @@
+{
+    "$schema": "https://github.com/glitchr-omnisense/contracts/blob/1.x/resources/usage-policy.schema.json",
+    "provider": "stripe",
+    "rateLimits": [{"max": 100, "window": "second", "scope": "key", "note": "Live mode, read and write together."}],
+    "rights": {
+        "commercial": "allowed",
+        "openSourceRequired": false,
+        "caching": {"permission": "unknown", "maxTtl": null},
+        "storage": "contract",
+        "redistribution": "forbidden",
+        "attribution": {"required": false, "text": null, "url": null, "where": []},
+        "licence": null
+    },
+    "requirements": {"key": true, "userAgent": {"required": false, "pattern": null}},
+    "provenance": {"terms": "https://stripe.com/legal/ssa", "policy": "https://docs.stripe.com/rate-limits", "verifiedAt": "2026-11-10", "declaredBy": "maintainer", "contact": null, "notes": "The tests' fixture."}
+}

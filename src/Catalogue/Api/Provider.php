@@ -48,15 +48,15 @@ final readonly class Provider
         return Status::Reserved === $this->status ? 'https://github.com/glitchr-omnisense/'.str_replace('/', '-', $this->package) : null;
     }
 
-    /** The auth a filter reads: the policy's, or "unknown" until it is declared. */
+    /** The access a filter reads: the policy's, or "undeclared" while there is none. */
     public function getAuth(): string
     {
-        return $this->policy?->auth ?? 'unknown';
+        return $this->policy?->access ?? 'undeclared';
     }
 
-    /** The commercial use a filter reads: the policy's, or "unknown" until it is declared. */
+    /** The commercial use a filter reads: the policy's (allowed, contract, forbidden, unknown), or "undeclared". */
     public function getCommercial(): string
     {
-        return $this->policy?->commercial ?? 'unknown';
+        return $this->policy?->commercial ?? 'undeclared';
     }
 }

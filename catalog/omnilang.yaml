@@ -1,0 +1,137 @@
+# The omnilang entry of the Omnisense catalogue. Written by `bin/console
+# app:catalog:import` from the packages' repositories; the phrase and the
+# text are the site's own, edited here. Each package: its kind, what its
+# composer.json says, its GitHub repository and development branch, whether
+# its README says it was verified against the real service, whether it has
+# a docs/ folder (see config/documentation.yaml).
+family: omnilang
+packages:
+  omnilang/amazon:
+    kind: provider
+    description: 'Omnilang''s Amazon Translate, under any PHP host and without the AWS SDK: texts translated with formality, the source language detected by "auto", custom terminologies as glossaries, HTML, text and DOCX documents translated at once - every call signed with Signature Version 4, the credentials given by reference, Amazon''s limits and data use declared as data.'
+    license: MIT
+    keywords:
+      - amazon
+      - amazon-translate
+      - aws
+      - sigv4
+      - translation
+      - machine-translation
+      - glossary
+      - document-translation
+      - framework-agnostic
+      - omnilang
+    repository: glitchr-omnisense/omnilang-amazon
+    branch: 1.x
+    requires:
+      - omnisense/contracts
+      - omnisense/omnilang
+    verification: unstated
+    docs: true
+  omnilang/azure:
+    kind: provider
+    description: "Omnilang's Azure AI Translator, under any PHP host: texts and HTML translated (v3.0), languages detected, the supported languages, Office, HTML and text documents translated at once on the resource's custom domain - the key given by reference with its region, Azure's limits and data retention declared as data."
+    license: MIT
+    keywords:
+      - azure
+      - azure-translator
+      - microsoft-translator
+      - translation
+      - machine-translation
+      - glossary
+      - document-translation
+      - framework-agnostic
+      - omnilang
+    repository: glitchr-omnisense/omnilang-azure
+    branch: 1.x
+    requires:
+      - omnisense/contracts
+      - omnisense/omnilang
+    verification: unstated
+    docs: true
+  omnilang/deepl:
+    kind: provider
+    description: "Omnilang's DeepL, under any PHP host: texts and HTML translated with formality as a preference, the source language detected, multilingual glossaries (v3) made, read and applied, documents (docx, pptx, xlsx, pdf, html...) uploaded, followed and downloaded - the key given by reference, DeepL's usage policy declared as data."
+    license: MIT
+    keywords:
+      - deepl
+      - translation
+      - machine-translation
+      - glossary
+      - document-translation
+      - framework-agnostic
+      - omnilang
+    repository: glitchr-omnisense/omnilang-deepl
+    branch: 1.x
+    requires:
+      - omnisense/contracts
+      - omnisense/omnilang
+    verification: unstated
+    docs: true
+  omnilang/google:
+    kind: provider
+    description: "Omnilang's Google Cloud Translation - Advanced (v3), under any PHP host: texts and HTML translated, languages detected, the supported languages, glossaries listed, read, applied and deleted, PDF and Office documents translated at once - the OAuth access token given by reference, Google's usage policy (quotas, the required attribution) declared as data."
+    license: MIT
+    keywords:
+      - google
+      - google-translate
+      - google-cloud
+      - translation
+      - machine-translation
+      - glossary
+      - document-translation
+      - framework-agnostic
+      - omnilang
+    repository: glitchr-omnisense/omnilang-google
+    branch: 1.x
+    requires:
+      - omnisense/contracts
+      - omnisense/omnilang
+    verification: unstated
+    docs: true
+  omnilang/libretranslate:
+    kind: provider
+    description: "Omnilang's LibreTranslate, under any PHP host: a self-hosted server (AGPL-3.0) translating texts and HTML, detecting languages, translating files (txt, odt, odp, docx, pptx, epub, html, srt, pdf) - no key by default, one by reference for a server that asks for it, its policy declared as data."
+    license: MIT
+    keywords:
+      - libretranslate
+      - argos-translate
+      - self-hosted
+      - open-source
+      - translation
+      - machine-translation
+      - glossary
+      - document-translation
+      - framework-agnostic
+      - omnilang
+    repository: glitchr-omnisense/omnilang-libretranslate
+    branch: 1.x
+    requires:
+      - omnisense/contracts
+      - omnisense/omnilang
+    verification: unstated
+    docs: true
+  omnisense/omnilang:
+    kind: family
+    description: "Omnilang: translate a text or a page, whatever the engine, under any PHP host - plain text or HTML with its tags kept, formality where the engine has it, the source language detected, glossaries, whole documents. Four contracts (translate, detect, glossary, documents), a registry that falls back from one engine to the next, providers as packages of their own (omnilang/deepl, omnilang/google, omnilang/azure, omnilang/amazon, omnilang/libretranslate), each declaring its usage policy (rate limits, rights, attribution, data retention), enforced on every call and tightened by a site's configuration - on omnisense/contracts."
+    license: MIT
+    keywords:
+      - translation
+      - machine-translation
+      - translate
+      - language-detection
+      - glossary
+      - document-translation
+      - deepl
+      - google-translate
+      - azure-translator
+      - amazon-translate
+      - libretranslate
+      - framework-agnostic
+      - omnilang
+    repository: glitchr-omnisense/omnilang
+    branch: 1.x
+    requires:
+      - omnisense/contracts
+    verification: unstated
+    docs: true

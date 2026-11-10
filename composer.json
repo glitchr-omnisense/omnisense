@@ -27,9 +27,9 @@
         }
     ],
     "require": {
+        "php": ">=8.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "php": ">=8.2",
         "api-platform/doctrine-orm": "^4.0",
         "api-platform/symfony": "^4.0",
         "doctrine/collections": "^3.1",
@@ -54,6 +54,7 @@
         "omnibridge/twig": "1.x-dev",
         "omnidocs/markdown": "1.x-dev",
         "omnidocs/php": "1.x-dev",
+        "omnisense/contracts": "1.x-dev",
         "omnisense/omnibase": "5.x-dev as 5.0.x-dev",
         "omnisense/omnibridge": "1.x-dev",
         "omnisense/omnidocs": "1.x-dev",

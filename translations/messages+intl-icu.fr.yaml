@@ -18,6 +18,7 @@ nav:
   theme: Clair ou sombre
   search: Recherche
   apis: API
+  policies: Politiques d’usage
   contribute: Contribuer
 footer:
   what: 'L’écosystème Omni, paquet par paquet : ce que chacun fait, où il en est, et son manuel, lu dans son dépôt.'
@@ -351,7 +352,8 @@ apis:
   title: Toutes les familles, toutes les API
   description: 'Les {families} familles de l’écosystème Omni et leurs {providers} fournisseurs : ce que chacune répond, où elle en est, et la politique d’usage de chaque API.'
   lead: '{families} familles, {providers} fournisseurs : publiés, réservés, ou recherchés et en quête de mainteneur. Filtrer par étiquettes ; l’adresse garde les filtres, une vue se partage.'
-  source: '{policies} politiques d’usage déclarées, lues sur les pages des fournisseurs ; {wanted} fournisseurs cherchent un mainteneur.'
+  source: '{declared} politiques d’usage déclarées par les paquets des fournisseurs eux-mêmes, {typed} lues sur les pages de fournisseurs pas encore construits ; {wanted} fournisseurs cherchent un mainteneur.'
+  to_policies: Toutes les politiques en un tableau →
   to_contribute: En maintenir un, ou déclarer la politique de son API →
   families: Familles
   providers: Fournisseurs
@@ -365,36 +367,64 @@ apis:
   maintain: Le maintenir
   review: Relire son intégration
   package: Son manuel
-  yes: Oui
-  no: Non
   status:
     available: Disponible
     reserved: Réservée
     wanted: Recherchée
   auth:
     none: Sans clé
-    key: Clé d’API
-    oauth: OAuth
+    key: Clé ou identifiants
+    oauth: OAuth (l’accord d’un utilisateur)
     contract: Contrat
-    unknown: Non déclaré
+    undeclared: Non déclaré
   commercial:
-    yes: Usage commercial
-    no: Non commercial seulement
-    conditional: Sous conditions
-    unclear: Pas clair
-    unknown: Non déclaré
+    allowed: Usage commercial permis
+    contract: Sous contrat ou conditions
+    forbidden: Non commercial seulement
+    unknown: Inconnu
+    undeclared: Non déclaré
+  permission:
+    allowed: Permis
+    contract: Sous contrat
+    forbidden: Interdit
+    unknown: Inconnu
   attribution:
     required: Obligatoire
     per-item: À l’œuvre (sa licence)
-    encouraged: Encouragée
-    none: Aucune
-    unclear: Pas claire
+    not-required: Pas demandé
+    unknown: Inconnu
+  declared:
+    maintainer: Son mainteneur
+    provider: L’entreprise qui tient l’API
+    site: Ce site, d’après les pages du fournisseur
+  limit:
+    rate: '{unit, select, requests {{max, plural, one {# requête} other {# requêtes}}} characters {{max, plural, one {# caractère} other {# caractères}}} units {{max, number} unités de quota} points {{max, number} points} content_bytes {{max, number} octets} other {{max, number}}} {every, plural, =1 {{window, select, second {par seconde} minute {par minute} hour {par heure} day {par jour} month {par mois} other {}}} other {toutes les # {window, select, second {secondes} minute {minutes} hour {heures} day {jours} month {mois} other {}}}}'
+    scope: '{scope, select, key {par clé} client_ip {par adresse IP} user {par utilisateur} other {}}'
   policy:
     auth: Accès
-    free: Offre gratuite
+    limits: Limites
+    limits_unknown: Inconnues
+    limits_none: Aucune dans les conditions
+    plan: '{count, plural, one {Offre {plan} :} other {Offre {plan}, sur # :}}'
+    plans: '{count, plural, one {# offre} other {Les # offres}}'
+    plan_default: (montrée)
+    retention: 'gardé {days, plural, one {# jour} other {# jours}} au plus'
+    more_limits: '{count, plural, one {# limite de plus} other {# limites de plus}}'
     commercial: Usage commercial
+    reuse: Cache, stockage, partage
+    caching: Cache
+    storage: Stocker
+    redistribution: Redistribuer
+    open_source: Code ouvert
+    required: exigé
+    ttl: '{seconds, number} s au plus'
+    user_agent: un User-Agent identifié
     attribution: Crédit
-    page: Conditions
+    declared: Déclarée par
+    verified: 'vérifiée le {date}'
+    not_verified: pas encore vérifiée
+    terms: Conditions
+    page: Politique d’usage
     undeclared: Politique d’usage pas encore déclarée. Le mainteneur du fournisseur, ou l’entreprise qui tient l’API, peut la déclarer.
   filter:
     search: Chercher dans les cartes
@@ -406,6 +436,18 @@ apis:
     family: Famille
     capability: Capacité
     reset: Effacer les filtres
+policies:
+  title: Politiques d’usage
+  description: 'Chaque fournisseur de l’écosystème Omni et sa politique d’usage : accès, limites, usage commercial, cache, stockage, crédit - {declared} déclarées par les paquets des fournisseurs eux-mêmes.'
+  lead: 'Chaque fournisseur déclare ses règles en données, dans son paquet : ce qu’il faut pour appeler l’API, ses limites, ce que ses conditions permettent, le crédit à montrer, qui les a lues et quand. Un site qui installe le paquet y est tenu ; ce tableau les montre toutes.'
+  source: '{declared} déclarées par les paquets (leur policy.json, à leur tête publiée), {typed} lues par ce site sur les pages de fournisseurs pas encore construits, {none} pas encore déclarées. L’inconnu est montré inconnu, jamais permis.'
+  to_declare: Déclarer une politique →
+  search: Chercher un fournisseur
+  placeholder: 'google, fériés, interdit…'
+  count: 'Fournisseurs : {providers}'
+  provider: Fournisseur
+  sources: Lue sur
+  notes: Les notes du mainteneur
 contribute:
   eyebrow: Contribuer
   title: Maintenir un fournisseur, ou apporter son API
@@ -416,6 +458,10 @@ contribute:
     lead: 'Un fournisseur remplit le contrat d’une famille pour un service, et rien d’autre.'
     template: Partir du modèle
     template_text: '<a href="https://github.com/glitchr-omnisense/omni-provider-template">omni-provider-template</a> porte un squelette par famille ; <code>bin/init &lt;famille&gt; &lt;service&gt;</code> remplit les noms, et sa suite est verte avant la première ligne.'
+    declarative: Ou le déclarer en données
+    declarative_text: 'Un service qui répond à un simple appel HTTP par question peut être un fournisseur sans code : un fichier de données qui nomme ses points d’accès et range ses réponses dans les modèles de la famille, chargé par la famille elle-même. Nager.Date et OpenHolidays, chez omnical, sont écrits ainsi - <a href="{url}">un fournisseur en fichier de données</a>.'
+    policy: Déclarer sa politique d’usage
+    policy_text: 'Chaque fournisseur porte un <code>policy.json</code> : ses limites, ce que ses conditions permettent (usage commercial, cache, stockage, redistribution), le crédit à montrer, ce qu’une requête doit porter, où et quand les conditions ont été lues. Un site qui l’installe y est tenu, et la <a href="{url}">déclaration</a> est vérifiée contre le schéma d’omnisense/contracts.'
     suite: Passer la suite de conformité de la famille
     suite_text: 'Chaque cœur livre sa suite en trait PHPUnit (<code>&lt;Cœur&gt;\Testing</code>). Le fournisseur y est monté sur des réponses enregistrées (<code>MockHttpClient</code>) : la suite ne touche jamais au réseau.'
     bare: Prouver qu’il tourne hors de tout cadre
@@ -438,13 +484,13 @@ contribute:
     review: Relire son fournisseur
     review_text: 'Lire le paquet qui appelle son API : les points d’accès, les erreurs qu’il traduit, les limites qu’il respecte. Un ticket ou une demande de fusion suffit.'
     policy: Déclarer sa politique d’usage en données
-    policy_text: 'Chaque fournisseur porte sa politique en données : l’accès qu’il demande, une offre gratuite, l’usage commercial sur cette offre, le crédit à montrer (<code>Policy</code> : auth, free, commercial, attribution, credit, terms). Une application la lit avant d’appeler l’API, et montre le crédit comme il est demandé.'
+    policy_text: 'Chaque fournisseur porte sa politique en données, dans son propre <code>policy.json</code> : les limites, les droits (usage commercial, cache, stockage, redistribution), le crédit à montrer, ce que chaque requête doit porter, qui a lu les conditions et quand. Une application y est tenue avant de vous appeler ; un site peut seulement la resserrer. <a href="{url}">Déclarer sa politique</a>, <a href="{limits}">fixer ses limites</a>, et voir <a href="{table}">toutes les politiques déclarées</a>.'
     comaintain: Le co-maintenir
     comaintain_text: 'Être nommé dans son CODEOWNERS : les changements de l’API arrivent dans le paquet quand ils sortent, pas quand un utilisateur les remarque.'
     listed: Être référencé
     listed_text: 'L’API a sa carte au catalogue, avec sa politique et un lien vers ses conditions ; un fournisseur relu le dit.'
     cta: Relire ou déclarer son API
-    see: Voir les fournisseurs publiés
+    see: Toutes les politiques d’usage
   wanted:
     title: Recherchés
     lead: '{wanted} fournisseurs cherchent un mainteneur : de nouvelles familles, et des services qui manquent aux familles publiées.'

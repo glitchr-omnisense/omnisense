@@ -28,6 +28,7 @@ packages:
     repository: glitchr-omnisense/omnipulse-bing-webmaster
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnipulse
     verification: partial
     verification_note: 'Positions are passed as Bing gives them (not verified against a live account).'
@@ -48,6 +49,7 @@ packages:
     repository: glitchr-omnisense/omnipulse-ga4
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnipulse
     verification: partial
     verification_note: '- Not verified live: no Google account was used.'
@@ -67,6 +69,7 @@ packages:
     repository: glitchr-omnisense/omnipulse-github-sponsors
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnipulse
     verification: partial
     verification_note: "- Verified live (2026-10-24, a token): glitchr-studio's listing; sindresorhus's tiers and two sponsors. — - Not verified live: an active goal (none at hand)."
@@ -84,6 +87,7 @@ packages:
     repository: glitchr-omnisense/omnipulse-google-reviews
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnipulse
     verification: partial
     verification_note: "Documentation: the options, the calls, Google's terms, what was verified. — Not verified in real: no key - but for the link to write a review, which answered."
@@ -102,6 +106,7 @@ packages:
     repository: glitchr-omnisense/omnipulse-liberapay
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnipulse
     verification: verified
     verification_note: "- Verified live without a key (2026-10-24): the Liberapay team's profile."
@@ -121,6 +126,7 @@ packages:
     repository: glitchr-omnisense/omnipulse-matomo
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnipulse
     verification: partial
     verification_note: '- Verified live (docker compose run --rm omnipulse live, 2026-10-24): demo.matomo.cloud, site 1, anonymous - the whole site over the last seven days, then entry pages over two days. — - Not verified: a self-hosted installation with a token.'
@@ -142,6 +148,7 @@ packages:
     repository: glitchr-omnisense/omnipulse-opencollective
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnipulse
     verification: partial
     verification_note: "- Verified live without a key (2026-10-24): webpack's profile, tiers and three backers. — - Not verified: a personal token."
@@ -161,6 +168,7 @@ packages:
     repository: glitchr-omnisense/omnipulse-plausible
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnipulse
     verification: partial
     verification_note: '- Not verified live: no Plausible key was used.'
@@ -181,6 +189,7 @@ packages:
     repository: glitchr-omnisense/omnipulse-search-console
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnipulse
     verification: partial
     verification_note: '- Not verified live: no Google account was used.'
@@ -197,6 +206,7 @@ packages:
     repository: glitchr-omnisense/omnipulse-tripadvisor
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnipulse
     verification: partial
     verification_note: "Documentation: the options, the calls, Tripadvisor's display rules, what was verified. — Not verified in real: no key."
@@ -213,6 +223,7 @@ packages:
     repository: glitchr-omnisense/omnipulse-trustpilot
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnipulse
     verification: partial
     verification_note: "Documentation: the options, the calls, Trustpilot's terms, what was verified. — Not verified in real: no key."
@@ -245,6 +256,8 @@ packages:
       - omnipulse
     repository: glitchr-omnisense/omnipulse
     branch: 1.x
+    requires:
+      - omnisense/contracts
     verification: partial
     verification_note: "- Verified live, earlier: Matomo's public demo (2026-10-24, 2026-10-26); Open Collective without a key, Liberapay's public.json, GitHub's GraphQL API with a token (2026-10-24). — - Not verified live: Search Console, Bing Webmaster, Plausible, Google Analytics, and none of the review platforms (each needs an account and a key)."
     docs: true

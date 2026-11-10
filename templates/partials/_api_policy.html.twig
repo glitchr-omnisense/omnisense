@@ -1,0 +1,72 @@
+{#
+ # A usage policy's parts, as the provider cards of /apis and the table of
+ # /apis/policies show them (App\Catalogue\Api\Policy): what it takes to
+ # call the provider, its limits in plain words, the permissions as facts -
+ # "unknown" shown as unknown, never as allowed -, the credit, who declared
+ # it and when it was verified.
+ #}
+{% macro access(policy) %}{{ ('@messages.apis.auth.' ~ policy.access)|trans }}{% if policy.userAgent %}<span class="om-policy-more">{{ '@messages.apis.policy.user_agent'|trans }}</span>{% endif %}{% endmacro %}
+
+{% macro limits(policy, shown = null, more = null) %}
+{%- if policy.plan %}<span class="om-policy-plan">{{ '@messages.apis.policy.plan'|trans({plan: policy.plan, count: policy.plans|length}) }}</span>{% endif -%}
+{{ _self.limit_list(policy.limits, shown, more) }}
+{% endmacro %}
+
+{% macro limit_list(limits, shown = null, more = null) %}
+{%- if limits is null -%}
+<span class="om-fact is-unknown">{{ '@messages.apis.policy.limits_unknown'|trans }}</span>
+{%- elseif limits is empty -%}
+<span class="om-fact is-yes">{{ '@messages.apis.policy.limits_none'|trans }}</span>
+{%- else -%}
+<ul class="om-policy-limits">
+    {%- for limit in shown ? limits|slice(0, shown) : limits %}
+    <li>{{ '@messages.apis.limit.rate'|trans({max: limit.max, unit: limit.unit|replace({'-': '_'}), every: limit.every, window: limit.window}) }}
+        {%- if limit.scope != 'application' %} {{ '@messages.apis.limit.scope'|trans({scope: limit.scope|replace({'-': '_'})}) }}{% endif %}
+        {%- if limit.operations is not empty %} <span class="om-policy-ops">({{ limit.operations|join(', ') }})</span>{% endif %}</li>
+    {%- endfor %}
+    {%- if shown and limits|length > shown %}
+    <li><a href="{{ more }}">{{ '@messages.apis.policy.more_limits'|trans({count: limits|length - shown}) }}</a></li>
+    {%- endif %}
+</ul>
+{%- endif -%}
+{% endmacro %}
+
+{# The plans a policy declares: each one's limits, the default's shown first by limits(). #}
+{% macro plans(policy) %}
+{%- if policy.plans|length > 1 -%}
+<details class="om-policy-plans">
+    <summary>{{ '@messages.apis.policy.plans'|trans({count: policy.plans|length}) }}</summary>
+    <dl>
+        {%- for name in policy.plans %}
+        <div><dt><code>{{ name }}</code>{% if name == policy.plan %} <small>{{ '@messages.apis.policy.plan_default'|trans }}</small>{% endif %}</dt>
+            <dd>{{ _self.limit_list(policy.planLimits[name]) }}</dd></div>
+        {%- endfor %}
+    </dl>
+</details>
+{%- endif -%}
+{% endmacro %}
+
+{% macro permission(value) %}<span class="om-fact is-{{ {allowed: 'yes', contract: 'partial', forbidden: 'no'}[value] ?? 'unknown' }}">{{ ('@messages.apis.permission.' ~ value)|trans }}</span>{% endmacro %}
+
+{% macro reuse(policy) %}
+<span class="om-policy-reuse">
+    <span><i>{{ '@messages.apis.policy.caching'|trans }}</i> {{ _self.permission(policy.caching) }}{% if policy.cacheTtl %} <small>{{ '@messages.apis.policy.ttl'|trans({seconds: policy.cacheTtl}) }}</small>{% endif %}</span>
+    <span><i>{{ '@messages.apis.policy.storage'|trans }}</i> {{ _self.permission(policy.storage) }}{% if policy.retention is not null %} <small>{{ '@messages.apis.policy.retention'|trans({days: (policy.retention / 86400)|round(0, 'ceil')}) }}</small>{% endif %}</span>
+    <span><i>{{ '@messages.apis.policy.redistribution'|trans }}</i> {{ _self.permission(policy.redistribution) }}</span>
+    {%- if policy.openSource %}<span><i>{{ '@messages.apis.policy.open_source'|trans }}</i> <span class="om-fact is-partial">{{ '@messages.apis.policy.required'|trans }}</span></span>{% endif %}
+</span>
+{% endmacro %}
+
+{% macro attribution(policy) %}
+{%- set fact = {required: 'partial', 'per-item': 'partial', 'not-required': 'yes'}[policy.attribution] ?? 'unknown' -%}
+<span class="om-fact is-{{ fact }}">{{ ('@messages.apis.attribution.' ~ policy.attribution)|trans }}</span>
+{%- if policy.credit %} {% if policy.creditUrl %}<a href="{{ policy.creditUrl }}" rel="noopener"><q>{{ policy.credit }}</q></a>{% else %}<q>{{ policy.credit }}</q>{% endif %}{% endif %}
+{%- if policy.licence %}<span class="om-policy-more">{{ policy.licence }}</span>{% endif %}
+{% endmacro %}
+
+{% macro declared(policy) %}{{ ('@messages.apis.declared.' ~ policy.declaredBy)|trans }}{% if policy.verifiedAt %}<span class="om-policy-more">{{ '@messages.apis.policy.verified'|trans({date: policy.verifiedAt}) }}</span>{% else %}<span class="om-policy-more">{{ '@messages.apis.policy.not_verified'|trans }}</span>{% endif %}{% endmacro %}
+
+{% macro sources(policy) %}
+{%- if policy.terms %}<a href="{{ policy.terms }}" rel="noopener">{{ '@messages.apis.policy.terms'|trans }}</a>{% endif %}
+{%- if policy.policyPage and policy.policyPage != policy.terms %} <a href="{{ policy.policyPage }}" rel="noopener">{{ '@messages.apis.policy.page'|trans }}</a>{% endif %}
+{% endmacro %}

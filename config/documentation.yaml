@@ -21,7 +21,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: ca27550f45c7f0cefe01509427cd29590248d9ac
+        ref: 16c8da147510df33aefad4ad0df3c380a9b245cb
         pinned: branch-head
         path: docs/
   flowjs:
@@ -845,6 +845,116 @@ packages:
         ref: 06d4581294187ebb17c96b2210117f47c779b7b4
         pinned: branch-head
         path: docs/
+  omnical:
+    package: omnisense/omnical
+    repository: glitchr-omnisense/omnical
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 77180f56ffa1cad4360d2264802d34ac181b2ae0
+        pinned: branch-head
+        path: docs/
+  omnical-caldav:
+    package: omnical/caldav
+    repository: glitchr-omnisense/omnical-caldav
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 2085edaa07a57fefc23fef9b3f21d56d7237d1a8
+        pinned: branch-head
+        path: docs/
+  omnical-google:
+    package: omnical/google
+    repository: glitchr-omnisense/omnical-google
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: f8fe2d30aa0fa1246ba6d24141051c68ec533a78
+        pinned: branch-head
+        path: docs/
+  omnical-microsoft:
+    package: omnical/microsoft
+    repository: glitchr-omnisense/omnical-microsoft
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 84e06e64b3f13208511aea5fffc75287dfb7e28f
+        pinned: branch-head
+        path: docs/
+  omnical-nager:
+    package: omnical/nager
+    repository: glitchr-omnisense/omnical-nager
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 76619d5f72e5971bef9bc25382ef38babf663e03
+        pinned: branch-head
+        path: docs/
+  omnical-openholidays:
+    package: omnical/openholidays
+    repository: glitchr-omnisense/omnical-openholidays
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: b7fd1527c82eb0f09926ee35723a2ca3fcd31b6e
+        pinned: branch-head
+        path: docs/
+  omnicrawl:
+    package: omnisense/omnicrawl
+    repository: glitchr-omnisense/omnicrawl
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: f300d01bb55a84bff09aec7890c4a11d4ce11018
+        pinned: branch-head
+        path: docs/
+  omnicrawl-apify:
+    package: omnicrawl/apify
+    repository: glitchr-omnisense/omnicrawl-apify
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: cce6ffd226f3c2f476162795f143a2413ee00e2a
+        pinned: branch-head
+        path: docs/
+  omnicrawl-firecrawl:
+    package: omnicrawl/firecrawl
+    repository: glitchr-omnisense/omnicrawl-firecrawl
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: ef80fd86b6c63cfcba70dffcb9dceed45eb14480
+        pinned: branch-head
+        path: docs/
+  omnicrawl-scrapingbee:
+    package: omnicrawl/scrapingbee
+    repository: glitchr-omnisense/omnicrawl-scrapingbee
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 4a9e7bfce6005fe31654b0b7e5cec1b66860b1ae
+        pinned: branch-head
+        path: docs/
+  omnicrawl-zyte:
+    package: omnicrawl/zyte
+    repository: glitchr-omnisense/omnicrawl-zyte
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: dab406e99bfbe98cf0c793c362eefa2858dd1498
+        pinned: branch-head
+        path: docs/
   omnidns:
     package: omnisense/omnidns
     repository: glitchr-omnisense/omnidns
@@ -1635,6 +1745,66 @@ packages:
         ref: 9bf4fb209674c5aa13a5b28a0c38b4ecb06b44e9
         pinned: branch-head
         path: docs/
+  omnilang:
+    package: omnisense/omnilang
+    repository: glitchr-omnisense/omnilang
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: d22f166f4ccfc6c19c4a62dc12052c9b1f514a61
+        pinned: branch-head
+        path: docs/
+  omnilang-amazon:
+    package: omnilang/amazon
+    repository: glitchr-omnisense/omnilang-amazon
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 2b618ebcae5bee0fbb3dea342dc3dd00b7abaffd
+        pinned: branch-head
+        path: docs/
+  omnilang-azure:
+    package: omnilang/azure
+    repository: glitchr-omnisense/omnilang-azure
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 7228051d46111d20d8539692bfbcc02086c77751
+        pinned: branch-head
+        path: docs/
+  omnilang-deepl:
+    package: omnilang/deepl
+    repository: glitchr-omnisense/omnilang-deepl
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: c2d2d0d560b26f18fab3eb8884ab4cf53d608951
+        pinned: branch-head
+        path: docs/
+  omnilang-google:
+    package: omnilang/google
+    repository: glitchr-omnisense/omnilang-google
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 36b1b458f8ec9f1547b2207ab685ee2a5bbd8d50
+        pinned: branch-head
+        path: docs/
+  omnilang-libretranslate:
+    package: omnilang/libretranslate
+    repository: glitchr-omnisense/omnilang-libretranslate
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 2ffa17364ecddb0c228fdfd0fabc96af4481450e
+        pinned: branch-head
+        path: docs/
   omnilex:
     package: omnisense/omnilex
     repository: glitchr-omnisense/omnilex
@@ -2365,6 +2535,26 @@ packages:
         ref: 65fd6aab6f2790213c84c4cfaf22c097dbf9274a
         pinned: branch-head
         path: docs/
+  omnistate-ecb:
+    package: omnistate/ecb
+    repository: glitchr-omnisense/omnistate-ecb
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 3d7c4d9c35adfeb7d9631cbb85460de8d906d821
+        pinned: branch-head
+        path: docs/
+  omnistate-eurostat:
+    package: omnistate/eurostat
+    repository: glitchr-omnisense/omnistate-eurostat
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: bdd3ab15b5e41a847d1f28becc6ece3d8af8d744
+        pinned: branch-head
+        path: docs/
   omnistate-iana:
     package: omnistate/iana
     repository: glitchr-omnisense/omnistate-iana
@@ -2373,6 +2563,16 @@ packages:
       1.x:
         branch: 1.x
         ref: 37166e8ec82af40b6ede576456df9fc6e520173f
+        pinned: branch-head
+        path: docs/
+  omnistate-insee:
+    package: omnistate/insee
+    repository: glitchr-omnisense/omnistate-insee
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 69a402b9ce14f8a69a80d78041a7c57a10a739bf
         pinned: branch-head
         path: docs/
   omnistate-matchid:

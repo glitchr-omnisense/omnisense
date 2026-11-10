@@ -28,6 +28,9 @@ parameters:
     # The families and APIs, their capabilities, statuses and usage policies: the
     # cards of /apis and the wanted list of /contribute (App\Catalogue\Api\Directory).
     app.apis_file: '%kernel.project_dir%/config/apis.yaml'
+    # The usage policies the providers' packages declare (their policy.json at their published head),
+    # written by app:policies:import at build time (App\Catalogue\Api\DeclaredPolicies).
+    app.policies_file: '%kernel.project_dir%/config/policies.json'
     # The header's star count, written by app:stars:fetch at build time.
     app.github_file: '%kernel.project_dir%/config/github.yaml'
     app.docs_dir: '%env(default:app.docs_dir_default:DOCS_DIR)%'
@@ -101,6 +104,8 @@ when@test:
         app.compatibility_file: '%kernel.project_dir%/tests/Fixtures/compatibility.yaml'
         # No star count: the header shows the button alone (PagesTest).
         app.github_file: '%kernel.project_dir%/tests/Fixtures/github-missing.yaml'
+        # One provider of the tests' catalogue declares its policy (omnitrade/stripe), another does not.
+        app.policies_file: '%kernel.project_dir%/tests/Fixtures/policies.json'
         app.docs_dir: '%kernel.project_dir%/tests/Fixtures/docs'
         app.news_dir: '%kernel.project_dir%/tests/Fixtures/news'
         app.catalogue.repos_dir: '%kernel.project_dir%/tests/Fixtures/repos'

@@ -2,6 +2,7 @@
 
 namespace App\Tests\Unit;
 
+use App\Catalogue\Api\DeclaredPolicies;
 use App\Catalogue\Api\Directory;
 use App\Catalogue\Api\Policy;
 use App\Catalogue\Api\Status;
@@ -19,7 +20,7 @@ final class ApiDirectoryTest extends TestCase
     {
         $root = \dirname(__DIR__, 2);
 
-        return new Directory(new Catalogue($root.'/catalog'), $root.'/config/apis.yaml');
+        return new Directory(new Catalogue($root.'/catalog'), new DeclaredPolicies($root.'/config/policies.json'), $root.'/config/apis.yaml');
     }
 
     public function testTheFileReadsAndEveryAvailableFamilyIsInTheCatalogue(): void
@@ -43,19 +44,67 @@ final class ApiDirectoryTest extends TestCase
         }
     }
 
-    public function testEveryDeclaredPolicySaysWhereAndWhenItWasRead(): void
+    public function testEveryPolicySaysWhoDeclaredItAndWhereAndWhenItWasRead(): void
     {
-        $policies = 0;
+        $declared = $typed = 0;
         foreach (self::directory()->providers() as $provider) {
-            if (null === $provider->policy) {
+            $policy = $provider->policy;
+            if (null === $policy) {
                 continue;
             }
-            ++$policies;
-            self::assertStringStartsWith('https://', (string) $provider->policy->terms, $provider->package);
-            self::assertMatchesRegularExpression('/^\d{4}-\d{2}-\d{2}$/', (string) $provider->policy->read, $provider->package);
             self::assertSame($provider->family, explode('/', $provider->package)[0], $provider->package.' is named after its family');
+            if ($policy->declared) {
+                // Its package's policy.json, at the published head it was read at.
+                ++$declared;
+                self::assertNotNull($provider->released, $provider->package.' declares its policy: it is released');
+                self::assertMatchesRegularExpression('/^[0-9a-f]{40}$/', (string) $policy->ref, $provider->package);
+                self::assertContains($policy->declaredBy, ['maintainer', 'provider', 'site'], $provider->package);
+            } else {
+                // Typed by the site for a provider with no package yet.
+                ++$typed;
+                self::assertNull($provider->released, $provider->package.': a released provider declares its own');
+                self::assertSame('site', $policy->declaredBy);
+                self::assertStringStartsWith('https://', (string) $policy->terms, $provider->package);
+                self::assertMatchesRegularExpression('/^\d{4}-\d{2}-\d{2}$/', (string) $policy->verifiedAt, $provider->package);
+            }
         }
-        self::assertGreaterThan(30, $policies);
+        self::assertGreaterThanOrEqual(80, $declared, 'the families moved onto omnisense/contracts on 2026-11-10');
+        self::assertGreaterThanOrEqual(15, $typed, 'the providers wanted or reserved');
+    }
+
+    public function testADeclaredPolicyIsShownAsItIsWrittenUnknownStayingUnknown(): void
+    {
+        $byPackage = [];
+        foreach (self::directory()->providers() as $provider) {
+            $byPackage[$provider->package] = $provider;
+        }
+        $insee = $byPackage['omnistate/insee']->policy;
+        self::assertTrue($insee->declared);
+        self::assertSame('none', $insee->access, 'no key');
+        self::assertSame(30, $insee->limits[0]['max']);
+        self::assertSame('minute', $insee->limits[0]['window']);
+        self::assertSame('allowed', $insee->commercial);
+        self::assertSame('unknown', $insee->caching, 'the terms do not address it: unknown, not allowed');
+        self::assertSame('unknown', Policy::fact($insee->caching));
+        self::assertSame('required', $insee->attribution);
+        self::assertSame('maintainer', $insee->declaredBy);
+        self::assertSame('2026-11-10', $insee->verifiedAt);
+        // The schema says a key is needed; the site says how it is obtained.
+        self::assertSame('oauth', $byPackage['omnical/google']->policy->access);
+        self::assertSame('key', $byPackage['omnilang/deepl']->policy->access);
+        self::assertSame('none', $byPackage['omnical/nager']->policy->access, 'a declarative provider declares its policy too');
+        // A policy with plans (contracts' `plans`): the limits shown are the default plan's, each plan's kept.
+        $azure = $byPackage['omnilang/azure']->policy;
+        self::assertSame('f0', $azure->plan);
+        self::assertContains('s1', $azure->plans);
+        self::assertSame($azure->limits, $azure->planLimits['f0']);
+        self::assertSame('characters', $azure->limits[0]['unit']);
+        // A provider with no package: what the site read, its limits unknown.
+        $adzuna = $byPackage['omnijob/adzuna']->policy;
+        self::assertFalse($adzuna->declared);
+        self::assertNull($adzuna->limits);
+        self::assertSame('contract', $adzuna->commercial);
+        self::assertSame('unknown', $adzuna->storage);
     }
 
     public function testTheReleasedProvidersAreCardsWithoutAPolicyUntilOneIsDeclared(): void
@@ -64,7 +113,8 @@ final class ApiDirectoryTest extends TestCase
         self::assertNotNull($omnibus);
         self::assertGreaterThan(20, \count($omnibus->providers), 'the carriers, from catalog/omnibus.yaml');
         self::assertSame(Status::Available, $omnibus->providers[0]->status);
-        self::assertSame('unknown', $omnibus->providers[0]->getAuth());
+        self::assertSame('undeclared', $omnibus->providers[0]->getAuth());
+        self::assertSame('undeclared', $omnibus->providers[0]->getCommercial());
     }
 
     public function testTheMergedFamiliesProvidersAreListedUnderTheFamilyTheyWentInto(): void
@@ -93,8 +143,9 @@ final class ApiDirectoryTest extends TestCase
         self::assertSame(['reviews'], $byPackage['omnipulse/google-reviews']->capabilities);
         self::assertSame(['sponsors'], $byPackage['omnipulse/liberapay']->capabilities);
         self::assertSame(['signature'], $directory->family('omnisign')->providers[0]->capabilities, 'a released signature provider does not check identities');
-        self::assertSame(Status::Reserved, $directory->family('omnilang')->status);
-        self::assertSame(Status::Reserved, $directory->family('omnical')->status);
+        // Built on 2026-11-10: no longer reserved.
+        self::assertSame(Status::Available, $directory->family('omnilang')->status);
+        self::assertSame(Status::Available, $directory->family('omnical')->status);
     }
 
     public function testADeclaredStatusMatchesTheCatalogue(): void
@@ -115,13 +166,45 @@ final class ApiDirectoryTest extends TestCase
         self::assertSame(['available', 'available', 'reserved', 'reserved'], [$bill['omnibill/odoo'], $bill['omnibill/pennylane'], $bill['omnibill/xero'], $bill['omnibill/quickbooks']]);
         self::assertSame(Status::Available, $directory->family('omnitravel')->status);
         self::assertSame(Status::Available, $directory->family('omnistay')->status);
-        self::assertSame(Status::Reserved, $directory->family('omnicrawl')->status);
+        self::assertSame(Status::Available, $directory->family('omnicrawl')->status);
+        foreach (['omnilang', 'omnical', 'omnicrawl'] as $built) {
+            foreach ($directory->family($built)->providers as $provider) {
+                self::assertSame(Status::Available, $provider->status, $provider->package);
+                self::assertTrue($provider->policy?->declared, $provider->package.' declares its policy');
+            }
+        }
+        $state = $statuses('omnistate');
+        self::assertSame(['available', 'available', 'available'], [$state['omnistate/insee'], $state['omnistate/eurostat'], $state['omnistate/ecb']], 'statistics: the capability omnistate gained');
     }
 
-    public function testAPolicyRefusesAValueItDoesNotKnow(): void
+    public function testATypedPolicyRefusesAValueItDoesNotKnow(): void
     {
         $this->expectException(\InvalidArgumentException::class);
-        Policy::fromArray(['auth' => 'password']);
+        Policy::fromTyped(['auth' => 'password']);
+    }
+
+    public function testAReleasedProviderIsNeverTypedAPolicy(): void
+    {
+        $root = \dirname(__DIR__, 2);
+        $file = tempnam(sys_get_temp_dir(), 'apis');
+        file_put_contents($file, <<<'YAML'
+            capabilities:
+              audience: { en: Audience, fr: Audience }
+            families:
+              omnipulse:
+                status: available
+                capabilities: [audience]
+                providers:
+                  omnipulse/matomo:
+                    status: available
+                    policy: { auth: none, commercial: yes, attribution: none, terms: 'https://matomo.org', read: '2026-11-10' }
+            YAML);
+        try {
+            $this->expectExceptionMessage('omnipulse/matomo is released: its policy is its package\'s policy.json');
+            (new Directory(new Catalogue($root.'/catalog'), new DeclaredPolicies($root.'/tests/Fixtures/none.json'), $file))->families();
+        } finally {
+            unlink($file);
+        }
     }
 
     public function testTheStarCountIsReadOrLeftOut(): void

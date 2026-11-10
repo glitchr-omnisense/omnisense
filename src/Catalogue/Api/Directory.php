@@ -3,17 +3,22 @@
 namespace App\Catalogue\Api;
 
 use App\Catalogue\Catalogue;
+use App\Catalogue\Package;
 use App\Catalogue\Tier;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Yaml\Yaml;
 
 /**
- * The families and the APIs of the ecosystem, as the cards of /apis and the
- * wanted list of /contribute show them: config/apis.yaml (statuses,
- * capabilities, usage policies, what is wanted), joined to the catalogue
+ * The families and the APIs of the ecosystem, as the cards of /apis, the
+ * policies page and the wanted list of /contribute show them: config/apis.yaml
+ * (statuses, capabilities, what is wanted), joined to the catalogue
  * (catalog/*.yaml: the released packages, their descriptions and
- * repositories). A provider the catalogue lists and the file does not is a
- * card too, its policy not declared yet. A family merged into another
+ * repositories) and to the usage policies the packages declare
+ * (config/policies.json, DeclaredPolicies). A provider the catalogue lists
+ * and the file does not is a card too. A released provider's policy is its
+ * package's own, or "not declared yet": config/apis.yaml types a policy only
+ * for a provider wanted or reserved, with no package yet - a `policy:` block
+ * on a released one is an error. A family merged into another
  * (`merged:`) has no card of its own: its released providers are listed under
  * the family it went into, with the capabilities it brought.
  *
@@ -30,6 +35,7 @@ class Directory
 
     public function __construct(
         private readonly Catalogue $catalogue,
+        private readonly DeclaredPolicies $declared,
         #[Autowire('%app.apis_file%')] private readonly string $file,
     ) {
     }
@@ -89,17 +95,37 @@ class Directory
         return $used;
     }
 
-    /** @return array{families: int, providers: int, wanted: int, policies: int} */
+    /** @return array{families: int, providers: int, wanted: int, policies: int, declared: int, typed: int} */
     public function counts(): array
     {
         $providers = $this->providers();
+        $declared = \count(array_filter($providers, static fn (Provider $p): bool => true === $p->policy?->declared));
+        $typed = \count(array_filter($providers, static fn (Provider $p): bool => false === $p->policy?->declared));
 
         return [
             'families' => \count($this->families()),
             'providers' => \count($providers),
             'wanted' => \count($this->wanted()),
-            'policies' => \count(array_filter($providers, static fn (Provider $p): bool => null !== $p->policy)),
+            'policies' => $declared + $typed,
+            'declared' => $declared,
+            'typed' => $typed,
         ];
+    }
+
+    /** A provider's policy: its package's declaration, or the one config/apis.yaml types for a provider with no package. */
+    private function policyOf(string $package, ?Package $released, array $entry): ?Policy
+    {
+        if (null !== $declared = $this->declared->of($package)) {
+            return Policy::fromDeclared($declared['policy'], isset($entry['access']) ? (string) $entry['access'] : null, $declared['ref'], $declared['file']);
+        }
+        if (!isset($entry['policy'])) {
+            return null;
+        }
+        if (null !== $released) {
+            throw new \InvalidArgumentException(\sprintf('%s: %s is released: its policy is its package\'s policy.json (app:policies:import), not a `policy:` block here.', $this->file, $package));
+        }
+
+        return Policy::fromTyped((array) $entry['policy']);
     }
 
     private function load(): void
@@ -143,7 +169,7 @@ class Directory
                         status: Status::Available,
                         capabilities: $sourceCapabilities,
                         helpWanted: false,
-                        policy: null,
+                        policy: $this->policyOf($package->getName(), $package, []),
                         released: $package,
                         successor: null === $rename ? null : $name.'/'.$short,
                     );
@@ -163,7 +189,7 @@ class Directory
                     status: null !== $released ? Status::Available : (Status::tryFrom((string) ($entry['status'] ?? '')) ?? throw new \InvalidArgumentException(\sprintf('%s: provider "%s" has no valid status.', $this->file, $package))),
                     capabilities: $own,
                     helpWanted: (bool) ($entry['help_wanted'] ?? false),
-                    policy: isset($entry['policy']) ? Policy::fromArray((array) $entry['policy']) : null,
+                    policy: $this->policyOf($package, $released, (array) $entry),
                     released: $released,
                 );
             }

@@ -26,7 +26,7 @@
             <ul>
                 <li><a href="{{ path('app_docs') }}" {{ route starts with 'app_docs' or route starts with 'app_guide' or route starts with 'app_manual' ? 'aria-current="page"' }}>{{ '@messages.nav.docs'|trans }}</a></li>
                 <li><a href="{{ path('app_packages') }}" {{ route starts with 'app_packages' or route starts with 'app_package.' or route starts with 'app_family' ? 'aria-current="page"' }}>{{ '@messages.nav.packages'|trans }}</a></li>
-                <li><a href="{{ path('app_apis') }}" {{ route starts with 'app_apis' ? 'aria-current="page"' }}>{{ '@messages.nav.apis'|trans }}</a></li>
+                <li><a href="{{ path('app_apis') }}" {{ route starts with 'app_apis' or route == 'app_api_policies' ? 'aria-current="page"' }}>{{ '@messages.nav.apis'|trans }}</a></li>
                 <li><a href="{{ path('app_news') }}" {{ route starts with 'app_news' ? 'aria-current="page"' }}>{{ '@messages.nav.blog'|trans }}</a></li>
                 <li><a href="{{ path('app_search') }}" {{ route starts with 'app_search' ? 'aria-current="page"' }}>{{ '@messages.nav.search'|trans }}</a></li>
                 <li><a href="{{ path('app_support') }}" {{ route starts with 'app_support' ? 'aria-current="page"' }}>{{ '@messages.nav.support'|trans }}</a></li>
@@ -71,6 +71,7 @@
                     <li><a href="{{ path('app_docs') }}">{{ '@messages.nav.docs'|trans }}</a></li>
                     <li><a href="{{ path('app_packages') }}">{{ '@messages.nav.packages'|trans }}</a></li>
                     <li><a href="{{ path('app_apis') }}">{{ '@messages.nav.apis'|trans }}</a></li>
+                    <li><a href="{{ path('app_api_policies') }}">{{ '@messages.nav.policies'|trans }}</a></li>
                     <li><a href="{{ path('app_contribute') }}">{{ '@messages.nav.contribute'|trans }}</a></li>
                     <li><a href="{{ path('app_news') }}">{{ '@messages.nav.blog'|trans }}</a></li>
                     <li><a href="{{ path('app_search') }}">{{ '@messages.nav.search'|trans }}</a></li>

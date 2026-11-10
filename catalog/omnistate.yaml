@@ -14,11 +14,17 @@ text:
 packages:
   omnisense/omnistate:
     kind: family
-    description: 'Omnistate: one contract for what states and registries know - companies, VAT numbers, domains and networks (the Omnipay of public registers).'
+    description: "Omnistate: one contract for what states and registries know - companies, VAT numbers, domains and networks, professionals, civil records, public statistics (the Omnipay of public registers), each register's usage policy enforced."
     license: MIT
     keywords:
       - company
       - registry
+      - statistics
+      - sdmx
+      - insee
+      - eurostat
+      - ecb
+      - irl
       - siren
       - siret
       - vat
@@ -30,6 +36,8 @@ packages:
       - genealogy
     repository: glitchr-omnisense/omnistate
     branch: 1.x
+    requires:
+      - omnisense/contracts
     verification: unstated
     docs: true
   omnistate/annuaire-entreprises:
@@ -49,6 +57,7 @@ packages:
     repository: glitchr-omnisense/omnistate-annuaire-entreprises
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnistate
     verification: unstated
     docs: true
@@ -69,6 +78,48 @@ packages:
     repository: glitchr-omnisense/omnistate-annuaire-sante
     branch: 1.x
     requires:
+      - omnisense/contracts
+      - omnisense/omnistate
+    verification: unstated
+    docs: true
+  omnistate/ecb:
+    kind: provider
+    description: "Omnistate ECB: the European Central Bank's statistics from its Data Portal's SDMX web service (no key) - euro foreign exchange reference rates, key interest rates, every series by its dataflow and key."
+    license: MIT
+    keywords:
+      - ecb
+      - 'european central bank'
+      - sdmx
+      - statistics
+      - 'exchange rates'
+      - 'interest rates'
+      - euro
+      - omnistate
+    repository: glitchr-omnisense/omnistate-ecb
+    branch: 1.x
+    requires:
+      - omnisense/contracts
+      - omnisense/omnistate
+    verification: unstated
+    docs: true
+  omnistate/eurostat:
+    kind: provider
+    description: "Omnistate Eurostat: European statistics from Eurostat's dissemination API (JSON-stat 2.0, no key) - a dataset's series by its filters, its flags (provisional, estimated, break), the catalogue searched."
+    license: MIT
+    keywords:
+      - eurostat
+      - json-stat
+      - sdmx
+      - statistics
+      - hicp
+      - inflation
+      - gdp
+      - eu
+      - omnistate
+    repository: glitchr-omnisense/omnistate-eurostat
+    branch: 1.x
+    requires:
+      - omnisense/contracts
       - omnisense/omnistate
     verification: unstated
     docs: true
@@ -88,6 +139,30 @@ packages:
     repository: glitchr-omnisense/omnistate-iana
     branch: 1.x
     requires:
+      - omnisense/contracts
+      - omnisense/omnistate
+    verification: unstated
+    docs: true
+  omnistate/insee:
+    kind: provider
+    description: "Omnistate INSEE: French statistics from INSEE's macro-economic database (BDM, SDMX 2.1, no key) - the indices leases refer to (IRL, ICC, ILC, ILAT), consumer prices, every series by its idBank, with its revisions."
+    license: MIT
+    keywords:
+      - insee
+      - bdm
+      - sdmx
+      - statistics
+      - irl
+      - 'indice de reference des loyers'
+      - icc
+      - ilc
+      - ilat
+      - ipc
+      - omnistate
+    repository: glitchr-omnisense/omnistate-insee
+    branch: 1.x
+    requires:
+      - omnisense/contracts
       - omnisense/omnistate
     verification: unstated
     docs: true
@@ -107,6 +182,7 @@ packages:
     repository: glitchr-omnisense/omnistate-matchid
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnistate
     verification: unstated
     docs: true
@@ -125,6 +201,7 @@ packages:
     repository: glitchr-omnisense/omnistate-nara
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnistate
     verification: unstated
     docs: true
@@ -143,6 +220,7 @@ packages:
     repository: glitchr-omnisense/omnistate-national-archives-uk
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnistate
     verification: unstated
     docs: true
@@ -163,6 +241,7 @@ packages:
     repository: glitchr-omnisense/omnistate-openarchieven
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnistate
     verification: unstated
     docs: true
@@ -180,6 +259,7 @@ packages:
     repository: glitchr-omnisense/omnistate-vies
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnistate
     verification: unstated
     docs: true

@@ -70,6 +70,50 @@
     q { font-style: italic; color: var(--om-soft); }
     .om-fact { @include fine(.8rem, 500); line-height: 1.45; } }
 
+// The parts of a policy (partials/_api_policy), on a card and in the table.
+.om-policy-limits { margin: 0; padding: 0; list-style: none; li { margin: 0 0 .1rem; } a { @include fine(.82rem, 600); } }
+.om-policy-ops { @include mono(.75rem, 500); color: var(--om-soft); }
+.om-policy-plan { display: block; @include fine(.8rem, 600); color: var(--om-soft); }
+.om-policy-plans { margin-top: .3rem;
+    summary { cursor: pointer; @include fine(.8rem, 600); color: var(--om-blue); }
+    dl { display: grid; gap: .25rem; margin: .3rem 0 0; }
+    dl > div { display: grid; grid-template-columns: minmax(5.5rem, max-content) minmax(0, 1fr); gap: .5rem; }
+    dt code { @include mono(.78rem, 600); } dt small { @include fine(.75rem, 400); color: var(--om-soft); } dd { margin: 0; } }
+.om-policy-more { display: block; @include fine(.8rem, 400); color: var(--om-soft); }
+.om-policy-reuse { display: flex; flex-wrap: wrap; gap: .2rem .6rem;
+    > span { display: inline-flex; align-items: center; gap: .3rem; white-space: nowrap; }
+    i { font-style: normal; @include fine(.8rem, 500); color: var(--om-soft); }
+    small { @include fine(.75rem, 400); color: var(--om-soft); } }
+
+// ── The policies table (/apis/policies): a row per provider; on a phone, each row a block, its labels in the margin ──
+.om-policies-scroll { margin-top: 1rem; border-top: 1.5px solid var(--om-ink); }
+.om-policies-table { width: 100%; border-collapse: collapse; font-size: .88rem; line-height: 1.45;
+    th, td { padding: .55rem .6rem; border-bottom: 1px solid var(--om-line); text-align: left; vertical-align: top; min-width: 0; overflow-wrap: break-word; hyphens: manual; }
+    td:nth-child(2) { min-width: 6.5rem; }
+    td.om-policies-links { min-width: 6.5rem; }
+    thead th { position: sticky; top: 0; z-index: 1; background: var(--om-paper); @include fine(.78rem, 650); color: var(--om-soft); white-space: nowrap; }
+    tbody th { font-weight: 400; min-width: 11rem; }
+    tbody tr[hidden] { display: none; }
+    tbody tr:target { outline: 2px solid var(--om-blue); outline-offset: -2px; }
+    tr.is-typed > th { box-shadow: inset 3px 0 0 var(--om-warn); }
+    q { font-style: italic; color: var(--om-soft); }
+    .om-fact { @include fine(.78rem, 500); line-height: 1.45; }
+    @include narrow {
+        thead { display: none; }
+        tbody, tr, th, td { display: block; }
+        tr { padding: .5rem 0; border-bottom: 1.5px solid var(--om-line); }
+        th, td { border: 0; padding: .2rem .25rem; }
+        // The label in the margin, the cell's content beside it whatever its parts.
+        td { position: relative; min-height: 1.4rem; padding-left: 8rem;
+            &::before { content: attr(data-label); position: absolute; left: .25rem; top: .2rem; width: 7.25rem; @include cote; font-size: .78rem; }
+            &.om-policies-none { padding-left: .25rem; &::before { content: none; } } } } }
+.om-policies-name { display: block; @include display(700); font-size: 1.02rem; line-height: 1.2; }
+.om-policies-table code { display: block; margin: .1rem 0 .25rem; @include mono(.76rem, 600); }
+.om-policies-notes { margin-top: .35rem; summary { cursor: pointer; @include fine(.8rem, 600); color: var(--om-blue); } p { margin: .3rem 0 0; @include fine(.8rem, 400); color: var(--om-soft); max-width: 34rem; } }
+.om-policies-note { margin: .3rem 0 0; @include fine(.8rem, 400); color: var(--om-soft); }
+.om-policies-links { a { display: block; @include fine(.82rem, 650); text-decoration: none; &:hover { text-decoration: underline; } } }
+.om-policies-none { color: var(--om-soft); font-style: italic; }
+
 // ── The call ──
 .om-audiences { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0 clamp(1.5rem, 4vw, 3rem); @include wide { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
 .om-audiences .om-tier > header { @include wide { grid-template-columns: minmax(0, 1fr); } }

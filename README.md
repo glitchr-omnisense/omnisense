@@ -15,6 +15,7 @@ search service.
 | `news/` | the news, `<YYYY-MM-DD>-<slug>.<locale>.md`; the Atom and RSS feeds are built from them |
 | `catalog/` | the catalogue, one YAML file per family: its phrase, its packages (kind, description, repository, branch, what its README says of its verification) |
 | `config/documentation.yaml` | each package's documentation: its series, the branch each follows and the commit it is read at |
+| `config/policies.json` | the usage policies the providers' packages declare, at the commit each was read at (written by `app:policies:import`, never by hand) |
 
 A change is a pull request; each pull request builds a preview of the whole
 site (the `website` workflow's artifact).
@@ -26,6 +27,15 @@ hand and the commits already pinned; `--pin` moves every series to its
 branch's published head. A package that only reserves its name (its
 keyword `reserved`) is left out: `config/apis.yaml` shows it as reserved. No package has a release tag yet: every pinned ref
 is a branch head's commit.
+
+`bin/console app:policies:import` rewrites `config/policies.json`: the usage
+policy each provider of the catalogue declares (its `policy.json`, named in
+`extra.omnisense.policy`), read at its branch's published head from GitHub and
+exported by omnisense/contracts, which checks it against the schema; `--local`
+reads the working copies at `refs/remotes/origin/<branch>` instead. The CI
+runs it before each build; a policy that does not validate fails it. The
+cards of `/apis` and the table of `/apis/policies` show these declarations;
+`config/apis.yaml` types a policy only for a provider with no package yet.
 
 ## Build
 

@@ -29,6 +29,8 @@ packages:
       - omnishield
     repository: glitchr-omnisense/omnishield
     branch: 1.x
+    requires:
+      - omnisense/contracts
     verification: unstated
     docs: true
   omnishield/akismet:
@@ -44,6 +46,7 @@ packages:
     repository: glitchr-omnisense/omnishield-akismet
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnishield
     verification: verified
     verification_note: 'Documentation: what it calls, the credentials, the capabilities, an example run offline, the errors, the fields sent, the answers, the options, what was verified - nothing against Akismet itself: no key.'
@@ -62,6 +65,7 @@ packages:
     repository: glitchr-omnisense/omnishield-altcha
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnishield
     verification: verified
     verification_note: 'Documentation: what it calls, the credentials, the capabilities, an example run offline, the errors, the options, the widget and its script, the challenge in the page or from a route, the action, what was verified - the whole way in PHP: issued, solved by the library, verified, refused when posted again.'
@@ -80,6 +84,7 @@ packages:
     repository: glitchr-omnisense/omnishield-disposable
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnishield
     verification: verified
     verification_note: "Documentation: what it calls, the credentials, the capabilities, an example run offline, the errors, the matching, the options, the refresh, the list's licence, what was verified."
@@ -97,6 +102,7 @@ packages:
     repository: glitchr-omnisense/omnishield-recaptcha
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnishield
     verification: verified
     verification_note: "Documentation: what it calls, the credentials, the capabilities, an example run offline, the errors, the four modes, the options, the answers, the test keys, what was verified - v2 against Google with its test keys; v3 and Enterprise on answers written from Google's documentation, no key."
@@ -115,6 +121,7 @@ packages:
     repository: glitchr-omnisense/omnishield-stopforumspam
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnishield
     verification: verified
     verification_note: "Documentation: what it calls, the credentials, the capabilities, an example run offline, the errors, the options, the answer and how it is read, the terms, what was verified - lookups on the documentation's values and a Tor exit node, for real, on 2026-10-07."
@@ -132,6 +139,7 @@ packages:
     repository: glitchr-omnisense/omnishield-turnstile
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnishield
     verification: verified
     verification_note: 'Documentation: what it calls, the credentials, the capabilities, an example run offline, the errors, the options, the answers, the testing keys, what was verified - the three testing secrets against Cloudflare, on 2026-10-07.'

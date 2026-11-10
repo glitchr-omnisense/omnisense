@@ -1,10 +1,13 @@
 {#
  # A provider as a card of /apis: its name and package, its family, its
- # status, and its usage policy as config/apis.yaml declares it (the auth it
- # needs, a free tier, commercial use on it, the credit it asks for, the page
- # that says so) - "not declared yet" when the file has none. The data-*
- # attributes are what apis_controller.js filters by.
+ # status, and its usage policy - its package's policy.json, or what
+ # config/apis.yaml typed for a provider with no package yet: access, limits,
+ # commercial use, caching, storage and redistribution, the credit, who
+ # declared it and when it was verified, the terms (partials/_api_policy) -
+ # "not declared yet" when there is none. The data-* attributes are what
+ # apis_controller.js filters by.
  #}
+{% import 'partials/_api_policy.html.twig' as p %}
 {% set locale = app.request.locale|lang %}
 {% set policy = provider.policy %}
 <li class="om-card is-provider is-{{ provider.status.value }}"
@@ -23,10 +26,12 @@
     {% if provider.description %}<p class="om-card-text">{{ provider.description }}</p>{% endif %}
     {% if policy %}
     <dl class="om-policy">
-        <div><dt>{{ '@messages.apis.policy.auth'|trans }}</dt><dd>{{ ('@messages.apis.auth.' ~ policy.auth)|trans }}</dd></div>
-        <div><dt>{{ '@messages.apis.policy.free'|trans }}</dt><dd><span class="om-fact is-{{ policy.free ? 'yes' : 'no' }}">{{ (policy.free ? '@messages.apis.yes' : '@messages.apis.no')|trans }}</span></dd></div>
-        <div><dt>{{ '@messages.apis.policy.commercial'|trans }}</dt><dd><span class="om-fact is-{{ {yes: 'yes', no: 'no', conditional: 'partial', unclear: 'unknown'}[policy.commercial] }}">{{ ('@messages.apis.commercial.' ~ policy.commercial)|trans }}</span></dd></div>
-        <div><dt>{{ '@messages.apis.policy.attribution'|trans }}</dt><dd>{{ ('@messages.apis.attribution.' ~ policy.attribution)|trans }}{% if policy.credit %} <q>{{ policy.credit }}</q>{% endif %}</dd></div>
+        <div><dt>{{ '@messages.apis.policy.auth'|trans }}</dt><dd>{{ p.access(policy) }}</dd></div>
+        <div><dt>{{ '@messages.apis.policy.limits'|trans }}</dt><dd>{{ p.limits(policy, 3, path('app_api_policies') ~ '#policy-' ~ provider.package|replace({'/': '-'})) }}{{ p.plans(policy) }}</dd></div>
+        <div><dt>{{ '@messages.apis.policy.commercial'|trans }}</dt><dd>{{ p.permission(policy.commercial) }}</dd></div>
+        <div><dt>{{ '@messages.apis.policy.reuse'|trans }}</dt><dd>{{ p.reuse(policy) }}</dd></div>
+        <div><dt>{{ '@messages.apis.policy.attribution'|trans }}</dt><dd>{{ p.attribution(policy) }}</dd></div>
+        <div><dt>{{ '@messages.apis.policy.declared'|trans }}</dt><dd>{{ p.declared(policy) }}</dd></div>
     </dl>
     {% if policy.note(locale) %}<p class="om-card-note">{{ policy.note(locale) }}</p>{% endif %}
     {% else %}
@@ -39,7 +44,7 @@
     <p class="om-card-links">
         {% if provider.released %}<a href="{{ doc_url(provider.released) }}">{{ '@messages.apis.package'|trans }}</a>{% endif %}
         {% if provider.repositoryUrl %}<a href="{{ provider.repositoryUrl }}" rel="noopener">GitHub</a>{% endif %}
-        {% if policy and policy.terms %}<a href="{{ policy.terms }}" rel="noopener">{{ '@messages.apis.policy.page'|trans }}{% if policy.read %} <span class="om-card-read">({{ policy.read }})</span>{% endif %}</a>{% endif %}
+        {% if policy %}{{ p.sources(policy) }}{% endif %}
         {% if provider.helpWanted %}<a href="{{ api_issue(stars.repository, templates.provider, '[' ~ provider.package ~ '] ') }}" rel="noopener">{{ '@messages.apis.maintain'|trans }}</a>
         {% elseif provider.status.value == 'available' %}<a href="{{ api_issue(stars.repository, templates.company, '[' ~ provider.package ~ '] ') }}" rel="noopener">{{ '@messages.apis.review'|trans }}</a>{% endif %}
     </p>

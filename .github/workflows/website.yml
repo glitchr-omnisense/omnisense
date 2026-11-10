@@ -125,6 +125,14 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: php bin/console app:stars:fetch --no-interaction
 
+      # The usage policies the providers' packages declare: each one's policy.json at its published head
+      # (git ls-remote, then raw.githubusercontent.com at that commit), checked by omnisense/contracts' export
+      # against the schema, into config/policies.json. A policy that does not validate fails here, and the
+      # build would fail on it too (App\Catalogue\Api\DeclaredPolicies); a package GitHub did not answer
+      # for keeps its committed entry.
+      - name: Usage policies
+        run: php bin/console app:policies:import --no-interaction
+
       - name: Build
         run: bin/omnibridge-static build --out=dist --github-pages
 

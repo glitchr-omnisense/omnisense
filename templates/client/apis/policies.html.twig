@@ -1,0 +1,101 @@
+{#
+ # Every provider and its usage policy, one row each: the public face of
+ # "each provider declares its rules". A released provider's policy is its
+ # package's policy.json, read at its published head (config/policies.json,
+ # app:policies:import); a provider wanted or reserved shows what the site
+ # read on the provider's pages until its package declares its own; the
+ # others say "not declared yet". The rows are all in the page, a plain
+ # table without JavaScript; policies_controller.js shows the filters - by
+ # family, by commercial use, a text search - and keeps them in the address
+ # (?family=omnical&commercial=forbidden,unknown).
+ #}
+{% extends 'layout1.html.twig' %}
+{% import 'partials/_api_policy.html.twig' as p %}
+
+{% block title %}{{ '@messages.policies.title'|trans }}{% endblock %}
+{% block description %}{{ '@messages.policies.description'|trans({declared: counts.declared, providers: counts.providers}) }}{% endblock %}
+
+{% block content %}
+{% set locale = app.request.locale|lang %}
+<div class="om-wrap om-page om-apis om-policies" data-controller="policies" data-policies-url-value="{{ path('app_api_policies') }}">
+    <header class="om-head is-page">
+        <p class="om-cote">{{ '@messages.apis.eyebrow'|trans }}</p>
+        <h1>{{ '@messages.policies.title'|trans }}</h1>
+        <p class="om-lead">{{ '@messages.policies.lead'|trans }}</p>
+        <p class="om-source">{{ '@messages.policies.source'|trans({declared: counts.declared, typed: counts.typed, none: counts.providers - counts.policies}) }} <a href="{{ path('app_manual_page', {key: 'contracts', series: '1.x', path: 'declare-your-policy'}) }}">{{ '@messages.policies.to_declare'|trans }}</a></p>
+    </header>
+
+    <form class="om-finder om-api-filters" role="search" method="get" action="{{ path('app_api_policies') }}" hidden data-policies-target="form" data-action="submit->policies#submit">
+        <div class="om-search om-finder-box">
+            <label for="om-policies-q">{{ '@messages.policies.search'|trans }}</label>
+            <div><input id="om-policies-q" type="search" name="q" placeholder="{{ '@messages.policies.placeholder'|trans }}" autocomplete="off" spellcheck="false" data-policies-target="q" data-action="input->policies#filter"></div>
+        </div>
+        <div class="om-api-groups">
+            <fieldset class="om-finder-kinds">
+                <legend class="om-cote">{{ '@messages.apis.filter.commercial'|trans }}</legend>
+                {% for value in commercials %}
+                <label class="om-chip"><input type="checkbox" name="commercial" value="{{ value }}" data-action="change->policies#filter"><span>{{ ('@messages.apis.commercial.' ~ value)|trans }}</span></label>
+                {% endfor %}
+            </fieldset>
+        </div>
+        <details class="om-api-more" data-policies-target="families">
+            <summary>{{ '@messages.apis.filter.family'|trans }} <span class="om-api-picked" data-picked></span></summary>
+            <fieldset class="om-finder-kinds">
+                <legend class="visually-hidden">{{ '@messages.apis.filter.family'|trans }}</legend>
+                {% for family in families %}
+                <label class="om-chip"><input type="checkbox" name="family" value="{{ family.name }}" data-action="change->policies#filter"><span>{{ family.name }}</span></label>
+                {% endfor %}
+            </fieldset>
+        </details>
+        <p class="om-api-reset"><button type="button" class="om-button is-line" data-policies-target="reset" data-action="policies#reset">{{ '@messages.apis.filter.reset'|trans }}</button></p>
+    </form>
+
+    <p class="om-finder-count" aria-live="polite" data-policies-target="count" data-template="{{ '@messages.policies.count'|trans({providers: '%p'}) }}">
+        {{ '@messages.policies.count'|trans({providers: providers|length}) }}
+    </p>
+
+    <div class="om-policies-scroll">
+    <table class="om-policies-table">
+        <thead>
+            <tr>
+                <th scope="col">{{ '@messages.policies.provider'|trans }}</th>
+                <th scope="col">{{ '@messages.apis.policy.auth'|trans }}</th>
+                <th scope="col">{{ '@messages.apis.policy.limits'|trans }}</th>
+                <th scope="col">{{ '@messages.apis.policy.commercial'|trans }}</th>
+                <th scope="col">{{ '@messages.apis.policy.reuse'|trans }}</th>
+                <th scope="col">{{ '@messages.apis.policy.attribution'|trans }}</th>
+                <th scope="col">{{ '@messages.apis.policy.declared'|trans }}</th>
+                <th scope="col">{{ '@messages.policies.sources'|trans }}</th>
+            </tr>
+        </thead>
+        <tbody data-policies-target="list">
+            {% for provider in providers %}
+            {% set policy = provider.policy %}
+            <tr id="policy-{{ provider.package|replace({'/': '-'}) }}" data-family="{{ provider.family }}" data-commercial="{{ provider.commercial }}"
+                data-text="{{ api_haystack(provider, locale) }}" class="{{ policy ? (policy.declared ? 'is-declared' : 'is-typed') : 'is-undeclared' }}">
+                <th scope="row" data-label="{{ '@messages.policies.provider'|trans }}">
+                    <span class="om-policies-name">{{ provider.name }}</span>
+                    <code>{{ provider.successor ?? provider.package }}</code>
+                    <span class="om-status is-{{ provider.status.value }}">{{ ('@messages.apis.status.' ~ provider.status.value)|trans }}</span>
+                    {% if policy and policy.notes %}<details class="om-policies-notes"><summary>{{ '@messages.policies.notes'|trans }}</summary><p lang="en">{{ policy.notes }}</p></details>{% endif %}
+                    {% if policy and policy.note(locale) %}<p class="om-policies-note">{{ policy.note(locale) }}</p>{% endif %}
+                </th>
+                {% if policy %}
+                <td data-label="{{ '@messages.apis.policy.auth'|trans }}">{{ p.access(policy) }}</td>
+                <td data-label="{{ '@messages.apis.policy.limits'|trans }}">{{ p.limits(policy) }}{{ p.plans(policy) }}</td>
+                <td data-label="{{ '@messages.apis.policy.commercial'|trans }}">{{ p.permission(policy.commercial) }}</td>
+                <td data-label="{{ '@messages.apis.policy.reuse'|trans }}">{{ p.reuse(policy) }}</td>
+                <td data-label="{{ '@messages.apis.policy.attribution'|trans }}">{{ p.attribution(policy) }}</td>
+                <td data-label="{{ '@messages.apis.policy.declared'|trans }}">{{ p.declared(policy) }}</td>
+                <td data-label="{{ '@messages.policies.sources'|trans }}" class="om-policies-links">{{ p.sources(policy) }}{% if policy.declared and provider.released %} <a href="https://github.com/{{ provider.released.repository }}/blob/{{ policy.ref ?? provider.released.branch }}/{{ policy.file }}" rel="noopener">{{ policy.file }}</a>{% endif %}</td>
+                {% else %}
+                <td colspan="7" class="om-policies-none">{{ '@messages.apis.policy.undeclared'|trans }}</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    <p class="om-none" hidden data-policies-target="none">{{ '@messages.apis.none'|trans }}</p>
+</div>
+{% endblock %}

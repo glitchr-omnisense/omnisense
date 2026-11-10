@@ -24,6 +24,7 @@ packages:
     repository: glitchr-omnisense/omnidns-cloudflare
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnidns
     verification: partial
     verification_note: '- Not verified live: no Cloudflare token at hand.'
@@ -44,6 +45,7 @@ packages:
     repository: glitchr-omnisense/omnidns-gandi
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnidns
     verification: partial
     verification_note: '- Not verified live: no Gandi account at hand.'
@@ -64,6 +66,7 @@ packages:
     repository: glitchr-omnisense/omnidns-ovh
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnidns
     verification: partial
     verification_note: '- Not verified live: no OVHcloud account at hand (an anonymous cart is answered "You must login first" for a domain''s offers, 2026-10-24).'
@@ -83,6 +86,7 @@ packages:
     repository: glitchr-omnisense/omnidns-scaleway
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnidns
     verification: partial
     verification_note: '- Not verified live: no Scaleway key at hand.'
@@ -105,6 +109,8 @@ packages:
       - omnidns
     repository: glitchr-omnisense/omnidns
     branch: 1.x
+    requires:
+      - omnisense/contracts
     verification: partial
     verification_note: '- Not verified live: none of the four providers. Every one needs an account and a key, OVH''s availability included (its order cart answers "You must login first" to an anonymous question, checked 2026-10-24); no account was at hand.'
     docs: true

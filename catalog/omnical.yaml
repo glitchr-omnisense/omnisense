@@ -1,0 +1,146 @@
+# The omnical entry of the Omnisense catalogue. Written by `bin/console
+# app:catalog:import` from the packages' repositories; the phrase and the
+# text are the site's own, edited here. Each package: its kind, what its
+# composer.json says, its GitHub repository and development branch, whether
+# its README says it was verified against the real service, whether it has
+# a docs/ folder (see config/documentation.yaml).
+family: omnical
+packages:
+  omnical/caldav:
+    kind: provider
+    description: "Omnical's CalDAV (RFC 4791), under any PHP host: the calendars of iCloud, Fastmail, Nextcloud or any sabre/dav server found from the server's address (current-user-principal, calendar-home-set), their events read (recurrences expanded or kept as RRULE data, time zones, attendees) and written (PUT with If-None-Match and If-Match against lost updates, DELETE), and busy time (free-busy-query, or computed from the events where the server does not answer it) - on sabre/xml and sabre/vobject, credentials by reference."
+    license: MIT
+    keywords:
+      - caldav
+      - webdav
+      - icalendar
+      - calendar
+      - events
+      - free-busy
+      - icloud
+      - fastmail
+      - nextcloud
+      - sabre
+      - framework-agnostic
+      - omnical
+    repository: glitchr-omnisense/omnical-caldav
+    branch: 1.x
+    requires:
+      - omnisense/contracts
+      - omnisense/omnical
+    verification: unstated
+    docs: true
+  omnical/google:
+    kind: provider
+    description: "Omnical's Google Calendar, under any PHP host: a user's calendars, their events read and written (time zones, all-day events, recurrence kept as RRULE lines, attendees and their answers, ETags against lost updates) and busy time, through the Calendar API v3 over OAuth 2.0 - the token refreshed once on a 401, Google's quotas declared as data and enforced per project and per user."
+    license: MIT
+    keywords:
+      - google-calendar
+      - calendar
+      - events
+      - free-busy
+      - oauth2
+      - rrule
+      - framework-agnostic
+      - omnical
+    repository: glitchr-omnisense/omnical-google
+    branch: 1.x
+    requires:
+      - omnisense/contracts
+      - omnisense/omnical
+    verification: partial
+    verification_note: '- Verified against the API reference, the OAuth 2.0 web-server guide, the quota and errors guides and the terms on 2026-11-10: every path, parameter and field above. — - PKCE from a web server: Google documents it for installed apps only; whether its web-server flow honours it is not verified (the challenge is optional: authorizationUrl() without one).'
+    docs: true
+  omnical/microsoft:
+    kind: provider
+    description: "Omnical's Microsoft Graph, under any PHP host: Outlook and Microsoft 365 calendars over OAuth 2.0 - the user's calendars, their events read (each occurrence of a series, or the series) and written, time zones kept (Windows names read back as IANA), recurrence as RRULE data both ways, attendees and their answers, a read-then-write check on changeKey against lost updates, busy time of people by their address (getSchedule) - with Microsoft's throttling limits declared and enforced."
+    license: MIT
+    keywords:
+      - microsoft-graph
+      - outlook
+      - microsoft-365
+      - calendar
+      - events
+      - free-busy
+      - getschedule
+      - oauth2
+      - rrule
+      - framework-agnostic
+      - omnical
+    repository: glitchr-omnisense/omnical-microsoft
+    branch: 1.x
+    requires:
+      - omnisense/contracts
+      - omnisense/omnical
+    verification: partial
+    verification_note: '- Not verified: no call has been made to Microsoft Graph itself.'
+    docs: true
+  omnical/nager:
+    kind: provider
+    description: "Omnical's Nager.Date, under any PHP host, with no key: the public holidays of 200+ countries by subdivision (ISO 3166-2) and type, through API v4 - a provider declared as data (provider.json), loaded by omnisense/omnical's declarative mechanism with no class of its own, its usage policy beside it (commercial use needs a sponsorship of the project)."
+    license: MIT
+    keywords:
+      - holidays
+      - public-holidays
+      - nager
+      - nager-date
+      - declarative
+      - framework-agnostic
+      - omnical
+    repository: glitchr-omnisense/omnical-nager
+    branch: 1.x
+    requires:
+      - omnisense/contracts
+      - omnisense/omnical
+    verification: partial
+    verification_note: "- Verified on 2026-11-10: the v4 OpenAPI document (/openapi/community-v4.json), the terms, the API page; three answers recorded at 04:21 UTC (France and Germany 2027, and XX's 404) are the tests' fixtures, kept whole; the live check (two calls) passed at 04:26 UTC. — - Not verified: the Pro API (beta, key in x-api-key), the Docker image."
+    docs: true
+  omnical/openholidays:
+    kind: provider
+    description: "Omnical's OpenHolidays API, under any PHP host, with no key: the public and school holidays of 36 countries (most of Europe, Brazil, Mexico, South Africa) by region, in the country's languages, from open data (ODbL) - a provider declared as data (provider.json), loaded by omnisense/omnical's declarative mechanism with no class of its own, its usage policy beside it."
+    license: MIT
+    keywords:
+      - holidays
+      - public-holidays
+      - school-holidays
+      - openholidays
+      - open-data
+      - odbl
+      - declarative
+      - framework-agnostic
+      - omnical
+    repository: glitchr-omnisense/omnical-openholidays
+    branch: 1.x
+    requires:
+      - omnisense/contracts
+      - omnisense/omnical
+    verification: partial
+    verification_note: '- Not verified: the behaviour over a three-year span (never asked: one year per call), the groupCode of school holidays (not used), text/calendar answers.'
+    docs: true
+  omnisense/omnical:
+    kind: family
+    description: "Omnical: calendars and public holidays under any PHP host, whoever keeps them - a user's calendars and their events read and written (time zones, recurrence kept as RRULE data, attendees and their answers, ETags against lost updates), busy time and the free spans everyone shares, a country's public and school holidays by region and type. One family in three contracts: calendar-events, free-busy, holidays. Providers are packages of their own (omnical/google, omnical/microsoft, omnical/caldav in code; omnical/openholidays, omnical/nager as data: a provider described by a definition file, loaded at run time with no class of its own), each declaring its usage policy, enforced on every call and tightened by a site's configuration - on omnisense/contracts. OAuth 2.0 (authorization code, PKCE, refresh) and secrets by reference included."
+    license: MIT
+    keywords:
+      - calendar
+      - events
+      - free-busy
+      - availability
+      - holidays
+      - public-holidays
+      - school-holidays
+      - rrule
+      - icalendar
+      - caldav
+      - google-calendar
+      - microsoft-graph
+      - oauth2
+      - declarative
+      - framework-agnostic
+      - omnical
+    repository: glitchr-omnisense/omnical
+    branch: 1.x
+    requires:
+      - omnisense/contracts
+    verification: unstated
+    docs: true

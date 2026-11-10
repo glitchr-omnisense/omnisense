@@ -46,10 +46,26 @@ class ApiController extends AbstractController
             'providers' => $this->directory->providers(),
             'capabilities' => $this->directory->capabilities(Locale::of($request)),
             'statuses' => array_map(static fn (Status $s): string => $s->value, Status::cases()),
-            'auths' => [...Policy::AUTH, 'unknown'],
-            'commercials' => [...Policy::COMMERCIAL, 'unknown'],
+            'auths' => [...Policy::ACCESS, 'undeclared'],
+            'commercials' => [...Policy::PERMISSIONS, 'undeclared'],
             'counts' => $this->directory->counts(),
             'templates' => self::TEMPLATES,
+            'family_pages' => $this->familyPages(),
+        ]);
+    }
+
+    /**
+     * Every provider and its usage policy in one table (/apis/policies), filtered by family and by commercial use in
+     * the reader's browser: the public face of "each provider declares its rules".
+     */
+    #[Route(['en' => '/apis/policies', 'fr' => '/fr/api/politiques'], name: 'app_api_policies', methods: ['GET'])]
+    public function policies(): Response
+    {
+        return $this->render('client/apis/policies.html.twig', [
+            'families' => $this->directory->families(),
+            'providers' => $this->directory->providers(),
+            'commercials' => [...Policy::PERMISSIONS, 'undeclared'],
+            'counts' => $this->directory->counts(),
             'family_pages' => $this->familyPages(),
         ]);
     }

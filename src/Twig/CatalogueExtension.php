@@ -39,6 +39,7 @@ class CatalogueExtension extends AbstractExtension
     {
         return [
             new TwigFilter('omni_mark', self::mark(...), ['is_safe' => ['html']]),
+            new TwigFilter('workspace_links', $this->workspaceLinks(...), ['is_safe' => ['html']]),
         ];
     }
 
@@ -68,6 +69,28 @@ class CatalogueExtension extends AbstractExtension
         $found = $package instanceof Package ? $package : $this->catalogue->find($name);
 
         return null !== $found ? $this->urls->generate('app_package', ['vendor' => $found->getVendor(), 'name' => $found->getShortName()]) : $this->urls->generate('app_packages');
+    }
+
+    /**
+     * A manual's links to another package of its family as the family's workspace lays them out
+     * (omnistate/insee's "../../core/docs/statistics.md": omnistate/core beside omnistate/insee) climb out
+     * of the package's own repository, so the manual leaves them as written - a 404 under /docs. Each goes
+     * to that package's manual: "core" is the family's own package, another folder <family>/<folder>.
+     * A link to a package the catalogue does not document is left as it was.
+     */
+    public function workspaceLinks(string $html, string $package): string
+    {
+        $family = $this->catalogue->find($package)?->getFamily();
+        if (null === $family) {
+            return $html;
+        }
+
+        return (string) preg_replace_callback('#href="(?:\.\./)+([a-z0-9-]+)/docs/[a-z0-9/_-]+\.md(\#[A-Za-z0-9_-]+)?"#', function (array $m) use ($family): string {
+            $sibling = 'core' === $m[1] ? $this->catalogue->family($family)?->getOwn()?->getName() : $family.'/'.$m[1];
+            $manual = null !== $sibling ? $this->documentation->manualOf($sibling) : null;
+
+            return null === $manual ? $m[0] : 'href="'.htmlspecialchars($this->urls->generate('app_manual', ['key' => $manual->key, 'series' => $manual->default]).($m[2] ?? '')).'"';
+        }, $html);
     }
 
     /** A family's core's manual, where its providers are listed; the family's page when its core has none (the libraries). */

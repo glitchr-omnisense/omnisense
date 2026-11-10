@@ -29,6 +29,8 @@ packages:
       - omnistay
     repository: glitchr-omnisense/omnistay
     branch: 1.x
+    requires:
+      - omnisense/contracts
     verification: unstated
     docs: true
   omnistay/amadeus:
@@ -46,6 +48,7 @@ packages:
     repository: glitchr-omnisense/omnistay-amadeus
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnistay
     verification: unstated
     docs: true
@@ -66,6 +69,7 @@ packages:
     repository: glitchr-omnisense/omnistay-local
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnistay
     verification: unstated
     docs: true

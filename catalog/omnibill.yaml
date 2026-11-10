@@ -26,6 +26,7 @@ packages:
     repository: glitchr-omnisense/omnibill-afnor
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnibill
     verification: partial
     verification_note: "Documentation: the sources and what is missing from them, the options, each operation and its route, the webhooks' signature, what was verified. — Not verified against a platform: no account."
@@ -44,6 +45,7 @@ packages:
     repository: glitchr-omnisense/omnibill-chorus-pro
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnibill
     verification: partial
     verification_note: "Documentation: the options, the routes, the statuses' reading, what was verified. — Not verified in real: no PISTE account."
@@ -61,6 +63,7 @@ packages:
     repository: glitchr-omnisense/omnibill-email
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnibill
     verification: verified
     verification_note: 'Documentation: the options, the message, the store, what was verified - an invoice sent for real to a local SMTP server, on 2026-10-08.'
@@ -78,6 +81,7 @@ packages:
     repository: glitchr-omnisense/omnibill-odoo
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnibill
     verification: unverified
     verification_note: 'Not verified in real: no instance.'
@@ -95,6 +99,7 @@ packages:
     repository: glitchr-omnisense/omnibill-pennylane
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnibill
     verification: unverified
     verification_note: 'Not verified in real: no account.'
@@ -117,5 +122,7 @@ packages:
       - omnibill
     repository: glitchr-omnisense/omnibill
     branch: 1.x
+    requires:
+      - omnisense/contracts
     verification: unstated
     docs: true

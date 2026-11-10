@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "93ec9e6bd2ca074fa1502b3ddd673d66",
+    "content-hash": "1f09cb67262f6f0df51edcd5f9c9e1f1",
     "packages": [
         {
             "name": "api-platform/doctrine-common",
@@ -6229,6 +6229,85 @@
                 "source": "https://github.com/glitchr-omnisense/omnidocs-php/tree/1.x"
             },
             "time": "2026-10-26T15:07:52+00:00"
+        },
+        {
+            "name": "omnisense/contracts",
+            "version": "1.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/glitchr-omnisense/contracts.git",
+                "reference": "16c8da147510df33aefad4ad0df3c380a9b245cb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/glitchr-omnisense/contracts/zipball/16c8da147510df33aefad4ad0df3c380a9b245cb",
+                "reference": "16c8da147510df33aefad4ad0df3c380a9b245cb",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=8.2",
+                "symfony/http-client-contracts": "^3.0"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^2.1",
+                "phpunit/phpunit": "^11.0",
+                "symfony/http-client": "^6.4|^7.0|^8.0"
+            },
+            "suggest": {
+                "omnibridge/symfony": "A RateLimiterInterface over symfony/rate-limiter, so that limits count across requests and servers",
+                "phpunit/phpunit": "Testing\\: BareTestCase, the check that a package loads with what it requires alone",
+                "symfony/http-client": "Testing\\MockHttp: recorded answers over Symfony's MockHttpClient, every request kept as it went on the wire"
+            },
+            "default-branch": true,
+            "bin": [
+                "bin/omnisense-policies"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Omnisense\\Contracts\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/",
+                    "/bin/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marco Meyer",
+                    "email": "marco.meyer@glitchr.io"
+                }
+            ],
+            "description": "The contracts every omnisense provider family builds on, under any PHP host: a provider, its capabilities, its factory and configuration, the registry of an application's providers, JSON calls that keep credentials out of every error, the testing kit (recorded HTTP answers, the bare check) - and usage policies: a provider's rate limits, rights (commercial use, open source, caching, storage, attribution) and request requirements, declared as data, tightened by a site, enforced by a guard that also honours Retry-After and the RateLimit header fields.",
+            "homepage": "https://github.com/glitchr-omnisense/contracts",
+            "keywords": [
+                "attribution",
+                "contracts",
+                "framework-agnostic",
+                "omnisense",
+                "provider",
+                "rate-limit",
+                "ratelimit-headers",
+                "registry",
+                "retry-after",
+                "usage-policy"
+            ],
+            "support": {
+                "issues": "https://github.com/glitchr-omnisense/contracts/issues",
+                "source": "https://github.com/glitchr-omnisense/contracts/tree/1.x"
+            },
+            "time": "2026-11-10T08:40:11+00:00",
+            "published-time": "2026-11-10T08:48:21+00:00"
         },
         {
             "name": "omnisense/omnibase",
@@ -19870,6 +19949,7 @@
         "omnibridge/twig": 20,
         "omnidocs/markdown": 20,
         "omnidocs/php": 20,
+        "omnisense/contracts": 20,
         "omnisense/omnibase": 20,
         "omnisense/omnibridge": 20,
         "omnisense/omnidocs": 20,
@@ -19878,9 +19958,9 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
+        "php": ">=8.2",
         "ext-ctype": "*",
-        "ext-iconv": "*",
-        "php": ">=8.2"
+        "ext-iconv": "*"
     },
     "platform-dev": {},
     "platform-overrides": {

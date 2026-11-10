@@ -36,6 +36,8 @@ packages:
       - omnishow
     repository: glitchr-omnisense/omnishow
     branch: 1.x
+    requires:
+      - omnisense/contracts
     verification: partial
     verification_note: '- Verified live: Wikidata (no key) - a search, a film by its IMDb number, a series by its TMDB number (docker compose run --rm omnishow live), on 2026-10-26 under omnifilm. — - Not verified live: TMDB, OMDb, TheTVDB, Trakt, YouTube, Vimeo, Twitch - no account was used.'
     docs: true
@@ -57,6 +59,7 @@ packages:
     repository: glitchr-omnisense/omnishow-omdb
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnishow
     verification: partial
     verification_note: '- Not verified live: no key.'
@@ -79,6 +82,7 @@ packages:
     repository: glitchr-omnisense/omnishow-tmdb
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnishow
     verification: partial
     verification_note: '- Not verified live: no key.'
@@ -99,6 +103,7 @@ packages:
     repository: glitchr-omnisense/omnishow-trakt
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnishow
     verification: partial
     verification_note: '- Not verified live: no client id.'
@@ -119,6 +124,7 @@ packages:
     repository: glitchr-omnisense/omnishow-tvdb
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnishow
     verification: partial
     verification_note: '- Not verified live: no key.'
@@ -138,6 +144,7 @@ packages:
     repository: glitchr-omnisense/omnishow-twitch
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnishow
     verification: unstated
     docs: true
@@ -156,6 +163,7 @@ packages:
     repository: glitchr-omnisense/omnishow-vimeo
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnishow
     verification: unstated
     docs: true
@@ -177,6 +185,7 @@ packages:
     repository: glitchr-omnisense/omnishow-wikidata
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnishow
     verification: verified
     verification_note: '- Verified live (docker compose run --rm omnishow live, 2026-10-24): Stalker found by a search narrowed to 1979, The Shawshank Redemption by its IMDb number (TMDB 278, Frank Darabont), Game of Thrones by its TMDB series number (Q23572, tt0944947, TheTVDB 121361, 2011).'
@@ -199,6 +208,7 @@ packages:
     repository: glitchr-omnisense/omnishow-youtube
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omnishow
     verification: unstated
     docs: true

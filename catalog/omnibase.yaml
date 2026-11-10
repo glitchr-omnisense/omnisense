@@ -279,7 +279,6 @@ packages:
     repository: glitchr-forge/omnibase-lawyer
     branch: main
     requires:
-      - omnibridge/symfony
       - omnibase/office
     verification: unstated
     docs: true
@@ -409,7 +408,6 @@ packages:
     repository: glitchr-forge/omnibase-notary
     branch: main
     requires:
-      - omnibridge/symfony
       - omnibase/office
     verification: unstated
     docs: true

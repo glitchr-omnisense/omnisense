@@ -27,6 +27,7 @@ packages:
     repository: glitchr-omnisense/omniplay-docker
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omniplay
     verification: partial
     verification_note: "- Verified live (Docker Desktop, engine 29.8.2, the socket mounted in the harness): a php:8.4-cli container started, listed by running(), its environment holding the secret and its room, stopped and removed by Docker. — - Not verified: an engine over TCP or TLS; a game server's image."
@@ -46,6 +47,7 @@ packages:
     repository: glitchr-omnisense/omniplay-edgegap
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omniplay
     verification: partial
     verification_note: '- Not verified: anything live - there is no Edgegap account.'
@@ -65,6 +67,7 @@ packages:
     repository: glitchr-omnisense/omniplay-gog
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omniplay
     verification: verified
     verification_note: '- Verified live (2026-10-24): a product with its US price, a search.'
@@ -85,6 +88,7 @@ packages:
     repository: glitchr-omnisense/omniplay-igdb
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omniplay
     verification: partial
     verification_note: '- Not verified live: no credentials.'
@@ -105,6 +109,7 @@ packages:
     repository: glitchr-omnisense/omniplay-itch
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omniplay
     verification: partial
     verification_note: "- Verified live (2026-10-24): X-Moon's page. — - Not verified live: ownership and library (no key)."
@@ -123,6 +128,7 @@ packages:
     repository: glitchr-omnisense/omniplay-rawg
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omniplay
     verification: partial
     verification_note: '- Not verified live: no key.'
@@ -147,6 +153,7 @@ packages:
     repository: glitchr-omnisense/omniplay-steam
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omniplay
     verification: partial
     verification_note: "- Verified live (no key, 2026-10-24): Portal 2's record in English with its US price, a search. — - Not verified live: the library and ownership (no Web API key was used), the identity (no publisher key, no game ticket)."
@@ -175,6 +182,8 @@ packages:
       - omniplay
     repository: glitchr-omnisense/omniplay
     branch: 1.x
+    requires:
+      - omnisense/contracts
     verification: partial
     verification_note: "- Verified live: Steam's store (Portal 2's record and price, a search), GOG's catalogue, an itch.io page (no key, 2026-10-24); a container started, found, stopped and removed through Docker Desktop's socket (2026-11-08). — - Not verified live: Steam's library, ownership and identity, itch.io's ownership and library, IGDB, RAWG, Edgegap - no key nor account was used; their tests run on answers written after each API's documentation."
     docs: true

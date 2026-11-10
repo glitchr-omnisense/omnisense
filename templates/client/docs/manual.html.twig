@@ -99,7 +99,7 @@
                 {% if one and one.parts %}
                     {% if api %}<p class="manual-api-note">{{ '@messages.manual.api_lead'|trans({commit: (commit ?? source.ref)|slice(0, 12)}) }}</p>{% endif %}
                     {% for part in one.parts %}
-                        {{ part.html|raw }}
+                        {{ part.html|workspace_links(manual.package) }}
                         {% if part.source and source.branch %}
                         <p class="manual-part-edit"><a class="manual-pencil" href="https://github.com/{{ manual.repository }}/edit/{{ source.branch }}/{{ part.source }}" rel="noopener" title="{{ '@messages.docs.pencil_title'|trans({file: part.source, branch: source.branch}) }}"><i class="fa-solid fa-pen" aria-hidden="true"></i><span>{{ '@messages.docs.pencil'|trans }}</span> <code>{{ part.source }}</code></a></p>
                         {% endif %}

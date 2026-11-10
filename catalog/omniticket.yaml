@@ -28,6 +28,8 @@ packages:
       - omniticket
     repository: glitchr-omnisense/omniticket
     branch: 1.x
+    requires:
+      - omnisense/contracts
     verification: partial
     verification_note: "- Verified live (docker compose run --rm omniticket live, 2026-10-24): Weezevent's public endpoint (GET /event/categories, no key) - its host and its JSON. — - Not verified live: every call that needs an account or a key (all five providers' events, attendees and checks)."
     docs: true
@@ -47,6 +49,7 @@ packages:
     repository: glitchr-omnisense/omniticket-billetweb
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omniticket
     verification: partial
     verification_note: '- Not verified live: no Billetweb account was used.'
@@ -67,6 +70,7 @@ packages:
     repository: glitchr-omnisense/omniticket-eventbrite
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omniticket
     verification: partial
     verification_note: "- Not verified live: no Eventbrite token was used; the response shapes were not re-read on 2026-10-24 (the documentation's pages render them in the browser)."
@@ -87,6 +91,7 @@ packages:
     repository: glitchr-omnisense/omniticket-helloasso
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omniticket
     verification: partial
     verification_note: '- Not verified live: no HelloAsso account or sandbox was used.'
@@ -106,6 +111,7 @@ packages:
     repository: glitchr-omnisense/omniticket-ticketmaster
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omniticket
     verification: partial
     verification_note: '- Not verified live: no Ticketmaster key was used.'
@@ -126,6 +132,7 @@ packages:
     repository: glitchr-omnisense/omniticket-weezevent
     branch: 1.x
     requires:
+      - omnisense/contracts
       - omnisense/omniticket
     verification: partial
     verification_note: '- Verified live (docker compose run --rm omniticket live, 2026-10-24): GET /event/categories, no key - the host and the JSON as read. — Not verified: whether a very large participant list is cut without paging (max and page are documented without their base).'

@@ -1,0 +1,60 @@
+{
+    "schema": "https://github.com/glitchr-omnisense/contracts/blob/1.x/resources/usage-policy.schema.json",
+    "about": "Written by `bin/console app:policies:import` (omnisense/contracts' PolicyExport): each provider's policy.json at its published head (ref). Edit the package's file, never this one.",
+    "policies": [
+        {
+            "package": "omnitrade/stripe",
+            "version": "1.x-dev",
+            "ref": null,
+            "file": "policy.json",
+            "policy": {
+                "provider": "stripe",
+                "rateLimits": [
+                    {
+                        "max": 100,
+                        "window": "second",
+                        "every": 1,
+                        "scope": "key",
+                        "operations": [],
+                        "unit": "requests",
+                        "cost": null,
+                        "note": "Live mode, read and write together."
+                    }
+                ],
+                "concurrency": null,
+                "rights": {
+                    "commercial": "allowed",
+                    "openSourceRequired": false,
+                    "caching": {
+                        "permission": "unknown",
+                        "maxTtl": null
+                    },
+                    "storage": "contract",
+                    "redistribution": "forbidden",
+                    "attribution": {
+                        "required": false,
+                        "text": null,
+                        "url": null,
+                        "where": []
+                    },
+                    "licence": null
+                },
+                "requirements": {
+                    "key": true,
+                    "userAgent": {
+                        "required": false,
+                        "pattern": null
+                    }
+                },
+                "provenance": {
+                    "terms": "https://stripe.com/legal/ssa",
+                    "policy": "https://docs.stripe.com/rate-limits",
+                    "verifiedAt": "2026-11-10",
+                    "declaredBy": "maintainer",
+                    "contact": null,
+                    "notes": "The tests' fixture."
+                }
+            }
+        }
+    ]
+}
