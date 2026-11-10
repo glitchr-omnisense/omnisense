@@ -5943,12 +5943,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-omnisense/omnibridge-symfony.git",
-                "reference": "474fae61377b44f11be8acf20846cd881d298026"
+                "reference": "1c1d1afd813bcc2e0842a3dc78bce1c9cab3162e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-omnisense/omnibridge-symfony/zipball/474fae61377b44f11be8acf20846cd881d298026",
-                "reference": "474fae61377b44f11be8acf20846cd881d298026",
+                "url": "https://api.github.com/repos/glitchr-omnisense/omnibridge-symfony/zipball/1c1d1afd813bcc2e0842a3dc78bce1c9cab3162e",
+                "reference": "1c1d1afd813bcc2e0842a3dc78bce1c9cab3162e",
                 "shasum": ""
             },
             "require": {
@@ -5969,7 +5969,6 @@
                 "symfony/http-foundation": "^6.0|^7.0|^8.0",
                 "symfony/http-kernel": "^6.1|^7.0|^8.0",
                 "symfony/messenger": "^6.0|^7.0|^8.0",
-                "symfony/monolog-bundle": "^3.8|^4.0",
                 "symfony/process": "^6.0|^7.0|^8.0",
                 "symfony/routing": "^6.0|^7.0|^8.0",
                 "symfony/security-bundle": "^6.0|^7.0|^8.0",
@@ -5992,6 +5991,7 @@
                 "omnimap/google": "^1.0@dev",
                 "omnimap/maplibre": "^1.0@dev",
                 "omnimap/openstreetmap": "^1.0@dev",
+                "omnisense/contracts": "^1.0@dev",
                 "omnisense/omniauth": "1.x-dev",
                 "omnisense/omnidrive": "^1.0@dev",
                 "omnisense/omnimap": "^1.0@dev",
@@ -5999,6 +5999,8 @@
                 "symfony/browser-kit": "^6.0|^7.0|^8.0",
                 "symfony/clock": "^6.2|^7.0|^8.0",
                 "symfony/http-client": "^6.4|^7.0|^8.0",
+                "symfony/lock": "^7.0|^8.0",
+                "symfony/rate-limiter": "^7.0|^8.0",
                 "symfony/translation": "^6.0|^7.0|^8.0"
             },
             "suggest": {
@@ -6008,12 +6010,15 @@
                 "omniauth/webauthn": "Passkeys through Omnibridge\\Symfony\\Auth\\ (omniauth.yaml: passkey), formerly omniauth/passkey",
                 "omnibridge/doctrine": "omnibase's persistence on Doctrine's ORM (base.persistence: doctrine, the default where it is installed), with doctrine/doctrine-bundle and symfony/doctrine-bridge: Doctrine's wiring - the entity manager's listeners and filters, the DBAL types, the Doctrine-named commands (doctrine:schema:charset, doctrine:database:import...) - is registered only where it is installed (Persistences::isInstalled('doctrine'), plan \"omnibase agnostic\", step B3); omnibridge/eloquent is the other persistence",
                 "omnibridge/static": "Static\\BuildCommand: bin/console omnibridge:static:build, omnibridge/static's export of the site a static.php declares, rendered by this kernel",
+                "omnisense/contracts": "Omnibridge\\Symfony\\Policy\\RateLimiter: omnisense/contracts' RateLimiterInterface (the usage policies' limits and waits of the omni families' providers) over symfony/rate-limiter, with it",
                 "omnisense/omniauth": "Omnibridge\\Symfony\\Auth\\: one authenticator over omniauth for every way of signing in (password, sign-in link, e-mailed code, backup codes, trusted devices, identity providers - omniauth's Omniauth\\OAuth\\, each provider a package of its own), its second factor's token and page, its routes; config/packages/omniauth.yaml (nothing of Auth\\ without it)",
                 "omnisense/omnibase": "Omnibridge\\Symfony\\Omnibase\\: omnibase's Symfony form layer, moved from the core (its former Base\\ names kept by the core until 6.0): the form types, extensions, FormFactory, FormProxy, FormProcessor",
                 "omnisense/omnidrive": "Omnidrive\\Drives: the storages of league/flysystem-bundle's configuration (the services tagged flysystem.storage) as omnidrive's drives, by their names",
                 "omnisense/omnimap": "Omnibridge\\Symfony\\Map\\: maps through omnimap (config/packages/omnimap.yaml) - its providers over the application's HTTP client and cache pool, the map cache over a storage service of the application's, the cache's routes (type \"omnimap\") and controller, omnibridge/twig's MapExtension (omnimap(), omnimap_export(), omnimap_suppress()); omnimap/google, omnimap/openstreetmap and omnimap/maplibre registered when installed",
                 "symfony/asset": "RouterUrls::asset() through the application's asset packages (assets.packages); without it, the path as it is",
-                "symfony/doctrine-bridge": "The security provider `entity:` and the form type EntityType on Doctrine, for omnibridge/doctrine; on omnibridge/eloquent, the users' provider is Base\\Repository\\Users"
+                "symfony/doctrine-bridge": "The security provider `entity:` and the form type EntityType on Doctrine, for omnibridge/doctrine; on omnibridge/eloquent, the users' provider is Base\\Repository\\Users",
+                "symfony/monolog-bundle": "Monolog's handlers and channels, MonologBundle registered by the application (^3.8|^4.0): omnibase's services log through psr/log's LoggerInterface, whatever answers it, and none needs MonologBundle's services with omnisense/omnibase 5.0 (SpamChecker makes monolog.http_client's client itself where it is not there); with it, the demo environment's messages go to the channel `demo`",
+                "symfony/rate-limiter": "Omnibridge\\Symfony\\Policy\\RateLimiter: a provider policy's limits counted by Symfony's rate limiter, each a fixed window over the application's storage (a CacheStorage on a shared pool: every process counts together), with omnisense/contracts; symfony/lock keeps two processes from counting one window at once"
             },
             "default-branch": true,
             "type": "library",
@@ -6047,8 +6052,8 @@
                 "issues": "https://github.com/glitchr-omnisense/omnibridge-symfony/issues",
                 "source": "https://github.com/glitchr-omnisense/omnibridge-symfony/tree/1.x"
             },
-            "time": "2026-11-08T03:42:04+00:00",
-            "published-time": "2026-11-08T10:39:55+00:00"
+            "time": "2026-11-10T07:15:03+00:00",
+            "published-time": "2026-11-10T08:19:06+00:00"
         },
         {
             "name": "omnibridge/twig",
@@ -6108,12 +6113,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-omnisense/omnidocs-markdown.git",
-                "reference": "15cb171229ecdb08c282bd70f04dde058554912b"
+                "reference": "af919096d8570dc01a741ad612ed0b57f9269d0c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-omnisense/omnidocs-markdown/zipball/15cb171229ecdb08c282bd70f04dde058554912b",
-                "reference": "15cb171229ecdb08c282bd70f04dde058554912b",
+                "url": "https://api.github.com/repos/glitchr-omnisense/omnidocs-markdown/zipball/af919096d8570dc01a741ad612ed0b57f9269d0c",
+                "reference": "af919096d8570dc01a741ad612ed0b57f9269d0c",
                 "shasum": ""
             },
             "require": {
@@ -6123,11 +6128,15 @@
                 "symfony/yaml": "^6.4|^7.0|^8.0"
             },
             "require-dev": {
+                "omnisense/contracts": "^1.0@dev",
                 "phpunit/phpunit": "^11.0"
             },
             "default-branch": true,
             "type": "library",
             "extra": {
+                "omnisense": {
+                    "policy": "policy.json"
+                },
                 "branch-alias": {
                     "dev-1.x": "1.x-dev"
                 }
@@ -6164,7 +6173,8 @@
                 "issues": "https://github.com/glitchr-omnisense/omnidocs-markdown/issues",
                 "source": "https://github.com/glitchr-omnisense/omnidocs-markdown/tree/1.x"
             },
-            "time": "2026-10-26T05:24:13+00:00"
+            "time": "2026-11-10T12:15:25+00:00",
+            "published-time": "2026-11-10T12:34:10+00:00"
         },
         {
             "name": "omnidocs/php",
@@ -6172,12 +6182,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-omnisense/omnidocs-php.git",
-                "reference": "996fd59ed7826f27f48d19840551debda3b8c4cb"
+                "reference": "a31a63d3ffc8f49072ebd801cf24e8a10138ed71"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-omnisense/omnidocs-php/zipball/996fd59ed7826f27f48d19840551debda3b8c4cb",
-                "reference": "996fd59ed7826f27f48d19840551debda3b8c4cb",
+                "url": "https://api.github.com/repos/glitchr-omnisense/omnidocs-php/zipball/a31a63d3ffc8f49072ebd801cf24e8a10138ed71",
+                "reference": "a31a63d3ffc8f49072ebd801cf24e8a10138ed71",
                 "shasum": ""
             },
             "require": {
@@ -6187,11 +6197,15 @@
                 "phpdocumentor/reflection-docblock": "^5.4"
             },
             "require-dev": {
+                "omnisense/contracts": "^1.0@dev",
                 "phpunit/phpunit": "^11.0"
             },
             "default-branch": true,
             "type": "library",
             "extra": {
+                "omnisense": {
+                    "policy": "policy.json"
+                },
                 "branch-alias": {
                     "dev-1.x": "1.x-dev"
                 }
@@ -6228,7 +6242,8 @@
                 "issues": "https://github.com/glitchr-omnisense/omnidocs-php/issues",
                 "source": "https://github.com/glitchr-omnisense/omnidocs-php/tree/1.x"
             },
-            "time": "2026-10-26T15:07:52+00:00"
+            "time": "2026-11-10T12:15:26+00:00",
+            "published-time": "2026-11-10T12:34:10+00:00"
         },
         {
             "name": "omnisense/contracts",
@@ -6236,12 +6251,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-omnisense/contracts.git",
-                "reference": "16c8da147510df33aefad4ad0df3c380a9b245cb"
+                "reference": "1568f2c72d636513adafedac885ddd861a581e40"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-omnisense/contracts/zipball/16c8da147510df33aefad4ad0df3c380a9b245cb",
-                "reference": "16c8da147510df33aefad4ad0df3c380a9b245cb",
+                "url": "https://api.github.com/repos/glitchr-omnisense/contracts/zipball/1568f2c72d636513adafedac885ddd861a581e40",
+                "reference": "1568f2c72d636513adafedac885ddd861a581e40",
                 "shasum": ""
             },
             "require": {
@@ -6306,8 +6321,8 @@
                 "issues": "https://github.com/glitchr-omnisense/contracts/issues",
                 "source": "https://github.com/glitchr-omnisense/contracts/tree/1.x"
             },
-            "time": "2026-11-10T08:40:11+00:00",
-            "published-time": "2026-11-10T08:48:21+00:00"
+            "time": "2026-11-10T11:55:11+00:00",
+            "published-time": "2026-11-10T12:34:02+00:00"
         },
         {
             "name": "omnisense/omnibase",
@@ -6624,12 +6639,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-omnisense/omnidocs.git",
-                "reference": "9ce91ac82a808ba0cebb2c10190af26e4e86ead0"
+                "reference": "dae8480766a9f1286048844bf6027cfe546c539f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-omnisense/omnidocs/zipball/9ce91ac82a808ba0cebb2c10190af26e4e86ead0",
-                "reference": "9ce91ac82a808ba0cebb2c10190af26e4e86ead0",
+                "url": "https://api.github.com/repos/glitchr-omnisense/omnidocs/zipball/dae8480766a9f1286048844bf6027cfe546c539f",
+                "reference": "dae8480766a9f1286048844bf6027cfe546c539f",
                 "shasum": ""
             },
             "require": {
@@ -6691,7 +6706,8 @@
                 "issues": "https://github.com/glitchr-omnisense/omnidocs/issues",
                 "source": "https://github.com/glitchr-omnisense/omnidocs/tree/1.x"
             },
-            "time": "2026-10-26T14:27:08+00:00"
+            "time": "2026-11-10T12:15:25+00:00",
+            "published-time": "2026-11-10T12:34:08+00:00"
         },
         {
             "name": "omnisense/omnidrive",
@@ -6699,16 +6715,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-omnisense/omnidrive.git",
-                "reference": "6d0c6df1c1a7c6d00b73842264ca70c7e89c6965"
+                "reference": "3a04302b353311ed49e880d065a2d77bab68791f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-omnisense/omnidrive/zipball/6d0c6df1c1a7c6d00b73842264ca70c7e89c6965",
-                "reference": "6d0c6df1c1a7c6d00b73842264ca70c7e89c6965",
+                "url": "https://api.github.com/repos/glitchr-omnisense/omnidrive/zipball/3a04302b353311ed49e880d065a2d77bab68791f",
+                "reference": "3a04302b353311ed49e880d065a2d77bab68791f",
                 "shasum": ""
             },
             "require": {
                 "league/flysystem": "^3.0",
+                "omnisense/contracts": "^1.0@dev",
                 "php": ">=8.2",
                 "psr/container": "^1.1|^2.0"
             },
@@ -6764,7 +6781,8 @@
                 "issues": "https://github.com/glitchr-omnisense/omnidrive/issues",
                 "source": "https://github.com/glitchr-omnisense/omnidrive/tree/1.x"
             },
-            "time": "2026-10-26T05:24:13+00:00"
+            "time": "2026-11-10T12:15:56+00:00",
+            "published-time": "2026-11-10T12:34:11+00:00"
         },
         {
             "name": "oscarotero/html-parser",
