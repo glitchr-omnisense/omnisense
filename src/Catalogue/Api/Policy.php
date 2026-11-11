@@ -35,7 +35,7 @@ final readonly class Policy
     private const TYPED_ATTRIBUTION = ['required' => 'required', 'per-item' => 'per-item', 'encouraged' => 'not-required', 'none' => 'not-required', 'unclear' => 'unknown'];
 
     /**
-     * @param list<array{max: int, window: string, every: int, scope: string, operations: list<string>, unit: string, note: ?string}>|null $limits null: nobody knows them; []: the terms set none
+     * @param list<array{max: int, window: string, every: int, scope: string, per: ?string, operations: list<string>, unit: string, note: ?string}>|null $limits null: nobody knows them; []: the terms set none; per: the kind of resource a "resource" limit counts each one of apart
      * @param array<string, string>                                                                                                           $note   locale => the one thing to know (a typed policy)
      * @param list<string>                                                                                                                    $plans  the plans a policy declares, its limits those of $plan (the default)
      * @param array<string, list<array<string, mixed>>|null>                                                                                  $planLimits each plan's limits, by name
@@ -85,7 +85,8 @@ final readonly class Policy
         $rights = $data['rights'];
         $limitsOf = static fn (?array $limits): ?array => null === $limits ? null : array_map(static fn (array $l): array => [
             'max' => $l['max'], 'window' => $l['window'], 'every' => $l['every'], 'scope' => $l['scope'],
-            'operations' => $l['operations'], 'unit' => $l['unit'], 'note' => $l['note'],
+            // A limit counted per resource ("scope": "resource", omnisense/contracts 1.0.0-rc.1) names the kind it counts apart.
+            'per' => $l['per'] ?? null, 'operations' => $l['operations'], 'unit' => $l['unit'], 'note' => $l['note'],
         ], $limits);
         $planLimits = [];
         foreach ($plans as $name) {

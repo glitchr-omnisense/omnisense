@@ -8,7 +8,10 @@ use App\Catalogue\Api\Policy;
 use App\Catalogue\Api\Status;
 use App\Catalogue\Catalogue;
 use App\Site\Stars;
+use Omnisense\Contracts\Policy\Scope;
+use Omnisense\Contracts\Policy\UsagePolicy;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * config/apis.yaml as the site reads it, against the real catalogue: a
@@ -105,6 +108,31 @@ final class ApiDirectoryTest extends TestCase
         self::assertNull($adzuna->limits);
         self::assertSame('contract', $adzuna->commercial);
         self::assertSame('unknown', $adzuna->storage);
+    }
+
+    public function testALimitPerResourceSaysWhatItCountsApart(): void
+    {
+        if (!\defined(Scope::class.'::Resource')) {
+            self::markTestSkipped('omnisense/contracts before 1.0.0-rc.1 reads no limit per resource.');
+        }
+        // Mondial Relay's rule (omnibus/mondial-relay): a parcel tracked 6 times a day at most.
+        $policy = Policy::fromDeclared(UsagePolicy::fromArray([
+            'provider' => 'mondial_relay',
+            'rateLimits' => [['max' => 6, 'window' => 'day', 'scope' => 'resource', 'per' => 'parcel', 'operations' => ['trackParcel']]],
+            'provenance' => ['terms' => 'https://example.org/terms', 'verifiedAt' => '2026-11-11'],
+        ]));
+        self::assertNotNull($policy->limits);
+        self::assertSame(['resource', 'parcel', ['trackParcel']], [$policy->limits[0]['scope'], $policy->limits[0]['per'], $policy->limits[0]['operations']]);
+
+        // The words the limit is shown with (templates/partials/_api_policy.html.twig): per parcel, pour chaque parcel.
+        foreach (['en' => 'per parcel', 'fr' => 'pour chaque parcel'] as $locale => $words) {
+            $catalogue = Yaml::parseFile(\dirname(__DIR__, 2).'/translations/messages+intl-icu.'.$locale.'.yaml');
+            self::assertIsArray($catalogue['apis'] ?? null);
+            self::assertIsArray($catalogue['apis']['limit'] ?? null);
+            self::assertIsString($message = $catalogue['apis']['limit']['scope'] ?? null);
+            self::assertSame($words, (new \MessageFormatter($locale, $message))->format(['scope' => 'resource', 'per' => 'parcel']));
+            self::assertSame('', (new \MessageFormatter($locale, $message))->format(['scope' => 'application', 'per' => '']), 'nothing for the application scope');
+        }
     }
 
     public function testTheReleasedProvidersAreCardsWithoutAPolicyUntilOneIsDeclared(): void

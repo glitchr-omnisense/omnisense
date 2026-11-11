@@ -399,7 +399,7 @@ apis:
     site: Ce site, d’après les pages du fournisseur
   limit:
     rate: '{unit, select, requests {{max, plural, one {# requête} other {# requêtes}}} characters {{max, plural, one {# caractère} other {# caractères}}} units {{max, number} unités de quota} points {{max, number} points} content_bytes {{max, number} octets} other {{max, number}}} {every, plural, =1 {{window, select, second {par seconde} minute {par minute} hour {par heure} day {par jour} month {par mois} other {}}} other {toutes les # {window, select, second {secondes} minute {minutes} hour {heures} day {jours} month {mois} other {}}}}'
-    scope: '{scope, select, key {par clé} client_ip {par adresse IP} user {par utilisateur} other {}}'
+    scope: '{scope, select, key {par clé} client_ip {par adresse IP} user {par utilisateur} resource {pour chaque {per}} other {}}'
   policy:
     auth: Accès
     limits: Limites

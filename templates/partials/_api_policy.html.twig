@@ -21,7 +21,7 @@
 <ul class="om-policy-limits">
     {%- for limit in shown ? limits|slice(0, shown) : limits %}
     <li>{{ '@messages.apis.limit.rate'|trans({max: limit.max, unit: limit.unit|replace({'-': '_'}), every: limit.every, window: limit.window}) }}
-        {%- if limit.scope != 'application' %} {{ '@messages.apis.limit.scope'|trans({scope: limit.scope|replace({'-': '_'})}) }}{% endif %}
+        {%- if limit.scope != 'application' %} {{ '@messages.apis.limit.scope'|trans({scope: limit.scope|replace({'-': '_'}), per: limit.per ?? ''}) }}{% endif %}
         {%- if limit.operations is not empty %} <span class="om-policy-ops">({{ limit.operations|join(', ') }})</span>{% endif %}</li>
     {%- endfor %}
     {%- if shown and limits|length > shown %}
