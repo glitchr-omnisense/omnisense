@@ -6251,12 +6251,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-omnisense/contracts.git",
-                "reference": "1568f2c72d636513adafedac885ddd861a581e40"
+                "reference": "b400e0a414dc01521a1e561d166b19375bc10fa6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-omnisense/contracts/zipball/1568f2c72d636513adafedac885ddd861a581e40",
-                "reference": "1568f2c72d636513adafedac885ddd861a581e40",
+                "url": "https://api.github.com/repos/glitchr-omnisense/contracts/zipball/b400e0a414dc01521a1e561d166b19375bc10fa6",
+                "reference": "b400e0a414dc01521a1e561d166b19375bc10fa6",
                 "shasum": ""
             },
             "require": {
@@ -6321,8 +6321,8 @@
                 "issues": "https://github.com/glitchr-omnisense/contracts/issues",
                 "source": "https://github.com/glitchr-omnisense/contracts/tree/1.x"
             },
-            "time": "2026-11-10T11:55:11+00:00",
-            "published-time": "2026-11-10T12:34:02+00:00"
+            "time": "2026-11-11T10:40:01+00:00",
+            "published-time": "2026-11-11T11:10:41+00:00"
         },
         {
             "name": "omnisense/omnibase",
@@ -6330,12 +6330,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-omnisense/omnibase.git",
-                "reference": "045c33276de78c9e0bf666f2052f73a273dd8dae"
+                "reference": "11116f9fb99f8032b9f640199450d5c8e8f43b1d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-omnisense/omnibase/zipball/045c33276de78c9e0bf666f2052f73a273dd8dae",
-                "reference": "045c33276de78c9e0bf666f2052f73a273dd8dae",
+                "url": "https://api.github.com/repos/glitchr-omnisense/omnibase/zipball/11116f9fb99f8032b9f640199450d5c8e8f43b1d",
+                "reference": "11116f9fb99f8032b9f640199450d5c8e8f43b1d",
                 "shasum": ""
             },
             "require": {
@@ -6564,7 +6564,7 @@
                 "forms",
                 "omnibase"
             ],
-            "time": "2026-11-08T11:00:26+00:00"
+            "time": "2026-11-11T11:15:32+00:00"
         },
         {
             "name": "omnisense/omnibridge",
@@ -6639,12 +6639,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-omnisense/omnidocs.git",
-                "reference": "dae8480766a9f1286048844bf6027cfe546c539f"
+                "reference": "1e4a584337a0cbae8ad466350ac8409d63e8e9f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-omnisense/omnidocs/zipball/dae8480766a9f1286048844bf6027cfe546c539f",
-                "reference": "dae8480766a9f1286048844bf6027cfe546c539f",
+                "url": "https://api.github.com/repos/glitchr-omnisense/omnidocs/zipball/1e4a584337a0cbae8ad466350ac8409d63e8e9f4",
+                "reference": "1e4a584337a0cbae8ad466350ac8409d63e8e9f4",
                 "shasum": ""
             },
             "require": {
@@ -6706,8 +6706,8 @@
                 "issues": "https://github.com/glitchr-omnisense/omnidocs/issues",
                 "source": "https://github.com/glitchr-omnisense/omnidocs/tree/1.x"
             },
-            "time": "2026-11-10T12:15:25+00:00",
-            "published-time": "2026-11-10T12:34:08+00:00"
+            "time": "2026-11-11T10:35:24+00:00",
+            "published-time": "2026-11-11T11:10:36+00:00"
         },
         {
             "name": "omnisense/omnidrive",
