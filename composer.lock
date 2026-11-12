@@ -5822,12 +5822,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-omnisense/omnibridge-doctrine.git",
-                "reference": "aed943a2e5e3f38243374d76d9a12c39ad883e19"
+                "reference": "1068d57333e618caedadbaa9ca65754c06e668b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-omnisense/omnibridge-doctrine/zipball/aed943a2e5e3f38243374d76d9a12c39ad883e19",
-                "reference": "aed943a2e5e3f38243374d76d9a12c39ad883e19",
+                "url": "https://api.github.com/repos/glitchr-omnisense/omnibridge-doctrine/zipball/1068d57333e618caedadbaa9ca65754c06e668b2",
+                "reference": "1068d57333e618caedadbaa9ca65754c06e668b2",
                 "shasum": ""
             },
             "require": {
@@ -5847,6 +5847,11 @@
             },
             "default-branch": true,
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Omnibridge\\Doctrine\\": "src/"
@@ -5866,8 +5871,8 @@
                 "issues": "https://github.com/glitchr-omnisense/omnibridge-doctrine/issues",
                 "source": "https://github.com/glitchr-omnisense/omnibridge-doctrine/tree/1.x"
             },
-            "time": "2026-11-08T00:37:43+00:00",
-            "published-time": "2026-11-08T01:00:18+00:00"
+            "time": "2026-11-11T23:12:49+00:00",
+            "published-time": "2026-11-11T23:20:15+00:00"
         },
         {
             "name": "omnibridge/static",
@@ -5943,12 +5948,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-omnisense/omnibridge-symfony.git",
-                "reference": "1c1d1afd813bcc2e0842a3dc78bce1c9cab3162e"
+                "reference": "31446027d658541775667c7870a7b4e82b5e4397"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-omnisense/omnibridge-symfony/zipball/1c1d1afd813bcc2e0842a3dc78bce1c9cab3162e",
-                "reference": "1c1d1afd813bcc2e0842a3dc78bce1c9cab3162e",
+                "url": "https://api.github.com/repos/glitchr-omnisense/omnibridge-symfony/zipball/31446027d658541775667c7870a7b4e82b5e4397",
+                "reference": "31446027d658541775667c7870a7b4e82b5e4397",
                 "shasum": ""
             },
             "require": {
@@ -6052,8 +6057,8 @@
                 "issues": "https://github.com/glitchr-omnisense/omnibridge-symfony/issues",
                 "source": "https://github.com/glitchr-omnisense/omnibridge-symfony/tree/1.x"
             },
-            "time": "2026-11-10T07:15:03+00:00",
-            "published-time": "2026-11-10T08:19:06+00:00"
+            "time": "2026-11-11T23:12:49+00:00",
+            "published-time": "2026-11-11T23:20:15+00:00"
         },
         {
             "name": "omnibridge/twig",
@@ -6330,12 +6335,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-omnisense/omnibase.git",
-                "reference": "11116f9fb99f8032b9f640199450d5c8e8f43b1d"
+                "reference": "9b33abba79ccd1ecfa0edda0ff18fb999eaed9f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-omnisense/omnibase/zipball/11116f9fb99f8032b9f640199450d5c8e8f43b1d",
-                "reference": "11116f9fb99f8032b9f640199450d5c8e8f43b1d",
+                "url": "https://api.github.com/repos/glitchr-omnisense/omnibase/zipball/9b33abba79ccd1ecfa0edda0ff18fb999eaed9f5",
+                "reference": "9b33abba79ccd1ecfa0edda0ff18fb999eaed9f5",
                 "shasum": ""
             },
             "require": {
@@ -6564,7 +6569,7 @@
                 "forms",
                 "omnibase"
             ],
-            "time": "2026-11-11T11:15:32+00:00"
+            "time": "2026-11-11T22:49:18+00:00"
         },
         {
             "name": "omnisense/omnibridge",
