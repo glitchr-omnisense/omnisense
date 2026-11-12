@@ -5948,12 +5948,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-omnisense/omnibridge-symfony.git",
-                "reference": "31446027d658541775667c7870a7b4e82b5e4397"
+                "reference": "9b8107061766b0976b700674f4775f89f0caa5ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-omnisense/omnibridge-symfony/zipball/31446027d658541775667c7870a7b4e82b5e4397",
-                "reference": "31446027d658541775667c7870a7b4e82b5e4397",
+                "url": "https://api.github.com/repos/glitchr-omnisense/omnibridge-symfony/zipball/9b8107061766b0976b700674f4775f89f0caa5ef",
+                "reference": "9b8107061766b0976b700674f4775f89f0caa5ef",
                 "shasum": ""
             },
             "require": {
@@ -6057,8 +6057,8 @@
                 "issues": "https://github.com/glitchr-omnisense/omnibridge-symfony/issues",
                 "source": "https://github.com/glitchr-omnisense/omnibridge-symfony/tree/1.x"
             },
-            "time": "2026-11-11T23:12:49+00:00",
-            "published-time": "2026-11-11T23:20:15+00:00"
+            "time": "2026-11-12T06:22:04+00:00",
+            "published-time": "2026-11-12T08:39:24+00:00"
         },
         {
             "name": "omnibridge/twig",
@@ -6335,12 +6335,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-omnisense/omnibase.git",
-                "reference": "9b33abba79ccd1ecfa0edda0ff18fb999eaed9f5"
+                "reference": "3f625ca13586852a166cee7dc1503a4af1e65512"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-omnisense/omnibase/zipball/9b33abba79ccd1ecfa0edda0ff18fb999eaed9f5",
-                "reference": "9b33abba79ccd1ecfa0edda0ff18fb999eaed9f5",
+                "url": "https://api.github.com/repos/glitchr-omnisense/omnibase/zipball/3f625ca13586852a166cee7dc1503a4af1e65512",
+                "reference": "3f625ca13586852a166cee7dc1503a4af1e65512",
                 "shasum": ""
             },
             "require": {
@@ -6569,7 +6569,7 @@
                 "forms",
                 "omnibase"
             ],
-            "time": "2026-11-11T22:49:18+00:00"
+            "time": "2026-11-12T06:22:04+00:00"
         },
         {
             "name": "omnisense/omnibridge",
