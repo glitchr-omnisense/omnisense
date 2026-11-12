@@ -19,11 +19,11 @@ use Symfony\Component\Yaml\Yaml;
  */
 final class ApiDirectoryTest extends TestCase
 {
-    private static function directory(): Directory
+    private static function directory(string $policies = 'config/policies.json'): Directory
     {
         $root = \dirname(__DIR__, 2);
 
-        return new Directory(new Catalogue($root.'/catalog'), new DeclaredPolicies($root.'/config/policies.json'), $root.'/config/apis.yaml');
+        return new Directory(new Catalogue($root.'/catalog'), new DeclaredPolicies($root.'/'.$policies), $root.'/config/apis.yaml');
     }
 
     public function testTheFileReadsAndEveryAvailableFamilyIsInTheCatalogue(): void
@@ -137,7 +137,8 @@ final class ApiDirectoryTest extends TestCase
 
     public function testTheReleasedProvidersAreCardsWithoutAPolicyUntilOneIsDeclared(): void
     {
-        $omnibus = self::directory()->family('omnibus');
+        // The tests' policies (omnitrade/stripe alone), not the site's: the carriers declare theirs since 2026-11-10.
+        $omnibus = self::directory('tests/Fixtures/policies.json')->family('omnibus');
         self::assertNotNull($omnibus);
         self::assertGreaterThan(20, \count($omnibus->providers), 'the carriers, from catalog/omnibus.yaml');
         self::assertSame(Status::Available, $omnibus->providers[0]->status);
