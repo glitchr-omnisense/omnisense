@@ -54,6 +54,28 @@ reads the commits from working copies instead of GitHub; `--skip-assets`
 keeps the current Encore build; `--verify` renders every page twice. Two
 builds of the same commit give the same `dist/`.
 
+The build is incremental. `static.php` declares what each page is rendered
+from (`Site::dependsOn()`): every page depends on the code, templates,
+translations, configuration, catalogue, lock and environment; a manual's
+pages on its entry in `config/documentation.yaml`, its fetched `var/docs`
+folders and its compatibility row; a piece of news on its files; the news
+list and feeds on `news/`; a guide on `docs/`. The renderer's answers are
+kept in `var/static-cache`, and a page whose inputs did not change is not
+rendered again. A page whose inputs are not declared (the home, the
+catalogue, the search index...) is rendered every time. Nothing checks these
+lists: a page that reads something its list leaves out would be served stale
+from the cache, so the workflow compares each build of `main` with a full
+one. `--full` renders everything; `--only=/docs/omnibase/*` renders the
+addresses it names whatever the cache holds; `--cache=<folder>` keeps the
+answers elsewhere.
+
+`bin/console app:provenance dist` writes `dist/provenance.json`, the
+deployment manifest published with the site. It records the site's commit,
+the commit each documentation source was read at, the locked packages, the
+tool versions and the export's checksums. Its build time and run are that
+build's own: it is written after the comparison and is not one of the files
+`omnibridge-static.json` lists.
+
 With the site's containers: `make static`, then `make static-serve`
 (http://localhost:8135, an nginx that serves it as GitHub Pages does;
 `make static-serve STATIC_BASE_PATH=/omnisense` for a build under that
@@ -67,6 +89,33 @@ Settings → Pages → Source: "GitHub Actions". The address is the one Pages
 gives the repository (`https://glitchr-omnisense.github.io/omnisense/`); with a
 custom domain, set it in Settings → Pages and set the repository variable
 `SITE_URL` to it (`https://example.org/`): the site is then built at the root.
+
+The workflow can also be started by hand or by another repository:
+
+- **Run workflow** with `full` renders every page.
+- **Run workflow** with `rollback` set to an earlier run's id deploys again
+  the `site` artifact that run kept. Each build of `main` keeps one for 90
+  days. Nothing is built. The run must be a successful run of this workflow on
+  `main`, and its files are checked against its `omnibridge-static.json` and
+  `provenance.json` first.
+- A documentation package that published a commit sends a
+  `repository_dispatch` of type `documentation-published` with a token
+  allowed to write to this repository:
+
+  ```sh
+  gh api repos/glitchr-omnisense/omnisense/dispatches \
+    -f event_type=documentation-published \
+    -f 'client_payload[key]=omnibase' -f 'client_payload[commit]=<full SHA>'
+  ```
+
+  `key` is the manual's key in `config/documentation.yaml`. `commit` must be on
+  the branch the series follows; without it, the branch's head is taken.
+  `series` is optional and defaults to the manual's default series.
+  `app:docs:pin` moves that series to the commit. Only that manual's addresses
+  are rendered (`--only`), and the moved pin is committed to `main` before the
+  site is deployed. If the key is unknown or missing, the whole site is built
+  as on a push. A commit that is not on the branch fails the run, and the
+  site is left as it was.
 
 ## Tests
 

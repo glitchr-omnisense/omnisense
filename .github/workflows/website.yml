@@ -1,11 +1,23 @@
 # The website: built statically by omnibridge/static, published on GitHub Pages.
 #
-#   pull request  tests, the whole site built, uploaded as an artifact: the preview
-#                 (nothing is published)
-#   main          the same, plus a second build compared with the first (deterministic),
-#                 smoke tests in headless Chrome over a static server that serves it as
-#                 GitHub Pages does (under the base path), the sitemap, the search indexes
-#                 and the feeds checked - then deployed to GitHub Pages
+#   pull request         tests, the whole site built, uploaded as an artifact: the preview
+#                        (nothing is published)
+#   main                 the same, plus a --full export into an empty folder compared with the
+#                        incremental one (byte for byte), smoke tests in headless Chrome over a
+#                        static server that serves it as GitHub Pages does (under the base path),
+#                        the sitemap, the search indexes and the feeds checked, the deployment
+#                        manifest written (provenance.json) - then deployed to GitHub Pages, the
+#                        folder kept 90 days as the run's `site` artifact
+#   workflow_dispatch    the same; `full` renders every page; `rollback: <run id>` builds nothing
+#                        and deploys again the `site` artifact of that earlier run of main
+#   repository_dispatch  `documentation-published` from a package (master plan section 10, items
+#                        11 and 12): its manual moved to the commit it names, then a targeted
+#                        rebuild of that manual's pages - see the Dispatch step
+#
+# Incremental: var/static-cache (the renderer's answers, by the fingerprint of the inputs
+# static.php declares) is kept from one run to the next; a page whose inputs did not change
+# is not rendered again, a page without declared inputs is rendered every time, a change of
+# the shared renderer (src, templates, config, the lock...) renders everything.
 #
 # The site's address: the repository variable SITE_URL when a custom domain is set
 # (https://example.org/), otherwise the address GitHub Pages gives the repository
@@ -22,6 +34,18 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      full:
+        description: Render every page (--full), nothing taken from the cache
+        type: boolean
+        default: false
+      rollback:
+        description: 'Deploy again the site an earlier run of main built: its run id (the number in the run''s address). Nothing is built.'
+        type: string
+        default: ''
+  # A documentation package published a commit: {"key": "<its manual>", "commit": "<sha>", "series": "<optional>"}.
+  repository_dispatch:
+    types: [documentation-published]
 
 permissions:
   contents: read
@@ -36,12 +60,16 @@ env:
 
 jobs:
   build:
+    if: github.event_name != 'workflow_dispatch' || inputs.rollback == ''
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     permissions:
       contents: read
       # actions/configure-pages reads the repository's Pages site (its address).
       pages: read
+    outputs:
+      moved: ${{ steps.dispatch.outputs.moved }}
+      pin: ${{ steps.dispatch.outputs.pin }}
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
@@ -99,6 +127,43 @@ jobs:
       - name: Tests
         run: php vendor/bin/phpunit
 
+      # documentation-published: the package's manual moved to the commit it names (its series'
+      # branch head without one), checked to be on that branch of the repository
+      # config/documentation.yaml names (app:docs:pin), then only that manual's addresses rendered
+      # whatever the cache holds (--only); every other page goes through the ordinary rule. A key
+      # the site does not know (or none) builds the whole site as a push does. The payload is
+      # read through the environment, never written into the script.
+      - name: Dispatch
+        id: dispatch
+        if: github.event_name == 'repository_dispatch'
+        env:
+          KEY: ${{ github.event.client_payload.key }}
+          COMMIT: ${{ github.event.client_payload.commit }}
+          SERIES: ${{ github.event.client_payload.series }}
+        run: |
+          request=$(jq -nc --arg key "$KEY" --arg commit "$COMMIT" --arg series "$SERIES" \
+            '{type: "documentation-published", key: $key, commit: (if $commit == "" then null else $commit end), series: (if $series == "" then null else $series end)}')
+          echo "request=$request" >> "$GITHUB_OUTPUT"
+          if ! [[ "$KEY" =~ ^[a-z0-9][a-z0-9-]*$ ]]; then
+            echo "::warning::documentation-published without a manual's key: the whole site is built."
+            exit 0
+          fi
+          status=0
+          php bin/console app:docs:pin "$KEY" ${COMMIT:+"$COMMIT"} ${SERIES:+--series="$SERIES"} --no-interaction || status=$?
+          case $status in
+            0)
+              echo "only=/docs/$KEY,/docs/$KEY/*,/fr/docs/$KEY,/fr/docs/$KEY/*" >> "$GITHUB_OUTPUT"
+              if git diff --quiet -- config/documentation.yaml; then
+                echo "moved=false" >> "$GITHUB_OUTPUT"
+              else
+                echo "moved=true" >> "$GITHUB_OUTPUT"
+                echo "pin=$(git diff -U0 -- config/documentation.yaml | grep '^+ *ref:' | tr -s ' ' | sed 's/^+ ref: //')" >> "$GITHUB_OUTPUT"
+                git diff -- config/documentation.yaml
+              fi ;;
+            2) echo "::warning::The site has no manual \"$KEY\": the whole site is built." ;;
+            *) exit "$status" ;;
+          esac
+
       # Each package's docs/ at the commit config/documentation.yaml pins: a ref never
       # changes, so what was fetched is kept from one run to the next.
       - name: Documentation cache
@@ -108,7 +173,15 @@ jobs:
           key: docs-${{ hashFiles('config/documentation.yaml') }}
           restore-keys: docs-
 
-      # For GitHub Pages: .nojekyll, the redirections as pages, every address under BASE_PATH.
+      # The renderer's answers of the last run (saved under this run's key once the job succeeds;
+      # a failed build leaves the last good cache as it was).
+      - name: Static export cache
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
+        with:
+          path: var/static-cache
+          key: static-cache-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: static-cache-
+
       # The compatibility dashboard's data, from GitHub's Actions API with the job's token. A failure
       # (a rate limit) keeps config/compatibility.yaml as committed: the build never depends on it.
       - name: Compatibility data
@@ -133,16 +206,27 @@ jobs:
       - name: Usage policies
         run: php bin/console app:policies:import --no-interaction
 
+      # For GitHub Pages: .nojekyll, the redirections as pages, every address under BASE_PATH.
+      # Incremental from the cache restored above; its last line (the counts) goes into provenance.json.
       - name: Build
-        run: bin/omnibridge-static build --out=dist --github-pages
-
-      - name: Build again, same files
-        if: github.event_name != 'pull_request'
+        env:
+          FULL: ${{ github.event_name == 'workflow_dispatch' && inputs.full && '--full' || '' }}
+          ONLY: ${{ steps.dispatch.outputs.only }}
         run: |
-          bin/omnibridge-static build --out=dist-again --skip-assets --github-pages
-          cmp dist/omnibridge-static.json dist-again/omnibridge-static.json
-          diff -r dist dist-again
-          rm -rf dist-again
+          set -o pipefail
+          bin/omnibridge-static build --out=dist --github-pages ${FULL:+"$FULL"} ${ONLY:+"--only=$ONLY"} 2>&1 | tee build.log
+          echo "STATIC_SUMMARY=$(grep -E '^(incremental|full)( \(|:)' build.log | tail -1)" >> "$GITHUB_ENV"
+
+      # The proof that the cache served no stale page: a --full export into an empty folder, with
+      # a cache of its own, gives the same files byte for byte (and two exports agree: deterministic).
+      # A dispatch's targeted rebuild skips it (the next push compares again).
+      - name: A full export, the same files
+        if: github.event_name != 'pull_request' && github.event_name != 'repository_dispatch'
+        run: |
+          bin/omnibridge-static build --out=dist-full --skip-assets --github-pages --full --cache=var/static-cache-full
+          cmp dist/omnibridge-static.json dist-full/omnibridge-static.json
+          diff -r dist dist-full
+          rm -rf dist-full var/static-cache-full
 
       - name: Sitemap, search and feeds
         run: |
@@ -173,6 +257,18 @@ jobs:
           for _ in $(seq 1 30); do curl -fs "http://localhost:8135$BASE_PATH/" >/dev/null && break; sleep 1; done
           node tests/smoke/chrome.mjs "http://localhost:8135$BASE_PATH" smoke-shots
 
+      # The deployment manifest, published with the site (master plan section 10, item 10): the
+      # site's commit, the commit each documentation source was read at, the packages and tools
+      # that rendered it, the checksums. Written last: its build time and run are this build's
+      # own, and it is not one of the files the export lists and the comparison above checks.
+      - name: Provenance
+        env:
+          DISPATCH_REQUEST: ${{ steps.dispatch.outputs.request }}
+          INPUTS: ${{ github.event_name == 'workflow_dispatch' && toJSON(inputs) || '' }}
+        run: |
+          request="${DISPATCH_REQUEST:-$INPUTS}"
+          php bin/console app:provenance dist --summary="$STATIC_SUMMARY" ${request:+--request="$request"}
+
       - name: Upload the preview
         if: github.event_name == 'pull_request'
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
@@ -180,6 +276,16 @@ jobs:
           name: website-pr-${{ github.event.number }}
           path: dist
           retention-days: 14
+
+      # The immutable artifact a rollback deploys again (workflow_dispatch, rollback: this run's id).
+      - name: Keep the site for a rollback
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: site
+          path: dist
+          include-hidden-files: true
+          retention-days: 90
 
       # .nojekyll is a hidden file: included.
       - name: Upload the site for GitHub Pages
@@ -189,6 +295,15 @@ jobs:
           path: dist
           include-hidden-files: true
 
+      # A dispatch that moved a pin: the file the pin job commits to main.
+      - name: Keep the moved pin
+        if: steps.dispatch.outputs.moved == 'true'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: documentation-pin
+          path: config/documentation.yaml
+          retention-days: 7
+
       - name: Upload the smoke tests' screenshots
         if: always() && github.event_name != 'pull_request'
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
@@ -197,9 +312,94 @@ jobs:
           path: smoke-shots
           if-no-files-found: ignore
 
-  deploy:
+  # The pin a dispatch moved, committed to main before the site that reads it is deployed: the
+  # repository stays what the site is built from (the next push builds the same manual). On a main
+  # that moved meanwhile, the push is refused and nothing is deployed: the package dispatches again.
+  pin:
     needs: build
-    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'repository_dispatch' && needs.build.outputs.moved == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: documentation-pin
+          path: config
+      - name: Commit the pin
+        env:
+          KEY: ${{ github.event.client_payload.key }}
+          PIN: ${{ needs.build.outputs.pin }}
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add config/documentation.yaml
+          git commit -m "config/documentation.yaml: the $KEY manual at $PIN (documentation-published)"
+          git push origin "HEAD:refs/heads/main"
+
+  # Deploy again an earlier run's `site` artifact: a run of this workflow on main that succeeded,
+  # its files checked against its omnibridge-static.json and provenance.json before they go out.
+  rollback:
+    if: github.event_name == 'workflow_dispatch' && inputs.rollback != '' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      actions: read
+      contents: read
+    steps:
+      - name: The run
+        env:
+          RUN: ${{ inputs.rollback }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          [[ "$RUN" =~ ^[0-9]+$ ]] || { echo "::error::rollback names a run by its id (digits)."; exit 1; }
+          read -r path branch event conclusion sha < <(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$RUN" --jq '[.path, .head_branch, .event, .conclusion, .head_sha] | @tsv')
+          echo "Run $RUN: $path on $branch ($event), $conclusion, commit $sha"
+          if [ "$path" != .github/workflows/website.yml ] || [ "$branch" != main ] || [ "$conclusion" != success ]; then
+            echo "::error::Run $RUN is not a successful run of website.yml on main."
+            exit 1
+          fi
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: site
+          path: dist
+          run-id: ${{ inputs.rollback }}
+          github-token: ${{ github.token }}
+      - name: Check the files
+        run: |
+          python3 - <<'EOF'
+          import hashlib, json, os
+          sha = lambda p: hashlib.sha256(open(p, 'rb').read()).hexdigest()
+          report = json.load(open('dist/omnibridge-static.json'))
+          provenance = json.load(open('dist/provenance.json'))
+          listed = report['files']
+          problems = [f'changed or missing: {f}' for f, e in listed.items() if not os.path.isfile(f'dist/{f}') or sha(f'dist/{f}') != e['sha256']]
+          for root, _, files in os.walk('dist'):
+              for name in files:
+                  f = os.path.relpath(os.path.join(root, name), 'dist')
+                  if f not in listed and f not in ('omnibridge-static.json', 'provenance.json'):
+                      problems.append(f'not in the report: {f}')
+          if provenance['artifact']['report'] != sha('dist/omnibridge-static.json'):
+              problems.append('omnibridge-static.json is not the one provenance.json names')
+          assert not problems, problems
+          print(f"{len(listed)} files checked; the site of commit {provenance['site']['commit']}, built {provenance['build']['built']}")
+          EOF
+      - name: Upload the site for GitHub Pages
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: dist
+          include-hidden-files: true
+
+  deploy:
+    needs: [build, pin, rollback]
+    # The build's site, or the rollback's; never after a failure (a pin refused leaves the site as it is).
+    if: >-
+      !cancelled() && !failure() && github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+      && (needs.build.result == 'success' || needs.rollback.result == 'success')
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     permissions:
