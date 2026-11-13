@@ -1,0 +1,48 @@
+# The omnihub entry of the Omnisense catalogue. Written by `bin/console
+# app:catalog:import` from the packages' repositories; the phrase and the
+# text are the site's own, edited here. Each package: its kind, what its
+# composer.json says, its GitHub repository and development branch, whether
+# its README says it was verified against the real service, whether it has
+# a docs/ folder (see config/documentation.yaml).
+family: omnihub
+phrase:
+  en: 'A package hub, written once.'
+  fr: 'Un hub de paquets, écrit une fois.'
+text:
+  en: 'The registry that Unity’s Package Manager and npm clients read - package documents, search, versions, tarballs and their checksums, the hub’s manifest - served by a forge with a database or by a static hub on GitHub Pages, whose packages are read from GitHub releases.'
+  fr: 'Le registre que lisent le Package Manager de Unity et les clients npm — documents des paquets, recherche, versions, archives et leurs sommes de contrôle, manifeste du hub — servi par une forge avec sa base de données ou par un hub statique sur GitHub Pages, dont les paquets sont lus dans les releases GitHub.'
+packages:
+  omnihub/github:
+    kind: provider
+    description: "Omnihub's GitHub provider: a static hub's packages read from GitHub - each repository's releases, their .tgz assets (npm pack's tarball), their package.json and hashes."
+    license: MIT
+    keywords:
+      - upm
+      - unity
+      - github
+      - releases
+      - omnihub
+    repository: glitchr-omnisense/omnihub-github
+    branch: main
+    requires:
+      - omnisense/contracts
+      - omnisense/omnihub
+    verification: unstated
+  omnisense/omnihub:
+    kind: family
+    description: "Omnihub: a package hub written once - the npm/UPM registry documents Unity's Package Manager reads (package documents, search, listing), the versions, the tarballs and their shasum/integrity, the hub manifest the hub clients read - for a forge with a database and for a static hub on GitHub Pages alike."
+    license: MIT
+    keywords:
+      - upm
+      - unity
+      - npm
+      - registry
+      - hub
+      - static
+      - omnihub
+    repository: glitchr-omnisense/omnihub
+    branch: main
+    requires:
+      - omnisense/contracts
+    verification: unstated
+    docs: true

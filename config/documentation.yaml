@@ -1175,6 +1175,16 @@ packages:
         ref: 8536fdc8200b6aa81d7b56a3d17090d2d76b60bb
         pinned: branch-head
         path: docs/
+  omnihub:
+    package: omnisense/omnihub
+    repository: glitchr-omnisense/omnihub
+    default: main
+    versions:
+      main:
+        branch: main
+        ref: 92cf0a3d46f4f2d176c740805a86d012dbc33b68
+        pinned: branch-head
+        path: docs/
   omnilab:
     package: omnisense/omnilab
     repository: glitchr-omnisense/omnilab
