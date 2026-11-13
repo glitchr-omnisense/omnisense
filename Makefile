@@ -89,17 +89,18 @@ else
 # for ${...} interpolation inside the compose files and env_file contents.
 DOCKER		 := docker compose --env-file .env --env-file .env.local -f docker-compose.yml
 
-# In dev: add override
+# In dev: add override, then docker-compose.local.yml (git-ignored: mounts of checkouts only this machine has) if present
+DOCKER_LOCAL   := $(if $(wildcard docker-compose.local.yml),-f docker-compose.local.yml,)
 ifeq ($(APP_DEBUG),1)
-DOCKER_DEV	 := $(DOCKER) -f docker-compose.override.yml
-DOCKER_ADMIN   := $(DOCKER) -f docker-compose.override.yml -f docker-compose.admin.yml
+DOCKER_DEV	 := $(DOCKER) -f docker-compose.override.yml $(DOCKER_LOCAL)
+DOCKER_ADMIN   := $(DOCKER) -f docker-compose.override.yml $(DOCKER_LOCAL) -f docker-compose.admin.yml
 else
 DOCKER_DEV	 := $(DOCKER)
 DOCKER_ADMIN   := $(DOCKER) -f docker-compose.admin.yml
 endif
 
 ifeq ($(APP_DEBUG),1)
-DOCKER_SETUP   := $(DOCKER) -f docker-compose.override.yml -f docker-compose.setup.yml -f docker-compose.override.setup.yml
+DOCKER_SETUP   := $(DOCKER) -f docker-compose.override.yml $(DOCKER_LOCAL) -f docker-compose.setup.yml -f docker-compose.override.setup.yml
 else
 DOCKER_SETUP   := $(DOCKER) -f docker-compose.setup.yml
 endif

@@ -2564,7 +2564,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 384c7595cb2283372c2bdedc7a0eb85ad0d6f630
+        ref: 021d8523046e13ebf70455b99cf3860668ab4319
         pinned: branch-head
         path: docs/
   omnistate-annuaire-entreprises:
@@ -2674,7 +2674,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 146a5fd92821f79ae4991f56ce819e5cd2b923f8
+        ref: b7d8c74957f36ce32ff090fbaa65e7c6c8a1f8b7
         pinned: branch-head
         path: docs/
   omnistay:

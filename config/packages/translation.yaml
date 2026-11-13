@@ -4,7 +4,7 @@ framework:
         default_path: '%kernel.project_dir%/translations'
         # omnibase's Localizer offers the default plus these: FR, EN.
         # A fallback's parent locale is never tried (fr_FR never reaches .fr):
-        # plain language codes here, as on Nakaya and a shop site.
+        # plain language codes here, as on the other omnibase sites.
         fallbacks:
             - fr
             - en

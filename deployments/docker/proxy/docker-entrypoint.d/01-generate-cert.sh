@@ -5,7 +5,7 @@
 # The names the certificate must cover come from SSL_CERT_DOMAINS (comma
 # separated, first one becomes the CN). It defaults to "localhost" so the
 # original behaviour is preserved wherever the variable is not set. Local dev
-# reaches the site over a custom DNS name (meyers.local), and a cert issued
+# reaches the site over a custom DNS name (site.local), and a cert issued
 # only for CN=localhost makes every browser refuse that hostname outright
 # rather than offering the usual self-signed warning — so the name has to be a
 # real SAN entry, not just the CN.

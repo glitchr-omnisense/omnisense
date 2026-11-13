@@ -11,6 +11,7 @@
 *.bak-*
 
 .env.local
+docker-compose.local.yml
 .env.local.php
 .env.*.local
 config/secrets/prod*/prod*.decrypt.private.php

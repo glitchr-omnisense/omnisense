@@ -15,7 +15,7 @@ well_known:
   # Fetch gnupg pgp-key.txt generation
   # gnupg: 
   #   directory: /var/www/.gnupg
-  #   uid: "Meyers & Associée"
+  #   uid: "Exemple SAS"
 
   resources:
     ads_txt: 

@@ -170,17 +170,19 @@ jobs:
         uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
         with:
           path: var/docs
-          key: docs-${{ hashFiles('config/documentation.yaml') }}
-          restore-keys: docs-
+          key: docs-v2-${{ hashFiles('config/documentation.yaml') }}
+          restore-keys: docs-v2-
 
       # The renderer's answers of the last run (saved under this run's key once the job succeeds;
-      # a failed build leaves the last good cache as it was).
+      # a failed build leaves the last good cache as it was). The prefix's generation (v2) is raised to
+      # start from nothing: v2 after the 2026-11-13 history rewrites of the documented repositories, so
+      # that no page rendered before them is reused.
       - name: Static export cache
         uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
         with:
           path: var/static-cache
-          key: static-cache-${{ github.run_id }}-${{ github.run_attempt }}
-          restore-keys: static-cache-
+          key: static-cache-v2-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: static-cache-v2-
 
       # The compatibility dashboard's data, from GitHub's Actions API with the job's token. A failure
       # (a rate limit) keeps config/compatibility.yaml as committed: the build never depends on it.
