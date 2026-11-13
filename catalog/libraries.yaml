@@ -1,9 +1,10 @@
 # The libraries entry of the Omnisense catalogue. Written by `bin/console
 # app:catalog:import` from the packages' repositories; the phrase and the
 # text are the site's own, edited here. Each package: its kind, what its
-# composer.json says, its GitHub repository and development branch, whether
-# its README says it was verified against the real service, whether it has
-# a docs/ folder (see config/documentation.yaml).
+# composer.json says, its GitHub repository and development branch, its
+# latest stable release on Packagist (`version`, none when nothing is tagged)
+# and whether it is abandoned, whether its README says it was verified against
+# the real service, whether it has a docs/ folder (see config/documentation.yaml).
 family: libraries
 phrase:
   en: "The house's JavaScript libraries, without dependency."
@@ -19,7 +20,7 @@ packages:
     docs: true
   '@glitchr/graphjs':
     kind: library
-    description: 'A layered directed graph you can drag and zoom: HTML nodes, SVG links, no dependency'
+    description: 'A layered directed graph you can drag and zoom, and a history drawn in lanes beside its rows: HTML nodes, SVG links, no dependency'
     license: MIT
     keywords:
       - graph
@@ -30,6 +31,8 @@ packages:
       - layout
       - pan
       - zoom
+      - lanes
+      - 'commit graph'
     repository: glitchr-studio/graphjs
     branch: main
     verification: unstated

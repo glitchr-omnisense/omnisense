@@ -1,9 +1,10 @@
 # The omniauth entry of the Omnisense catalogue. Written by `bin/console
 # app:catalog:import` from the packages' repositories; the phrase and the
 # text are the site's own, edited here. Each package: its kind, what its
-# composer.json says, its GitHub repository and development branch, whether
-# its README says it was verified against the real service, whether it has
-# a docs/ folder (see config/documentation.yaml).
+# composer.json says, its GitHub repository and development branch, its
+# latest stable release on Packagist (`version`, none when nothing is tagged)
+# and whether it is abandoned, whether its README says it was verified against
+# the real service, whether it has a docs/ folder (see config/documentation.yaml).
 family: omniauth
 phrase:
   en: 'Sign people in, by whichever factors.'
@@ -27,7 +28,9 @@ packages:
       - omniauth
     repository: glitchr-omnisense/omniauth-google
     branch: 1.x
+    version: 1.0.0
     requires:
+      - omnisense/contracts
       - omnisense/omniauth
     verification: partial
     verification_note: "- Not verified: a real Google - no client id and secret were at hand: the recorded answers are written from Google's documentation, not captured, and the ID token's signature is not checked (a token from the token endpoint over TLS, OpenID Connect Core §3.1.3.7 (6))."
@@ -46,6 +49,7 @@ packages:
       - abandoned
     repository: glitchr-omnisense/omniauth-oauth
     branch: 1.x
+    abandoned: true
     requires:
       - omnisense/omniauth
     verification: unstated
@@ -66,6 +70,7 @@ packages:
       - omniauth
     repository: glitchr-omnisense/omniauth-otp
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omniauth
     verification: partial
@@ -85,6 +90,7 @@ packages:
       - omniauth
     repository: glitchr-omnisense/omniauth-webauthn
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omniauth
     verification: partial
@@ -111,6 +117,9 @@ packages:
       - omniauth
     repository: glitchr-omnisense/omniauth
     branch: 1.x
+    version: 1.0.0
+    requires:
+      - omnisense/contracts
     verification: partial
     verification_note: "- Not verified: an application's own stores (omnibase fills them at step AU4); a real host (the bridges come with AU6 and AU8); a cookie written by a running scheb/2fa on an application (the encoder is compared, not a browser's cookie); concurrent tries against CacheThrottle (read then written, not atomic: a host that "
     docs: true

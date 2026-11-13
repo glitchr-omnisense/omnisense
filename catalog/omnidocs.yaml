@@ -1,9 +1,10 @@
 # The omnidocs entry of the Omnisense catalogue. Written by `bin/console
 # app:catalog:import` from the packages' repositories; the phrase and the
 # text are the site's own, edited here. Each package: its kind, what its
-# composer.json says, its GitHub repository and development branch, whether
-# its README says it was verified against the real service, whether it has
-# a docs/ folder (see config/documentation.yaml).
+# composer.json says, its GitHub repository and development branch, its
+# latest stable release on Packagist (`version`, none when nothing is tagged)
+# and whether it is abandoned, whether its README says it was verified against
+# the real service, whether it has a docs/ folder (see config/documentation.yaml).
 family: omnidocs
 packages:
   omnidocs/doxygen:
@@ -23,6 +24,7 @@ packages:
       - omnisense/omnidocs
     verification: partial
     verification_note: '- Not verified: Doxygen''s groups (\defgroup) and related pages beyond the main page; C, Java and Python projects; diagrams (Doxygen draws them as images, not in the XML).'
+    docs: true
   omnidocs/jsdoc:
     kind: provider
     description: "Omnidocs JSDoc: a JavaScript library's API reference from the JSON JSDoc explains (jsdoc -X) - a page per global, its functions, methods and properties with their comments, parameters and source lines; a library of browser scripts (IIFE, UMD) named by the globals it sets."
@@ -39,6 +41,7 @@ packages:
       - omnisense/omnidocs
     verification: partial
     verification_note: "- Not verified: ES modules (export function), whose doclets JSDoc names module:x~y - read, but no library of the ecosystem is written so; JSDoc's own @module, @namespace tags beyond their names."
+    docs: true
   omnidocs/markdown:
     kind: provider
     description: 'Omnidocs Markdown: a folder of Markdown files as an omnidocs manual - its contents from the folders and the files (their front matter, a number before their name), each page rendered with league/commonmark as symfony.com/doc writes its pages: callouts (note, tip, caution, versionadded...), code with a caption and in tabs, version badges, links between pages and to the repository; and a changelog read as releases.'
@@ -74,6 +77,7 @@ packages:
       - omnisense/omnidocs
     verification: partial
     verification_note: '- Not verified: options given otherwise than in an array literal (a constant, a method call); attributes ([...]) are not shown; a package with two classes of the same name in one namespace (one wins).'
+    docs: true
   omnidocs/sphinx:
     kind: provider
     description: "Omnidocs Sphinx: a Sphinx manual as an omnidocs manual, from the JSON builder's output (sphinx-build -b json) and its objects.inv - pages in the toctrees' order, admonitions and versionadded as callouts, highlighted code in frames, the API entries at their anchors with their signatures."
@@ -91,6 +95,7 @@ packages:
       - omnisense/omnidocs
     verification: partial
     verification_note: "- Not verified: other domains than Python's (cpp:, js:) beyond their names; themes' extra context; MyST (Markdown) projects; math (MathJax is a script, left out: formulas show as their source)."
+    docs: true
   omnisense/omnidocs:
     kind: family
     description: 'Omnidocs: one model of a manual, whatever wrote it - Markdown, Sphinx, Doxygen, JSDoc: its versions, its pages (title, contents, headings, the file to edit), its API entries and their anchors, read through one source contract; a search index a static page searches, and the HTML conventions of symfony.com/doc (callouts, versionadded, code with captions and tabs) every format renders to.'

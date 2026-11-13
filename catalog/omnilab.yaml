@@ -1,9 +1,10 @@
 # The omnilab entry of the Omnisense catalogue. Written by `bin/console
 # app:catalog:import` from the packages' repositories; the phrase and the
 # text are the site's own, edited here. Each package: its kind, what its
-# composer.json says, its GitHub repository and development branch, whether
-# its README says it was verified against the real service, whether it has
-# a docs/ folder (see config/documentation.yaml).
+# composer.json says, its GitHub repository and development branch, its
+# latest stable release on Packagist (`version`, none when nothing is tagged)
+# and whether it is abandoned, whether its README says it was verified against
+# the real service, whether it has a docs/ folder (see config/documentation.yaml).
 family: omnilab
 phrase:
   en: 'Read what science knows of a thing, or measures at a place.'
@@ -27,6 +28,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-brightsky
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -46,6 +48,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-cactus
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -65,6 +68,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-cams
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnilab/cds
       - omnisense/omnilab
@@ -85,6 +89,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-cds
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -103,6 +108,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-chebi
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -122,6 +128,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-chembl
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -141,6 +148,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-clinvar
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -160,6 +168,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-cod
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -178,6 +187,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-codata
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -196,6 +206,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-col
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -214,6 +225,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-copernicus
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -235,6 +247,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-donki
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -255,6 +268,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-earthdata
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: verified
@@ -274,6 +288,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-ebird
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -293,6 +308,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-elevation
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -312,6 +328,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-emsc
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -331,6 +348,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-ensembl
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -351,6 +369,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-exoplanets
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -371,6 +390,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-gaia
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -390,6 +410,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-gbif
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -409,6 +430,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-gwas
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -428,6 +450,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-hgnc
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -450,6 +473,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-horizons
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -469,6 +493,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-inaturalist
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -488,6 +513,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-interpro
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -505,6 +531,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-itis
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -523,6 +550,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-iucn
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -543,6 +571,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-jpl
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -562,6 +591,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-kegg
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -580,6 +610,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-launches
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -598,6 +629,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-materials-project
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -618,6 +650,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-mpc
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -636,6 +669,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-ncbi
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -658,6 +692,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-ned
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -679,6 +714,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-noaa
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -698,6 +734,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-obis
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -718,6 +755,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-open-meteo
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -736,6 +774,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-openaq
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -757,6 +796,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-opentargets
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -775,6 +815,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-oqmd
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -793,6 +834,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-pbdb
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -812,6 +854,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-pdb
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -830,6 +873,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-pubchem
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -849,6 +893,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-quickgo
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -868,6 +913,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-reactome
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -887,6 +933,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-rhea
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -907,6 +954,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-simbad
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -926,6 +974,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-string
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -945,6 +994,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-swpc
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -964,6 +1014,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-tides
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: partial
@@ -983,6 +1034,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-uniprot
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -1002,6 +1054,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-usgs
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -1021,6 +1074,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-usgs-water
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -1040,6 +1094,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-vizier
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -1058,6 +1113,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-wikidata
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -1076,6 +1132,7 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab-worms
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnilab
     verification: unstated
@@ -1106,5 +1163,8 @@ packages:
       - omnilab
     repository: glitchr-omnisense/omnilab
     branch: 1.x
+    version: 1.0.0
+    requires:
+      - omnisense/contracts
     verification: unstated
     docs: true

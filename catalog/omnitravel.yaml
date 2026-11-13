@@ -1,9 +1,10 @@
 # The omnitravel entry of the Omnisense catalogue. Written by `bin/console
 # app:catalog:import` from the packages' repositories; the phrase and the
 # text are the site's own, edited here. Each package: its kind, what its
-# composer.json says, its GitHub repository and development branch, whether
-# its README says it was verified against the real service, whether it has
-# a docs/ folder (see config/documentation.yaml).
+# composer.json says, its GitHub repository and development branch, its
+# latest stable release on Packagist (`version`, none when nothing is tagged)
+# and whether it is abandoned, whether its README says it was verified against
+# the real service, whether it has a docs/ folder (see config/documentation.yaml).
 family: omnitravel
 phrase:
   en: 'Read timetables, journeys and real time, by train, plane or city transit.'
@@ -35,6 +36,7 @@ packages:
       - omnitravel
     repository: glitchr-omnisense/omnitravel
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
     verification: unstated
@@ -57,6 +59,7 @@ packages:
       - omnitravel
     repository: glitchr-omnisense/omnitravel-gtfs
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnitravel
     verification: unstated
@@ -78,6 +81,7 @@ packages:
       - omnitravel
     repository: glitchr-omnisense/omnitravel-navitia
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omnitravel
@@ -100,6 +104,7 @@ packages:
       - omnitravel
     repository: glitchr-omnisense/omnitravel-transitous
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omnitravel

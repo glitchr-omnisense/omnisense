@@ -1,11 +1,11 @@
 # The documentation each package publishes in its own repository (its docs/
 # folder), read by the website at an immutable commit. Each package has its
 # own version series; a series names the branch it follows and the commit it
-# is read at. No package has a release tag yet: every ref is the head of a
-# published branch (origin/<branch>) when it was pinned - `pinned: branch-head`
-# (a series read at a release tag would say `pinned: tag`). A package with
-# several maintained series (release branches such as 3.x and 4.x, each with a
-# docs/ folder) lists each; `default` is the current one, the others are shown
+# is read at. Every ref is the head of a published branch (origin/<branch>)
+# when it was pinned - `pinned: branch-head` (a series read at a release tag
+# would say `pinned: tag`). A package with several maintained series
+# (release branches such as 3.x and 4.x, each with a docs/ folder) lists
+# each; `default` is the current one, the others are shown
 # with a notice and kept out of search engines' indexes.
 #
 #   bin/console app:catalog:import          new packages and series, pinned refs kept
@@ -13,6 +13,8 @@
 #   bin/console app:docs:fetch              the docs/ folders at these refs, into var/docs
 #
 # A series kept for history keeps its ref: add it by hand, with its tag or commit.
+# A package without a docs/ folder can have its manual added by hand, `path: ''`:
+# its README and changelog at that commit; the import keeps it as it is.
 packages:
   contracts:
     package: omnisense/contracts
@@ -147,12 +149,12 @@ packages:
         path: docs/
       4.x:
         branch: 4.x
-        ref: 80ca635dac217cd5571441a5c4763d24f17e808b
+        ref: 6170e1d7d263fefa1dc17b63352b9e43b9722556
         pinned: branch-head
         path: docs/
       3.x:
         branch: 3.x
-        ref: dab12e9a30fe862d13342ca201c4e041cb1c1570
+        ref: 688e4a8938af0d2a285427fefaa6dcad1bfc1114
         pinned: branch-head
         path: docs/
   omnibase-admin:
@@ -182,7 +184,7 @@ packages:
     versions:
       main:
         branch: main
-        ref: 3ba70fd6048579a28b3530af21a34644cb4be3ae
+        ref: a59ea45f9338a7d3409a72f466aae72c2cd2b20c
         pinned: branch-head
         path: docs/
   omnibase-booking:
@@ -362,7 +364,7 @@ packages:
     versions:
       main:
         branch: main
-        ref: f058ad62b5f4ffb4f3f76078ade33ebdfd5bdd9f
+        ref: 2042c64247936587161d3f5a963bfb4172205223
         pinned: branch-head
         path: docs/
   omnibase-music:
@@ -562,7 +564,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 77de4a484a1fea5ffe615143f8045ed3d56fd9d4
+        ref: ec274e085c2d360ddc4ae20003b10ae0d6cdb5b3
         pinned: branch-head
         path: docs/
   omnibridge-react:
@@ -612,7 +614,7 @@ packages:
     versions:
       2.x:
         branch: 2.x
-        ref: 1dd873f591e43a8b92c930ff1cc690c70902c759
+        ref: 7b7d0c42399794a517851a6db0ffbaae28ec8253
         pinned: branch-head
         path: docs/
   omnibus-amazon:
@@ -1015,6 +1017,26 @@ packages:
         ref: 9ce91ac82a808ba0cebb2c10190af26e4e86ead0
         pinned: branch-head
         path: docs/
+  omnidocs-doxygen:
+    package: omnidocs/doxygen
+    repository: glitchr-omnisense/omnidocs-doxygen
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: 30d7d73a278af333eab90fdefdf5e37c33810b33
+        pinned: branch-head
+        path: ''
+  omnidocs-jsdoc:
+    package: omnidocs/jsdoc
+    repository: glitchr-omnisense/omnidocs-jsdoc
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: a0de7d24793b1a8b8e42ca8a6efba5667a911331
+        pinned: branch-head
+        path: ''
   omnidocs-markdown:
     package: omnidocs/markdown
     repository: glitchr-omnisense/omnidocs-markdown
@@ -1025,6 +1047,26 @@ packages:
         ref: 15cb171229ecdb08c282bd70f04dde058554912b
         pinned: branch-head
         path: docs/
+  omnidocs-php:
+    package: omnidocs/php
+    repository: glitchr-omnisense/omnidocs-php
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: a31a63d3ffc8f49072ebd801cf24e8a10138ed71
+        pinned: branch-head
+        path: ''
+  omnidocs-sphinx:
+    package: omnidocs/sphinx
+    repository: glitchr-omnisense/omnidocs-sphinx
+    default: 1.x
+    versions:
+      1.x:
+        branch: 1.x
+        ref: d41fa0c53bebbfc25e8858ee63890826f6c50105
+        pinned: branch-head
+        path: ''
   omnidrive:
     package: omnisense/omnidrive
     repository: glitchr-omnisense/omnidrive
@@ -2522,7 +2564,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 871a3b3d24ee01141d8fd5a0b8f4f2b36471fdea
+        ref: 384c7595cb2283372c2bdedc7a0eb85ad0d6f630
         pinned: branch-head
         path: docs/
   omnistate-annuaire-entreprises:

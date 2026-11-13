@@ -1,9 +1,10 @@
 # The omnipulse entry of the Omnisense catalogue. Written by `bin/console
 # app:catalog:import` from the packages' repositories; the phrase and the
 # text are the site's own, edited here. Each package: its kind, what its
-# composer.json says, its GitHub repository and development branch, whether
-# its README says it was verified against the real service, whether it has
-# a docs/ folder (see config/documentation.yaml).
+# composer.json says, its GitHub repository and development branch, its
+# latest stable release on Packagist (`version`, none when nothing is tagged)
+# and whether it is abandoned, whether its README says it was verified against
+# the real service, whether it has a docs/ folder (see config/documentation.yaml).
 family: omnipulse
 phrase:
   en: 'Audience, reviews and funding: the pulse of a site or project.'
@@ -27,6 +28,7 @@ packages:
       - omnipulse
     repository: glitchr-omnisense/omnipulse-bing-webmaster
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omnipulse
@@ -48,6 +50,7 @@ packages:
       - omnipulse
     repository: glitchr-omnisense/omnipulse-ga4
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omnipulse
@@ -68,6 +71,7 @@ packages:
       - omnipulse
     repository: glitchr-omnisense/omnipulse-github-sponsors
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omnipulse
@@ -86,6 +90,7 @@ packages:
       - omnipulse
     repository: glitchr-omnisense/omnipulse-google-reviews
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omnipulse
@@ -105,6 +110,7 @@ packages:
       - omnipulse
     repository: glitchr-omnisense/omnipulse-liberapay
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omnipulse
@@ -125,6 +131,7 @@ packages:
       - omnipulse
     repository: glitchr-omnisense/omnipulse-matomo
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omnipulse
@@ -147,6 +154,7 @@ packages:
       - omnipulse
     repository: glitchr-omnisense/omnipulse-opencollective
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omnipulse
@@ -167,6 +175,7 @@ packages:
       - omnipulse
     repository: glitchr-omnisense/omnipulse-plausible
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omnipulse
@@ -188,6 +197,7 @@ packages:
       - omnipulse
     repository: glitchr-omnisense/omnipulse-search-console
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omnipulse
@@ -205,6 +215,7 @@ packages:
       - omnipulse
     repository: glitchr-omnisense/omnipulse-tripadvisor
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omnipulse
@@ -222,6 +233,7 @@ packages:
       - omnipulse
     repository: glitchr-omnisense/omnipulse-trustpilot
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omnipulse
@@ -256,6 +268,7 @@ packages:
       - omnipulse
     repository: glitchr-omnisense/omnipulse
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
     verification: partial

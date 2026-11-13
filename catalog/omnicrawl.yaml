@@ -1,9 +1,10 @@
 # The omnicrawl entry of the Omnisense catalogue. Written by `bin/console
 # app:catalog:import` from the packages' repositories; the phrase and the
 # text are the site's own, edited here. Each package: its kind, what its
-# composer.json says, its GitHub repository and development branch, whether
-# its README says it was verified against the real service, whether it has
-# a docs/ folder (see config/documentation.yaml).
+# composer.json says, its GitHub repository and development branch, its
+# latest stable release on Packagist (`version`, none when nothing is tagged)
+# and whether it is abandoned, whether its README says it was verified against
+# the real service, whether it has a docs/ folder (see config/documentation.yaml).
 family: omnicrawl
 packages:
   omnicrawl/apify:
@@ -19,6 +20,7 @@ packages:
       - framework-agnostic
     repository: glitchr-omnisense/omnicrawl-apify
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omnicrawl
@@ -37,6 +39,7 @@ packages:
       - framework-agnostic
     repository: glitchr-omnisense/omnicrawl-firecrawl
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omnicrawl
@@ -54,6 +57,7 @@ packages:
       - framework-agnostic
     repository: glitchr-omnisense/omnicrawl-scrapingbee
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omnicrawl
@@ -72,6 +76,7 @@ packages:
       - framework-agnostic
     repository: glitchr-omnisense/omnicrawl-zyte
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omnicrawl
@@ -98,6 +103,7 @@ packages:
       - omnicrawl
     repository: glitchr-omnisense/omnicrawl
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
     verification: unstated

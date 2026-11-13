@@ -1,9 +1,10 @@
 # The omnifood entry of the Omnisense catalogue. Written by `bin/console
 # app:catalog:import` from the packages' repositories; the phrase and the
 # text are the site's own, edited here. Each package: its kind, what its
-# composer.json says, its GitHub repository and development branch, whether
-# its README says it was verified against the real service, whether it has
-# a docs/ folder (see config/documentation.yaml).
+# composer.json says, its GitHub repository and development branch, its
+# latest stable release on Packagist (`version`, none when nothing is tagged)
+# and whether it is abandoned, whether its README says it was verified against
+# the real service, whether it has a docs/ folder (see config/documentation.yaml).
 family: omnifood
 phrase:
   en: "Receive a restaurant's orders and reservations."
@@ -23,7 +24,9 @@ packages:
       - omnifood
     repository: glitchr-omnisense/omnifood-deliveroo
     branch: 1.x
+    version: 1.0.0
     requires:
+      - omnisense/contracts
       - omnisense/omnifood
     verification: unverified
     verification_note: "Not verified against the live API (non vérifié en réel). Deliveroo gives production keys only to approved partners: this package is written from Deliveroo's public documentation (https://api-docs.deliveroo.com, read on 2026-10-04) and tested against recorded answers."
@@ -41,7 +44,9 @@ packages:
       - omnifood
     repository: glitchr-omnisense/omnifood-justeat
     branch: 1.x
+    version: 1.0.0
     requires:
+      - omnisense/contracts
       - omnisense/omnifood
     verification: unverified
     verification_note: "Not verified against the live API (non vérifié en réel). JET gives its API key only to partners under a commercial agreement: this package is written from JET's public documentation (https://developers.just-eat.com/documentation/jet-connect and https://uk.api.just-eat.io/docs/jetconnect/openapi.yaml, read on 2026-10-04"
@@ -59,7 +64,9 @@ packages:
       - omnifood
     repository: glitchr-omnisense/omnifood-thefork
     branch: 1.x
+    version: 1.0.0
     requires:
+      - omnisense/contracts
       - omnisense/omnifood
     verification: unverified
     verification_note: "Not verified against the live API (non vérifié en réel). TheFork sends its keys only to partners it has accepted: this package is written from TheFork's public documentation (https://docs.thefork.io/B2B-API/introduction and https://api.thefork.io/manager/openapi.json, read on 2026-10-04) and tested against recorded ans"
@@ -76,7 +83,9 @@ packages:
       - omnifood
     repository: glitchr-omnisense/omnifood-ubereats
     branch: 1.x
+    version: 1.0.0
     requires:
+      - omnisense/contracts
       - omnisense/omnifood
     verification: unverified
     verification_note: "Not verified against the live API (non vérifié en réel). Uber gives API access only to approved partners: this package is written from Uber's public documentation (https://developer.uber.com/docs/eats/introduction, read on 2026-10-04) and tested against recorded answers."
@@ -93,14 +102,16 @@ packages:
       - omnifood
     repository: glitchr-omnisense/omnifood-zenchef
     branch: 1.x
+    version: 1.0.0
     requires:
+      - omnisense/contracts
       - omnisense/omnifood
     verification: unverified
     verification_note: 'Not verified against the live API (non vérifié en réel), and nothing guessed: every reservation call throws NotSupportedException until the documentation is in hand.'
     docs: true
   omnisense/omnifood:
     kind: family
-    description: 'Omnifood: one contract for the restaurant platforms - delivery orders (Uber Eats, Deliveroo, Just Eat) and table reservations (TheFork, Zenchef) - their menus, their stores, their webhooks, and its Symfony bundle.'
+    description: "Omnifood: one contract for the restaurant platforms - delivery orders (Uber Eats, Deliveroo, Just Eat) and table reservations (TheFork, Zenchef) - their menus, their stores, their webhooks, on omnisense/contracts (usage policies, the platforms' waits honoured, never a write sent twice), under any PHP host; an optional Symfony bundle."
     license: MIT
     keywords:
       - restaurant
@@ -117,6 +128,9 @@ packages:
       - omnifood
     repository: glitchr-omnisense/omnifood
     branch: 1.x
+    version: 1.0.0
+    requires:
+      - omnisense/contracts
     verification: unverified
     verification_note: "None of these platforms gives credentials without a partner agreement: every package is written from the platform's public documentation and tested against recorded answers (MockHttpClient), not verified against the live APIs."
     docs: true

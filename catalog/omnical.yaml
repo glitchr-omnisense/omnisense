@@ -1,9 +1,10 @@
 # The omnical entry of the Omnisense catalogue. Written by `bin/console
 # app:catalog:import` from the packages' repositories; the phrase and the
 # text are the site's own, edited here. Each package: its kind, what its
-# composer.json says, its GitHub repository and development branch, whether
-# its README says it was verified against the real service, whether it has
-# a docs/ folder (see config/documentation.yaml).
+# composer.json says, its GitHub repository and development branch, its
+# latest stable release on Packagist (`version`, none when nothing is tagged)
+# and whether it is abandoned, whether its README says it was verified against
+# the real service, whether it has a docs/ folder (see config/documentation.yaml).
 family: omnical
 packages:
   omnical/caldav:
@@ -25,6 +26,7 @@ packages:
       - omnical
     repository: glitchr-omnisense/omnical-caldav
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omnical
@@ -45,6 +47,7 @@ packages:
       - omnical
     repository: glitchr-omnisense/omnical-google
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omnical
@@ -69,6 +72,7 @@ packages:
       - omnical
     repository: glitchr-omnisense/omnical-microsoft
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omnical
@@ -89,6 +93,7 @@ packages:
       - omnical
     repository: glitchr-omnisense/omnical-nager
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omnical
@@ -111,6 +116,7 @@ packages:
       - omnical
     repository: glitchr-omnisense/omnical-openholidays
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omnical
@@ -140,6 +146,7 @@ packages:
       - omnical
     repository: glitchr-omnisense/omnical
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
     verification: unstated

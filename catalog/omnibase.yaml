@@ -1,9 +1,10 @@
 # The omnibase entry of the Omnisense catalogue. Written by `bin/console
 # app:catalog:import` from the packages' repositories; the phrase and the
 # text are the site's own, edited here. Each package: its kind, what its
-# composer.json says, its GitHub repository and development branch, whether
-# its README says it was verified against the real service, whether it has
-# a docs/ folder (see config/documentation.yaml).
+# composer.json says, its GitHub repository and development branch, its
+# latest stable release on Packagist (`version`, none when nothing is tagged)
+# and whether it is abandoned, whether its README says it was verified against
+# the real service, whether it has a docs/ folder (see config/documentation.yaml).
 family: omnibase
 phrase:
   en: 'The core of the sites, and optional ready-made structures.'
@@ -191,7 +192,7 @@ packages:
     docs: true
   omnibase/forge:
     kind: structure
-    description: 'Software forge for base-bundle: releases built from git tags, free and licensed downloads, a private Composer repository, client projects with a shared board, prepaid support hours and quotes - paid through base-bundle-market'
+    description: 'Software forge for base-bundle: releases built from git tags, free and licensed downloads, a private Composer repository, a Unity registry (its documents written by omnisense/omnihub), client projects with a shared board, prepaid support hours and quotes - paid through base-bundle-market'
     license: MIT
     keywords:
       - symfony
@@ -208,6 +209,7 @@ packages:
     requires:
       - omnibridge/symfony
       - omnisense/omnibase
+      - omnisense/omnihub
       - omnibase/admin
       - omnibase/marketplace
       - omnisense/omnistate
@@ -526,6 +528,7 @@ packages:
       - contracts
     repository: glitchr-omnisense/omnibase
     branch: 5.x
+    version: 5.0.0
     requires:
       - omnibridge/composer
       - omnisense/omnibridge

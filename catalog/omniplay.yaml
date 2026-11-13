@@ -1,9 +1,10 @@
 # The omniplay entry of the Omnisense catalogue. Written by `bin/console
 # app:catalog:import` from the packages' repositories; the phrase and the
 # text are the site's own, edited here. Each package: its kind, what its
-# composer.json says, its GitHub repository and development branch, whether
-# its README says it was verified against the real service, whether it has
-# a docs/ folder (see config/documentation.yaml).
+# composer.json says, its GitHub repository and development branch, its
+# latest stable release on Packagist (`version`, none when nothing is tagged)
+# and whether it is abandoned, whether its README says it was verified against
+# the real service, whether it has a docs/ folder (see config/documentation.yaml).
 family: omniplay
 phrase:
   en: 'Put a game on the stores, and play it online.'
@@ -26,6 +27,7 @@ packages:
       - omniplay
     repository: glitchr-omnisense/omniplay-docker
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omniplay
@@ -46,6 +48,7 @@ packages:
       - omniplay
     repository: glitchr-omnisense/omniplay-edgegap
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omniplay
@@ -66,6 +69,7 @@ packages:
       - omniplay
     repository: glitchr-omnisense/omniplay-gog
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omniplay
@@ -87,6 +91,7 @@ packages:
       - omniplay
     repository: glitchr-omnisense/omniplay-igdb
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omniplay
@@ -108,6 +113,7 @@ packages:
       - omniplay
     repository: glitchr-omnisense/omniplay-itch
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omniplay
@@ -127,6 +133,7 @@ packages:
       - omniplay
     repository: glitchr-omnisense/omniplay-rawg
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omniplay
@@ -152,6 +159,7 @@ packages:
       - omniplay
     repository: glitchr-omnisense/omniplay-steam
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omniplay
@@ -182,6 +190,7 @@ packages:
       - omniplay
     repository: glitchr-omnisense/omniplay
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
     verification: partial

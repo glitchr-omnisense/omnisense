@@ -1,9 +1,10 @@
 # The omnitrade entry of the Omnisense catalogue. Written by `bin/console
 # app:catalog:import` from the packages' repositories; the phrase and the
 # text are the site's own, edited here. Each package: its kind, what its
-# composer.json says, its GitHub repository and development branch, whether
-# its README says it was verified against the real service, whether it has
-# a docs/ folder (see config/documentation.yaml).
+# composer.json says, its GitHub repository and development branch, its
+# latest stable release on Packagist (`version`, none when nothing is tagged)
+# and whether it is abandoned, whether its README says it was verified against
+# the real service, whether it has a docs/ folder (see config/documentation.yaml).
 family: omnitrade
 phrase:
   en: 'Take payments and sell, whatever the provider.'
@@ -26,6 +27,7 @@ packages:
       - omnitrade
     repository: glitchr-omnisense/omnitrade
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
     verification: unstated
@@ -42,6 +44,7 @@ packages:
       - omnitrade
     repository: glitchr-omnisense/omnitrade-amazon
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnitrade
     verification: unstated
@@ -56,6 +59,7 @@ packages:
       - omnitrade
     repository: glitchr-omnisense/omnitrade-paypal
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omnitrade
@@ -71,6 +75,7 @@ packages:
       - omnitrade
     repository: glitchr-omnisense/omnitrade-shopify
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omnitrade
@@ -86,6 +91,7 @@ packages:
       - omnitrade
     repository: glitchr-omnisense/omnitrade-stripe
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omnitrade
@@ -105,6 +111,7 @@ packages:
       - omnitrade
     repository: glitchr-omnisense/omnitrade-web
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnitrade
     verification: unstated
@@ -120,6 +127,7 @@ packages:
       - omnitrade
     repository: glitchr-omnisense/omnitrade-woocommerce
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omnitrade

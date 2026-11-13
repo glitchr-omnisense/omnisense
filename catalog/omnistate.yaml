@@ -1,9 +1,10 @@
 # The omnistate entry of the Omnisense catalogue. Written by `bin/console
 # app:catalog:import` from the packages' repositories; the phrase and the
 # text are the site's own, edited here. Each package: its kind, what its
-# composer.json says, its GitHub repository and development branch, whether
-# its README says it was verified against the real service, whether it has
-# a docs/ folder (see config/documentation.yaml).
+# composer.json says, its GitHub repository and development branch, its
+# latest stable release on Packagist (`version`, none when nothing is tagged)
+# and whether it is abandoned, whether its README says it was verified against
+# the real service, whether it has a docs/ folder (see config/documentation.yaml).
 family: omnistate
 phrase:
   en: 'Ask the public registers what they know.'
@@ -36,6 +37,7 @@ packages:
       - genealogy
     repository: glitchr-omnisense/omnistate
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
     verification: unstated
@@ -56,6 +58,7 @@ packages:
       - omnistate
     repository: glitchr-omnisense/omnistate-annuaire-entreprises
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omnistate
@@ -77,6 +80,7 @@ packages:
       - omnistate
     repository: glitchr-omnisense/omnistate-annuaire-sante
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omnistate
@@ -97,6 +101,7 @@ packages:
       - omnistate
     repository: glitchr-omnisense/omnistate-ecb
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omnistate
@@ -118,6 +123,7 @@ packages:
       - omnistate
     repository: glitchr-omnisense/omnistate-eurostat
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omnistate
@@ -138,6 +144,7 @@ packages:
       - omnistate
     repository: glitchr-omnisense/omnistate-iana
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omnistate
@@ -161,6 +168,7 @@ packages:
       - omnistate
     repository: glitchr-omnisense/omnistate-insee
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omnistate
@@ -181,6 +189,7 @@ packages:
       - omnistate
     repository: glitchr-omnisense/omnistate-matchid
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omnistate
@@ -200,6 +209,7 @@ packages:
       - omnistate
     repository: glitchr-omnisense/omnistate-nara
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omnistate
@@ -219,6 +229,7 @@ packages:
       - omnistate
     repository: glitchr-omnisense/omnistate-national-archives-uk
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omnistate
@@ -240,6 +251,7 @@ packages:
       - omnistate
     repository: glitchr-omnisense/omnistate-openarchieven
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omnistate
@@ -258,6 +270,7 @@ packages:
       - omnistate
     repository: glitchr-omnisense/omnistate-vies
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omnistate

@@ -1,9 +1,10 @@
 # The omnimeet entry of the Omnisense catalogue. Written by `bin/console
 # app:catalog:import` from the packages' repositories; the phrase and the
 # text are the site's own, edited here. Each package: its kind, what its
-# composer.json says, its GitHub repository and development branch, whether
-# its README says it was verified against the real service, whether it has
-# a docs/ folder (see config/documentation.yaml).
+# composer.json says, its GitHub repository and development branch, its
+# latest stable release on Packagist (`version`, none when nothing is tagged)
+# and whether it is abandoned, whether its README says it was verified against
+# the real service, whether it has a docs/ folder (see config/documentation.yaml).
 family: omnimeet
 phrase:
   en: 'Open a video room and let someone in.'
@@ -24,8 +25,10 @@ packages:
       - turn
       - coturn
       - omnimeet
+      - usage-policy
     repository: glitchr-omnisense/omnimeet-direct
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnimeet
     verification: unstated
@@ -43,8 +46,10 @@ packages:
       - jaas
       - jwt
       - omnimeet
+      - usage-policy
     repository: glitchr-omnisense/omnimeet-jitsi
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnimeet
     verification: partial
@@ -52,7 +57,7 @@ packages:
     docs: true
   omnisense/omnimeet:
     kind: family
-    description: "Omnimeet: one contract for video meetings - open a room, let a participant in (a JavaScript engine and its options, an embedded frame, or an address), close it, read its state, hear the provider's callbacks - whatever carries the call: the two browsers themselves (omnimeet/direct) or a conferencing service (omnimeet/jitsi); and its Symfony bundle."
+    description: "Omnimeet: one contract for video meetings - open a room, let a participant in (a JavaScript engine and its options, an embedded frame, or an address), close it, read its state, hear the provider's callbacks - whatever carries the call: the two browsers themselves (omnimeet/direct) or a conferencing service (omnimeet/jitsi) - each gateway with its usage policy (omnisense/contracts: what its terms allow, its limits, enforced by a guard); and its Symfony bundle."
     license: MIT
     keywords:
       - video
@@ -62,7 +67,11 @@ packages:
       - teleconsultation
       - jitsi
       - omnimeet
+      - usage-policy
     repository: glitchr-omnisense/omnimeet
     branch: 1.x
+    version: 1.0.0
+    requires:
+      - omnisense/contracts
     verification: unstated
     docs: true

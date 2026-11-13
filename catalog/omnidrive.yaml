@@ -1,9 +1,10 @@
 # The omnidrive entry of the Omnisense catalogue. Written by `bin/console
 # app:catalog:import` from the packages' repositories; the phrase and the
 # text are the site's own, edited here. Each package: its kind, what its
-# composer.json says, its GitHub repository and development branch, whether
-# its README says it was verified against the real service, whether it has
-# a docs/ folder (see config/documentation.yaml).
+# composer.json says, its GitHub repository and development branch, its
+# latest stable release on Packagist (`version`, none when nothing is tagged)
+# and whether it is abandoned, whether its README says it was verified against
+# the real service, whether it has a docs/ folder (see config/documentation.yaml).
 family: omnidrive
 phrase:
   en: 'Read and write files, wherever they are kept.'
@@ -24,6 +25,7 @@ packages:
       - omnidrive
     repository: glitchr-omnisense/omnidrive-azure
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnidrive
     verification: partial
@@ -40,6 +42,7 @@ packages:
       - omnidrive
     repository: glitchr-omnisense/omnidrive-dropbox
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnidrive
     verification: partial
@@ -57,6 +60,7 @@ packages:
       - omnidrive
     repository: glitchr-omnisense/omnidrive-ftp
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnidrive
     verification: partial
@@ -73,6 +77,7 @@ packages:
       - omnidrive
     repository: glitchr-omnisense/omnidrive-gdrive
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnidrive
     verification: partial
@@ -90,6 +95,7 @@ packages:
       - omnidrive
     repository: glitchr-omnisense/omnidrive-local
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnidrive
     verification: partial
@@ -108,6 +114,7 @@ packages:
       - omnidrive
     repository: glitchr-omnisense/omnidrive-s3
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnidrive
     verification: partial
@@ -126,6 +133,7 @@ packages:
       - omnidrive
     repository: glitchr-omnisense/omnidrive-sftp
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnidrive
     verification: partial
@@ -144,6 +152,7 @@ packages:
       - omnidrive
     repository: glitchr-omnisense/omnidrive-webdav
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnidrive
     verification: partial
@@ -164,6 +173,9 @@ packages:
       - omnidrive
     repository: glitchr-omnisense/omnidrive
     branch: 1.x
+    version: 1.0.0
+    requires:
+      - omnisense/contracts
     verification: partial
     verification_note: "- Not verified: Dropbox and Google Drive themselves - their live tests run with an account's tokens (OMNIDRIVE_DROPBOX_*, OMNIDRIVE_GDRIVE_*), none was at hand; Azure Blob Storage itself (Azurite only) and an account with a hierarchical namespace; ownCloud; AWS S3 itself and the other S3 services (Scaleway, OVHcloud, R"
     docs: true

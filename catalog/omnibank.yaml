@@ -1,9 +1,10 @@
 # The omnibank entry of the Omnisense catalogue. Written by `bin/console
 # app:catalog:import` from the packages' repositories; the phrase and the
 # text are the site's own, edited here. Each package: its kind, what its
-# composer.json says, its GitHub repository and development branch, whether
-# its README says it was verified against the real service, whether it has
-# a docs/ folder (see config/documentation.yaml).
+# composer.json says, its GitHub repository and development branch, its
+# latest stable release on Packagist (`version`, none when nothing is tagged)
+# and whether it is abandoned, whether its README says it was verified against
+# the real service, whether it has a docs/ folder (see config/documentation.yaml).
 family: omnibank
 phrase:
   en: 'Read a bank account.'
@@ -25,7 +26,9 @@ packages:
       - omnibank
     repository: glitchr-omnisense/omnibank-bridge
     branch: 1.x
+    version: 1.0.0
     requires:
+      - omnisense/contracts
       - omnisense/omnibank
     verification: unverified
     verification_note: "Unverified. Written from Bridge's published v3 documentation and recorded answers (Tests/Fixtures); it has not yet been run against a real Bridge sandbox."
@@ -44,7 +47,9 @@ packages:
       - omnibank
     repository: glitchr-omnisense/omnibank-files
     branch: 1.x
+    version: 1.0.0
     requires:
+      - omnisense/contracts
       - omnisense/omnibank
     verification: unstated
     docs: true
@@ -61,7 +66,9 @@ packages:
       - omnibank
     repository: glitchr-omnisense/omnibank-powens
     branch: 1.x
+    version: 1.0.0
     requires:
+      - omnisense/contracts
       - omnisense/omnibank
     verification: unverified
     verification_note: "Unverified. Written from Powens' published documentation and recorded answers (Tests/Fixtures); it has not yet been run against a real Powens sandbox."
@@ -76,14 +83,16 @@ packages:
       - omnibank
     repository: glitchr-omnisense/omnibank-qonto
     branch: 1.x
+    version: 1.0.0
     requires:
+      - omnisense/contracts
       - omnisense/omnibank
     verification: unverified
     verification_note: "Unverified. Written from Qonto's published API documentation and recorded answers (Tests/Fixtures); it has not yet been run against a real Qonto organization or the sandbox."
     docs: true
   omnisense/omnibank:
     kind: family
-    description: "Omnibank: one contract for bank access - accounts, balances, transactions, transfers, consents and webhooks - over statement files and bank APIs, and its Symfony bundle (Omnitrade's sibling for banking)."
+    description: "Omnibank: one contract for bank access - accounts, balances, transactions, transfers, consents and webhooks - over statement files and bank APIs, on omnisense/contracts (usage policies, the providers' waits honoured, nothing sent twice), under any PHP host; an optional Symfony bundle."
     license: MIT
     keywords:
       - bank
@@ -95,5 +104,8 @@ packages:
       - omnibank
     repository: glitchr-omnisense/omnibank
     branch: 1.x
+    version: 1.0.0
+    requires:
+      - omnisense/contracts
     verification: unstated
     docs: true

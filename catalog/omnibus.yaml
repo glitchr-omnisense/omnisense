@@ -1,9 +1,10 @@
 # The omnibus entry of the Omnisense catalogue. Written by `bin/console
 # app:catalog:import` from the packages' repositories; the phrase and the
 # text are the site's own, edited here. Each package: its kind, what its
-# composer.json says, its GitHub repository and development branch, whether
-# its README says it was verified against the real service, whether it has
-# a docs/ folder (see config/documentation.yaml).
+# composer.json says, its GitHub repository and development branch, its
+# latest stable release on Packagist (`version`, none when nothing is tagged)
+# and whether it is abandoned, whether its README says it was verified against
+# the real service, whether it has a docs/ folder (see config/documentation.yaml).
 family: omnibus
 phrase:
   en: 'Ship a parcel, whatever the carrier.'
@@ -23,7 +24,9 @@ packages:
       - amazon
     repository: glitchr-omnisense/omnibus-amazon
     branch: 2.x
+    version: 2.0.0
     requires:
+      - omnisense/contracts
       - omnisense/omnibus
     verification: unstated
     docs: true
@@ -38,7 +41,9 @@ packages:
       - aramex
     repository: glitchr-omnisense/omnibus-aramex
     branch: 2.x
+    version: 2.0.0
     requires:
+      - omnisense/contracts
       - omnisense/omnibus
     verification: unstated
     docs: true
@@ -53,7 +58,9 @@ packages:
       - auspost
     repository: glitchr-omnisense/omnibus-auspost
     branch: 2.x
+    version: 2.0.0
     requires:
+      - omnisense/contracts
       - omnisense/omnibus
     verification: unstated
     docs: true
@@ -68,10 +75,12 @@ packages:
       - bluedart
     repository: glitchr-omnisense/omnibus-bluedart
     branch: 2.x
+    version: 2.0.0
     requires:
+      - omnisense/contracts
       - omnisense/omnibus
-    verification: unverified
-    verification_note: "Built from Blue Dart's published API documentation and tested on recorded answers; unverified against the sandbox until an account's keys are at hand."
+    verification: partial
+    verification_note: "Unverified: the request and answer shapes come from Blue Dart's published documentation, and the package has not been run against its service."
     docs: true
   omnibus/canada-post:
     kind: provider
@@ -84,7 +93,9 @@ packages:
       - 'canada post'
     repository: glitchr-omnisense/omnibus-canada-post
     branch: 2.x
+    version: 2.0.0
     requires:
+      - omnisense/contracts
       - omnisense/omnibus
     verification: unstated
     docs: true
@@ -99,7 +110,9 @@ packages:
       - canpar
     repository: glitchr-omnisense/omnibus-canpar
     branch: 2.x
+    version: 2.0.0
     requires:
+      - omnisense/contracts
       - omnisense/omnibus
     verification: unstated
     docs: true
@@ -114,7 +127,9 @@ packages:
       - chronopost
     repository: glitchr-omnisense/omnibus-chronopost
     branch: 2.x
+    version: 2.0.0
     requires:
+      - omnisense/contracts
       - omnisense/omnibus
     verification: partial
     verification_note: 'Not verified against a real contract: the codes and fields are those of the public integrations of Chronopost Food; the order of scheduledValue in the request and the Saturday service in particular are to be confirmed on a first real skybill.'
@@ -130,7 +145,9 @@ packages:
       - 'la poste'
     repository: glitchr-omnisense/omnibus-colissimo
     branch: 2.x
+    version: 2.0.0
     requires:
+      - omnisense/contracts
       - omnisense/omnibus
     verification: unstated
     docs: true
@@ -145,10 +162,12 @@ packages:
       - 'db schenker'
     repository: glitchr-omnisense/omnibus-db-schenker
     branch: 2.x
+    version: 2.0.0
     requires:
+      - omnisense/contracts
       - omnisense/omnibus
-    verification: unverified
-    verification_note: "The booking action is built on the Open API's published shape and is unverified: it needs an account's key (from the Schenker partner portal) to be run against the service."
+    verification: partial
+    verification_note: "Nothing here was run against DB Schenker's service: the answer is shaped after its documentation, and the bookings are unverified."
     docs: true
   omnibus/dhl:
     kind: provider
@@ -161,7 +180,9 @@ packages:
       - dhl
     repository: glitchr-omnisense/omnibus-dhl
     branch: 2.x
+    version: 2.0.0
     requires:
+      - omnisense/contracts
       - omnisense/omnibus
     verification: unstated
     docs: true
@@ -176,10 +197,12 @@ packages:
       - dtdc
     repository: glitchr-omnisense/omnibus-dtdc
     branch: 2.x
+    version: 2.0.0
     requires:
+      - omnisense/contracts
       - omnisense/omnibus
-    verification: unverified
-    verification_note: "Built from DTDC's published integration documentation and tested on recorded answers; unverified against the demo environment until an account's keys are at hand."
+    verification: partial
+    verification_note: "Unverified: the request and answer shapes come from DTDC's published documentation, and the package has not been run against its service."
     docs: true
   omnibus/fedex:
     kind: provider
@@ -192,7 +215,9 @@ packages:
       - fedex
     repository: glitchr-omnisense/omnibus-fedex
     branch: 2.x
+    version: 2.0.0
     requires:
+      - omnisense/contracts
       - omnisense/omnibus
     verification: unstated
     docs: true
@@ -207,7 +232,9 @@ packages:
       - gls
     repository: glitchr-omnisense/omnibus-gls
     branch: 2.x
+    version: 2.0.0
     requires:
+      - omnisense/contracts
       - omnisense/omnibus
     verification: unstated
     docs: true
@@ -222,14 +249,16 @@ packages:
       - 'jdl express'
     repository: glitchr-omnisense/omnibus-jdl-express
     branch: 2.x
+    version: 2.0.0
     requires:
+      - omnisense/contracts
       - omnisense/omnibus
-    verification: unverified
-    verification_note: "Built from JD Logistics' published open platform documentation and tested on recorded answers; unverified against UAT until an account's keys are at hand."
+    verification: partial
+    verification_note: "Unverified: the request and answer shapes come from JD Logistics's published documentation, and the package has not been run against its service."
     docs: true
   omnibus/mondial-relay:
     kind: provider
-    description: 'Omnibus Mondial Relay carrier: relay points, labels, tracking (Web_Services.asmx, no ext-soap needed).'
+    description: 'Omnibus Mondial Relay carrier: relay points and tracking (API1, Web_Services.asmx, no ext-soap needed), labels (API2, the dual carrier shipment API).'
     license: MIT
     keywords:
       - shipping
@@ -239,9 +268,12 @@ packages:
       - inpost
     repository: glitchr-omnisense/omnibus-mondial-relay
     branch: 2.x
+    version: 2.0.0
     requires:
+      - omnisense/contracts
       - omnisense/omnibus
-    verification: unstated
+    verification: partial
+    verification_note: "- Verified against the documents: API1's methods, parameters and signature, its test brand BDTEST13 / TestAPI1key (the key changed in V-5.12), its STAT codes; API2's endpoints (connect-api.mondialrelay.com, connect-api-sandbox.mondialrelay.com), headers, Context, output types and formats, delivery and collection modes, — - Not verified: no live call was made (no account): every test runs on answers written from the documents."
     docs: true
   omnibus/offline:
     kind: provider
@@ -254,7 +286,9 @@ packages:
       - 'click and collect'
     repository: glitchr-omnisense/omnibus-offline
     branch: 2.x
+    version: 2.0.0
     requires:
+      - omnisense/contracts
       - omnisense/omnibus
     verification: unstated
     docs: true
@@ -269,7 +303,9 @@ packages:
       - purolator
     repository: glitchr-omnisense/omnibus-purolator
     branch: 2.x
+    version: 2.0.0
     requires:
+      - omnisense/contracts
       - omnisense/omnibus
     verification: unstated
     docs: true
@@ -284,7 +320,9 @@ packages:
       - 'royal mail'
     repository: glitchr-omnisense/omnibus-royal-mail
     branch: 2.x
+    version: 2.0.0
     requires:
+      - omnisense/contracts
       - omnisense/omnibus
     verification: unstated
     docs: true
@@ -299,10 +337,12 @@ packages:
       - 'sf express'
     repository: glitchr-omnisense/omnibus-sf-express
     branch: 2.x
+    version: 2.0.0
     requires:
+      - omnisense/contracts
       - omnisense/omnibus
-    verification: unverified
-    verification_note: "Built from SF's published open platform documentation and tested on recorded answers; unverified against the sandbox until an account's keys are at hand."
+    verification: partial
+    verification_note: "Unverified: the request and answer shapes come from SF Express's published documentation, and the package has not been run against its service."
     docs: true
   omnibus/tnt:
     kind: provider
@@ -315,7 +355,9 @@ packages:
       - tnt
     repository: glitchr-omnisense/omnibus-tnt
     branch: 2.x
+    version: 2.0.0
     requires:
+      - omnisense/contracts
       - omnisense/omnibus
     verification: unstated
     docs: true
@@ -330,7 +372,9 @@ packages:
       - ups
     repository: glitchr-omnisense/omnibus-ups
     branch: 2.x
+    version: 2.0.0
     requires:
+      - omnisense/contracts
       - omnisense/omnibus
     verification: unstated
     docs: true
@@ -345,7 +389,9 @@ packages:
       - usps
     repository: glitchr-omnisense/omnibus-usps
     branch: 2.x
+    version: 2.0.0
     requires:
+      - omnisense/contracts
       - omnisense/omnibus
     verification: unstated
     docs: true
@@ -360,14 +406,16 @@ packages:
       - 'zto express'
     repository: glitchr-omnisense/omnibus-zto-express
     branch: 2.x
+    version: 2.0.0
     requires:
+      - omnisense/contracts
       - omnisense/omnibus
-    verification: unverified
-    verification_note: "Built from ZTO's published open platform documentation and tested on recorded answers; unverified against the test environment until an account's keys are at hand."
+    verification: partial
+    verification_note: "Unverified: the request and answer shapes come from ZTO Express's published documentation, and the package has not been run against its service."
     docs: true
   omnisense/omnibus:
     kind: family
-    description: 'Omnibus: one contract for parcel carriers - rates, labels, tracking, pickup points - and its Symfony bundle (the Payum of shipping).'
+    description: "Omnibus: one contract for parcel carriers - rates, labels, tracking, pickup points - on omnisense/contracts (usage policies, the carriers' waits honoured, never a label bought twice), under any PHP host; an optional Symfony bundle (the Payum of shipping)."
     license: MIT
     keywords:
       - shipping
@@ -378,6 +426,9 @@ packages:
       - 'pickup point'
     repository: glitchr-omnisense/omnibus
     branch: 2.x
+    version: 2.0.0
+    requires:
+      - omnisense/contracts
     verification: partial
     verification_note: "Not verified: that the carriers' APIs answer as recorded."
     docs: true

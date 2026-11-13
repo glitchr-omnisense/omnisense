@@ -1,9 +1,10 @@
 # The omnisong entry of the Omnisense catalogue. Written by `bin/console
 # app:catalog:import` from the packages' repositories; the phrase and the
 # text are the site's own, edited here. Each package: its kind, what its
-# composer.json says, its GitHub repository and development branch, whether
-# its README says it was verified against the real service, whether it has
-# a docs/ folder (see config/documentation.yaml).
+# composer.json says, its GitHub repository and development branch, its
+# latest stable release on Packagist (`version`, none when nothing is tagged)
+# and whether it is abandoned, whether its README says it was verified against
+# the real service, whether it has a docs/ folder (see config/documentation.yaml).
 family: omnisong
 phrase:
   en: "Let a musician's catalogue be heard."
@@ -14,7 +15,7 @@ text:
 packages:
   omnisense/omnisong:
     kind: family
-    description: "Omnisong: one contract for listening to a musician's catalogue - releases, tracks, previews, the links to every platform with the label first, and the embeds that play from them - and its Symfony bundle."
+    description: "Omnisong: one contract for listening to a musician's catalogue - releases, tracks, previews, the links to every platform with the label first, and the embeds that play from them - each catalogue behind its usage policy (omnisense/contracts), and its Symfony bundle."
     license: MIT
     keywords:
       - music
@@ -26,6 +27,9 @@ packages:
       - omnisong
     repository: glitchr-omnisense/omnisong
     branch: 1.x
+    version: 1.0.0
+    requires:
+      - omnisense/contracts
     verification: unstated
     docs: true
   omnisong/itunes:
@@ -40,7 +44,9 @@ packages:
       - omnisong
     repository: glitchr-omnisense/omnisong-itunes
     branch: 1.x
+    version: 1.0.0
     requires:
+      - omnisense/contracts
       - omnisense/omnisong
     verification: unstated
     docs: true
@@ -55,7 +61,9 @@ packages:
       - omnisong
     repository: glitchr-omnisense/omnisong-odesli
     branch: 1.x
+    version: 1.0.0
     requires:
+      - omnisense/contracts
       - omnisense/omnisong
     verification: unstated
     docs: true

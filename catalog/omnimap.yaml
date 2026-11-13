@@ -1,9 +1,10 @@
 # The omnimap entry of the Omnisense catalogue. Written by `bin/console
 # app:catalog:import` from the packages' repositories; the phrase and the
 # text are the site's own, edited here. Each package: its kind, what its
-# composer.json says, its GitHub repository and development branch, whether
-# its README says it was verified against the real service, whether it has
-# a docs/ folder (see config/documentation.yaml).
+# composer.json says, its GitHub repository and development branch, its
+# latest stable release on Packagist (`version`, none when nothing is tagged)
+# and whether it is abandoned, whether its README says it was verified against
+# the real service, whether it has a docs/ folder (see config/documentation.yaml).
 family: omnimap
 phrase:
   en: 'Draw a map, whoever provides it.'
@@ -26,7 +27,9 @@ packages:
       - omnimap
     repository: glitchr-omnisense/omnimap-google
     branch: 1.x
+    version: 1.0.0
     requires:
+      - omnisense/contracts
       - omnisense/omnimap
     verification: partial
     verification_note: "- Not verified live: Google's answers themselves (Static Maps, Geocoding, the Maps JavaScript API drawn by assets/google.js) - no key in the harness."
@@ -47,7 +50,9 @@ packages:
       - omnimap
     repository: glitchr-omnisense/omnimap-maplibre
     branch: 1.x
+    version: 1.0.0
     requires:
+      - omnisense/contracts
       - omnisense/omnimap
     verification: partial
     verification_note: "- Verified live, no key (vendor/bin/phpunit --group live, 2026-10-25): OpenFreeMap's style, its TileJSON, a vector tile of Strasbourg, a glyph range and the sprite, all on the declared host; unpkg's MapLibre GL JS 5.24.0 and its stylesheet against the SHA-384 hashes the browser checks, with the CORS header that check n — - Not verified: MapLibre GL JS 6 loaded as a module (library_module), styles other than OpenFreeMap's, assets/capture.js sending a MapLibre picture to a host's cache."
@@ -69,7 +74,9 @@ packages:
       - omnimap
     repository: glitchr-omnisense/omnimap-openstreetmap
     branch: 1.x
+    version: 1.0.0
     requires:
+      - omnisense/contracts
       - omnisense/omnimap
     verification: partial
     verification_note: "- Verified live (docker compose run --rm omnimap live, 2026-10-23): an image of Kyoto made of tile.openstreetmap.org's tiles (the response headers: access-control-allow-origin: *, cache-control: max-age=91080, stale-while-revalidate=604800, stale-if-error=604800) and one Nominatim query, with the package's User-Agent. — - Not verified: Leaflet's live map (assets/leaflet.js) in a browser; another tile provider."
@@ -91,6 +98,9 @@ packages:
       - omnimap
     repository: glitchr-omnisense/omnimap
     branch: 1.x
+    version: 1.0.0
+    requires:
+      - omnisense/contracts
     verification: partial
     verification_note: "- Verified live (docker compose run --rm omnimap live, 2026-10-23): an image of Kyoto made of tile.openstreetmap.org's tiles and one Nominatim query, with this package's User-Agent. — - Not verified here: the JavaScript in a browser; Google's live answers (no key in this harness: see omnimap/google)."
     docs: true

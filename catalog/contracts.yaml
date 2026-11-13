@@ -1,9 +1,10 @@
 # The contracts entry of the Omnisense catalogue. Written by `bin/console
 # app:catalog:import` from the packages' repositories; the phrase and the
 # text are the site's own, edited here. Each package: its kind, what its
-# composer.json says, its GitHub repository and development branch, whether
-# its README says it was verified against the real service, whether it has
-# a docs/ folder (see config/documentation.yaml).
+# composer.json says, its GitHub repository and development branch, its
+# latest stable release on Packagist (`version`, none when nothing is tagged)
+# and whether it is abandoned, whether its README says it was verified against
+# the real service, whether it has a docs/ folder (see config/documentation.yaml).
 family: contracts
 phrase:
   en: 'What every family builds on.'
@@ -29,5 +30,6 @@ packages:
       - omnisense
     repository: glitchr-omnisense/contracts
     branch: 1.x
+    version: 1.0.0
     verification: unstated
     docs: true

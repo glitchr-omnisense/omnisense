@@ -1,9 +1,10 @@
 # The omnisearch entry of the Omnisense catalogue. Written by `bin/console
 # app:catalog:import` from the packages' repositories; the phrase and the
 # text are the site's own, edited here. Each package: its kind, what its
-# composer.json says, its GitHub repository and development branch, whether
-# its README says it was verified against the real service, whether it has
-# a docs/ folder (see config/documentation.yaml).
+# composer.json says, its GitHub repository and development branch, its
+# latest stable release on Packagist (`version`, none when nothing is tagged)
+# and whether it is abandoned, whether its README says it was verified against
+# the real service, whether it has a docs/ folder (see config/documentation.yaml).
 family: omnisearch
 phrase:
   en: 'Search, whatever the engine.'
@@ -43,6 +44,9 @@ packages:
       - omnisearch
     repository: glitchr-omnisense/omnisearch
     branch: 1.x
+    version: 1.0.0
+    requires:
+      - omnisense/contracts
     verification: partial
     verification_note: "- Not verified: an engine other than Typesense and memory; Doctrine's MongoDB ODM (the store falls back on findBy(), never run); Laravel (no bridge yet: one is written when an application under Laravel indexes)."
     docs: true
