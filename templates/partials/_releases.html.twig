@@ -1,0 +1,31 @@
+{#
+ # The releases of each family as the catalogue has them (its `version`, read
+ # from Packagist by app:catalog:import): the family's own package and its
+ # release, how many of its other packages have a stable release, and the ones
+ # that have none yet, each with the constraint that requires it. Ends the
+ # Install guide (docs/<locale>/install.md).
+ #}
+<table class="releases">
+    <thead>
+        <tr>
+            <th scope="col">{{ '@messages.install.family'|trans }}</th>
+            <th scope="col">{{ '@messages.install.own'|trans }}</th>
+            <th scope="col">{{ '@messages.install.members'|trans }}</th>
+            <th scope="col">{{ '@messages.install.not_stable'|trans }}</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for family in catalogue.families|filter(f => f.name != 'libraries') %}
+        {% set own = family.own %}
+        {% set members = family.members %}
+        {% set stable = members|filter(p => p.stable and not p.abandoned) %}
+        {% set pending = (own and not own.stable ? [own] : [])|merge(members|filter(p => not p.stable or p.abandoned)) %}
+        <tr>
+            <th scope="row">{% if family.hasPage %}<a href="{{ family_url(family.name) }}">{{ family.name }}</a>{% else %}{{ family.name }}{% endif %}</th>
+            <td>{% if own %}<code>{{ own.name }}</code> {% if own.stable %}{{ own.version }}{% else %}{{ '@messages.state.development'|trans }}{% endif %}{% else %}—{% endif %}</td>
+            <td>{{ '@messages.install.stable_count'|trans({stable: stable|length, total: members|length}) }}</td>
+            <td>{% for p in pending %}<a href="{{ doc_url(p) }}"><code>{{ p.name }}</code></a> {% if p.abandoned %}({{ '@messages.state.abandoned'|trans|lower }}){% else %}<code>{{ p.constraint }}</code>{% endif %}{{ not loop.last ? ', ' }}{% else %}—{% endfor %}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

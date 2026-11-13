@@ -122,6 +122,8 @@ state:
   partial: Vérifié en partie
   unverified: Non vérifié en réel
   unstated: Son README ne le dit pas
+  development: développement seulement
+  abandoned: Abandonné
 family:
   manual: Lire son manuel
   own: La famille
@@ -134,6 +136,7 @@ package:
   sheet: Fiche
   floor: Étage
   license: Licence
+  release: Version publiée
   branch: Branche
   verified: Vérifié en réel
   from_readme: Extrait de son README
@@ -144,7 +147,10 @@ package:
   links: Dépendances
   requires: Il requiert
   required_by: '{count, plural, one {Requis par # paquet} other {Requis par # paquets}}'
-  dev_branch: 'Aucun paquet de l’écosystème n’a encore de version stable : la commande demande sa branche de développement.'
+  stable: 'Sa dernière version stable sur Packagist est la {version} : il s’installe avec la minimum-stability par défaut de Composer.'
+  dev_branch: 'Pas encore de version stable : la commande nomme sa branche de développement, que Composer accepte alors pour ce seul paquet - le projet garde sa minimum-stability (voir Installer).'
+  abandoned: 'Abandonné : requérir {replacement} à la place.'
+  abandoned_plain: 'Abandonné : son README dit quoi requérir à la place.'
   readme: README
 docs:
   eyebrow: Documentation
@@ -244,6 +250,12 @@ structures:
   count: '{count, plural, one {structure} other {structures}}'
   note: Rien dans le socle ni dans les familles n’en dépend. Symfony aujourd’hui, comme le cœur ; toutes se trouvent dans la recherche des paquets.
   optional_note: 'Structure préparée, facultative : rien dans le socle ni dans les familles n’en dépend.'
+install:
+  family: Famille
+  own: Son paquet
+  members: Ses autres paquets
+  not_stable: Pas encore stable
+  stable_count: '{total, plural, =0 {aucun} other {{stable} sur # en stable}}'
 search:
   eyebrow: Paquets
   title: Chercher un paquet
@@ -259,7 +271,8 @@ search:
   count: '{count, plural, =0 {Aucun paquet} one {# paquet} other {# paquets}}'
   count_many: '{count} paquets'
   none: 'Aucun paquet ne répond : un autre mot, ou une autre famille ?'
-  version_title: Sa branche de développement, telle que Composer la demande
+  version_title: Sa dernière version stable sur Packagist
+  dev_title: 'Pas encore de version stable : sa branche de développement, telle que Composer la demande'
   untested: Non testé en réel
   partly_tested: Testé en partie
   docs: Manuel

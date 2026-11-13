@@ -7,7 +7,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Attribute\Option;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-#[AsCommand(name: 'app:catalog:import', description: 'Write catalog/*.yaml and config/documentation.yaml from the repositories under OMNI_REPOS')]
+#[AsCommand(name: 'app:catalog:import', description: 'Write catalog/*.yaml and config/documentation.yaml from the repositories under OMNI_REPOS, each package\'s latest stable release from Packagist')]
 final class CatalogImportCommand
 {
     public function __construct(private readonly CatalogueImporter $importer)
@@ -17,7 +17,10 @@ final class CatalogImportCommand
     public function __invoke(SymfonyStyle $io, #[Option(description: 'Move every documentation series to its branch\'s published head')] bool $pin = false): int
     {
         $report = $this->importer->import($pin);
-        $io->success(sprintf('%d families, %d packages; %d documented, %d series pinned.', $report['families'], $report['packages'], $report['documented'], $report['pinned']));
+        $io->success(sprintf('%d families, %d packages; %d documented, %d series pinned; %d with a stable release on Packagist.', $report['families'], $report['packages'], $report['documented'], $report['pinned'], $report['released']));
+        if ($report['unanswered']) {
+            $io->warning('Packagist did not answer, the version written before kept: '.implode(', ', $report['unanswered']));
+        }
         if ($report['skipped']) {
             $io->note('Not on GitHub, left out: '.implode(', ', $report['skipped']));
         }

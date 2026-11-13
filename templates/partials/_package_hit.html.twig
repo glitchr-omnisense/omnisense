@@ -1,6 +1,6 @@
 {#
  # A package as a row of the search: its name, what it is, its family, its
- # development branch, "not tested live" when its README says so, its links.
+ # latest stable release (its development branch while nothing is tagged), "not tested live" when its README says so, its links.
  # The data-* attributes are what search_controller.js narrows the rows by
  # (App\Catalogue\PackageSearch writes the same haystack it searches).
  #}
@@ -9,7 +9,8 @@
         <a class="om-hit-name" href="{{ doc_url(package) }}">{{ package.name|omni_mark }}</a>
         <span class="om-kind is-{{ package.tier.kind }}">{{ ('@messages.kind.' ~ package.tier.kind ~ '_one')|trans }}</span>
         {% if package.family and package.tier.kind not in ['core', 'family'] and package.family in family_pages %}<a class="om-hit-family" href="{{ family_url(package.family) }}">{{ package.family }}</a>{% endif %}
-        {% if package.constraint %}<code class="om-hit-version" title="{{ '@messages.search.version_title'|trans }}">{{ package.constraint }}</code>{% endif %}
+        {% if package.stable %}<code class="om-hit-version" title="{{ '@messages.search.version_title'|trans }}">{{ package.version }}</code>{% elseif package.constraint %}<code class="om-hit-version" title="{{ '@messages.search.dev_title'|trans }}">{{ package.constraint }}</code>{% endif %}
+        {% if package.abandoned %}<span class="om-fact is-unverified">{{ '@messages.state.abandoned'|trans }}</span>{% endif %}
         {% if package.verification.value == 'unverified' %}<span class="om-fact is-unverified" title="{{ package.verificationNote }}">{{ '@messages.search.untested'|trans }}</span>{% elseif package.verification.value == 'partial' %}<span class="om-fact is-partial" title="{{ package.verificationNote }}">{{ '@messages.search.partly_tested'|trans }}</span>{% endif %}
     </div>
     <p class="om-hit-text">{{ package.description ?? '@messages.catalogue.no_description'|trans }}</p>

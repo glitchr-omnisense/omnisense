@@ -31,7 +31,7 @@ Symfony et sous Laravel par ses ponts (voir [Compatibilité](compatibility.md)).
 Une famille et le fournisseur qui répond — ici le paiement, avec PayPal :
 
 ```sh
-composer require omnisense/omnitrade:1.x-dev omnitrade/paypal:1.x-dev
+composer require omnisense/omnitrade omnitrade/paypal
 ```
 
 ```php
@@ -51,20 +51,23 @@ famille (`omnitrade:`). Le manuel de chaque famille s'ouvre sur l'usage en
 PHP nu, puis sur Symfony.
 
 > [!NOTE]
-> Aucun paquet n'a encore de version stable : chacun se requiert à sa
-> branche de développement (`1.x-dev`), et un projet a besoin de
-> `"minimum-stability": "dev"` avec `"prefer-stable": true` (voir
-> [Conventions](conventions.md)).
+> Les familles, leurs fournisseurs et les ponts ont des versions stables :
+> ils s'installent avec la `minimum-stability` par défaut de Composer. Ce
+> qui n'est pas encore stable, et la version de chaque famille :
+> [Installer](install.md).
 
 ## Installer le cœur
 
 `omnisense/omnibase` vient avec son greffon Composer, `omnibridge/composer`
 (les stubs et la seule retouche que le cœur déclare), qu'il faut autoriser,
-et le pont du cadre hôte :
+et le pont du cadre hôte. Sa 5.0.0 requiert encore trois paquets à leur
+branche de développement, nommés dans la même commande jusqu'à la 5.1.0
+(voir [Installer](install.md#le-cœur)) :
 
 ```sh
 composer config allow-plugins.omnibridge/composer true
-composer require omnisense/omnibase:4.x-dev omnibridge/symfony:1.x-dev
+composer require omnisense/omnibase:^5.0 omnibridge/symfony \
+    omnibridge/composer:1.x-dev omnisense/omnibridge:1.x-dev omnisense/omnidrive:1.x-dev
 ```
 
 Puis, si elle fait gagner du temps, une structure préparée : `omnibase/blog`,
@@ -73,6 +76,8 @@ n'est requise.
 
 ## Lire la suite
 
+- [Installer](install.md) : la version de chaque famille, et ce qui n'est pas
+  encore stable.
 - [Architecture](architecture.md) : le cœur et l'application, les familles,
   les ponts, l'export statique.
 - [La documentation](/fr/docs) : un manuel par paquet, lu dans le dossier

@@ -37,7 +37,7 @@ class ContentController extends AbstractController
     }
 
     #[Route(['en' => '/guides/{slug}', 'fr' => '/fr/guides/{slug}'], name: 'app_guide', requirements: ['slug' => '[a-z0-9-]+'], methods: ['GET'])]
-    public function guide(Request $request, string $slug): Response
+    public function guide(Request $request, string $slug, Catalogue $catalogue): Response
     {
         $locale = Locale::of($request);
         $guide = $this->guides->get($locale, $slug) ?? throw $this->createNotFoundException(sprintf('No guide "%s".', $slug));
@@ -45,6 +45,8 @@ class ContentController extends AbstractController
         return $this->render('client/docs/guide.html.twig', [
             'guide' => $guide,
             'guides' => $this->guides->all($locale),
+            // The Install guide ends on the releases of each family, read from the catalogue.
+            'catalogue' => $catalogue,
         ]);
     }
 

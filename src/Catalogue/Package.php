@@ -27,6 +27,8 @@ final class Package implements \Stringable
         private readonly Verification $verification = Verification::Unstated,
         private readonly ?string $verificationNote = null,
         private readonly bool $documented = false,
+        private readonly ?string $version = null,
+        private readonly bool|string $abandoned = false,
     ) {
     }
 
@@ -51,6 +53,8 @@ final class Package implements \Stringable
             verification: Verification::tryFrom((string) ($data['verification'] ?? '')) ?? Verification::Unstated,
             verificationNote: $data['verification_note'] ?? null,
             documented: (bool) ($data['docs'] ?? false),
+            version: isset($data['version']) ? (string) $data['version'] : null,
+            abandoned: \is_string($data['abandoned'] ?? null) ? $data['abandoned'] : (bool) ($data['abandoned'] ?? false),
         );
     }
 
@@ -169,12 +173,39 @@ final class Package implements \Stringable
         return $this->isNpm() ? 'https://www.npmjs.com/package/'.$this->name : 'https://packagist.org/packages/'.$this->name;
     }
 
+    /** Its latest stable release on Packagist ("1.0.0"); null while nothing is tagged. */
+    public function getVersion(): ?string
+    {
+        return $this->version;
+    }
+
+    public function isStable(): bool
+    {
+        return null !== $this->version;
+    }
+
+    public function isAbandoned(): bool
+    {
+        return false !== $this->abandoned;
+    }
+
+    /** The package to require instead, when Packagist names one. */
+    public function getReplacement(): ?string
+    {
+        return \is_string($this->abandoned) ? $this->abandoned : null;
+    }
+
     /**
-     * The constraint of its development branch: 1.x → 1.x-dev, 2.0 → 2.0.x-dev,
-     * main → dev-main. No package of the ecosystem has a stable release yet.
+     * The constraint a project writes: ^1.0 for a stable release 1.0.0 (what
+     * `composer require` writes by itself); while nothing is tagged, its
+     * development branch's: 1.x → 1.x-dev, 2.0 → 2.0.x-dev, main → dev-main.
      */
     public function getConstraint(): ?string
     {
+        if (null !== $this->version && 1 === preg_match('/^(\d+)\.(\d+)/', $this->version, $m)) {
+            return '^'.$m[1].'.'.$m[2];
+        }
+
         return match (true) {
             null === $this->branch => null,
             1 === preg_match('/^\d+\.x$/', $this->branch) => $this->branch.'-dev',
@@ -183,12 +214,17 @@ final class Package implements \Stringable
         };
     }
 
+    /**
+     * A stable package installs with the default minimum-stability and no
+     * constraint (Composer writes ^X.Y); an untagged one names its branch,
+     * which a project accepts only with a development minimum-stability.
+     */
     public function getInstallCommand(): string
     {
         if ($this->isNpm()) {
             return 'npm install '.$this->name;
         }
-        $constraint = $this->getConstraint();
+        $constraint = $this->isStable() ? null : $this->getConstraint();
 
         return 'composer require '.$this->name.(null !== $constraint ? ':'.$constraint : '');
     }

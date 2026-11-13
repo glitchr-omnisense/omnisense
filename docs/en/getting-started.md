@@ -31,7 +31,7 @@ bridges (see [Compatibility](compatibility.md)).
 A family and the provider that answers - here payments, with PayPal:
 
 ```sh
-composer require omnisense/omnitrade:1.x-dev omnitrade/paypal:1.x-dev
+composer require omnisense/omnitrade omnitrade/paypal
 ```
 
 ```php
@@ -50,19 +50,22 @@ declare it in `config/bundles.php` and its gateways under the family's key
 (`omnitrade:`). Each family's manual starts with plain PHP, then Symfony.
 
 > [!NOTE]
-> No package has a stable release yet: each is required at its development
-> branch (`1.x-dev`), and a project needs `"minimum-stability": "dev"` with
-> `"prefer-stable": true` (see [Conventions](conventions.md)).
+> The families, their providers and the bridges have stable releases: they
+> install with Composer's default `minimum-stability`. What is not stable
+> yet, and each family's release: [Install](install.md).
 
 ## Install the core
 
 `omnisense/omnibase` comes with its Composer plugin, `omnibridge/composer`
 (the stubs and the one patch the core declares), which must be allowed, and
-the bridge of the host framework:
+the bridge of the host framework. Its 5.0.0 still requires three packages
+at their development branch, named in the same command until 5.1.0 (see
+[Install](install.md#the-core)):
 
 ```sh
 composer config allow-plugins.omnibridge/composer true
-composer require omnisense/omnibase:4.x-dev omnibridge/symfony:1.x-dev
+composer require omnisense/omnibase:^5.0 omnibridge/symfony \
+    omnibridge/composer:1.x-dev omnisense/omnibridge:1.x-dev omnisense/omnidrive:1.x-dev
 ```
 
 Then, if it saves time, a prepared structure: `omnibase/blog`,
@@ -71,6 +74,8 @@ required.
 
 ## Read on
 
+- [Install](install.md): the release of each family, and what is not
+  stable yet.
 - [Architecture](architecture.md): the core and the application, the
   families, the bridges, the static export.
 - [The documentation](/docs): one manual per package, read from its

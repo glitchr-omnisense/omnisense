@@ -50,6 +50,23 @@ final class PagesTest extends SiteTestCase
         self::assertSame('/docs/omnitrade/1.x', $this->client->getResponse()->headers->get('Location'), 'a package with a manual: its manual, no page between');
 
         $this->get('/packages/omnitrade/nothing', 404);
+
+        // A stable release (the catalogue's version, read from Packagist): no constraint, the default stability.
+        $paypal = $this->get('/packages/omnitrade/paypal');
+        self::assertStringContainsString('<code data-copy-source>composer require omnitrade/paypal</code>', $paypal);
+        self::assertStringContainsString('Packagist · 1.0.0', $paypal);
+        self::assertStringContainsString('Its latest stable release on Packagist is 1.0.0', $paypal);
+        self::assertStringContainsString('No stable release yet', $html, 'a package without one says so');
+    }
+
+    public function testTheInstallGuideEndsOnEachFamilysReleases(): void
+    {
+        $html = $this->get('/guides/install');
+        self::assertStringContainsString('<h1>Install</h1>', $html);
+        self::assertStringNotContainsString('"minimum-stability": "dev"', $html);
+        // From the catalogue: the family's own release, how many of the others are stable, the ones that are not.
+        self::assertMatchesRegularExpression('#<code>omnisense/omnitrade</code> 1\.0\.0</td>\s*<td>1 of 2 stable</td>\s*<td><a href="/packages/omnitrade/stripe"><code>omnitrade/stripe</code></a> <code>1\.x-dev</code></td>#', $html);
+        self::assertStringContainsString('1 sur 2 en stable', $this->get('/fr/guides/install'));
     }
 
     public function testAFamilyIsItsCoresDocumentationAndTheLibrariesAList(): void
@@ -58,6 +75,7 @@ final class PagesTest extends SiteTestCase
         self::assertSame('/docs/omnitrade/1.x', $this->client->getResponse()->headers->get('Location'), 'no page between a family and its documentation');
         $html = $this->get('/docs/omnitrade/1.x');
         self::assertStringContainsString('href="/packages/omnitrade/paypal"', $html, 'its providers, listed beside it');
+        self::assertMatchesRegularExpression('#<dt>Release</dt><dd><a href="https://packagist.org/packages/omnisense/omnitrade"[^>]*>1\.0\.0</a></dd>#', $html, 'its stable release, from the catalogue');
         // The bridges have no family page.
         $this->get('/families/omnibridge', 404);
 

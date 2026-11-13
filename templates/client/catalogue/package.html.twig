@@ -22,7 +22,13 @@
 
         <div class="om-install">
             <code data-copy-source>{{ package.installCommand }}</code>
+            {% if package.abandoned %}
+            <p class="om-install-note">{{ package.replacement ? '@messages.package.abandoned'|trans({replacement: package.replacement}) : '@messages.package.abandoned_plain'|trans }}</p>
+            {% elseif package.stable %}
+            <p class="om-install-note">{{ '@messages.package.stable'|trans({version: package.version}) }}</p>
+            {% elseif not package.npm %}
             <p class="om-install-note">{{ '@messages.package.dev_branch'|trans }}</p>
+            {% endif %}
         </div>
 
         <div class="om-actions">

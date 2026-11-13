@@ -1,5 +1,7 @@
-{# A package's state as its own README says it: verified against the real service, in part, or not. #}
-{% if package.constraint %}<a class="om-fact is-yes" href="{{ package.registryUrl }}" rel="noopener">{{ package.registry }} · {{ package.constraint }}</a>{% endif %}
+{# A package's state: its latest stable release on Packagist (or its development branch while nothing is tagged), abandoned, and as its own README says it: verified against the real service, in part, or not. #}
+{% if package.stable %}<a class="om-fact is-yes" href="{{ package.registryUrl }}" rel="noopener" title="{{ '@messages.search.version_title'|trans }}">{{ package.registry }} · {{ package.version }}</a>
+{% elseif package.constraint %}<a class="om-fact is-partial" href="{{ package.registryUrl }}" rel="noopener" title="{{ '@messages.search.dev_title'|trans }}">{{ package.registry }} · {{ package.constraint }} · {{ '@messages.state.development'|trans }}</a>{% endif %}
+{% if package.abandoned %}<span class="om-fact is-unverified">{{ '@messages.state.abandoned'|trans }}</span>{% endif %}
 {% if package.verification.value != 'unstated' %}
     <span class="om-fact is-{{ package.verification.value }}" title="{{ package.verificationNote }}">{{ ('@messages.state.' ~ package.verification.value)|trans }}</span>
 {% endif %}

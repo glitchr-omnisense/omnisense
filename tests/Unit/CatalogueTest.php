@@ -5,11 +5,14 @@ namespace App\Tests\Unit;
 use App\Catalogue\CatalogueImporter;
 use App\Catalogue\Families;
 use App\Catalogue\Package;
+use App\Catalogue\PackagistReader;
 use App\Catalogue\RepositoryScanner;
 use App\Catalogue\Tier;
 use App\Catalogue\Verification;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpClient\MockHttpClient;
+use Symfony\Component\HttpClient\Response\MockResponse;
 use Symfony\Component\Yaml\Yaml;
 
 /** The catalogue's rules, without a kernel: a name's floor, a README's word, what a repository says, the files the importer writes. */
@@ -119,6 +122,67 @@ final class CatalogueTest extends TestCase
         } finally {
             $fs->remove($dir);
         }
+    }
+
+    public function testTheImporterReadsEachReleaseFromPackagist(): void
+    {
+        $fs = new Filesystem();
+        $dir = sys_get_temp_dir().'/omnisense-import-'.bin2hex(random_bytes(4));
+        $fs->mkdir($dir.'/catalog');
+        // What the last import wrote: kept when Packagist does not answer.
+        file_put_contents($dir.'/catalog/omnibase.yaml', "family: omnibase\npackages:\n  glitchr/omnibase: {kind: core, version: 4.0.0}\n");
+        // A manual written by hand for a package without a docs/ folder (its README, path ''): kept as it is.
+        $byHand = ['package' => 'glitchr/omnitrade', 'repository' => 'glitchr-omnisense/omnitrade', 'default' => '1.x', 'versions' => ['1.x' => ['branch' => '1.x', 'ref' => str_repeat('a', 40), 'pinned' => 'branch-head', 'path' => '']]];
+        file_put_contents($dir.'/documentation.yaml', Yaml::dump(['packages' => ['omnitrade' => $byHand]], 6, 2));
+        $asked = [];
+        $http = new MockHttpClient(static function (string $method, string $url) use (&$asked): MockResponse {
+            $asked[] = $url;
+
+            return match ($url) {
+                // Minified as Packagist serves it: the newest first, each version only what changed.
+                'https://repo.packagist.org/p2/glitchr/omnitrade.json' => new MockResponse(json_encode(['minified' => 'composer/2.0', 'packages' => ['glitchr/omnitrade' => [
+                    ['name' => 'glitchr/omnitrade', 'version' => 'v1.3.0-RC1', 'version_normalized' => '1.3.0.0-RC1', 'abandoned' => 'omnisense/omnitrade'],
+                    ['version' => 'v1.2.0', 'version_normalized' => '1.2.0.0'],
+                    ['version' => 'v1.10.0', 'version_normalized' => '1.10.0.0', 'abandoned' => '__unset'],
+                ]]])),
+                'https://repo.packagist.org/p2/glitchr/omnibus.json' => new MockResponse('', ['http_code' => 404]),
+                'https://repo.packagist.org/p2/omnibase/blog.json' => new MockResponse(json_encode(['packages' => ['omnibase/blog' => []]])),
+                default => new MockResponse('', ['http_code' => 503]),
+            };
+        });
+        try {
+            $report = (new CatalogueImporter(new RepositoryScanner(\dirname(__DIR__).'/Fixtures/repos'), $dir.'/catalog', $dir.'/documentation.yaml', $dir.'/translations', new PackagistReader($http)))->import();
+
+            // Composer packages only: the npm library is not asked.
+            self::assertCount(4, $asked);
+            self::assertNotContains('https://repo.packagist.org/p2/@glitchr/flowjs.json', $asked);
+            $trade = Yaml::parseFile($dir.'/catalog/omnitrade.yaml')['packages']['glitchr/omnitrade'];
+            // The highest stable release, not the first listed nor a release candidate; abandoned as the newest says.
+            self::assertSame(['1.10.0', 'omnisense/omnitrade'], [$trade['version'], $trade['abandoned']]);
+            self::assertArrayNotHasKey('version', Yaml::parseFile($dir.'/catalog/omnibus.yaml')['packages']['glitchr/omnibus'], 'not on Packagist: no version');
+            $base = Yaml::parseFile($dir.'/catalog/omnibase.yaml')['packages'];
+            self::assertArrayNotHasKey('version', $base['omnibase/blog'], 'nothing tagged: no version');
+            self::assertSame('4.0.0', $base['glitchr/omnibase']['version'], 'no answer: the version written before is kept');
+            self::assertSame(['glitchr/omnibase'], $report['unanswered']);
+            self::assertSame(2, $report['released']);
+            self::assertSame(['omnitrade' => $byHand], Yaml::parseFile($dir.'/documentation.yaml')['packages']);
+            self::assertTrue($trade['docs'], 'its manual written by hand: documented');
+        } finally {
+            $fs->remove($dir);
+        }
+    }
+
+    public function testAReleasedPackageInstallsWithoutAConstraint(): void
+    {
+        $trade = Package::fromArray('omnisense/omnitrade', ['branch' => '1.x', 'version' => '1.3.0'], 'omnitrade');
+        self::assertSame(['1.3.0', '^1.3', true], [$trade->getVersion(), $trade->getConstraint(), $trade->isStable()]);
+        self::assertSame('composer require omnisense/omnitrade', $trade->getInstallCommand());
+        self::assertSame('^2.0', Package::fromArray('omnibus/colissimo', ['branch' => '2.x', 'version' => '2.0.0'], 'omnibus')->getConstraint());
+
+        $oauth = Package::fromArray('omniauth/oauth', ['branch' => '1.x', 'abandoned' => true], 'omniauth');
+        self::assertSame([true, null, false], [$oauth->isAbandoned(), $oauth->getReplacement(), $oauth->isStable()]);
+        self::assertSame('omnisense/omniauth', Package::fromArray('omniauth/oauth', ['abandoned' => 'omnisense/omniauth'], 'omniauth')->getReplacement());
+        self::assertFalse($trade->isAbandoned());
     }
 
     public function testAPackageIsAddressedAndRequiredByItsBranch(): void

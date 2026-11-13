@@ -25,8 +25,13 @@ site (the `website` workflow's artifact).
 (`OMNI_REPOS`, `~/Sites` mounted read-only), keeping the phrases written by
 hand and the commits already pinned; `--pin` moves every series to its
 branch's published head. A package that only reserves its name (its
-keyword `reserved`) is left out: `config/apis.yaml` shows it as reserved. No package has a release tag yet: every pinned ref
-is a branch head's commit.
+keyword `reserved`) is left out: `config/apis.yaml` shows it as reserved.
+Each entry's `version` is the package's latest stable release on Packagist,
+read from Packagist's public metadata (`repo.packagist.org/p2/<name>.json`,
+anonymously, a few requests at a time), and `abandoned` says Packagist or
+the package's own keyword `abandoned`; when Packagist does not answer, the
+entry keeps what it said. The pinned documentation refs are still branch
+heads' commits.
 
 `bin/console app:policies:import` rewrites `config/policies.json`: the usage
 policy each provider of the catalogue declares (its `policy.json`, named in

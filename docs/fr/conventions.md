@@ -24,20 +24,21 @@ rien dans le cœur ni dans les familles n'en dépend.
 
 Chaque paquet garde son historique dans son dépôt git. Le développement se
 fait sur des branches de version nommées `1.x`, `2.x` (`main` pour quelques
-structures préparées) ; aucun paquet n'a encore de version étiquetée.
+structures préparées), et les versions y sont étiquetées (`v1.0.0`), selon
+le versionnage sémantique. Un paquet requiert les autres à leurs versions
+(`^1.0`), jamais à une branche de développement.
 
-| Le dépôt a… | Contrainte |
+| Le projet requiert… | Contrainte |
 |---|---|
-| une branche `1.x` | `1.x-dev` |
-| une branche `2.0` | `2.0.x-dev` |
-| une branche `main` | `dev-main` |
-| (plus tard) une version `v1.4.2` | `^1.4` |
+| une version `v1.4.2` | `^1.4` (ce que `composer require` écrit) |
+| un paquet sans version encore, branche `1.x` | `1.x-dev` |
+| un paquet sans version encore, branche `main` | `dev-main` |
 
-Dès qu'une contrainte prend une version de développement, le projet a besoin
-de `"minimum-stability": "dev"` — avec `"prefer-stable": true` pour que tout
-le reste reste en versions stables. Une branche de développement requise par
-un paquet que vous requérez ne se résout que si votre `composer.json` racine
-la nomme aussi.
+Un projet garde la `minimum-stability` par défaut de Composer (`stable`).
+Une branche de développement nommée dans le `composer.json` racine est
+acceptée pour ce seul paquet ; celle que requiert une dépendance ne l'est
+pas, sauf si la racine la nomme aussi. Ce qui a une version et ce qui n'en a
+pas encore : [Installer](install.md).
 
 ## Les versions de la documentation
 

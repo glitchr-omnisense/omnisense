@@ -6,7 +6,8 @@ use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Yaml\Yaml;
 
 /**
- * Writes the catalogue's files from the repositories (RepositoryScanner):
+ * Writes the catalogue's files from the repositories (RepositoryScanner) and
+ * the releases Packagist serves (PackagistReader):
  * catalog/<family>.yaml, one per family, and config/documentation.yaml, the
  * commit each package's docs/ is read at.
  *
@@ -22,16 +23,18 @@ class CatalogueImporter
         #[Autowire('%app.catalog_dir%')] private readonly string $catalogDir,
         #[Autowire('%app.documentation_file%')] private readonly string $documentationFile,
         #[Autowire('%kernel.project_dir%/translations')] private readonly string $translationsDir,
+        // Null: Packagist is not asked, each entry keeps the version and the abandoned flag it had.
+        private readonly ?PackagistReader $packagist = null,
     ) {
     }
 
     /**
-     * @return array{families: int, packages: int, documented: int, pinned: int, skipped: list<string>, merged: list<string>, reserved: list<string>}
+     * @return array{families: int, packages: int, documented: int, pinned: int, released: int, unanswered: list<string>, skipped: list<string>, merged: list<string>, reserved: list<string>}
      */
     public function import(bool $pin = false): array
     {
         $scanned = $this->scanner->scan();
-        $report = ['families' => 0, 'packages' => 0, 'documented' => 0, 'pinned' => 0, 'skipped' => [], 'merged' => [], 'reserved' => []];
+        $report = ['families' => 0, 'packages' => 0, 'documented' => 0, 'pinned' => 0, 'released' => 0, 'unanswered' => [], 'skipped' => [], 'merged' => [], 'reserved' => []];
 
         $byFamily = [];
         foreach ($scanned as $name => $package) {
@@ -57,6 +60,17 @@ class CatalogueImporter
         }
         ksort($byFamily);
 
+        // What Packagist serves: the latest stable release of each Composer package, and whether it is abandoned.
+        $composerNames = [];
+        foreach ($byFamily as $packages) {
+            foreach (array_keys($packages) as $name) {
+                if (!str_starts_with($name, '@')) {
+                    $composerNames[] = $name;
+                }
+            }
+        }
+        $released = null !== $this->packagist ? $this->packagist->read($composerNames) : [];
+
         $documentation = is_file($this->documentationFile) ? (array) (Yaml::parseFile($this->documentationFile)['packages'] ?? []) : [];
         $documented = [];
 
@@ -73,7 +87,25 @@ class CatalogueImporter
             $existing = is_file($file) ? (array) Yaml::parseFile($file) : [];
             $entries = [];
             foreach ($packages as $name => $package) {
+                $before = (array) ($existing['packages'][$name] ?? []);
+                $packagist = $released[$name] ?? null;
+                if (null !== $this->packagist && !str_starts_with($name, '@') && null === $packagist) {
+                    $report['unanswered'][] = $name;
+                }
+                // Packagist's answer; without one, what the entry said before.
+                $version = null !== $packagist ? $packagist['version'] : ($before['version'] ?? null);
+                $abandoned = null !== $packagist ? $packagist['abandoned'] : ($before['abandoned'] ?? false);
+                // A package its own composer.json calls abandoned (keyword "abandoned") is, before Packagist says so.
+                if (false === $abandoned && \in_array('abandoned', $package->keywords, true)) {
+                    $abandoned = true;
+                }
+                $report['released'] += null !== $version ? 1 : 0;
                 [$verification, $note] = null !== $package->readme ? Verification::read($package->readme) : [Verification::Unstated, null];
+                $key = Package::keyOf($name);
+                $fromDocs = $package->docPages > 0 && null !== $package->head;
+                // A manual written by hand in config/documentation.yaml for a package without a docs/ folder (its
+                // README and changelog, `path: ''`): kept as it is, never moved by --pin.
+                $byHand = !$fromDocs && isset($documentation[$key]) ? (array) $documentation[$key] : null;
                 $entry = array_filter([
                     'kind' => $package->tier->kind(),
                     'description' => $package->description,
@@ -81,16 +113,19 @@ class CatalogueImporter
                     'keywords' => $package->keywords ?: null,
                     'repository' => $package->repository,
                     'branch' => $package->branch,
+                    'version' => $version,
+                    'abandoned' => false !== $abandoned ? $abandoned : null,
                     'requires' => array_values(array_filter($package->requires, static fn (string $r): bool => isset($scanned[$r]))) ?: null,
                     'verification' => $verification->value,
                     'verification_note' => $note,
-                    'docs' => $package->docPages > 0 && null !== $package->head ? true : null,
+                    'docs' => $fromDocs || null !== $byHand ? true : null,
                 ], static fn ($v): bool => null !== $v);
                 $entries[$name] = $entry;
 
-                if ($package->docPages > 0 && null !== $package->head && null !== $package->branch) {
-                    $key = Package::keyOf($name);
+                if ($fromDocs && null !== $package->branch) {
                     $documented[$key] = self::pinned($documentation[$key] ?? null, $name, $package, $pin, $report);
+                } elseif (null !== $byHand) {
+                    $documented[$key] = $byHand;
                 }
             }
 
@@ -111,11 +146,11 @@ class CatalogueImporter
             # The documentation each package publishes in its own repository (its docs/
             # folder), read by the website at an immutable commit. Each package has its
             # own version series; a series names the branch it follows and the commit it
-            # is read at. No package has a release tag yet: every ref is the head of a
-            # published branch (origin/<branch>) when it was pinned - `pinned: branch-head`
-            # (a series read at a release tag would say `pinned: tag`). A package with
-            # several maintained series (release branches such as 3.x and 4.x, each with a
-            # docs/ folder) lists each; `default` is the current one, the others are shown
+            # is read at. Every ref is the head of a published branch (origin/<branch>)
+            # when it was pinned - `pinned: branch-head` (a series read at a release tag
+            # would say `pinned: tag`). A package with several maintained series
+            # (release branches such as 3.x and 4.x, each with a docs/ folder) lists
+            # each; `default` is the current one, the others are shown
             # with a notice and kept out of search engines' indexes.
             #
             #   bin/console app:catalog:import          new packages and series, pinned refs kept
@@ -123,6 +158,8 @@ class CatalogueImporter
             #   bin/console app:docs:fetch              the docs/ folders at these refs, into var/docs
             #
             # A series kept for history keeps its ref: add it by hand, with its tag or commit.
+            # A package without a docs/ folder can have its manual added by hand, `path: ''`:
+            # its README and changelog at that commit; the import keeps it as it is.
 
             YAML.Yaml::dump(['packages' => $documented], 6, 2));
 
@@ -186,9 +223,10 @@ class CatalogueImporter
             # The {$family} entry of the Omnisense catalogue. Written by `bin/console
             # app:catalog:import` from the packages' repositories; the phrase and the
             # text are the site's own, edited here. Each package: its kind, what its
-            # composer.json says, its GitHub repository and development branch, whether
-            # its README says it was verified against the real service, whether it has
-            # a docs/ folder (see config/documentation.yaml).
+            # composer.json says, its GitHub repository and development branch, its
+            # latest stable release on Packagist (`version`, none when nothing is tagged)
+            # and whether it is abandoned, whether its README says it was verified against
+            # the real service, whether it has a docs/ folder (see config/documentation.yaml).
 
             YAML;
     }

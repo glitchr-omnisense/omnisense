@@ -24,20 +24,20 @@ or the families depends on it.
 
 Each package keeps its history in its git repository. Development happens
 on version branches named `1.x`, `2.x` (`main` for a few prepared
-structures); no package has a tagged release yet.
+structures), and releases are tagged on them (`v1.0.0`), following semantic
+versioning. A package requires the others at their releases (`^1.0`),
+never at a development branch.
 
-| The repository has... | Constraint |
+| The project requires... | Constraint |
 |---|---|
-| a branch `1.x` | `1.x-dev` |
-| a branch `2.0` | `2.0.x-dev` |
-| a branch `main` | `dev-main` |
-| (later) a release `v1.4.2` | `^1.4` |
+| a release `v1.4.2` | `^1.4` (what `composer require` writes) |
+| a package with no release yet, branch `1.x` | `1.x-dev` |
+| a package with no release yet, branch `main` | `dev-main` |
 
-As soon as a constraint takes a development version, the project needs
-`"minimum-stability": "dev"` - with `"prefer-stable": true` so that
-everything else stays on stable versions. A development branch required by
-a package you require resolves only if your root `composer.json` names it
-too.
+A project keeps Composer's default `minimum-stability` (`stable`). A
+development branch named in the root `composer.json` is accepted for that
+package alone; one required by a dependency is not, unless the root names
+it too. What has a release and what does not yet: [Install](install.md).
 
 ## Documentation versions
 

@@ -55,6 +55,7 @@
             {% if package %}
             <div><dt>{{ '@messages.package.verified'|trans }}</dt><dd><span class="om-fact is-{{ package.verification.value }}"{% if package.verificationNote %} title="{{ package.verificationNote }}"{% endif %}>{{ ('@messages.state.' ~ package.verification.value)|trans }}</span></dd></div>
             <div><dt>{{ '@messages.package.license'|trans }}</dt><dd>{{ package.license ?? '—' }}</dd></div>
+            <div><dt>{{ '@messages.package.release'|trans }}</dt><dd>{% if package.stable %}<a href="{{ package.registryUrl }}" rel="noopener" title="{{ '@messages.search.version_title'|trans }}">{{ package.version }}</a>{% elseif package.npm %}—{% else %}<span title="{{ '@messages.search.dev_title'|trans }}"><code>{{ package.constraint }}</code> · {{ '@messages.state.development'|trans }}</span>{% endif %}{% if package.abandoned %} · {{ '@messages.state.abandoned'|trans }}{% endif %}</dd></div>
             {% endif %}
             <div><dt>{{ '@messages.package.repository'|trans }}</dt><dd><a href="https://github.com/{{ manual.repository }}" rel="noopener">{{ manual.repository }}</a>{% if package %} · <a href="{{ package.registryUrl }}" rel="noopener">{{ package.registry }}</a>{% endif %}{% if manual.website %} · <a href="{{ manual.website }}" rel="noopener">{{ '@messages.manual.website'|trans }}</a>{% endif %}</dd></div>
         </dl>

@@ -122,6 +122,8 @@ state:
   partial: Verified in part
   unverified: Not verified for real
   unstated: Its README does not say
+  development: development only
+  abandoned: Abandoned
 family:
   manual: Read its manual
   own: The family
@@ -134,6 +136,7 @@ package:
   sheet: Sheet
   floor: Floor
   license: Licence
+  release: Release
   branch: Branch
   verified: Verified for real
   from_readme: From its README
@@ -144,7 +147,10 @@ package:
   links: Dependencies
   requires: It requires
   required_by: '{count, plural, one {Required by # package} other {Required by # packages}}'
-  dev_branch: 'No package of the ecosystem has a stable release yet: the command asks for its development branch.'
+  stable: 'Its latest stable release on Packagist is {version}: it installs with Composer''s default minimum-stability.'
+  dev_branch: 'No stable release yet: the command names its development branch, which Composer then accepts for this package alone - the project keeps its minimum-stability (see Install).'
+  abandoned: 'Abandoned: require {replacement} instead.'
+  abandoned_plain: 'Abandoned: its README says what to require instead.'
   readme: README
 docs:
   eyebrow: Documentation
@@ -244,6 +250,12 @@ structures:
   count: '{count, plural, one {structure} other {structures}}'
   note: Nothing in the core or the families depends on them. Symfony today, as the core is; all of them are in the package search.
   optional_note: 'A prepared structure, optional: nothing in the core or the families depends on it.'
+install:
+  family: Family
+  own: Its package
+  members: Its other packages
+  not_stable: Not stable yet
+  stable_count: '{total, plural, =0 {none} other {{stable} of # stable}}'
 search:
   eyebrow: Packages
   title: Search the packages
@@ -259,7 +271,8 @@ search:
   count: '{count, plural, =0 {No package} one {# package} other {# packages}}'
   count_many: '{count} packages'
   none: 'No package answers: another word, or another family?'
-  version_title: Its development branch, as Composer asks for it
+  version_title: Its latest stable release on Packagist
+  dev_title: 'No stable release yet: its development branch, as Composer asks for it'
   untested: Not tested live
   partly_tested: Partly tested live
   docs: Docs
