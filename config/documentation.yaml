@@ -164,7 +164,7 @@ packages:
     versions:
       main:
         branch: main
-        ref: 4462fb7a19e35f0f13e2ef5a53a2c60106b9ee60
+        ref: 9a82a11017f1d313732a34ee9c0b9b6570cc96e9
         pinned: branch-head
         path: docs/
   omnibase-agenda:
@@ -174,7 +174,7 @@ packages:
     versions:
       main:
         branch: main
-        ref: 0dbeff09945d4269a7b86b4f524bc58a0ac48f43
+        ref: f0ee8e4fe00568bf08808dc39869e74c6baacf70
         pinned: branch-head
         path: docs/
   omnibase-blog:
@@ -184,7 +184,7 @@ packages:
     versions:
       main:
         branch: main
-        ref: a59ea45f9338a7d3409a72f466aae72c2cd2b20c
+        ref: 6a5ce777f8f915e4195828fc6a004931a7d57f84
         pinned: branch-head
         path: docs/
   omnibase-booking:
@@ -194,7 +194,7 @@ packages:
     versions:
       main:
         branch: main
-        ref: e2051702fae6eb29711929778ebd72ee61039385
+        ref: d8843e84d303c66d29497c9911d61be309070ef7
         pinned: branch-head
         path: docs/
   omnibase-broadcast:
@@ -204,7 +204,7 @@ packages:
     versions:
       main:
         branch: main
-        ref: a721353a64945c96a698adda3a2b742d6f124ff8
+        ref: 5e1ccadc3babd17b3ad31b0e3cefeaafbf6ba5ce
         pinned: branch-head
         path: docs/
   omnibase-classroom:
@@ -214,7 +214,7 @@ packages:
     versions:
       main:
         branch: main
-        ref: a5af4be92fffb008ced245a423834a700825959b
+        ref: 7994457b5cd7091e29e156c722c7dee6d0e4281f
         pinned: branch-head
         path: docs/
   omnibase-consent:
@@ -224,7 +224,7 @@ packages:
     versions:
       main:
         branch: main
-        ref: d94cf01a71def6b3f8f0a2094ce1d4ef145e194b
+        ref: c3fc76d2aa2406e77f5517be41ca7e3a58c66468
         pinned: branch-head
         path: docs/
   omnibase-consulting:
@@ -234,7 +234,7 @@ packages:
     versions:
       main:
         branch: main
-        ref: c569525abeddf450643856c9294e6734ce22d089
+        ref: 44d39f0bc408b0add0bdaebca07995646aeb1725
         pinned: branch-head
         path: docs/
   omnibase-docs:
@@ -244,7 +244,7 @@ packages:
     versions:
       '2.0':
         branch: '2.0'
-        ref: 259f0ef9ecb3bcda826d6179b16f0f83cc4d0730
+        ref: 1a279d9424028a832cba9b39da21c257f053f71b
         pinned: branch-head
         path: docs/
   omnibase-drive:
@@ -254,7 +254,7 @@ packages:
     versions:
       main:
         branch: main
-        ref: 74eceb1c44f1f51164716e29198c24612f3c7d35
+        ref: 942905b61505653af7190a5f3bf5d94ef56e8984
         pinned: branch-head
         path: docs/
   omnibase-estate:
@@ -264,7 +264,7 @@ packages:
     versions:
       main:
         branch: main
-        ref: cb07b7c8bf337ed64af70417229eba748e0cc650
+        ref: 497aabb32fa9cf4765cea09522c5379c0927fc10
         pinned: branch-head
         path: docs/
   omnibase-faq:
@@ -274,7 +274,7 @@ packages:
     versions:
       main:
         branch: main
-        ref: a9693c9534181b7a207ead6f71eb684d2c6e85a9
+        ref: f882ce2c4622d4bbef9d4a7ee8e9ce794492f960
         pinned: branch-head
         path: docs/
   omnibase-forge:
@@ -284,7 +284,7 @@ packages:
     versions:
       main:
         branch: main
-        ref: 200df927930c6dc84c0631054fc907cdc5055b2c
+        ref: b17067f9831c41f824cc3fba0d540b4ed6e6047e
         pinned: branch-head
         path: docs/
   omnibase-forum:
@@ -294,7 +294,7 @@ packages:
     versions:
       main:
         branch: main
-        ref: f074f7706ccb48811ea0da9229e38950dad12963
+        ref: b5b63f2948a0357723b199bf62b626495c1909ff
         pinned: branch-head
         path: docs/
   omnibase-gallery:
@@ -304,7 +304,7 @@ packages:
     versions:
       main:
         branch: main
-        ref: c71090111a353016179e2a5634a9343f51b21376
+        ref: 5bd806c614f596f7a874fc9678ba5ab30289f322
         pinned: branch-head
         path: docs/
   omnibase-health:
@@ -314,7 +314,7 @@ packages:
     versions:
       main:
         branch: main
-        ref: 9d3181f0c5d84fe01f750ae3fed551a54a1c8e89
+        ref: 6b75b8dae1a80a5ef223bf7e703f9b854e19bce1
         pinned: branch-head
         path: docs/
   omnibase-lawyer:
@@ -334,7 +334,7 @@ packages:
     versions:
       main:
         branch: main
-        ref: af442f79ca5e1a6bfa93d528c9c8a8696e7bfedc
+        ref: 9a2567b93294219139f1f07ce4d43a81be21aa35
         pinned: branch-head
         path: docs/
   omnibase-legal:
@@ -344,7 +344,7 @@ packages:
     versions:
       main:
         branch: main
-        ref: f90b8933208bff1575928611005ab63a50b05c57
+        ref: a9210783cbe51599ae1e838ef3ccac96dac1664e
         pinned: branch-head
         path: docs/
   omnibase-mailbox:
@@ -354,7 +354,7 @@ packages:
     versions:
       main:
         branch: main
-        ref: 796be79ff0dbae09c73514ff31d9cf22c46d9df3
+        ref: f95e69343dfe6536f16645a045b9ad02bac860fd
         pinned: branch-head
         path: docs/
   omnibase-marketplace:
@@ -364,7 +364,7 @@ packages:
     versions:
       main:
         branch: main
-        ref: 2042c64247936587161d3f5a963bfb4172205223
+        ref: fd760f62f36c7eba6bc77c438a2d272c7cfb432e
         pinned: branch-head
         path: docs/
   omnibase-music:
@@ -374,7 +374,7 @@ packages:
     versions:
       main:
         branch: main
-        ref: ac40ed8ecbd0138e5a028ab2af99c6ce68d4838f
+        ref: 6b2f40756a073cfcac183d55ab7f5f2dddf19baa
         pinned: branch-head
         path: docs/
   omnibase-newsletter:
@@ -384,7 +384,7 @@ packages:
     versions:
       main:
         branch: main
-        ref: b9185af96c80416b7006b74615c0f74524b291d3
+        ref: 884313041092dc84a7f3027bc18c178fed6e1675
         pinned: branch-head
         path: docs/
   omnibase-notary:
@@ -404,7 +404,7 @@ packages:
     versions:
       main:
         branch: main
-        ref: ee6b1b7f36c6a1f3bff0de61cd02460ca745ca36
+        ref: 76dbc05c3c4e3821c87ee327a107710d071b0d4b
         pinned: branch-head
         path: docs/
   omnibase-press:
@@ -414,7 +414,7 @@ packages:
     versions:
       main:
         branch: main
-        ref: 6c35618e0ddc7f5365807d6be5a8b157e728ba09
+        ref: 9fa6ba6508d439bdae3510b2d2c63410a19a581a
         pinned: branch-head
         path: docs/
   omnibase-restaurant:
@@ -424,7 +424,7 @@ packages:
     versions:
       main:
         branch: main
-        ref: a8cc8ece1679461236df15d8a6347270d0189d92
+        ref: 7e3347110c225e32a377f5ff3db817468b06aa8c
         pinned: branch-head
         path: docs/
   omnibase-scholar:
@@ -434,7 +434,7 @@ packages:
     versions:
       main:
         branch: main
-        ref: 19769706a596ee442c03400026ff1f7c2f567058
+        ref: d32afffff10b6993d0a4023dcd572cab0c0de914
         pinned: branch-head
         path: docs/
   omnibase-social:
@@ -444,7 +444,7 @@ packages:
     versions:
       main:
         branch: main
-        ref: 65254200acc796d92fe3e78cde1623289621063b
+        ref: ce036409fa2b7a90c492eb00ae0f3eb4d9d0e9bd
         pinned: branch-head
         path: docs/
   omnibase-video:
@@ -454,7 +454,7 @@ packages:
     versions:
       main:
         branch: main
-        ref: e560817678d24ae3607521344f049cdf6967e7ca
+        ref: 4f138c428f50ae7315f56d47c4c59d2370313edf
         pinned: branch-head
         path: docs/
   omnibill:
@@ -2214,7 +2214,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 52db62e5be3584443174e4c3f12d4244fabac75f
+        ref: fd5f3267b597823aa212d820d58c40d0ad61481b
         pinned: branch-head
         path: docs/
   omnischolar-arxiv:
@@ -2224,7 +2224,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: c24ed75ef37db11d09f270bc2023e93441e506f5
+        ref: 7f385c648fe89a5a5699b19f48d066d739afaa6e
         pinned: branch-head
         path: docs/
   omnischolar-crossref:
@@ -2234,7 +2234,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 66e2f44b5ee9d27d22af36c4ae234802631b59f8
+        ref: 63cd92a4910c039017b0f829fc4e7d0b81cb2992
         pinned: branch-head
         path: docs/
   omnischolar-hal:
@@ -2244,7 +2244,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 0aa3cac2be0b0e66f9aa04c4815c09902c8c5534
+        ref: 18715cd6fbc26945f8ab6eaef9ee27eaa3f2e7e7
         pinned: branch-head
         path: docs/
   omnischolar-inspire:
@@ -2254,7 +2254,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: ea140d0af9456247883cc365de8d633befae056a
+        ref: c16015960e7fe9df1a231e9956266c2c390bc29e
         pinned: branch-head
         path: docs/
   omnischolar-openalex:
@@ -2264,7 +2264,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: a7e7c48138171f63b153bf132948f3825db21242
+        ref: e017565c82746533a96346c78de6eed6ebbed5a0
         pinned: branch-head
         path: docs/
   omnischolar-openlibrary:
@@ -2274,7 +2274,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: b9a8af5424b371046d39860e39f663d3e83c7d81
+        ref: 934deb387fc873a6ca35cb765757b0e53f902031
         pinned: branch-head
         path: docs/
   omnischolar-orcid:
@@ -2284,7 +2284,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: b41d611cf26063bda30ecc470771a0fab519239c
+        ref: 1b07cdaab6198212fe9c92de9cc367ec2e3564d6
         pinned: branch-head
         path: docs/
   omnisearch:
@@ -2534,7 +2534,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 8be4dc647fc0e0e7e4038c7eb357d24ab6aee2c9
+        ref: f760dada39ad6c59b5dafb099b51a656618be27f
         pinned: branch-head
         path: docs/
   omnisong-itunes:
@@ -2544,7 +2544,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: f5d97c0421416c1e087081e4fcb5ce46f60d0cbe
+        ref: 0d3d5cec213483df60db58ac78ab5ff042760eeb
         pinned: branch-head
         path: docs/
   omnisong-odesli:
@@ -2554,7 +2554,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 04c7181c01a8e0ff33864c39be7c0f591d302661
+        ref: 5218df3911ec9a2d1d5c9e0004986c1fbf79e1f2
         pinned: branch-head
         path: docs/
   omnistate:
