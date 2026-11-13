@@ -4,7 +4,14 @@
 # omnibridge/static, and the check of the folder against its manifest.
 #
 #   bin/omnibridge-static build [--out=dist] [--local=<folder of working copies>] [--skip-assets] [--verify] [--github-pages]
+#                               [--cache=<folder>] [--only=<pattern>,...] [--full]
 #   bin/omnibridge-static check [dist]
+#
+# Incremental: only the files that changed are written, and a page whose
+# declared inputs did not change (static.php) is taken from the cache
+# (var/static-cache, or --cache=). --only=/docs/omnibase/*,/fr/docs/omnibase/*
+# renders the addresses it names whatever the cache holds (a targeted
+# rebuild); --full renders every page and rewrites every file.
 #
 # Runs where PHP 8.4 (with the core's extensions) and Node are: the CI image,
 # or the site's container (make static). No database, no Redis, no network
@@ -26,6 +33,9 @@ local=
 assets=1
 verify=
 target=
+cache=
+only=
+full=
 for argument in "$@"; do
     case "$argument" in
         --out=*) out=${argument#--out=} ;;
@@ -33,6 +43,9 @@ for argument in "$@"; do
         --skip-assets) assets= ;;
         --verify) verify=--verify ;;
         --github-pages) target=--target=github-pages ;;
+        --cache=*) cache=${argument#--cache=} ;;
+        --only=*) only=${argument#--only=} ;;
+        --full) full=--full ;;
         *) [ "$command" = check ] && out=$argument || { echo "Unknown option: $argument" >&2; exit 2; } ;;
     esac
 done
@@ -56,7 +69,9 @@ case "$command" in
         php bin/console assets:install public --no-interaction >/dev/null
         php bin/console cache:clear --no-warmup >/dev/null
         echo "== export (omnibridge/static) to $out"
-        php vendor/bin/omnibridge-static build static.php --out="$out" --strict $verify $target
+        # The export keeps every answer of the site (about 4600 addresses) until it writes them: more than
+        # the containers' 512M. CI gives PHP 2G too.
+        php -d memory_limit=2G vendor/bin/omnibridge-static build static.php --out="$out" --strict $verify $target $full ${cache:+"--cache=$cache"} ${only:+"--only=$only"}
         php vendor/bin/omnibridge-static check "$out"
         ;;
     check)

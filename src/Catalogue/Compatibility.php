@@ -2,6 +2,7 @@
 
 namespace App\Catalogue;
 
+use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Yaml\Yaml;
 
@@ -10,7 +11,11 @@ use Symfony\Component\Yaml\Yaml;
  * repository, joined with what app:compat:fetch read from GitHub (its CI jobs,
  * the conformance suite its tests run) and with what its README says of a live
  * check (catalog/<family>.yaml). Nothing here is kept by hand.
+ *
+ * Public: static.php reads a package's row from the container, one of the
+ * inputs its manual's pages declare.
  */
+#[Autoconfigure(public: true)]
 class Compatibility
 {
     /** @var array<string, mixed>|null */

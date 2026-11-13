@@ -5880,12 +5880,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-omnisense/omnibridge-static.git",
-                "reference": "a0ed1120d39be39b07b6dfffc40742642d2e6aa4"
+                "reference": "bc1081a037343e449e827c6ec3f1e5f3c8b70e9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-omnisense/omnibridge-static/zipball/a0ed1120d39be39b07b6dfffc40742642d2e6aa4",
-                "reference": "a0ed1120d39be39b07b6dfffc40742642d2e6aa4",
+                "url": "https://api.github.com/repos/glitchr-omnisense/omnibridge-static/zipball/bc1081a037343e449e827c6ec3f1e5f3c8b70e9a",
+                "reference": "bc1081a037343e449e827c6ec3f1e5f3c8b70e9a",
                 "shasum": ""
             },
             "require": {
@@ -5940,7 +5940,8 @@
                 "issues": "https://github.com/glitchr-omnisense/omnibridge-static/issues",
                 "source": "https://github.com/glitchr-omnisense/omnibridge-static/tree/1.x"
             },
-            "time": "2026-10-26T05:26:57+00:00"
+            "time": "2026-11-13T08:17:08+00:00",
+            "published-time": "2026-11-13T08:19:32+00:00"
         },
         {
             "name": "omnibridge/symfony",

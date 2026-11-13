@@ -6,8 +6,11 @@
  * router with the values of their parameters read from the content files -
  * rendered as a visitor by the site's own kernel, for a static host.
  *
- *     bin/omnibridge-static build [--github-pages]   (the whole build: docs, assets, export, check)
+ *     bin/omnibridge-static build [--github-pages] [--full] [--only=<pattern>,...]   (the whole build: docs, assets, export, check)
  *     vendor/bin/omnibridge-static build static.php --out=public-static [--target=github-pages]
+ *
+ * Incremental: the inputs each page is rendered from are declared below (Site::dependsOn()), the answers
+ * kept in var/static-cache; a page whose inputs did not change is not rendered again.
  *
  * Environment:
  *   SITE_URL        the static site's public address (canonical links, sitemap, feeds): an origin, or the
@@ -22,6 +25,7 @@
  */
 
 use App\Catalogue\Catalogue;
+use App\Catalogue\Compatibility;
 use App\Content\Documentation;
 use App\Content\Guides;
 use App\Content\News;
@@ -29,6 +33,7 @@ use Omnibridge\Static\Console\Cli;
 use Omnibridge\Static\Render\RequestRenderer;
 use Omnibridge\Static\Route\RouteCollectionProvider;
 use Omnibridge\Static\Site;
+use Omnibridge\Static\StaticPage;
 use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -65,6 +70,108 @@ return static function (array $host): Site {
     $guides = $container->get(Guides::class);
     $news = $container->get(News::class);
     $documentation = $container->get(Documentation::class);
+    $compatibility = $container->get(Compatibility::class);
+
+    // What a page is rendered from, for an incremental export (omnibridge/static's Site::dependsOn()): a page
+    // whose inputs did not change is taken from var/static-cache instead of being rendered again. Nothing
+    // checks these lists - an input left out gives a stale page - so a page is declared only where its
+    // inputs are known for sure; any other is rendered every time. CI compares the export with a --full one.
+    //
+    // A value (a commit, a configuration's entry) enters as a label and the SHA-256 of its JSON: omnibridge/static
+    // takes a string holding *, ? or [ for a glob pattern, which a JSON value would be.
+    $value = static fn (string $label, mixed $data): string => $label.' '.hash('sha256', json_encode($data, \JSON_THROW_ON_ERROR | \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_UNICODE));
+    // The environment the kernel renders in: every variable the .env files define or the configuration reads
+    // (%env(NAME)%), with its value in this process - but secrets, which change no page (and APP_SECRET, a
+    // cache seed). SITE_URL and RENDER_ORIGIN, read by this file, too.
+    $environment = static function () use ($root): array {
+        $names = ['APP_ENV' => true, 'APP_DEBUG' => true, 'SITE_URL' => true, 'RENDER_ORIGIN' => true];
+        foreach (glob($root.'/.env*') ?: [] as $file) {
+            preg_match_all('/^\s*(?:export\s+)?([A-Z][A-Z0-9_]*)=/m', (string) file_get_contents($file), $m);
+            $names += array_fill_keys($m[1], true);
+        }
+        $config = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($root.'/config', FilesystemIterator::SKIP_DOTS));
+        foreach ($config as $file) {
+            if ($file instanceof SplFileInfo && $file->isFile()) {
+                preg_match_all('/%env\((?:[^)%]*:)?([A-Z][A-Z0-9_]*)\)%/', (string) file_get_contents($file->getPathname()), $m);
+                $names += array_fill_keys($m[1], true);
+            }
+        }
+        $values = [];
+        foreach (array_keys($names) as $name) {
+            if (1 !== preg_match('/SECRET|PASSWORD|TOKEN|PRIVATE|_KEY$|_KEY_|^KEY/', $name)) {
+                $read = $_SERVER[$name] ?? $_ENV[$name] ?? getenv($name);
+                $values[$name] = false === $read ? null : $read;
+            }
+        }
+        ksort($values);
+
+        return $values;
+    };
+    // Every page: the code that renders it, its templates and translations, the configuration (but
+    // documentation.yaml and compatibility.yaml, read below for each manual), the catalogue, the front end's
+    // manifests (the files themselves are copied, not rendered), the locked packages, the .env files and the
+    // environment; then what each manual's page knows of the other manuals - its key, package and default
+    // series, for the links to it - and the year the credits print, the timezone and the ICU version dates are
+    // written with.
+    $shared = [$root.'/src', $root.'/templates', $root.'/translations', $root.'/composer.lock', $root.'/public/assets/manifest.json', $root.'/public/assets/entrypoints.json'];
+    foreach (glob($root.'/config/*') ?: [] as $entry) {
+        if (!in_array(basename($entry), ['documentation.yaml', 'compatibility.yaml', 'reference.php'], true)) {
+            $shared[] = $entry;
+        }
+    }
+    // The data files where the configuration puts them (catalog/ and config/, or the tests' fixtures).
+    foreach (['app.catalog_dir', 'app.policies_file', 'app.github_file', 'app.apis_file'] as $parameter) {
+        $shared[] = (string) $container->getParameter($parameter);
+    }
+    foreach (['.env', '.env.local', '.env.'.$_SERVER['APP_ENV'], '.env.'.$_SERVER['APP_ENV'].'.local'] as $file) {
+        $shared[] = is_file($root.'/'.$file) ? $root.'/'.$file : $value('absent', $file);
+    }
+    $shared[] = $value('environment', $environment());
+    $shared[] = $value('manuals', array_map(static fn ($m): array => [$m->key, $m->package, $m->default, $m->series()], array_values($documentation->manuals())));
+    $shared[] = $value('clock', [date('Y'), date_default_timezone_get(), defined('INTL_ICU_VERSION') ? INTL_ICU_VERSION : null]);
+    // A manual's pages (its one page, its API reference, its pages' former addresses): its entry in
+    // config/documentation.yaml, each series' folder in var/docs (the docs/ files and the PHP sources, at the
+    // pinned commit) and the commit app:docs:fetch recorded, and its package's row of the compatibility data.
+    $manualInputs = static function (mixed $key) use ($documentation, $catalogue, $compatibility, $value): ?array {
+        $manual = is_string($key) ? $documentation->manual($key) : null;
+        if (null === $manual) {
+            return null;
+        }
+        $inputs = [$value('manual', [$manual->key, $manual->package, $manual->repository, $manual->default, $manual->versions, $manual->website])];
+        foreach ($manual->series() as $series) {
+            $inputs[] = $documentation->folder($manual, $series) ?? $value('not fetched', [$manual->key, $series]);
+            $inputs[] = $value('commit', [$manual->key, $series, $documentation->commit($manual, $series)]);
+        }
+        $package = $catalogue->find($manual->package);
+        $row = null !== $package ? $compatibility->of($package) : null;
+        if (null !== $row) {
+            unset($row['package']); // the catalogue's, in the shared inputs
+        }
+        $inputs[] = $value('compatibility', $row);
+
+        return $inputs;
+    };
+    // The folders the content services read (the tests' fixtures in the test environment).
+    $newsDir = rtrim((string) $container->getParameter('app.news_dir'), '/');
+    $guidesDir = rtrim((string) $container->getParameter('app.guides_dir'), '/');
+    $pageInputs = static function (StaticPage $page) use ($newsDir, $guidesDir, $manualInputs): ?array {
+        $parameters = $page->parameters;
+
+        return match (explode('.', (string) $page->route)[0]) {
+            'app_manual', 'app_manual_page', 'app_manual_api' => $manualInputs($parameters['key'] ?? null),
+            // A redirection to the default series: in the shared inputs.
+            'app_manual_root', 'app_manual_latest' => [],
+            // A piece of news, in each language it is written in (its alternates): news/<date>-<slug>.<locale>.md.
+            'app_news_item' => is_string($parameters['slug'] ?? null) ? [$newsDir.'/*-'.$parameters['slug'].'.*.md'] : null,
+            // The list and the feeds show every item.
+            'app_news', 'app_news_atom', 'app_news_rss' => [$newsDir],
+            // A guide lists the guides of its language and has its translation for alternate.
+            'app_guide' => [$guidesDir],
+            // Any other page (the home, the catalogue, the search index, the dashboard...) reads more than this
+            // file can list for sure: rendered every time.
+            default => null,
+        };
+    };
 
     // A manual's pages, of its current series or of its older ones (out of the sitemap, noindex).
     $manuals = static function (bool $pages, bool $current) use ($documentation): array {
@@ -140,6 +247,10 @@ return static function (array $host): Site {
             noSitemap: ['*'],
         ))
         ->renderWith($renderer)
+        // The inputs above, and where the answers are kept between exports (kept between CI runs by the
+        // workflow's cache). --full renders everything; --only=<pattern> renders what it names whatever the cache holds.
+        ->dependsOn($shared, $pageInputs)
+        ->cache($root.'/var/static-cache')
         ->publicDir($root.'/public')
         // Encore's build (the site's entries and omnibase's, with the chunks their runtime loads).
         ->assets($root.'/public/assets/manifest.json')
