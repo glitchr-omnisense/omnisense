@@ -528,9 +528,12 @@ htpasswd:
 	printf "${C_OK}[htpasswd]${C_RESET} $(BETA_USER) / %s written to .htpasswd\n" "$$pass"
 
 ## Create the test database (<database>_test, see when@test in doctrine.yaml) and migrate it
+# The site is static and has no schema (no migrations since 492a243, no database
+# at build time, the tests use none): migrate is a no-op until a migration
+# exists, and --allow-no-migration keeps it from failing meanwhile.
 database-test:
 	@$(DOCKER_DATABASE) mysql -h localhost -u root -p$(MYSQL_ROOT_PASSWORD) -e "CREATE DATABASE IF NOT EXISTS $(MYSQL_DATABASE)_test; GRANT ALL ON $(MYSQL_DATABASE)_test.* TO '$(MYSQL_USER)'@'%'; FLUSH PRIVILEGES;"
-	@$(DOCKER_WEB) php bin/console doctrine:migrations:migrate --env=test --no-interaction
+	@$(DOCKER_WEB) php bin/console doctrine:migrations:migrate --env=test --no-interaction --allow-no-migration
 	@printf "${C_OK}[db]${C_RESET} $(MYSQL_DATABASE)_test ready\n"
 
 ## Delete database volume (irreversible)
