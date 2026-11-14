@@ -44,7 +44,7 @@ packages:
       - omnischolar
     repository: glitchr-omnisense/omnischolar-crossref
     branch: 1.x
-    version: 1.0.0
+    version: 1.0.1
     requires:
       - omnisense/omnischolar
     verification: unstated
@@ -63,7 +63,7 @@ packages:
       - omnischolar
     repository: glitchr-omnisense/omnischolar-hal
     branch: 1.x
-    version: 1.0.0
+    version: 1.0.1
     requires:
       - omnisense/omnischolar
     verification: unstated
@@ -100,7 +100,7 @@ packages:
       - omnischolar
     repository: glitchr-omnisense/omnischolar-openalex
     branch: 1.x
-    version: 1.0.0
+    version: 1.0.1
     requires:
       - omnisense/omnischolar
     verification: unstated
@@ -119,7 +119,7 @@ packages:
       - omnischolar
     repository: glitchr-omnisense/omnischolar-openlibrary
     branch: 1.x
-    version: 1.0.0
+    version: 1.0.1
     requires:
       - omnisense/omnischolar
     verification: unstated
@@ -137,7 +137,7 @@ packages:
       - omnischolar
     repository: glitchr-omnisense/omnischolar-orcid
     branch: 1.x
-    version: 1.0.0
+    version: 1.0.1
     requires:
       - omnisense/omnischolar
     verification: unstated
@@ -159,7 +159,7 @@ packages:
       - omnischolar
     repository: glitchr-omnisense/omnischolar
     branch: 1.x
-    version: 1.0.0
+    version: 1.0.1
     requires:
       - omnisense/contracts
     verification: unstated

@@ -27,7 +27,7 @@ packages:
       - omnisong
     repository: glitchr-omnisense/omnisong
     branch: 1.x
-    version: 1.0.0
+    version: 1.0.1
     requires:
       - omnisense/contracts
     verification: unstated
@@ -44,7 +44,7 @@ packages:
       - omnisong
     repository: glitchr-omnisense/omnisong-itunes
     branch: 1.x
-    version: 1.0.0
+    version: 1.0.1
     requires:
       - omnisense/contracts
       - omnisense/omnisong
@@ -61,7 +61,7 @@ packages:
       - omnisong
     repository: glitchr-omnisense/omnisong-odesli
     branch: 1.x
-    version: 1.0.0
+    version: 1.0.1
     requires:
       - omnisense/contracts
       - omnisense/omnisong

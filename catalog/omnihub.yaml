@@ -25,6 +25,7 @@ packages:
       - omnihub
     repository: glitchr-omnisense/omnihub-github
     branch: main
+    version: 1.0.0
     requires:
       - omnisense/contracts
       - omnisense/omnihub
@@ -43,6 +44,7 @@ packages:
       - omnihub
     repository: glitchr-omnisense/omnihub
     branch: main
+    version: 1.0.0
     requires:
       - omnisense/contracts
     verification: unstated

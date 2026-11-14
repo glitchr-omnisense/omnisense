@@ -37,7 +37,7 @@ packages:
       - genealogy
     repository: glitchr-omnisense/omnistate
     branch: 1.x
-    version: 1.0.0
+    version: 1.0.1
     requires:
       - omnisense/contracts
     verification: unstated
@@ -58,7 +58,7 @@ packages:
       - omnistate
     repository: glitchr-omnisense/omnistate-annuaire-entreprises
     branch: 1.x
-    version: 1.0.0
+    version: 1.0.1
     requires:
       - omnisense/contracts
       - omnisense/omnistate
@@ -80,7 +80,7 @@ packages:
       - omnistate
     repository: glitchr-omnisense/omnistate-annuaire-sante
     branch: 1.x
-    version: 1.0.0
+    version: 1.0.1
     requires:
       - omnisense/contracts
       - omnisense/omnistate
@@ -270,7 +270,7 @@ packages:
       - omnistate
     repository: glitchr-omnisense/omnistate-vies
     branch: 1.x
-    version: 1.0.0
+    version: 1.0.1
     requires:
       - omnisense/contracts
       - omnisense/omnistate

@@ -25,6 +25,7 @@ packages:
       - dashboard
     repository: glitchr-omnisense/omnibase-admin
     branch: main
+    version: 1.0.0
     requires:
       - omnibridge/symfony
       - omnisense/omnibase
@@ -36,6 +37,7 @@ packages:
     license: MIT
     repository: glitchr-omnisense/omnibase-agenda
     branch: main
+    version: 1.0.0
     requires:
       - omnibridge/symfony
       - omnisense/omnibase
@@ -48,6 +50,7 @@ packages:
     license: MIT
     repository: glitchr-omnisense/omnibase-blog
     branch: main
+    version: 1.0.0
     requires:
       - omnibridge/symfony
       - omnisense/omnibase
@@ -60,6 +63,7 @@ packages:
     license: MIT
     repository: glitchr-omnisense/omnibase-booking
     branch: main
+    version: 1.0.0
     requires:
       - omnibase/admin
       - omnibridge/symfony
@@ -74,6 +78,7 @@ packages:
     license: MIT
     repository: glitchr-omnisense/omnibase-broadcast
     branch: main
+    version: 1.0.0
     requires:
       - omnibridge/symfony
       - omnisense/omnibase
@@ -88,6 +93,7 @@ packages:
     license: MIT
     repository: glitchr-omnisense/omnibase-classroom
     branch: main
+    version: 1.0.0
     requires:
       - omnibridge/symfony
       - omnisense/omnibase
@@ -100,6 +106,7 @@ packages:
     license: MIT
     repository: glitchr-omnisense/omnibase-consent
     branch: main
+    version: 1.0.0
     requires:
       - omnisense/omnibase
     verification: unstated
@@ -116,6 +123,7 @@ packages:
       - freelance
     repository: glitchr-omnisense/omnibase-consulting
     branch: main
+    version: 1.0.0
     requires:
       - omnibridge/symfony
       - omnisense/omnibase
@@ -134,6 +142,7 @@ packages:
       - omnibase
     repository: glitchr-omnisense/omnibase-docs
     branch: '2.0'
+    version: 2.0.0
     requires:
       - omnibridge/symfony
       - omnisense/omnibase
@@ -153,6 +162,7 @@ packages:
       - flysystem
     repository: glitchr-omnisense/omnibase-drive
     branch: main
+    version: 1.0.0
     requires:
       - omnibridge/symfony
       - omnisense/omnibase
@@ -172,6 +182,7 @@ packages:
       - sci
     repository: glitchr-omnisense/omnibase-estate
     branch: main
+    version: 1.0.0
     requires:
       - omnibridge/symfony
       - omnisense/omnibase
@@ -184,6 +195,7 @@ packages:
     license: MIT
     repository: glitchr-omnisense/omnibase-faq
     branch: main
+    version: 1.0.0
     requires:
       - omnibridge/symfony
       - omnisense/omnibase
@@ -206,6 +218,7 @@ packages:
       - git
     repository: glitchr-omnisense/omnibase-forge
     branch: main
+    version: 1.0.0
     requires:
       - omnibase/admin
       - omnibase/marketplace
@@ -227,6 +240,7 @@ packages:
       - discussion
     repository: glitchr-omnisense/omnibase-forum
     branch: main
+    version: 1.0.0
     requires:
       - omnibridge/symfony
       - omnisense/omnibase
@@ -239,6 +253,7 @@ packages:
     license: MIT
     repository: glitchr-omnisense/omnibase-gallery
     branch: main
+    version: 1.0.0
     requires:
       - omnibridge/symfony
       - omnisense/omnibase
@@ -259,6 +274,7 @@ packages:
       - patients
     repository: glitchr-omnisense/omnibase-health
     branch: main
+    version: 1.0.0
     requires:
       - omnibridge/symfony
       - omnisense/omnibase
@@ -300,6 +316,7 @@ packages:
       - pcg
     repository: glitchr-omnisense/omnibase-ledger
     branch: main
+    version: 1.0.0
     requires:
       - omnisense/omnibank
       - omnibridge/symfony
@@ -325,6 +342,7 @@ packages:
       - déontologie
     repository: glitchr-omnisense/omnibase-legal
     branch: main
+    version: 1.0.0
     requires:
       - omnibridge/symfony
       - omnisense/omnibase
@@ -341,6 +359,7 @@ packages:
       - 'private messages'
     repository: glitchr-omnisense/omnibase-mailbox
     branch: main
+    version: 1.0.0
     requires:
       - omnibridge/doctrine
       - omnibridge/symfony
@@ -362,6 +381,7 @@ packages:
       - shopify
     repository: glitchr-omnisense/omnibase-marketplace
     branch: main
+    version: 1.0.0
     requires:
       - omnibase/admin
       - omnibridge/doctrine
@@ -378,6 +398,7 @@ packages:
     license: MIT
     repository: glitchr-omnisense/omnibase-music
     branch: main
+    version: 1.0.0
     requires:
       - omnibridge/symfony
       - omnisense/omnibase
@@ -391,6 +412,7 @@ packages:
     license: MIT
     repository: glitchr-omnisense/omnibase-newsletter
     branch: main
+    version: 1.0.0
     requires:
       - omnibridge/doctrine
       - omnibridge/symfony
@@ -432,6 +454,7 @@ packages:
       - teleconsultation
     repository: glitchr-omnisense/omnibase-office
     branch: main
+    version: 1.0.0
     requires:
       - omnibridge/doctrine
       - omnibridge/symfony
@@ -446,6 +469,7 @@ packages:
     license: MIT
     repository: glitchr-omnisense/omnibase-press
     branch: main
+    version: 1.0.0
     requires:
       - omnibridge/symfony
       - omnisense/omnibase
@@ -467,6 +491,7 @@ packages:
       - omnifood
     repository: glitchr-omnisense/omnibase-restaurant
     branch: main
+    version: 1.0.0
     requires:
       - omnibridge/doctrine
       - omnibridge/symfony
@@ -490,6 +515,7 @@ packages:
       - omnischolar
     repository: glitchr-omnisense/omnibase-scholar
     branch: main
+    version: 1.0.0
     requires:
       - omnibridge/symfony
       - omnisense/omnibase
@@ -503,6 +529,7 @@ packages:
     license: MIT
     repository: glitchr-omnisense/omnibase-social
     branch: main
+    version: 1.0.0
     requires:
       - omnibridge/symfony
       - omnisense/omnibase
@@ -516,6 +543,7 @@ packages:
     license: MIT
     repository: glitchr-omnisense/omnibase-video
     branch: main
+    version: 1.0.0
     requires:
       - omnibridge/symfony
       - omnisense/omnibase
@@ -533,7 +561,7 @@ packages:
       - contracts
     repository: glitchr-omnisense/omnibase
     branch: 5.x
-    version: 5.0.0
+    version: 5.1.1
     requires:
       - omnibridge/composer
       - omnisense/omnibridge

@@ -20,6 +20,7 @@ packages:
       - omnidocs
     repository: glitchr-omnisense/omnidocs-doxygen
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnidocs
     verification: partial
@@ -37,6 +38,7 @@ packages:
       - omnidocs
     repository: glitchr-omnisense/omnidocs-jsdoc
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnidocs
     verification: partial
@@ -55,6 +57,7 @@ packages:
       - omnidocs
     repository: glitchr-omnisense/omnidocs-markdown
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnidocs
     verification: partial
@@ -73,6 +76,7 @@ packages:
       - omnidocs
     repository: glitchr-omnisense/omnidocs-php
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnidocs
     verification: partial
@@ -91,6 +95,7 @@ packages:
       - omnidocs
     repository: glitchr-omnisense/omnidocs-sphinx
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnidocs
     verification: partial
@@ -113,6 +118,7 @@ packages:
       - omnidocs
     repository: glitchr-omnisense/omnidocs
     branch: 1.x
+    version: 1.0.0
     verification: partial
     verification_note: "- Not verified: Sphinx themes' own JSON additions beyond the standard builder; Sphinx projects written with MyST (Markdown) - the JSON builder writes the same HTML, not tried; Doxygen's C, Java and Python output; TypeDoc (see omnidocs/jsdoc's README: why JSDoc)."
     docs: true

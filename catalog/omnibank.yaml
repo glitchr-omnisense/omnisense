@@ -26,7 +26,7 @@ packages:
       - omnibank
     repository: glitchr-omnisense/omnibank-bridge
     branch: 1.x
-    version: 1.0.0
+    version: 1.0.1
     requires:
       - omnisense/contracts
       - omnisense/omnibank
@@ -47,7 +47,7 @@ packages:
       - omnibank
     repository: glitchr-omnisense/omnibank-files
     branch: 1.x
-    version: 1.0.0
+    version: 1.0.1
     requires:
       - omnisense/contracts
       - omnisense/omnibank
@@ -66,7 +66,7 @@ packages:
       - omnibank
     repository: glitchr-omnisense/omnibank-powens
     branch: 1.x
-    version: 1.0.0
+    version: 1.0.1
     requires:
       - omnisense/contracts
       - omnisense/omnibank
@@ -83,7 +83,7 @@ packages:
       - omnibank
     repository: glitchr-omnisense/omnibank-qonto
     branch: 1.x
-    version: 1.0.0
+    version: 1.0.1
     requires:
       - omnisense/contracts
       - omnisense/omnibank
@@ -104,7 +104,7 @@ packages:
       - omnibank
     repository: glitchr-omnisense/omnibank
     branch: 1.x
-    version: 1.0.0
+    version: 1.0.1
     requires:
       - omnisense/contracts
     verification: unstated
