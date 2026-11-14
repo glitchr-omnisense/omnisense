@@ -7,14 +7,16 @@ use Symfony\Component\Process\Process;
 
 /**
  * The deployment manifest published with the site (provenance.json, master
- * plan section 10, item 10): the site's commit, the commit each package's
- * documentation was read at, the packages and tools that rendered it, and
- * the export's checksums.
+ * plan section 10, item 10): the site's commit and the files the build
+ * changed in its checkout, the commit each package's documentation was read
+ * at, the packages and tools that rendered it, and the export's checksums.
  *
- * Written after the export was checked and compared with a second one: it
- * holds the build's own time and run, which no two builds share, and it is
- * not one of the files omnibridge-static.json lists. Everything else in it is
- * the same for every build of the same commit.
+ * Deterministic: no time, no run, nothing a build has of its own - two
+ * builds from the same sources write the same file, byte for byte (what
+ * asked for a build and its counts go to the run's summary instead). Written
+ * after the export was checked and compared with a full one; not one of the
+ * files omnibridge-static.json lists, whose checksum it holds. The exporter's
+ * report has no room for data of the site's own, hence a file beside it.
  */
 class Provenance
 {
@@ -28,12 +30,11 @@ class Provenance
     }
 
     /**
-     * @param array<string, string|null> $environment the CI's variables (GITHUB_SHA, GITHUB_REF, GITHUB_RUN_ID...)
-     * @param array<string, mixed>|null  $request     what started the build beyond its event (a dispatch's payload)
+     * @param array<string, string|null> $environment the CI's variables (GITHUB_SHA, GITHUB_REF, GITHUB_REPOSITORY)
      *
      * @return array<string, mixed> what was written to <folder>/provenance.json
      */
-    public function write(string $folder, array $environment = [], ?string $summary = null, ?array $request = null, ?\DateTimeImmutable $now = null): array
+    public function write(string $folder, array $environment = []): array
     {
         $folder = rtrim($folder, '/');
         $report = $folder.'/omnibridge-static.json';
@@ -43,27 +44,21 @@ class Provenance
         $env = static fn (string $name): ?string => isset($environment[$name]) && '' !== $environment[$name] ? (string) $environment[$name] : null;
 
         $commit = $env('GITHUB_SHA') ?? $this->git(['rev-parse', 'HEAD']);
-        $run = null !== $env('GITHUB_RUN_ID')
-            ? ($env('GITHUB_SERVER_URL') ?? 'https://github.com').'/'.($env('GITHUB_REPOSITORY') ?? $this->repository).'/actions/runs/'.$env('GITHUB_RUN_ID').'/attempts/'.($env('GITHUB_RUN_ATTEMPT') ?? '1')
-            : null;
+        $packages = $this->packages();
 
         $data = [
-            'about' => 'The deployment manifest: what this site was built from. "build" (its time, run and counts) is this build\'s own; '
-                .'every other value is the same for each build of the same commit. The export itself (omnibridge-static.json and the files it lists) '
-                .'is compared with a full export before this file is written; this file is not one of them.',
+            'about' => 'The deployment manifest: what this site was built from - the site\'s commit and the files the build changed in '
+                .'its checkout (the data it fetched: compatibility, stars, policies, a moved documentation pin), each documentation '
+                .'source\'s commit, the packages and tools, the checksums. No time nor run: two builds from the same sources write '
+                .'the same file. The export (omnibridge-static.json and the files it lists) is compared with a full export before '
+                .'this file is written; this file is not one of them.',
             'site' => [
                 'repository' => $env('GITHUB_REPOSITORY') ?? $this->repository,
                 'commit' => $commit,
                 'ref' => $env('GITHUB_REF'),
                 // The commit's own date: a time every build of the commit agrees on.
                 'committed' => null !== $commit ? $this->git(['show', '-s', '--format=%cI', $commit]) : null,
-            ],
-            'build' => [
-                'event' => $env('GITHUB_EVENT_NAME') ?? 'local',
-                'request' => $request,
-                'run' => $run,
-                'summary' => $summary,
-                'built' => ($now ?? new \DateTimeImmutable())->setTimezone(new \DateTimeZone('UTC'))->format('Y-m-d\TH:i:s\Z'),
+                'modified' => (object) $this->modified(),
             ],
             'tools' => [
                 'php' => \PHP_VERSION,
@@ -71,8 +66,9 @@ class Provenance
                 'composer' => $this->version(['composer', '--version', '--no-ansi'], '/Composer version (\S+)/'),
                 'node' => $this->version(['node', '--version'], '/^v?(\S+)/'),
                 'yarn' => $this->version(['yarn', '--version'], '/^(\S+)/'),
+                'omnibridge/static' => $packages['omnibridge/static']['version'] ?? null,
             ],
-            'packages' => $this->packages(),
+            'packages' => $packages,
             'documentation' => $this->documentation(),
             'artifact' => $this->artifact($folder),
         ];
@@ -80,6 +76,25 @@ class Provenance
         file_put_contents($folder.'/'.self::FILE, json_encode($data, \JSON_PRETTY_PRINT | \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_UNICODE | \JSON_THROW_ON_ERROR).\PHP_EOL);
 
         return $data;
+    }
+
+    /**
+     * @return array<string, string|null> each tracked file the checkout changed, with its SHA-256 (null: deleted) - what
+     *                                    the build fetched before the export (config/compatibility.yaml, config/github.yaml,
+     *                                    config/policies.json) or a dispatch moved (config/documentation.yaml)
+     */
+    private function modified(): array
+    {
+        $out = [];
+        foreach (explode("\n", (string) $this->git(['diff', '--name-only', '--no-renames', 'HEAD'])) as $path) {
+            if ('' !== $path) {
+                $file = $this->projectDir.'/'.$path;
+                $out[$path] = is_file($file) ? (string) hash_file('sha256', $file) : null;
+            }
+        }
+        ksort($out, \SORT_STRING);
+
+        return $out;
     }
 
     /** @return array<string, array{version: string, reference: ?string}> the packages the site runs on (composer.lock, without require-dev) */

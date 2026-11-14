@@ -29,6 +29,7 @@ final class ProvenanceTest extends KernelTestCase
             'GITHUB_SHA' => 'abcdefabcdefabcdefabcdefabcdefabcdefabcd',
             'GITHUB_REF' => 'refs/heads/main',
             'GITHUB_REPOSITORY' => 'glitchr-omnisense/omnisense',
+            // Each run's own: never in the file.
             'GITHUB_SERVER_URL' => 'https://github.com',
             'GITHUB_RUN_ID' => '123',
             'GITHUB_RUN_ATTEMPT' => '2',
@@ -46,23 +47,23 @@ final class ProvenanceTest extends KernelTestCase
     public function testTheManifestNamesWhatTheSiteWasBuiltFrom(): void
     {
         $tester = new CommandTester((new Application(self::bootKernel()))->find('app:provenance'));
-        $tester->execute(['folder' => $this->dir, '--summary' => 'incremental: 3 rendered, 9 reused', '--request' => '{"key":"omnitrade","commit":null}']);
+        $tester->execute(['folder' => $this->dir]);
         $tester->assertCommandIsSuccessful();
 
-        $data = json_decode((string) file_get_contents($this->dir.'/provenance.json'), true, 512, \JSON_THROW_ON_ERROR);
+        $written = (string) file_get_contents($this->dir.'/provenance.json');
+        $data = json_decode($written, true, 512, \JSON_THROW_ON_ERROR);
 
         self::assertSame(['repository' => 'glitchr-omnisense/omnisense', 'commit' => 'abcdefabcdefabcdefabcdefabcdefabcdefabcd', 'ref' => 'refs/heads/main'], array_intersect_key($data['site'], array_flip(['repository', 'commit', 'ref'])));
-        self::assertSame('repository_dispatch', $data['build']['event']);
-        self::assertSame(['key' => 'omnitrade', 'commit' => null], $data['build']['request']);
-        self::assertSame('https://github.com/glitchr-omnisense/omnisense/actions/runs/123/attempts/2', $data['build']['run']);
-        self::assertSame('incremental: 3 rendered, 9 reused', $data['build']['summary']);
-        self::assertMatchesRegularExpression('/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\dZ$/', $data['build']['built']);
+        self::assertIsArray($data['site']['modified'], 'the tracked files the checkout changed, with their SHA-256');
+        self::assertSame(['about', 'site', 'tools', 'packages', 'documentation', 'artifact'], array_keys($data), 'no build time, run nor event');
+        self::assertStringNotContainsString('actions/runs', $written);
         self::assertSame(\PHP_VERSION, $data['tools']['php']);
 
         // The packages that render the site, at the commit the lock pins.
         $lock = json_decode((string) file_get_contents(self::getContainer()->getParameter('kernel.project_dir').'/composer.lock'), true);
         $static = current(array_filter($lock['packages'], static fn (array $p): bool => 'omnibridge/static' === $p['name']));
         self::assertSame($static['source']['reference'], $data['packages']['omnibridge/static']['reference']);
+        self::assertSame($static['version'], $data['tools']['omnibridge/static']);
         self::assertArrayNotHasKey('phpunit/phpunit', $data['packages'], 'require-dev renders nothing');
 
         // Each documentation source at the commit app:docs:fetch resolved (the tests' manifest).
@@ -77,12 +78,12 @@ final class ProvenanceTest extends KernelTestCase
         self::assertSame(3, $data['artifact']['files']);
         self::assertSame(hash('sha256', implode("\n", $lines)), $data['artifact']['sha256']);
 
-        // Written again (the next run): the same but for the build's own values.
-        $first = $data;
+        // Written again by another run of the same sources: the same file, byte for byte.
+        $_SERVER['GITHUB_RUN_ID'] = '456';
+        $_SERVER['GITHUB_EVENT_NAME'] = 'push';
         $tester->execute(['folder' => $this->dir]);
-        $second = json_decode((string) file_get_contents($this->dir.'/provenance.json'), true);
-        unset($first['build'], $second['build']);
-        self::assertSame($first, $second);
+        $tester->assertCommandIsSuccessful();
+        self::assertSame($written, file_get_contents($this->dir.'/provenance.json'));
     }
 
     public function testAFolderWithoutAnExportIsRefused(): void
