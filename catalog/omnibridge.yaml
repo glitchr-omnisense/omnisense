@@ -76,6 +76,12 @@ packages:
     kind: bridge
     description: "A page of a site as a React component and its props, the same from any framework: the first visit an HTML shell holding the page, a visit within the site the page in JSON (header X-Omnibridge), the JavaScript side rendering it and following the site's links without reloading."
     license: MIT
+    keywords:
+      - omnibridge
+      - react
+      - symfony
+      - laravel
+      - framework-agnostic
     repository: glitchr-omnisense/omnibridge-react
     branch: 1.x
     verification: unstated

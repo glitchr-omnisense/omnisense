@@ -207,11 +207,11 @@ packages:
     repository: glitchr-omnisense/omnibase-forge
     branch: main
     requires:
+      - omnibase/admin
+      - omnibase/marketplace
       - omnibridge/symfony
       - omnisense/omnibase
       - omnisense/omnihub
-      - omnibase/admin
-      - omnibase/marketplace
       - omnisense/omnistate
       - omnistate/annuaire-entreprises
     verification: unstated
@@ -342,6 +342,7 @@ packages:
     repository: glitchr-omnisense/omnibase-mailbox
     branch: main
     requires:
+      - omnibridge/doctrine
       - omnibridge/symfony
       - omnisense/omnibase
     verification: unstated
@@ -362,9 +363,10 @@ packages:
     repository: glitchr-omnisense/omnibase-marketplace
     branch: main
     requires:
+      - omnibase/admin
+      - omnibridge/doctrine
       - omnibridge/symfony
       - omnisense/omnibase
-      - omnibase/admin
       - omnisense/omnistate
       - omnistate/annuaire-entreprises
       - omnistate/vies
@@ -390,6 +392,7 @@ packages:
     repository: glitchr-omnisense/omnibase-newsletter
     branch: main
     requires:
+      - omnibridge/doctrine
       - omnibridge/symfony
       - omnisense/omnibase
       - omnibase/admin
@@ -430,6 +433,7 @@ packages:
     repository: glitchr-omnisense/omnibase-office
     branch: main
     requires:
+      - omnibridge/doctrine
       - omnibridge/symfony
       - omnisense/omnibase
       - omnimeet/direct
@@ -464,6 +468,7 @@ packages:
     repository: glitchr-omnisense/omnibase-restaurant
     branch: main
     requires:
+      - omnibridge/doctrine
       - omnibridge/symfony
       - omnisense/omnibase
       - omnibase/admin

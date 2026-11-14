@@ -24,6 +24,7 @@ packages:
       - doctrine
     repository: glitchr-omnisense/omnisearch-typesense
     branch: 1.x
+    version: 1.0.0
     requires:
       - omnisense/omnisearch
     verification: partial
