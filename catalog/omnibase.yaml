@@ -218,7 +218,7 @@ packages:
       - git
     repository: glitchr-omnisense/omnibase-forge
     branch: main
-    version: 1.0.0
+    version: 1.0.1
     requires:
       - omnibase/admin
       - omnibase/marketplace
