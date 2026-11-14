@@ -239,7 +239,7 @@ families:
     capabilities: [signature, identity-check, tenant-file]
     released_capabilities: [signature]
     help_wanted: true
-    note: { en: 'Identity verification joined the family on 2026-11-10 (no separate omniproof): Stripe Identity and DossierFacile released as 1.x-dev, Veriff and Entrust reserved.', fr: 'La vérification d’identité a rejoint la famille le 2026-11-10 (pas d’omniproof à part) : Stripe Identity et DossierFacile publiés en 1.x-dev, Veriff et Entrust réservés.' }
+    note: { en: 'Identity verification joined the family on 2026-11-10 (no separate omniproof): Stripe Identity and DossierFacile released at 1.0.0, Veriff and Entrust reserved.', fr: 'La vérification d’identité a rejoint la famille le 2026-11-10 (pas d’omniproof à part) : Stripe Identity et DossierFacile publiés en 1.0.0, Veriff et Entrust réservés.' }
     providers:
       omnisign/stripe-identity: { name: Stripe Identity, capabilities: [identity-check], status: available }
       omnisign/veriff:
@@ -273,7 +273,7 @@ families:
     capabilities: [invoices, journal-entries, contacts]
     released_capabilities: [invoices]
     help_wanted: true
-    note: { en: 'French accounting software often doubles as an approved e-invoicing platform (PDP): one provider can answer both. Odoo and Pennylane released as 1.x-dev, Xero and QuickBooks reserved.', fr: 'Les logiciels comptables français sont souvent aussi plateformes de dématérialisation partenaires (PDP) : un même fournisseur peut répondre aux deux. Odoo et Pennylane publiés en 1.x-dev, Xero et QuickBooks réservés.' }
+    note: { en: 'French accounting software often doubles as an approved e-invoicing platform (PDP): one provider can answer both. Odoo and Pennylane released at 1.0.0, Xero and QuickBooks reserved.', fr: 'Les logiciels comptables français sont souvent aussi plateformes de dématérialisation partenaires (PDP) : un même fournisseur peut répondre aux deux. Odoo et Pennylane publiés en 1.0.0, Xero et QuickBooks réservés.' }
     providers:
       omnibill/pennylane: { name: Pennylane, capabilities: [journal-entries, invoices, contacts], access: oauth, status: available }
       omnibill/xero:

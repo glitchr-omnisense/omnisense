@@ -59,7 +59,7 @@ declare it in `config/bundles.php` and its gateways under the family's key
 `omnisense/omnibase` comes with its Composer plugin, `omnibridge/composer`
 (the stubs and the one patch the core declares), which must be allowed, and
 the bridge of the host framework. Its 5.0.0 still requires three packages
-at their development branch, named in the same command until 5.1.0 (see
+at their development branch, named in the same command until 5.1.1 (see
 [Install](install.md#the-core)):
 
 ```sh

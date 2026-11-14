@@ -61,7 +61,7 @@ PHP nu, puis sur Symfony.
 `omnisense/omnibase` vient avec son greffon Composer, `omnibridge/composer`
 (les stubs et la seule retouche que le cœur déclare), qu'il faut autoriser,
 et le pont du cadre hôte. Sa 5.0.0 requiert encore trois paquets à leur
-branche de développement, nommés dans la même commande jusqu'à la 5.1.0
+branche de développement, nommés dans la même commande jusqu'à la 5.1.1
 (voir [Installer](install.md#le-cœur)) :
 
 ```sh
