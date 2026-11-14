@@ -13,7 +13,7 @@ security:
 
     providers:
         users: { entity: { class: App\Entity\User } }
-        hwi: { id: Base\Security\UserProvider }
+        hwi: { id: Omnibridge\Symfony\Omnibase\Security\UserProvider }
 
     firewalls:
         dev:
@@ -32,14 +32,14 @@ security:
             provider: users
             context: common
             pattern: ^/(rescue|admin|_profiler)
-            user_checker: Base\Security\UserChecker
+            user_checker: Omnibridge\Symfony\Omnibase\Security\UserChecker
             remember_me:
                 secret:   '%kernel.secret%'
                 lifetime: 604800
                 signature_properties: ['password', 'email']
             custom_authenticator:
-                - Base\Security\RescueFormAuthenticator
-            entry_point: Base\Security\RescueFormAuthenticator
+                - Omnibridge\Symfony\Omnibase\Security\RescueFormAuthenticator
+            entry_point: Omnibridge\Symfony\Omnibase\Security\RescueFormAuthenticator
             logout:
                 path: security_logoutRequest
                 target: security_logout
@@ -50,17 +50,17 @@ security:
             provider: users
             lazy: true
             pattern: ^/
-            user_checker: Base\Security\UserChecker
+            user_checker: Omnibridge\Symfony\Omnibase\Security\UserChecker
             remember_me:
                 secret:   '%kernel.secret%'
                 lifetime: 604800
                 signature_properties: ['password', 'email']
             custom_authenticator:
-                - Base\Security\RescueFormAuthenticator
-                - Base\Security\LoginFormAuthenticator
-            entry_point: Base\Security\LoginFormAuthenticator
+                - Omnibridge\Symfony\Omnibase\Security\RescueFormAuthenticator
+                - Omnibridge\Symfony\Omnibase\Security\LoginFormAuthenticator
+            entry_point: Omnibridge\Symfony\Omnibase\Security\LoginFormAuthenticator
             access_token:
-                token_handler: Base\Security\AccessTokenHandler
+                token_handler: Omnibridge\Symfony\Omnibase\Security\AccessTokenHandler
             form_login:
                 use_referer: true
             two_factor:
@@ -74,7 +74,7 @@ security:
                 failure_path:      /login
                 use_forward:       false
                 oauth_user_provider:
-                    service: Base\Security\UserProvider
+                    service: Omnibridge\Symfony\Omnibase\Security\UserProvider
             webauthn:
                 user_provider: users
                 authentication:

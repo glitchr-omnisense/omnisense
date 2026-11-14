@@ -1,4 +1,4 @@
-# Sign in with Google (base-bundle's Base\Security\UserProvider). Empty ids
+# Sign in with Google (base-bundle's Omnibridge\Symfony\Omnibase\Security\UserProvider). Empty ids
 # leave the button off the login page.
 hwi_oauth:
     resource_owners:

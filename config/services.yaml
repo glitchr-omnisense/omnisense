@@ -86,13 +86,15 @@ services:
 
     # A static site counts no page view on a server (the core's counter writes
     # to the database at the end of each request): every address is excluded.
+    # Under its former id until omnisense/omnibase 6.0: omnibridge/symfony 1.x defines the
+    # service under that id (the new one is an alias of it), so only that id overrides it.
     Base\Subscriber\PageViewSubscriber:
         arguments:
             $excludedPrefixes: ['/']
 
     # Required by webauthn.yaml's repositories (see a community site's services.yaml:
     # the alias is resolved before Doctrine would make them autowireable).
-    Base\Repository\User\PasskeyRepository: ~
+    Omnibridge\Doctrine\Omnibase\Repository\User\PasskeyRepository: ~
     Base\Security\WebauthnUserEntityRepository: ~
 
 when@test:

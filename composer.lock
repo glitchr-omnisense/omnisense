@@ -5967,16 +5967,16 @@
         },
         {
             "name": "omnibridge/symfony",
-            "version": "v1.1.1",
+            "version": "v1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-omnisense/omnibridge-symfony.git",
-                "reference": "20cacc79b40bc17d2b74af3f4183bd4c870efe4d"
+                "reference": "a1c12fdfee955dbdca29a0c1e64c9f33ed353141"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-omnisense/omnibridge-symfony/zipball/20cacc79b40bc17d2b74af3f4183bd4c870efe4d",
-                "reference": "20cacc79b40bc17d2b74af3f4183bd4c870efe4d",
+                "url": "https://api.github.com/repos/glitchr-omnisense/omnibridge-symfony/zipball/a1c12fdfee955dbdca29a0c1e64c9f33ed353141",
+                "reference": "a1c12fdfee955dbdca29a0c1e64c9f33ed353141",
                 "shasum": ""
             },
             "require": {
@@ -6077,10 +6077,10 @@
             ],
             "support": {
                 "issues": "https://github.com/glitchr-omnisense/omnibridge-symfony/issues",
-                "source": "https://github.com/glitchr-omnisense/omnibridge-symfony/tree/v1.1.1"
+                "source": "https://github.com/glitchr-omnisense/omnibridge-symfony/tree/v1.1.2"
             },
-            "time": "2026-11-13T14:22:51+00:00",
-            "published-time": "2026-11-14T02:14:09+00:00"
+            "time": "2026-11-14T10:43:00+00:00",
+            "published-time": "2026-11-14T11:17:48+00:00"
         },
         {
             "name": "omnibridge/twig",

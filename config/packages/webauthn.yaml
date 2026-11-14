@@ -1,7 +1,7 @@
 # Please see the following page for more information: https://webauthn-doc.spomky-labs.com/the-webauthn-server/the-symfony-way#configuration
 
 webauthn:
-    credential_repository: 'Base\Repository\User\PasskeyRepository'
+    credential_repository: 'Omnibridge\Doctrine\Omnibase\Repository\User\PasskeyRepository'
     user_repository: 'Base\Security\WebauthnUserEntityRepository'
     creation_profiles:
         default:
