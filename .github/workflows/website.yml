@@ -8,16 +8,22 @@
 #                        the sitemap, the search indexes and the feeds checked, the deployment
 #                        manifest written (provenance.json) - then deployed to GitHub Pages, the
 #                        folder kept 90 days as the run's `site` artifact
-#   workflow_dispatch    the same; `full` renders every page; `rollback: <run id>` builds nothing
-#                        and deploys again the `site` artifact of that earlier run of main
+#   workflow_dispatch    the same; `full` renders every page; `rollback: <run id | commit>` builds
+#                        nothing and deploys again the `site` artifact of that earlier run of main
+#                        (or of the latest one built from that commit) - see the rollback job
 #   repository_dispatch  `documentation-published` from a package (master plan section 10, items
 #                        11 and 12): its manual moved to the commit it names, then a targeted
-#                        rebuild of that manual's pages - see the Dispatch step
+#                        rebuild of that manual's pages - see the Dispatch step;
+#                        `package-released`: the catalogue imported again from every package's
+#                        repository and Packagist, built and tested, and proposed as a pull request
+#                        (nothing deployed) - see the catalogue jobs
 #
 # Incremental: var/static-cache (the renderer's answers, by the fingerprint of the inputs
-# static.php declares) is kept from one run to the next; a page whose inputs did not change
-# is not rendered again, a page without declared inputs is rendered every time, a change of
-# the shared renderer (src, templates, config, the lock...) renders everything.
+# static.php declares, and omnibridge/static's build record) is kept from one run to the next;
+# a page whose inputs did not change is not rendered again, a page without declared inputs is
+# rendered every time, a change of the shared renderer (src, templates, config, the lock...)
+# renders everything, and so does a cache whose record cannot be trusted (none, another
+# omnibridge/static, another PHP or extension, a PHP file the last export loaded that changed).
 #
 # The site's address: the repository variable SITE_URL when a custom domain is set
 # (https://example.org/), otherwise the address GitHub Pages gives the repository
@@ -40,12 +46,15 @@ on:
         type: boolean
         default: false
       rollback:
-        description: 'Deploy again the site an earlier run of main built: its run id (the number in the run''s address). Nothing is built.'
+        description: 'Deploy again the site an earlier run of main built: its run id (the number in the run''s address), or the full SHA of the commit it was built from. Nothing is built.'
         type: string
         default: ''
-  # A documentation package published a commit: {"key": "<its manual>", "commit": "<sha>", "series": "<optional>"}.
+  # documentation-published: a documentation package published a commit,
+  #   {"key": "<its manual>", "commit": "<sha>", "series": "<optional>"}.
+  # package-released: a package published a release, {"package": "<vendor/name>", "version": "<tag>",
+  #   "repository": "<owner/name>"} - the catalogue imported again, proposed as a pull request.
   repository_dispatch:
-    types: [documentation-published]
+    types: [documentation-published, package-released]
 
 permissions:
   contents: read
@@ -59,8 +68,89 @@ env:
   APP_SECRET: static-site-build-not-a-secret
 
 jobs:
+  # package-released: the catalogue imported again, as a maintainer imports it (app:catalog:import) but from
+  # shallow clones of every repository the catalogue lists and of the released one (app:catalog:clone; one that
+  # does not clone stops it: a partial set would drop packages), with each package's release read from
+  # Packagist. Read-only: the changed files go to the build as an artifact, and the pull request job proposes
+  # them. Nothing changed: nothing built, nothing proposed. The payload is read through the environment.
+  catalogue:
+    if: github.event_name == 'repository_dispatch' && github.event.action == 'package-released'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    outputs:
+      changed: ${{ steps.import.outputs.changed }}
+      branch: ${{ steps.import.outputs.branch }}
+      title: ${{ steps.import.outputs.title }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - uses: shivammathur/setup-php@bf6b4fbd49ca58e4608c9c89fba0b8d90bd2a39f # 2.35.5
+        with:
+          php-version: '8.4'
+          extensions: bcmath, ctype, curl, dom, exif, ftp, gd, iconv, igbinary, imagick, intl, mbstring, pdo_sqlite, sodium, sqlite3, xml, xsl, zip
+          ini-values: memory_limit=2G
+          coverage: none
+          tools: composer:v2
+
+      - name: Composer cache
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
+        with:
+          path: ~/.cache/composer
+          key: composer-${{ hashFiles('composer.lock') }}
+          restore-keys: composer-
+
+      - name: Install
+        run: composer install --no-interaction --no-progress --prefer-dist
+
+      - name: Import
+        id: import
+        env:
+          PACKAGE: ${{ github.event.client_payload.package }}
+          VERSION: ${{ github.event.client_payload.version }}
+          REPOSITORY: ${{ github.event.client_payload.repository }}
+        run: |
+          [[ "$PACKAGE" =~ ^@?[a-z0-9][a-z0-9_.-]*/[a-z0-9][a-z0-9_.-]*$ ]] || { echo "::error::package-released names no package (vendor/name): \"$PACKAGE\"."; exit 1; }
+          [[ "$VERSION" =~ ^v?[0-9]+\.[0-9]+\.[0-9]+([.+-][0-9A-Za-z.+-]*)?$ ]] || { echo "::error::package-released names no version (1.2.3): \"$VERSION\"."; exit 1; }
+          [ -z "$REPOSITORY" ] || [[ "$REPOSITORY" =~ ^[A-Za-z0-9][A-Za-z0-9_.-]*/[A-Za-z0-9][A-Za-z0-9_.-]*$ ]] || { echo "::error::package-released: \"$REPOSITORY\" is no repository (owner/name)."; exit 1; }
+          # Packagist lists a release minutes after its tag: waited for, up to 10 minutes (a Composer package).
+          if [[ "$PACKAGE" != @* ]]; then
+            for _ in $(seq 1 20); do
+              curl -fsS "https://repo.packagist.org/p2/$PACKAGE.json" | jq -e --arg v "${VERSION#v}" --arg p "$PACKAGE" '.packages[$p][] | select((.version | ltrimstr("v")) == $v)' >/dev/null && break
+              sleep 30
+            done || true
+          fi
+          php bin/console app:catalog:clone "$RUNNER_TEMP/repos" ${REPOSITORY:+--repository="$REPOSITORY"} --no-interaction
+          OMNI_REPOS="$RUNNER_TEMP/repos" php bin/console app:catalog:import --no-interaction
+          slug=$(printf '%s-%s' "${PACKAGE#@}" "${VERSION#v}" | tr '/' '-')
+          echo "branch=catalogue/$slug" >> "$GITHUB_OUTPUT"
+          echo "title=The catalogue after $PACKAGE $VERSION (package-released)" >> "$GITHUB_OUTPUT"
+          if [ -z "$(git status --porcelain -- catalog config/documentation.yaml)" ]; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "The catalogue already says what the repositories and Packagist say: nothing to propose." >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            git status --short -- catalog config/documentation.yaml
+            git diff --stat -- catalog config/documentation.yaml
+          fi
+
+      - name: Keep the catalogue
+        if: steps.import.outputs.changed == 'true'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: catalogue
+          path: |
+            catalog
+            config/documentation.yaml
+          retention-days: 7
+
   build:
-    if: github.event_name != 'workflow_dispatch' || inputs.rollback == ''
+    needs: catalogue
+    # Every event but a rollback; after a package-released import, only when it changed something.
+    if: >-
+      !cancelled() && needs.catalogue.result != 'failure' && needs.catalogue.outputs.changed != 'false'
+      && (github.event_name != 'workflow_dispatch' || inputs.rollback == '')
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     permissions:
@@ -72,6 +162,15 @@ jobs:
       pin: ${{ steps.dispatch.outputs.pin }}
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      # package-released: the catalogue the import wrote, over the checkout - the site built and tested is the
+      # one the pull request proposes.
+      - name: The imported catalogue
+        if: needs.catalogue.outputs.changed == 'true'
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: catalogue
+          path: .
 
       # The address GitHub Pages serves the site at (main only: a pull request publishes nothing).
       - name: GitHub Pages
@@ -135,7 +234,7 @@ jobs:
       # read through the environment, never written into the script.
       - name: Dispatch
         id: dispatch
-        if: github.event_name == 'repository_dispatch'
+        if: github.event_name == 'repository_dispatch' && github.event.action == 'documentation-published'
         env:
           KEY: ${{ github.event.client_payload.key }}
           COMMIT: ${{ github.event.client_payload.commit }}
@@ -176,7 +275,8 @@ jobs:
       # The renderer's answers of the last run (saved under this run's key once the job succeeds;
       # a failed build leaves the last good cache as it was). The prefix's generation (v2) is raised to
       # start from nothing: v2 after the 2026-11-13 history rewrites of the documented repositories, so
-      # that no page rendered before them is reused.
+      # that no page rendered before them is reused. A cache without omnibridge/static 1.1's build record (or
+      # with one it cannot trust) renders everything once and writes the record: no generation to raise for it.
       - name: Static export cache
         uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
         with:
@@ -209,7 +309,8 @@ jobs:
         run: php bin/console app:policies:import --no-interaction
 
       # For GitHub Pages: .nojekyll, the redirections as pages, every address under BASE_PATH.
-      # Incremental from the cache restored above; its last line (the counts) goes into provenance.json.
+      # Incremental from the cache restored above; its last line (incremental, or full and why, and the
+      # counts) goes into the run's summary.
       - name: Build
         env:
           FULL: ${{ github.event_name == 'workflow_dispatch' && inputs.full && '--full' || '' }}
@@ -217,7 +318,7 @@ jobs:
         run: |
           set -o pipefail
           bin/omnibridge-static build --out=dist --github-pages ${FULL:+"$FULL"} ${ONLY:+"--only=$ONLY"} 2>&1 | tee build.log
-          echo "STATIC_SUMMARY=$(grep -E '^(incremental|full)( \(|:)' build.log | tail -1)" >> "$GITHUB_ENV"
+          echo "Export: $(grep -E '^(incremental|full)( \(|:)' build.log | tail -1)" >> "$GITHUB_STEP_SUMMARY"
 
       # The proof that the cache served no stale page: a --full export into an empty folder, with
       # a cache of its own, gives the same files byte for byte (and two exports agree: deterministic).
@@ -260,28 +361,36 @@ jobs:
           node tests/smoke/chrome.mjs "http://localhost:8135$BASE_PATH" smoke-shots
 
       # The deployment manifest, published with the site (master plan section 10, item 10): the
-      # site's commit, the commit each documentation source was read at, the packages and tools
-      # that rendered it, the checksums. Written last: its build time and run are this build's
-      # own, and it is not one of the files the export lists and the comparison above checks.
+      # site's commit and the files this run changed in the checkout (the data fetched above, a
+      # moved pin), the commit each documentation source was read at, the packages and tools that
+      # rendered it, the checksums. Deterministic: no time nor run in it (two builds from the same
+      # sources write the same file); what asked for the build goes to the run's summary. Written
+      # last: not one of the files the export lists and the comparison above checks.
       - name: Provenance
         env:
           DISPATCH_REQUEST: ${{ steps.dispatch.outputs.request }}
+          PAYLOAD: ${{ github.event_name == 'repository_dispatch' && toJSON(github.event.client_payload) || '' }}
           INPUTS: ${{ github.event_name == 'workflow_dispatch' && toJSON(inputs) || '' }}
+          EVENT: ${{ github.event.action || github.event_name }}
         run: |
-          request="${DISPATCH_REQUEST:-$INPUTS}"
-          php bin/console app:provenance dist --summary="$STATIC_SUMMARY" ${request:+--request="$request"}
+          php bin/console app:provenance dist
+          request="${DISPATCH_REQUEST:-${PAYLOAD:-$INPUTS}}"
+          {
+            echo "Provenance: \`provenance.json\` $(sha256sum dist/provenance.json | cut -d' ' -f1)"
+            [ -z "$request" ] || echo "Request ($EVENT): \`$(jq -c . <<< "$request")\`"
+          } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload the preview
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' || github.event.action == 'package-released'
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: website-pr-${{ github.event.number }}
+          name: website-${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.number) || 'catalogue' }}
           path: dist
           retention-days: 14
 
       # The immutable artifact a rollback deploys again (workflow_dispatch, rollback: this run's id).
       - name: Keep the site for a rollback
-        if: github.event_name != 'pull_request'
+        if: github.event_name != 'pull_request' && github.event.action != 'package-released'
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: site
@@ -291,7 +400,7 @@ jobs:
 
       # .nojekyll is a hidden file: included.
       - name: Upload the site for GitHub Pages
-        if: github.event_name != 'pull_request'
+        if: github.event_name != 'pull_request' && github.event.action != 'package-released'
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
           path: dist
@@ -343,8 +452,59 @@ jobs:
           git commit -m "config/documentation.yaml: the $KEY manual at $PIN (documentation-published)"
           git push origin "HEAD:refs/heads/main"
 
-  # Deploy again an earlier run's `site` artifact: a run of this workflow on main that succeeded,
-  # its files checked against its omnibridge-static.json and provenance.json before they go out.
+  # package-released: the imported catalogue, built and tested above, proposed as a pull request from a branch
+  # of its own (catalogue/<package>-<version>, pushed again by a later dispatch of the same release). Never
+  # pushed to main: the import writes what third-party metadata (the repositories' composer.json and READMEs,
+  # Packagist) says onto public pages, so a maintainer reads it before it is published - merging it is the
+  # push that deploys it. A pull request opened with the job's token starts no workflow: the build above is its
+  # check (its run and preview are linked in the description). Without "Allow GitHub Actions to create and
+  # approve pull requests" (Settings -> Actions -> General), the branch is pushed and the run's summary gives
+  # the address that opens the pull request.
+  catalogue-pr:
+    needs: [catalogue, build]
+    if: >-
+      github.event_name == 'repository_dispatch' && github.event.action == 'package-released'
+      && needs.catalogue.outputs.changed == 'true' && needs.build.result == 'success'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: catalogue
+          path: .
+      - name: The pull request
+        env:
+          BRANCH: ${{ needs.catalogue.outputs.branch }}
+          TITLE: ${{ needs.catalogue.outputs.title }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git switch --create "$BRANCH"
+          git add -- catalog config/documentation.yaml
+          git commit --quiet -m "$TITLE"
+          git push --force origin "HEAD:refs/heads/$BRANCH"
+          run="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          body=$(printf '%s\n\n%s\n\n%s\n' \
+            "app:catalog:import over every repository of the catalogue and the released one, with Packagist's releases, after a \`package-released\` dispatch." \
+            "$(git show --stat --format= HEAD)" \
+            "Built, tested and smoke-tested by $run (its \`website-catalogue\` artifact is the preview). Merging deploys it.")
+          if [ -n "$(gh pr list --head "$BRANCH" --state open --json number --jq '.[].number')" ]; then
+            gh pr edit "$BRANCH" --title "$TITLE" --body "$body"
+          elif ! gh pr create --base main --head "$BRANCH" --title "$TITLE" --body "$body"; then
+            echo "::warning::The pull request could not be opened with the job's token: open it from $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/compare/main...$BRANCH"
+            echo "Open the pull request: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/compare/main...$BRANCH" >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+  # Deploy again an earlier run's `site` artifact: a successful run of this workflow on main, named by its id
+  # or by the commit it was built from (the latest such run whose artifact is kept), its files checked against
+  # its omnibridge-static.json and provenance.json before they go out (.github/scripts).
   rollback:
     if: github.event_name == 'workflow_dispatch' && inputs.rollback != '' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
@@ -353,43 +513,30 @@ jobs:
       actions: read
       contents: read
     steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          sparse-checkout: .github/scripts
       - name: The run
+        id: run
         env:
-          RUN: ${{ inputs.rollback }}
+          ROLLBACK: ${{ inputs.rollback }}
           GH_TOKEN: ${{ github.token }}
         run: |
-          [[ "$RUN" =~ ^[0-9]+$ ]] || { echo "::error::rollback names a run by its id (digits)."; exit 1; }
-          read -r path branch event conclusion sha < <(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$RUN" --jq '[.path, .head_branch, .event, .conclusion, .head_sha] | @tsv')
-          echo "Run $RUN: $path on $branch ($event), $conclusion, commit $sha"
-          if [ "$path" != .github/workflows/website.yml ] || [ "$branch" != main ] || [ "$conclusion" != success ]; then
-            echo "::error::Run $RUN is not a successful run of website.yml on main."
-            exit 1
-          fi
+          found=$(.github/scripts/rollback-run.sh "$ROLLBACK")
+          read -r run commit <<< "$found"
+          echo "Rollback to run $run, commit $commit" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "id=$run" >> "$GITHUB_OUTPUT"
+          echo "commit=$commit" >> "$GITHUB_OUTPUT"
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
           name: site
           path: dist
-          run-id: ${{ inputs.rollback }}
+          run-id: ${{ steps.run.outputs.id }}
           github-token: ${{ github.token }}
       - name: Check the files
-        run: |
-          python3 - <<'EOF'
-          import hashlib, json, os
-          sha = lambda p: hashlib.sha256(open(p, 'rb').read()).hexdigest()
-          report = json.load(open('dist/omnibridge-static.json'))
-          provenance = json.load(open('dist/provenance.json'))
-          listed = report['files']
-          problems = [f'changed or missing: {f}' for f, e in listed.items() if not os.path.isfile(f'dist/{f}') or sha(f'dist/{f}') != e['sha256']]
-          for root, _, files in os.walk('dist'):
-              for name in files:
-                  f = os.path.relpath(os.path.join(root, name), 'dist')
-                  if f not in listed and f not in ('omnibridge-static.json', 'provenance.json'):
-                      problems.append(f'not in the report: {f}')
-          if provenance['artifact']['report'] != sha('dist/omnibridge-static.json'):
-              problems.append('omnibridge-static.json is not the one provenance.json names')
-          assert not problems, problems
-          print(f"{len(listed)} files checked; the site of commit {provenance['site']['commit']}, built {provenance['build']['built']}")
-          EOF
+        env:
+          COMMIT: ${{ steps.run.outputs.commit }}
+        run: python3 .github/scripts/check-site.py dist "$COMMIT"
       - name: Upload the site for GitHub Pages
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
@@ -401,6 +548,7 @@ jobs:
     # The build's site, or the rollback's; never after a failure (a pin refused leaves the site as it is).
     if: >-
       !cancelled() && !failure() && github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+      && github.event.action != 'package-released'
       && (needs.build.result == 'success' || needs.rollback.result == 'success')
     runs-on: ubuntu-24.04
     timeout-minutes: 15

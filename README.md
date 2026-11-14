@@ -72,14 +72,37 @@ lists: a page that reads something its list leaves out would be served stale
 from the cache, so the workflow compares each build of `main` with a full
 one. `--full` renders everything; `--only=/docs/omnibase/*` renders the
 addresses it names whatever the cache holds; `--cache=<folder>` keeps the
-answers elsewhere.
+answers elsewhere. omnibridge/static also keeps a build record in that
+folder: the PHP files the export loaded with their checksums, PHP and its
+extensions, the installed packages. An export whose record is missing or no
+longer matches (a vendor upgrade, another PHP, a changed file of `src/`)
+renders every page and says why ("full (...)"); the kernel's compiled
+container and Twig cache under `var/cache` are left out of it
+(`Site::ignoreLoaded()` in `static.php`), since every fresh boot writes them
+again.
 
 `bin/console app:provenance dist` writes `dist/provenance.json`, the
-deployment manifest published with the site. It records the site's commit,
-the commit each documentation source was read at, the locked packages, the
-tool versions and the export's checksums. Its build time and run are that
-build's own: it is written after the comparison and is not one of the files
-`omnibridge-static.json` lists.
+deployment manifest published with the site
+(`https://glitchr-omnisense.github.io/omnisense/provenance.json`). It records:
+
+- `site`: the repository, the commit and its date, and `modified`, each
+  tracked file the build changed in its checkout with its SHA-256 (the data
+  the workflow fetches before the export: `config/compatibility.yaml`,
+  `config/github.yaml`, `config/policies.json`; a pin a dispatch moved);
+- `tools`: PHP, ICU, Composer, Node, Yarn and omnibridge/static;
+- `packages`: every locked package (not `require-dev`) with its version and
+  commit;
+- `documentation`: each manual's series with its repository, the ref
+  `config/documentation.yaml` pins and the commit `app:docs:fetch` read;
+- `artifact`: the SHA-256 of `omnibridge-static.json`, the number of files and
+  bytes, and a checksum of the whole folder (each file's path and SHA-256,
+  sorted).
+
+It holds no time and no run: two builds from the same sources write the same
+file. The run's own facts (what asked for it, the export's counts) are in the
+run's summary. It is written after the comparison with a full export and is
+not one of the files `omnibridge-static.json` lists (the exporter's report has
+no room for data of the site's own).
 
 With the site's containers: `make static`, then `make static-serve`
 (http://localhost:8135, an nginx that serves it as GitHub Pages does;
@@ -98,11 +121,27 @@ custom domain, set it in Settings → Pages and set the repository variable
 The workflow can also be started by hand or by another repository:
 
 - **Run workflow** with `full` renders every page.
-- **Run workflow** with `rollback` set to an earlier run's id deploys again
-  the `site` artifact that run kept. Each build of `main` keeps one for 90
-  days. Nothing is built. The run must be a successful run of this workflow on
-  `main`, and its files are checked against its `omnibridge-static.json` and
-  `provenance.json` first.
+- **Rollback.** Each build of `main` keeps its folder for 90 days as the
+  run's `site` artifact. **Run workflow** with `rollback` set to an earlier
+  run's id (the number in its address), or to the full SHA of a commit, deploys
+  that folder again. Nothing is built. A commit takes the latest successful run
+  of this workflow on `main` built from it whose artifact is still kept. Before
+  anything goes out, `.github/scripts/check-site.py` checks every file against
+  the run's `omnibridge-static.json`, checks that no other file is there, and
+  checks the report, the folder checksum and the commit against its
+  `provenance.json`. From the command line:
+
+  ```sh
+  gh workflow run website.yml --ref main -f rollback=<run id or commit SHA>
+  # which run a value names, without deploying anything:
+  GITHUB_REPOSITORY=glitchr-omnisense/omnisense .github/scripts/rollback-run.sh <run id or commit SHA>
+  # a downloaded site checked as the rollback checks it:
+  gh run download <run id> -n site -D /tmp/site && python3 .github/scripts/check-site.py /tmp/site <commit SHA>
+  ```
+
+  An artifact older than 90 days is gone: check out that commit and run the
+  workflow on it with `full` instead. The next push to `main` deploys its own
+  build again, so the rollback holds until then.
 - A documentation package that published a commit sends a
   `repository_dispatch` of type `documentation-published` with a token
   allowed to write to this repository:
@@ -121,6 +160,45 @@ The workflow can also be started by hand or by another repository:
   site is deployed. If the key is unknown or missing, the whole site is built
   as on a push. A commit that is not on the branch fails the run, and the
   site is left as it was.
+- A package that published a release sends a `repository_dispatch` of type
+  `package-released`, so that the catalogue picks up the release:
+
+  ```sh
+  gh api repos/glitchr-omnisense/omnisense/dispatches \
+    -f event_type=package-released \
+    -f 'client_payload[package]=omnibase/blog' -f 'client_payload[version]=1.0.1' \
+    -f 'client_payload[repository]=glitchr-omnisense/omnibase-blog'
+  ```
+
+  `package` (`vendor/name`, or `@scope/name` for npm) and `version` are
+  required. `repository` is optional: it is cloned in addition to the
+  catalogue's own repositories, which lets a package the catalogue does not
+  list yet join it. Only owners the catalogue already has are accepted. The
+  `catalogue` job clones every repository the catalogue lists, shallow, at its
+  branch (`app:catalog:clone`). One clone that fails stops the job, because an
+  import over a partial set would drop packages. The job then runs
+  `app:catalog:import` over the clones, with each package's release read from
+  Packagist. If nothing changed, the run stops there. Otherwise the site is
+  built from the new catalogue, then tested and smoke-tested, and the change is
+  proposed as a pull request from the branch `catalogue/<package>-<version>`.
+  A later dispatch of the same release pushes that branch again. Nothing is
+  deployed: merging the pull request is the push that deploys it.
+
+  Why a pull request and not a commit to `main` (as `documentation-published`
+  does): the import writes onto public pages what other repositories'
+  `composer.json` and READMEs and Packagist say, and a stale Packagist
+  replica can answer an older release. A maintainer reads the diff first. A
+  pull request opened with the job's token starts no workflow; its
+  description links the run that built and tested it, and the run's
+  `website-catalogue` artifact is the preview. The job's token needs
+  Settings → Actions → General → "Allow GitHub Actions to create and approve
+  pull requests". Without that setting, the branch is still pushed, and the
+  run's summary gives the address that opens the pull request.
+
+  The token that sends either dispatch must belong to the sending repository's
+  workflow: a fine-grained token limited to this repository with "Contents:
+  read and write" (the dispatches endpoint asks for it), stored in the sender
+  as a secret.
 
 ## Tests
 

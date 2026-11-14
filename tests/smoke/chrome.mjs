@@ -44,42 +44,51 @@ let failures = 0;
 for (const [name, path, selector] of PAGES) {
     for (const [width, height, mobile] of [[1440, 1000, false], [390, 844, true]]) {
         for (const scheme of ['light', 'dark']) {
-            const target = await (await fetch(`http://127.0.0.1:${port}/json/new?about:blank`, { method: 'PUT' })).json();
-            const ws = new WebSocket(target.webSocketDebuggerUrl);
-            await new Promise((r) => ws.addEventListener('open', r, { once: true }));
-            let id = 0; const pending = new Map(); const problems = []; const urls = new Map();
-            ws.addEventListener('message', (e) => {
-                const m = JSON.parse(e.data); const p = m.params || {};
-                if (m.id && pending.has(m.id)) { pending.get(m.id)(m.result || {}); pending.delete(m.id); return; }
-                if (m.method === 'Runtime.exceptionThrown') problems.push('exception: ' + (p.exceptionDetails.exception?.description || p.exceptionDetails.text).slice(0, 200));
-                if (m.method === 'Runtime.consoleAPICalled' && p.type === 'error') problems.push('console: ' + p.args.map((a) => a.value ?? a.description ?? '').join(' ').slice(0, 200));
-                if (m.method === 'Network.requestWillBeSent') { urls.set(p.requestId, p.request.url); if (outside(p.request.url)) problems.push(`outside ${folder}/: ${p.request.url}`); }
-                // The page for unknown addresses answers 404 itself.
-                if (m.method === 'Network.responseReceived' && p.response.status >= 400 && !(name.startsWith('not-found') && p.type === 'Document')) problems.push(`http ${p.response.status}: ${p.response.url}`);
-                if (m.method === 'Network.loadingFailed' && !p.canceled) problems.push(`failed ${p.errorText}: ${urls.get(p.requestId)}`);
-            });
-            const send = (method, params = {}) => new Promise((r) => { const n = ++id; pending.set(n, r); ws.send(JSON.stringify({ id: n, method, params })); });
-            for (const d of ['Page', 'Runtime', 'Network']) await send(d + '.enable');
-            await send('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: 1, mobile });
-            await send('Emulation.setTouchEmulationEnabled', { enabled: mobile });
-            await send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-color-scheme', value: scheme }] });
-            await send('Page.navigate', { url: base + path });
-            await sleep(3000);
-            const r = await send('Runtime.evaluate', { returnByValue: true, expression: `JSON.stringify({ sw: document.documentElement.scrollWidth, iw: innerWidth, found: !!document.querySelector(${JSON.stringify(selector)}), links: [...document.querySelectorAll('a[href], link[href], form[action]')].map((e) => e.href || e.action).concat([...document.querySelectorAll('[src]')].map((e) => e.src)) })` });
-            const info = JSON.parse(r.result.value);
-            const away = [...new Set(info.links.filter(outside))];
-            if (away.length) problems.push(`${away.length} link(s) outside ${folder}/: ${away.slice(0, 3).join(' ')}`);
-            if (info.sw > info.iw) problems.push(`horizontal scroll: ${info.sw} > ${info.iw}`);
-            if (!info.found) problems.push(`missing ${selector}`);
-            if (shots) {
-                const shot = await send('Page.captureScreenshot', { format: 'png' });
-                writeFileSync(join(shots, `${name}-${width}-${scheme}.png`), Buffer.from(shot.data, 'base64'));
+            for (let attempt = 1; ; attempt++) {
+                const target = await (await fetch(`http://127.0.0.1:${port}/json/new?about:blank`, { method: 'PUT' })).json();
+                const ws = new WebSocket(target.webSocketDebuggerUrl);
+                await new Promise((r) => ws.addEventListener('open', r, { once: true }));
+                let id = 0; const pending = new Map(); const problems = []; const urls = new Map();
+                ws.addEventListener('message', (e) => {
+                    const m = JSON.parse(e.data); const p = m.params || {};
+                    if (m.id && pending.has(m.id)) { pending.get(m.id)(m.result || {}); pending.delete(m.id); return; }
+                    if (m.method === 'Runtime.exceptionThrown') problems.push('exception: ' + (p.exceptionDetails.exception?.description || p.exceptionDetails.text).slice(0, 200));
+                    if (m.method === 'Runtime.consoleAPICalled' && p.type === 'error') problems.push('console: ' + p.args.map((a) => a.value ?? a.description ?? '').join(' ').slice(0, 200));
+                    if (m.method === 'Network.requestWillBeSent') { urls.set(p.requestId, p.request.url); if (outside(p.request.url)) problems.push(`outside ${folder}/: ${p.request.url}`); }
+                    // The page for unknown addresses answers 404 itself.
+                    if (m.method === 'Network.responseReceived' && p.response.status >= 400 && !(name.startsWith('not-found') && p.type === 'Document')) problems.push(`http ${p.response.status}: ${p.response.url}`);
+                    if (m.method === 'Network.loadingFailed' && !p.canceled) problems.push(`failed ${p.errorText}: ${urls.get(p.requestId)}`);
+                });
+                const send = (method, params = {}) => new Promise((r) => { const n = ++id; pending.set(n, r); ws.send(JSON.stringify({ id: n, method, params })); });
+                for (const d of ['Page', 'Runtime', 'Network']) await send(d + '.enable');
+                await send('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: 1, mobile });
+                await send('Emulation.setTouchEmulationEnabled', { enabled: mobile });
+                await send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-color-scheme', value: scheme }] });
+                await send('Page.navigate', { url: base + path });
+                await sleep(3000);
+                const r = await send('Runtime.evaluate', { returnByValue: true, expression: `JSON.stringify({ sw: document.documentElement.scrollWidth, iw: innerWidth, found: !!document.querySelector(${JSON.stringify(selector)}), links: [...document.querySelectorAll('a[href], link[href], form[action]')].map((e) => e.href || e.action).concat([...document.querySelectorAll('[src]')].map((e) => e.src)) })` });
+                const info = JSON.parse(r.result.value);
+                const away = [...new Set(info.links.filter(outside))];
+                if (away.length) problems.push(`${away.length} link(s) outside ${folder}/: ${away.slice(0, 3).join(' ')}`);
+                if (info.sw > info.iw) problems.push(`horizontal scroll: ${info.sw} > ${info.iw}`);
+                if (!info.found) problems.push(`missing ${selector}`);
+                if (shots) {
+                    const shot = await send('Page.captureScreenshot', { format: 'png' });
+                    writeFileSync(join(shots, `${name}-${width}-${scheme}.png`), Buffer.from(shot.data, 'base64'));
+                }
+                ws.close();
+                await fetch(`http://127.0.0.1:${port}/json/close/${target.id}`);
+                // Chrome sees the runner's network change when the server's container starts (net::ERR_NETWORK_CHANGED):
+                // a visit that failed for that only is made once more.
+                if (attempt < 2 && problems.length && problems.every((p) => p.includes('net::ERR_NETWORK_CHANGED'))) {
+                    console.log(`again ${path} ${width} ${scheme} (the network changed)`);
+                    continue;
+                }
+                console.log(`${problems.length ? 'FAIL' : 'ok  '} ${path} ${width} ${scheme}`);
+                for (const p of problems) console.log('     ' + p);
+                failures += problems.length;
+                break;
             }
-            console.log(`${problems.length ? 'FAIL' : 'ok  '} ${path} ${width} ${scheme}`);
-            for (const p of problems) console.log('     ' + p);
-            failures += problems.length;
-            ws.close();
-            await fetch(`http://127.0.0.1:${port}/json/close/${target.id}`);
         }
     }
 }
