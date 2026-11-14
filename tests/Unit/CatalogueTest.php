@@ -2,6 +2,7 @@
 
 namespace App\Tests\Unit;
 
+use App\Catalogue\Catalogue;
 use App\Catalogue\CatalogueImporter;
 use App\Catalogue\Families;
 use App\Catalogue\Package;
@@ -210,5 +211,21 @@ final class CatalogueTest extends TestCase
         self::assertSame(['omnifilm' => 'omnishow', 'omnigame' => 'omniplay', 'omnishare' => 'omnipost', 'omnireach' => 'omnipulse', 'omnireview' => 'omnipulse', 'omnifund' => 'omnipulse'], Families::MERGED);
         self::assertSame([], array_intersect(array_keys(Families::MERGED), Families::ORDER));
         self::assertSame([], array_diff(Families::MERGED, Families::ORDER), 'each successor has its place');
+    }
+
+    public function testTheSkeletonNamesEachFamilysPackagesAndItsFile(): void
+    {
+        $dir = \dirname(__DIR__).'/Fixtures/catalog';
+        $catalogue = new Catalogue($dir);
+
+        self::assertSame([
+            'libraries' => ['@glitchr/flowjs'],
+            'omnibase' => ['omnibase/blog', 'omnisense/omnibase'],
+            'omnibridge' => ['omnibridge/static'],
+            'omnitrade' => ['omnisense/omnitrade', 'omnitrade/paypal', 'omnitrade/stripe'],
+        ], $catalogue->skeleton(), 'names only: a description or a version changes no page but those reading the file');
+        self::assertSame($dir.'/omnitrade.yaml', $catalogue->fileOf('omnitrade'));
+        self::assertSame($catalogue->fileOf((string) $catalogue->find('omnitrade/stripe')?->getFamily()), $catalogue->fileOf('omnitrade'));
+        self::assertNull($catalogue->fileOf('omninothing'));
     }
 }

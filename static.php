@@ -108,30 +108,33 @@ return static function (array $host): Site {
         return $values;
     };
     // Every page: the code that renders it, its templates and translations, the configuration (but
-    // documentation.yaml and compatibility.yaml, read below for each manual), the catalogue, the front end's
-    // manifests (the files themselves are copied, not rendered), the locked packages, the .env files and the
-    // environment; then what each manual's page knows of the other manuals - its key, package and default
-    // series, for the links to it - and the year the credits print, the timezone and the ICU version dates are
-    // written with.
+    // documentation.yaml, compatibility.yaml, apis.yaml and policies.json, read below by the pages that print
+    // them), the front end's manifests (the
+    // files themselves are copied, not rendered), the locked packages, the .env files and the environment;
+    // then what each manual's page knows of the other manuals - its key, package and default series, for the
+    // links to it - and of the catalogue - each family and the names of its packages, for the links to them
+    // (Catalogue::skeleton()) - and the year the credits print, the timezone and the ICU version dates are
+    // written with. What a package's entry says is in its family's file (catalog/<family>.yaml): an input of
+    // the pages that print it only.
     $shared = [$root.'/src', $root.'/templates', $root.'/translations', $root.'/composer.lock', $root.'/public/assets/manifest.json', $root.'/public/assets/entrypoints.json'];
     foreach (glob($root.'/config/*') ?: [] as $entry) {
-        if (!in_array(basename($entry), ['documentation.yaml', 'compatibility.yaml', 'reference.php'], true)) {
+        if (!in_array(basename($entry), ['documentation.yaml', 'compatibility.yaml', 'apis.yaml', 'policies.json', 'reference.php'], true)) {
             $shared[] = $entry;
         }
     }
-    // The data files where the configuration puts them (catalog/ and config/, or the tests' fixtures).
-    foreach (['app.catalog_dir', 'app.policies_file', 'app.github_file', 'app.apis_file'] as $parameter) {
-        $shared[] = (string) $container->getParameter($parameter);
-    }
+    // The star count every page's header shows, where the configuration puts it (config/, or the tests' fixtures).
+    $shared[] = (string) $container->getParameter('app.github_file');
     foreach (['.env', '.env.local', '.env.'.$_SERVER['APP_ENV'], '.env.'.$_SERVER['APP_ENV'].'.local'] as $file) {
         $shared[] = is_file($root.'/'.$file) ? $root.'/'.$file : $value('absent', $file);
     }
     $shared[] = $value('environment', $environment());
     $shared[] = $value('manuals', array_map(static fn ($m): array => [$m->key, $m->package, $m->default, $m->series()], array_values($documentation->manuals())));
+    $shared[] = $value('catalogue', $catalogue->skeleton());
     $shared[] = $value('clock', [date('Y'), date_default_timezone_get(), defined('INTL_ICU_VERSION') ? INTL_ICU_VERSION : null]);
     // A manual's pages (its one page, its API reference, its pages' former addresses): its entry in
     // config/documentation.yaml, each series' folder in var/docs (the docs/ files and the PHP sources, at the
-    // pinned commit) and the commit app:docs:fetch recorded, and its package's row of the compatibility data.
+    // pinned commit) and the commit app:docs:fetch recorded, its package's family file (the package's entry, the
+    // family's own package and members its header and side list print) and its row of the compatibility data.
     $manualInputs = static function (mixed $key) use ($documentation, $catalogue, $compatibility, $value): ?array {
         $manual = is_string($key) ? $documentation->manual($key) : null;
         if (null === $manual) {
@@ -143,6 +146,8 @@ return static function (array $host): Site {
             $inputs[] = $value('commit', [$manual->key, $series, $documentation->commit($manual, $series)]);
         }
         $package = $catalogue->find($manual->package);
+        $file = null !== $package && null !== $package->getFamily() ? $catalogue->fileOf($package->getFamily()) : null;
+        $inputs[] = $file ?? $value('not in the catalogue', $manual->package);
         $row = null !== $package ? $compatibility->of($package) : null;
         if (null !== $row) {
             unset($row['package']); // the catalogue's, in the shared inputs
@@ -154,7 +159,48 @@ return static function (array $host): Site {
     // The folders the content services read (the tests' fixtures in the test environment).
     $newsDir = rtrim((string) $container->getParameter('app.news_dir'), '/');
     $guidesDir = rtrim((string) $container->getParameter('app.guides_dir'), '/');
-    $pageInputs = static function (StaticPage $page) use ($newsDir, $guidesDir, $manualInputs): ?array {
+    $catalogDir = rtrim((string) $container->getParameter('app.catalog_dir'), '/');
+    $compatibilityFile = (string) $container->getParameter('app.compatibility_file');
+    $documentationFile = (string) $container->getParameter('app.documentation_file');
+    // The API cards' data (config/apis.yaml) and the usage policies the providers declare (config/policies.json).
+    $apiFiles = [(string) $container->getParameter('app.apis_file'), (string) $container->getParameter('app.policies_file')];
+    // What reads every manual (the documentation's entry, the search index): each one's inputs.
+    $everyManual = static function () use ($documentation, $manualInputs): array {
+        $inputs = [];
+        foreach (array_keys($documentation->manuals()) as $key) {
+            array_push($inputs, ...($manualInputs((string) $key) ?? []));
+        }
+
+        return $inputs;
+    };
+    // A family's page, or the redirection to its own package's manual (the manual: in the shared inputs).
+    $familyInputs = static function (mixed $name) use ($catalogue, $documentation): ?array {
+        $family = is_string($name) ? $catalogue->family($name) : null;
+        if (null === $family) {
+            return null;
+        }
+        $own = $family->getOwn();
+        $file = $catalogue->fileOf($name);
+
+        return null !== $own && null !== $documentation->manualOf($own->getName()) ? [] : (null !== $file ? [$file] : null);
+    };
+    // A package's page lists what it requires and what requires it (any family): the catalogue. With a manual,
+    // a redirection to it (in the shared inputs).
+    $packageInputs = static function (array $parameters) use ($catalogue, $documentation, $catalogDir): ?array {
+        $vendor = $parameters['vendor'] ?? null;
+        $name = $parameters['name'] ?? null;
+        if (!is_string($vendor) || !is_string($name)) {
+            return null;
+        }
+        $package = $catalogue->find($vendor.'/'.$name) ?? $catalogue->find('@'.$vendor.'/'.$name);
+
+        return null !== $package && null !== $documentation->manualOf($package->getName()) ? [] : [$catalogDir];
+    };
+    $pageInputs = static function (StaticPage $page) use ($newsDir, $guidesDir, $catalogDir, $compatibilityFile, $documentationFile, $apiFiles, $manualInputs, $everyManual, $familyInputs, $packageInputs): ?array {
+        // 404.html: its template and the shared inputs.
+        if (StaticPage::NOT_FOUND === $page->role) {
+            return [];
+        }
         $parameters = $page->parameters;
 
         return match (explode('.', (string) $page->route)[0]) {
@@ -165,10 +211,27 @@ return static function (array $host): Site {
             'app_news_item' => is_string($parameters['slug'] ?? null) ? [$newsDir.'/*-'.$parameters['slug'].'.*.md'] : null,
             // The list and the feeds show every item.
             'app_news', 'app_news_atom', 'app_news_rss' => [$newsDir],
-            // A guide lists the guides of its language and has its translation for alternate.
-            'app_guide' => [$guidesDir],
-            // Any other page (the home, the catalogue, the search index, the dashboard...) reads more than this
-            // file can list for sure: rendered every time.
+            // A guide lists the guides of its language and has its translation for alternate; the Install guide
+            // ends on every family's releases.
+            'app_guide' => 'install' === ($parameters['slug'] ?? null) ? [$guidesDir, $catalogDir] : [$guidesDir],
+            'app_family' => $familyInputs($parameters['family'] ?? null),
+            'app_package' => $packageInputs($parameters),
+            // The home: the families and floors, the counts, the latest news and the guides.
+            'app_index' => [$catalogDir, $newsDir, $guidesDir],
+            // The catalogue's list; the counts.
+            'app_packages', 'app_support' => [$catalogDir],
+            // The API cards, the wanted list and the policies' table: config/apis.yaml and the declared policies,
+            // joined to the catalogue (App\Catalogue\Api\Directory).
+            'app_apis', 'app_contribute', 'app_api_policies' => [$catalogDir, ...$apiFiles],
+            // The dashboard: every package's row of the compatibility data.
+            'app_compatibility' => [$catalogDir, $compatibilityFile],
+            // The documentation's entry (every manual, its family's phrase, its number of pages) and the search
+            // index (the guides, the news, the catalogue, every manual's pages).
+            'app_docs' => [$catalogDir, $documentationFile, ...$everyManual()],
+            'app_search_index' => [$catalogDir, $documentationFile, $newsDir, $guidesDir, ...$everyManual()],
+            // Templates and the shared inputs only.
+            'app_search', 'app_legal', 'app_privacy', 'app_robots', 'app_not_found' => [],
+            // A route added later, or an address found only by following a link (no route): rendered every time.
             default => null,
         };
     };

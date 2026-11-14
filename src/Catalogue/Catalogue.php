@@ -23,6 +23,9 @@ class Catalogue
     /** @var array<string, Package> */
     private array $packages = [];
 
+    /** @var array<string, string> family => the catalog file it is read from */
+    private array $files = [];
+
     public function __construct(
         #[Autowire('%app.catalog_dir%')] private readonly string $dir,
     ) {
@@ -49,6 +52,34 @@ class Catalogue
         $this->families();
 
         return $this->packages;
+    }
+
+    /** The catalog file a family is read from (its packages, phrase and text), null for no such family. */
+    public function fileOf(string $family): ?string
+    {
+        $this->families();
+
+        return $this->files[$family] ?? null;
+    }
+
+    /**
+     * What every page may know of the catalogue: each family with the names of its packages, sorted - enough
+     * for a link to any package or family (doc_url(), family_url(): the name, its family, the family's own
+     * package by its tier, which the name gives). A static export takes it for an input of every page; what a
+     * package's entry says (its description, version, verification...) is read from its family's file.
+     *
+     * @return array<string, list<string>>
+     */
+    public function skeleton(): array
+    {
+        $out = [];
+        foreach ($this->families() as $name => $family) {
+            $out[$name] = array_map(static fn (Package $p): string => $p->getName(), array_filter([$family->getOwn(), ...$family->getMembers()]));
+            sort($out[$name], \SORT_STRING);
+        }
+        ksort($out, \SORT_STRING);
+
+        return $out;
     }
 
     public function find(string $name): ?Package
@@ -107,6 +138,7 @@ class Catalogue
     {
         $families = [];
         $packages = [];
+        $paths = [];
         $files = glob(rtrim($this->dir, '/').'/*.yaml') ?: [];
         sort($files);
         foreach ($files as $file) {
@@ -124,10 +156,12 @@ class Catalogue
                 $packages[$package->getName()] = $members[] = $package;
             }
             $families[$name] = new Family($name, (array) ($data['phrase'] ?? []), (array) ($data['text'] ?? []), $members);
+            $paths[$name] = $file;
         }
         ksort($packages);
 
         $this->packages = $packages;
+        $this->files = $paths;
         $this->families = Families::ordered($families);
     }
 }
