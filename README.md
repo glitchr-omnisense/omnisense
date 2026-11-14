@@ -60,14 +60,39 @@ keeps the current Encore build; `--verify` renders every page twice. Two
 builds of the same commit give the same `dist/`.
 
 The build is incremental. `static.php` declares what each page is rendered
-from (`Site::dependsOn()`): every page depends on the code, templates,
-translations, configuration, catalogue, lock and environment; a manual's
-pages on its entry in `config/documentation.yaml`, its fetched `var/docs`
-folders and its compatibility row; a piece of news on its files; the news
-list and feeds on `news/`; a guide on `docs/`. The renderer's answers are
-kept in `var/static-cache`, and a page whose inputs did not change is not
-rendered again. A page whose inputs are not declared (the home, the
-catalogue, the search index...) is rendered every time. Nothing checks these
+from (`Site::dependsOn()`). Every page depends on the code, templates,
+translations, configuration, lock and environment, the star count, what it
+knows of the manuals (key, package, series) and the catalogue's skeleton:
+each family with its packages' names (`Catalogue::skeleton()`), enough for a
+link to any of them. On top of that:
+
+- a manual's pages depend on its entry in `config/documentation.yaml`, its
+  fetched `var/docs` folders, its compatibility row and its package's family
+  file (`catalog/<family>.yaml`);
+- a piece of news depends on its files; the news list and the feeds on
+  `news/`; a guide on `docs/` (the Install guide also on `catalog/`);
+- a family's or a package's address that redirects to a manual depends on
+  nothing more; otherwise on the family's file, or on `catalog/` (a package
+  page lists what requires it);
+- the home depends on `catalog/`, `news/` and `docs/`; the package list and
+  `/support` on `catalog/`; the API pages on `catalog/`, `config/apis.yaml`
+  and `config/policies.json`; the dashboard on `catalog/` and
+  `config/compatibility.yaml`;
+- the documentation's entry and `search.json` depend on `catalog/`,
+  `config/documentation.yaml` and every manual's inputs (`search.json` also on
+  `news/` and `docs/`);
+- search, legal, privacy, `robots.txt` and `404.html` depend on the shared
+  inputs only.
+
+The renderer's answers are kept in `var/static-cache`, and a page whose
+inputs did not change is not rendered again: an untouched build renders
+nothing. Measured on the whole site (4692 addresses): one provider's
+description in its family's file renders 94 (that family's manuals, the
+pages listing the catalogue), a piece of news 12, a guide 18,
+`compatibility.yaml` 2, `apis.yaml` 6, a page of one manual 12; a template or
+a file of `src/` renders everything. An address found only by following a
+link (no route) has no declared inputs and is rendered every time.
+Nothing checks these
 lists: a page that reads something its list leaves out would be served stale
 from the cache, so the workflow compares each build of `main` with a full
 one. `--full` renders everything; `--only=/docs/omnibase/*` renders the
