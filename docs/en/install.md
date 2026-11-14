@@ -28,59 +28,44 @@ The release lines today:
 | Packages | Release |
 |---|---|
 | `omnisense/contracts` | 1.0.0 |
-| the families' own packages (`omnisense/omni<domain>`) | 1.0.0; `omnisense/omnibus` 2.0.0, `omnisense/omnitrade` 1.1.0, `omnisense/omnisign` 1.2.0, `omnisense/omnibill` 1.3.0 |
-| the providers (`omni<domain>/<service>`) | 1.0.0; the carriers of `omnibus/*` 2.0.0 |
-| the bridges | `omnisense/omnibridge` 1.0.1, `omnibridge/symfony` 1.1.0, `omnibridge/composer` 1.0.0, `omnibridge/doctrine` 1.0.1 |
+| the families' own packages (`omnisense/omni<domain>`) | 1.0.x; `omnisense/omnibus` 2.0.0, `omnisense/omnitrade` 1.1.1, `omnisense/omnisign` 1.2.1, `omnisense/omnibill` 1.3.0 |
+| the providers (`omni<domain>/<service>`) | 1.0.x; the carriers of `omnibus/*` 2.0.0 |
+| the bridges | `omnisense/omnibridge` 1.0.1, `omnibridge/symfony` 1.1.1, `omnibridge/laravel` 1.1.0, `omnibridge/static` 1.1.0, `omnibridge/composer`, `twig`, `eloquent` and `react` 1.0.0, `omnibridge/doctrine` 1.0.1 |
+| the core | `omnisense/omnibase` 5.1.1 |
+| the prepared structures (`omnibase/*`) | 1.0.x; `omnibase/docs` 2.0.0 |
 
 The table at the end of this page gives each family's packages one by one,
 from the catalogue: it is read from Packagist at each import.
 
 ## The core
 
-`omnisense/omnibase` 5.0.0 is the core's stable release, but it still
-requires three packages at their development branch: `omnibridge/composer`,
-`omnisense/omnibridge` and `omnisense/omnidrive`. A dependency's development
-branch is not accepted in a stable project, so until `omnisense/omnibase`
-5.1.1 the three are named in the same command (a constraint written in the
-root `composer.json` lets that package alone take its branch):
+`omnisense/omnibase` comes with its Composer plugin, `omnibridge/composer`
+(the stubs and the one patch the core declares), which must be allowed, and
+the bridge of the host framework:
 
 ```sh
 composer config allow-plugins.omnibridge/composer true
-composer require omnisense/omnibase:^5.0 omnibridge/symfony \
-    omnibridge/composer:1.x-dev omnisense/omnibridge:1.x-dev omnisense/omnidrive:1.x-dev
+composer require omnisense/omnibase omnibridge/symfony
 ```
 
-`omnibridge/composer` is the core's Composer plugin (the stubs and the one
-patch the core declares): it must be allowed. With 5.1.1,
-`composer require omnisense/omnibase omnibridge/symfony` is enough.
-
-The prepared structures (`omnibase/blog`, `omnibase/marketplace`...) have
-no release on Packagist yet, and they require the core, `omnibridge/symfony` and one
-another at development branches: they do not install with the default
-minimum-stability until they are released.
+Composer writes `^5.1` for the core. The prepared structures
+(`omnibase/blog`, `omnibase/marketplace`...) install the same way, each by
+its name: `composer require omnibase/blog`.
 
 ## Not stable yet
 
 Said as it is today:
 
-- The omnidocs family (`omnisense/omnidocs` and `omnidocs/markdown`,
-  `php`, `jsdoc`, `sphinx`, `doxygen`) and the omnihub family
-  (`omnisense/omnihub`, `omnihub/github`) have no release on Packagist yet.
-- `omnisense/omnibase` 5.1.1 is not on Packagist yet, and
-  `omnibridge/laravel` 1.1.0 is being prepared. `omnibridge/laravel` 1.0.0
-  requires the core, so it meets the same wall as the core until then.
-- `omnibridge/static` and `omnibridge/react` have no release on Packagist
-  yet: `composer require omnibridge/static:1.x-dev`.
 - omniplay's game-server clients (.NET, Godot, Mirror, Netcode for
   GameObjects, Node) are not Composer packages: the Unity ones install by
   their Git address, and none is on npm or NuGet yet.
 - `omniauth/oauth` is abandoned: its sign-in through identity providers is
   `omnisense/omniauth`'s own, require that instead.
+- `omnibase/lawyer` and `omnibase/notary` are abandoned for
+  `omnibase/legal`, which holds the legal professions, a profile each.
 
-A package without a release is required at its development branch, named
-in the command (`omnibridge/static:1.x-dev`): Composer accepts it for that
-package alone, and the project keeps its `minimum-stability`. Its own
-dependencies must then be stable, or named the same way:
-`composer require omnisense/omnidocs:1.x-dev omnidocs/php:1.x-dev`.
+A development branch is for trying what is not released yet: named in the
+command (`omnibridge/static:1.x-dev`), Composer accepts it for that package
+alone, and the project keeps its `minimum-stability`.
 
 ## Each family's packages

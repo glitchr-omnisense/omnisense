@@ -60,14 +60,11 @@ PHP nu, puis sur Symfony.
 
 `omnisense/omnibase` vient avec son greffon Composer, `omnibridge/composer`
 (les stubs et la seule retouche que le cœur déclare), qu'il faut autoriser,
-et le pont du cadre hôte. Sa 5.0.0 requiert encore trois paquets à leur
-branche de développement, nommés dans la même commande jusqu'à la 5.1.1
-(voir [Installer](install.md#le-cœur)) :
+et le pont du cadre hôte :
 
 ```sh
 composer config allow-plugins.omnibridge/composer true
-composer require omnisense/omnibase:^5.0 omnibridge/symfony \
-    omnibridge/composer:1.x-dev omnisense/omnibridge:1.x-dev omnisense/omnidrive:1.x-dev
+composer require omnisense/omnibase omnibridge/symfony
 ```
 
 Puis, si elle fait gagner du temps, une structure préparée : `omnibase/blog`,

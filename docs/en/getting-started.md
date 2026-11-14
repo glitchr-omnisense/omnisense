@@ -58,14 +58,11 @@ declare it in `config/bundles.php` and its gateways under the family's key
 
 `omnisense/omnibase` comes with its Composer plugin, `omnibridge/composer`
 (the stubs and the one patch the core declares), which must be allowed, and
-the bridge of the host framework. Its 5.0.0 still requires three packages
-at their development branch, named in the same command until 5.1.1 (see
-[Install](install.md#the-core)):
+the bridge of the host framework:
 
 ```sh
 composer config allow-plugins.omnibridge/composer true
-composer require omnisense/omnibase:^5.0 omnibridge/symfony \
-    omnibridge/composer:1.x-dev omnisense/omnibridge:1.x-dev omnisense/omnidrive:1.x-dev
+composer require omnisense/omnibase omnibridge/symfony
 ```
 
 Then, if it saves time, a prepared structure: `omnibase/blog`,
