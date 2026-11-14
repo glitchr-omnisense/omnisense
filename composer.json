@@ -49,7 +49,7 @@
         "nelmio/security-bundle": "^3.0",
         "omnibridge/composer": "^1.0",
         "omnibridge/doctrine": "^1.0.1",
-        "omnibridge/static": "^1.0",
+        "omnibridge/static": "^1.1",
         "omnibridge/symfony": "^1.1.1",
         "omnibridge/twig": "^1.0",
         "omnidocs/markdown": "^1.0",

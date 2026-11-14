@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6b68cdcac70e88cd56d6d3d6c4b7ef00",
+    "content-hash": "b39bb86be0a50c3897a5b9e437f2d369",
     "packages": [
         {
             "name": "api-platform/doctrine-common",
@@ -5899,16 +5899,16 @@
         },
         {
             "name": "omnibridge/static",
-            "version": "v1.0.0",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-omnisense/omnibridge-static.git",
-                "reference": "e0f3261751c8a23ad4f79852f790b12bd7d0bcf4"
+                "reference": "b72fa61c26cfc86fbda8d823f60edbeb4025069f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-omnisense/omnibridge-static/zipball/e0f3261751c8a23ad4f79852f790b12bd7d0bcf4",
-                "reference": "e0f3261751c8a23ad4f79852f790b12bd7d0bcf4",
+                "url": "https://api.github.com/repos/glitchr-omnisense/omnibridge-static/zipball/b72fa61c26cfc86fbda8d823f60edbeb4025069f",
+                "reference": "b72fa61c26cfc86fbda8d823f60edbeb4025069f",
                 "shasum": ""
             },
             "require": {
@@ -5960,10 +5960,10 @@
             ],
             "support": {
                 "issues": "https://github.com/glitchr-omnisense/omnibridge-static/issues",
-                "source": "https://github.com/glitchr-omnisense/omnibridge-static/tree/v1.0.0"
+                "source": "https://github.com/glitchr-omnisense/omnibridge-static/tree/v1.1.0"
             },
-            "time": "2026-11-13T14:24:21+00:00",
-            "published-time": "2026-11-14T02:14:09+00:00"
+            "time": "2026-11-14T02:29:06+00:00",
+            "published-time": "2026-11-14T09:41:02+00:00"
         },
         {
             "name": "omnibridge/symfony",

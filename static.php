@@ -251,6 +251,11 @@ return static function (array $host): Site {
         // workflow's cache). --full renders everything; --only=<pattern> renders what it names whatever the cache holds.
         ->dependsOn($shared, $pageInputs)
         ->cache($root.'/var/static-cache')
+        // The cache's record also holds every PHP file the export loaded: a changed one (vendor, src) renders
+        // everything. But the kernel's compiled container and Twig's compiled templates, written again by every
+        // fresh boot (bin/omnibridge-static clears var/cache, a CI run starts without it; the container carries
+        // its build time): their sources (config/, templates/, src/) are inputs of every page above.
+        ->ignoreLoaded($root.'/var/cache/*')
         ->publicDir($root.'/public')
         // Encore's build (the site's entries and omnibase's, with the chunks their runtime loads).
         ->assets($root.'/public/assets/manifest.json')
