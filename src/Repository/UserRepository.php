@@ -2,22 +2,23 @@
 
 namespace App\Repository;
 
+use Base\Database\Repository\Finder\Criterion;
+use Base\Database\Repository\Finder\Group;
+use Base\Database\Repository\Finder\Parser;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class UserRepository extends \Omnibridge\Doctrine\Omnibase\Repository\UserRepository
+class UserRepository extends \Base\Repository\UserRepository
 {
     /** The coworkers: everyone granted a staff role (ROLE_STAFF and the roles above it). */
     public function countStaff(): int
     {
-        $qb = $this->createQueryBuilder('u')->select('COUNT(u.id)');
-        $any = $qb->expr()->orX();
-        foreach (['ROLE_STAFF', 'ROLE_ADMIN', 'ROLE_SUPERADMIN', 'ROLE_EDITOR'] as $i => $role) {
-            $any->add("u.roles LIKE :role$i");
-            $qb->setParameter("role$i", '%'.$role.'%');
-        }
+        $any = array_map(
+            static fn (string $role): Criterion => Criterion::of('roles', '%'.$role.'%', Parser::OPTION_PARTIAL),
+            ['ROLE_STAFF', 'ROLE_ADMIN', 'ROLE_SUPERADMIN', 'ROLE_EDITOR'],
+        );
 
-        return (int) $qb->andWhere($any)->getQuery()->getSingleScalarResult();
+        return $this->count([Group::of(Parser::SEPARATOR_OR, ...$any)]);
     }
 
     /** Sign in with the email or the username. */

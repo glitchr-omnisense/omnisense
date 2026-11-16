@@ -27,7 +27,7 @@ packages:
     docs: true
   omnibridge/doctrine:
     kind: bridge
-    description: 'The storage glue of omnibase sites, framework-free: Doctrine reading the structure described outside of it (omnisense/omnibridge''s Omnibridge\Schema), the naming strategy that turns their entities into their tables, the UTC date types, and an entity manager built with them, for any framework reading the same database; and omnibase''s persistence on Doctrine (Omnibridge\Doctrine\Omnibase\: its repositories, finder compiler, mapping, DBAL types, walkers, filters and listeners), which omnisense/omnibase requires.'
+    description: 'The storage glue of omnibase sites, framework-free: Doctrine reading the structure described outside of it (omnisense/omnibridge''s schema description), the naming strategy that turns their entities into their tables, the UTC date types, and an entity manager built with them, for any framework reading the same database; and omnibase''s persistence on Doctrine behind omnisense/omnibase''s contracts (its finder compiler, statements, mapping, DBAL types, walkers, filters and listeners), which omnisense/omnibase requires.'
     license: MIT
     repository: glitchr-omnisense/omnibridge-doctrine
     branch: 1.x
@@ -38,7 +38,7 @@ packages:
     docs: true
   omnibridge/eloquent:
     kind: bridge
-    description: "omnibase's entities on Eloquent's database layer, framework-free: illuminate/database (Laravel's connection, or Capsule outside Laravel) reading the tables omnisense/omnibridge's Omnibridge\\Schema describes into the same plain PHP entities Doctrine maps - a data mapper: tables from the description, a hydrator with PHP 8.4 lazy ghosts and lazy collections, an identity map, casts; and omnibase's persistence on Eloquent (Omnibridge\\Eloquent\\Omnibase\\: its backend, scopes, repositories and finder compiler) when omnisense/omnibase is installed."
+    description: "omnibase's entities on Eloquent's database layer, framework-free: illuminate/database (Laravel's connection, or Capsule outside Laravel) reading the tables omnisense/omnibridge's schema description describes into the same plain PHP entities Doctrine maps - a data mapper: tables from the description, a hydrator with PHP 8.4 lazy ghosts and lazy collections, an identity map, casts; and omnibase's persistence on Eloquent behind omnisense/omnibase's contracts (its backend, scopes, finder compiler and statements) when omnisense/omnibase is installed."
     license: MIT
     keywords:
       - omnibridge

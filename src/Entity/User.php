@@ -5,7 +5,7 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Base\Database\Attribute\DiscriminatorEntry;
 use Base\Validator\Constraints as AssertBase;
-use Doctrine\ORM\Mapping as ORM;
+use Base\Mapping as ORM;
 
 /**
  * Whoever signs in: a member who follows packages (anyone signs up), the

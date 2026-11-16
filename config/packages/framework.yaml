@@ -27,7 +27,6 @@ framework:
     php_errors:
         log: true
 
-    error_controller: Omnibridge\Symfony\Omnibase\Controller\ErrorController::Main
     handle_all_throwables: true
 
 when@dev:

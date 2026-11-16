@@ -92,11 +92,6 @@ services:
         arguments:
             $excludedPrefixes: ['/']
 
-    # Required by webauthn.yaml's repositories (see a community site's services.yaml:
-    # the alias is resolved before Doctrine would make them autowireable).
-    Omnibridge\Doctrine\Omnibase\Repository\User\PasskeyRepository: ~
-    Base\Security\WebauthnUserEntityRepository: ~
-
 when@test:
     parameters:
         # The tests read their own content: a catalogue, a manifest and a fetched

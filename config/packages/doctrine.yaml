@@ -27,8 +27,6 @@ doctrine:
                 pool: cache.adapter
 
         quote_strategy: doctrine.orm.quote_strategy.default
-        naming_strategy: Omnibridge\Doctrine\Omnibase\Database\Mapping\NamingStrategy
-        class_metadata_factory_name: Omnibridge\Doctrine\Omnibase\Database\Mapping\ClassMetadataFactory
 
         auto_mapping: true
 

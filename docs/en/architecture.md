@@ -16,7 +16,7 @@ stays in the site; what every site needs moves to the core once.
 
 The core's own code needs no framework. What it asks of its host - URLs,
 translations, the current locale, access, sessions, tokens, files - is a
-set of small contracts (`Omnibridge\Contract\*`), each fulfilled by the
+set of small contracts (`Base\Contract\*`), each fulfilled by the
 host's bridge.
 
 ## Families and providers

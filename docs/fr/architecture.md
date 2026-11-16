@@ -17,7 +17,7 @@ fois dans le cœur.
 
 Le code propre du cœur ne demande aucun cadre. Ce qu'il attend de son hôte —
 adresses, traductions, langue courante, accès, sessions, jetons, fichiers —
-est un ensemble de petits contrats (`Omnibridge\Contract\*`), chacun rempli
+est un ensemble de petits contrats (`Base\Contract\*`), chacun rempli
 par le pont de l'hôte.
 
 ## Familles et fournisseurs
