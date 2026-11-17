@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b39bb86be0a50c3897a5b9e437f2d369",
+    "content-hash": "6292590054a76ff390e5d618f2c7a4e9",
     "packages": [
         {
             "name": "api-platform/doctrine-common",
@@ -1487,16 +1487,16 @@
         },
         {
             "name": "composer/ca-bundle",
-            "version": "1.6.0",
+            "version": "1.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/ca-bundle.git",
-                "reference": "2c99cf2e92516985dea4914812b93d9daf01cdd6"
+                "reference": "0c64479fae6952ba4cf021a72c0ac530394c91d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/ca-bundle/zipball/2c99cf2e92516985dea4914812b93d9daf01cdd6",
-                "reference": "2c99cf2e92516985dea4914812b93d9daf01cdd6",
+                "url": "https://api.github.com/repos/composer/ca-bundle/zipball/0c64479fae6952ba4cf021a72c0ac530394c91d4",
+                "reference": "0c64479fae6952ba4cf021a72c0ac530394c91d4",
                 "shasum": ""
             },
             "require": {
@@ -1543,7 +1543,7 @@
             "support": {
                 "irc": "irc://irc.freenode.org/composer",
                 "issues": "https://github.com/composer/ca-bundle/issues",
-                "source": "https://github.com/composer/ca-bundle/tree/1.6.0"
+                "source": "https://github.com/composer/ca-bundle/tree/1.6.1"
             },
             "funding": [
                 {
@@ -1555,8 +1555,8 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-10-20T20:14:05+00:00",
-            "published-time": "2026-10-20T20:17:23+00:00"
+            "time": "2026-10-29T14:10:42+00:00",
+            "published-time": "2026-10-29T14:45:12+00:00"
         },
         {
             "name": "composer/pcre",
@@ -1921,7 +1921,8 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-29T20:41:02+00:00"
+            "time": "2026-04-29T20:41:02+00:00",
+            "published-time": "2026-04-29T20:41:48+00:00"
         },
         {
             "name": "doctrine/common",
@@ -2018,16 +2019,16 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "4.5.0",
+            "version": "4.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "c435cd7ea33e17d2a89288caf994cf3d4549b879"
+                "reference": "1b56fbfb22704712786fea81ff4bb156fcc6427e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/c435cd7ea33e17d2a89288caf994cf3d4549b879",
-                "reference": "c435cd7ea33e17d2a89288caf994cf3d4549b879",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/1b56fbfb22704712786fea81ff4bb156fcc6427e",
+                "reference": "1b56fbfb22704712786fea81ff4bb156fcc6427e",
                 "shasum": ""
             },
             "require": {
@@ -2040,14 +2041,15 @@
                 "doctrine/coding-standard": "14.0.0",
                 "fig/log-test": "^1",
                 "jetbrains/phpstorm-stubs": "2023.2",
-                "phpstan/phpstan": "2.1.30",
+                "phpstan/phpstan": "2.3.4",
                 "phpstan/phpstan-phpunit": "2.0.7",
                 "phpstan/phpstan-strict-rules": "^2",
                 "phpunit/phpunit": "11.5.56",
                 "slevomat/coding-standard": "8.31.1",
                 "squizlabs/php_codesniffer": "4.0.4",
                 "symfony/cache": "^6.3.8|^7.0|^8.0",
-                "symfony/console": "^5.4|^6.3|^7.0|^8.0"
+                "symfony/console": "^5.4|^6.3|^7.0|^8.0",
+                "symfony/service-contracts": "^2.2 || ^3.0"
             },
             "suggest": {
                 "symfony/console": "For helpful console commands such as SQL execution and import of files."
@@ -2104,7 +2106,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/dbal/issues",
-                "source": "https://github.com/doctrine/dbal/tree/4.5.0"
+                "source": "https://github.com/doctrine/dbal/tree/4.6.0"
             },
             "funding": [
                 {
@@ -2120,25 +2122,25 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-09-24T16:11:26+00:00",
-            "published-time": "2026-09-26T07:58:02+00:00"
+            "time": "2026-11-14T18:08:09+00:00",
+            "published-time": "2026-11-14T18:18:19+00:00"
         },
         {
             "name": "doctrine/deprecations",
-            "version": "1.1.6",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/deprecations.git",
-                "reference": "d4fe3e6fd9bb9e72557a19674f44d8ac7db4c6ca"
+                "reference": "d2e16653a734c8784c1851ad68b02f997b53ca82"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/deprecations/zipball/d4fe3e6fd9bb9e72557a19674f44d8ac7db4c6ca",
-                "reference": "d4fe3e6fd9bb9e72557a19674f44d8ac7db4c6ca",
+                "url": "https://api.github.com/repos/doctrine/deprecations/zipball/d2e16653a734c8784c1851ad68b02f997b53ca82",
+                "reference": "d2e16653a734c8784c1851ad68b02f997b53ca82",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1 || ^8.0"
+                "php": "^7.4 || ^8.0"
             },
             "conflict": {
                 "phpunit/phpunit": "<=7.5 || >=14"
@@ -2167,10 +2169,10 @@
             "homepage": "https://www.doctrine-project.org/",
             "support": {
                 "issues": "https://github.com/doctrine/deprecations/issues",
-                "source": "https://github.com/doctrine/deprecations/tree/1.1.6"
+                "source": "https://github.com/doctrine/deprecations/tree/1.2.0"
             },
-            "time": "2026-02-07T07:09:04+00:00",
-            "published-time": "2026-02-07T07:10:09+00:00"
+            "time": "2026-11-11T10:04:49+00:00",
+            "published-time": "2026-11-11T10:12:24+00:00"
         },
         {
             "name": "doctrine/doctrine-bundle",
@@ -2470,23 +2472,23 @@
         },
         {
             "name": "doctrine/inflector",
-            "version": "2.1.0",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/inflector.git",
-                "reference": "6d6c96277ea252fc1304627204c3d5e6e15faa3b"
+                "reference": "46351b6812b7b6d52b82c3efa5dfb786a198ec88"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/inflector/zipball/6d6c96277ea252fc1304627204c3d5e6e15faa3b",
-                "reference": "6d6c96277ea252fc1304627204c3d5e6e15faa3b",
+                "url": "https://api.github.com/repos/doctrine/inflector/zipball/46351b6812b7b6d52b82c3efa5dfb786a198ec88",
+                "reference": "46351b6812b7b6d52b82c3efa5dfb786a198ec88",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.2 || ^8.0"
             },
             "require-dev": {
-                "doctrine/coding-standard": "^12.0 || ^13.0",
+                "doctrine/coding-standard": "^12.0 || ^14.0",
                 "phpstan/phpstan": "^1.12 || ^2.0",
                 "phpstan/phpstan-phpunit": "^1.4 || ^2.0",
                 "phpstan/phpstan-strict-rules": "^1.6 || ^2.0",
@@ -2540,7 +2542,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/inflector/issues",
-                "source": "https://github.com/doctrine/inflector/tree/2.1.0"
+                "source": "https://github.com/doctrine/inflector/tree/2.1.1"
             },
             "funding": [
                 {
@@ -2556,21 +2558,21 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-08-10T19:31:58+00:00",
-            "published-time": "2025-08-10T19:33:33+00:00"
+            "time": "2026-10-26T08:14:14+00:00",
+            "published-time": "2026-10-26T20:06:59+00:00"
         },
         {
             "name": "doctrine/instantiator",
-            "version": "2.1.0",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/instantiator.git",
-                "reference": "23da848e1a2308728fe5fdddabf4be17ff9720c7"
+                "reference": "bf3870fbe25c1b5f4febaf281be76d1e2d86df30"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/23da848e1a2308728fe5fdddabf4be17ff9720c7",
-                "reference": "23da848e1a2308728fe5fdddabf4be17ff9720c7",
+                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/bf3870fbe25c1b5f4febaf281be76d1e2d86df30",
+                "reference": "bf3870fbe25c1b5f4febaf281be76d1e2d86df30",
                 "shasum": ""
             },
             "require": {
@@ -2580,15 +2582,15 @@
                 "doctrine/coding-standard": "^14",
                 "ext-pdo": "*",
                 "ext-phar": "*",
-                "phpbench/phpbench": "^1.2",
-                "phpstan/phpstan": "^2.1",
-                "phpstan/phpstan-phpunit": "^2.0",
-                "phpunit/phpunit": "^10.5.58"
+                "phpbench/phpbench": "^1.7",
+                "phpstan/phpstan": "^2.3",
+                "phpstan/phpstan-phpunit": "^2.1",
+                "phpunit/phpunit": "^13.4.6"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Doctrine\\Instantiator\\": "src/Doctrine/Instantiator/"
+                    "Doctrine\\Instantiator\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2610,7 +2612,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/instantiator/issues",
-                "source": "https://github.com/doctrine/instantiator/tree/2.1.0"
+                "source": "https://github.com/doctrine/instantiator/tree/2.2.0"
             },
             "funding": [
                 {
@@ -2626,8 +2628,8 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-01-05T06:47:08+00:00",
-            "published-time": "2026-01-06T07:25:40+00:00"
+            "time": "2026-11-15T20:06:55+00:00",
+            "published-time": "2026-11-15T20:08:11+00:00"
         },
         {
             "name": "doctrine/lexer",
@@ -3120,16 +3122,16 @@
         },
         {
             "name": "embed/embed",
-            "version": "v4.5.0",
+            "version": "v4.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-embed/Embed.git",
-                "reference": "0015e5e75198ddcbad2295ab19547e9df3b04bff"
+                "reference": "1d6040f32f1723156302ca1966f561c1deaf3483"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-embed/Embed/zipball/0015e5e75198ddcbad2295ab19547e9df3b04bff",
-                "reference": "0015e5e75198ddcbad2295ab19547e9df3b04bff",
+                "url": "https://api.github.com/repos/php-embed/Embed/zipball/1d6040f32f1723156302ca1966f561c1deaf3483",
+                "reference": "1d6040f32f1723156302ca1966f561c1deaf3483",
                 "shasum": ""
             },
             "require": {
@@ -3139,7 +3141,7 @@
                 "ext-json": "*",
                 "ext-mbstring": "*",
                 "ml/json-ld": "^1.1",
-                "oscarotero/html-parser": "^0.1.4",
+                "oscarotero/html-parser": "^0.1.6",
                 "php": "^7.4|^8",
                 "psr/http-client": "^1.0",
                 "psr/http-factory": "^1.0",
@@ -3181,7 +3183,7 @@
                 }
             ],
             "description": "PHP library to retrieve page info using oembed, opengraph, etc",
-            "homepage": "https://github.com/oscarotero/Embed",
+            "homepage": "https://github.com/php-embed/Embed",
             "keywords": [
                 "embed",
                 "embedly",
@@ -3191,8 +3193,8 @@
             ],
             "support": {
                 "email": "oom@oscarotero.com",
-                "issues": "https://github.com/oscarotero/Embed/issues",
-                "source": "https://github.com/php-embed/Embed/tree/v4.5.0"
+                "issues": "https://github.com/php-embed/Embed/issues",
+                "source": "https://github.com/php-embed/Embed"
             },
             "funding": [
                 {
@@ -3208,8 +3210,8 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2026-10-19T23:29:48+00:00",
-            "published-time": "2026-10-19T23:29:53+00:00"
+            "time": "2026-11-06T12:42:47+00:00",
+            "published-time": "2026-11-06T12:42:56+00:00"
         },
         {
             "name": "endroid/qr-code",
@@ -4229,16 +4231,16 @@
         },
         {
             "name": "jaybizzle/crawler-detect",
-            "version": "v1.4.2",
+            "version": "v1.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/JayBizzle/Crawler-Detect.git",
-                "reference": "d4b03a96c1ed0cc9da025018ca4a3e805c56c276"
+                "reference": "1a667c348758a38aa7ab82d596bdc11e2da63002"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JayBizzle/Crawler-Detect/zipball/d4b03a96c1ed0cc9da025018ca4a3e805c56c276",
-                "reference": "d4b03a96c1ed0cc9da025018ca4a3e805c56c276",
+                "url": "https://api.github.com/repos/JayBizzle/Crawler-Detect/zipball/1a667c348758a38aa7ab82d596bdc11e2da63002",
+                "reference": "1a667c348758a38aa7ab82d596bdc11e2da63002",
                 "shasum": ""
             },
             "require": {
@@ -4275,9 +4277,10 @@
             ],
             "support": {
                 "issues": "https://github.com/JayBizzle/Crawler-Detect/issues",
-                "source": "https://github.com/JayBizzle/Crawler-Detect/tree/v1.4.2"
+                "source": "https://github.com/JayBizzle/Crawler-Detect/tree/v1.4.3"
             },
-            "time": "2026-10-20T18:03:06+00:00"
+            "time": "2026-11-13T19:40:21+00:00",
+            "published-time": "2026-11-13T19:46:05+00:00"
         },
         {
             "name": "lcobucci/clock",
@@ -5842,41 +5845,45 @@
         },
         {
             "name": "omnibridge/doctrine",
-            "version": "v1.0.1",
+            "version": "v3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-omnisense/omnibridge-doctrine.git",
-                "reference": "631bb3e1ed96bdac22eb13b122de44f06eb6a0c6"
+                "reference": "7310ee3f5d5e19c484137c95be67ce7fca04b6dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-omnisense/omnibridge-doctrine/zipball/631bb3e1ed96bdac22eb13b122de44f06eb6a0c6",
-                "reference": "631bb3e1ed96bdac22eb13b122de44f06eb6a0c6",
+                "url": "https://api.github.com/repos/glitchr-omnisense/omnibridge-doctrine/zipball/7310ee3f5d5e19c484137c95be67ce7fca04b6dd",
+                "reference": "7310ee3f5d5e19c484137c95be67ce7fca04b6dd",
                 "shasum": ""
             },
             "require": {
                 "beberlei/doctrineextensions": "^1.0",
                 "doctrine/dbal": "^4.2",
                 "doctrine/orm": "^3.4",
-                "omnisense/omnibridge": "^1.0.1",
+                "omnisense/omnibridge": "^2.0",
                 "php": ">=8.2",
                 "scienta/doctrine-json-functions": "~4.3",
                 "symfony/cache": "^7.0|^8.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^11.5"
+                "doctrine/orm-plugin-second-level-cache": "^1.0",
+                "omnisense/omnibase": "^7.0",
+                "phpunit/phpunit": "^11.5",
+                "symfony/validator": "^7.0|^8.0"
             },
             "suggest": {
-                "omnisense/omnibase": "Omnibridge\\Doctrine\\Omnibase\\: omnibase's persistence on Doctrine, moved from the core (its former Base\\ names aliased by the core); loaded only with the core, which requires this package"
+                "omnisense/omnibase": "The core this package is the Doctrine persistence of (^1.0)"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-1.x": "1.x-dev"
+                    "dev-3.x": "3.x-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
+                    "Base\\": "src/Base/",
                     "Omnibridge\\Doctrine\\": "src/"
                 }
             },
@@ -5889,13 +5896,13 @@
                     "name": "Marco Meyer"
                 }
             ],
-            "description": "The storage glue of omnibase sites, framework-free: Doctrine reading the structure described outside of it (omnisense/omnibridge's Omnibridge\\Schema), the naming strategy that turns their entities into their tables, the UTC date types, and an entity manager built with them, for any framework reading the same database; and omnibase's persistence on Doctrine (Omnibridge\\Doctrine\\Omnibase\\: its repositories, finder compiler, mapping, DBAL types, walkers, filters and listeners), which omnisense/omnibase requires.",
+            "description": "omnibase's persistence on Doctrine, and the storage glue of omnibase sites, framework-free: Doctrine reading the structure described outside of it (omnisense/omnibridge's schema), the naming strategy, the UTC date types, an entity manager built with them; behind the core's contracts, the compiler of the finder language, the statements of the backend-only queries and the mapping. It declares no repository: the core's repositories are the same on every persistence. The Doctrine classes a host's configuration names are declared under the core's own namespace.",
             "support": {
                 "issues": "https://github.com/glitchr-omnisense/omnibridge-doctrine/issues",
-                "source": "https://github.com/glitchr-omnisense/omnibridge-doctrine/tree/v1.0.1"
+                "source": "https://github.com/glitchr-omnisense/omnibridge-doctrine/tree/v3.0.1"
             },
-            "time": "2026-11-13T08:39:52+00:00",
-            "published-time": "2026-11-13T13:29:10+00:00"
+            "time": "2026-11-16T12:17:17+00:00",
+            "published-time": "2026-11-16T12:21:37+00:00"
         },
         {
             "name": "omnibridge/static",
@@ -5967,21 +5974,21 @@
         },
         {
             "name": "omnibridge/symfony",
-            "version": "v1.1.2",
+            "version": "v3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-omnisense/omnibridge-symfony.git",
-                "reference": "a1c12fdfee955dbdca29a0c1e64c9f33ed353141"
+                "reference": "b55f92baddf53ab483e9c2a74ba7054feed9e43e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-omnisense/omnibridge-symfony/zipball/a1c12fdfee955dbdca29a0c1e64c9f33ed353141",
-                "reference": "a1c12fdfee955dbdca29a0c1e64c9f33ed353141",
+                "url": "https://api.github.com/repos/glitchr-omnisense/omnibridge-symfony/zipball/b55f92baddf53ab483e9c2a74ba7054feed9e43e",
+                "reference": "b55f92baddf53ab483e9c2a74ba7054feed9e43e",
                 "shasum": ""
             },
             "require": {
-                "omnibridge/twig": "^1.0",
-                "omnisense/omnibridge": "^1.0",
+                "omnibridge/twig": "^2.0",
+                "omnisense/omnibridge": "^2.0",
                 "php": ">=8.2",
                 "symfony/asset": "^6.0|^7.0|^8.0",
                 "symfony/cache": "^6.0|^7.0|^8.0",
@@ -6011,6 +6018,8 @@
                 "twig/extra-bundle": "^3.0"
             },
             "require-dev": {
+                "doctrine/doctrine-bundle": "^2.13|^3.0",
+                "doctrine/orm": "^3.4",
                 "league/flysystem-memory": "^3.0",
                 "omniauth/google": "1.x-dev",
                 "omniauth/otp": "1.x-dev",
@@ -6026,6 +6035,7 @@
                 "phpunit/phpunit": "^11.5|^12.0",
                 "symfony/browser-kit": "^6.0|^7.0|^8.0",
                 "symfony/clock": "^6.2|^7.0|^8.0",
+                "symfony/doctrine-bridge": "^6.4|^7.0|^8.0",
                 "symfony/http-client": "^6.4|^7.0|^8.0",
                 "symfony/lock": "^7.0|^8.0",
                 "symfony/rate-limiter": "^7.0|^8.0",
@@ -6033,29 +6043,30 @@
             },
             "suggest": {
                 "doctrine/doctrine-bundle": "Doctrine's entity manager and connection as Symfony services, for omnibridge/doctrine (the persistence on Doctrine) and the packages written on DoctrineBundle (omnibase/admin's EasyAdmin, API Platform's doctrine-orm)",
-                "omniauth/google": "Google sign-in through Omnibridge\\Symfony\\Auth\\ (omniauth.yaml: oauth.providers.google; its GoogleFactory is registered when it is installed)",
-                "omniauth/otp": "Authenticator applications through Omnibridge\\Symfony\\Auth\\ (omniauth.yaml: totp; totp.secret_key seals the secrets at rest), formerly omniauth/totp",
-                "omniauth/webauthn": "Passkeys through Omnibridge\\Symfony\\Auth\\ (omniauth.yaml: passkey), formerly omniauth/passkey",
+                "omniauth/google": "Google sign-in through the sign-in adapters (Auth) (omniauth.yaml: oauth.providers.google; its GoogleFactory is registered when it is installed)",
+                "omniauth/otp": "Authenticator applications through the sign-in adapters (Auth) (omniauth.yaml: totp; totp.secret_key seals the secrets at rest), formerly omniauth/totp",
+                "omniauth/webauthn": "Passkeys through the sign-in adapters (Auth) (omniauth.yaml: passkey), formerly omniauth/passkey",
                 "omnibridge/doctrine": "omnibase's persistence on Doctrine's ORM (base.persistence: doctrine, the default where it is installed), with doctrine/doctrine-bundle and symfony/doctrine-bridge: Doctrine's wiring - the entity manager's listeners and filters, the DBAL types, the Doctrine-named commands (doctrine:schema:charset, doctrine:database:import...) - is registered only where it is installed (Persistences::isInstalled('doctrine'), plan \"omnibase agnostic\", step B3); omnibridge/eloquent is the other persistence",
-                "omnibridge/static": "Static\\BuildCommand: bin/console omnibridge:static:build, omnibridge/static's export of the site a static.php declares, rendered by this kernel",
-                "omnisense/contracts": "Omnibridge\\Symfony\\Policy\\RateLimiter: omnisense/contracts' RateLimiterInterface (the usage policies' limits and waits of the omni families' providers) over symfony/rate-limiter, with it",
-                "omnisense/omniauth": "Omnibridge\\Symfony\\Auth\\: one authenticator over omniauth for every way of signing in (password, sign-in link, e-mailed code, backup codes, trusted devices, identity providers - omniauth's Omniauth\\OAuth\\, each provider a package of its own), its second factor's token and page, its routes; config/packages/omniauth.yaml (nothing of Auth\\ without it)",
-                "omnisense/omnibase": "Omnibridge\\Symfony\\Omnibase\\: omnibase's Symfony form layer, moved from the core (its former Base\\ names kept by the core until 6.0): the form types, extensions, FormFactory, FormProxy, FormProcessor",
+                "omnibridge/static": "the omnibridge:static:build command: bin/console omnibridge:static:build, omnibridge/static's export of the site a static.php declares, rendered by this kernel",
+                "omnisense/contracts": "the rate limiter bound to omnisense/contracts' RateLimiterInterface: omnisense/contracts' RateLimiterInterface (the usage policies' limits and waits of the omni families' providers) over symfony/rate-limiter, with it",
+                "omnisense/omniauth": "the sign-in adapters (Auth): one authenticator over omniauth for every way of signing in (password, sign-in link, e-mailed code, backup codes, trusted devices, identity providers - omniauth's Omniauth\\OAuth\\, each provider a package of its own), its second factor's token and page, its routes; config/packages/omniauth.yaml (nothing of Auth\\ without it)",
+                "omnisense/omnibase": "omnibase's Symfony side under Base\\: the bundle, the form layer (Base\\Form\\*, Base\\Field\\Type\\*), the security glue (Base\\Security\\*), the controllers, the commands, the subscribers; a site's configuration names none of it (prepended from base.security)",
                 "omnisense/omnidrive": "Omnidrive\\Drives: the storages of league/flysystem-bundle's configuration (the services tagged flysystem.storage) as omnidrive's drives, by their names",
-                "omnisense/omnimap": "Omnibridge\\Symfony\\Map\\: maps through omnimap (config/packages/omnimap.yaml) - its providers over the application's HTTP client and cache pool, the map cache over a storage service of the application's, the cache's routes (type \"omnimap\") and controller, omnibridge/twig's MapExtension (omnimap(), omnimap_export(), omnimap_suppress()); omnimap/google, omnimap/openstreetmap and omnimap/maplibre registered when installed",
+                "omnisense/omnimap": "the map adapters (Map): maps through omnimap (config/packages/omnimap.yaml) - its providers over the application's HTTP client and cache pool, the map cache over a storage service of the application's, the cache's routes (type \"omnimap\") and controller, omnibridge/twig's MapExtension (omnimap(), omnimap_export(), omnimap_suppress()); omnimap/google, omnimap/openstreetmap and omnimap/maplibre registered when installed",
                 "symfony/asset": "RouterUrls::asset() through the application's asset packages (assets.packages); without it, the path as it is",
                 "symfony/doctrine-bridge": "The security provider `entity:` and the form type EntityType on Doctrine, for omnibridge/doctrine; on omnibridge/eloquent, the users' provider is Base\\Repository\\Users",
                 "symfony/monolog-bundle": "Monolog's handlers and channels, MonologBundle registered by the application (^3.8|^4.0): omnibase's services log through psr/log's LoggerInterface, whatever answers it, and none needs MonologBundle's services with omnisense/omnibase 5.0 (SpamChecker makes monolog.http_client's client itself where it is not there); with it, the demo environment's messages go to the channel `demo`",
-                "symfony/rate-limiter": "Omnibridge\\Symfony\\Policy\\RateLimiter: a provider policy's limits counted by Symfony's rate limiter, each a fixed window over the application's storage (a CacheStorage on a shared pool: every process counts together), with omnisense/contracts; symfony/lock keeps two processes from counting one window at once"
+                "symfony/rate-limiter": "the rate limiter bound to omnisense/contracts' RateLimiterInterface: a provider policy's limits counted by Symfony's rate limiter, each a fixed window over the application's storage (a CacheStorage on a shared pool: every process counts together), with omnisense/contracts; symfony/lock keeps two processes from counting one window at once"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-1.x": "1.x-dev"
+                    "dev-3.x": "3.x-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
+                    "Base\\": "src/Base/",
                     "Omnibridge\\Symfony\\": "src/"
                 }
             },
@@ -6069,7 +6080,7 @@
                     "email": "marco.meyer@glitchr.io"
                 }
             ],
-            "description": "The Symfony host of omnisense/omnibridge's contracts (urls, translations, access, sessions, tokens, environment) - adapters over Symfony's router, translator, security and kernel, their container wiring and OmnibridgeBundle - and the framework packages omnisense/omnibase no longer requires. A Symfony site requires it beside the core.",
+            "description": "The Symfony host of omnisense/omnibase: what is Symfony by nature in omnibase, declared under its Base\\ names (Base\\BaseBundle, the security glue, the form and field types, the controllers, the console commands, the kernel subscribers, the DI passes, the router), the adapters of omnisense/omnibridge's contracts over Symfony's services, and the framework packages the core does not require. A Symfony site requires it beside the core and names Base\\ only.",
             "keywords": [
                 "omnibase",
                 "omnibridge",
@@ -6077,29 +6088,29 @@
             ],
             "support": {
                 "issues": "https://github.com/glitchr-omnisense/omnibridge-symfony/issues",
-                "source": "https://github.com/glitchr-omnisense/omnibridge-symfony/tree/v1.1.2"
+                "source": "https://github.com/glitchr-omnisense/omnibridge-symfony/tree/v3.0.1"
             },
-            "time": "2026-11-14T10:43:00+00:00",
-            "published-time": "2026-11-14T11:17:48+00:00"
+            "time": "2026-11-16T12:20:44+00:00",
+            "published-time": "2026-11-16T12:22:02+00:00"
         },
         {
             "name": "omnibridge/twig",
-            "version": "v1.0.0",
+            "version": "v2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-omnisense/omnibridge-twig.git",
-                "reference": "36b14f69e49422e823c44837f971a9065d8fba60"
+                "reference": "47351531526c4416baba75417e67a25513274f2b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-omnisense/omnibridge-twig/zipball/36b14f69e49422e823c44837f971a9065d8fba60",
-                "reference": "36b14f69e49422e823c44837f971a9065d8fba60",
+                "url": "https://api.github.com/repos/glitchr-omnisense/omnibridge-twig/zipball/47351531526c4416baba75417e67a25513274f2b",
+                "reference": "47351531526c4416baba75417e67a25513274f2b",
                 "shasum": ""
             },
             "require": {
                 "ext-intl": "*",
                 "ext-mbstring": "*",
-                "omnisense/omnibridge": "^1.0",
+                "omnisense/omnibridge": "^2.0",
                 "php": ">=8.2",
                 "twig/twig": "^3.10"
             },
@@ -6113,7 +6124,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-1.x": "1.x-dev"
+                    "dev-2.x": "2.x-dev"
                 }
             },
             "autoload": {
@@ -6133,10 +6144,10 @@
             "description": "The Twig side of omnibridge: the contract a page rendered with Twig asks of any framework (path, url, asset, trans - omnisense/omnibridge's Urls and Translations), the Twig extension that provides it where the framework does not, and helpers.",
             "support": {
                 "issues": "https://github.com/glitchr-omnisense/omnibridge-twig/issues",
-                "source": "https://github.com/glitchr-omnisense/omnibridge-twig/tree/v1.0.0"
+                "source": "https://github.com/glitchr-omnisense/omnibridge-twig/tree/v2.0.0"
             },
-            "time": "2026-11-10T01:51:45+00:00",
-            "published-time": "2026-11-10T02:02:55+00:00"
+            "time": "2026-11-16T08:11:42+00:00",
+            "published-time": "2026-11-16T08:37:14+00:00"
         },
         {
             "name": "omnidocs/markdown",
@@ -6354,16 +6365,16 @@
         },
         {
             "name": "omnisense/omnibase",
-            "version": "v5.1.1",
+            "version": "v7.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-omnisense/omnibase.git",
-                "reference": "8973064e4a48e2a6c7a3b0d00ca150ab3d66e8fe"
+                "reference": "09c1ceb5f73932a86c5c305d85ed78ba441c8a1f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-omnisense/omnibase/zipball/8973064e4a48e2a6c7a3b0d00ca150ab3d66e8fe",
-                "reference": "8973064e4a48e2a6c7a3b0d00ca150ab3d66e8fe",
+                "url": "https://api.github.com/repos/glitchr-omnisense/omnibase/zipball/09c1ceb5f73932a86c5c305d85ed78ba441c8a1f",
+                "reference": "09c1ceb5f73932a86c5c305d85ed78ba441c8a1f",
                 "shasum": ""
             },
             "require": {
@@ -6381,7 +6392,7 @@
                 "jaybizzle/crawler-detect": "^1.2",
                 "league/flysystem": "^3.0",
                 "omnibridge/composer": "^1.0",
-                "omnisense/omnibridge": "^1.0",
+                "omnisense/omnibridge": "^2.0",
                 "omnisense/omnidrive": "^1.0",
                 "php": "^8.4",
                 "psr/cache": "^1.0|^2.0|^3.0",
@@ -6429,9 +6440,9 @@
                 "league/flysystem-ftp": "^3.0",
                 "omniauth/otp": "1.x-dev",
                 "omniauth/webauthn": "1.x-dev",
-                "omnibridge/doctrine": "1.x-dev",
-                "omnibridge/symfony": "^1.1",
-                "omnibridge/twig": "1.x-dev",
+                "omnibridge/doctrine": "^3.0",
+                "omnibridge/symfony": "^3.0",
+                "omnibridge/twig": "^2.0",
                 "omnisense/omniauth": "1.x-dev",
                 "omnisense/omnishield": "1.x-dev",
                 "omnisense/omnisign": "1.x-dev",
@@ -6452,6 +6463,7 @@
                 "symfony/lock": "^6.0|^7.0|^8.0",
                 "symfony/phpunit-bridge": "^6.0|^7.0|^8.0",
                 "symfony/process": "^6.0|^7.0|^8.0",
+                "symfony/rate-limiter": "^7.0|^8.0",
                 "symfony/stopwatch": "^6.0|^7.0|^8.0",
                 "symfony/validator": "^6.0|^7.0|^8.0",
                 "symfony/web-profiler-bundle": "^6.0|^7.0|^8.0",
@@ -6479,9 +6491,10 @@
                 "omniauth/google": "Google sign-in through omniauth, linked by its subject in userIdentity (Base\\Auth\\UserIdentities; Base\\Auth\\PolicyLinking: never by the address an account with a second factor or an administration role); the providers' mechanics are omnisense/omniauth's own (^1.0)",
                 "omniauth/otp": "Authenticator applications through omniauth, on user.secret (Base\\Auth\\UserTotpSecrets), sealed at rest when omniauth.yaml sets totp.secret_key (formerly omniauth/totp) (^1.0)",
                 "omniauth/webauthn": "Passkeys through omniauth: Base\\Auth\\UserPasskeys, the userPasskey table as omniauth/webauthn's records (formerly omniauth/passkey) (^1.0)",
-                "omnibridge/doctrine": "The persistence on Doctrine: since 5.0 the core requires no Doctrine package but doctrine/collections; omnibridge/doctrine brings doctrine/orm and dbal, the DQL functions (beberlei/doctrineextensions, scienta/doctrine-json-functions), the repositories, the mapping and the types of the core's entities (^1.0)",
+                "omnibridge/doctrine": "The persistence on Doctrine behind the core's contracts: the DQL compiler of the finder language, the statements of the backend-only queries, the mapping and the types (^1.0)",
+                "omnibridge/eloquent": "The persistence on Eloquent's database layer behind the same contracts (^1.0)",
                 "omnibridge/laravel": "The core under Laravel: the contracts, the services' list bound, the forms drawn in Blade (^1.0)",
-                "omnibridge/symfony": "The core under Symfony: since 5.0 the bundle itself (Omnibridge\\Symfony\\Omnibase\\BaseBundle, registered in config/bundles.php), its configuration (base:), its container extension and compiler passes, the Symfony controllers (their routes imported with `type: omnibase`), the adapters of the host's contracts and the framework packages (FrameworkBundle, DoctrineBundle, SecurityBundle, TwigBundle, Form, Routing, HttpKernel, Validator, Cache, Process, Workflow...) (^1.1)",
+                "omnibridge/symfony": "The core under Symfony: the bundle (Base\\BaseBundle, registered in config/bundles.php), its configuration (base:), the Symfony form types, controllers, commands and security classes under their Base\\ names, the adapters of the host's contracts (^1.0)",
                 "omnibridge/twig": "Twig's generic helpers beside omnibase's (|at, |emoji_only, html_attributes()...: Omnibridge\\Twig\\HelperExtension, registered with the Twig layer); omnibridge/symfony and omnibridge/laravel require it (^1.0)",
                 "omnisense/omniauth": "Signing in under any host (Symfony, Laravel, plain PHP): Base\\Auth\\ fills omniauth's stores on omnibase's tables (the accounts, user.password, the sign-in links of userToken hashed, the e-mailed codes hashed, the backup codes, the trusted devices' version, the identities of userIdentity), Base\\Auth\\Policy is SecurityPolicy on its second-factor rule, Base\\Auth\\Listener\\* listen to its events; nothing is wired without it (^1.0)",
                 "omnisense/omnimap": "Maps through omnimap (config/packages/omnimap.yaml): BaseBundle registers omnibridge/symfony's OmnimapExtension where both are installed - the providers, the map cache, omnimap() in Twig, the cache's routes (^1.0)",
@@ -6494,6 +6507,7 @@
                 "phpoffice/phpspreadsheet": "The spreadsheets exported and read by the back office and the commands (^1.23|^2.0)",
                 "scheb/2fa": "Two-factor sign-in (TOTP, e-mail codes, backup codes, trusted devices): installed, Base\\Entity\\User implements its Scheb\\TwoFactorBundle\\Model interfaces (Base\\Contract\\TwoFactorUser); register SchebTwoFactorBundle for the sign-in itself (^7.0|^8.0)",
                 "symfony/discord-notifier": "Notifications to Discord through the core's notifier (^6.0|^7.0|^8.0)",
+                "symfony/form": "Base\\Form\\Type\\* (the contact, comment, privacy, search and password forms) and FormDefinition::of(): the forms written as Symfony form types, read on every host (omnibridge/symfony and omnibridge/laravel install it)",
                 "symfony/http-client": "An HTTP client behind the core's HTTP contract (symfony/http-client-contracts): the currency rates (Trading), the remote classifiers, embeds (^6.0|^7.0|^8.0)",
                 "symfony/lock": "demo:reset runs under a lock (the demo environment)",
                 "symfony/ux-twig-component": "The Base\\ and App\\ Twig components (^2.0|^3.0)",
@@ -6511,11 +6525,11 @@
             "extra": {
                 "omnibridge": {
                     "stubs": [
-                        "Base\\Bridge\\Composer\\Stub\\EntityStub",
-                        "Base\\Bridge\\Composer\\Stub\\EnumStub",
-                        "Base\\Bridge\\Composer\\Stub\\FormStub",
-                        "Base\\Bridge\\Composer\\Stub\\NotifierStub",
-                        "Base\\Bridge\\Composer\\Stub\\RepositoryStub"
+                        "Base\\Tooling\\Composer\\Stub\\EntityStub",
+                        "Base\\Tooling\\Composer\\Stub\\EnumStub",
+                        "Base\\Tooling\\Composer\\Stub\\FormStub",
+                        "Base\\Tooling\\Composer\\Stub\\NotifierStub",
+                        "Base\\Tooling\\Composer\\Stub\\RepositoryStub"
                     ],
                     "patches": [
                         {
@@ -6547,11 +6561,8 @@
                         "omnisense/omniauth": "1.x-dev",
                         "omniauth/webauthn": "1.x-dev",
                         "omniauth/otp": "1.x-dev",
-                        "omnibridge/doctrine": "1.x-dev"
+                        "omnibridge/doctrine": "^3.0"
                     }
-                },
-                "branch-alias": {
-                    "dev-5.x": "5.1.x-dev"
                 }
             },
             "autoload": {
@@ -6584,7 +6595,7 @@
                     "email": "marco.meyer@glitchr.io"
                 }
             ],
-            "description": "omnibase: entities, view models, contracts, forms and helpers for any PHP host; under Symfony with omnibridge/symfony, under Laravel with omnibridge/laravel, persisted through omnibridge/doctrine",
+            "description": "omnibase: entities, repositories, view models, contracts, forms and helpers for any PHP host - Base\\ is what is provided, App\\ the application that overrides it by the same path; under Symfony with omnibridge/symfony, under Laravel with omnibridge/laravel, persisted through omnibridge/doctrine or omnibridge/eloquent",
             "homepage": "https://github.com/glitchr-omnisense/omnibase",
             "keywords": [
                 "contracts",
@@ -6592,20 +6603,20 @@
                 "forms",
                 "omnibase"
             ],
-            "time": "2026-11-13T14:43:01+00:00"
+            "time": "2026-11-16T17:11:36+00:00"
         },
         {
             "name": "omnisense/omnibridge",
-            "version": "v1.0.1",
+            "version": "v2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-omnisense/omnibridge.git",
-                "reference": "22ed7b472a9ed1dee0d0e33d663693d27e625a29"
+                "reference": "e01ad14dec2a8cc4bb084581273f35ef2a8534cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-omnisense/omnibridge/zipball/22ed7b472a9ed1dee0d0e33d663693d27e625a29",
-                "reference": "22ed7b472a9ed1dee0d0e33d663693d27e625a29",
+                "url": "https://api.github.com/repos/glitchr-omnisense/omnibridge/zipball/e01ad14dec2a8cc4bb084581273f35ef2a8534cd",
+                "reference": "e01ad14dec2a8cc4bb084581273f35ef2a8534cd",
                 "shasum": ""
             },
             "require": {
@@ -6627,7 +6638,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-1.x": "1.x-dev"
+                    "dev-2.x": "2.x-dev"
                 }
             },
             "autoload": {
@@ -6655,10 +6666,10 @@
             ],
             "support": {
                 "issues": "https://github.com/glitchr-omnisense/omnibridge/issues",
-                "source": "https://github.com/glitchr-omnisense/omnibridge/tree/v1.0.1"
+                "source": "https://github.com/glitchr-omnisense/omnibridge/tree/v2.0.1"
             },
-            "time": "2026-11-13T08:43:59+00:00",
-            "published-time": "2026-11-13T10:32:35+00:00"
+            "time": "2026-11-16T08:20:24+00:00",
+            "published-time": "2026-11-16T08:20:53+00:00"
         },
         {
             "name": "omnisense/omnidocs",
@@ -12203,16 +12214,16 @@
         },
         {
             "name": "symfony/polyfill-php85",
-            "version": "v1.43.0",
+            "version": "v1.44.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php85.git",
-                "reference": "86a42cbcc07adc331481a5ab310a4024bfc227f6"
+                "reference": "94c794cb5ba51784bc259f11e9f128593297d8dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php85/zipball/86a42cbcc07adc331481a5ab310a4024bfc227f6",
-                "reference": "86a42cbcc07adc331481a5ab310a4024bfc227f6",
+                "url": "https://api.github.com/repos/symfony/polyfill-php85/zipball/94c794cb5ba51784bc259f11e9f128593297d8dc",
+                "reference": "94c794cb5ba51784bc259f11e9f128593297d8dc",
                 "shasum": ""
             },
             "require": {
@@ -12259,7 +12270,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-php85/tree/v1.43.0"
+                "source": "https://github.com/symfony/polyfill-php85/tree/v1.44.0"
             },
             "funding": [
                 {
@@ -12279,8 +12290,8 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-09-25T15:46:47+00:00",
-            "published-time": "2026-09-30T10:23:32+00:00"
+            "time": "2026-10-30T15:20:09+00:00",
+            "published-time": "2026-11-15T14:20:22+00:00"
         },
         {
             "name": "symfony/polyfill-php86",
@@ -15315,7 +15326,8 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-09-11T08:59:50+00:00"
+            "time": "2026-09-11T08:59:50+00:00",
+            "published-time": "2026-09-18T09:10:34+00:00"
         },
         {
             "name": "twig/html-extra",
@@ -15600,7 +15612,8 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-09-25T13:20:01+00:00"
+            "time": "2026-09-25T13:20:01+00:00",
+            "published-time": "2026-09-25T13:20:14+00:00"
         },
         {
             "name": "ua-parser/uap-php",
