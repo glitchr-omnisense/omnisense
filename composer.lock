@@ -2813,16 +2813,16 @@
         },
         {
             "name": "doctrine/orm",
-            "version": "3.7.5",
+            "version": "3.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/orm.git",
-                "reference": "00c2fd70da291cca1ec75f4dae5344fe3df588fa"
+                "reference": "243f25157055d553da52d7c4bbe73c4623dadc61"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/orm/zipball/00c2fd70da291cca1ec75f4dae5344fe3df588fa",
-                "reference": "00c2fd70da291cca1ec75f4dae5344fe3df588fa",
+                "url": "https://api.github.com/repos/doctrine/orm/zipball/243f25157055d553da52d7c4bbe73c4623dadc61",
+                "reference": "243f25157055d553da52d7c4bbe73c4623dadc61",
                 "shasum": ""
             },
             "require": {
@@ -2844,15 +2844,17 @@
             },
             "require-dev": {
                 "doctrine/coding-standard": "^14.0",
+                "doctrine/orm-plugin-second-level-cache": "^1.0",
                 "phpbench/phpbench": "^1.0",
                 "phpstan/extension-installer": "^1.4",
-                "phpstan/phpstan": "2.2.14",
+                "phpstan/phpstan": "2.3.5",
                 "phpstan/phpstan-deprecation-rules": "^2",
                 "phpunit/phpunit": "^10.5.0 || ^11.5",
                 "psr/log": "^1 || ^2 || ^3",
                 "symfony/cache": "^5.4 || ^6.2 || ^7.0 || ^8.0"
             },
             "suggest": {
+                "doctrine/orm-plugin-second-level-cache": "Second level cache functionality needs extra package.",
                 "ext-deepclone": "Improves performance when not using native lazy objects (Symfony 8.1+)",
                 "ext-dom": "Provides support for XSD validation for XML mapping files",
                 "symfony/cache": "Provides cache support for Setup Tool with doctrine/cache 2.0"
@@ -2897,10 +2899,48 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/orm/issues",
-                "source": "https://github.com/doctrine/orm/tree/3.7.5"
+                "source": "https://github.com/doctrine/orm/tree/3.8.0"
             },
-            "time": "2026-10-09T05:58:13+00:00",
-            "published-time": "2026-10-09T18:17:02+00:00"
+            "time": "2026-11-14T11:18:54+00:00",
+            "published-time": "2026-11-14T14:12:03+00:00"
+        },
+        {
+            "name": "doctrine/orm-plugin-second-level-cache",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/orm-plugin-second-level-cache.git",
+                "reference": "12bd712c0a8dcae6635adcb53d33981942f0f52d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/orm-plugin-second-level-cache/zipball/12bd712c0a8dcae6635adcb53d33981942f0f52d",
+                "reference": "12bd712c0a8dcae6635adcb53d33981942f0f52d",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Doctrine\\ORM\\Cache\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Benjamin Eberlei",
+                    "email": "kontakt@beberlei.de"
+                }
+            ],
+            "description": "Required package to make second level cache working on doctrine/orm from version 3.8+ on.",
+            "support": {
+                "issues": "https://github.com/doctrine/orm-plugin-second-level-cache/issues",
+                "source": "https://github.com/doctrine/orm-plugin-second-level-cache/tree/1.0.2"
+            },
+            "time": "2026-11-05T13:05:51+00:00",
+            "published-time": "2026-11-05T13:06:48+00:00"
         },
         {
             "name": "doctrine/persistence",
@@ -5845,35 +5885,35 @@
         },
         {
             "name": "omnibridge/doctrine",
-            "version": "v3.0.1",
+            "version": "v3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-omnisense/omnibridge-doctrine.git",
-                "reference": "7310ee3f5d5e19c484137c95be67ce7fca04b6dd"
+                "reference": "0e48ede4674617d8f9549b41bce22d83e1ddf297"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-omnisense/omnibridge-doctrine/zipball/7310ee3f5d5e19c484137c95be67ce7fca04b6dd",
-                "reference": "7310ee3f5d5e19c484137c95be67ce7fca04b6dd",
+                "url": "https://api.github.com/repos/glitchr-omnisense/omnibridge-doctrine/zipball/0e48ede4674617d8f9549b41bce22d83e1ddf297",
+                "reference": "0e48ede4674617d8f9549b41bce22d83e1ddf297",
                 "shasum": ""
             },
             "require": {
                 "beberlei/doctrineextensions": "^1.0",
                 "doctrine/dbal": "^4.2",
-                "doctrine/orm": "^3.4",
+                "doctrine/orm": "^3.8",
+                "doctrine/orm-plugin-second-level-cache": "^1.0",
                 "omnisense/omnibridge": "^2.0",
                 "php": ">=8.2",
                 "scienta/doctrine-json-functions": "~4.3",
                 "symfony/cache": "^7.0|^8.0"
             },
             "require-dev": {
-                "doctrine/orm-plugin-second-level-cache": "^1.0",
                 "omnisense/omnibase": "^7.0",
                 "phpunit/phpunit": "^11.5",
                 "symfony/validator": "^7.0|^8.0"
             },
             "suggest": {
-                "omnisense/omnibase": "The core this package is the Doctrine persistence of (^1.0)"
+                "omnisense/omnibase": "The core this package is the Doctrine persistence of (^7.0)"
             },
             "type": "library",
             "extra": {
@@ -5899,10 +5939,10 @@
             "description": "omnibase's persistence on Doctrine, and the storage glue of omnibase sites, framework-free: Doctrine reading the structure described outside of it (omnisense/omnibridge's schema), the naming strategy, the UTC date types, an entity manager built with them; behind the core's contracts, the compiler of the finder language, the statements of the backend-only queries and the mapping. It declares no repository: the core's repositories are the same on every persistence. The Doctrine classes a host's configuration names are declared under the core's own namespace.",
             "support": {
                 "issues": "https://github.com/glitchr-omnisense/omnibridge-doctrine/issues",
-                "source": "https://github.com/glitchr-omnisense/omnibridge-doctrine/tree/v3.0.1"
+                "source": "https://github.com/glitchr-omnisense/omnibridge-doctrine/tree/v3.0.2"
             },
-            "time": "2026-11-16T12:17:17+00:00",
-            "published-time": "2026-11-16T12:21:37+00:00"
+            "time": "2026-11-17T03:38:37+00:00",
+            "published-time": "2026-11-17T03:39:22+00:00"
         },
         {
             "name": "omnibridge/static",
@@ -6365,16 +6405,16 @@
         },
         {
             "name": "omnisense/omnibase",
-            "version": "v7.0.3",
+            "version": "v7.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-omnisense/omnibase.git",
-                "reference": "09c1ceb5f73932a86c5c305d85ed78ba441c8a1f"
+                "reference": "e878a40364f024184c74106c1ed2c707388e4f00"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-omnisense/omnibase/zipball/09c1ceb5f73932a86c5c305d85ed78ba441c8a1f",
-                "reference": "09c1ceb5f73932a86c5c305d85ed78ba441c8a1f",
+                "url": "https://api.github.com/repos/glitchr-omnisense/omnibase/zipball/e878a40364f024184c74106c1ed2c707388e4f00",
+                "reference": "e878a40364f024184c74106c1ed2c707388e4f00",
                 "shasum": ""
             },
             "require": {
@@ -6603,7 +6643,7 @@
                 "forms",
                 "omnibase"
             ],
-            "time": "2026-11-16T17:11:36+00:00"
+            "time": "2026-11-17T04:27:10+00:00"
         },
         {
             "name": "omnisense/omnibridge",
