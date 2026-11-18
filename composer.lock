@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6292590054a76ff390e5d618f2c7a4e9",
+    "content-hash": "1d218a4eef8c129748d4aae9a4af95a8",
     "packages": [
         {
             "name": "api-platform/doctrine-common",
@@ -5885,21 +5885,21 @@
         },
         {
             "name": "omnibridge/doctrine",
-            "version": "v3.0.3",
+            "version": "v4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-omnisense/omnibridge-doctrine.git",
-                "reference": "0e772f2bf40bda5e784ca34ebcb1defbe0cbb961"
+                "reference": "f1307d316a70ef7a4dd94d013d32421e335c6b6d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-omnisense/omnibridge-doctrine/zipball/0e772f2bf40bda5e784ca34ebcb1defbe0cbb961",
-                "reference": "0e772f2bf40bda5e784ca34ebcb1defbe0cbb961",
+                "url": "https://api.github.com/repos/glitchr-omnisense/omnibridge-doctrine/zipball/f1307d316a70ef7a4dd94d013d32421e335c6b6d",
+                "reference": "f1307d316a70ef7a4dd94d013d32421e335c6b6d",
                 "shasum": ""
             },
             "require": {
                 "beberlei/doctrineextensions": "^1.0",
-                "doctrine/dbal": "^4.2",
+                "doctrine/dbal": "^4.6",
                 "doctrine/orm": "^3.8",
                 "doctrine/orm-plugin-second-level-cache": "^1.0",
                 "omnisense/omnibridge": "^2.0",
@@ -5918,7 +5918,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-3.x": "3.x-dev"
+                    "dev-4.x": "4.x-dev"
                 }
             },
             "autoload": {
@@ -5939,10 +5939,10 @@
             "description": "omnibase's persistence on Doctrine, and the storage glue of omnibase sites, framework-free: Doctrine reading the structure described outside of it (omnisense/omnibridge's schema), the naming strategy, the UTC date types, an entity manager built with them; behind the core's contracts, the compiler of the finder language, the statements of the backend-only queries and the mapping. It declares no repository: the core's repositories are the same on every persistence. The Doctrine classes a host's configuration names are declared under the core's own namespace.",
             "support": {
                 "issues": "https://github.com/glitchr-omnisense/omnibridge-doctrine/issues",
-                "source": "https://github.com/glitchr-omnisense/omnibridge-doctrine/tree/v3.0.3"
+                "source": "https://github.com/glitchr-omnisense/omnibridge-doctrine/tree/v4.0.0"
             },
-            "time": "2026-11-18T00:41:11+00:00",
-            "published-time": "2026-11-18T00:42:10+00:00"
+            "time": "2026-11-18T04:27:01+00:00",
+            "published-time": "2026-11-18T04:40:59+00:00"
         },
         {
             "name": "omnibridge/static",
@@ -6014,16 +6014,16 @@
         },
         {
             "name": "omnibridge/symfony",
-            "version": "v3.0.1",
+            "version": "v3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-omnisense/omnibridge-symfony.git",
-                "reference": "b55f92baddf53ab483e9c2a74ba7054feed9e43e"
+                "reference": "921568441ac4c5362d6374f9de6bf46b170d8d32"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-omnisense/omnibridge-symfony/zipball/b55f92baddf53ab483e9c2a74ba7054feed9e43e",
-                "reference": "b55f92baddf53ab483e9c2a74ba7054feed9e43e",
+                "url": "https://api.github.com/repos/glitchr-omnisense/omnibridge-symfony/zipball/921568441ac4c5362d6374f9de6bf46b170d8d32",
+                "reference": "921568441ac4c5362d6374f9de6bf46b170d8d32",
                 "shasum": ""
             },
             "require": {
@@ -6056,6 +6056,9 @@
                 "symfony/var-dumper": "^6.0|^7.0|^8.0",
                 "symfony/workflow": "^6.0|^7.0|^8.0",
                 "twig/extra-bundle": "^3.0"
+            },
+            "conflict": {
+                "omnibridge/doctrine": "<4.0"
             },
             "require-dev": {
                 "doctrine/doctrine-bundle": "^2.13|^3.0",
@@ -6128,10 +6131,10 @@
             ],
             "support": {
                 "issues": "https://github.com/glitchr-omnisense/omnibridge-symfony/issues",
-                "source": "https://github.com/glitchr-omnisense/omnibridge-symfony/tree/v3.0.1"
+                "source": "https://github.com/glitchr-omnisense/omnibridge-symfony/tree/v3.1.1"
             },
-            "time": "2026-11-16T12:20:44+00:00",
-            "published-time": "2026-11-16T12:22:02+00:00"
+            "time": "2026-11-18T05:14:06+00:00",
+            "published-time": "2026-11-18T05:14:48+00:00"
         },
         {
             "name": "omnibridge/twig",
@@ -6405,16 +6408,16 @@
         },
         {
             "name": "omnisense/omnibase",
-            "version": "v7.0.4",
+            "version": "v7.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-omnisense/omnibase.git",
-                "reference": "e878a40364f024184c74106c1ed2c707388e4f00"
+                "reference": "98f249d9b7b9cd9f941ade3a615bfed98176f2bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-omnisense/omnibase/zipball/e878a40364f024184c74106c1ed2c707388e4f00",
-                "reference": "e878a40364f024184c74106c1ed2c707388e4f00",
+                "url": "https://api.github.com/repos/glitchr-omnisense/omnibase/zipball/98f249d9b7b9cd9f941ade3a615bfed98176f2bb",
+                "reference": "98f249d9b7b9cd9f941ade3a615bfed98176f2bb",
                 "shasum": ""
             },
             "require": {
@@ -6468,10 +6471,10 @@
             "require-dev": {
                 "api-platform/symfony": "^4.0",
                 "beberlei/doctrineextensions": "^1.0",
-                "doctrine/dbal": "^4.2",
+                "doctrine/dbal": "^4.6",
                 "doctrine/doctrine-fixtures-bundle": "^3.4",
                 "doctrine/doctrine-migrations-bundle": "^3.0",
-                "doctrine/orm": "^3.4",
+                "doctrine/orm": "^3.8",
                 "florianv/swap": "^4.0",
                 "glitchr/backup-manager": "4.0.*-dev",
                 "glitchr/ux-google": "1.0.*-dev",
@@ -6480,8 +6483,8 @@
                 "league/flysystem-ftp": "^3.0",
                 "omniauth/otp": "1.x-dev",
                 "omniauth/webauthn": "1.x-dev",
-                "omnibridge/doctrine": "^3.0",
-                "omnibridge/symfony": "^3.0",
+                "omnibridge/doctrine": "^4.0",
+                "omnibridge/symfony": "^3.1",
                 "omnibridge/twig": "^2.0",
                 "omnisense/omniauth": "1.x-dev",
                 "omnisense/omnishield": "1.x-dev",
@@ -6601,7 +6604,7 @@
                         "omnisense/omniauth": "1.x-dev",
                         "omniauth/webauthn": "1.x-dev",
                         "omniauth/otp": "1.x-dev",
-                        "omnibridge/doctrine": "^3.0"
+                        "omnibridge/doctrine": "^4.0"
                     }
                 }
             },
@@ -6643,7 +6646,7 @@
                 "forms",
                 "omnibase"
             ],
-            "time": "2026-11-17T04:27:10+00:00"
+            "time": "2026-11-18T04:46:03+00:00"
         },
         {
             "name": "omnisense/omnibridge",
