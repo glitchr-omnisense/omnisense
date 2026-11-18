@@ -63,7 +63,18 @@ class Documentation
                         'pinned' => isset($source['pinned']) ? (string) $source['pinned'] : null,
                         'path' => trim((string) ($source['path'] ?? 'docs/'), '/'),
                         'eol' => (bool) ($source['eol'] ?? false),
+                        // The names the series was published under before (its addresses redirect to it).
+                        'formerly' => array_values(array_map('strval', (array) ($source['formerly'] ?? []))),
                     ];
+                }
+                $names = array_keys($versions);
+                foreach ($versions as $series => $source) {
+                    foreach ($source['formerly'] as $former) {
+                        if (\in_array($former, $names, true) || \in_array($former, ['latest', ...self::RESERVED], true)) {
+                            throw new \UnexpectedValueException(sprintf('config/documentation.yaml: %s %s was formerly "%s", a name the manual still takes.', $key, $series, $former));
+                        }
+                        $names[] = $former;
+                    }
                 }
                 $this->manuals[(string) $key] = new Manual((string) $key, (string) $entry['package'], (string) $entry['repository'], (string) ($entry['default'] ?? array_key_first($versions)), $versions, isset($entry['website']) ? (string) $entry['website'] : null);
             }

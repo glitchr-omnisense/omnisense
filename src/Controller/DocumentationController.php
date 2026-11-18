@@ -28,7 +28,8 @@ use Symfony\Component\Routing\Attribute\Route;
  * The former address of each page, /docs/<key>/<series>/<page>, redirects
  * to its part of the one page, the visitor's #anchor carried over. /docs/<key>
  * and /docs/<key>/latest redirect to the default series. An older series is
- * published with a notice, out of search engines' indexes.
+ * published with a notice, out of search engines' indexes. A series' former
+ * name (`formerly`) redirects each of its addresses to the series it now is.
  */
 class DocumentationController extends AbstractController
 {
@@ -57,6 +58,9 @@ class DocumentationController extends AbstractController
     #[Route(['en' => '/docs/{key}/{series}', 'fr' => '/fr/docs/{key}/{series}'], name: 'app_manual', requirements: ['key' => self::KEY, 'series' => self::SERIES], methods: ['GET'])]
     public function manualHome(Request $request, string $key, string $series): Response
     {
+        if (null !== $renamed = $this->manual($key)->renamed($series)) {
+            return $this->redirectToRoute('app_manual', ['key' => $key, 'series' => $renamed, '_locale' => Locale::of($request)], Response::HTTP_MOVED_PERMANENTLY);
+        }
         $manual = $this->series($key, $series);
         $locale = Locale::of($request);
         $url = $this->generateUrl('app_manual', ['key' => $key, 'series' => $series, '_locale' => $locale]);
@@ -67,6 +71,9 @@ class DocumentationController extends AbstractController
     #[Route(['en' => '/docs/{key}/{series}/api', 'fr' => '/fr/docs/{key}/{series}/api'], name: 'app_manual_api', requirements: ['key' => self::KEY, 'series' => self::SERIES], methods: ['GET'], priority: 5)]
     public function api(Request $request, string $key, string $series): Response
     {
+        if (null !== $renamed = $this->manual($key)->renamed($series)) {
+            return $this->redirectToRoute('app_manual_api', ['key' => $key, 'series' => $renamed, '_locale' => Locale::of($request)], Response::HTTP_MOVED_PERMANENTLY);
+        }
         $manual = $this->series($key, $series);
         $version = $this->documentation->api($manual, $series) ?? throw $this->createNotFoundException(sprintf('%s %s has no API reference.', $key, $series));
         $locale = Locale::of($request);
@@ -79,6 +86,10 @@ class DocumentationController extends AbstractController
     #[Route(['en' => '/docs/{key}/{series}/{path}', 'fr' => '/fr/docs/{key}/{series}/{path}'], name: 'app_manual_page', requirements: ['key' => self::KEY, 'series' => self::SERIES, 'path' => '[a-z0-9][a-z0-9/-]*'], methods: ['GET'])]
     public function page(Request $request, string $key, string $series, string $path): Response
     {
+        // A page of a renamed series: straight to its part in the series it now is.
+        if (null !== $renamed = $this->manual($key)->renamed($series)) {
+            return $this->page($request, $key, $renamed, $path);
+        }
         $manual = $this->series($key, $series);
         if (!\in_array($path, $this->documentation->formerAddresses($manual, $series), true)) {
             throw $this->createNotFoundException(sprintf('%s %s has no page "%s".', $key, $series, $path));

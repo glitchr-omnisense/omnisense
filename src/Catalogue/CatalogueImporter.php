@@ -158,7 +158,9 @@ class CatalogueImporter
             #   bin/console app:docs:fetch              the docs/ folders at these refs, into var/docs
             #
             # A series is named after its branch, or by hand after its releases (2.x on
-            # main): the import moves the one that follows the package's branch.
+            # main): the import moves the one that follows the package's branch. A series
+            # renamed so lists its former names, `formerly: [main]`: their addresses
+            # redirect, page by page, to it.
             # A series kept for history keeps its ref: add it by hand, with its tag or commit,
             # without a branch when its branch now carries a later series.
             # A package without a docs/ folder can have its manual added by hand, `path: ''`:
@@ -191,7 +193,8 @@ class CatalogueImporter
         }
         $current = $versions[$series] ?? null;
         if (null === $current || ($pin && ($current['ref'] ?? null) !== $package->head)) {
-            $versions[$series] = ['branch' => $package->branch, 'ref' => $package->head, 'pinned' => 'branch-head', 'path' => 'docs/'];
+            // What the series says besides (its former names, `formerly`) is kept.
+            $versions[$series] = ['branch' => $package->branch, 'ref' => $package->head, 'pinned' => 'branch-head', 'path' => 'docs/'] + array_diff_key((array) $current, ['branch' => 0, 'ref' => 0, 'pinned' => 0, 'path' => 0]);
             ++$report['pinned'];
         }
 

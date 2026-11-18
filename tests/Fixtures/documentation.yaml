@@ -9,6 +9,7 @@ packages:
         ref: 1111111111111111111111111111111111111111
         pinned: branch-head
         path: docs/
+        formerly: [main]
       '0.9':
         branch: '0.9'
         ref: 2222222222222222222222222222222222222222

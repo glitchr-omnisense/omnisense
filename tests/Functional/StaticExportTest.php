@@ -120,6 +120,12 @@ final class StaticExportTest extends KernelTestCase
         self::assertStringContainsString('A sentence added by StaticExportTest.', (string) file_get_contents($incremental.'/docs/omnitrade/1.x/index.html'));
         self::assertStringContainsString('News added by StaticExportTest.', (string) file_get_contents($incremental.'/news/first/index.html'));
         self::assertStringContainsString('Stripe for Omnitrade, as StaticExportTest says.', (string) file_get_contents($incremental.'/docs/omnitrade/1.x/index.html'), 'the family\'s manual lists its providers');
+
+        // A series' former name (`formerly`): each of its addresses redirects, for good, to the series it now is.
+        $redirects = json_decode((string) file_get_contents($incremental.'/redirects.json'), true, 512, \JSON_THROW_ON_ERROR);
+        self::assertSame(['to' => '/docs/omnitrade/1.x', 'status' => 301], $redirects['/docs/omnitrade/main'] ?? null);
+        self::assertSame(['to' => '/fr/docs/omnitrade/1.x', 'status' => 301], $redirects['/fr/docs/omnitrade/main'] ?? null);
+        self::assertSame(['to' => '/docs/omnitrade/1.x#installation', 'status' => 301], $redirects['/docs/omnitrade/main/installation'] ?? null);
     }
 
     private function site(): \Omnibridge\Static\Site

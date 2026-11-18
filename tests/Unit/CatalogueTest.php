@@ -192,13 +192,13 @@ final class CatalogueTest extends TestCase
         $pinned = new \ReflectionMethod(CatalogueImporter::class, 'pinned');
         $package = static fn (string $branch, string $head): ScannedPackage => new ScannedPackage('omnibase/admin', Tier::Component, 'omnibase', null, null, [], [], '/repos/omnibase-admin', $branch, 'glitchr-omnisense/omnibase-admin', null, 3, $head);
         $old = ['ref' => str_repeat('1', 40), 'pinned' => 'tag', 'path' => 'docs/'];
-        $existing = ['default' => '2.x', 'versions' => ['2.x' => ['branch' => 'main', 'ref' => str_repeat('2', 40), 'pinned' => 'branch-head', 'path' => 'docs/'], '1.x' => $old]];
+        $existing = ['default' => '2.x', 'versions' => ['2.x' => ['branch' => 'main', 'ref' => str_repeat('2', 40), 'pinned' => 'branch-head', 'path' => 'docs/', 'formerly' => ['main']], '1.x' => $old]];
 
         // A series named after its releases, on main: moved, no series "main" added; the one kept for history stays.
         $report = ['pinned' => 0];
         $entry = $pinned->invokeArgs(null, [$existing, 'omnibase/admin', $package('main', str_repeat('3', 40)), true, &$report]);
         self::assertSame(['2.x', '1.x'], array_keys($entry['versions']));
-        self::assertSame(['branch' => 'main', 'ref' => str_repeat('3', 40), 'pinned' => 'branch-head', 'path' => 'docs/'], $entry['versions']['2.x']);
+        self::assertSame(['branch' => 'main', 'ref' => str_repeat('3', 40), 'pinned' => 'branch-head', 'path' => 'docs/', 'formerly' => ['main']], $entry['versions']['2.x'], 'its former names kept');
         self::assertSame($old, $entry['versions']['1.x']);
         self::assertSame(['2.x', 1], [$entry['default'], $report['pinned']]);
 

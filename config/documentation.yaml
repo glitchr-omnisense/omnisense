@@ -13,7 +13,9 @@
 #   bin/console app:docs:fetch              the docs/ folders at these refs, into var/docs
 #
 # A series is named after its branch, or by hand after its releases (2.x on
-# main): the import moves the one that follows the package's branch.
+# main): the import moves the one that follows the package's branch. A series
+# renamed so lists its former names, `formerly: [main]`: their addresses
+# redirect, page by page, to it.
 # A series kept for history keeps its ref: add it by hand, with its tag or commit,
 # without a branch when its branch now carries a later series.
 # A package without a docs/ folder can have its manual added by hand, `path: ''`:
@@ -175,6 +177,8 @@ packages:
         ref: 7cc3f9d5c63834c6bb3641c28d0d41b60b6372c7
         pinned: branch-head
         path: docs/
+        formerly:
+          - main
       1.x:
         ref: 71fd0a39c27c3acdc153ee407f6068d3c9c3945d
         pinned: tag
@@ -189,6 +193,8 @@ packages:
         ref: f57411308060345ab913f8ac44cd266ddeb551a8
         pinned: branch-head
         path: docs/
+        formerly:
+          - main
       1.x:
         ref: 27a1c3aedfac7bd6323dcadf267c0ff055300999
         pinned: tag
@@ -203,6 +209,8 @@ packages:
         ref: e3691fccabe485fcba27d716d0140d234d23be40
         pinned: branch-head
         path: docs/
+        formerly:
+          - main
       1.x:
         ref: b56a90bae15e36b9af8b8cf3deaeb996c478a148
         pinned: tag
@@ -217,6 +225,8 @@ packages:
         ref: a9bb63e37d401b93c4d4954cd08954f62359be36
         pinned: branch-head
         path: docs/
+        formerly:
+          - main
       1.x:
         ref: 15aaf537ed824dc09de30a5acc089d0c40aaff04
         pinned: tag
@@ -231,6 +241,8 @@ packages:
         ref: 153da6ccab4b0e42e02e21308f808bbc05c2d556
         pinned: branch-head
         path: docs/
+        formerly:
+          - main
       1.x:
         ref: d9669c8018584b11af85cff2cf37cd2d5bb03c72
         pinned: tag
@@ -245,6 +257,8 @@ packages:
         ref: d8127dfefd3b33d085ef1555db5032d1ab079674
         pinned: branch-head
         path: docs/
+        formerly:
+          - main
       1.x:
         ref: 7116f34d927ce5fed5cf168185a6f2ee1fe49c1a
         pinned: tag
@@ -259,6 +273,8 @@ packages:
         ref: 701fe1146c5cb98c87dcc09f3cc3d86a8a731743
         pinned: branch-head
         path: docs/
+        formerly:
+          - main
       1.x:
         ref: d1a892d2c423012508f5ca44156cd4b8961cb11a
         pinned: tag
@@ -273,6 +289,8 @@ packages:
         ref: 393e4766d6910cbfa32d85aa3b800953f6ac956d
         pinned: branch-head
         path: docs/
+        formerly:
+          - main
       1.x:
         ref: e3814462f0736753dda845db6504b03a8a6a9982
         pinned: tag
@@ -287,6 +305,8 @@ packages:
         ref: 700306046c63897d1b9ed76ad5633cb0d651c320
         pinned: branch-head
         path: docs/
+        formerly:
+          - '2.0'
       2.x:
         ref: bc72d4652fe0b638ea2fddb937d9cddd5a9c606f
         pinned: tag
@@ -301,6 +321,8 @@ packages:
         ref: 84aeeb3936bf733b550818a34416b08f6209d25e
         pinned: branch-head
         path: docs/
+        formerly:
+          - main
       1.x:
         ref: 70754a52d276bf2fd9175a2699c805e904753da5
         pinned: tag
@@ -315,6 +337,8 @@ packages:
         ref: 836477900ff9719339d275e8e539740ce0f2332e
         pinned: branch-head
         path: docs/
+        formerly:
+          - main
       1.x:
         ref: af83a76148d08146d4b498721aa1a45ed93098e9
         pinned: tag
@@ -329,6 +353,8 @@ packages:
         ref: e9c4a0386bc2c046002d8fb67cbabdb8a44d970c
         pinned: branch-head
         path: docs/
+        formerly:
+          - main
       1.x:
         ref: ee2a9814702c833230ff102acffa372a5a7c054e
         pinned: tag
@@ -343,6 +369,8 @@ packages:
         ref: 9aa65b6911a5016ead990e57b5a2f7d73a7d78b7
         pinned: branch-head
         path: docs/
+        formerly:
+          - main
       1.x:
         ref: dfd3d96226421c9859578224a86e2b095970e18b
         pinned: tag
@@ -357,6 +385,8 @@ packages:
         ref: 76764e389991fb8d0592c9f9c1da9bd1dee3d7b5
         pinned: branch-head
         path: docs/
+        formerly:
+          - main
       1.x:
         ref: e7fb2a3bccb9b61fbd2f85ad9216860307a0914f
         pinned: tag
@@ -371,6 +401,8 @@ packages:
         ref: 5ec266116efec2d1e9419ddf1f77a8ff0006b105
         pinned: branch-head
         path: docs/
+        formerly:
+          - main
       1.x:
         ref: d1ee0ddb3e64d710284c7c7e772915454d0a6497
         pinned: tag
@@ -385,6 +417,8 @@ packages:
         ref: 8a672b56ddf98b58dde19db0cda1e3788d4a35f7
         pinned: branch-head
         path: docs/
+        formerly:
+          - main
       1.x:
         ref: 6ef5c9f0ef79abd92c2175087b81a62c5869f70b
         pinned: tag
@@ -409,6 +443,8 @@ packages:
         ref: e63c9681094b1ed771cf2e737694fe8246dea02e
         pinned: branch-head
         path: docs/
+        formerly:
+          - main
       1.x:
         ref: 1af1628305e845933927b881790b15af1dd7fe69
         pinned: tag
@@ -423,6 +459,8 @@ packages:
         ref: 3eb2c9e19b26871aa522c03c3fe02ac99d6bfb22
         pinned: branch-head
         path: docs/
+        formerly:
+          - main
       1.x:
         ref: e77c6f8d00eea59f20c8fdee925ed4a0aef76132
         pinned: tag
@@ -437,6 +475,8 @@ packages:
         ref: 7b3bd58627e14dca1c668086ebc205e25f35b696
         pinned: branch-head
         path: docs/
+        formerly:
+          - main
       1.x:
         ref: e6283c4b8e8ee7bcb1ad2feabd1063a3d0506d8d
         pinned: tag
@@ -451,6 +491,8 @@ packages:
         ref: e5e3ce75af03092b63bac7a0dad1ed1c369f4ad4
         pinned: branch-head
         path: docs/
+        formerly:
+          - main
       1.x:
         ref: a9abaa31b551fde3cf86cf8e370e57c245e78610
         pinned: tag
@@ -465,6 +507,8 @@ packages:
         ref: 845ca00c68afacd5b93294ca507e78dbf9c00740
         pinned: branch-head
         path: docs/
+        formerly:
+          - main
       1.x:
         ref: cc09e2d73ca0bbef978edb9d813c8d2600f5f8d9
         pinned: tag
@@ -479,6 +523,8 @@ packages:
         ref: 9689037110939295494e9d561adba499ce2675a2
         pinned: branch-head
         path: docs/
+        formerly:
+          - main
       1.x:
         ref: 094817ab870488630d8778da25abcf3123baf731
         pinned: tag
@@ -503,6 +549,8 @@ packages:
         ref: 3a09c1caa3c6194898b0d45cdacfec91439f2a92
         pinned: branch-head
         path: docs/
+        formerly:
+          - main
       1.x:
         ref: a7bcbaa23fc34dc6d99e6ae82bf39ea1c083a475
         pinned: tag
@@ -517,6 +565,8 @@ packages:
         ref: 316d9c6dca83ff8357955b99bb717746d9e99e12
         pinned: branch-head
         path: docs/
+        formerly:
+          - main
       1.x:
         ref: cdd4e2baa9c1c107ea2f2d05db3c28c5e3617cab
         pinned: tag
@@ -531,6 +581,8 @@ packages:
         ref: c2edfcf73c6e6fb25e80f3e687b4dd90cd1985fc
         pinned: branch-head
         path: docs/
+        formerly:
+          - main
       1.x:
         ref: 633398a032217f913c83f1488b388a083639faaf
         pinned: tag
@@ -545,6 +597,8 @@ packages:
         ref: bb003e541645e347e91a1f97536635fa6ae69af1
         pinned: branch-head
         path: docs/
+        formerly:
+          - main
       1.x:
         ref: 742dd32344ee6ca6212d40ef71e0deb4bdb0c105
         pinned: tag
@@ -559,6 +613,8 @@ packages:
         ref: 1d2889d63227dc1f7b2bdb9aca027c5a0beb388b
         pinned: branch-head
         path: docs/
+        formerly:
+          - main
       1.x:
         ref: 9b83493149f8d0f5e2b74b3035f5028b1e41fa71
         pinned: tag
@@ -573,6 +629,8 @@ packages:
         ref: 74c9facc65feaeeedd89c1498f74b135b6cb7905
         pinned: branch-head
         path: docs/
+        formerly:
+          - main
       1.x:
         ref: 33b3f263714ecd9482ee77956f483a5a2d56480e
         pinned: tag

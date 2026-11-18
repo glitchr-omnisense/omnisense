@@ -74,6 +74,15 @@ final class DocumentationTest extends SiteTestCase
         $this->get('/fr/docs/omnitrade/latest', 302);
         self::assertSame('/fr/docs/omnitrade/1.x', $this->client->getResponse()->headers->get('Location'));
 
+        // A series' former name: each of its addresses redirects, for good, to the same in the series it now is.
+        $this->get('/docs/omnitrade/main', 301);
+        self::assertSame('/docs/omnitrade/1.x', $this->client->getResponse()->headers->get('Location'));
+        $this->get('/fr/docs/omnitrade/main', 301);
+        self::assertSame('/fr/docs/omnitrade/1.x', $this->client->getResponse()->headers->get('Location'));
+        $this->get('/docs/omnitrade/main/installation', 301);
+        self::assertSame('/docs/omnitrade/1.x#installation', $this->client->getResponse()->headers->get('Location'), 'a page: straight to its part');
+        $this->get('/docs/omnitrade/main/nothing', 404);
+
         $this->get('/docs/omnitrade/2.x', 404);
         $this->get('/docs/omnitrade/1.x/nothing', 404);
         $this->get('/docs/nothing/1.x', 404);

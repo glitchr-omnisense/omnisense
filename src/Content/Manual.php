@@ -11,7 +11,7 @@ namespace App\Content;
 final class Manual
 {
     /**
-     * @param array<string, array{branch: ?string, ref: string, pinned: ?string, path: string, eol: bool}> $versions series => source
+     * @param array<string, array{branch: ?string, ref: string, pinned: ?string, path: string, eol: bool, formerly: list<string>}> $versions series => source
      */
     public function __construct(
         public readonly string $key,
@@ -33,6 +33,21 @@ final class Manual
     public function has(string $series): bool
     {
         return isset($this->versions[$series]);
+    }
+
+    /**
+     * The series a former name of a series now is (config/documentation.yaml's `formerly`: omnibase/admin's main is
+     * 2.x): its addresses redirect, page by page, to that series'.
+     */
+    public function renamed(string $name): ?string
+    {
+        foreach ($this->versions as $series => $source) {
+            if (\in_array($name, $source['formerly'], true)) {
+                return (string) $series;
+            }
+        }
+
+        return null;
     }
 
     /** Whether a series is the current one (the default): the others are shown with a notice, out of the sitemap, not indexed. */

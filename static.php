@@ -270,6 +270,24 @@ return static function (array $host): Site {
 
         return $rows;
     };
+    // A series' former names (config/documentation.yaml's `formerly`): each address it had, a redirection to the
+    // series it now is - its page, each page's former address, its API reference.
+    $renamed = static function (string $route) use ($documentation): array {
+        $rows = [];
+        foreach ($documentation->manuals() as $manual) {
+            foreach ($manual->versions as $series => $source) {
+                foreach ($source['formerly'] as $former) {
+                    $rows = [...$rows, ...match ($route) {
+                        'app_manual' => [['key' => $manual->key, 'series' => $former]],
+                        'app_manual_page' => array_map(static fn (string $path): array => ['key' => $manual->key, 'series' => $former, 'path' => $path], $documentation->formerAddresses($manual, (string) $series)),
+                        'app_manual_api' => null !== $documentation->api($manual, (string) $series) ? [['key' => $manual->key, 'series' => $former]] : [],
+                    }];
+                }
+            }
+        }
+
+        return $rows;
+    };
     $keys = static fn (): array => array_map(static fn ($m): array => ['key' => $m->key], array_values($documentation->manuals()));
     $slugs = static fn (array $slugs): array => array_map(static fn (string $slug): array => ['slug' => $slug], $slugs);
 
@@ -305,6 +323,17 @@ return static function (array $host): Site {
                 'app_manual' => static fn (): array => $manuals(false, false),
                 'app_manual_page' => static fn (): array => $manuals(true, false),
                 'app_manual_api' => static fn (): array => $apis(false),
+            ],
+            include: ['app_manual', 'app_manual.*', 'app_manual_page', 'app_manual_page.*', 'app_manual_api', 'app_manual_api.*'],
+            noSitemap: ['*'],
+        ))
+        // A renamed series' addresses: redirections, out of the sitemap.
+        ->provide(new RouteCollectionProvider(
+            $routes,
+            parameters: [
+                'app_manual' => static fn (): array => $renamed('app_manual'),
+                'app_manual_page' => static fn (): array => $renamed('app_manual_page'),
+                'app_manual_api' => static fn (): array => $renamed('app_manual_api'),
             ],
             include: ['app_manual', 'app_manual.*', 'app_manual_page', 'app_manual_page.*', 'app_manual_api', 'app_manual_api.*'],
             noSitemap: ['*'],
