@@ -61,9 +61,13 @@ when@prod:
 
 # Tests never touch the development data: <database>_test, created once with
 #     make database-test   (see the Makefile)
+# The migrations create messenger_messages there too, but the test env's failed
+# transport is in-memory (messenger.yaml), so its schema has no such table: the
+# filter keeps doctrine:schema:validate --env=test from asking to drop it.
 when@test:
     doctrine:
         dbal:
             connections:
                 default:
                     dbname_suffix: '_test%env(default::TEST_TOKEN)%'
+                    schema_filter: '~^(?!messenger_messages$)~'
