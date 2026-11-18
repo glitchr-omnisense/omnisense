@@ -211,10 +211,14 @@ jobs:
           key: composer-${{ hashFiles('composer.lock') }}
           restore-keys: composer-
 
+      # The front end is built before the tests: the pages they export link to its files (the favicon,
+      # Encore's entries), which the export copies; without them, such a link is an address with no file
+      # and no route. Built once: the Build step below keeps it (--skip-assets).
       - name: Install
         run: |
           composer install --no-interaction --no-progress --prefer-dist
           yarn install --frozen-lockfile
+          yarn run prod
 
       - name: Validate
         run: |
@@ -317,7 +321,7 @@ jobs:
           ONLY: ${{ steps.dispatch.outputs.only }}
         run: |
           set -o pipefail
-          bin/omnibridge-static build --out=dist --github-pages ${FULL:+"$FULL"} ${ONLY:+"--only=$ONLY"} 2>&1 | tee build.log
+          bin/omnibridge-static build --out=dist --skip-assets --github-pages ${FULL:+"$FULL"} ${ONLY:+"--only=$ONLY"} 2>&1 | tee build.log
           echo "Export: $(grep -E '^(incremental|full)( \(|:)' build.log | tail -1)" >> "$GITHUB_STEP_SUMMARY"
 
       # The proof that the cache served no stale page: a --full export into an empty folder, with

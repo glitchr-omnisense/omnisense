@@ -228,6 +228,7 @@ The workflow can also be started by hand or by another repository:
 ## Tests
 
 ```sh
+yarn run prod            # the front end first: the exported pages link to its files
 php vendor/bin/phpunit
 ```
 

@@ -76,7 +76,11 @@ final class StaticExportTest extends KernelTestCase
     {
         $incremental = $this->dir.'/incremental';
         $cache = $this->dir.'/cache';
-        $fixtures = self::getContainer()->getParameter('kernel.project_dir').'/tests/Fixtures';
+        $root = self::getContainer()->getParameter('kernel.project_dir');
+        $fixtures = $root.'/tests/Fixtures';
+        // The pages link to the front end's files (the favicon, Encore's entries), which the export copies from
+        // public/assets: without a build, such a link is an address with no file and no route, rendered every time.
+        self::assertFileExists($root.'/public/assets/manifest.json', 'The front end is built before the tests: yarn run prod.');
 
         $first = $this->export($incremental, $cache);
         self::assertSame(0, $first->reused);
