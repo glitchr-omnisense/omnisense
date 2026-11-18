@@ -12,7 +12,10 @@
 #   bin/console app:catalog:import --pin    every series moved to its branch's head
 #   bin/console app:docs:fetch              the docs/ folders at these refs, into var/docs
 #
-# A series kept for history keeps its ref: add it by hand, with its tag or commit.
+# A series is named after its branch, or by hand after its releases (2.x on
+# main): the import moves the one that follows the package's branch.
+# A series kept for history keeps its ref: add it by hand, with its tag or commit,
+# without a branch when its branch now carries a later series.
 # A package without a docs/ folder can have its manual added by hand, `path: ''`:
 # its README and changelog at that commit; the import keeps it as it is.
 packages:
@@ -23,7 +26,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 16c8da147510df33aefad4ad0df3c380a9b245cb
+        ref: 019b725b83098dbac7f73b076ee10b168c60bc8a
         pinned: branch-head
         path: docs/
   flowjs:
@@ -34,7 +37,7 @@ packages:
     versions:
       master:
         branch: master
-        ref: b06340750a0c191dce09e5539aa96bc5550c750e
+        ref: dfd336af98b73767b875e08f500fa97042501ecf
         pinned: branch-head
         path: docs/
   graphjs:
@@ -44,7 +47,7 @@ packages:
     versions:
       main:
         branch: main
-        ref: 65211a935100b57e18d6d1fb260200e9ac2fb48b
+        ref: 2b6ccf3e920f7d199900b30dc6f94c9ef1711cc4
         pinned: branch-head
         path: docs/
   omniauth:
@@ -54,7 +57,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 66aa549da28cbe88ae03991cf370d3585a2e6493
+        ref: b2b3d135c593e0b8f0cec5d0e4aa70d61b0303d7
         pinned: branch-head
         path: docs/
   omniauth-google:
@@ -64,7 +67,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: fce87685581f04a15d25c9116d16239dadfdade1
+        ref: 4db8c5df140f74dc026b24f44b81adfea4a0092e
         pinned: branch-head
         path: docs/
   omniauth-otp:
@@ -74,7 +77,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 069bf3092f646276d6fbac6fa360a5f6808e48b2
+        ref: 48b4a47e410562fe5bf942b523aad11d15f3a93b
         pinned: branch-head
         path: docs/
   omniauth-webauthn:
@@ -84,7 +87,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 21b1a4b3694384556bff3c001f64e10ef78bb8ea
+        ref: e94c8efe6ba614890e9f18e5f8cc457d0cfccb64
         pinned: branch-head
         path: docs/
   omnibank:
@@ -94,7 +97,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 380edfce43753bf3e860a7dd418044ef3cfdc5de
+        ref: 504bc6d8baecf97470aea2a260fa33e902353792
         pinned: branch-head
         path: docs/
   omnibank-bridge:
@@ -104,7 +107,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 59c245b2390604a985a9c5eb55083738a4f58cc9
+        ref: dddb6e4ac27770363bb7db891a45d9002865e2c3
         pinned: branch-head
         path: docs/
   omnibank-files:
@@ -114,7 +117,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 5e6d036693b1ad5b1e422d89404c1166b12cf764
+        ref: 24be799449eacb63e50654948bf52a0b40ae40e6
         pinned: branch-head
         path: docs/
   omnibank-powens:
@@ -124,7 +127,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: e8582e9840ac416c91156e010a476e53c4b67ebf
+        ref: eddd49724855cb81c41332cac391f766bb3507e6
         pinned: branch-head
         path: docs/
   omnibank-qonto:
@@ -134,14 +137,19 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 19bbd6b6766da234d71823b6092f1a03ce78425e
+        ref: 435a6306cb71940fba5ddd2169a069b21acc7384
         pinned: branch-head
         path: docs/
   omnibase:
     package: omnisense/omnibase
     repository: glitchr-omnisense/omnibase
-    default: 5.x
+    default: 7.x
     versions:
+      7.x:
+        branch: 7.x
+        ref: 98f249d9b7b9cd9f941ade3a615bfed98176f2bb
+        pinned: branch-head
+        path: docs/
       5.x:
         branch: 5.x
         ref: 8973064e4a48e2a6c7a3b0d00ca150ab3d66e8fe
@@ -160,162 +168,226 @@ packages:
   omnibase-admin:
     package: omnibase/admin
     repository: glitchr-omnisense/omnibase-admin
-    default: main
+    default: 2.x
     versions:
-      main:
+      2.x:
         branch: main
-        ref: 9a82a11017f1d313732a34ee9c0b9b6570cc96e9
+        ref: 7cc3f9d5c63834c6bb3641c28d0d41b60b6372c7
         pinned: branch-head
+        path: docs/
+      1.x:
+        ref: 71fd0a39c27c3acdc153ee407f6068d3c9c3945d
+        pinned: tag
         path: docs/
   omnibase-agenda:
     package: omnibase/agenda
     repository: glitchr-omnisense/omnibase-agenda
-    default: main
+    default: 2.x
     versions:
-      main:
+      2.x:
         branch: main
-        ref: f0ee8e4fe00568bf08808dc39869e74c6baacf70
+        ref: f57411308060345ab913f8ac44cd266ddeb551a8
         pinned: branch-head
+        path: docs/
+      1.x:
+        ref: 27a1c3aedfac7bd6323dcadf267c0ff055300999
+        pinned: tag
         path: docs/
   omnibase-blog:
     package: omnibase/blog
     repository: glitchr-omnisense/omnibase-blog
-    default: main
+    default: 2.x
     versions:
-      main:
+      2.x:
         branch: main
-        ref: 6a5ce777f8f915e4195828fc6a004931a7d57f84
+        ref: e3691fccabe485fcba27d716d0140d234d23be40
         pinned: branch-head
+        path: docs/
+      1.x:
+        ref: b56a90bae15e36b9af8b8cf3deaeb996c478a148
+        pinned: tag
         path: docs/
   omnibase-booking:
     package: omnibase/booking
     repository: glitchr-omnisense/omnibase-booking
-    default: main
+    default: 2.x
     versions:
-      main:
+      2.x:
         branch: main
-        ref: d8843e84d303c66d29497c9911d61be309070ef7
+        ref: a9bb63e37d401b93c4d4954cd08954f62359be36
         pinned: branch-head
+        path: docs/
+      1.x:
+        ref: 15aaf537ed824dc09de30a5acc089d0c40aaff04
+        pinned: tag
         path: docs/
   omnibase-broadcast:
     package: omnibase/broadcast
     repository: glitchr-omnisense/omnibase-broadcast
-    default: main
+    default: 2.x
     versions:
-      main:
+      2.x:
         branch: main
-        ref: 5e1ccadc3babd17b3ad31b0e3cefeaafbf6ba5ce
+        ref: 153da6ccab4b0e42e02e21308f808bbc05c2d556
         pinned: branch-head
+        path: docs/
+      1.x:
+        ref: d9669c8018584b11af85cff2cf37cd2d5bb03c72
+        pinned: tag
         path: docs/
   omnibase-classroom:
     package: omnibase/classroom
     repository: glitchr-omnisense/omnibase-classroom
-    default: main
+    default: 2.x
     versions:
-      main:
+      2.x:
         branch: main
-        ref: 7994457b5cd7091e29e156c722c7dee6d0e4281f
+        ref: d8127dfefd3b33d085ef1555db5032d1ab079674
         pinned: branch-head
+        path: docs/
+      1.x:
+        ref: 7116f34d927ce5fed5cf168185a6f2ee1fe49c1a
+        pinned: tag
         path: docs/
   omnibase-consent:
     package: omnibase/consent
     repository: glitchr-omnisense/omnibase-consent
-    default: main
+    default: 2.x
     versions:
-      main:
+      2.x:
         branch: main
-        ref: c3fc76d2aa2406e77f5517be41ca7e3a58c66468
+        ref: 701fe1146c5cb98c87dcc09f3cc3d86a8a731743
         pinned: branch-head
+        path: docs/
+      1.x:
+        ref: d1a892d2c423012508f5ca44156cd4b8961cb11a
+        pinned: tag
         path: docs/
   omnibase-consulting:
     package: omnibase/consulting
     repository: glitchr-omnisense/omnibase-consulting
-    default: main
+    default: 2.x
     versions:
-      main:
+      2.x:
         branch: main
-        ref: 44d39f0bc408b0add0bdaebca07995646aeb1725
+        ref: 393e4766d6910cbfa32d85aa3b800953f6ac956d
         pinned: branch-head
+        path: docs/
+      1.x:
+        ref: e3814462f0736753dda845db6504b03a8a6a9982
+        pinned: tag
         path: docs/
   omnibase-docs:
     package: omnibase/docs
     repository: glitchr-omnisense/omnibase-docs
-    default: '2.0'
+    default: 3.x
     versions:
-      '2.0':
+      3.x:
         branch: '2.0'
-        ref: 1a279d9424028a832cba9b39da21c257f053f71b
+        ref: 700306046c63897d1b9ed76ad5633cb0d651c320
         pinned: branch-head
+        path: docs/
+      2.x:
+        ref: bc72d4652fe0b638ea2fddb937d9cddd5a9c606f
+        pinned: tag
         path: docs/
   omnibase-drive:
     package: omnibase/drive
     repository: glitchr-omnisense/omnibase-drive
-    default: main
+    default: 2.x
     versions:
-      main:
+      2.x:
         branch: main
-        ref: 942905b61505653af7190a5f3bf5d94ef56e8984
+        ref: 84aeeb3936bf733b550818a34416b08f6209d25e
         pinned: branch-head
+        path: docs/
+      1.x:
+        ref: 70754a52d276bf2fd9175a2699c805e904753da5
+        pinned: tag
         path: docs/
   omnibase-estate:
     package: omnibase/estate
     repository: glitchr-omnisense/omnibase-estate
-    default: main
+    default: 2.x
     versions:
-      main:
+      2.x:
         branch: main
-        ref: 497aabb32fa9cf4765cea09522c5379c0927fc10
+        ref: 836477900ff9719339d275e8e539740ce0f2332e
         pinned: branch-head
+        path: docs/
+      1.x:
+        ref: af83a76148d08146d4b498721aa1a45ed93098e9
+        pinned: tag
         path: docs/
   omnibase-faq:
     package: omnibase/faq
     repository: glitchr-omnisense/omnibase-faq
-    default: main
+    default: 2.x
     versions:
-      main:
+      2.x:
         branch: main
-        ref: f882ce2c4622d4bbef9d4a7ee8e9ce794492f960
+        ref: e9c4a0386bc2c046002d8fb67cbabdb8a44d970c
         pinned: branch-head
+        path: docs/
+      1.x:
+        ref: ee2a9814702c833230ff102acffa372a5a7c054e
+        pinned: tag
         path: docs/
   omnibase-forge:
     package: omnibase/forge
     repository: glitchr-omnisense/omnibase-forge
-    default: main
+    default: 2.x
     versions:
-      main:
+      2.x:
         branch: main
-        ref: b17067f9831c41f824cc3fba0d540b4ed6e6047e
+        ref: 9aa65b6911a5016ead990e57b5a2f7d73a7d78b7
         pinned: branch-head
+        path: docs/
+      1.x:
+        ref: dfd3d96226421c9859578224a86e2b095970e18b
+        pinned: tag
         path: docs/
   omnibase-forum:
     package: omnibase/forum
     repository: glitchr-omnisense/omnibase-forum
-    default: main
+    default: 2.x
     versions:
-      main:
+      2.x:
         branch: main
-        ref: b5b63f2948a0357723b199bf62b626495c1909ff
+        ref: 76764e389991fb8d0592c9f9c1da9bd1dee3d7b5
         pinned: branch-head
+        path: docs/
+      1.x:
+        ref: e7fb2a3bccb9b61fbd2f85ad9216860307a0914f
+        pinned: tag
         path: docs/
   omnibase-gallery:
     package: omnibase/gallery
     repository: glitchr-omnisense/omnibase-gallery
-    default: main
+    default: 2.x
     versions:
-      main:
+      2.x:
         branch: main
-        ref: 5bd806c614f596f7a874fc9678ba5ab30289f322
+        ref: 5ec266116efec2d1e9419ddf1f77a8ff0006b105
         pinned: branch-head
+        path: docs/
+      1.x:
+        ref: d1ee0ddb3e64d710284c7c7e772915454d0a6497
+        pinned: tag
         path: docs/
   omnibase-health:
     package: omnibase/health
     repository: glitchr-omnisense/omnibase-health
-    default: main
+    default: 2.x
     versions:
-      main:
+      2.x:
         branch: main
-        ref: 6b75b8dae1a80a5ef223bf7e703f9b854e19bce1
+        ref: 8a672b56ddf98b58dde19db0cda1e3788d4a35f7
         pinned: branch-head
+        path: docs/
+      1.x:
+        ref: 6ef5c9f0ef79abd92c2175087b81a62c5869f70b
+        pinned: tag
         path: docs/
   omnibase-lawyer:
     package: omnibase/lawyer
@@ -330,62 +402,86 @@ packages:
   omnibase-ledger:
     package: omnibase/ledger
     repository: glitchr-omnisense/omnibase-ledger
-    default: main
+    default: 2.x
     versions:
-      main:
+      2.x:
         branch: main
-        ref: 9a2567b93294219139f1f07ce4d43a81be21aa35
+        ref: e63c9681094b1ed771cf2e737694fe8246dea02e
         pinned: branch-head
+        path: docs/
+      1.x:
+        ref: 1af1628305e845933927b881790b15af1dd7fe69
+        pinned: tag
         path: docs/
   omnibase-legal:
     package: omnibase/legal
     repository: glitchr-omnisense/omnibase-legal
-    default: main
+    default: 2.x
     versions:
-      main:
+      2.x:
         branch: main
-        ref: a9210783cbe51599ae1e838ef3ccac96dac1664e
+        ref: 3eb2c9e19b26871aa522c03c3fe02ac99d6bfb22
         pinned: branch-head
+        path: docs/
+      1.x:
+        ref: e77c6f8d00eea59f20c8fdee925ed4a0aef76132
+        pinned: tag
         path: docs/
   omnibase-mailbox:
     package: omnibase/mailbox
     repository: glitchr-omnisense/omnibase-mailbox
-    default: main
+    default: 2.x
     versions:
-      main:
+      2.x:
         branch: main
-        ref: f95e69343dfe6536f16645a045b9ad02bac860fd
+        ref: 7b3bd58627e14dca1c668086ebc205e25f35b696
         pinned: branch-head
+        path: docs/
+      1.x:
+        ref: e6283c4b8e8ee7bcb1ad2feabd1063a3d0506d8d
+        pinned: tag
         path: docs/
   omnibase-marketplace:
     package: omnibase/marketplace
     repository: glitchr-omnisense/omnibase-marketplace
-    default: main
+    default: 2.x
     versions:
-      main:
+      2.x:
         branch: main
-        ref: fd760f62f36c7eba6bc77c438a2d272c7cfb432e
+        ref: e5e3ce75af03092b63bac7a0dad1ed1c369f4ad4
         pinned: branch-head
+        path: docs/
+      1.x:
+        ref: a9abaa31b551fde3cf86cf8e370e57c245e78610
+        pinned: tag
         path: docs/
   omnibase-music:
     package: omnibase/music
     repository: glitchr-omnisense/omnibase-music
-    default: main
+    default: 2.x
     versions:
-      main:
+      2.x:
         branch: main
-        ref: 6b2f40756a073cfcac183d55ab7f5f2dddf19baa
+        ref: 845ca00c68afacd5b93294ca507e78dbf9c00740
         pinned: branch-head
+        path: docs/
+      1.x:
+        ref: cc09e2d73ca0bbef978edb9d813c8d2600f5f8d9
+        pinned: tag
         path: docs/
   omnibase-newsletter:
     package: omnibase/newsletter
     repository: glitchr-omnisense/omnibase-newsletter
-    default: main
+    default: 2.x
     versions:
-      main:
+      2.x:
         branch: main
-        ref: 884313041092dc84a7f3027bc18c178fed6e1675
+        ref: 9689037110939295494e9d561adba499ce2675a2
         pinned: branch-head
+        path: docs/
+      1.x:
+        ref: 094817ab870488630d8778da25abcf3123baf731
+        pinned: tag
         path: docs/
   omnibase-notary:
     package: omnibase/notary
@@ -400,62 +496,86 @@ packages:
   omnibase-office:
     package: omnibase/office
     repository: glitchr-omnisense/omnibase-office
-    default: main
+    default: 2.x
     versions:
-      main:
+      2.x:
         branch: main
-        ref: 76dbc05c3c4e3821c87ee327a107710d071b0d4b
+        ref: 3a09c1caa3c6194898b0d45cdacfec91439f2a92
         pinned: branch-head
+        path: docs/
+      1.x:
+        ref: a7bcbaa23fc34dc6d99e6ae82bf39ea1c083a475
+        pinned: tag
         path: docs/
   omnibase-press:
     package: omnibase/press
     repository: glitchr-omnisense/omnibase-press
-    default: main
+    default: 2.x
     versions:
-      main:
+      2.x:
         branch: main
-        ref: 9fa6ba6508d439bdae3510b2d2c63410a19a581a
+        ref: 316d9c6dca83ff8357955b99bb717746d9e99e12
         pinned: branch-head
+        path: docs/
+      1.x:
+        ref: cdd4e2baa9c1c107ea2f2d05db3c28c5e3617cab
+        pinned: tag
         path: docs/
   omnibase-restaurant:
     package: omnibase/restaurant
     repository: glitchr-omnisense/omnibase-restaurant
-    default: main
+    default: 2.x
     versions:
-      main:
+      2.x:
         branch: main
-        ref: 7e3347110c225e32a377f5ff3db817468b06aa8c
+        ref: c2edfcf73c6e6fb25e80f3e687b4dd90cd1985fc
         pinned: branch-head
+        path: docs/
+      1.x:
+        ref: 633398a032217f913c83f1488b388a083639faaf
+        pinned: tag
         path: docs/
   omnibase-scholar:
     package: omnibase/scholar
     repository: glitchr-omnisense/omnibase-scholar
-    default: main
+    default: 2.x
     versions:
-      main:
+      2.x:
         branch: main
-        ref: d32afffff10b6993d0a4023dcd572cab0c0de914
+        ref: bb003e541645e347e91a1f97536635fa6ae69af1
         pinned: branch-head
+        path: docs/
+      1.x:
+        ref: 742dd32344ee6ca6212d40ef71e0deb4bdb0c105
+        pinned: tag
         path: docs/
   omnibase-social:
     package: omnibase/social
     repository: glitchr-omnisense/omnibase-social
-    default: main
+    default: 2.x
     versions:
-      main:
+      2.x:
         branch: main
-        ref: ce036409fa2b7a90c492eb00ae0f3eb4d9d0e9bd
+        ref: 1d2889d63227dc1f7b2bdb9aca027c5a0beb388b
         pinned: branch-head
+        path: docs/
+      1.x:
+        ref: 9b83493149f8d0f5e2b74b3035f5028b1e41fa71
+        pinned: tag
         path: docs/
   omnibase-video:
     package: omnibase/video
     repository: glitchr-omnisense/omnibase-video
-    default: main
+    default: 2.x
     versions:
-      main:
+      2.x:
         branch: main
-        ref: 4f138c428f50ae7315f56d47c4c59d2370313edf
+        ref: 74c9facc65feaeeedd89c1498f74b135b6cb7905
         pinned: branch-head
+        path: docs/
+      1.x:
+        ref: 33b3f263714ecd9482ee77956f483a5a2d56480e
+        pinned: tag
         path: docs/
   omnibill:
     package: omnisense/omnibill
@@ -464,7 +584,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 472e2cf40ca6999fd1dcc1bc024e16ce8af630f6
+        ref: e709872a14eddee7dc30bf034844542c89063b1b
         pinned: branch-head
         path: docs/
   omnibill-afnor:
@@ -474,7 +594,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 57ee0e7b20936425b592bcd0384340ddef0da677
+        ref: fc3c1fc457ad60061d356e6e2fdb07cfa636572b
         pinned: branch-head
         path: docs/
   omnibill-chorus-pro:
@@ -484,7 +604,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 2d73786e492d75572f3ee06228c82f74c16a709f
+        ref: 9ae1294c70af662131117d661662f9120d8475bc
         pinned: branch-head
         path: docs/
   omnibill-email:
@@ -494,7 +614,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 1bb02eee83ac36083bd97cf8c64f35df85c069da
+        ref: 663eea0b28b09550dd6349eca033d51c353203c9
         pinned: branch-head
         path: docs/
   omnibill-odoo:
@@ -504,7 +624,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 0a38a48f620f8bd7374b3aa3c07ceff4ef1085a5
+        ref: 2e4e7a04f661ef18ef9d8d16cb3ccdddf16eb885
         pinned: branch-head
         path: docs/
   omnibill-pennylane:
@@ -514,14 +634,19 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: ea7c21343032addb0782ffef5c9d7f61c4770305
+        ref: 63f1e609b1dd474b091bb7731110953d8c235b27
         pinned: branch-head
         path: docs/
   omnibridge:
     package: omnisense/omnibridge
     repository: glitchr-omnisense/omnibridge
-    default: 1.x
+    default: 2.x
     versions:
+      2.x:
+        branch: 2.x
+        ref: e01ad14dec2a8cc4bb084581273f35ef2a8534cd
+        pinned: branch-head
+        path: docs/
       1.x:
         branch: 1.x
         ref: 3e9120ea97739316fb10f01ffe72ed7f9c83c30a
@@ -534,14 +659,19 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 53bede1c9e7a8922b319cac7f838a7adc72f9f29
+        ref: 808c39343dee71662cc1d3ee32ec849e0065f9ab
         pinned: branch-head
         path: docs/
   omnibridge-doctrine:
     package: omnibridge/doctrine
     repository: glitchr-omnisense/omnibridge-doctrine
-    default: 1.x
+    default: 4.x
     versions:
+      4.x:
+        branch: 4.x
+        ref: f1307d316a70ef7a4dd94d013d32421e335c6b6d
+        pinned: branch-head
+        path: docs/
       1.x:
         branch: 1.x
         ref: 945239b171f803e38ecb0f1b17e256f3c2e384fe
@@ -550,8 +680,13 @@ packages:
   omnibridge-eloquent:
     package: omnibridge/eloquent
     repository: glitchr-omnisense/omnibridge-eloquent
-    default: 1.x
+    default: 2.x
     versions:
+      2.x:
+        branch: 2.x
+        ref: c21b4fb2b834c6a21fe9e75a01d9ee1c5bead729
+        pinned: branch-head
+        path: docs/
       1.x:
         branch: 1.x
         ref: a6cd864fe03d2febe762f804d5d37e549aa992c2
@@ -560,8 +695,13 @@ packages:
   omnibridge-laravel:
     package: omnibridge/laravel
     repository: glitchr-omnisense/omnibridge-laravel
-    default: 1.x
+    default: 2.x
     versions:
+      2.x:
+        branch: 2.x
+        ref: 1c80686d83364fa64dea50504a66359194c9a43d
+        pinned: branch-head
+        path: docs/
       1.x:
         branch: 1.x
         ref: ec274e085c2d360ddc4ae20003b10ae0d6cdb5b3
@@ -574,7 +714,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 45e3f6916122e66ecb5eda86d67530ce70a90349
+        ref: 02ea0d6136020ea0b7bbf1577571b07044d5a4e0
         pinned: branch-head
         path: docs/
   omnibridge-static:
@@ -584,14 +724,19 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 1ba157548bc308039f7291a044e5022de262cc18
+        ref: 18a395b410cedf77b7814f0e8b1ff2023ad0d912
         pinned: branch-head
         path: docs/
   omnibridge-symfony:
     package: omnibridge/symfony
     repository: glitchr-omnisense/omnibridge-symfony
-    default: 1.x
+    default: 3.x
     versions:
+      3.x:
+        branch: 3.x
+        ref: 921568441ac4c5362d6374f9de6bf46b170d8d32
+        pinned: branch-head
+        path: docs/
       1.x:
         branch: 1.x
         ref: 2b56a255d77ef1c6aa216d8d291c9b28046f5f31
@@ -600,8 +745,13 @@ packages:
   omnibridge-twig:
     package: omnibridge/twig
     repository: glitchr-omnisense/omnibridge-twig
-    default: 1.x
+    default: 2.x
     versions:
+      2.x:
+        branch: 2.x
+        ref: 47351531526c4416baba75417e67a25513274f2b
+        pinned: branch-head
+        path: docs/
       1.x:
         branch: 1.x
         ref: ca8a648306a48bfeed9d1ecec33479a6e5c4fe25
@@ -614,7 +764,7 @@ packages:
     versions:
       2.x:
         branch: 2.x
-        ref: 7b7d0c42399794a517851a6db0ffbaae28ec8253
+        ref: c31fa07e91d8fc2c40b63625dbd807aa1a16058b
         pinned: branch-head
         path: docs/
   omnibus-amazon:
@@ -624,7 +774,7 @@ packages:
     versions:
       2.x:
         branch: 2.x
-        ref: a2e403fc8537afe28fc47167dbac02cf515d26f0
+        ref: fb258830ef306d9a2e81510c068b093eccf9193d
         pinned: branch-head
         path: docs/
   omnibus-aramex:
@@ -634,7 +784,7 @@ packages:
     versions:
       2.x:
         branch: 2.x
-        ref: 340746f7ec764edde9bcb969f9e54949c6512d85
+        ref: ab508cbbf81d1a763b47eff72c3145b54d13661f
         pinned: branch-head
         path: docs/
   omnibus-auspost:
@@ -644,7 +794,7 @@ packages:
     versions:
       2.x:
         branch: 2.x
-        ref: 19ea81336a7174234cea2ae7f6e8e4bad4e8e3b5
+        ref: 506c862313dbab760169936c84c9bb5ecde081cb
         pinned: branch-head
         path: docs/
   omnibus-bluedart:
@@ -654,7 +804,7 @@ packages:
     versions:
       2.x:
         branch: 2.x
-        ref: ea60ef0faabefaa0cffca4eaa69ffe6720a084ca
+        ref: 8a380b99c26555e6e52eb63cc390515af6a51203
         pinned: branch-head
         path: docs/
   omnibus-canada-post:
@@ -664,7 +814,7 @@ packages:
     versions:
       2.x:
         branch: 2.x
-        ref: 870a2807eff7f94dde9042a6f73136030b42b675
+        ref: ae836573a81085a3c6756b68f7c2506445c33b25
         pinned: branch-head
         path: docs/
   omnibus-canpar:
@@ -674,7 +824,7 @@ packages:
     versions:
       2.x:
         branch: 2.x
-        ref: 0ef29af09877fa5235b0a8e847e1f415c414e714
+        ref: 7adb2564abe9f984a21c26387dd90558512b6752
         pinned: branch-head
         path: docs/
   omnibus-chronopost:
@@ -684,7 +834,7 @@ packages:
     versions:
       2.x:
         branch: 2.x
-        ref: 5a1fd7eb65b4265c0ce10b5cbdf126adc61aa722
+        ref: d6352b3ebca82cb9d1599dbc2f0f1036a2356ede
         pinned: branch-head
         path: docs/
   omnibus-colissimo:
@@ -694,7 +844,7 @@ packages:
     versions:
       2.x:
         branch: 2.x
-        ref: 9bfec04faf7b7bc5f16947b886622d16dd66c5db
+        ref: ef8bf3dd008f3d8ecc448fbe29b6cb8c1064ea23
         pinned: branch-head
         path: docs/
   omnibus-db-schenker:
@@ -704,7 +854,7 @@ packages:
     versions:
       2.x:
         branch: 2.x
-        ref: 0f62a3e02b781338fe75fe6ab159c18cc18faaaa
+        ref: 1b906968737f08118fbb927dd7986f836ca56388
         pinned: branch-head
         path: docs/
   omnibus-dhl:
@@ -714,7 +864,7 @@ packages:
     versions:
       2.x:
         branch: 2.x
-        ref: 19040f83af9639caa28eefc9384673132900db2f
+        ref: f7aa5ce7d7d7bfcda93046b6fb66f46f7a1b7d11
         pinned: branch-head
         path: docs/
   omnibus-dtdc:
@@ -724,7 +874,7 @@ packages:
     versions:
       2.x:
         branch: 2.x
-        ref: 139d00dc1ce811509d71fa02a462a842b7b957b7
+        ref: 843e0c4407e6e9fa6dc3b279f1293d6953fb9a2f
         pinned: branch-head
         path: docs/
   omnibus-fedex:
@@ -734,7 +884,7 @@ packages:
     versions:
       2.x:
         branch: 2.x
-        ref: ac579cd975f272b7fad9e91c33389c670579f5d0
+        ref: c7b6324ec4f69e9d7a382430bcc986a3f06f74fd
         pinned: branch-head
         path: docs/
   omnibus-gls:
@@ -744,7 +894,7 @@ packages:
     versions:
       2.x:
         branch: 2.x
-        ref: 5ae261f55f6c45a0249d8b545823651f3c9c5479
+        ref: b7479dfe4dbaf76fc40d26465ae85d09fa02b5e5
         pinned: branch-head
         path: docs/
   omnibus-jdl-express:
@@ -754,7 +904,7 @@ packages:
     versions:
       2.x:
         branch: 2.x
-        ref: ec1db9bec8686e8c237bd22dcb7afedc2a572677
+        ref: 65d62b63f291971672648d3364f5f02c327e5e43
         pinned: branch-head
         path: docs/
   omnibus-mondial-relay:
@@ -764,7 +914,7 @@ packages:
     versions:
       2.x:
         branch: 2.x
-        ref: 095e5280847aeccab05d603e0dccce50a0bbc448
+        ref: 6228cbb06da0f85ef9bf59f51bc524d98d200e62
         pinned: branch-head
         path: docs/
   omnibus-offline:
@@ -774,7 +924,7 @@ packages:
     versions:
       2.x:
         branch: 2.x
-        ref: be3a619754fa5806503067911955e999d8802837
+        ref: a200ce56b49203ab18562340a65a19476d5304d1
         pinned: branch-head
         path: docs/
   omnibus-purolator:
@@ -784,7 +934,7 @@ packages:
     versions:
       2.x:
         branch: 2.x
-        ref: 4505998105f5eb7bef302f55c06fa8da5a9ffa94
+        ref: 6ac50d7cfaa48c998af5a06ce4e9769f1c94b759
         pinned: branch-head
         path: docs/
   omnibus-royal-mail:
@@ -794,7 +944,7 @@ packages:
     versions:
       2.x:
         branch: 2.x
-        ref: 51149b6e63d17f2f25a17ed7effc0a9d4ace5a9e
+        ref: d271c9737829548de34b4a38200839fa0b93ab58
         pinned: branch-head
         path: docs/
   omnibus-sf-express:
@@ -804,7 +954,7 @@ packages:
     versions:
       2.x:
         branch: 2.x
-        ref: d026f05ec2b44535649dc2cd83072bd5358aa037
+        ref: 0300febd3cea04061e8c87ea57518380ef93c884
         pinned: branch-head
         path: docs/
   omnibus-tnt:
@@ -814,7 +964,7 @@ packages:
     versions:
       2.x:
         branch: 2.x
-        ref: a39c55f15574ea5928ba8c169dbb4b6043a0bd4a
+        ref: 039663b69746981f380039c409a606b87bddc553
         pinned: branch-head
         path: docs/
   omnibus-ups:
@@ -824,7 +974,7 @@ packages:
     versions:
       2.x:
         branch: 2.x
-        ref: 9748d2557b70cc599bbf6ba14bafce0d1c7b653c
+        ref: 9ca6e4d43952fa35389108dd12daffd54bf3e36e
         pinned: branch-head
         path: docs/
   omnibus-usps:
@@ -834,7 +984,7 @@ packages:
     versions:
       2.x:
         branch: 2.x
-        ref: 4c3a6421dad4670201bccf9ce948eba38414790d
+        ref: 93a9e55cf5a7a1a3e98046d5b8b4f9e7ed903b21
         pinned: branch-head
         path: docs/
   omnibus-zto-express:
@@ -844,7 +994,7 @@ packages:
     versions:
       2.x:
         branch: 2.x
-        ref: 06d4581294187ebb17c96b2210117f47c779b7b4
+        ref: c7fbae44c0e069f8aabf37b00cd7c1b424cc38b6
         pinned: branch-head
         path: docs/
   omnical:
@@ -854,7 +1004,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 77180f56ffa1cad4360d2264802d34ac181b2ae0
+        ref: 7ee1a44a837f255bd6eea1e5511d6cff7b1b416b
         pinned: branch-head
         path: docs/
   omnical-caldav:
@@ -864,7 +1014,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 2085edaa07a57fefc23fef9b3f21d56d7237d1a8
+        ref: 2792e7a990953f05836027a2bfa610a35421121a
         pinned: branch-head
         path: docs/
   omnical-google:
@@ -874,7 +1024,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: f8fe2d30aa0fa1246ba6d24141051c68ec533a78
+        ref: fa22f8b2acafa27693983cd8682fed0af12c9420
         pinned: branch-head
         path: docs/
   omnical-microsoft:
@@ -884,7 +1034,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 84e06e64b3f13208511aea5fffc75287dfb7e28f
+        ref: b1350709ebe53ff7eea20f6ffd0198ef01657f30
         pinned: branch-head
         path: docs/
   omnical-nager:
@@ -894,7 +1044,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 76619d5f72e5971bef9bc25382ef38babf663e03
+        ref: 22d8d6210614eb6a996b56625a0c991f68a5a0f1
         pinned: branch-head
         path: docs/
   omnical-openholidays:
@@ -904,7 +1054,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: b7fd1527c82eb0f09926ee35723a2ca3fcd31b6e
+        ref: 9a948841519adbb810c50fe884a1073fdde017e3
         pinned: branch-head
         path: docs/
   omnicrawl:
@@ -914,7 +1064,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: f300d01bb55a84bff09aec7890c4a11d4ce11018
+        ref: 4ffec2647f6845e119e13fa00057a7f1bd04f27f
         pinned: branch-head
         path: docs/
   omnicrawl-apify:
@@ -924,7 +1074,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: cce6ffd226f3c2f476162795f143a2413ee00e2a
+        ref: 8b0fe02e7943d836338b436b5298464fa8323ce9
         pinned: branch-head
         path: docs/
   omnicrawl-firecrawl:
@@ -934,7 +1084,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: ef80fd86b6c63cfcba70dffcb9dceed45eb14480
+        ref: 4b366e2c664a880aec1cdb040f238fea87de6b2e
         pinned: branch-head
         path: docs/
   omnicrawl-scrapingbee:
@@ -944,7 +1094,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 4a9e7bfce6005fe31654b0b7e5cec1b66860b1ae
+        ref: ca10627e3f0b84724094b493fb1b34ce3c00f4a0
         pinned: branch-head
         path: docs/
   omnicrawl-zyte:
@@ -954,7 +1104,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: dab406e99bfbe98cf0c793c362eefa2858dd1498
+        ref: 2be9c95b7b1a7a5a66746096f0e332fb3ad999a2
         pinned: branch-head
         path: docs/
   omnidns:
@@ -964,7 +1114,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 947a85a5eb080432960d1900acf49455626a3107
+        ref: 52336c157d7563817676291dbe4c45a8f1391b82
         pinned: branch-head
         path: docs/
   omnidns-cloudflare:
@@ -974,7 +1124,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 369cd6e3629cbe388e20b3aa56f5373c9808bb56
+        ref: 5de596bcb25651f96d552ecf4d4f4b5a6dd170d0
         pinned: branch-head
         path: docs/
   omnidns-gandi:
@@ -984,7 +1134,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: f35aa1b48045837f78e2a28d9850dcfc5508db90
+        ref: 327490409d15ee2c4daab6643a35b26b44f80cc7
         pinned: branch-head
         path: docs/
   omnidns-ovh:
@@ -994,7 +1144,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: c5a5665373dbb11142e26ea6e72639d684305aee
+        ref: 964da6ee29fd9bcbc88d8e506f86a92bb809c6dc
         pinned: branch-head
         path: docs/
   omnidns-scaleway:
@@ -1004,7 +1154,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 570cf02f7af0c3c2364fb46e6dc3dff2d25a5c34
+        ref: 669da1dd264786608dfaea63b56c7f9b91a5ac0e
         pinned: branch-head
         path: docs/
   omnidocs:
@@ -1014,7 +1164,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 9ce91ac82a808ba0cebb2c10190af26e4e86ead0
+        ref: 2438f109e414567c2d065307abaa0ce9e11db096
         pinned: branch-head
         path: docs/
   omnidocs-doxygen:
@@ -1044,7 +1194,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 15cb171229ecdb08c282bd70f04dde058554912b
+        ref: eaf130ff939ac12d7457dfebab90d6c829b9525a
         pinned: branch-head
         path: docs/
   omnidocs-php:
@@ -1074,7 +1224,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: c627235810f885c6545352c7e214dccaf5bf7ab1
+        ref: c160cd5eb654310bb962a743ca3de957e8382d61
         pinned: branch-head
         path: docs/
   omnidrive-azure:
@@ -1084,7 +1234,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: c985f5bb41f0ebc2a6f1763008542da97b74bed8
+        ref: ad3ae1e7cc3801d53acc0d37111091c3391b0d91
         pinned: branch-head
         path: docs/
   omnidrive-dropbox:
@@ -1094,7 +1244,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: adfc7a264c15f70761aa54da40fdc604b30a87b0
+        ref: aea337d77281331111dc2b0ec7253876b3c7104a
         pinned: branch-head
         path: docs/
   omnidrive-ftp:
@@ -1104,7 +1254,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 13842d9132149cec1250806ca377029c6cd701c3
+        ref: c57f9de7b81c312e79e40e9c3d4b81a5b673e1b5
         pinned: branch-head
         path: docs/
   omnidrive-gdrive:
@@ -1114,7 +1264,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 9f9ec59efea864338ba66b35c708ad9afc3e4bf3
+        ref: e1d1f7f05a69542f0a24f9af7ae6f2a532db90b9
         pinned: branch-head
         path: docs/
   omnidrive-local:
@@ -1124,7 +1274,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 7a875a8f6abdfb3e069804043e5a10d49d417d87
+        ref: 1ae36ed09faca3f6824a56a69b1bf765f9ae4100
         pinned: branch-head
         path: docs/
   omnidrive-s3:
@@ -1134,7 +1284,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: adad1b569a8c4d14a2be6fd2903463267ca5c272
+        ref: f9beb4bba460174172529d7065cc47e6b9600d27
         pinned: branch-head
         path: docs/
   omnidrive-sftp:
@@ -1144,7 +1294,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 206fff7d82dee5d1cb64e9d87f5eebb1ac06a37d
+        ref: a1da07aaf04d73a0e07ef66fa805e287dde726a9
         pinned: branch-head
         path: docs/
   omnidrive-webdav:
@@ -1154,7 +1304,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: f5225447a457a94f24e77bb62dc94bb00d6a5f64
+        ref: a39c08f37f78e075ce7ddb115528333cf872ffcb
         pinned: branch-head
         path: docs/
   omnifood:
@@ -1164,7 +1314,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: cd454531c3853c55e9873a5e2feb6a564e2b1517
+        ref: a2c63ea821bce903f4279f00d3552b613b3adbb4
         pinned: branch-head
         path: docs/
   omnifood-deliveroo:
@@ -1174,7 +1324,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: ad288b0c05789763f647462527d148d9f3813f99
+        ref: bc57c75cc5911e6aa8e04ee9c03f70259d56dffb
         pinned: branch-head
         path: docs/
   omnifood-justeat:
@@ -1184,7 +1334,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 1c8ac1d37f47aba98d8d810b8fd60087eeb74486
+        ref: cab5b6b6511c0633d636bce0fdf8c18234979614
         pinned: branch-head
         path: docs/
   omnifood-thefork:
@@ -1194,7 +1344,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: f2f1d5704600c3ff9bc64a0393fa1529065e1c85
+        ref: 71f530aa8e34a08e1f982659604b3ec5ca61f20e
         pinned: branch-head
         path: docs/
   omnifood-ubereats:
@@ -1204,7 +1354,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: c567fbf9c19e8c07eeb306935353e3ac43a82478
+        ref: 1ae9e98c060ca242f593bd2e3338c9ed51245d14
         pinned: branch-head
         path: docs/
   omnifood-zenchef:
@@ -1214,7 +1364,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 8536fdc8200b6aa81d7b56a3d17090d2d76b60bb
+        ref: 1f6c341652e9b33df7474e50f96fc35baa0f69c2
         pinned: branch-head
         path: docs/
   omnihub:
@@ -1224,7 +1374,7 @@ packages:
     versions:
       main:
         branch: main
-        ref: 92cf0a3d46f4f2d176c740805a86d012dbc33b68
+        ref: 3fbe2e287d48665880fa310186e43fdd2dfec1d0
         pinned: branch-head
         path: docs/
   omnilab:
@@ -1234,7 +1384,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: cd8f6e2398d0b6cc7e89853b66399ea1fa5d99a2
+        ref: c1af3c36f0aaf02085ac17483e4f269adfd39391
         pinned: branch-head
         path: docs/
   omnilab-brightsky:
@@ -1244,7 +1394,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: e4e6e6e16b2733eb2d44741723c01379a0a0323e
+        ref: 3d76b55da8edbabb2ca348c707418bebd0c65dfe
         pinned: branch-head
         path: docs/
   omnilab-cactus:
@@ -1254,7 +1404,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: bf907cf93e8a2907cdd0f09a3f222e1b10899dcb
+        ref: acd2083f094d95019b4102838aa1bd6cf431fdbf
         pinned: branch-head
         path: docs/
   omnilab-cams:
@@ -1264,7 +1414,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 6c3f0c4ba2dfaa7b0c5c93cfdf56277d7c896409
+        ref: bc60a8b197bb00107eb648d7f3d14e7702b31933
         pinned: branch-head
         path: docs/
   omnilab-cds:
@@ -1274,7 +1424,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 57bf023dc339f78e2825195032fde1ac870b2f88
+        ref: 29819714f30339654077f334debe32162eb9e81c
         pinned: branch-head
         path: docs/
   omnilab-chebi:
@@ -1284,7 +1434,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: b318dbabe7a0b797ae7ae05da766735a37fd94d6
+        ref: 355cd2e7fc00b7c87c058bb36e895f1004a3c67f
         pinned: branch-head
         path: docs/
   omnilab-chembl:
@@ -1294,7 +1444,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: d3b8dc708d7abdde8a44b43331c791cca7f56953
+        ref: 4a2ce92c30b639ed36936255c00f777f57aa0e64
         pinned: branch-head
         path: docs/
   omnilab-clinvar:
@@ -1304,7 +1454,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 8e68d56e5b149a427374605f6b890c3c84eaa611
+        ref: 479a0e5f185fc05e1ca74de9917255d868eaff3f
         pinned: branch-head
         path: docs/
   omnilab-cod:
@@ -1314,7 +1464,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 36e7eeb7d9dd0d2ffa299b04801729e65f18ab7a
+        ref: d8206a0605a93d345b2f4a38a88225f3f029b2f8
         pinned: branch-head
         path: docs/
   omnilab-codata:
@@ -1324,7 +1474,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: add501303bcb60a53549878a0d79b2736f288b8a
+        ref: 4d57ec5003edf7db2f4376a6398fca5a5d32aaba
         pinned: branch-head
         path: docs/
   omnilab-col:
@@ -1334,7 +1484,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 2f83a0b651fbf6d95e282eb0b3bd57be1fb8326b
+        ref: a3e5208a6affd3ef4972796b102da34dbce33aab
         pinned: branch-head
         path: docs/
   omnilab-copernicus:
@@ -1344,7 +1494,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 2f74758fc2b1e7fb1a46bd9997e83bc9fe9bc064
+        ref: f7c57f19ddf7a0810b8ae47bedbfe5f05d6e055d
         pinned: branch-head
         path: docs/
   omnilab-donki:
@@ -1354,7 +1504,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: ffd8bdb8740d6c5f4e4e7c5fff1c4329f97b4af7
+        ref: 01a8023b1bdc6fd3eb5464f36d968bc9cd98097a
         pinned: branch-head
         path: docs/
   omnilab-earthdata:
@@ -1364,7 +1514,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 8b4ef63f5fb57ea4a5e154488de2991801c6aae4
+        ref: 15fe45eb743b61d9b66205214addcf3a32b2f83a
         pinned: branch-head
         path: docs/
   omnilab-ebird:
@@ -1374,7 +1524,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 515267be8bba61222cfc4cf4c1f82730e1bd9b02
+        ref: 20365de052de38c76c1b6d36178f211ee1865cbe
         pinned: branch-head
         path: docs/
   omnilab-elevation:
@@ -1384,7 +1534,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: c7ab2647d6e897e9cb8a80047011cebf175ba71d
+        ref: 38616d215d9a43bc643de95f97a5aa05c41c5a08
         pinned: branch-head
         path: docs/
   omnilab-emsc:
@@ -1394,7 +1544,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 013da77cd517df0358f1467a765dc4ca61153d26
+        ref: fd234f685a32a24270c0e20eb93d0a6f916f7bd9
         pinned: branch-head
         path: docs/
   omnilab-ensembl:
@@ -1404,7 +1554,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 21bd693ea97ac27d3abae51f2fda8ff76fb81a6d
+        ref: cdc6c14ecfd6da4bdbb857488aa55fc637c007cd
         pinned: branch-head
         path: docs/
   omnilab-exoplanets:
@@ -1414,7 +1564,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 313acdae6f94eabe6fb3a3ff1190441bf209a79e
+        ref: e6014c587fc5a17b2ada2ee615cc6881a496b7b2
         pinned: branch-head
         path: docs/
   omnilab-gaia:
@@ -1424,7 +1574,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 4411c907ea11a7286204be9f368eef486ac47e39
+        ref: 7fa49e1fc21d905816f9e171005c5a47de9913b8
         pinned: branch-head
         path: docs/
   omnilab-gbif:
@@ -1434,7 +1584,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 9a31b3603d04005fab519d22d8ef6be2bd358998
+        ref: 3b92f95fccc528ddcf38af1b37f041d07e4b303f
         pinned: branch-head
         path: docs/
   omnilab-gwas:
@@ -1444,7 +1594,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: b14711f7d20e542418437743b3b85f6082da0a9c
+        ref: 3a0dcaba5c7a4bcbf9c159f4539222300b0ecc3f
         pinned: branch-head
         path: docs/
   omnilab-hgnc:
@@ -1454,7 +1604,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 3cfaca8bf05fa442afd1e4db4e67f96e62408d64
+        ref: b54a5ded6a9b2bd771bc7c2a1e32c9a5440461af
         pinned: branch-head
         path: docs/
   omnilab-horizons:
@@ -1464,7 +1614,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 29afbff33a30e69606ceaa3562fda37c17b5e0bd
+        ref: b53ba48d67bacfe6572d496de7e5d5f4e3042325
         pinned: branch-head
         path: docs/
   omnilab-inaturalist:
@@ -1474,7 +1624,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: e5eb167ff797f1aef24d5758c9b9925309c2c3a2
+        ref: 09d0fe1f5a19fce9c6c0a88d46b5919a169d4215
         pinned: branch-head
         path: docs/
   omnilab-interpro:
@@ -1484,7 +1634,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: bcbb3753faa5eefe41c120725dbde419cb298e19
+        ref: 32cb6253b04181234fc398938df37fc6a3d63b12
         pinned: branch-head
         path: docs/
   omnilab-itis:
@@ -1494,7 +1644,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 10151d030aa3dabff0a8d75aaedfedfcdcac25d9
+        ref: 70c6bef8e0cda106244dbd9efed3dded98638d76
         pinned: branch-head
         path: docs/
   omnilab-iucn:
@@ -1504,7 +1654,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: e9d91ef980ab83efdd337b1f051b475b121e64a3
+        ref: 6e4a153fa027580334d0bca7d836567dabe41f36
         pinned: branch-head
         path: docs/
   omnilab-jpl:
@@ -1514,7 +1664,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: b3117dc27b835916d7d81ffbebf1a0233761d5cd
+        ref: beec57f50115e9b3224aba009ea7ebbe4900cdc7
         pinned: branch-head
         path: docs/
   omnilab-kegg:
@@ -1524,7 +1674,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: d54f5d36a8be103e981d3cbf66ea07baa9c55b00
+        ref: 30e59b55bbff5669a6e2ed936b5f51a3c02bb311
         pinned: branch-head
         path: docs/
   omnilab-launches:
@@ -1534,7 +1684,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 2c03bfffd47d26538d88aca3773286ebf7593f39
+        ref: 3ded4f9a2720ebb515b1c54131f11f6ee427e6fd
         pinned: branch-head
         path: docs/
   omnilab-materials-project:
@@ -1544,7 +1694,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 758f53a3013c1863ab9dee61959161eafd5bf1f5
+        ref: c8f16b717e21b2c2438462d0b68ac6f285139fbf
         pinned: branch-head
         path: docs/
   omnilab-mpc:
@@ -1554,7 +1704,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: ae0078b5a72d953c4bbeafe0a23eae595a4bffce
+        ref: 1bcfcbd56926ddaf6ff5530ee25c07d1150a959c
         pinned: branch-head
         path: docs/
   omnilab-ncbi:
@@ -1564,7 +1714,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: bba94f3df22e5eb74ce1b8f3be48a10612da9e09
+        ref: 38518ff77b7cbe491d94252544ff55992f528d64
         pinned: branch-head
         path: docs/
   omnilab-ned:
@@ -1574,7 +1724,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 10b65fdcaa19eb8fb5f6fdc571636f533f86842d
+        ref: 34d6a542c2bac1824bf706a54796deabe6812baa
         pinned: branch-head
         path: docs/
   omnilab-noaa:
@@ -1584,7 +1734,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: fd9a605a26b426c9d50876d7651ddaceb4937922
+        ref: 832416c757b4956d57bcb6832111ef4ec6b3c653
         pinned: branch-head
         path: docs/
   omnilab-obis:
@@ -1594,7 +1744,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 95928c1f6fb0134bb8f148c04755289fdffc18f4
+        ref: 4dc1a98d6c72a18dd737109284c194974d3d708a
         pinned: branch-head
         path: docs/
   omnilab-open-meteo:
@@ -1604,7 +1754,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 9dbd0d6b683d1e5127543c4cdb5713e108426419
+        ref: 2b9bb8d9f46863f944b0a664dc4e9f39998ad345
         pinned: branch-head
         path: docs/
   omnilab-openaq:
@@ -1614,7 +1764,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 81badfd4974484b3918a6700f9d3859465f99ae9
+        ref: a0502898d25db76fb8cb982fdf899fdd84f0f272
         pinned: branch-head
         path: docs/
   omnilab-opentargets:
@@ -1624,7 +1774,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: be0022f154335d209bcf201959259994977d5c77
+        ref: cf73134fcc3a6d9d9d5347fbb2c0129bcb84b4f1
         pinned: branch-head
         path: docs/
   omnilab-oqmd:
@@ -1634,7 +1784,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 634fde9ca7204872dde3dbc51e631b59ca69b989
+        ref: 09d2685bde03c97c485bbe639d8e9bb65bbb6c4d
         pinned: branch-head
         path: docs/
   omnilab-pbdb:
@@ -1644,7 +1794,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: a29879e1915d5c828a57f999914d94e19915008f
+        ref: 39d45ef5dc2fecfd13325865cbdef1e38284f804
         pinned: branch-head
         path: docs/
   omnilab-pdb:
@@ -1654,7 +1804,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 420c496e5ff66d3297429957270b97df0b1502e7
+        ref: c6ddb7e8a281c513119d4889e3baf47b7f89f415
         pinned: branch-head
         path: docs/
   omnilab-pubchem:
@@ -1664,7 +1814,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 2220782f98a679a1d4cdc5d6d038dd6d0f3fee8a
+        ref: e9a9ff85beab44b74164ecc8ffc8d53810777d07
         pinned: branch-head
         path: docs/
   omnilab-quickgo:
@@ -1674,7 +1824,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 50564f2cf4142a1c2365147d4370b917d05dafbe
+        ref: 1d3620afa25ebf54dbd5044a71656456f9dae6d2
         pinned: branch-head
         path: docs/
   omnilab-reactome:
@@ -1684,7 +1834,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: fc9066bc05fdbc2200b994093e5f2979af5c6984
+        ref: c4ab06453661500fd54105b3f408065706a4f9a7
         pinned: branch-head
         path: docs/
   omnilab-rhea:
@@ -1694,7 +1844,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: a586df4f0d671d0aa4ede34be91b0e894165ff51
+        ref: 35664d90abfa3bca8db1ec31ec3435da0ae2f85b
         pinned: branch-head
         path: docs/
   omnilab-simbad:
@@ -1704,7 +1854,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 1e4d5398d10980f8faec0494a316d4d5a4500221
+        ref: 04b330d43b93b3b5124394257843371ed800307b
         pinned: branch-head
         path: docs/
   omnilab-string:
@@ -1714,7 +1864,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 3b6770b81b112d05d28d1da5307f70d1f8e12d7d
+        ref: 07824d506229fb113d520bb364b715c9c67a7eb0
         pinned: branch-head
         path: docs/
   omnilab-swpc:
@@ -1724,7 +1874,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 4be9490288838f377fb144831cc624261f3b24fd
+        ref: f81f3ea8b889afd78c6b1ea692bb9e9d4e5c66ce
         pinned: branch-head
         path: docs/
   omnilab-tides:
@@ -1734,7 +1884,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: cdc0207d7e6274d36418a3379b051f73f1e28ff9
+        ref: e0c77693c458617f92557abe829e52ed90ede51e
         pinned: branch-head
         path: docs/
   omnilab-uniprot:
@@ -1744,7 +1894,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 4f6c9c06bc7235d29b2d29c6dcbcd93d454616ed
+        ref: f65fc95ceeff60556b3527f0f360a9cca8ea7855
         pinned: branch-head
         path: docs/
   omnilab-usgs:
@@ -1754,7 +1904,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: fee6d84e972413628f4ad139393cd9081e365629
+        ref: 3fb515249d674daaee2c86f52ef69e4af07618e8
         pinned: branch-head
         path: docs/
   omnilab-usgs-water:
@@ -1764,7 +1914,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 04a10f6933c546032d7c46d4b26e88f3e59e5222
+        ref: 28026c4042e8ed379f20e233fea456eda01b75b0
         pinned: branch-head
         path: docs/
   omnilab-vizier:
@@ -1774,7 +1924,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 0d1070b624738b9e79a89759cf05b76a003cf3d5
+        ref: 6a719fdb3d86228e4807d23494cf02b3873de25a
         pinned: branch-head
         path: docs/
   omnilab-wikidata:
@@ -1784,7 +1934,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: baf23c76f152572d830f26ebc2c25f555b3c15fd
+        ref: 03e57a75d67e78117536c9b7b1030cc603c49bc4
         pinned: branch-head
         path: docs/
   omnilab-worms:
@@ -1794,7 +1944,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 9bf4fb209674c5aa13a5b28a0c38b4ecb06b44e9
+        ref: 7112d135c237839534bfc1cb0edce87574220d9a
         pinned: branch-head
         path: docs/
   omnilang:
@@ -1804,7 +1954,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: d22f166f4ccfc6c19c4a62dc12052c9b1f514a61
+        ref: d43b346a463f9573f90160792cad643c84d8c0d7
         pinned: branch-head
         path: docs/
   omnilang-amazon:
@@ -1814,7 +1964,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 2b618ebcae5bee0fbb3dea342dc3dd00b7abaffd
+        ref: ecb1c0483fc669670bf2d58eca6baec66d8df3a0
         pinned: branch-head
         path: docs/
   omnilang-azure:
@@ -1824,7 +1974,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 7228051d46111d20d8539692bfbcc02086c77751
+        ref: 94ece0a1de2237fbc509bc1e8f9fd7dae8d6fe07
         pinned: branch-head
         path: docs/
   omnilang-deepl:
@@ -1834,7 +1984,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: c2d2d0d560b26f18fab3eb8884ab4cf53d608951
+        ref: 3929b5b2e7a2d723abf0fd66cbf0eab889a43648
         pinned: branch-head
         path: docs/
   omnilang-google:
@@ -1844,7 +1994,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 36b1b458f8ec9f1547b2207ab685ee2a5bbd8d50
+        ref: fc8820926a81118060eaa4a2f9c6d99d38c975a4
         pinned: branch-head
         path: docs/
   omnilang-libretranslate:
@@ -1854,7 +2004,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 2ffa17364ecddb0c228fdfd0fabc96af4481450e
+        ref: 79134e46d8e3ce672028964e8719966352ebcce0
         pinned: branch-head
         path: docs/
   omnilex:
@@ -1864,7 +2014,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 786b20a2d63c5b5082f684381b739828daf07e82
+        ref: af3b21ed1bfecd54756ddecd1cfacdddf8fae3a1
         pinned: branch-head
         path: docs/
   omnilex-eurlex:
@@ -1874,7 +2024,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 1d2fac8fe4e9c93bb252277c9f1e6719957ac7ba
+        ref: b97126a02b4d9cdfe0496ba8632c55c6bc7b3642
         pinned: branch-head
         path: docs/
   omnilex-judilibre:
@@ -1884,7 +2034,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: e0de7a748df337842a552a9f3562db778f634724
+        ref: 1ec0ca1b1ae95c00e27a98e9982bc69ad66b07b1
         pinned: branch-head
         path: docs/
   omnilex-justice-administrative:
@@ -1894,7 +2044,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: eba71818c7bea4f54ad3bcf41e1e3f44e083c8dc
+        ref: 0d8c98a33ff03421ad04e32041805020a63c3d30
         pinned: branch-head
         path: docs/
   omnilex-legifrance:
@@ -1904,7 +2054,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: de3fc832404d46953381692b0a2a179ce450f918
+        ref: 05dce1b7d18ae729515a0e6734a21a8c9a868637
         pinned: branch-head
         path: docs/
   omnimap:
@@ -1914,7 +2064,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: fd38b58a7f7e60b50a16ecad2f50c06ddd61abc9
+        ref: 345abf474503ed87d6f43434126297950b216b2c
         pinned: branch-head
         path: docs/
   omnimap-google:
@@ -1924,7 +2074,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 9ce6571c1a6297ea007d99374420c339343e7b3f
+        ref: c46e0fe98ce3309127a238c11a2c88f72bbed2d9
         pinned: branch-head
         path: docs/
   omnimap-maplibre:
@@ -1934,7 +2084,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 0d6279a9e1291816fd5eea7d69d115f08dfc4710
+        ref: 53b1a2bd813ee501e85e0c6413bb089ac3ef73e6
         pinned: branch-head
         path: docs/
   omnimap-openstreetmap:
@@ -1944,7 +2094,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 4f3fa313c6b2190b26989abb92ea67c0a292cdef
+        ref: 2b9053c4d92f268ebcacd39b57cddfeb5e5f448b
         pinned: branch-head
         path: docs/
   omnimeet:
@@ -1954,7 +2104,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: fd661efca707f4be034e532614f8cf27216dcda3
+        ref: 569900e5283fc87bfbdb9460de820c5fedbe85fd
         pinned: branch-head
         path: docs/
   omnimeet-direct:
@@ -1964,7 +2114,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: d480fdb0798358d3d29472b80fba0d536ed8af50
+        ref: 079b1b5f31dd7b037636f0c3e332c4f92aacc72b
         pinned: branch-head
         path: docs/
   omnimeet-jitsi:
@@ -1974,7 +2124,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: c6445bd247c51f6b9f3cf276f867a0b8c6276cd1
+        ref: aeecc7d1944baa1baa9782218b1fbcaa59aee3fb
         pinned: branch-head
         path: docs/
   omniplay:
@@ -1984,7 +2134,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: f88e9682690466af75ebebc920509fbd1b68d546
+        ref: 67446b502b557c69c324c7a13bd1a45cfed4f646
         pinned: branch-head
         path: docs/
   omniplay-docker:
@@ -1994,7 +2144,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: f8a7c20c4dde18edafc007c01fde49806f7dec25
+        ref: 0c4cef3ccec17458ba01cd8d7a446030140443be
         pinned: branch-head
         path: docs/
   omniplay-edgegap:
@@ -2004,7 +2154,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 71472e01669a5617126c6a5bed76addb8bd3035f
+        ref: 2a43a2e310bafeed8b7a6bb3b52055227bdd543f
         pinned: branch-head
         path: docs/
   omniplay-gog:
@@ -2014,7 +2164,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 0fdc5989844cfe8a4cb4ca1283d3e51f5a3a862b
+        ref: db9965883dd0e4425f34082c0a768ea154f8d126
         pinned: branch-head
         path: docs/
   omniplay-igdb:
@@ -2024,7 +2174,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 11592554ed5b02c15b9ed05a6add3ae36cf6ac88
+        ref: 765a689e4a52b799189105c29d2822c08139a653
         pinned: branch-head
         path: docs/
   omniplay-itch:
@@ -2034,7 +2184,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: adc4fa19c4c5b0b6bf978057190c8e93a3a0cde0
+        ref: e0767a58dafae5ab3ade9fba8e84a10ae08dce53
         pinned: branch-head
         path: docs/
   omniplay-rawg:
@@ -2044,7 +2194,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: c6cc29b4b4912fa34e8a6f40ccde64bed15160be
+        ref: 3040bb369bfad6f34c37237050e62b7d21c82754
         pinned: branch-head
         path: docs/
   omniplay-steam:
@@ -2054,7 +2204,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: f60e828152c09500f0100d4b6c4216952d8ef873
+        ref: e329122ef6ddda7ffe12ad71381bd29573251485
         pinned: branch-head
         path: docs/
   omnipost:
@@ -2064,7 +2214,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 9bbeeac27fb8193ba717aa78c1ebcadbdde109c9
+        ref: 72701a499fdc079b7cf0ebd6892d987b12adc078
         pinned: branch-head
         path: docs/
   omnipost-instagram:
@@ -2074,7 +2224,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 799b798a2951f0e345230c567bf4842a846ef2f2
+        ref: c6e29e8574ea010ae8561273176335f100cc8508
         pinned: branch-head
         path: docs/
   omnipost-youtube:
@@ -2084,7 +2234,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 6e448aff34aad6db5fb75fe3edf63d50a147eced
+        ref: d24e9c632f010516e53b7f3a81e5705827c30c6a
         pinned: branch-head
         path: docs/
   omnipulse:
@@ -2094,7 +2244,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 6fdfadd7eee0a75d7c53388b87cfab5bcd312e59
+        ref: 2f451165678fc79162cabee23040e131166e9099
         pinned: branch-head
         path: docs/
   omnipulse-bing-webmaster:
@@ -2104,7 +2254,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: be3240a27e01a34d776b3f770b1cb384a6f7492e
+        ref: 4f56f704458a213a987b6e208cc23158f1f1997c
         pinned: branch-head
         path: docs/
   omnipulse-ga4:
@@ -2114,7 +2264,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: d98ec85d36499098dcda428f70752eb33368aa8d
+        ref: 7408f68f0c4662487caf6c09e3be38d6253c0d69
         pinned: branch-head
         path: docs/
   omnipulse-github-sponsors:
@@ -2124,7 +2274,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 64a468ff8d237fb7f241fb254adb3bf3a2a86d6e
+        ref: f00277a54729829941eb17d8ba5d333ef96f55ae
         pinned: branch-head
         path: docs/
   omnipulse-google-reviews:
@@ -2134,7 +2284,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 1e3d9e5d4810332219a8dee464a5cb36e42275a4
+        ref: caefa304f8cbb075c25c65203c2ba41c08df17f3
         pinned: branch-head
         path: docs/
   omnipulse-liberapay:
@@ -2144,7 +2294,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 541c68a5ab5b8e99b9c6a50bca4107b8695ae700
+        ref: b82956805b39522a24bc9fb95e710aa46ac304c0
         pinned: branch-head
         path: docs/
   omnipulse-matomo:
@@ -2154,7 +2304,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 25f6138ab50a4a299cd086a67fbbabe716ab9701
+        ref: 046abdcfedadb45425c049f9b0c4e19e49937dd3
         pinned: branch-head
         path: docs/
   omnipulse-opencollective:
@@ -2164,7 +2314,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 11643cbc8508f6adf2fe9b354537d557ca68e1ff
+        ref: 9f53777901d81f48474997d735b71c6a9b18c2c1
         pinned: branch-head
         path: docs/
   omnipulse-plausible:
@@ -2174,7 +2324,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 6979bc9906c3d0dd06e2309cdd310eabfc32b059
+        ref: ac5d4784b725189d32918e99da68d4f4eac497f8
         pinned: branch-head
         path: docs/
   omnipulse-search-console:
@@ -2184,7 +2334,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 92004e6a9ea76126d5ff82b8a3c4135270cfd3cd
+        ref: 1fdfac60c443a09cc9b78d521da1f2a83ed53ebe
         pinned: branch-head
         path: docs/
   omnipulse-tripadvisor:
@@ -2194,7 +2344,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 727f76070728bceae9cf402554b0cd5f400eb5cb
+        ref: d1c44a0a96479a8280e34bb4137423de06ca21e0
         pinned: branch-head
         path: docs/
   omnipulse-trustpilot:
@@ -2204,7 +2354,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 8baf7c356f867391724821bcc62a5b6eefc7d76a
+        ref: 9772eaf89d34562f5bda031c0c8eb027b9b34384
         pinned: branch-head
         path: docs/
   omnischolar:
@@ -2294,7 +2444,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: b5f0c6ba61d0fe1fc71e26649e12877782eebc5d
+        ref: 4e0fbe1d514af1a0c9cddda0de3bc785c767ca5c
         pinned: branch-head
         path: docs/
   omnisearch-typesense:
@@ -2304,7 +2454,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: fa612a42da9773ddee2bcba81360147046b665a4
+        ref: 080dc4ddfb0059a6aeb8a4112a511e99e7ef5fd5
         pinned: branch-head
         path: docs/
   omnishield:
@@ -2314,7 +2464,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: fa677c52435912698960c0faccd19906f3426ded
+        ref: 4c848802ef981f17e2439c9c41d46f1043b84686
         pinned: branch-head
         path: docs/
   omnishield-akismet:
@@ -2324,7 +2474,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 643b591aaf519959d2f1d8d6bcd3aa70b457780e
+        ref: 095c182aba0d106e48fae1c9f0a222e8e2140c1c
         pinned: branch-head
         path: docs/
   omnishield-altcha:
@@ -2334,7 +2484,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 667269062ed9388b738e1925a2b02578d9ac66c4
+        ref: 150745b3d965776aae4bbf7610006fa71e8c52f1
         pinned: branch-head
         path: docs/
   omnishield-disposable:
@@ -2344,7 +2494,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: c8f2fbf88d886c9f5dba2fccaa42926f4c47e173
+        ref: 7d8bac506b5211936895bf7b86287c5c5ffdbdfc
         pinned: branch-head
         path: docs/
   omnishield-recaptcha:
@@ -2354,7 +2504,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 085c59bfb829cd7dc77a5293654f90dbe73d77e2
+        ref: bc0c58b259e9b85b69e8d4e96f2d95c203c9c545
         pinned: branch-head
         path: docs/
   omnishield-stopforumspam:
@@ -2364,7 +2514,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: f06bd4c01fc78ce16106228bf6dbf861b9bd4b4e
+        ref: 4c26e9e98c1b54c8f616cc5f0188a7200a5615c4
         pinned: branch-head
         path: docs/
   omnishield-turnstile:
@@ -2374,7 +2524,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: a2b8983a749097b767eeef000fae3e5043303f57
+        ref: e96d3205717ab5148b00dff5d57ac6db7cff7595
         pinned: branch-head
         path: docs/
   omnishow:
@@ -2384,7 +2534,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 34fb71a575c15c4bd3dbe9f9e55b794c74081cf0
+        ref: cb827216331dc44ab278a55061fbd6a0642b549d
         pinned: branch-head
         path: docs/
   omnishow-omdb:
@@ -2394,7 +2544,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 1f75bb9fc75cf20bb1dcd49711cecf1b23b4761a
+        ref: b57d167cfbcc48f999958969919ea4c107173fcf
         pinned: branch-head
         path: docs/
   omnishow-tmdb:
@@ -2404,7 +2554,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: b216d107807206aaa877a7154ca1217ecbe02c76
+        ref: 9a935eaa9be50947efd9938a825b24cf4248a55c
         pinned: branch-head
         path: docs/
   omnishow-trakt:
@@ -2414,7 +2564,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 2f2942cb7fc28cd0f722e6192188dadf4dd4c5ee
+        ref: 8dbc7e4c68b4fcd76f941e6fc163951205da4ffb
         pinned: branch-head
         path: docs/
   omnishow-tvdb:
@@ -2424,7 +2574,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 0c3ef1e14dea2252d339aee664e6dc54c877162a
+        ref: c87853833e23825278b1016ca15cfbf3185195b3
         pinned: branch-head
         path: docs/
   omnishow-twitch:
@@ -2434,7 +2584,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 922113262e2a432e31f9b61032a697703d157dfc
+        ref: 9dc7dbc01dbc4902c226ad7729d21bd42b88aafa
         pinned: branch-head
         path: docs/
   omnishow-vimeo:
@@ -2444,7 +2594,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 327d54874fd932f38067cf5ef87e513a773f4da8
+        ref: fdf4a9e5f0dbb1c4cae56384de970834ea523945
         pinned: branch-head
         path: docs/
   omnishow-wikidata:
@@ -2454,7 +2604,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: a78922e840a0da901954375cd629731e42eb740a
+        ref: 419d6c128244479e85d9cf1fffe5459a64113a16
         pinned: branch-head
         path: docs/
   omnishow-youtube:
@@ -2464,7 +2614,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 034ea698802128f2999dce44f615ff03aae03d24
+        ref: dbe1645c9ff555405e4853553dc5ac96cdb5daf9
         pinned: branch-head
         path: docs/
   omnisign:
@@ -2474,7 +2624,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 30f49226bcce9600d02fd16ab6872c2bc7f03724
+        ref: 69a0d116891af47f3e8e07c39d58dc0fabc57e1e
         pinned: branch-head
         path: docs/
   omnisign-docuseal:
@@ -2484,7 +2634,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 332754e4f1004a9e750efcd82db0823560b603f0
+        ref: 6acc6fbf0cb0d4caca7c543afe57a5ba0ed55351
         pinned: branch-head
         path: docs/
   omnisign-docusign:
@@ -2494,7 +2644,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 497cf974387b2a6c70f665993e2d1089a6c72a7f
+        ref: ad3bda09ecce1faabf494b15e299bbacc166555d
         pinned: branch-head
         path: docs/
   omnisign-dossierfacile:
@@ -2504,7 +2654,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: c0260cc3ae0b269d6128b9057d1c12fafc866c49
+        ref: fd145f48ad0b6f2c8a7e877534ce598733b03b23
         pinned: branch-head
         path: docs/
   omnisign-stripe-identity:
@@ -2514,7 +2664,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 3522ef1471c62deb222f309e7ca6013b44d36677
+        ref: f5ed99c28d287d8772aa970eebc43ba7d11b7752
         pinned: branch-head
         path: docs/
   omnisign-yousign:
@@ -2524,7 +2674,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 303a336c694caae36b26530b04a5d50c9569b72a
+        ref: fc1c02a732bf633d4121a7b34f6a849cf0bdcd70
         pinned: branch-head
         path: docs/
   omnisong:
@@ -2534,7 +2684,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: f760dada39ad6c59b5dafb099b51a656618be27f
+        ref: 9c7e77533c2137cba59cbad070040557813eb5a4
         pinned: branch-head
         path: docs/
   omnisong-itunes:
@@ -2544,7 +2694,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 0d3d5cec213483df60db58ac78ab5ff042760eeb
+        ref: 60844cb6fb83ef17c0b26ee8444fd53fc8971444
         pinned: branch-head
         path: docs/
   omnisong-odesli:
@@ -2554,7 +2704,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 5218df3911ec9a2d1d5c9e0004986c1fbf79e1f2
+        ref: 606659d8e79f86387f4af3527b619c1c043f5e85
         pinned: branch-head
         path: docs/
   omnistate:
@@ -2574,7 +2724,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: c4be9ec1ff3a94b146e81261a3a143e63c220d66
+        ref: ffdda9ab2931e1e2fc07499e30babed23ebb5d0d
         pinned: branch-head
         path: docs/
   omnistate-annuaire-sante:
@@ -2584,7 +2734,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 65fd6aab6f2790213c84c4cfaf22c097dbf9274a
+        ref: 5678561f6f5e86668ab9de282576f81b0f618498
         pinned: branch-head
         path: docs/
   omnistate-ecb:
@@ -2594,7 +2744,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 3d7c4d9c35adfeb7d9631cbb85460de8d906d821
+        ref: 81e31f2df06232493f1d43515f589b91ac71e696
         pinned: branch-head
         path: docs/
   omnistate-eurostat:
@@ -2604,7 +2754,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: bdd3ab15b5e41a847d1f28becc6ece3d8af8d744
+        ref: e1b0a819480cae7cc5dfa8a198ccc1a18ab40961
         pinned: branch-head
         path: docs/
   omnistate-iana:
@@ -2614,7 +2764,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 37166e8ec82af40b6ede576456df9fc6e520173f
+        ref: eaa65acd64f2b975f4e4c383fe0edbcf830344ef
         pinned: branch-head
         path: docs/
   omnistate-insee:
@@ -2624,7 +2774,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 69a402b9ce14f8a69a80d78041a7c57a10a739bf
+        ref: e44c521eb17309c1e6adf8185507b88d56c6c6d5
         pinned: branch-head
         path: docs/
   omnistate-matchid:
@@ -2634,7 +2784,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 754bc4c286cf70f5c2ca4e907b33a4331d500ae7
+        ref: 7404dd05610349ab43fa5d4577823043ae96bdcf
         pinned: branch-head
         path: docs/
   omnistate-nara:
@@ -2644,7 +2794,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 12ccf05abb9831358be0134e81f6133d832fb211
+        ref: 1a301ac7c6dc34f07d281b33f9a2fb38b0bda89a
         pinned: branch-head
         path: docs/
   omnistate-national-archives-uk:
@@ -2654,7 +2804,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 0a0675b28fbdfe5b81666da09e37de5add06d32f
+        ref: 6d77e10311f7409e4124c6ee1e484d17581100fb
         pinned: branch-head
         path: docs/
   omnistate-openarchieven:
@@ -2664,7 +2814,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 04d7070e9b3d898994e1abff3b9a31503ba40ab8
+        ref: b0087a616653b21734890738ac9d34295bc243b9
         pinned: branch-head
         path: docs/
   omnistate-vies:
@@ -2684,7 +2834,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: c48fa3889eb241a3329ba0d96cd8f3f08b7c5900
+        ref: 981200a9e2b3ce2024e4ff925dcd9cbcbdde0c67
         pinned: branch-head
         path: docs/
   omnistay-amadeus:
@@ -2694,7 +2844,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 35364342337e2b3773a04be98908f68bcfc4dc94
+        ref: 98cf084c186350c3be1c1203f2d3269063771390
         pinned: branch-head
         path: docs/
   omnistay-local:
@@ -2704,7 +2854,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 00013da9cd5140100676583139805f75a00f9adb
+        ref: df8a6b9a329791abdd74e53cfd5cc64a50977473
         pinned: branch-head
         path: docs/
   omniticket:
@@ -2714,7 +2864,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 5132f9698bdc73adb2d50c14695f9d7722f787fc
+        ref: 28e6a6b476bad6641ee130eb935a907c2557f9fb
         pinned: branch-head
         path: docs/
   omniticket-billetweb:
@@ -2724,7 +2874,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 31e25a402f5d8cfdd5e0d9d3ad1716df387b56b5
+        ref: 5084243c9f2c72d43c719ca8faba0e9112909dbe
         pinned: branch-head
         path: docs/
   omniticket-eventbrite:
@@ -2734,7 +2884,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 8367283e6d4e3bd0c0b5bea388b998cd8773150b
+        ref: e887d91a23f8fe30b5d48c7604139c975251035f
         pinned: branch-head
         path: docs/
   omniticket-helloasso:
@@ -2744,7 +2894,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: c6d5ca286a910856bcd00078632f675b220f4531
+        ref: 79433150bdc0cb9c2b39301f3bb334323231321a
         pinned: branch-head
         path: docs/
   omniticket-ticketmaster:
@@ -2754,7 +2904,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 43d607a8c1958013ee5bc17fbbac0ab6613d8dcd
+        ref: 4535a717f89a1f5bdefb60f736f86067316350be
         pinned: branch-head
         path: docs/
   omniticket-weezevent:
@@ -2764,7 +2914,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: cb92074ae54b8c4bda866c8672d3735841c3cf7c
+        ref: 6c1a1c23f107564718786128ee54c797510d2430
         pinned: branch-head
         path: docs/
   omnitrade:
@@ -2774,7 +2924,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: e18549a5e42a60f3a7b3746b279b075fefe57f60
+        ref: e516e2be826d8bbd0f0c3e7be7e9435a631591ef
         pinned: branch-head
         path: docs/
   omnitrade-amazon:
@@ -2784,7 +2934,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 4835f722d00a14f51a43678bdb694acd6567302a
+        ref: efa7022d3354ad4934d1d77966f13e9326c1e505
         pinned: branch-head
         path: docs/
   omnitrade-paypal:
@@ -2794,7 +2944,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 519cbc5e71d0898d5903bb85642596a5792840e7
+        ref: 97b5552094979700b7aebf0aebf2092075473d97
         pinned: branch-head
         path: docs/
   omnitrade-shopify:
@@ -2804,7 +2954,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 7a76c621b953bb64ac3a00fa37491f688ee2eac5
+        ref: 1f422e53c3e0157a4aefea4e0d1706f9bbb898f5
         pinned: branch-head
         path: docs/
   omnitrade-stripe:
@@ -2814,7 +2964,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 4105b70ad5178d7ba809ff6a6faf2f3b3ef8c6ea
+        ref: 0005a43713153ce428c238f7de488aabb99e12e8
         pinned: branch-head
         path: docs/
   omnitrade-web:
@@ -2824,7 +2974,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 8e95d40f1565599c2785399dc70a77f003cf8a8d
+        ref: 322660c264155f8b1757ca2b5cca1ed37e938128
         pinned: branch-head
         path: docs/
   omnitrade-woocommerce:
@@ -2834,7 +2984,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: 89c858d6194f0ca1b11402ef8a526c01f80c6c22
+        ref: ce78a862e1681d76eabb3fac67c135cfaf793904
         pinned: branch-head
         path: docs/
   omnitravel:
@@ -2844,7 +2994,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: d2090deea0c0bdf99126813d7b8ac848ed1db059
+        ref: 17a0af099d1b161d70b968935a759cc81983b0cd
         pinned: branch-head
         path: docs/
   omnitravel-gtfs:
@@ -2854,7 +3004,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: ebc4c417e25e669e1c56fa890ebcb376040282da
+        ref: e4240a63ca4c1d3a0bd191af4e990d10f56fe11c
         pinned: branch-head
         path: docs/
   omnitravel-navitia:
@@ -2864,7 +3014,7 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: edceebff9fabc2095f3c3fc58addebce9ede0064
+        ref: eddaf764f2d937095f6338e6d429c1549be7b502
         pinned: branch-head
         path: docs/
   omnitravel-transitous:
@@ -2874,6 +3024,6 @@ packages:
     versions:
       1.x:
         branch: 1.x
-        ref: a014487be0b6f813e56119b29b362dcd5dcc00af
+        ref: 34eb51eed0f314b90fded898c8fc78d221dccc5c
         pinned: branch-head
         path: docs/

@@ -8,6 +8,7 @@ use App\Catalogue\Families;
 use App\Catalogue\Package;
 use App\Catalogue\PackagistReader;
 use App\Catalogue\RepositoryScanner;
+use App\Catalogue\ScannedPackage;
 use App\Catalogue\Tier;
 use App\Catalogue\Verification;
 use PHPUnit\Framework\TestCase;
@@ -184,6 +185,30 @@ final class CatalogueTest extends TestCase
         self::assertSame([true, null, false], [$oauth->isAbandoned(), $oauth->getReplacement(), $oauth->isStable()]);
         self::assertSame('omnisense/omniauth', Package::fromArray('omniauth/oauth', ['abandoned' => 'omnisense/omniauth'], 'omniauth')->getReplacement());
         self::assertFalse($trade->isAbandoned());
+    }
+
+    public function testPinMovesTheSeriesThatFollowsTheBranch(): void
+    {
+        $pinned = new \ReflectionMethod(CatalogueImporter::class, 'pinned');
+        $package = static fn (string $branch, string $head): ScannedPackage => new ScannedPackage('omnibase/admin', Tier::Component, 'omnibase', null, null, [], [], '/repos/omnibase-admin', $branch, 'glitchr-omnisense/omnibase-admin', null, 3, $head);
+        $old = ['ref' => str_repeat('1', 40), 'pinned' => 'tag', 'path' => 'docs/'];
+        $existing = ['default' => '2.x', 'versions' => ['2.x' => ['branch' => 'main', 'ref' => str_repeat('2', 40), 'pinned' => 'branch-head', 'path' => 'docs/'], '1.x' => $old]];
+
+        // A series named after its releases, on main: moved, no series "main" added; the one kept for history stays.
+        $report = ['pinned' => 0];
+        $entry = $pinned->invokeArgs(null, [$existing, 'omnibase/admin', $package('main', str_repeat('3', 40)), true, &$report]);
+        self::assertSame(['2.x', '1.x'], array_keys($entry['versions']));
+        self::assertSame(['branch' => 'main', 'ref' => str_repeat('3', 40), 'pinned' => 'branch-head', 'path' => 'docs/'], $entry['versions']['2.x']);
+        self::assertSame($old, $entry['versions']['1.x']);
+        self::assertSame(['2.x', 1], [$entry['default'], $report['pinned']]);
+
+        // Without --pin, nothing moves; a branch no series follows adds one, named after it.
+        $report = ['pinned' => 0];
+        self::assertSame($existing['versions'], $pinned->invokeArgs(null, [$existing, 'omnibase/admin', $package('main', str_repeat('3', 40)), false, &$report])['versions']);
+        $entry = $pinned->invokeArgs(null, [$existing, 'omnibase/admin', $package('3.x', str_repeat('4', 40)), false, &$report]);
+        self::assertSame(['2.x', '1.x', '3.x'], array_keys($entry['versions']));
+        self::assertSame(['branch' => '3.x', 'ref' => str_repeat('4', 40), 'pinned' => 'branch-head', 'path' => 'docs/'], $entry['versions']['3.x']);
+        self::assertSame(['2.x', 1], [$entry['default'], $report['pinned']]);
     }
 
     public function testAPackageIsAddressedAndRequiredByItsBranch(): void

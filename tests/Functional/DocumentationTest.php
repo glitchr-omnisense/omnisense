@@ -99,20 +99,37 @@ final class DocumentationTest extends SiteTestCase
         self::assertStringContainsString('noindex, follow', $french);
     }
 
-    /** The site's own manifest: every series pinned at a full commit, said to be a branch head or a tag, its default among its series. */
+    /**
+     * The site's own manifest: every series pinned at a full commit, said to be a branch head or a tag, its default among
+     * its series. A series follows the branch of its name, or is named after its releases (2.x on main); one series per
+     * branch. A series without a branch is kept for history, read at a tag.
+     */
     public function testTheManifestPinsEverySeries(): void
     {
         $manuals = Yaml::parseFile(\dirname(__DIR__, 2).'/config/documentation.yaml')['packages'];
         foreach ($manuals as $key => $manual) {
             self::assertArrayHasKey((string) $manual['default'], $manual['versions'], $key.': its default is one of its series');
+            $branches = [];
             foreach ($manual['versions'] as $series => $version) {
                 self::assertMatchesRegularExpression('/^[0-9a-f]{40}$/', $version['ref'], $key.' '.$series);
                 self::assertContains($version['pinned'] ?? null, ['branch-head', 'tag'], $key.' '.$series);
-                self::assertSame((string) $series, (string) $version['branch'], $key.': a series follows the branch of its name');
+                if (!isset($version['branch'])) {
+                    self::assertSame('tag', $version['pinned'], $key.' '.$series.': a series kept for history without its branch is read at a tag');
+                    continue;
+                }
+                $branches[] = (string) $version['branch'];
+                if ((string) $series !== (string) $version['branch']) {
+                    self::assertMatchesRegularExpression('/^\d+\.x$/', (string) $series, $key.': a series follows the branch of its name, or is named after its releases');
+                }
             }
+            self::assertSame(array_unique($branches), $branches, $key.': one series per branch');
         }
-        // 5.x the current one since every site moved to it (2026-11-09), 4.x and 3.x kept for history.
-        self::assertSame(['5.x', '4.x', '3.x'], array_map('strval', array_keys($manuals['omnibase']['versions'])), 'omnibase\'s three series with a docs/ folder');
-        self::assertSame('5.x', $manuals['omnibase']['default']);
+        // 7.x the current one since the 7.x ensemble (2026-11-18), 5.x, 4.x and 3.x kept for history.
+        self::assertSame(['7.x', '5.x', '4.x', '3.x'], array_map('strval', array_keys($manuals['omnibase']['versions'])), 'omnibase\'s series with a docs/ folder');
+        self::assertSame('7.x', $manuals['omnibase']['default']);
+        // A bundle released from main: 2.x follows it, 1.x is read at its last release.
+        self::assertSame(['branch' => 'main', 'pinned' => 'branch-head'], array_intersect_key($manuals['omnibase-admin']['versions']['2.x'], ['branch' => 0, 'pinned' => 0]));
+        self::assertSame('tag', $manuals['omnibase-admin']['versions']['1.x']['pinned']);
+        self::assertSame('2.x', $manuals['omnibase-admin']['default']);
     }
 }

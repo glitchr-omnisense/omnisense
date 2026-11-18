@@ -27,7 +27,7 @@ packages:
       - omnitrade
     repository: glitchr-omnisense/omnitrade
     branch: 1.x
-    version: 1.1.1
+    version: 1.2.0
     requires:
       - omnisense/contracts
     verification: unstated
@@ -51,7 +51,7 @@ packages:
     docs: true
   omnitrade/paypal:
     kind: provider
-    description: "Omnitrade PayPal: orders approved on PayPal's page and captured on return, authorizations, refunds and webhook events, over the v2 REST API."
+    description: "Omnitrade PayPal: orders approved on PayPal's page and captured on return, authorizations, refunds, saved PayPal accounts charged without a page (Vault v3) and webhook events, over the REST API."
     license: MIT
     keywords:
       - payment
@@ -59,7 +59,7 @@ packages:
       - omnitrade
     repository: glitchr-omnisense/omnitrade-paypal
     branch: 1.x
-    version: 1.0.0
+    version: 1.2.0
     requires:
       - omnisense/contracts
       - omnisense/omnitrade
@@ -91,7 +91,7 @@ packages:
       - omnitrade
     repository: glitchr-omnisense/omnitrade-stripe
     branch: 1.x
-    version: 1.1.0
+    version: 1.2.0
     requires:
       - omnisense/contracts
       - omnisense/omnitrade

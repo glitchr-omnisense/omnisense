@@ -27,18 +27,18 @@ packages:
     docs: true
   omnibridge/doctrine:
     kind: bridge
-    description: 'The storage glue of omnibase sites, framework-free: Doctrine reading the structure described outside of it (omnisense/omnibridge''s schema description), the naming strategy that turns their entities into their tables, the UTC date types, and an entity manager built with them, for any framework reading the same database; and omnibase''s persistence on Doctrine behind omnisense/omnibase''s contracts (its finder compiler, statements, mapping, DBAL types, walkers, filters and listeners), which omnisense/omnibase requires.'
+    description: "omnibase's persistence on Doctrine, and the storage glue of omnibase sites, framework-free: Doctrine reading the structure described outside of it (omnisense/omnibridge's schema), the naming strategy, the UTC date types, an entity manager built with them; behind the core's contracts, the compiler of the finder language, the statements of the backend-only queries and the mapping. It declares no repository: the core's repositories are the same on every persistence. The Doctrine classes a host's configuration names are declared under the core's own namespace."
     license: MIT
     repository: glitchr-omnisense/omnibridge-doctrine
-    branch: 1.x
-    version: 1.0.1
+    branch: 4.x
+    version: 4.0.0
     requires:
       - omnisense/omnibridge
     verification: unstated
     docs: true
   omnibridge/eloquent:
     kind: bridge
-    description: "omnibase's entities on Eloquent's database layer, framework-free: illuminate/database (Laravel's connection, or Capsule outside Laravel) reading the tables omnisense/omnibridge's schema description describes into the same plain PHP entities Doctrine maps - a data mapper: tables from the description, a hydrator with PHP 8.4 lazy ghosts and lazy collections, an identity map, casts; and omnibase's persistence on Eloquent behind omnisense/omnibase's contracts (its backend, scopes, finder compiler and statements) when omnisense/omnibase is installed."
+    description: "omnibase's persistence on Eloquent's database layer, framework-free: illuminate/database (Laravel's connection, or Capsule outside Laravel) reading the tables omnisense/omnibridge's schema describes into the same plain PHP entities any other persistence maps - a data mapper: tables from the description, a hydrator with PHP 8.4 lazy ghosts and lazy collections, an identity map, casts; behind the core's contracts, the compiler of the finder language, the statements of the backend-only queries, the unit of work and its lifecycle. It declares no repository: Base\\Repository\\* are the core's, the same on every persistence."
     license: MIT
     keywords:
       - omnibridge
@@ -47,8 +47,8 @@ packages:
       - data-mapper
       - framework-agnostic
     repository: glitchr-omnisense/omnibridge-eloquent
-    branch: 1.x
-    version: 1.0.0
+    branch: 2.x
+    version: 2.1.0
     requires:
       - omnisense/omnibridge
     verification: unstated
@@ -64,8 +64,8 @@ packages:
       - twig
       - doctrine
     repository: glitchr-omnisense/omnibridge-laravel
-    branch: 1.x
-    version: 1.1.0
+    branch: 2.x
+    version: 2.0.2
     requires:
       - omnibridge/twig
       - omnisense/omnibase
@@ -106,15 +106,15 @@ packages:
     docs: true
   omnibridge/symfony:
     kind: bridge
-    description: "The Symfony host of omnisense/omnibridge's contracts (urls, translations, access, sessions, tokens, environment) - adapters over Symfony's router, translator, security and kernel, their container wiring and OmnibridgeBundle - and the framework packages omnisense/omnibase no longer requires. A Symfony site requires it beside the core."
+    description: 'The Symfony host of omnisense/omnibase: what is Symfony by nature in omnibase, declared under its Base\ names (Base\BaseBundle, the security glue, the form and field types, the controllers, the console commands, the kernel subscribers, the DI passes, the router), the adapters of omnisense/omnibridge''s contracts over Symfony''s services, and the framework packages the core does not require. A Symfony site requires it beside the core and names Base\ only.'
     license: MIT
     keywords:
       - omnibase
       - omnibridge
       - symfony
     repository: glitchr-omnisense/omnibridge-symfony
-    branch: 1.x
-    version: 1.1.1
+    branch: 3.x
+    version: 3.1.1
     requires:
       - omnibridge/twig
       - omnisense/omnibridge
@@ -125,8 +125,8 @@ packages:
     description: "The Twig side of omnibridge: the contract a page rendered with Twig asks of any framework (path, url, asset, trans - omnisense/omnibridge's Urls and Translations), the Twig extension that provides it where the framework does not, and helpers."
     license: MIT
     repository: glitchr-omnisense/omnibridge-twig
-    branch: 1.x
-    version: 1.0.0
+    branch: 2.x
+    version: 2.0.0
     requires:
       - omnisense/omnibridge
     verification: unstated
@@ -142,7 +142,7 @@ packages:
       - symfony
       - laravel
     repository: glitchr-omnisense/omnibridge
-    branch: 1.x
-    version: 1.0.1
+    branch: 2.x
+    version: 2.0.1
     verification: unstated
     docs: true

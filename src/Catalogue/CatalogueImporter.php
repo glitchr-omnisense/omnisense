@@ -157,7 +157,10 @@ class CatalogueImporter
             #   bin/console app:catalog:import --pin    every series moved to its branch's head
             #   bin/console app:docs:fetch              the docs/ folders at these refs, into var/docs
             #
-            # A series kept for history keeps its ref: add it by hand, with its tag or commit.
+            # A series is named after its branch, or by hand after its releases (2.x on
+            # main): the import moves the one that follows the package's branch.
+            # A series kept for history keeps its ref: add it by hand, with its tag or commit,
+            # without a branch when its branch now carries a later series.
             # A package without a docs/ folder can have its manual added by hand, `path: ''`:
             # its README and changelog at that commit; the import keeps it as it is.
 
@@ -175,10 +178,20 @@ class CatalogueImporter
     private static function pinned(?array $existing, string $name, ScannedPackage $package, bool $pin, array &$report): array
     {
         $versions = (array) ($existing['versions'] ?? []);
+        // The series that follows the package's branch: named after it, or named by hand after its releases
+        // (omnibase/admin's 2.x on main); the import adds one named after the branch only when none follows it.
         $series = $package->branch;
+        if (!isset($versions[$series])) {
+            foreach ($versions as $key => $source) {
+                if ($package->branch === (string) (((array) $source)['branch'] ?? '')) {
+                    $series = (string) $key;
+                    break;
+                }
+            }
+        }
         $current = $versions[$series] ?? null;
         if (null === $current || ($pin && ($current['ref'] ?? null) !== $package->head)) {
-            $versions[$series] = ['branch' => $series, 'ref' => $package->head, 'pinned' => 'branch-head', 'path' => 'docs/'];
+            $versions[$series] = ['branch' => $package->branch, 'ref' => $package->head, 'pinned' => 'branch-head', 'path' => 'docs/'];
             ++$report['pinned'];
         }
 
