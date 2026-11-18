@@ -5885,16 +5885,16 @@
         },
         {
             "name": "omnibridge/doctrine",
-            "version": "v3.0.2",
+            "version": "v3.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-omnisense/omnibridge-doctrine.git",
-                "reference": "0e48ede4674617d8f9549b41bce22d83e1ddf297"
+                "reference": "0e772f2bf40bda5e784ca34ebcb1defbe0cbb961"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-omnisense/omnibridge-doctrine/zipball/0e48ede4674617d8f9549b41bce22d83e1ddf297",
-                "reference": "0e48ede4674617d8f9549b41bce22d83e1ddf297",
+                "url": "https://api.github.com/repos/glitchr-omnisense/omnibridge-doctrine/zipball/0e772f2bf40bda5e784ca34ebcb1defbe0cbb961",
+                "reference": "0e772f2bf40bda5e784ca34ebcb1defbe0cbb961",
                 "shasum": ""
             },
             "require": {
@@ -5939,10 +5939,10 @@
             "description": "omnibase's persistence on Doctrine, and the storage glue of omnibase sites, framework-free: Doctrine reading the structure described outside of it (omnisense/omnibridge's schema), the naming strategy, the UTC date types, an entity manager built with them; behind the core's contracts, the compiler of the finder language, the statements of the backend-only queries and the mapping. It declares no repository: the core's repositories are the same on every persistence. The Doctrine classes a host's configuration names are declared under the core's own namespace.",
             "support": {
                 "issues": "https://github.com/glitchr-omnisense/omnibridge-doctrine/issues",
-                "source": "https://github.com/glitchr-omnisense/omnibridge-doctrine/tree/v3.0.2"
+                "source": "https://github.com/glitchr-omnisense/omnibridge-doctrine/tree/v3.0.3"
             },
-            "time": "2026-11-17T03:38:37+00:00",
-            "published-time": "2026-11-17T03:39:22+00:00"
+            "time": "2026-11-18T00:41:11+00:00",
+            "published-time": "2026-11-18T00:42:10+00:00"
         },
         {
             "name": "omnibridge/static",
