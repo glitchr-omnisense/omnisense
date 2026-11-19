@@ -16999,16 +16999,16 @@
         },
         {
             "name": "glitchr/symfony-profiler-pack",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/glitchr-studio/symfony-profiler-pack.git",
-                "reference": "52270f98099372eae5e6fdf6251a2f167508f75b"
+                "reference": "fed583b5a02f8920440c1643ef79d212545632f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glitchr-studio/symfony-profiler-pack/zipball/52270f98099372eae5e6fdf6251a2f167508f75b",
-                "reference": "52270f98099372eae5e6fdf6251a2f167508f75b",
+                "url": "https://api.github.com/repos/glitchr-studio/symfony-profiler-pack/zipball/fed583b5a02f8920440c1643ef79d212545632f6",
+                "reference": "fed583b5a02f8920440c1643ef79d212545632f6",
                 "shasum": ""
             },
             "require": {
@@ -17058,7 +17058,7 @@
                 "toolbar",
                 "web debug toolbar"
             ],
-            "time": "2026-11-13T13:47:25+00:00"
+            "time": "2026-11-19T22:55:15+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
